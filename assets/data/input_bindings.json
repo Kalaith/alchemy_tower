@@ -1,0 +1,20 @@
+{
+  "global": {
+    "confirm": "Enter",
+    "cancel": "Esc",
+    "interact": "E",
+    "journal": "J"
+  },
+  "navigation": {
+    "select": "Up/Down"
+  },
+  "alchemy": {
+    "open": "Tab",
+    "heat": "Left/Right",
+    "fill_slots": "1/2/3",
+    "catalyst": "F"
+  },
+  "shop": {
+    "switch_tab": "Left/Right"
+  }
+}

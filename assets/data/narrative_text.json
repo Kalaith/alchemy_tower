@@ -1,0 +1,37 @@
+{
+  "milestones": {
+    "entry_lab_recovered": {
+      "id": "entry_lab_recovered",
+      "title": "Entry Laboratory",
+      "text": "The first floor is usable again. The tower responds to simple brews, but much of it remains asleep."
+    },
+    "archive_revelation": {
+      "id": "archive_revelation",
+      "title": "Archive Revelation",
+      "text": "The archive timeline resolves: the wizard sealed each floor not to hoard power, but to keep the tower from consuming every living system bound into it. Leaving was the final act of restraint."
+    },
+    "greenhouse_expanded": {
+      "id": "greenhouse_expanded",
+      "title": "Greenhouse Expanded",
+      "text": "Brin reset the old planter wards. A new moon bed is active on the north side of the greenhouse."
+    },
+    "containment_stable": {
+      "id": "containment_stable",
+      "title": "Habitats Stabilized",
+      "text": "Lyra tuned the habitat wards. Gentle collection from tower creatures can now support regular alchemical work."
+    }
+  },
+  "statuses": {
+    "archive_timeline_complete": "The archive timeline snaps into place.",
+    "archive_timeline_incomplete": "The archive still has missing pieces.",
+    "archive_reconstruction_ready": "Ready: final timeline can be reconstructed.",
+    "archive_reconstruction_missing": "Final timeline still has missing pieces.",
+    "save_unknown_area": "Save referenced an unknown area.",
+    "cauldron_empty": "The cauldron is empty.",
+    "greenhouse_unlock": "The tower greenhouse unlocks upstairs after your tenth brew."
+  },
+  "overlays": {
+    "observatory_epilogue": "The restored tower resolves its own history through the lens above the clouds. The wizard did not vanish in failure. They chose distance over domination, leaving a machine of rooms that only remains safe when used with restraint. The tower is not yours to conquer. It is yours to tend.",
+    "observatory_footer": "Enter or Esc to step back"
+  }
+}

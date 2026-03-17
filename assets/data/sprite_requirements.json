@@ -1,0 +1,408 @@
+{
+  "version": 1,
+  "project": "alchemy_tower",
+  "art_direction": {
+    "style": "Hand-painted fantasy pixel-art hybrid for a top-down alchemy exploration game. Soft magical atmosphere, readable silhouettes, slightly storybook, grounded materials, warm village life against old tower mystery.",
+    "camera": "Top-down with slight angle bias. Sprites must read clearly from above and keep strong shape language.",
+    "lighting": "Readable local contrast with soft bloom-ready highlights on magical materials. No pure black shadows. Favor teal, amber, moss, moonlight silver, and archive brass.",
+    "rendering_rules": [
+      "Transparent background for all sprites and icons unless the requirement explicitly says background plate.",
+      "Keep silhouettes bold and readable at gameplay scale.",
+      "Avoid noisy sub-pixel detail that muddies at small sizes.",
+      "Characters should fit the established village-fantasy tone rather than high armor fantasy.",
+      "Stations and gather nodes need stronger shape distinction than the prototype circles and rectangles.",
+      "Potions, catalysts, runes, and creature harvests should be instantly recognizable by outline first and color second."
+    ]
+  },
+  "size_guide": {
+    "character_frame_px": [64, 64],
+    "character_sheet_layout": "4 directions x 4 walk frames plus 1 idle frame per direction",
+    "character_sheet_px": [320, 256],
+    "station_sprite_px": [96, 96],
+    "large_station_sprite_px": [128, 128],
+    "gather_node_sprite_px": [64, 64],
+    "item_icon_px": [64, 64],
+    "ui_icon_px": [32, 32],
+    "effect_sprite_px": [64, 64],
+    "background_plate_px": [1920, 1080]
+  },
+  "sprite_requirements": {
+    "player": [
+      {
+        "id": "player_tower_alchemist",
+        "type": "character_spritesheet",
+        "image_size_px": [320, 256],
+        "frame_size_px": [64, 64],
+        "prompt": "A young village alchemist seen from a top-down game view, practical travel cloak, satchel of ingredients, small glass vials at the belt, not heroic armor, readable hair and shoulder silhouette, curious but capable mood, palette that stands out from NPCs, designed for 4-direction walk and idle animation in a magical tower exploration game."
+      }
+    ],
+    "npcs": [
+      {
+        "id": "mira_apothecary",
+        "type": "character_spritesheet",
+        "image_size_px": [320, 256],
+        "frame_size_px": [64, 64],
+        "prompt": "Top-down fantasy shopkeeper apothecary, practical apron, warm salmon and honey palette, tidy sleeves, confident merchant posture, village herbal trade silhouette, readable from above, designed for 4-direction walk and idle animation."
+      },
+      {
+        "id": "rowan_herbalist",
+        "type": "character_spritesheet",
+        "image_size_px": [320, 256],
+        "frame_size_px": [64, 64],
+        "prompt": "Top-down herbalist rival, green travel layers, clipped gathering tools, field-worn boots, slightly competitive stance, more outdoorsy than the shopkeeper, readable from above, designed for 4-direction walk and idle animation."
+      },
+      {
+        "id": "mayor_elric",
+        "type": "character_spritesheet",
+        "image_size_px": [320, 256],
+        "frame_size_px": [64, 64],
+        "prompt": "Top-down village mayor, modest formal coat, brass trim, civic sash or chain, practical authority rather than royalty, warm gold and brown palette, readable from above, designed for 4-direction walk and idle animation."
+      },
+      {
+        "id": "ione_archivist",
+        "type": "character_spritesheet",
+        "image_size_px": [320, 256],
+        "frame_size_px": [64, 64],
+        "prompt": "Top-down archivist researcher, cool blue and parchment palette, carrying rolled notes and a satchel, scholarly silhouette, precise and observant mood, readable from above, designed for 4-direction walk and idle animation."
+      },
+      {
+        "id": "brin_groundskeeper",
+        "type": "character_spritesheet",
+        "image_size_px": [320, 256],
+        "frame_size_px": [64, 64],
+        "prompt": "Top-down greenhouse groundskeeper, worn work gloves, soil-stained apron, sturdy boots, practical gardener silhouette, earth-toned palette with greenhouse greens, readable from above, designed for 4-direction walk and idle animation."
+      },
+      {
+        "id": "lyra_keeper",
+        "type": "character_spritesheet",
+        "image_size_px": [320, 256],
+        "frame_size_px": [64, 64],
+        "prompt": "Top-down creature keeper, calm posture, layered pale blue utility coat, habitat tools and feed pouch, gentle magical-naturalist silhouette, readable from above, designed for 4-direction walk and idle animation."
+      }
+    ],
+    "stations": [
+      {
+        "id": "entry_cauldron",
+        "type": "world_station",
+        "image_size_px": [128, 128],
+        "prompt": "A restored entry-lab alchemy cauldron for a top-down game, sturdy iron basin, luminous teal simmer, copper pipes, arcane ward marks, old but cared-for magical workstation, instantly readable as brewing equipment."
+      },
+      {
+        "id": "greenhouse_still",
+        "type": "world_station",
+        "image_size_px": [128, 128],
+        "prompt": "A greenhouse still seen from above, glass coils, warm condensation, sunlit brass, plant-fed alchemy apparatus, softer and greener than the main cauldron, instantly readable as a refined brewing station."
+      },
+      {
+        "id": "greenhouse_planter_west",
+        "type": "world_station",
+        "image_size_px": [96, 96],
+        "prompt": "A west planter bed for a top-down magical greenhouse, rectangular soil tray, carved stone rim, small sprouts and irrigation charm details, readable as a growable planter."
+      },
+      {
+        "id": "greenhouse_planter_east",
+        "type": "world_station",
+        "image_size_px": [96, 96],
+        "prompt": "An east planter bed for a top-down magical greenhouse, same family as the west planter but with slightly different trim and arrangement to avoid copy-paste repetition, readable as a growable planter."
+      },
+      {
+        "id": "greenhouse_planter_north",
+        "type": "world_station",
+        "image_size_px": [96, 96],
+        "prompt": "An expanded moon planter bed for a top-down magical greenhouse, more ornate stone rim, moonlit herb emphasis, subtly upgraded silhouette compared with the base planter beds."
+      },
+      {
+        "id": "town_request_board",
+        "type": "world_station",
+        "image_size_px": [96, 96],
+        "prompt": "A top-down village request board, timber frame, pinned papers, wax seals, fluttering notes, instantly readable as the quest board."
+      },
+      {
+        "id": "containment_habitat_moth",
+        "type": "world_station",
+        "image_size_px": [128, 128],
+        "prompt": "A magical lantern moth habitat seen from above, gentle enclosure with glowing perches, safe open habitat not a cage, warm golden moth-light, readable as a creature habitat."
+      },
+      {
+        "id": "containment_habitat_slug",
+        "type": "world_station",
+        "image_size_px": [128, 128],
+        "prompt": "A mist slug habitat seen from above, damp stone basin, glass humidity panels, pale blue moisture glow, safe and calm enclosure, readable as a creature habitat."
+      },
+      {
+        "id": "rune_workbench",
+        "type": "world_station",
+        "image_size_px": [128, 128],
+        "prompt": "A rune workbench for a top-down alchemy game, carved arcane slab, engraving tools, rune dust, brass clamps, violet-white glyph shimmer, instantly readable as rune modification equipment."
+      },
+      {
+        "id": "archive_console",
+        "type": "world_station",
+        "image_size_px": [128, 128],
+        "prompt": "A restored archive console seen from above, old brass terminals, parchment drawers, timeline projector glow, scholarly magical machinery, readable as archive reconstruction equipment."
+      },
+      {
+        "id": "observatory_focus",
+        "type": "world_station",
+        "image_size_px": [128, 128],
+        "prompt": "A top-down astral lens at the observatory, circular brass housing, starlight core, ancient instrument silhouette, solemn final-story atmosphere, readable as a climax interaction point."
+      },
+      {
+        "id": "apothecary_counter",
+        "type": "world_station",
+        "image_size_px": [128, 128],
+        "prompt": "A top-down village apothecary counter, shelves, jars, scales, warm lantern light, merchant station silhouette, instantly readable as a shop."
+      }
+    ],
+    "items_and_gatherables": [
+      {
+        "id": "whisper_moss",
+        "type": "icon_and_world_node",
+        "world_sprite_px": [64, 64],
+        "icon_size_px": [64, 64],
+        "prompt": "Soft glowing green moss clinging to old stone, gentle magical herb cluster, readable from above, suitable both as a gather node and inventory icon."
+      },
+      {
+        "id": "arcane_dust",
+        "type": "icon_and_world_node",
+        "world_sprite_px": [64, 64],
+        "icon_size_px": [64, 64],
+        "prompt": "A small pile of violet arcane dust with faint sparkle and crystalline residue, readable from above, suitable as both gather node and icon."
+      },
+      {
+        "id": "sunleaf",
+        "type": "icon_and_world_node",
+        "world_sprite_px": [64, 64],
+        "icon_size_px": [64, 64],
+        "prompt": "Bright golden medicinal leaves in a sunny herb cluster, cheerful readable silhouette, top-down view, suitable as gather node and icon."
+      },
+      {
+        "id": "moon_fern",
+        "type": "icon_and_world_node",
+        "world_sprite_px": [64, 64],
+        "icon_size_px": [64, 64],
+        "prompt": "Pale moonlit fern fronds with subtle silver-green glow, mystical but botanical, readable top-down silhouette, suitable as gather node and icon."
+      },
+      {
+        "id": "ember_root",
+        "type": "icon_and_world_node",
+        "world_sprite_px": [64, 64],
+        "icon_size_px": [64, 64],
+        "prompt": "Warm orange-red root cluster with ember heat in the cracks, rugged and earthy, readable from above, suitable as gather node and icon."
+      },
+      {
+        "id": "mist_moth_wing",
+        "type": "icon_and_world_node",
+        "world_sprite_px": [64, 64],
+        "icon_size_px": [64, 64],
+        "prompt": "A delicate blue-silver moth wing with misty shimmer, soft airy silhouette, readable from above, suitable as gather node and icon."
+      },
+      {
+        "id": "glow_moth",
+        "type": "icon_and_world_node",
+        "world_sprite_px": [64, 64],
+        "icon_size_px": [64, 64],
+        "prompt": "A living lantern moth, pale gold glowing body and broad luminous wings, magical creature readable from above, suitable as world node and icon."
+      },
+      {
+        "id": "dew_slug",
+        "type": "icon_and_world_node",
+        "world_sprite_px": [64, 64],
+        "icon_size_px": [64, 64],
+        "prompt": "A plump translucent dew slug with pale blue moisture sheen, gentle magical creature, readable from above, suitable as world node and icon."
+      },
+      {
+        "id": "lumen_dust",
+        "type": "inventory_icon",
+        "icon_size_px": [64, 64],
+        "prompt": "A small jar or pinch of luminous golden powder harvested from magical creatures, cleaner and brighter than arcane dust, readable icon."
+      },
+      {
+        "id": "dew_slime",
+        "type": "inventory_icon",
+        "icon_size_px": [64, 64],
+        "prompt": "A vial of glossy pale blue dew slime, viscous but clean, moisture-rich magical reagent, readable icon."
+      },
+      {
+        "id": "starlight_shard",
+        "type": "inventory_icon",
+        "icon_size_px": [64, 64],
+        "prompt": "A faceted crystal shard carrying cold starlight, white-silver glow with subtle blue edge, catalyst icon, premium magical readability."
+      },
+      {
+        "id": "splash_rune",
+        "type": "inventory_icon",
+        "icon_size_px": [64, 64],
+        "prompt": "A carved splash rune tablet, cool blue magical symbol, readable arcane icon from above."
+      },
+      {
+        "id": "echo_rune",
+        "type": "inventory_icon",
+        "icon_size_px": [64, 64],
+        "prompt": "A carved echo rune tablet, pale violet symbol suggesting repetition and resonance, readable arcane icon."
+      },
+      {
+        "id": "delay_rune",
+        "type": "inventory_icon",
+        "icon_size_px": [64, 64],
+        "prompt": "A carved delay rune tablet, warm amber-orange symbol suggesting held release and timing, readable arcane icon."
+      },
+      {
+        "id": "soothing_tonic",
+        "type": "inventory_icon",
+        "icon_size_px": [64, 64],
+        "prompt": "A small green restorative bottle, humble and stable, weak tonic silhouette, readable potion icon."
+      },
+      {
+        "id": "lantern_leak",
+        "type": "inventory_icon",
+        "icon_size_px": [64, 64],
+        "prompt": "A slightly unstable purple glow potion bottle, leaking light at the cork, readable potion icon."
+      },
+      {
+        "id": "rush_draught",
+        "type": "inventory_icon",
+        "icon_size_px": [64, 64],
+        "prompt": "A rough orange stimulant vial, energetic but unstable, readable potion icon."
+      },
+      {
+        "id": "healing_draught",
+        "type": "inventory_icon",
+        "icon_size_px": [64, 64],
+        "prompt": "A dependable green healing draught in a clear bottle, balanced village medicine silhouette, readable potion icon."
+      },
+      {
+        "id": "glow_potion",
+        "type": "inventory_icon",
+        "icon_size_px": [64, 64],
+        "prompt": "A refined glow potion, soft lavender liquid with steady pale light, readable potion icon."
+      },
+      {
+        "id": "star_lantern_elixir",
+        "type": "inventory_icon",
+        "icon_size_px": [64, 64],
+        "prompt": "A premium starlit elixir bottle, silver-white crystalline glow, elegant rare potion silhouette, readable icon."
+      },
+      {
+        "id": "beastcalm_extract",
+        "type": "inventory_icon",
+        "icon_size_px": [64, 64],
+        "prompt": "A calm pale aqua extract bottle used for magical creature habitats, gentle and controlled potion silhouette, readable icon."
+      },
+      {
+        "id": "splash_glow_potion",
+        "type": "inventory_icon",
+        "icon_size_px": [64, 64],
+        "prompt": "A glow potion modified with splash rune energy, brighter outward halo motif, readable potion icon."
+      },
+      {
+        "id": "echo_healing_draught",
+        "type": "inventory_icon",
+        "icon_size_px": [64, 64],
+        "prompt": "A healing draught with echo rune influence, layered green pulses in the bottle, readable potion icon."
+      },
+      {
+        "id": "delayed_stamina_tonic",
+        "type": "inventory_icon",
+        "icon_size_px": [64, 64],
+        "prompt": "A stamina tonic modified for delayed release, orange bottle with contained coil-like energy, readable potion icon."
+      },
+      {
+        "id": "stamina_tonic",
+        "type": "inventory_icon",
+        "icon_size_px": [64, 64],
+        "prompt": "A strong orange stamina tonic, clean energetic silhouette, readable potion icon."
+      },
+      {
+        "id": "murky_concoction",
+        "type": "inventory_icon",
+        "icon_size_px": [64, 64],
+        "prompt": "A failed muddy potion with unpleasant sludge tone and unstable residue, still readable and distinct as a bad result icon."
+      }
+    ],
+    "areas": [
+      {
+        "id": "tower_entry",
+        "type": "background_plate",
+        "image_size_px": [1920, 1080],
+        "prompt": "Top-down magical tower entry laboratory, old stone, copper fixtures, restored cauldron corner, worn research surfaces, mysterious but welcoming first playable space."
+      },
+      {
+        "id": "town_square",
+        "type": "background_plate",
+        "image_size_px": [1920, 1080],
+        "prompt": "Top-down village square, warm market paths, apothecary frontage, request board area, bright readable social hub with soft fantasy atmosphere."
+      },
+      {
+        "id": "moonlit_forest",
+        "type": "background_plate",
+        "image_size_px": [1920, 1080],
+        "prompt": "Top-down moonlit forest route, damp glades, luminous herbs, pale moon clearings, magical but grounded gathering area."
+      },
+      {
+        "id": "greenhouse_floor",
+        "type": "background_plate",
+        "image_size_px": [1920, 1080],
+        "prompt": "Top-down restored tower greenhouse, glass ribs, planter beds, warm moisture, cultivated magical growth, hopeful reclaimed space."
+      },
+      {
+        "id": "containment_floor",
+        "type": "background_plate",
+        "image_size_px": [1920, 1080],
+        "prompt": "Top-down magical creature containment floor, calm habitat rings, secure but humane research atmosphere, cooler blue palette."
+      },
+      {
+        "id": "rune_workshop_floor",
+        "type": "background_plate",
+        "image_size_px": [1920, 1080],
+        "prompt": "Top-down rune workshop, engraved benches, dust, glyph tools, arcane craft atmosphere, violet and brass highlights."
+      },
+      {
+        "id": "archive_floor",
+        "type": "background_plate",
+        "image_size_px": [1920, 1080],
+        "prompt": "Top-down tower archives, heavy stacks, brass mechanisms, parchment drawers, reconstructed timeline machinery, scholarly mystery."
+      },
+      {
+        "id": "observatory_floor",
+        "type": "background_plate",
+        "image_size_px": [1920, 1080],
+        "prompt": "Top-down portal observatory, astral lens, deep night palette, brass circles, restrained final-act wonder, solemn magical climax space."
+      }
+    ],
+    "ui_and_effects": [
+      {
+        "id": "journal_tab_icons",
+        "type": "ui_icon_set",
+        "image_size_px": [32, 32],
+        "count": 5,
+        "prompt": "A matching icon set for journal tabs: routes, notes, brews, greenhouse, rapport. Clean readable line-and-fill fantasy UI icons."
+      },
+      {
+        "id": "toast_event_icons",
+        "type": "ui_icon_set",
+        "image_size_px": [32, 32],
+        "count": 6,
+        "prompt": "Small readable event icons for journal note, recipe logged, quest accepted, quest complete, route restored, best quality improved."
+      },
+      {
+        "id": "gather_feedback_sparkle",
+        "type": "effect_sprite",
+        "image_size_px": [64, 64],
+        "prompt": "A small magical sparkle burst for gathering feedback, radial but soft, usable for rare finds and quality celebrations."
+      },
+      {
+        "id": "brew_bubble_effect",
+        "type": "effect_sprite",
+        "image_size_px": [64, 64],
+        "prompt": "A cauldron bubble and vapor effect sprite for brewing feedback, readable and loop-friendly."
+      },
+      {
+        "id": "warp_glow_effect",
+        "type": "effect_sprite",
+        "image_size_px": [64, 64],
+        "prompt": "A magical doorway shimmer effect for restored warps, readable from top-down and suitable for soft pulsing."
+      }
+    ]
+  }
+}

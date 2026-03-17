@@ -1,0 +1,28 @@
+{
+  "statuses": {
+    "closed_alchemy": "Closed alchemy.",
+    "closed_shop": "Closed apothecary ledger.",
+    "closed_rune": "Closed rune workshop.",
+    "closed_archive": "Closed archives.",
+    "closed_journal": "Closed field journal.",
+    "closed_quest_board": "Closed request board.",
+    "open_journal": "Opened field journal.",
+    "open_alchemy": "Opened the cauldron ledger.",
+    "reading_quest_board": "Reading the town request board."
+  },
+  "prompts": {
+    "open_alchemy": "Open alchemy",
+    "browse_shop": "Browse shop",
+    "open_rune_workshop": "Open rune workshop",
+    "reconstruct_archives": "Reconstruct archives",
+    "focus_observatory": "Focus observatory",
+    "read_request_board": "Read request board"
+  },
+  "overlays": {
+    "shop_subtitle": "Coins {coins}  |  Confirm purchases or sales.",
+    "rune_subtitle": "Select a potion-and-rune pairing.",
+    "archive_subtitle": "Recovered research, experiment records, and higher synthesis controls.",
+    "quest_board_subtitle": "Select a request to accept.",
+    "alchemy_subtitle": "Select materials, set the process, then confirm."
+  }
+}

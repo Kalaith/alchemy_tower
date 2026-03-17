@@ -1,0 +1,621 @@
+use super::*;
+use crate::data::{ItemCategory, RecipeDefinition};
+
+impl GameplayState {
+    pub(super) fn active_quest_reference_count(&self, data: &GameData, item_id: &str) -> usize {
+        self.progression.started_quests
+            .iter()
+            .filter(|quest_id| {
+                data.quest(quest_id)
+                    .map(|quest| quest.required_item_id == item_id)
+                    .unwrap_or(false)
+            })
+            .count()
+    }
+
+    pub(super) fn known_recipe_reference_count(&self, data: &GameData, item_id: &str) -> usize {
+        data.recipes
+            .iter()
+            .filter(|recipe| self.progression.known_recipes.contains(&recipe.id))
+            .filter(|recipe| {
+                recipe.output_item_id == item_id
+                    || recipe
+                        .ingredients
+                        .iter()
+                        .any(|ingredient| ingredient.item_id == item_id)
+            })
+            .count()
+    }
+
+    pub(super) fn item_best_record_label(&self, item_id: &str) -> Option<String> {
+        self.progression.crafted_item_profiles
+            .get(item_id)
+            .map(|profile| format!("best {}", profile.best_quality_band))
+            .or_else(|| {
+                self.progression.field_journal
+                    .get(item_id)
+                    .map(|entry| format!("best {}", entry.best_quality_band))
+            })
+    }
+
+    pub(super) fn sell_is_safe(&self, data: &GameData, item_id: &str) -> bool {
+        let quest_refs = self.active_quest_reference_count(data, item_id);
+        let recipe_refs = self.known_recipe_reference_count(data, item_id);
+        let category = data
+            .item(item_id)
+            .map(|item| item.category)
+            .unwrap_or(ItemCategory::Rune);
+        quest_refs == 0 && recipe_refs == 0 && category != ItemCategory::Potion
+    }
+
+    pub(super) fn inventory_badges(&self, data: &GameData, item_id: &str) -> Vec<String> {
+        let quest_refs = self.active_quest_reference_count(data, item_id);
+        let recipe_refs = self.known_recipe_reference_count(data, item_id);
+        let mut badges = Vec::new();
+        if quest_refs > 0 {
+            badges.push("quest".to_owned());
+        }
+        if recipe_refs > 0 {
+            badges.push("recipe".to_owned());
+        }
+        if self.item_best_record_label(item_id).is_some() {
+            badges.push("best".to_owned());
+        }
+        if self.sell_is_safe(data, item_id) {
+            badges.push("safe".to_owned());
+        }
+        badges
+    }
+
+    pub(super) fn inventory_reference_summary(&self, data: &GameData, item_id: &str) -> String {
+        let quest_refs = self.active_quest_reference_count(data, item_id);
+        let recipe_refs = self.known_recipe_reference_count(data, item_id);
+        let mut parts = Vec::new();
+        if quest_refs > 0 {
+            parts.push(format!("quest {quest_refs}"));
+        }
+        if recipe_refs > 0 {
+            parts.push(format!("recipe {recipe_refs}"));
+        }
+        if let Some(best_label) = self.item_best_record_label(item_id) {
+            parts.push(best_label);
+        }
+        let badges = self.inventory_badges(data, item_id);
+        if !badges.is_empty() {
+            parts.push(format!(
+                "[{}]",
+                badges
+                    .iter()
+                    .map(|badge| badge.as_str())
+                    .collect::<Vec<_>>()
+                    .join(", ")
+            ));
+        }
+        parts.join("  ")
+    }
+
+    pub(super) fn sorted_inventory_items(&self, data: &GameData) -> Vec<String> {
+        let mut items = self
+            .inventory
+            .iter()
+            .filter(|(_, amount)| **amount > 0)
+            .map(|(item_id, _)| item_id.clone())
+            .collect::<Vec<_>>();
+        items.sort_by(|left, right| {
+            let left_item = data.item(left);
+            let right_item = data.item(right);
+            let left_quest = self.active_quest_reference_count(data, left);
+            let right_quest = self.active_quest_reference_count(data, right);
+            let left_recipe = self.known_recipe_reference_count(data, left);
+            let right_recipe = self.known_recipe_reference_count(data, right);
+            let left_best = self.item_best_record_label(left).is_some();
+            let right_best = self.item_best_record_label(right).is_some();
+            let left_quality = left_item.map(|item| item.quality).unwrap_or_default();
+            let right_quality = right_item.map(|item| item.quality).unwrap_or_default();
+            let left_category = left_item.map(|item| item.category.as_str()).unwrap_or("");
+            let right_category = right_item.map(|item| item.category.as_str()).unwrap_or("");
+            right_quest
+                .cmp(&left_quest)
+                .then(right_recipe.cmp(&left_recipe))
+                .then(right_best.cmp(&left_best))
+                .then(right_quality.cmp(&left_quality))
+                .then(left_category.cmp(right_category))
+                .then(data.item_name(left).cmp(data.item_name(right)))
+        });
+        items
+    }
+
+    pub(super) fn recipe_memory_meta(&self, _data: &GameData, recipe: &RecipeDefinition) -> String {
+        let mastery = self.recipe_mastery_brews(&recipe.id);
+        let best = self
+            .progression
+            .crafted_item_profiles
+            .get(&recipe.output_item_id)
+            .map(|profile| profile.best_quality_band.clone())
+            .unwrap_or_else(|| "unlogged".to_owned());
+        let catalyst = if recipe.catalyst_tag.is_empty() {
+            "catalyst any".to_owned()
+        } else {
+            format!("catalyst {}", recipe.catalyst_tag)
+        };
+        format!("mastery {mastery}  best {best}  {catalyst}")
+    }
+
+    pub(super) fn recipe_memory_detail(
+        &self,
+        data: &GameData,
+        recipe: &RecipeDefinition,
+    ) -> String {
+        let mut parts = vec![format!("Output {}", data.item_name(&recipe.output_item_id))];
+        if !recipe.required_sequence.is_empty() {
+            let sequence = recipe
+                .required_sequence
+                .iter()
+                .map(|item_id| data.item_name(item_id))
+                .collect::<Vec<_>>()
+                .join(" -> ");
+            parts.push(format!("order {sequence}"));
+        }
+        if let Some(profile) = self.progression.crafted_item_profiles.get(&recipe.output_item_id) {
+            if !profile.inherited_traits.is_empty() {
+                parts.push(format!("traits {}", profile.inherited_traits.join(", ")));
+            }
+        }
+        if !recipe.morph_targets.is_empty() {
+            parts.push("morph path logged".to_owned());
+        }
+        parts.join("  ")
+    }
+
+    pub(super) fn sell_price(&self, data: &GameData, item_id: &str) -> u32 {
+        let Some(item) = data.item(item_id) else {
+            return 0;
+        };
+        if item.category == ItemCategory::Potion {
+            item.base_value + (item.base_value / 4).max(1)
+        } else {
+            item.base_value
+        }
+    }
+
+    pub(super) fn alchemy_materials(&self, data: &GameData) -> Vec<String> {
+        let mut items = self
+            .inventory
+            .iter()
+            .filter(|(item_id, amount)| {
+                **amount > 0
+                    && data
+                        .item(item_id)
+                        .map(|item| {
+                            item.category == ItemCategory::Ingredient
+                                || item.category == ItemCategory::Catalyst
+                        })
+                        .unwrap_or(false)
+            })
+            .map(|(item_id, _)| item_id.clone())
+            .collect::<Vec<_>>();
+        items.sort_by(|left, right| {
+            let left_item = data.item(left);
+            let right_item = data.item(right);
+            let left_category = left_item.map(|item| item.category.as_str()).unwrap_or("");
+            let right_category = right_item.map(|item| item.category.as_str()).unwrap_or("");
+            left_category
+                .cmp(right_category)
+                .then(data.item_name(left).cmp(data.item_name(right)))
+        });
+        items
+    }
+
+    pub(super) fn reserved_count(&self, item_id: &str) -> u32 {
+        self.alchemy.slots
+            .iter()
+            .filter(|slot| slot.as_deref() == Some(item_id))
+            .count() as u32
+            + u32::from(self.alchemy.catalyst.as_deref() == Some(item_id))
+    }
+
+    pub(super) fn fill_slot(&mut self, data: &GameData, items: &[String], slot: usize) {
+        let Some(item_id) = items.get(self.alchemy.index) else {
+            return;
+        };
+        let Some(item) = data.item(item_id) else {
+            return;
+        };
+        if item.category != ItemCategory::Ingredient {
+            self.runtime.status_text = self.unavailable_state_text(&format!(
+                "{} is a catalyst, not a brew ingredient.",
+                item.name
+            ));
+            return;
+        }
+        let total = self.inventory.get(item_id).copied().unwrap_or_default();
+        let reserved = self.reserved_count(item_id)
+            - u32::from(self.alchemy.slots[slot].as_deref() == Some(item_id));
+        if total <= reserved {
+            self.runtime.status_text = self.unavailable_state_text(&format!(
+                "No more {} ready for use.",
+                data.item_name(item_id)
+            ));
+            return;
+        }
+        self.alchemy.slots[slot] = Some(item_id.clone());
+        self.runtime.status_text = format!("Added {} to slot {}.", data.item_name(item_id), slot + 1);
+    }
+
+    pub(super) fn fill_catalyst(&mut self, data: &GameData, items: &[String]) {
+        let Some(item_id) = items.get(self.alchemy.index) else {
+            return;
+        };
+        let Some(item) = data.item(item_id) else {
+            return;
+        };
+        if item.category != ItemCategory::Catalyst {
+            self.runtime.status_text = self.unavailable_state_text(&format!(
+                "{} cannot stabilize a brew as a catalyst.",
+                item.name
+            ));
+            return;
+        }
+        let total = self.inventory.get(item_id).copied().unwrap_or_default();
+        let reserved = self.reserved_count(item_id)
+            - u32::from(self.alchemy.catalyst.as_deref() == Some(item_id));
+        if total <= reserved {
+            self.runtime.status_text =
+                self.unavailable_state_text(&format!("No more {} ready for use.", item.name));
+            return;
+        }
+        self.alchemy.catalyst = Some(item_id.clone());
+        self.runtime.status_text = format!("Prepared catalyst {}.", item.name);
+    }
+
+    pub(super) fn selected_items(&self) -> Vec<String> {
+        self.alchemy.slots
+            .iter()
+            .filter_map(|item_id| item_id.clone())
+            .collect()
+    }
+
+    pub(super) fn selected_catalyst(&self) -> Option<&str> {
+        self.alchemy.catalyst.as_deref()
+    }
+
+    pub(super) fn alchemy_timing(&self) -> &'static str {
+        ALCHEMY_TIMINGS[self.alchemy.timing_index]
+    }
+
+    pub(super) fn recipe_mastery_brews(&self, recipe_id: &str) -> u32 {
+        self.progression.recipe_mastery
+            .get(recipe_id)
+            .copied()
+            .unwrap_or_default()
+    }
+
+    pub(super) fn preview_mastery_brews(
+        &self,
+        data: &GameData,
+        station: &StationDefinition,
+        selected: &[String],
+    ) -> u32 {
+        crate::alchemy::match_recipe(data, station, selected)
+            .map(|recipe| self.recipe_mastery_brews(&recipe.id))
+            .unwrap_or_default()
+    }
+
+    pub(super) fn current_item_quality_snapshot(
+        &self,
+        data: &GameData,
+        item_id: &str,
+    ) -> Option<(u32, String)> {
+        let item = data.item(item_id)?;
+        let mut quality = item.quality;
+        let mut variant_name = String::new();
+        for variant in &item.wild_variants {
+            if variant
+                .required_conditions
+                .iter()
+                .all(|condition| self.condition_matches(condition))
+            {
+                quality += variant.quality_bonus;
+                variant_name = variant.name.clone();
+                break;
+            }
+        }
+        Some((quality.min(100), variant_name))
+    }
+
+    pub(super) fn condition_matches(&self, condition: &str) -> bool {
+        let condition = condition.to_ascii_lowercase();
+        condition.contains(self.current_season())
+            || condition.contains(self.current_weather())
+            || condition.contains(self.current_time_window())
+    }
+
+    pub(super) fn preview_is_uncertain(
+        &self,
+        preview: &crate::alchemy::BrewResolution<'_>,
+    ) -> bool {
+        preview
+            .recipe
+            .map(|recipe| !recipe.morph_targets.is_empty() && self.selected_catalyst().is_some())
+            .unwrap_or(false)
+    }
+
+    pub(super) fn quick_potions(&self, data: &GameData) -> Vec<String> {
+        let mut potions = self
+            .inventory
+            .iter()
+            .filter(|(item_id, amount)| {
+                **amount > 0
+                    && data
+                        .item(item_id)
+                        .map(|item| item.category == ItemCategory::Potion)
+                        .unwrap_or(false)
+            })
+            .map(|(item_id, _)| item_id.clone())
+            .collect::<Vec<_>>();
+        potions.sort_by(|left, right| {
+            let left_value = data.item(left).map(|item| item.base_value).unwrap_or(0);
+            let right_value = data.item(right).map(|item| item.base_value).unwrap_or(0);
+            right_value.cmp(&left_value).then(left.cmp(right))
+        });
+        potions
+    }
+
+    pub(super) fn sell_candidates(&self, data: &GameData) -> Vec<String> {
+        let mut items = self
+            .sorted_inventory_items(data)
+            .into_iter()
+            .filter(|item_id| {
+                !self.progression.started_quests.iter().any(|quest_id| {
+                    data.quest(quest_id)
+                        .map(|quest| quest.required_item_id == *item_id)
+                        .unwrap_or(false)
+                })
+            })
+            .collect::<Vec<_>>();
+        items.sort_by(|left, right| {
+            let left_safe = self.sell_is_safe(data, left);
+            let right_safe = self.sell_is_safe(data, right);
+            let left_value = self.sell_price(data, left);
+            let right_value = self.sell_price(data, right);
+            right_safe
+                .cmp(&left_safe)
+                .then(right_value.cmp(&left_value))
+                .then(data.item_name(left).cmp(data.item_name(right)))
+        });
+        items
+    }
+
+    pub(super) fn brew_selected(&mut self, data: &GameData, station: &StationDefinition) {
+        let selected = self.selected_items();
+        if selected.is_empty() {
+            self.runtime.status_text = narrative_text().statuses.cauldron_empty.clone();
+            return;
+        }
+        let resolution = resolve_brew(
+            data,
+            station,
+            &selected,
+            self.selected_catalyst(),
+            self.alchemy.heat,
+            self.alchemy.stirs,
+            self.alchemy_timing(),
+            self.preview_mastery_brews(data, station, &selected),
+        );
+        for item_id in &selected {
+            if let Some(amount) = self.inventory.get_mut(item_id) {
+                *amount -= 1;
+            }
+        }
+        if let Some(item_id) = self.selected_catalyst().map(str::to_owned) {
+            if let Some(amount) = self.inventory.get_mut(&item_id) {
+                *amount -= 1;
+            }
+        }
+        self.inventory.retain(|_, amount| *amount > 0);
+        *self
+            .inventory
+            .entry(resolution.output_item_id.clone())
+            .or_insert(0) += resolution.output_amount;
+        self.progression.total_brews += 1;
+        self.record_experiment_log(&resolution);
+        let previous_profile = self
+            .progression
+            .crafted_item_profiles
+            .get(&resolution.output_item_id)
+            .cloned();
+        self.record_crafted_item_profile(data, &resolution.output_item_id, &resolution);
+        if let Some(recipe) = resolution.recipe {
+            let previous_mastery = self.recipe_mastery_brews(&recipe.id);
+            let mastery_improved = if resolution.process_match
+                && resolution.minimum_quality_met
+                && resolution.minimum_elements_met
+            {
+                let mastery = self.progression.recipe_mastery.entry(recipe.id.clone()).or_insert(0);
+                *mastery += 1;
+                *mastery > previous_mastery
+            } else {
+                false
+            };
+            let recipe_discovered = self.progression.known_recipes.insert(recipe.id.clone());
+            if recipe_discovered {
+                self.push_event_toast(
+                    format!("Recipe logged: {}.", recipe.name),
+                    Color::from_rgba(176, 226, 255, 255),
+                );
+                self.runtime.status_text = format!(
+                    "Discovered {}. {} quality, traits: {}.",
+                    recipe.name,
+                    resolution.quality_band,
+                    resolution.inherited_traits.join(", ")
+                );
+            } else {
+                self.runtime.status_text = format!(
+                    "Brewed {} x{} as {} quality.",
+                    data.item_name(&resolution.output_item_id),
+                    resolution.output_amount,
+                    resolution.quality_band
+                );
+            }
+            if mastery_improved {
+                self.push_event_toast(
+                    format!("Mastery improved: {}.", recipe.name),
+                    Color::from_rgba(255, 230, 170, 255),
+                );
+            }
+        } else {
+            self.runtime.status_text = format!(
+                "The mixture collapsed into {} quality {}.",
+                resolution.quality_band,
+                data.item_name(&resolution.output_item_id)
+            );
+        }
+        let current_profile = self.progression.crafted_item_profiles.get(&resolution.output_item_id);
+        let improved_best = current_profile
+            .zip(previous_profile.as_ref())
+            .map(|(current, previous)| current.best_quality_score > previous.best_quality_score)
+            .unwrap_or(current_profile.is_some());
+        if improved_best {
+            if let Some(profile) = current_profile {
+                self.push_event_toast(
+                    format!(
+                        "New best quality: {} ({})",
+                        data.item_name(&resolution.output_item_id),
+                        profile.best_quality_band
+                    ),
+                    Color::from_rgba(188, 255, 220, 255),
+                );
+            }
+        }
+        if self.progression.total_brews == 10 {
+            self.push_event_toast(
+                "Station unlocked: Greenhouse access restored.",
+                Color::from_rgba(200, 255, 200, 255),
+            );
+            self.runtime.status_text = narrative_text().statuses.greenhouse_unlock.clone();
+        }
+        self.alchemy.stirs = 0;
+        self.alchemy.timing_index = 0;
+        self.alchemy.slots = [None, None, None];
+        self.alchemy.catalyst = None;
+    }
+
+    pub(super) fn record_crafted_item_profile(
+        &mut self,
+        data: &GameData,
+        item_id: &str,
+        resolution: &crate::alchemy::BrewResolution<'_>,
+    ) {
+        let effect_kinds = data
+            .item(item_id)
+            .map(|item| {
+                item.effects
+                    .iter()
+                    .map(|effect| effect.kind.to_string())
+                    .collect()
+            })
+            .unwrap_or_else(Vec::new);
+        let entry = self
+            .progression
+            .crafted_item_profiles
+            .entry(item_id.to_owned())
+            .or_insert_with(|| CraftedItemProfileEntry {
+                item_id: item_id.to_owned(),
+                best_quality_score: 0,
+                best_quality_band: "Crude".to_owned(),
+                inherited_traits: Vec::new(),
+                effect_kinds: effect_kinds.clone(),
+            });
+        if resolution.quality_score >= entry.best_quality_score {
+            entry.best_quality_score = resolution.quality_score;
+            entry.best_quality_band = resolution.quality_band.to_owned();
+            entry.inherited_traits = resolution.inherited_traits.clone();
+        }
+        if entry.effect_kinds.is_empty() {
+            entry.effect_kinds = effect_kinds;
+        }
+    }
+
+    pub(super) fn record_experiment_log(
+        &mut self,
+        resolution: &crate::alchemy::BrewResolution<'_>,
+    ) {
+        self.progression.experiment_log.push(ExperimentLogEntry {
+            recipe_id: resolution
+                .recipe
+                .map(|recipe| recipe.id.clone())
+                .unwrap_or_default(),
+            output_item_id: resolution.output_item_id.clone(),
+            quality_score: resolution.quality_score,
+            quality_band: resolution.quality_band.to_owned(),
+            stable: resolution.process_match
+                && resolution.minimum_quality_met
+                && resolution.minimum_elements_met,
+            catalyst_item_id: self.selected_catalyst().unwrap_or_default().to_owned(),
+            morph_output_item_id: resolution.morph_output_item_id.clone().unwrap_or_default(),
+            day_index: self.world.day_index,
+        });
+        if self.progression.experiment_log.len() > 24 {
+            let excess = self.progression.experiment_log.len() - 24;
+            self.progression.experiment_log.drain(0..excess);
+        }
+    }
+
+    pub(super) fn consume_potion(&mut self, data: &GameData, item_id: &str) {
+        let Some(item) = data.item(item_id) else {
+            return;
+        };
+        let Some(amount) = self.inventory.get_mut(item_id) else {
+            return;
+        };
+        if *amount == 0 {
+            return;
+        }
+        *amount -= 1;
+        if *amount == 0 {
+            self.inventory.remove(item_id);
+        }
+        for effect in &item.effects {
+            self.apply_effect(effect);
+        }
+        self.runtime.status_text = format!("Used {}.", item.name);
+    }
+
+    pub(super) fn buy_item(&mut self, data: &GameData, item_id: &str, price: u32) {
+        if self.coins < price {
+            self.runtime.status_text = format!("Not enough coins for {}.", data.item_name(item_id));
+            return;
+        }
+        self.coins -= price;
+        *self.inventory.entry(item_id.to_owned()).or_insert(0) += 1;
+        self.runtime.status_text = format!("Bought {}.", data.item_name(item_id));
+    }
+
+    pub(super) fn sell_item(&mut self, data: &GameData, item_id: &str) {
+        let Some(item) = data.item(item_id) else {
+            return;
+        };
+        let price = self.sell_price(data, item_id);
+        let Some(amount) = self.inventory.get_mut(item_id) else {
+            return;
+        };
+        if *amount == 0 {
+            return;
+        }
+        *amount -= 1;
+        if *amount == 0 {
+            self.inventory.remove(item_id);
+        }
+        self.coins += price;
+        self.runtime.status_text = format!("Sold {} for {} coins.", item.name, price);
+        if self.sell_is_safe(data, item_id) {
+            self.push_event_toast(
+                format!("Sold safe stock: {} (+{}c)", item.name, price),
+                Color::from_rgba(255, 214, 132, 255),
+            );
+        }
+    }
+}
+
+
+
