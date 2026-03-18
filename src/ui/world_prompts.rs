@@ -22,9 +22,20 @@ impl GameplayState {
     ) -> Option<WorldPromptView> {
         if let Some(npc) = self.nearby_npc(data) {
             let npc_pos = self.npc_runtime_state(data, npc).position;
+            let text = if let Some((label, _)) = self.npc_world_label(data, npc) {
+                if label == ui_copy("world_marker_turn_in") {
+                    ui_format("world_prompt_talk_ready", &[("name", &npc.name)])
+                } else if label == ui_copy("world_marker_request") {
+                    ui_format("world_prompt_talk_request", &[("name", &npc.name)])
+                } else {
+                    ui_format("world_prompt_talk", &[("name", &npc.name)])
+                }
+            } else {
+                ui_format("world_prompt_talk", &[("name", &npc.name)])
+            };
             return Some(WorldPromptView {
                 position: vec2(offset.x + npc_pos.x, offset.y + npc_pos.y - 42.0),
-                text: ui_format("world_prompt_talk", &[("name", &npc.name)]),
+                text,
             });
         }
 
@@ -34,11 +45,7 @@ impl GameplayState {
                 offset.y + station.position[1] - 42.0,
             );
             let text = if station.kind == StationKind::Alchemy {
-                format!(
-                    "{}: {}",
-                    input_bindings().alchemy.open,
-                    ui_text().prompts.open_alchemy
-                )
+                format!("E/{}: {}", input_bindings().alchemy.open, ui_text().prompts.open_alchemy)
             } else if station.kind == StationKind::Shop {
                 format!(
                     "{}: {}",
@@ -64,11 +71,15 @@ impl GameplayState {
                     ui_text().prompts.focus_observatory
                 )
             } else if station.kind == StationKind::QuestBoard {
-                format!(
-                    "{}: {}",
-                    input_bindings().global.interact,
-                    ui_text().prompts.read_request_board
-                )
+                if self.available_board_quests(data).is_empty() {
+                    format!(
+                        "{}: {}",
+                        input_bindings().global.interact,
+                        ui_text().prompts.read_request_board
+                    )
+                } else {
+                    ui_copy("world_prompt_board_new").to_owned()
+                }
             } else if station.kind == StationKind::Planter {
                 self.progression
                     .planter_states
@@ -124,6 +135,8 @@ impl GameplayState {
                 ),
                 text: if self.warp_is_unlocked(warp) {
                     ui_format("world_prompt_enter", &[("label", &warp.label)])
+                } else if self.can_unlock_warp(warp) {
+                    ui_format("world_prompt_restore", &[("label", &warp.label)])
                 } else {
                     self.warp_lock_text(data, warp)
                 },
@@ -134,6 +147,7 @@ impl GameplayState {
             .iter()
             .find(|node| {
                 !self.world.gathered_nodes.contains(&node.id)
+                    && self.node_is_available(node)
                     && self
                         .world
                         .player
@@ -146,11 +160,7 @@ impl GameplayState {
                     offset.x + node.position[0],
                     offset.y + node.position[1] - node.radius - 18.0,
                 ),
-                text: if self.node_is_available(node) {
-                    ui_format("world_prompt_gather", &[("name", &node.name)])
-                } else {
-                    format!("{}: {}", node.name, self.gather_unavailable_reason(node))
-                },
+                text: ui_format("world_prompt_gather", &[("name", &node.name)]),
             })
     }
 }

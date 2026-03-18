@@ -1,5 +1,5 @@
 use super::*;
-use crate::content::{ui_copy, ui_format};
+use crate::content::{input_bindings, ui_copy, ui_format};
 
 struct HudLine {
     title: String,
@@ -8,6 +8,7 @@ struct HudLine {
 
 struct HudQuestView {
     title: String,
+    requirements: String,
     location_hint: Option<String>,
 }
 
@@ -21,17 +22,21 @@ struct HudFeedbackView {
     position: Vec2,
     radius: f32,
     color: Color,
-    sparkle_points: [Vec2; 4],
+    sparkle_points: [Vec2; 8],
+    burst_scale: f32,
 }
 
 struct HudView {
     area_name: String,
+    inventory_title: String,
     coins_text: String,
     vitality_text: String,
     time_text: String,
     progress_text: String,
     day_text: String,
+    goal_text: String,
     status_text: String,
+    controls_text: String,
     quest: Option<HudQuestView>,
     inventory: Vec<HudLine>,
     effects: Vec<HudLine>,
@@ -49,6 +54,18 @@ impl GameplayState {
     fn build_hud_view(&self, area: &AreaDefinition, data: &GameData) -> HudView {
         let quest = self.active_quest_title(data).map(|title| HudQuestView {
             title: ui_format("hud_quest", &[("title", title)]),
+            requirements: self
+                .progression
+                .started_quests
+                .iter()
+                .find_map(|quest_id| data.quest(quest_id))
+                .map(|quest| {
+                    ui_format(
+                        "hud_quest_requirements",
+                        &[("requirements", &self.quest_requirement_summary(data, quest))],
+                    )
+                })
+                .unwrap_or_default(),
             location_hint: self
                 .active_quest_location_hint(data)
                 .map(|hint| ui_format("hud_turn_in", &[("hint", hint.as_str())])),
@@ -66,14 +83,9 @@ impl GameplayState {
                     .into_iter()
                     .map(|item_id| {
                         let amount = self.inventory.get(&item_id).copied().unwrap_or_default();
-                        let context = self.inventory_reference_summary(data, &item_id);
                         HudLine {
                             title: format!("{} x{}", data.item_name(&item_id), amount),
-                            detail: if context.is_empty() {
-                                ui_copy("hud_stocked").to_owned()
-                            } else {
-                                context
-                            },
+                            detail: String::new(),
                         }
                     })
                     .take_while({
@@ -147,13 +159,18 @@ impl GameplayState {
 
         HudView {
             area_name: area.name.clone(),
+            inventory_title: format!(
+                "{} [{}]",
+                ui_copy("hud_inventory_title"),
+                self.inventory_sort_label()
+            ),
             coins_text: ui_format("hud_coins", &[("coins", &self.coins.to_string())]),
             vitality_text: ui_format("hud_vitality", &[("vitality", &format!("{:.0}", self.vitality))]),
             time_text: ui_format(
                 "hud_time",
                 &[("time", &clock_text(self.world.day_clock_seconds, data.config.day_length_seconds))],
             ),
-            progress_text: ui_format("hud_progress", &[("brews", &self.progression.total_brews.min(10).to_string())]),
+            progress_text: ui_format("hud_progress", &[("brews", &self.progression.total_brews.to_string())]),
             day_text: ui_format(
                 "hud_day",
                 &[
@@ -162,7 +179,16 @@ impl GameplayState {
                     ("day", &(self.world.day_index + 1).to_string()),
                 ],
             ),
+            goal_text: ui_format("hud_goal", &[("goal", &self.next_goal_summary(data))]),
             status_text: self.runtime.status_text.clone(),
+            controls_text: ui_format(
+                "hud_controls_hint",
+                &[
+                    ("interact", &input_bindings().global.interact),
+                    ("journal", &input_bindings().global.journal),
+                    ("cancel", &input_bindings().global.cancel),
+                ],
+            ),
             quest,
             inventory,
             effects,
@@ -200,9 +226,9 @@ impl GameplayState {
                         life / 0.45
                     };
                 let radius = if feedback.emphasis {
-                    12.0 + t * 24.0
+                    (12.0 + t * 24.0) * feedback.burst_scale
                 } else {
-                    10.0 + t * 16.0
+                    (10.0 + t * 16.0) * feedback.burst_scale
                 };
                 let alpha = (1.0 - t).clamp(0.0, 1.0);
                 let color = Color::new(
@@ -213,8 +239,8 @@ impl GameplayState {
                 );
                 let screen_pos = offset + feedback.position;
                 let sparkle_points = std::array::from_fn(|index| {
-                    let angle = t * 0.8 + index as f32 * std::f32::consts::FRAC_PI_2;
-                    let sparkle = vec2(angle.cos(), angle.sin()) * (radius + 4.0);
+                    let angle = t * 1.1 + index as f32 * (std::f32::consts::TAU / 8.0);
+                    let sparkle = vec2(angle.cos(), angle.sin()) * (radius + 4.0 + index as f32 * 1.6);
                     screen_pos + sparkle
                 });
 
@@ -223,6 +249,7 @@ impl GameplayState {
                     radius,
                     color,
                     sparkle_points,
+                    burst_scale: feedback.burst_scale,
                 }
             })
             .collect()
@@ -239,11 +266,11 @@ fn draw_hud_view(view: &HudView) {
 }
 
 fn draw_status_panel(view: &HudView) {
-    draw_panel(18.0, 18.0, 430.0, 176.0, ui_copy("hud_status_title"));
+    draw_panel(18.0, 18.0, 520.0, 210.0, ui_copy("hud_status_title"));
     draw_text(&view.area_name, 34.0, 58.0, 32.0, dark::TEXT_BRIGHT);
     draw_text(
         &view.coins_text,
-        276.0,
+        360.0,
         58.0,
         28.0,
         Color::from_rgba(255, 214, 132, 255),
@@ -256,19 +283,22 @@ fn draw_status_panel(view: &HudView) {
         Color::from_rgba(126, 220, 158, 255),
     );
     draw_text(&view.time_text, 34.0, 112.0, 24.0, dark::TEXT);
-    draw_text(&view.progress_text, 34.0, 138.0, 22.0, dark::TEXT_DIM);
+    draw_text(&view.progress_text, 34.0, 136.0, 20.0, dark::TEXT_DIM);
     draw_text(&view.day_text, 220.0, 112.0, 20.0, dark::TEXT_DIM);
-    draw_text(&view.status_text, 34.0, 138.0, 20.0, dark::TEXT_DIM);
+    draw_text(&view.goal_text, 34.0, 158.0, 18.0, dark::TEXT_DIM);
+    draw_text(&view.status_text, 34.0, 180.0, 20.0, dark::TEXT);
+    draw_text(&view.controls_text, 34.0, 204.0, 18.0, dark::TEXT_DIM);
     if let Some(quest) = &view.quest {
         draw_text(
             &quest.title,
-            34.0,
-            160.0,
+            290.0,
+            136.0,
             20.0,
             Color::from_rgba(255, 230, 170, 255),
         );
+        draw_text(&quest.requirements, 290.0, 158.0, 18.0, dark::TEXT_DIM);
         if let Some(location_hint) = &quest.location_hint {
-            draw_text(location_hint, 34.0, 180.0, 18.0, dark::TEXT_DIM);
+            draw_text(location_hint, 290.0, 178.0, 18.0, dark::TEXT_DIM);
         }
     }
 }
@@ -279,7 +309,7 @@ fn draw_inventory_panel(view: &HudView) {
         18.0,
         302.0,
         222.0,
-        ui_copy("hud_inventory_title"),
+        &view.inventory_title,
     );
     let mut y = 58.0;
     for line in &view.inventory {
@@ -330,7 +360,7 @@ fn draw_potion_panel(view: &HudView) {
     }
     draw_text(
         ui_copy("hud_journal_hint"),
-        418.0,
+        370.0,
         screen_height() - 26.0,
         18.0,
         dark::TEXT_DIM,
@@ -357,11 +387,23 @@ fn draw_hud_feedbacks(feedbacks: &[HudFeedbackView]) {
             feedback.position.x,
             feedback.position.y,
             feedback.radius,
-            2.0,
+            if feedback.burst_scale > 1.5 { 3.0 } else { 2.0 },
             feedback.color,
         );
+        draw_circle_lines(
+            feedback.position.x,
+            feedback.position.y,
+            feedback.radius * 0.62,
+            1.5,
+            Color::new(feedback.color.r, feedback.color.g, feedback.color.b, feedback.color.a * 0.75),
+        );
         for sparkle in feedback.sparkle_points {
-            draw_circle(sparkle.x, sparkle.y, 2.0, feedback.color);
+            draw_circle(
+                sparkle.x,
+                sparkle.y,
+                if feedback.burst_scale > 1.4 { 2.6 } else { 2.0 },
+                feedback.color,
+            );
         }
     }
 }

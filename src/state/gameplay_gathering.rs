@@ -1,50 +1,84 @@
 use super::gameplay_support::rgba;
 use super::*;
 use crate::content::ui_format;
+use std::collections::BTreeSet;
 
 impl GameplayState {
     pub(super) fn node_is_available(&self, node: &crate::data::GatherNodeDefinition) -> bool {
         self.world.available_nodes.contains(&node.id)
     }
 
-    pub(super) fn gather_unavailable_reason(
+    pub(super) fn item_has_field_notes(&self, item_id: &str) -> bool {
+        self.progression.field_journal.contains_key(item_id)
+    }
+
+    pub(super) fn gather_attempt_status(
         &self,
+        _data: &GameData,
         node: &crate::data::GatherNodeDefinition,
     ) -> String {
-        let season_ok = node.seasons.is_empty()
-            || node
-                .seasons
-                .iter()
-                .any(|season| season == self.current_season());
-        if !season_ok {
-            return ui_format("gather_out_of_season", &[]);
+        if self.item_has_field_notes(&node.item_id) {
+            ui_format("gather_attempt_known", &[("name", &node.name)])
+        } else {
+            ui_format("gather_attempt_none", &[])
+        }
+    }
+
+    pub(super) fn learned_gathering_conditions(
+        &self,
+        data: &GameData,
+        item_id: &str,
+    ) -> Option<String> {
+        if !self.item_has_field_notes(item_id) {
+            return None;
         }
 
-        let weather_ok = node.weathers.is_empty()
-            || node
-                .weathers
-                .iter()
-                .any(|weather| weather == self.current_weather());
-        if !weather_ok {
-            if node.weathers.iter().any(|weather| weather == "rain") {
-                return ui_format("gather_requires_rain", &[]);
-            }
-            return ui_format("gather_needs_weather", &[("weather", &node.weathers.join(" or "))]);
+        let mut seasons = BTreeSet::new();
+        let mut weathers = BTreeSet::new();
+        let mut times = BTreeSet::new();
+        let mut found = false;
+        for node in data
+            .areas
+            .iter()
+            .flat_map(|area| area.gather_nodes.iter())
+            .filter(|node| node.item_id == item_id)
+        {
+            found = true;
+            seasons.extend(node.seasons.iter().cloned());
+            weathers.extend(node.weathers.iter().cloned());
+            times.extend(node.time_windows.iter().cloned());
+        }
+        if !found {
+            return None;
         }
 
-        let time_ok = node.time_windows.is_empty()
-            || node
-                .time_windows
-                .iter()
-                .any(|time| time == self.current_time_window());
-        if !time_ok {
-            if node.time_windows.iter().any(|time| time == "evening") {
-                return ui_format("gather_only_dusk", &[]);
-            }
-            return ui_format("gather_appears_during", &[("time", &node.time_windows.join(" or "))]);
+        let mut parts = Vec::new();
+        if !seasons.is_empty() {
+            parts.push(format!(
+                "season {}",
+                seasons.into_iter().collect::<Vec<_>>().join(" or ")
+            ));
         }
-
-        ui_format("gather_no_sign", &[])
+        if !weathers.is_empty() {
+            parts.push(format!(
+                "weather {}",
+                weathers.into_iter().collect::<Vec<_>>().join(" or ")
+            ));
+        }
+        if !times.is_empty() {
+            parts.push(format!(
+                "time {}",
+                times.into_iter().collect::<Vec<_>>().join(" or ")
+            ));
+        }
+        if parts.is_empty() {
+            Some(ui_format("gather_known_conditions_none", &[]))
+        } else {
+            Some(ui_format(
+                "gather_known_conditions",
+                &[("conditions", &parts.join("  |  "))],
+            ))
+        }
     }
 
     pub(super) fn record_field_discovery(
@@ -99,6 +133,7 @@ impl GameplayState {
             remaining_seconds: duration,
             color: base_color,
             emphasis,
+            burst_scale: if emphasis { 1.35 } else { 1.0 },
         });
 
         if discovery.new_note {
@@ -125,6 +160,7 @@ impl GameplayState {
         }
         if emphasis {
             self.runtime.gather_pause_seconds = self.runtime.gather_pause_seconds.max(0.08);
+            self.trigger_camera_shake(0.08, 2.4);
         }
     }
 

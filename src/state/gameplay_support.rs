@@ -1,8 +1,92 @@
 use super::gameplay_npc::npc_motion_seed;
 use super::*;
-use crate::content::{narrative_text, ui_format};
+use crate::content::{narrative_text, ui_copy, ui_format};
 
 impl GameplayState {
+    pub(super) fn locked_warps<'a>(&self, data: &'a GameData) -> Vec<&'a WarpDefinition> {
+        data.areas
+            .iter()
+            .flat_map(|area| area.warps.iter())
+            .filter(|warp| !self.warp_is_unlocked(warp))
+            .collect()
+    }
+
+    pub(super) fn next_locked_warp<'a>(&self, data: &'a GameData) -> Option<&'a WarpDefinition> {
+        self.locked_warps(data)
+            .into_iter()
+            .min_by_key(|warp| self.warp_progress_score(data, warp))
+    }
+
+    pub(super) fn warp_progress_score(&self, _data: &GameData, warp: &WarpDefinition) -> u32 {
+        let owned = self
+            .inventory
+            .get(&warp.required_item_id)
+            .copied()
+            .unwrap_or_default();
+        let item_missing = warp.required_item_amount.saturating_sub(owned);
+        let milestone_missing = u32::from(
+            !warp.required_journal_milestone.is_empty()
+                && !self.has_journal_milestone(&warp.required_journal_milestone),
+        );
+
+        warp.required_total_brews
+            .saturating_sub(self.progression.total_brews)
+            .saturating_mul(100)
+            .saturating_add(warp.required_coins.saturating_sub(self.coins))
+            .saturating_add(item_missing.saturating_mul(25))
+            .saturating_add(milestone_missing.saturating_mul(150))
+    }
+
+    pub(super) fn active_quest_summary(&self, data: &GameData) -> Option<String> {
+        let quest = self
+            .progression
+            .started_quests
+            .iter()
+            .find_map(|quest_id| data.quest(quest_id))?;
+        let location = self.quest_location_hint(data, quest);
+        Some(format!(
+            "{}  |  {}  |  {}",
+            quest.title,
+            self.quest_requirement_summary(data, quest),
+            location
+        ))
+    }
+
+    pub(super) fn milestone_status_lines(&self) -> Vec<(&'static str, String, bool)> {
+        vec![
+            (
+                "Greenhouse access",
+                if self.progression.unlocked_warps.contains("entry_to_greenhouse") {
+                    "Greenhouse floor restored.".to_owned()
+                } else {
+                    "Reach 10 brews, 40 coins, and carry 2 Moon Fern.".to_owned()
+                },
+                self.progression.unlocked_warps.contains("entry_to_greenhouse"),
+            ),
+            (
+                "Archive reconstruction",
+                if self.has_journal_milestone("archive_revelation") {
+                    "Archive revelation recovered.".to_owned()
+                } else if self.can_reconstruct_archive() {
+                    "Ready at the archive console.".to_owned()
+                } else {
+                    "Finish star_elixir_for_ione, containment_for_lyra, and restore the tower floors."
+                        .to_owned()
+                },
+                self.has_journal_milestone("archive_revelation") || self.can_reconstruct_archive(),
+            ),
+            (
+                "Observatory access",
+                if self.has_journal_milestone("archive_revelation") {
+                    "Portal Observatory can be opened from the archives.".to_owned()
+                } else {
+                    "Recover the archive revelation.".to_owned()
+                },
+                self.has_journal_milestone("archive_revelation"),
+            ),
+        ]
+    }
+
     pub(super) fn greenhouse_journal_unlocked(&self) -> bool {
         self.progression.unlocked_warps.contains("entry_to_greenhouse")
     }
@@ -44,6 +128,27 @@ impl GameplayState {
         self.runtime.gather_toasts.truncate(3);
     }
 
+    pub(super) fn trigger_camera_shake(&mut self, seconds: f32, intensity: f32) {
+        self.runtime.camera_shake_seconds = self.runtime.camera_shake_seconds.max(seconds);
+        self.runtime.camera_shake_intensity = self.runtime.camera_shake_intensity.max(intensity);
+    }
+
+    pub(super) fn trigger_world_feedback(
+        &mut self,
+        position: Vec2,
+        color: Color,
+        emphasis: bool,
+        burst_scale: f32,
+    ) {
+        self.runtime.gather_feedbacks.push(GatherFeedback {
+            position,
+            remaining_seconds: if emphasis { 0.9 } else { 0.55 },
+            color,
+            emphasis,
+            burst_scale,
+        });
+    }
+
     pub(super) fn resolve_area_collision(&self, area: &AreaDefinition, candidate: Vec2) -> Vec2 {
         let clamped = vec2(
             candidate
@@ -82,10 +187,18 @@ impl GameplayState {
         let unclamped = half - self.world.player.position;
         let min_x = screen_width() - area.size[0] - CAMERA_PADDING;
         let min_y = screen_height() - area.size[1] - CAMERA_PADDING;
-        vec2(
+        let mut offset = vec2(
             unclamped.x.clamp(min_x.min(CAMERA_PADDING), CAMERA_PADDING),
             unclamped.y.clamp(min_y.min(CAMERA_PADDING), CAMERA_PADDING),
-        )
+        );
+        if self.runtime.camera_shake_seconds > 0.0 && self.runtime.camera_shake_intensity > 0.0 {
+            let t = get_time() as f32 * 45.0;
+            let shake = vec2(t.sin(), (t * 1.37).cos())
+                * self.runtime.camera_shake_intensity
+                * (self.runtime.camera_shake_seconds / 0.25).min(1.0);
+            offset += shake;
+        }
+        offset
     }
 
     pub(super) fn npc_draw_position(&self, npc: &NpcDefinition, runtime: &NpcRuntimeState) -> Vec2 {
@@ -140,6 +253,264 @@ impl GameplayState {
 
     pub(super) fn current_clock_minutes(&self) -> f32 {
         (self.world.day_clock_seconds / self.world.day_length_seconds) * 24.0 * 60.0
+    }
+
+    pub(super) fn next_goal_summary(&self, data: &GameData) -> String {
+        if let Some(quest) = self
+            .progression
+            .started_quests
+            .iter()
+            .find_map(|quest_id| data.quest(quest_id))
+        {
+            return format!(
+                "{} ({})",
+                quest.title,
+                self.quest_requirement_summary(data, quest)
+            );
+        }
+
+        if self.can_reconstruct_archive() && !self.has_journal_milestone("archive_revelation") {
+            return "Reconstruct the archive timeline from the console.".to_owned();
+        }
+
+        if let Some(quest) = data
+            .quests
+            .iter()
+            .filter(|quest| !self.progression.started_quests.contains(&quest.id))
+            .filter(|quest| !self.progression.completed_quests.contains(&quest.id))
+            .find(|quest| self.quest_is_available(quest))
+        {
+            return format!(
+                "Accept {} from {}.",
+                quest.title,
+                self.quest_location_hint(data, quest)
+            );
+        }
+
+        if let Some(warp) = self.next_locked_warp(data) {
+            return format!(
+                "Restore {}: {}.",
+                warp.label,
+                self.warp_requirement_summary(data, warp)
+            );
+        }
+
+        "Keep gathering, brewing, and filling the archive.".to_owned()
+    }
+
+    pub(super) fn station_world_label(
+        &self,
+        data: &GameData,
+        station: &StationDefinition,
+    ) -> Option<(String, Color)> {
+        match station.kind {
+            StationKind::Alchemy if self.progression.total_brews < 3 => Some((
+                ui_copy("world_marker_brew_here").to_owned(),
+                Color::from_rgba(188, 255, 220, 255),
+            )),
+            StationKind::QuestBoard if !self.available_board_quests(data).is_empty() => Some((
+                ui_copy("world_marker_new_requests").to_owned(),
+                Color::from_rgba(255, 230, 170, 255),
+            )),
+            StationKind::ArchiveConsole
+                if self.can_reconstruct_archive()
+                    && !self.has_journal_milestone("archive_revelation") =>
+            {
+                Some((
+                    ui_copy("world_marker_rebuild_ready").to_owned(),
+                    Color::from_rgba(176, 226, 255, 255),
+                ))
+            }
+            StationKind::Planter => self
+                .progression
+                .planter_states
+                .get(&station.id)
+                .filter(|state| state.ready)
+                .map(|_| {
+                    (
+                        ui_copy("world_marker_harvest_ready").to_owned(),
+                        Color::from_rgba(188, 255, 220, 255),
+                    )
+                }),
+            StationKind::Habitat => self
+                .progression
+                .habitat_states
+                .get(&station.id)
+                .filter(|state| {
+                    !state.creature_item_id.is_empty()
+                        && self.world.day_index
+                            >= state
+                                .last_harvest_day
+                                .saturating_add(station.habitat_harvest_days.max(1))
+                })
+                .map(|_| {
+                    (
+                        ui_copy("world_marker_collect_ready").to_owned(),
+                        Color::from_rgba(188, 255, 220, 255),
+                    )
+                }),
+            StationKind::EndingFocus if self.has_journal_milestone("archive_revelation") => Some((
+                ui_copy("world_marker_final_focus").to_owned(),
+                Color::from_rgba(255, 230, 170, 255),
+            )),
+            _ => None,
+        }
+    }
+
+    pub(super) fn npc_world_label(
+        &self,
+        data: &GameData,
+        npc: &NpcDefinition,
+    ) -> Option<(String, Color)> {
+        let quest = (!npc.quest_id.is_empty())
+            .then(|| data.quest(&npc.quest_id))
+            .flatten()?;
+        if self.progression.completed_quests.contains(&quest.id) {
+            return None;
+        }
+        if self.progression.started_quests.contains(&quest.id) {
+            if self.quest_requirements_met(data, quest) {
+                Some((
+                    ui_copy("world_marker_turn_in").to_owned(),
+                    Color::from_rgba(188, 255, 220, 255),
+                ))
+            } else {
+                Some((
+                    ui_copy("world_marker_awaiting_brew").to_owned(),
+                    Color::from_rgba(255, 230, 170, 255),
+                ))
+            }
+        } else if self.quest_is_available(quest) {
+            Some((
+                ui_copy("world_marker_request").to_owned(),
+                Color::from_rgba(255, 230, 170, 255),
+            ))
+        } else {
+            None
+        }
+    }
+
+    pub(super) fn update_tutorial_hints(&mut self, data: &GameData, frame_time: f32) {
+        if self.runtime.tutorial.next_hint_delay_seconds > 0.0 {
+            self.runtime.tutorial.next_hint_delay_seconds =
+                (self.runtime.tutorial.next_hint_delay_seconds - frame_time).max(0.0);
+        }
+        if self.runtime.tutorial.next_hint_delay_seconds > 0.0
+            || !self.runtime.gather_toasts.is_empty()
+            || self.ui.journal_open
+            || self.ui.quest_board_open
+            || self.ui.shop_open
+            || self.ui.rune_open
+            || self.ui.archive_open
+            || self.ui.dialogue_open
+            || self.ui.ending_open
+            || self.alchemy.open
+        {
+            return;
+        }
+
+        let near_alchemy = self
+            .nearby_station(data)
+            .map(|station| station.kind == StationKind::Alchemy)
+            .unwrap_or(false);
+        let near_quest_npc = self
+            .nearby_npc(data)
+            .and_then(|npc| self.npc_world_label(data, npc))
+            .is_some();
+        let nearby_available_node = data
+            .area(&self.world.current_area_id)
+            .map(|area| {
+                area.gather_nodes.iter().any(|node| {
+                    !self.world.gathered_nodes.contains(&node.id)
+                        && self.node_is_available(node)
+                        && self
+                            .world
+                            .player
+                            .position
+                            .distance(vec2(node.position[0], node.position[1]))
+                            <= node.radius + data.config.interaction_range + 36.0
+                })
+            })
+            .unwrap_or(false);
+        let unlockable_warp_here = data
+            .area(&self.world.current_area_id)
+            .map(|area| {
+                area.warps
+                    .iter()
+                    .any(|warp| !self.warp_is_unlocked(warp) && self.can_unlock_warp(warp))
+            })
+            .unwrap_or(false);
+        let has_quick_potions = !self.quick_potions(data).is_empty();
+        let next_hint = if !self.runtime.tutorial.save_hint_shown {
+            self.runtime.tutorial.save_hint_shown = true;
+            Some((
+                "F5 saves and F9 reloads your current run.",
+                Color::from_rgba(176, 226, 255, 255),
+            ))
+        } else if !self.runtime.tutorial.journal_hint_shown {
+            self.runtime.tutorial.journal_hint_shown = true;
+            Some((
+                "Press J to open the field journal for routes, brews, and notes.",
+                Color::from_rgba(255, 230, 170, 255),
+            ))
+        } else if !self.runtime.tutorial.alchemy_hint_shown && near_alchemy {
+            self.runtime.tutorial.alchemy_hint_shown = true;
+            Some((
+                "Press E or Tab near a cauldron to start brewing.",
+                Color::from_rgba(188, 255, 220, 255),
+            ))
+        } else if !self.runtime.tutorial.potion_hint_shown && has_quick_potions {
+            self.runtime.tutorial.potion_hint_shown = true;
+            Some((
+                "Use Z, X, and C for the first three potions on your belt.",
+                Color::from_rgba(255, 214, 132, 255),
+            ))
+        } else if !self.runtime.tutorial.gather_hint_shown
+            && self.progression.field_journal.is_empty()
+            && nearby_available_node
+        {
+            self.runtime.tutorial.gather_hint_shown = true;
+            Some((
+                "Bright nodes can be gathered with E. Early route notes build your journal quickly.",
+                Color::from_rgba(188, 255, 220, 255),
+            ))
+        } else if !self.runtime.tutorial.quest_hint_shown
+            && self.progression.started_quests.is_empty()
+            && self.progression.completed_quests.is_empty()
+            && (near_quest_npc || !self.available_board_quests(data).is_empty())
+        {
+            self.runtime.tutorial.quest_hint_shown = true;
+            Some((
+                "Gold markers mean new requests. Talk to highlighted townsfolk or read the board to start your first hand-in loop.",
+                Color::from_rgba(255, 230, 170, 255),
+            ))
+        } else if !self.runtime.tutorial.delivery_hint_shown
+            && self
+                .progression
+                .started_quests
+                .iter()
+                .filter_map(|quest_id| data.quest(quest_id))
+                .any(|quest| self.quest_requirements_met(data, quest))
+        {
+            self.runtime.tutorial.delivery_hint_shown = true;
+            Some((
+                "A highlighted requester is ready for delivery. Return with E to cash in the order.",
+                Color::from_rgba(188, 255, 220, 255),
+            ))
+        } else if !self.runtime.tutorial.route_hint_shown && unlockable_warp_here {
+            self.runtime.tutorial.route_hint_shown = true;
+            Some((
+                "Green gates can be restored now. Step onto the marked route and press E to open the next floor.",
+                Color::from_rgba(176, 226, 255, 255),
+            ))
+        } else {
+            None
+        };
+
+        if let Some((text, color)) = next_hint {
+            self.push_event_toast(text, color);
+            self.runtime.tutorial.next_hint_delay_seconds = 6.0;
+        }
     }
 }
 

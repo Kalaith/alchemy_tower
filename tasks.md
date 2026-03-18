@@ -1,34 +1,30 @@
- 1. Make progression explicit.                                                                                                                   
-     Add a tower progression panel: current floor unlock goal, next station unlock, next key quest, and what unlocks after 10/20/etc brews. Right 
-     now a lot of progression is learnable, but not always legible.                                                                               
-  2. Turn recipes into a proper discovery loop.                                                                                                   
-     Give each discovered recipe a journal page with known requirements, last brewed quality, catalyst notes, morph hints, and failed attempts.   
-     Alchemy becomes much stickier when the game remembers what the player has learned.                                                           
-  3. Finish inventory decision support.                                                                                                           
-     Add sort modes, badges, reserved counts, “needed for active quest”, “used in known recipe”, and “safe to sell”. This is one of the biggest   
-     friction reducers once the item list gets larger.                                                                                            
-  4. Add structured toast/event feedback.                                                                                                         
-     Use one consistent toast system for milestone unlocked, recipe discovered, warp restored, quest accepted/completed, new variant found, best  
-     quality improved, and station unlocked. That makes the game feel responsive without needing cutscenes.                                       
-  5. Tighten station UX language fully.                                                                                                           
-     You already started this. Finish it by making every overlay use the same footer grammar, card spacing, selection rhythm, locked-state        
-     phrasing, and confirmation language. MVP quality is often “everything feels related”.                                                        
-  6. Improve world readability.                                                                                                                   
-     Give every important node type and station a stronger silhouette and a small ambient effect: archive glow, rune spark, alchemy simmer, quest 
-     board paper flutter, greenhouse shimmer. No new mechanics, just easier scanning.                                                             
-  7. Make NPC routines fully readable.                                                                                                            
-     Keep the improved movement, then add “Now / Later / Usually” hints in dialogue and journal, and make key turn-in NPCs extra reliable. Players     should feel village pattern, not schedule punishment.                                                                                        
-  8. Add economy and crafting balance pass.                                                                                                       
-     Audit buy prices, sell prices, potion value, rune conversion value, quest rewards, unlock costs, and ingredient availability. MVP polish dies     fast if one loop dominates the rest.                                                                                                         
-  9. Add fail-safe save/load and state recovery.                                                                                                  
-     You already have save/load. Finish it with save version migration handling, invalid-state recovery, safer area fallback, and better messaging
-     for bad save data. That is boring work, but it is MVP-critical.                                                                              
-  10. Add end-to-end “first hour” pacing polish.                                                                                                  
-     Play the first 30-60 minutes as a fresh user and smooth:                                                                                     
-                                                                                                                                                  
-  - time to first successful brew                                                                                                                 
-  - time to first unlock                                                                                                                          
-  - time to first cross-map NPC hand-in                                                                                                           
-  - time to first meaningful gather discovery                                                                                                     
-  - time to first recipe journal moment                                                                                                           
-    This is where prototype becomes product.
+# Product Notes
+
+This file is for higher-level product and design follow-ups only.
+
+Implementation status and shipped polish tracking live in [polish_backlog.md](/H:/RustGames/alchemy_tower/polish_backlog.md). Current implemented behavior is documented in [IMPLEMENTED_SYSTEMS.md](/H:/RustGames/alchemy_tower/IMPLEMENTED_SYSTEMS.md).
+
+## Open Product Questions
+
+1. Save/load UX
+Should save and load remain `F5` / `F9` shortcuts for the MVP, or move into pause/menu UI before release?
+
+2. Alchemy repetition
+Should `repeat last brew setup` be a direct input in the alchemy station, a journal/archive action, or both?
+
+3. Journal identity
+What should make the journal feel like a player memory system rather than a report log: authored recap text, stronger summaries, pinned notes, or custom player-facing bookmarks?
+
+4. Economy balance
+Run a dedicated value pass on buy prices, sell prices, unlock costs, quest rewards, and rune/duplication value so no single loop dominates progression.
+
+5. First-hour validation
+Do a fresh-user pass and record:
+- time to first successful brew
+- time to first unlock
+- time to first NPC hand-in
+- time to first meaningful gather discovery
+- time to first useful journal/archive revisit
+
+6. Audio scope
+Decide whether MVP ships silent or with a minimal audio layer for gather, brewing, unlocks, selling, quests, and journal discovery.

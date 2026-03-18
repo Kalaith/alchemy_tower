@@ -1,5 +1,5 @@
 use super::*;
-use crate::content::{ui_copy, ui_format};
+use crate::content::{input_bindings, ui_copy, ui_format};
 use crate::ui::{
     draw_overlay_backdrop, draw_overlay_footer, draw_overlay_subtitle, draw_selection_card,
     draw_state_banner, draw_wrapped_text,
@@ -46,6 +46,13 @@ impl GameplayState {
                 dark::ACCENT
             },
         );
+        draw_text(
+            &ui_format("overlay_sort_mode", &[("mode", self.inventory_sort_label())]),
+            x + w - 180.0,
+            y + 88.0,
+            20.0,
+            dark::TEXT_DIM,
+        );
 
         let entries = if self.ui.shop_buy_tab {
             station
@@ -71,6 +78,20 @@ impl GameplayState {
         };
 
         let mut row_y = y + 128.0;
+        if !self.ui.shop_buy_tab {
+            let safe_banner = entries
+                .get(self.ui.shop_index)
+                .map(|(item_id, _, _)| {
+                    if self.sell_is_safe(data, item_id) {
+                        ui_copy("overlay_safe_sell").to_owned()
+                    } else {
+                        ui_copy("overlay_keep_stock").to_owned()
+                    }
+                })
+                .unwrap_or_else(|| ui_copy("overlay_safe_sell").to_owned());
+            draw_state_banner(x + 20.0, row_y - 16.0, w - 40.0, &safe_banner, false);
+            row_y += 38.0;
+        }
         if entries.is_empty() {
             let empty_text = if self.ui.shop_buy_tab {
                 self.unavailable_state_text("Nothing is stocked right now.")
@@ -82,19 +103,11 @@ impl GameplayState {
             for (index, (item_id, price, enabled)) in entries.iter().enumerate() {
                 let selected = index == self.ui.shop_index;
                 let amount = self.inventory.get(item_id).copied().unwrap_or_default();
-                let subtitle = data
-                    .item(item_id)
-                    .map(|item| item.description.as_str())
-                    .unwrap_or("");
                 let detail = if self.ui.shop_buy_tab {
-                    subtitle.to_owned()
+                    self.inventory_reference_summary(data, item_id)
                 } else {
                     let context = self.inventory_reference_summary(data, item_id);
-                    if context.is_empty() {
-                        subtitle.to_owned()
-                    } else {
-                        format!("{subtitle}  {context}")
-                    }
+                    context
                 };
                 let meta = if self.ui.shop_buy_tab {
                     self.item_card_meta(data, item_id, amount, &ui_format("overlay_buy_price", &[("price", &price.to_string())]))
@@ -128,7 +141,13 @@ impl GameplayState {
             y,
             w,
             h,
-            "Left/Right switch tab  |  Up/Down select  |  Enter confirm  |  Esc close",
+            &format!(
+                "{} switch tab  |  {} select  |  V sort  |  {} confirm  |  {} close",
+                input_bindings().shop.switch_tab,
+                input_bindings().navigation.select,
+                input_bindings().global.confirm,
+                input_bindings().global.cancel,
+            ),
         );
     }
 
@@ -174,7 +193,18 @@ impl GameplayState {
                 row_y += 64.0;
             }
         }
-        draw_overlay_footer(x, y, w, h, "Up/Down select  |  Enter confirm  |  Esc close");
+        draw_overlay_footer(
+            x,
+            y,
+            w,
+            h,
+            &format!(
+                "{} select  |  {} confirm  |  {} close",
+                input_bindings().navigation.select,
+                input_bindings().global.confirm,
+                input_bindings().global.cancel,
+            ),
+        );
     }
 
     pub(super) fn draw_archive_overlay(&self, data: &GameData) {
@@ -286,7 +316,15 @@ impl GameplayState {
 
     fn draw_archive_experiments_section(&self, data: &GameData, x: f32, y: f32, w: f32, _h: f32) {
         draw_text(ui_copy("overlay_experiment_history"), x + 20.0, y + 122.0, 26.0, dark::TEXT_BRIGHT);
-        if self.progression.experiment_log.is_empty() {
+        let entries = self.archive_experiment_entries(data);
+        draw_text(
+            &ui_format("overlay_filter", &[("mode", self.archive_experiment_filter_label())]),
+            x + 220.0,
+            y + 122.0,
+            20.0,
+            dark::TEXT_DIM,
+        );
+        if entries.is_empty() {
             draw_state_banner(
                 x + 20.0,
                 y + 144.0,
@@ -297,9 +335,24 @@ impl GameplayState {
             return;
         }
 
+        let selected_index = self.ui.archive_index.min(entries.len().saturating_sub(1));
+        let page = selected_index / 6;
+        let page_count = entries.len().div_ceil(6);
+        draw_text(
+            &ui_format(
+                "overlay_page",
+                &[("page", &(page + 1).to_string()), ("pages", &page_count.to_string())],
+            ),
+            x + 320.0,
+            y + 122.0,
+            20.0,
+            dark::TEXT_DIM,
+        );
         let mut list_y = y + 154.0;
-        for (index, entry) in self.progression.experiment_log.iter().rev().take(6).enumerate() {
-            let selected = index == self.ui.archive_index;
+        let page_start = page * 6;
+        for (offset, entry) in entries.iter().skip(page_start).take(6).enumerate() {
+            let index = page_start + offset;
+            let selected = index == selected_index;
             let title = data.item_name(&entry.output_item_id);
             let detail = if entry.recipe_id.is_empty() {
                 "Unknown recipe".to_owned()
@@ -329,13 +382,7 @@ impl GameplayState {
             list_y += 64.0;
         }
 
-        let selected_entry = self
-            .progression
-            .experiment_log
-            .iter()
-            .rev()
-            .nth(self.ui.archive_index)
-            .unwrap_or_else(|| self.progression.experiment_log.last().expect("experiment log not empty"));
+        let selected_entry = entries[selected_index];
         draw_text(ui_copy("overlay_selected_record"), x + 410.0, y + 122.0, 26.0, dark::TEXT_BRIGHT);
         draw_text(
             &ui_format("overlay_output", &[("item", data.item_name(&selected_entry.output_item_id))]),
@@ -396,6 +443,37 @@ impl GameplayState {
             20.0,
             dark::TEXT_DIM,
         );
+        if let Some(recipe) = data.recipes.iter().find(|recipe| recipe.id == selected_entry.recipe_id) {
+            draw_text(
+                &format!(
+                    "Mastery now: {}",
+                    crate::alchemy::mastery_stage(self.recipe_mastery_brews(&recipe.id))
+                ),
+                x + 410.0,
+                y + 282.0,
+                20.0,
+                dark::TEXT_DIM,
+            );
+            draw_text(
+                &format!(
+                    "Memory: {}",
+                    self.recipe_memory_meta(data, recipe)
+                ),
+                x + 410.0,
+                y + 306.0,
+                18.0,
+                dark::TEXT_DIM,
+            );
+            draw_wrapped_text(
+                &self.recipe_memory_detail(data, recipe),
+                x + 410.0,
+                y + 332.0,
+                w - 430.0,
+                18.0,
+                20.0,
+                dark::TEXT_DIM,
+            );
+        }
     }
 
     fn draw_archive_mastery_section(&self, data: &GameData, x: f32, y: f32, w: f32, _h: f32) {
@@ -475,10 +553,29 @@ impl GameplayState {
                 dark::TEXT_DIM,
             );
         }
+        if let Some(entry) = self
+            .progression
+            .experiment_log
+            .iter()
+            .rev()
+            .find(|entry| entry.recipe_id == recipe.id)
+        {
+            draw_text(
+                &format!(
+                    "Last logged attempt: day {} as {}",
+                    entry.day_index + 1,
+                    entry.quality_band
+                ),
+                x + 410.0,
+                y + 262.0,
+                20.0,
+                dark::TEXT_DIM,
+            );
+        }
         draw_wrapped_text(
             &recipe.lore_note,
             x + 410.0,
-            y + 270.0,
+            y + 292.0,
             w - 430.0,
             18.0,
             20.0,
@@ -519,7 +616,26 @@ impl GameplayState {
 
         let recipe = recipes[selected_index];
         draw_text(ui_copy("overlay_branch_detail"), x + 410.0, y + 122.0, 26.0, dark::TEXT_BRIGHT);
-        let mut detail_y = y + 154.0;
+        if let Some(entry) = self
+            .progression
+            .experiment_log
+            .iter()
+            .rev()
+            .find(|entry| entry.recipe_id == recipe.id && !entry.morph_output_item_id.is_empty())
+        {
+            draw_text(
+                &format!(
+                    "Last morph logged: day {} -> {}",
+                    entry.day_index + 1,
+                    data.item_name(&entry.morph_output_item_id)
+                ),
+                x + 410.0,
+                y + 146.0,
+                20.0,
+                dark::TEXT_DIM,
+            );
+        }
+        let mut detail_y = y + 176.0;
         for morph in &recipe.morph_targets {
             let discovered = self.progression.crafted_item_profiles.contains_key(&morph.output_item_id);
             draw_text(
@@ -650,7 +766,7 @@ impl GameplayState {
                 index == selected_index,
                 self.can_duplicate_item(data, item_id),
                 data.item_name(item_id),
-                &item.description,
+                &self.inventory_reference_summary(data, item_id),
                 &format!(
                     "owned {}  cost {}c",
                     self.inventory.get(item_id).copied().unwrap_or_default(),
@@ -708,7 +824,10 @@ impl GameplayState {
                 "Left/Right section  |  Up/Down select  |  Enter confirm  |  Esc close"
                     .to_owned()
             }
-            "Experiments" | "Mastery" | "Morphs" => {
+            "Experiments" => {
+                "Left/Right section  |  Up/Down browse  |  F filter  |  Esc close".to_owned()
+            }
+            "Mastery" | "Morphs" => {
                 "Left/Right section  |  Up/Down browse  |  Esc close".to_owned()
             }
             _ => "Left/Right section  |  Esc close".to_owned(),
@@ -902,7 +1021,7 @@ impl GameplayState {
 
         match tabs.get(self.ui.journal_tab).copied().unwrap_or("Routes") {
             "Routes" => self.draw_journal_routes_tab(data, x, y, w, h),
-            "Notes" => self.draw_journal_notes_tab(x, y, w, h),
+            "Notes" => self.draw_journal_notes_tab(data, x, y, w, h),
             "Brews" => self.draw_journal_brews_tab(data, x, y, w, h),
             "Greenhouse" => self.draw_journal_greenhouse_tab(data, x, y, w, h),
             _ => self.draw_journal_rapport_tab(data, x, y, w, h),
@@ -916,7 +1035,7 @@ impl GameplayState {
         );
     }
 
-    fn draw_journal_routes_tab(&self, data: &GameData, x: f32, y: f32, _w: f32, h: f32) {
+    fn draw_journal_routes_tab(&self, data: &GameData, x: f32, y: f32, w: f32, h: f32) {
         draw_text(ui_copy("overlay_known_routes"), x + 20.0, y + 136.0, 26.0, dark::TEXT_BRIGHT);
         let mut route_y = y + 168.0;
         for route in &data.gathering_routes {
@@ -937,65 +1056,181 @@ impl GameplayState {
             dark::TEXT_BRIGHT,
         );
         let mut entry_y = y + 168.0;
-        if self.progression.field_journal.is_empty() {
-            draw_text(
-                "No specimens recorded yet.",
-                x + 420.0,
+            if self.progression.field_journal.is_empty() {
+                draw_text(
+                    "No specimens recorded yet.",
+                    x + 420.0,
                 entry_y,
                 22.0,
                 dark::TEXT_DIM,
             );
-            return;
-        }
-        for entry in self.progression.field_journal.values() {
-            let route_name = data
-                .route(&entry.route_id)
-                .map(|route| route.name.as_str())
-                .unwrap_or("Unknown Route");
-            draw_text(
-                data.item_name(&entry.item_id),
-                x + 420.0,
-                entry_y,
-                22.0,
-                dark::TEXT_BRIGHT,
-            );
-            entry_y += 22.0;
-            draw_text(
-                &format!(
-                    "{} / {} / {} / {}",
-                    route_name, entry.season, entry.weather, entry.time_window
-                ),
-                x + 420.0,
-                entry_y,
-                18.0,
-                dark::TEXT_DIM,
-            );
-            entry_y += 20.0;
-            let quality_line = if entry.variant_name.is_empty() {
-                format!(
-                    "Best quality: {} ({})",
-                    entry.best_quality, entry.best_quality_band
-                )
             } else {
-                format!(
-                    "Best quality: {} ({})  Variant: {}",
-                    entry.best_quality, entry.best_quality_band, entry.variant_name
-                )
-            };
-            draw_text(&quality_line, x + 420.0, entry_y, 18.0, dark::TEXT_DIM);
-            entry_y += 20.0;
-            draw_text(&entry.note, x + 420.0, entry_y, 18.0, dark::TEXT_DIM);
-            entry_y += 28.0;
-            if entry_y > y + h - 40.0 {
-                break;
+                for entry in self.progression.field_journal.values() {
+                    let route_name = data
+                        .route(&entry.route_id)
+                        .map(|route| route.name.as_str())
+                        .unwrap_or("Unknown Route");
+                    draw_text(
+                        data.item_name(&entry.item_id),
+                        x + 420.0,
+                        entry_y,
+                        22.0,
+                        dark::TEXT_BRIGHT,
+                    );
+                    entry_y += 22.0;
+                    draw_text(
+                        &format!(
+                            "Observed at {} / {} / {} / {}",
+                            route_name, entry.season, entry.weather, entry.time_window
+                        ),
+                        x + 420.0,
+                        entry_y,
+                        18.0,
+                        dark::TEXT_DIM,
+                    );
+                    entry_y += 20.0;
+                    if let Some(conditions) = self.learned_gathering_conditions(data, &entry.item_id) {
+                        draw_wrapped_text(
+                            &conditions,
+                            x + 420.0,
+                            entry_y,
+                            w - 440.0,
+                            16.0,
+                            18.0,
+                            dark::TEXT_DIM,
+                        );
+                        entry_y += 28.0;
+                    }
+                    let quality_line = if entry.variant_name.is_empty() {
+                        format!(
+                            "Best quality: {} ({})",
+                            entry.best_quality, entry.best_quality_band
+                        )
+                    } else {
+                        format!(
+                            "Best quality: {} ({})  Variant: {}",
+                            entry.best_quality, entry.best_quality_band, entry.variant_name
+                        )
+                    };
+                    draw_text(&quality_line, x + 420.0, entry_y, 18.0, dark::TEXT_DIM);
+                    entry_y += 20.0;
+                    draw_text(&entry.note, x + 420.0, entry_y, 18.0, dark::TEXT_DIM);
+                    entry_y += 28.0;
+                    if entry_y > y + h - 160.0 {
+                        break;
+                    }
+                }
+            }
+        draw_text(
+            ui_copy("overlay_progress_routes"),
+            x + 20.0,
+            y + h - 156.0,
+            24.0,
+            dark::TEXT_BRIGHT,
+        );
+        draw_rectangle(
+            x + 20.0,
+            y + h - 140.0,
+            w - 40.0,
+            96.0,
+            Color::from_rgba(38, 40, 50, 255),
+        );
+        draw_rectangle_lines(x + 20.0, y + h - 140.0, w - 40.0, 96.0, 2.0, dark::ACCENT);
+        let locked_warps = self.locked_warps(data);
+        if locked_warps.is_empty() {
+            draw_text(
+                "All current tower routes are restored.",
+                x + 34.0,
+                y + h - 108.0,
+                20.0,
+                dark::TEXT_DIM,
+            );
+        } else {
+            let mut unlock_y = y + h - 108.0;
+            for warp in locked_warps.into_iter().take(2) {
+                draw_wrapped_text(
+                    &format!("{}: {}", warp.label, self.warp_lock_text(data, warp)),
+                    x + 34.0,
+                    unlock_y,
+                    w - 68.0,
+                    16.0,
+                    18.0,
+                    dark::TEXT_DIM,
+                );
+                unlock_y += 34.0;
             }
         }
     }
 
-    fn draw_journal_notes_tab(&self, x: f32, y: f32, w: f32, h: f32) {
+    fn draw_journal_notes_tab(&self, data: &GameData, x: f32, y: f32, w: f32, h: f32) {
         draw_text(ui_copy("overlay_tower_notes"), x + 20.0, y + 136.0, 26.0, dark::TEXT_BRIGHT);
-        let mut note_y = y + 168.0;
-        for milestone in self.progression.journal_milestones.iter().rev().take(10) {
+        draw_text(
+            ui_copy("overlay_progress_active"),
+            x + 20.0,
+            y + 168.0,
+            24.0,
+            dark::TEXT_BRIGHT,
+        );
+        draw_rectangle(
+            x + 20.0,
+            y + 182.0,
+            w - 40.0,
+            72.0,
+            Color::from_rgba(38, 40, 50, 255),
+        );
+        draw_rectangle_lines(x + 20.0, y + 182.0, w - 40.0, 72.0, 2.0, dark::ACCENT);
+        let active_summary = self
+            .active_quest_summary(data)
+            .unwrap_or_else(|| self.next_goal_summary(data));
+        draw_wrapped_text(
+            &active_summary,
+            x + 34.0,
+            y + 206.0,
+            w - 68.0,
+            18.0,
+            20.0,
+            dark::TEXT_DIM,
+        );
+
+        draw_text(
+            ui_copy("overlay_progress_milestones"),
+            x + 20.0,
+            y + 286.0,
+            24.0,
+            dark::TEXT_BRIGHT,
+        );
+        let mut milestone_y = y + 318.0;
+        for (label, detail, ready) in self.milestone_status_lines() {
+            draw_text(
+                &format!(
+                    "{} [{}]",
+                    label,
+                    if ready {
+                        ui_copy("overlay_progress_ready")
+                    } else {
+                        ui_copy("overlay_progress_locked")
+                    }
+                ),
+                x + 20.0,
+                milestone_y,
+                20.0,
+                dark::TEXT_BRIGHT,
+            );
+            milestone_y += 20.0;
+            draw_wrapped_text(
+                &detail,
+                x + 20.0,
+                milestone_y,
+                w - 40.0,
+                16.0,
+                18.0,
+                dark::TEXT_DIM,
+            );
+            milestone_y += 34.0;
+        }
+
+        let mut note_y = y + 448.0;
+        for milestone in self.progression.journal_milestones.iter().rev().take(5) {
             draw_text(&milestone.title, x + 20.0, note_y, 22.0, dark::TEXT_BRIGHT);
             note_y += 22.0;
             draw_wrapped_text(
@@ -1301,7 +1536,18 @@ impl GameplayState {
             20.0,
             dark::TEXT_DIM,
         );
-        draw_overlay_footer(x, y, w, h, "Up/Down select  |  Enter confirm  |  Esc close");
+        draw_overlay_footer(
+            x,
+            y,
+            w,
+            h,
+            &format!(
+                "{} select  |  {} confirm  |  {} close",
+                input_bindings().navigation.select,
+                input_bindings().global.confirm,
+                input_bindings().global.cancel,
+            ),
+        );
     }
 
     pub(super) fn draw_alchemy_overlay(&self, data: &GameData) {
@@ -1315,6 +1561,13 @@ impl GameplayState {
 
         let items = self.alchemy_materials(data);
         draw_text(ui_copy("overlay_materials"), x + 20.0, y + 84.0, 28.0, dark::TEXT_BRIGHT);
+        draw_text(
+            &ui_format("overlay_sort_mode", &[("mode", self.inventory_sort_label())]),
+            x + 182.0,
+            y + 84.0,
+            18.0,
+            dark::TEXT_DIM,
+        );
         let mut iy = y + 82.0;
         if items.is_empty() {
             draw_state_banner(
@@ -1347,8 +1600,9 @@ impl GameplayState {
                         item_id,
                         amount,
                         &format!(
-                            "ready {}  {}",
+                            "ready {}  reserved {}  {}",
                             ready,
+                            self.reserved_count(item_id),
                             self.inventory_reference_summary(data, item_id)
                         ),
                     ),
@@ -1356,6 +1610,34 @@ impl GameplayState {
                 iy += 58.0;
             }
         }
+
+        draw_text("Controls", x + 20.0, y + 270.0, 24.0, dark::TEXT_BRIGHT);
+        draw_wrapped_text(
+            &format!(
+                "{} browse  {} adjust heat  S stir  T timing",
+                input_bindings().navigation.select,
+                input_bindings().alchemy.heat,
+            ),
+            x + 20.0,
+            y + 298.0,
+            286.0,
+            16.0,
+            18.0,
+            dark::TEXT_DIM,
+        );
+        draw_wrapped_text(
+            &format!(
+                "{} fill slots  {} catalyst  Enter or B brew  Y repeat  V sort  C clear",
+                input_bindings().alchemy.fill_slots,
+                input_bindings().alchemy.catalyst,
+            ),
+            x + 20.0,
+            y + 334.0,
+            286.0,
+            16.0,
+            18.0,
+            dark::TEXT_DIM,
+        );
 
         draw_text(ui_copy("overlay_slots"), x + 340.0, y + 84.0, 28.0, dark::TEXT_BRIGHT);
         draw_text(
@@ -1370,6 +1652,18 @@ impl GameplayState {
             20.0,
             dark::TEXT_DIM,
         );
+        draw_rectangle(x + 520.0, y + 88.0, 28.0, 24.0, Color::from_rgba(52, 56, 70, 255));
+        draw_rectangle_lines(x + 520.0, y + 88.0, 28.0, 24.0, 2.0, dark::ACCENT);
+        draw_text("-", x + 530.0, y + 106.0, 22.0, dark::TEXT_BRIGHT);
+        draw_rectangle(x + 552.0, y + 88.0, 28.0, 24.0, Color::from_rgba(52, 56, 70, 255));
+        draw_rectangle_lines(x + 552.0, y + 88.0, 28.0, 24.0, 2.0, dark::ACCENT);
+        draw_text("+", x + 560.0, y + 106.0, 22.0, dark::TEXT_BRIGHT);
+        draw_rectangle(x + 612.0, y + 88.0, 92.0, 24.0, Color::from_rgba(52, 56, 70, 255));
+        draw_rectangle_lines(x + 612.0, y + 88.0, 92.0, 24.0, 2.0, dark::ACCENT);
+        draw_text(ui_copy("overlay_alchemy_stir_button"), x + 624.0, y + 106.0, 18.0, dark::TEXT_BRIGHT);
+        draw_rectangle(x + 716.0, y + 88.0, 156.0, 24.0, Color::from_rgba(52, 56, 70, 255));
+        draw_rectangle_lines(x + 716.0, y + 88.0, 156.0, 24.0, 2.0, dark::ACCENT);
+        draw_text(ui_copy("overlay_alchemy_timing_button"), x + 734.0, y + 106.0, 18.0, dark::TEXT_BRIGHT);
         for slot in 0..SLOT_COUNT {
             let sx = x + 340.0 + slot as f32 * 140.0;
             draw_rectangle(
@@ -1397,6 +1691,17 @@ impl GameplayState {
                 20.0,
                 dark::TEXT,
             );
+            draw_text(
+                if self.alchemy.slots[slot].is_some() {
+                    ui_copy("overlay_slot_click_clear")
+                } else {
+                    ui_copy("overlay_slot_click_fill")
+                },
+                sx + 12.0,
+                y + 206.0,
+                16.0,
+                dark::TEXT_DIM,
+            );
         }
         draw_rectangle(
             x + 760.0,
@@ -1417,6 +1722,17 @@ impl GameplayState {
             20.0,
             dark::TEXT,
         );
+        draw_text(
+            if self.alchemy.catalyst.is_some() {
+                ui_copy("overlay_catalyst_click_clear")
+            } else {
+                ui_copy("overlay_catalyst_click_assign")
+            },
+            x + 772.0,
+            y + 206.0,
+            16.0,
+            dark::TEXT_DIM,
+        );
 
         draw_text(ui_copy("overlay_preview"), x + 340.0, y + 240.0, 28.0, dark::TEXT_BRIGHT);
         draw_rectangle(
@@ -1430,7 +1746,7 @@ impl GameplayState {
         let selected = self.selected_items();
         if selected.is_empty() {
             draw_text(
-                "Add ingredients to the cauldron.",
+                ui_copy("overlay_preview_empty"),
                 x + 360.0,
                 y + 296.0,
                 22.0,
@@ -1452,10 +1768,23 @@ impl GameplayState {
                 .map(|recipe| self.progression.known_recipes.contains(&recipe.id))
                 .unwrap_or(false);
             let preview_uncertain = known && self.preview_is_uncertain(&preview);
-            let preview_title = if known && !preview_uncertain {
+            let stable_preview = self.brew_is_stable(&preview);
+            let preview_title = if preview.recipe.is_none() {
+                "Unknown salvage".to_owned()
+            } else if known && stable_preview && !preview_uncertain {
                 ui_format("overlay_known_result", &[("item", data.item_name(&preview.output_item_id))])
+            } else if !known {
+                "Unlogged formula".to_owned()
+            } else if preview_uncertain {
+                "Known base, uncertain branch".to_owned()
+            } else if !preview.process_match {
+                "Known formula, unstable process".to_owned()
+            } else if !preview.minimum_elements_met {
+                "Known formula, element shortfall".to_owned()
+            } else if !preview.minimum_quality_met {
+                "Known formula, quality shortfall".to_owned()
             } else {
-                "Uncertain result".to_owned()
+                "Known formula, imperfect setup".to_owned()
             };
             draw_text(
                 &preview_title,
@@ -1499,6 +1828,25 @@ impl GameplayState {
                 18.0,
                 dark::TEXT_DIM,
             );
+            draw_text(
+                &format!(
+                    "Read: {}",
+                    if preview.recipe.is_none() {
+                        "fallback salvage"
+                    } else if !known {
+                        "formula matches, but not yet logged"
+                    } else if stable_preview {
+                        "stable result if brewed now"
+                    } else {
+                        "result is known, but the current setup will degrade it"
+                    }
+                ),
+                x + 360.0,
+                y + 392.0,
+                18.0,
+                dark::TEXT_DIM,
+            );
+            let mut process_y = y + 416.0;
             if let Some(recipe) = preview.recipe {
                 draw_text(
                     &format!(
@@ -1515,10 +1863,11 @@ impl GameplayState {
                         if preview.minimum_elements_met { "pass" } else { "fail" }
                     ),
                     x + 360.0,
-                    y + 392.0,
+                    process_y,
                     18.0,
                     dark::TEXT_DIM,
                 );
+                process_y += 22.0;
                 draw_text(
                     &format!(
                         "Catalyst: {}  Timing: {}  Sequence: {}  Room bonus: {}",
@@ -1544,20 +1893,24 @@ impl GameplayState {
                         }
                     ),
                     x + 360.0,
-                    y + 414.0,
+                    process_y,
                     18.0,
                     dark::TEXT_DIM,
                 );
+                process_y += 24.0;
                 if !preview.failure_reasons.is_empty() {
-                    draw_wrapped_text(
-                        &ui_format("overlay_risk", &[("text", &preview.failure_reasons.join(" "))]),
-                        x + 360.0,
-                        y + 436.0,
-                        w - 392.0,
-                        18.0,
-                        20.0,
-                        dark::TEXT_DIM,
-                    );
+                    draw_text("Instability points:", x + 360.0, process_y, 18.0, dark::TEXT_BRIGHT);
+                    process_y += 20.0;
+                    for reason in preview.failure_reasons.iter().take(3) {
+                        draw_text(
+                            &format!("- {reason}"),
+                            x + 372.0,
+                            process_y,
+                            18.0,
+                            dark::TEXT_DIM,
+                        );
+                        process_y += 20.0;
+                    }
                 }
             }
             let detail = preview
@@ -1573,10 +1926,13 @@ impl GameplayState {
                         morph_hint.clone()
                     } else if known && preview_uncertain {
                         "Known base recipe, unknown catalyst interaction.".to_owned()
-                    } else if known && preview.process_match && preview.minimum_quality_met {
+                    } else if known && stable_preview {
                         recipe.description.clone()
                     } else if !preview.process_match {
                         "The ingredients are right, but the technique will distort the brew."
+                            .to_owned()
+                    } else if !preview.minimum_elements_met {
+                        "The base formula is right, but the mixture is missing enough elemental weight."
                             .to_owned()
                     } else if !preview.minimum_quality_met {
                         "The formula is correct, but the current quality will not stabilize it."
@@ -1587,9 +1943,9 @@ impl GameplayState {
                 })
                 .unwrap_or("These ingredients will collapse into murky sludge.".to_owned());
             let detail_y = if preview.recipe.is_some() && !preview.failure_reasons.is_empty() {
-                y + 484.0
+                process_y + 8.0
             } else {
-                y + 438.0
+                process_y + 4.0
             };
             draw_wrapped_text(
                 &detail,
@@ -1605,11 +1961,11 @@ impl GameplayState {
         draw_text(
             "Known Formulae",
             x + 20.0,
-            y + 330.0,
+            y + 392.0,
             28.0,
             dark::TEXT_BRIGHT,
         );
-        let mut ky = y + 362.0;
+        let mut ky = y + 424.0;
         let mut any_known = false;
         for recipe in &data.recipes {
             if self.progression.known_recipes.contains(&recipe.id) {
@@ -1656,12 +2012,25 @@ impl GameplayState {
             );
         }
 
+        draw_rectangle(x + 20.0, y + 368.0, 82.0, 28.0, Color::from_rgba(52, 56, 70, 255));
+        draw_rectangle_lines(x + 20.0, y + 368.0, 82.0, 28.0, 2.0, dark::ACCENT);
+        draw_text(ui_copy("overlay_alchemy_sort_button"), x + 44.0, y + 388.0, 18.0, dark::TEXT_BRIGHT);
+        draw_rectangle(x + 114.0, y + 368.0, 82.0, 28.0, Color::from_rgba(52, 56, 70, 255));
+        draw_rectangle_lines(x + 114.0, y + 368.0, 82.0, 28.0, 2.0, dark::ACCENT);
+        draw_text(ui_copy("overlay_alchemy_clear_button"), x + 136.0, y + 388.0, 18.0, dark::TEXT_BRIGHT);
+        draw_rectangle(x + 208.0, y + 368.0, 90.0, 28.0, Color::from_rgba(52, 56, 70, 255));
+        draw_rectangle_lines(x + 208.0, y + 368.0, 90.0, 28.0, 2.0, dark::ACCENT);
+        draw_text(ui_copy("overlay_alchemy_repeat_button"), x + 224.0, y + 388.0, 18.0, dark::TEXT_BRIGHT);
+        draw_rectangle(x + 310.0, y + 368.0, 90.0, 28.0, Color::from_rgba(82, 110, 82, 255));
+        draw_rectangle_lines(x + 310.0, y + 368.0, 90.0, 28.0, 2.0, Color::from_rgba(188, 255, 220, 255));
+        draw_text(ui_copy("overlay_alchemy_brew_button"), x + 338.0, y + 388.0, 18.0, dark::TEXT_BRIGHT);
+
         draw_overlay_footer(
             x,
             y,
             w,
             h,
-            "Up/Down select  |  Left/Right heat  |  1/2/3 fill  F catalyst  |  Enter confirm  |  Esc close",
+            ui_copy("overlay_alchemy_mouse_footer"),
         );
     }
 }

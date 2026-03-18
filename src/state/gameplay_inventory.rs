@@ -1,8 +1,27 @@
 use super::*;
 use crate::content::ui_format;
 use crate::data::{ItemCategory, RecipeDefinition};
+use std::collections::BTreeMap;
 
 impl GameplayState {
+    pub(super) fn brew_is_stable(&self, resolution: &crate::alchemy::BrewResolution<'_>) -> bool {
+        resolution.process_match
+            && resolution.minimum_quality_met
+            && resolution.minimum_elements_met
+    }
+
+    pub(super) fn inventory_sort_label(&self) -> &'static str {
+        self.ui.inventory_sort_mode.label()
+    }
+
+    pub(super) fn cycle_inventory_sort_mode(&mut self) {
+        self.ui.inventory_sort_mode = self.ui.inventory_sort_mode.next();
+        self.runtime.status_text = ui_format(
+            "inventory_sort_status",
+            &[("mode", self.inventory_sort_label())],
+        );
+    }
+
     pub(super) fn active_quest_reference_count(&self, data: &GameData, item_id: &str) -> usize {
         self.progression.started_quests
             .iter()
@@ -81,6 +100,16 @@ impl GameplayState {
         if let Some(best_label) = self.item_best_record_label(item_id) {
             parts.push(best_label);
         }
+        let reserved = self.reserved_count(item_id);
+        if reserved > 0 {
+            parts.push(ui_format(
+                "inventory_ref_reserved",
+                &[("count", &reserved.to_string())],
+            ));
+        }
+        if self.sell_is_safe(data, item_id) {
+            parts.push(ui_format("inventory_ref_safe", &[]));
+        }
         let badges = self.inventory_badges(data, item_id);
         if !badges.is_empty() {
             parts.push(format!(
@@ -102,27 +131,7 @@ impl GameplayState {
             .filter(|(_, amount)| **amount > 0)
             .map(|(item_id, _)| item_id.clone())
             .collect::<Vec<_>>();
-        items.sort_by(|left, right| {
-            let left_item = data.item(left);
-            let right_item = data.item(right);
-            let left_quest = self.active_quest_reference_count(data, left);
-            let right_quest = self.active_quest_reference_count(data, right);
-            let left_recipe = self.known_recipe_reference_count(data, left);
-            let right_recipe = self.known_recipe_reference_count(data, right);
-            let left_best = self.item_best_record_label(left).is_some();
-            let right_best = self.item_best_record_label(right).is_some();
-            let left_quality = left_item.map(|item| item.quality).unwrap_or_default();
-            let right_quality = right_item.map(|item| item.quality).unwrap_or_default();
-            let left_category = left_item.map(|item| item.category.as_str()).unwrap_or("");
-            let right_category = right_item.map(|item| item.category.as_str()).unwrap_or("");
-            right_quest
-                .cmp(&left_quest)
-                .then(right_recipe.cmp(&left_recipe))
-                .then(right_best.cmp(&left_best))
-                .then(right_quality.cmp(&left_quality))
-                .then(left_category.cmp(right_category))
-                .then(data.item_name(left).cmp(data.item_name(right)))
-        });
+        self.sort_item_ids(data, &mut items, false);
         items
     }
 
@@ -198,15 +207,7 @@ impl GameplayState {
             })
             .map(|(item_id, _)| item_id.clone())
             .collect::<Vec<_>>();
-        items.sort_by(|left, right| {
-            let left_item = data.item(left);
-            let right_item = data.item(right);
-            let left_category = left_item.map(|item| item.category.as_str()).unwrap_or("");
-            let right_category = right_item.map(|item| item.category.as_str()).unwrap_or("");
-            left_category
-                .cmp(right_category)
-                .then(data.item_name(left).cmp(data.item_name(right)))
-        });
+        self.sort_item_ids(data, &mut items, false);
         items
     }
 
@@ -288,6 +289,49 @@ impl GameplayState {
 
     pub(super) fn alchemy_timing(&self) -> &'static str {
         ALCHEMY_TIMINGS[self.alchemy.timing_index]
+    }
+
+    pub(super) fn save_last_brew_setup(&mut self) {
+        self.runtime.last_brew_setup = Some(SavedAlchemySetup {
+            heat: self.alchemy.heat,
+            stirs: self.alchemy.stirs,
+            timing_index: self.alchemy.timing_index,
+            slots: self.alchemy.slots.clone(),
+            catalyst: self.alchemy.catalyst.clone(),
+        });
+    }
+
+    pub(super) fn repeat_last_brew_setup(&mut self, data: &GameData) {
+        let Some(setup) = self.runtime.last_brew_setup.clone() else {
+            self.runtime.status_text = ui_format("alchemy_repeat_none", &[]);
+            return;
+        };
+
+        let mut needed = BTreeMap::<String, u32>::new();
+        for item_id in setup.slots.iter().flatten() {
+            *needed.entry(item_id.clone()).or_insert(0) += 1;
+        }
+        if let Some(item_id) = &setup.catalyst {
+            *needed.entry(item_id.clone()).or_insert(0) += 1;
+        }
+
+        for (item_id, required) in &needed {
+            let available = self.inventory.get(item_id).copied().unwrap_or_default();
+            if available < *required {
+                self.runtime.status_text = self.unavailable_state_text(&ui_format(
+                    "alchemy_repeat_missing",
+                    &[("name", data.item_name(item_id)), ("count", &required.to_string())],
+                ));
+                return;
+            }
+        }
+
+        self.alchemy.heat = setup.heat;
+        self.alchemy.stirs = setup.stirs;
+        self.alchemy.timing_index = setup.timing_index.min(ALCHEMY_TIMINGS.len().saturating_sub(1));
+        self.alchemy.slots = setup.slots;
+        self.alchemy.catalyst = setup.catalyst;
+        self.runtime.status_text = ui_format("alchemy_repeat_loaded", &[]);
     }
 
     pub(super) fn recipe_mastery_brews(&self, recipe_id: &str) -> u32 {
@@ -380,17 +424,90 @@ impl GameplayState {
                 })
             })
             .collect::<Vec<_>>();
-        items.sort_by(|left, right| {
-            let left_safe = self.sell_is_safe(data, left);
-            let right_safe = self.sell_is_safe(data, right);
-            let left_value = self.sell_price(data, left);
-            let right_value = self.sell_price(data, right);
+        self.sort_item_ids(data, &mut items, true);
+        items
+    }
+
+    fn sort_item_ids(&self, data: &GameData, items: &mut [String], selling: bool) {
+        items.sort_by(|left, right| self.compare_item_ids(data, left, right, selling));
+    }
+
+    fn compare_item_ids(
+        &self,
+        data: &GameData,
+        left: &str,
+        right: &str,
+        selling: bool,
+    ) -> std::cmp::Ordering {
+        match self.ui.inventory_sort_mode {
+            InventorySortMode::Priority => self.compare_item_priority(data, left, right, selling),
+            InventorySortMode::Type => self.compare_item_type(data, left, right, selling),
+            InventorySortMode::Name => data.item_name(left).cmp(data.item_name(right)),
+        }
+    }
+
+    fn compare_item_priority(
+        &self,
+        data: &GameData,
+        left: &str,
+        right: &str,
+        selling: bool,
+    ) -> std::cmp::Ordering {
+        let left_item = data.item(left);
+        let right_item = data.item(right);
+        let left_quest = self.active_quest_reference_count(data, left);
+        let right_quest = self.active_quest_reference_count(data, right);
+        let left_recipe = self.known_recipe_reference_count(data, left);
+        let right_recipe = self.known_recipe_reference_count(data, right);
+        let left_best = self.item_best_record_label(left).is_some();
+        let right_best = self.item_best_record_label(right).is_some();
+        let left_quality = left_item.map(|item| item.quality).unwrap_or_default();
+        let right_quality = right_item.map(|item| item.quality).unwrap_or_default();
+        let left_category = left_item.map(|item| item.category.as_str()).unwrap_or("");
+        let right_category = right_item.map(|item| item.category.as_str()).unwrap_or("");
+        let left_safe = self.sell_is_safe(data, left);
+        let right_safe = self.sell_is_safe(data, right);
+
+        if selling {
             right_safe
                 .cmp(&left_safe)
-                .then(right_value.cmp(&left_value))
+                .then(right_quality.cmp(&left_quality))
                 .then(data.item_name(left).cmp(data.item_name(right)))
-        });
-        items
+        } else {
+            right_quest
+                .cmp(&left_quest)
+                .then(right_recipe.cmp(&left_recipe))
+                .then(right_best.cmp(&left_best))
+                .then(right_quality.cmp(&left_quality))
+                .then(left_category.cmp(right_category))
+                .then(data.item_name(left).cmp(data.item_name(right)))
+        }
+    }
+
+    fn compare_item_type(
+        &self,
+        data: &GameData,
+        left: &str,
+        right: &str,
+        selling: bool,
+    ) -> std::cmp::Ordering {
+        let left_item = data.item(left);
+        let right_item = data.item(right);
+        let left_category = left_item.map(|item| item.category.as_str()).unwrap_or("");
+        let right_category = right_item.map(|item| item.category.as_str()).unwrap_or("");
+        let left_safe = self.sell_is_safe(data, left);
+        let right_safe = self.sell_is_safe(data, right);
+
+        if selling {
+            right_safe
+                .cmp(&left_safe)
+                .then(left_category.cmp(right_category))
+                .then(data.item_name(left).cmp(data.item_name(right)))
+        } else {
+            left_category
+                .cmp(right_category)
+                .then(data.item_name(left).cmp(data.item_name(right)))
+        }
     }
 
     pub(super) fn brew_selected(&mut self, data: &GameData, station: &StationDefinition) {
@@ -399,6 +516,7 @@ impl GameplayState {
             self.runtime.status_text = narrative_text().statuses.cauldron_empty.clone();
             return;
         }
+        self.save_last_brew_setup();
         let resolution = resolve_brew(
             data,
             station,
@@ -409,6 +527,21 @@ impl GameplayState {
             self.alchemy_timing(),
             self.preview_mastery_brews(data, station, &selected),
         );
+        let stable_brew = self.brew_is_stable(&resolution);
+        let brew_feedback_color = if resolution.recipe.is_none() {
+            Color::from_rgba(196, 162, 255, 255)
+        } else if stable_brew {
+            Color::from_rgba(188, 255, 220, 255)
+        } else {
+            Color::from_rgba(255, 214, 132, 255)
+        };
+        self.trigger_world_feedback(
+            vec2(station.position[0], station.position[1]),
+            brew_feedback_color,
+            stable_brew || resolution.recipe.is_none(),
+            if stable_brew { 1.9 } else { 1.4 },
+        );
+        self.trigger_camera_shake(if stable_brew { 0.12 } else { 0.08 }, if stable_brew { 3.6 } else { 2.0 });
         for item_id in &selected {
             if let Some(amount) = self.inventory.get_mut(item_id) {
                 *amount -= 1;
@@ -434,16 +567,17 @@ impl GameplayState {
         self.record_crafted_item_profile(data, &resolution.output_item_id, &resolution);
         if let Some(recipe) = resolution.recipe {
             let previous_mastery = self.recipe_mastery_brews(&recipe.id);
-            let mastery_improved = if resolution.process_match
-                && resolution.minimum_quality_met
-                && resolution.minimum_elements_met
-            {
+            let stable_brew = self.brew_is_stable(&resolution);
+            let mastery_improved = if stable_brew {
                 let mastery = self.progression.recipe_mastery.entry(recipe.id.clone()).or_insert(0);
                 *mastery += 1;
                 *mastery > previous_mastery
             } else {
                 false
             };
+            let current_mastery_stage = crate::alchemy::mastery_stage(
+                self.recipe_mastery_brews(&recipe.id),
+            );
             let recipe_discovered = self.progression.known_recipes.insert(recipe.id.clone());
             if recipe_discovered {
                 self.push_event_toast(
@@ -455,6 +589,7 @@ impl GameplayState {
                     &[
                         ("recipe", &recipe.name),
                         ("quality", resolution.quality_band),
+                        ("mastery", current_mastery_stage),
                         ("traits", &resolution.inherited_traits.join(", ")),
                     ],
                 );
@@ -465,12 +600,24 @@ impl GameplayState {
                         ("item", data.item_name(&resolution.output_item_id)),
                         ("amount", &resolution.output_amount.to_string()),
                         ("quality", resolution.quality_band),
+                        (
+                            "result",
+                            if stable_brew {
+                                "Stable synthesis."
+                            } else {
+                                "Imperfect process."
+                            },
+                        ),
+                        ("mastery", current_mastery_stage),
                     ],
                 );
             }
             if mastery_improved {
                 self.push_event_toast(
-                    ui_format("inventory_mastery_improved", &[("name", &recipe.name)]),
+                    ui_format(
+                        "inventory_mastery_improved",
+                        &[("name", &recipe.name), ("stage", current_mastery_stage)],
+                    ),
                     Color::from_rgba(255, 230, 170, 255),
                 );
             }
@@ -480,6 +627,7 @@ impl GameplayState {
                 &[
                     ("quality", resolution.quality_band),
                     ("item", data.item_name(&resolution.output_item_id)),
+                    ("reasons", &resolution.failure_reasons.join(" ")),
                 ],
             );
         }
@@ -507,6 +655,13 @@ impl GameplayState {
                 &ui_format("inventory_greenhouse_unlock", &[]),
                 Color::from_rgba(200, 255, 200, 255),
             );
+            self.trigger_world_feedback(
+                self.world.player.position,
+                Color::from_rgba(200, 255, 200, 255),
+                true,
+                2.1,
+            );
+            self.trigger_camera_shake(0.2, 5.4);
             self.runtime.status_text = narrative_text().statuses.greenhouse_unlock.clone();
         }
         self.alchemy.stirs = 0;
@@ -570,8 +725,8 @@ impl GameplayState {
             morph_output_item_id: resolution.morph_output_item_id.clone().unwrap_or_default(),
             day_index: self.world.day_index,
         });
-        if self.progression.experiment_log.len() > 24 {
-            let excess = self.progression.experiment_log.len() - 24;
+        if self.progression.experiment_log.len() > 60 {
+            let excess = self.progression.experiment_log.len() - 60;
             self.progression.experiment_log.drain(0..excess);
         }
     }

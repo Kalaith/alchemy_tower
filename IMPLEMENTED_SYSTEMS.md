@@ -12,8 +12,10 @@ This file describes what the game currently supports based on the source code an
 
 - Top-down 8-direction movement with blocker collision.
 - Multi-area travel through authored warp regions.
-- Camera follow and simple immediate-mode UI panels/prompts.
+- Camera follow, impact shake, and immediate-mode UI panels/prompts.
 - Day clock, day rollover, weather state, season state, and time-of-day windows.
+- In-world route/station/NPC prompts with contextual requirement or readiness messaging.
+- First-run contextual tutorial toasts for save/load, journal, brewing, potions, early gathering, quest pickup, delivery, and route restoration.
 
 ## World Content
 
@@ -49,7 +51,11 @@ Current authored gathering routes:
   - daily spawn chance
   - field journal note capture
 - Node availability refreshes by day.
-- Gathered specimens are tracked in a field journal with route, season, weather, time window, best quality snapshot, and variant label.
+- Gather node silhouettes vary by item type for faster world scanning.
+- Herb availability rules are learned only after the first successful collection of that herb.
+- Learned herb conditions are surfaced in the field journal rather than exposed directly in map prompts.
+- Gathered specimens are tracked in a field journal with route, season, weather, time window, best quality snapshot, variant label, and learned availability context.
+- Gather feedback includes world bursts, HUD toasts, best-quality notifications, and variant discovery messaging.
 
 ## Inventory and Economy
 
@@ -57,6 +63,16 @@ Current authored gathering routes:
 - Buying from a shop station.
 - Selling items back through the shop UI.
 - Quest-protected sell filtering for active delivery items.
+- Inventory sort modes:
+  - `priority`
+  - `type`
+  - `name`
+- Inventory context labels for:
+  - quest hold
+  - recipe use
+  - best record
+  - safe stock
+- Reserved-count visibility in inventory and alchemy selection flows.
 - Quick potion belt for consuming up to three carried potions.
 
 ## Item Model
@@ -109,6 +125,13 @@ Ingredient/item data supports:
   - inherited traits
   - process/quality/element pass state
   - catalyst/timing/sequence/room-bonus state
+- Preview classification for:
+  - unknown salvage
+  - unlogged formula
+  - known base, uncertain branch
+  - known formula with unstable or imperfect setup
+- Instability/failure reasons listed explicitly in the preview panel.
+- Known formula memory and mastery summaries surfaced directly in the alchemy/archive UI.
 
 Current authored brew recipes:
 
@@ -141,6 +164,8 @@ Current authored morph path:
   - required journal milestone
 - Unlock state persists in save data.
 - Journal milestones persist in save data.
+- HUD and journal next-goal messaging surfaces closest unlocks and active progression requirements before the player hits a gate.
+- Warp readiness and restoration state are signposted both in-world and in the journal.
 
 Current tower progression path in data:
 
@@ -217,6 +242,7 @@ Current rune outputs:
   - quest assignment
   - time-of-day schedules
 - NPC visibility and position change by time window.
+- NPC motion/pathing between scheduled locations, including cross-area travel.
 - Relationship/rapport counter per NPC.
 - Direct NPC quest acceptance and turn-in.
 - Quest board station with accept-able board quests.
@@ -229,6 +255,10 @@ Current rune outputs:
   - minimum quality band
   - required inherited trait
   - required effect kind
+- NPC and quest UI surfaces:
+  - now/later/usually schedule hints
+  - active quest turn-in guidance
+  - in-world request/turn-in highlighting for key NPCs
 
 Current authored NPCs:
 
@@ -254,11 +284,18 @@ Current authored quests:
 
 - Archive floor unlock and archive console station.
 - Archive overlay that displays recovered milestones.
+- Archive tabs for timeline, experiments, mastery, morphs, disassembly, and duplication.
 - Archive reconstruction gate based on completed quest and milestone state.
 - Archive reconstruction creates the `archive_revelation` milestone.
 - Observatory floor unlock gated by archive revelation.
 - Final observatory interaction through an ending-focus station.
 - Ending overlay text exists and is triggerable in gameplay.
+- Experiment archive retention includes:
+  - 60-entry experiment log cap
+  - all/stable/unstable filtering
+  - page-aware browsing
+  - cross-links into recipe mastery and morph history
+- Journal tabs surface routes, notes, brew ledger, greenhouse state, rapport, and milestone/readiness summaries.
 
 ## Save Data
 
@@ -292,7 +329,6 @@ The codebase does not currently show support for:
 - sleep/bed flow
 - farming beyond greenhouse planters
 - creature feeding/care needs beyond habitat placement and timed harvest
-- NPC schedule pathing between points
 - dialogue trees with player choices
 - cutscenes or branching endings
 - audio systems

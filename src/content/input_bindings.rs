@@ -5,17 +5,35 @@ use serde::Deserialize;
 #[derive(Debug, Deserialize)]
 pub struct InputBindings {
     pub global: GlobalBindings,
+    pub navigation: NavigationBindings,
     pub alchemy: AlchemyBindings,
+    pub shop: ShopBindings,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct GlobalBindings {
+    pub confirm: String,
+    pub cancel: String,
     pub interact: String,
+    pub journal: String,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct NavigationBindings {
+    pub select: String,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct AlchemyBindings {
     pub open: String,
+    pub heat: String,
+    pub fill_slots: String,
+    pub catalyst: String,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct ShopBindings {
+    pub switch_tab: String,
 }
 
 pub fn input_bindings() -> &'static InputBindings {

@@ -4,6 +4,36 @@ use crate::data::ItemCategory;
 
 #[allow(dead_code)]
 impl GameplayState {
+    pub(super) fn archive_experiment_entries<'a>(
+        &'a self,
+        data: &'a GameData,
+    ) -> Vec<&'a ExperimentLogEntry> {
+        let _ = data;
+        self.progression
+            .experiment_log
+            .iter()
+            .rev()
+            .filter(|entry| match self.ui.archive_experiment_filter {
+                ArchiveExperimentFilter::All => true,
+                ArchiveExperimentFilter::Stable => entry.stable,
+                ArchiveExperimentFilter::Unstable => !entry.stable,
+            })
+            .collect()
+    }
+
+    pub(super) fn archive_experiment_filter_label(&self) -> &'static str {
+        self.ui.archive_experiment_filter.label()
+    }
+
+    pub(super) fn cycle_archive_experiment_filter(&mut self) {
+        self.ui.archive_experiment_filter = self.ui.archive_experiment_filter.next();
+        self.ui.archive_index = 0;
+        self.runtime.status_text = ui_format(
+            "archive_filter_status",
+            &[("mode", self.archive_experiment_filter_label())],
+        );
+    }
+
     pub(super) fn mastery_recipes<'a>(&self, data: &'a GameData) -> Vec<&'a crate::data::RecipeDefinition> {
         let mut recipes = data
             .recipes
@@ -30,7 +60,7 @@ impl GameplayState {
 
     pub(super) fn archive_selection_len(&self, data: &GameData) -> usize {
         match ARCHIVE_TABS[self.ui.archive_tab] {
-            "Experiments" => self.progression.experiment_log.len(),
+            "Experiments" => self.archive_experiment_entries(data).len(),
             "Mastery" => self.mastery_recipes(data).len(),
             "Morphs" => self.morph_recipes(data).len(),
             "Disassembly" => self.available_disassembly_recipes(data).len(),

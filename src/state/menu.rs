@@ -30,7 +30,7 @@ impl MenuState {
     }
 
     pub fn draw(&self, data: &GameData) {
-        let panel = centered_panel_rect(480.0, 280.0);
+        let panel = centered_panel_rect(540.0, 320.0);
 
         draw_panel_frame(panel);
 
@@ -54,10 +54,11 @@ impl MenuState {
 
         draw_text(
             &ui_format(
-                "menu_controls",
+                "menu_controls_primary",
                 &[
                     ("interact", &input_bindings().global.interact),
                     ("alchemy", &input_bindings().alchemy.open),
+                    ("journal", &input_bindings().global.journal),
                 ],
             ),
             panel.x + 28.0,
@@ -65,9 +66,22 @@ impl MenuState {
             20.0,
             dark::TEXT_DIM,
         );
+        draw_text(
+            &ui_format(
+                "menu_controls_secondary",
+                &[
+                    ("confirm", &input_bindings().global.confirm),
+                    ("cancel", &input_bindings().global.cancel),
+                ],
+            ),
+            panel.x + 28.0,
+            panel.y + 278.0,
+            20.0,
+            dark::TEXT_DIM,
+        );
     }
 }
 
 fn start_button_rect() -> Rect {
-    inset_rect(centered_panel_rect(480.0, 280.0), 28.0, 185.0, 180.0, 46.0)
+    inset_rect(centered_panel_rect(540.0, 320.0), 28.0, 185.0, 180.0, 46.0)
 }

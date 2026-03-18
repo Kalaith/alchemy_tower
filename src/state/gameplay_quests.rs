@@ -46,6 +46,12 @@ impl GameplayState {
                 ui_format("quests_accepted_toast", &[("title", &quest.title)]),
                 Color::from_rgba(255, 230, 170, 255),
             );
+            self.trigger_world_feedback(
+                self.world.player.position,
+                Color::from_rgba(255, 230, 170, 255),
+                false,
+                1.2,
+            );
             self.runtime.status_text = ui_format(
                 "quests_accepted_status",
                 &[("title", &quest.title), ("hint", &self.quest_location_hint(data, quest))],
@@ -79,6 +85,13 @@ impl GameplayState {
                 ui_format("quests_complete_toast", &[("title", &quest.title)]),
                 Color::from_rgba(188, 255, 220, 255),
             );
+            self.trigger_world_feedback(
+                self.world.player.position,
+                Color::from_rgba(188, 255, 220, 255),
+                true,
+                1.8,
+            );
+            self.trigger_camera_shake(0.14, 3.8);
             self.runtime.status_text = ui_format(
                 "quests_delivered_status",
                 &[
@@ -121,6 +134,12 @@ impl GameplayState {
                     self.push_event_toast(
                         ui_format("quests_accepted_toast", &[("title", &quest.title)]),
                         Color::from_rgba(255, 230, 170, 255),
+                    );
+                    self.trigger_world_feedback(
+                        self.world.player.position,
+                        Color::from_rgba(255, 230, 170, 255),
+                        false,
+                        1.2,
                     );
                 }
                 self.runtime.status_text = data

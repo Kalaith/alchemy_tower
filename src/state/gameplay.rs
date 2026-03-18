@@ -85,6 +85,7 @@ struct GatherFeedback {
     remaining_seconds: f32,
     color: Color,
     emphasis: bool,
+    burst_scale: f32,
 }
 
 #[derive(Clone, Debug, Default)]
@@ -136,15 +137,40 @@ struct OverlayState {
     archive_open: bool,
     archive_tab: usize,
     archive_index: usize,
+    archive_experiment_filter: ArchiveExperimentFilter,
     ending_open: bool,
     dialogue_open: bool,
     current_npc_id: Option<String>,
+    inventory_sort_mode: InventorySortMode,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+enum InventorySortMode {
+    Priority,
+    Type,
+    Name,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+enum ArchiveExperimentFilter {
+    All,
+    Stable,
+    Unstable,
 }
 
 #[derive(Clone, Debug)]
 struct AlchemySession {
     open: bool,
     index: usize,
+    heat: i32,
+    stirs: u32,
+    timing_index: usize,
+    slots: [Option<String>; SLOT_COUNT],
+    catalyst: Option<String>,
+}
+
+#[derive(Clone, Debug)]
+struct SavedAlchemySetup {
     heat: i32,
     stirs: u32,
     timing_index: usize,
@@ -162,6 +188,54 @@ impl Default for AlchemySession {
             timing_index: 0,
             slots: [None, None, None],
             catalyst: None,
+        }
+    }
+}
+
+impl InventorySortMode {
+    fn next(self) -> Self {
+        match self {
+            Self::Priority => Self::Type,
+            Self::Type => Self::Name,
+            Self::Name => Self::Priority,
+        }
+    }
+
+    fn label(self) -> &'static str {
+        match self {
+            Self::Priority => "priority",
+            Self::Type => "type",
+            Self::Name => "name",
+        }
+    }
+}
+
+impl Default for InventorySortMode {
+    fn default() -> Self {
+        Self::Priority
+    }
+}
+
+impl Default for ArchiveExperimentFilter {
+    fn default() -> Self {
+        Self::All
+    }
+}
+
+impl ArchiveExperimentFilter {
+    fn next(self) -> Self {
+        match self {
+            Self::All => Self::Stable,
+            Self::Stable => Self::Unstable,
+            Self::Unstable => Self::All,
+        }
+    }
+
+    fn label(self) -> &'static str {
+        match self {
+            Self::All => "all",
+            Self::Stable => "stable",
+            Self::Unstable => "unstable",
         }
     }
 }
@@ -200,8 +274,25 @@ struct RuntimeState {
     gather_toasts: Vec<GatherToast>,
     gather_feedbacks: Vec<GatherFeedback>,
     gather_pause_seconds: f32,
+    camera_shake_seconds: f32,
+    camera_shake_intensity: f32,
     npc_motion_states: BTreeMap<String, NpcMotionTracker>,
     status_text: String,
+    last_brew_setup: Option<SavedAlchemySetup>,
+    tutorial: TutorialState,
+}
+
+#[derive(Clone, Debug)]
+struct TutorialState {
+    next_hint_delay_seconds: f32,
+    save_hint_shown: bool,
+    journal_hint_shown: bool,
+    alchemy_hint_shown: bool,
+    potion_hint_shown: bool,
+    gather_hint_shown: bool,
+    quest_hint_shown: bool,
+    delivery_hint_shown: bool,
+    route_hint_shown: bool,
 }
 
 #[derive(Clone, Debug)]
@@ -256,11 +347,27 @@ impl GameplayState {
                 gather_toasts: Vec::new(),
                 gather_feedbacks: Vec::new(),
                 gather_pause_seconds: 0.0,
+                camera_shake_seconds: 0.0,
+                camera_shake_intensity: 0.0,
                 npc_motion_states: BTreeMap::new(),
                 status_text: "Gather ingredients and experiment at the tower cauldron.".to_owned(),
+                last_brew_setup: None,
+                tutorial: TutorialState {
+                    next_hint_delay_seconds: 1.5,
+                    save_hint_shown: false,
+                    journal_hint_shown: false,
+                    alchemy_hint_shown: false,
+                    potion_hint_shown: false,
+                    gather_hint_shown: false,
+                    quest_hint_shown: false,
+                    delivery_hint_shown: false,
+                    route_hint_shown: false,
+                },
             },
             ui: OverlayState {
                 shop_buy_tab: true,
+                inventory_sort_mode: InventorySortMode::Priority,
+                archive_experiment_filter: ArchiveExperimentFilter::All,
                 ..Default::default()
             },
             alchemy: AlchemySession::default(),
@@ -329,10 +436,18 @@ impl GameplayState {
                 self.current_weather(),
                 self.current_season()
             );
+            self.trigger_world_feedback(
+                self.world.player.position,
+                Color::from_rgba(176, 226, 255, 255),
+                true,
+                1.5,
+            );
+            self.trigger_camera_shake(0.22, 6.0);
         }
         self.update_active_effects(frame_time);
         self.update_gather_feedback(frame_time);
         self.update_npc_motion(data, frame_time);
+        self.update_tutorial_hints(data, frame_time);
 
         if self.ui.dialogue_open {
             self.handle_dialogue_inputs(data);
@@ -386,6 +501,9 @@ impl GameplayState {
                 self.ui.journal_open = true;
                 self.ui.journal_tab = 0;
                 self.runtime.status_text = ui_text().statuses.open_journal.clone();
+            }
+            if is_key_pressed(KeyCode::V) {
+                self.cycle_inventory_sort_mode();
             }
             if self.runtime.gather_pause_seconds <= 0.0 {
                 self.update_movement(data, frame_time);
@@ -453,6 +571,10 @@ impl GameplayState {
 
     fn update_gather_feedback(&mut self, frame_time: f32) {
         self.runtime.gather_pause_seconds = (self.runtime.gather_pause_seconds - frame_time).max(0.0);
+        self.runtime.camera_shake_seconds = (self.runtime.camera_shake_seconds - frame_time).max(0.0);
+        if self.runtime.camera_shake_seconds <= 0.0 {
+            self.runtime.camera_shake_intensity = 0.0;
+        }
         for toast in &mut self.runtime.gather_toasts {
             toast.remaining_seconds -= frame_time;
         }
@@ -493,7 +615,9 @@ impl GameplayState {
 
     fn handle_interactions(&mut self, data: &GameData) {
         if let Some(station) = self.nearby_station(data) {
-            if station.kind == StationKind::Alchemy && is_key_pressed(KeyCode::Tab) {
+            if station.kind == StationKind::Alchemy
+                && (is_key_pressed(KeyCode::Tab) || is_key_pressed(KeyCode::E))
+            {
                 self.alchemy.open = true;
                 self.alchemy.index = 0;
                 self.runtime.status_text = ui_text().statuses.open_alchemy.clone();
@@ -587,6 +711,16 @@ impl GameplayState {
                         ui_format("gameplay_route_restored", &[("label", &warp.label)]),
                         Color::from_rgba(188, 255, 220, 255),
                     );
+                    self.trigger_world_feedback(
+                        vec2(
+                            warp.rect.x + warp.rect.w * 0.5,
+                            warp.rect.y + warp.rect.h * 0.5,
+                        ),
+                        Color::from_rgba(188, 255, 220, 255),
+                        true,
+                        2.0,
+                    );
+                    self.trigger_camera_shake(0.18, 4.8);
                     self.runtime.status_text = ui_format("gameplay_repaired_access", &[("label", &warp.label)]);
                 } else {
                     self.runtime.status_text = self.warp_lock_text(data, warp);
@@ -597,6 +731,12 @@ impl GameplayState {
             self.world.player.position = vec2(warp.target_position[0], warp.target_position[1]);
             self.refresh_available_nodes(data);
             self.runtime.status_text = ui_format("gameplay_entered", &[("label", &warp.label)]);
+            self.trigger_world_feedback(
+                self.world.player.position,
+                Color::from_rgba(255, 245, 160, 255),
+                false,
+                1.2,
+            );
             return;
         }
 
@@ -616,11 +756,7 @@ impl GameplayState {
                 self.trigger_gather_feedback(data, node, &discovery);
                 self.runtime.status_text = self.gather_status_text(data, node, &discovery);
             } else {
-                self.runtime.status_text = format!(
-                    "{} is unavailable. {}",
-                    node.name,
-                    self.gather_unavailable_reason(node)
-                );
+                self.runtime.status_text = self.gather_attempt_status(data, node);
             }
         }
     }
@@ -701,6 +837,7 @@ impl GameplayState {
                 );
             }
         }
+        self.draw_environment_overlay(area, offset);
         for blocker in &area.blockers {
             draw_rectangle(
                 offset.x + blocker.x,
@@ -711,13 +848,39 @@ impl GameplayState {
             );
         }
         for warp in &area.warps {
+            let center = vec2(
+                offset.x + warp.rect.x + warp.rect.w * 0.5,
+                offset.y + warp.rect.y + warp.rect.h * 0.5,
+            );
+            let unlock_ready = !self.warp_is_unlocked(warp) && self.can_unlock_warp(warp);
+            if unlock_ready {
+                let pulse = ((get_time() as f32 * 3.0) + warp.rect.x * 0.01).sin() * 0.5 + 0.5;
+                draw_rectangle(
+                    offset.x + warp.rect.x,
+                    offset.y + warp.rect.y,
+                    warp.rect.w,
+                    warp.rect.h,
+                    Color::new(188.0 / 255.0, 255.0 / 255.0, 220.0 / 255.0, 0.10 + pulse * 0.08),
+                );
+                draw_circle_lines(
+                    center.x,
+                    center.y,
+                    20.0 + pulse * 8.0,
+                    2.0,
+                    Color::from_rgba(188, 255, 220, 220),
+                );
+            }
             draw_rectangle_lines(
                 offset.x + warp.rect.x,
                 offset.y + warp.rect.y,
                 warp.rect.w,
                 warp.rect.h,
                 3.0,
-                Color::from_rgba(255, 245, 160, 255),
+                if unlock_ready {
+                    Color::from_rgba(188, 255, 220, 255)
+                } else {
+                    Color::from_rgba(255, 245, 160, 255)
+                },
             );
         }
         for station in self
@@ -725,19 +888,47 @@ impl GameplayState {
             .into_iter()
             .filter(|station| station.area_id == area.id)
         {
-            draw_circle(
-                offset.x + station.position[0],
-                offset.y + station.position[1],
-                24.0,
-                rgba(station.color),
+            let center = vec2(offset.x + station.position[0], offset.y + station.position[1]);
+            let player_distance = self
+                .world
+                .player
+                .position
+                .distance(vec2(station.position[0], station.position[1]));
+            let nearby = player_distance <= station.interaction_radius + 60.0;
+            let priority = self.station_world_label(data, station);
+            let pulse = ((get_time() as f32 * 2.6) + station.position[0] * 0.01).sin() * 0.5 + 0.5;
+            let ambient_radius = 30.0 + pulse * 8.0;
+            let ambient_alpha = if priority.is_some() {
+                0.14 + pulse * 0.14
+            } else {
+                0.08 + pulse * 0.10
+            };
+            let ambient = Color::new(
+                station.color[0] as f32 / 255.0,
+                station.color[1] as f32 / 255.0,
+                station.color[2] as f32 / 255.0,
+                ambient_alpha,
             );
             draw_circle_lines(
-                offset.x + station.position[0],
-                offset.y + station.position[1],
-                28.0,
-                3.0,
-                WHITE,
+                center.x,
+                center.y,
+                ambient_radius,
+                if priority.is_some() { 3.0 } else { 2.0 },
+                ambient,
             );
+            self.draw_station_marker(station, center, priority.is_some());
+            if nearby || priority.is_some() {
+                draw_text(
+                    &station.name,
+                    center.x - 42.0,
+                    center.y + 46.0,
+                    18.0,
+                    dark::TEXT_BRIGHT,
+                );
+            }
+            if let Some((label, color)) = priority {
+                draw_text(&label, center.x - 42.0, center.y - 34.0, 18.0, color);
+            }
         }
         for npc in self.visible_npcs(data) {
             let runtime = self.npc_runtime_state(data, npc);
@@ -745,20 +936,143 @@ impl GameplayState {
                 continue;
             }
             let pos = self.npc_draw_position(npc, &runtime);
-            draw_circle(offset.x + pos.x, offset.y + pos.y, 18.0, rgba(npc.color));
-            draw_circle_lines(offset.x + pos.x, offset.y + pos.y, 20.0, 2.0, WHITE);
+            let center = vec2(offset.x + pos.x, offset.y + pos.y);
+            let priority = self.npc_world_label(data, npc);
+            if let Some((_, color)) = &priority {
+                let pulse = ((get_time() as f32 * 3.4) + pos.x * 0.02).sin() * 0.5 + 0.5;
+                draw_circle_lines(center.x, center.y, 22.0 + pulse * 5.0, 2.0, *color);
+            }
+            draw_circle(center.x, center.y, 18.0, rgba(npc.color));
+            draw_circle_lines(center.x, center.y, 20.0, 2.0, WHITE);
+            if runtime.moving && runtime.direction.length_squared() > 0.0 {
+                let head = center + runtime.direction.normalize() * 18.0;
+                draw_line(center.x, center.y, head.x, head.y, 2.0, WHITE);
+            }
+            if priority.is_some()
+                || self.world.player.position.distance(pos) <= npc.interaction_radius + 54.0
+            {
+                draw_text(&npc.name, center.x - 34.0, center.y - 28.0, 18.0, dark::TEXT_BRIGHT);
+            }
+            if let Some((label, color)) = priority {
+                draw_text(&label, center.x - 34.0, center.y - 46.0, 18.0, color);
+            }
         }
         for node in &area.gather_nodes {
             if self.world.gathered_nodes.contains(&node.id) {
                 continue;
             }
             let available = self.node_is_available(node);
-            let mut color = rgba(node.color);
             if !available {
-                color.a = 0.28;
+                continue;
             }
+            let color = rgba(node.color);
             let center = vec2(offset.x + node.position[0], offset.y + node.position[1]);
             self.draw_gather_node(data, node, center, color, available);
+        }
+    }
+
+    fn draw_environment_overlay(&self, area: &AreaDefinition, offset: Vec2) {
+        let time_tint = match self.current_time_window() {
+            "morning" => Color::from_rgba(255, 220, 170, 24),
+            "day" => Color::from_rgba(255, 255, 255, 0),
+            "evening" => Color::from_rgba(255, 184, 120, 38),
+            _ => Color::from_rgba(72, 92, 150, 72),
+        };
+        if time_tint.a > 0.0 {
+            draw_rectangle(offset.x, offset.y, area.size[0], area.size[1], time_tint);
+        }
+
+        match self.current_weather() {
+            "mist" => {
+                draw_rectangle(
+                    offset.x,
+                    offset.y,
+                    area.size[0],
+                    area.size[1],
+                    Color::from_rgba(220, 228, 240, 28),
+                );
+                for index in 0..10 {
+                    let drift = ((get_time() as f32 * 0.4) + index as f32 * 0.6).sin() * 18.0;
+                    let x = offset.x + 80.0 + index as f32 * 110.0 + drift;
+                    let y = offset.y + 60.0 + (index % 4) as f32 * 120.0;
+                    draw_circle(x, y, 42.0 + (index % 3) as f32 * 12.0, Color::from_rgba(240, 244, 248, 20));
+                }
+            }
+            "rain" => {
+                draw_rectangle(
+                    offset.x,
+                    offset.y,
+                    area.size[0],
+                    area.size[1],
+                    Color::from_rgba(90, 126, 168, 26),
+                );
+                for index in 0..28 {
+                    let wave = ((get_time() as f32 * 2.8) + index as f32 * 0.4).fract();
+                    let x = offset.x + (index as f32 * 48.0).rem_euclid(area.size[0]);
+                    let y = offset.y + wave * area.size[1];
+                    draw_line(x, y, x - 8.0, y + 16.0, 2.0, Color::from_rgba(200, 224, 255, 120));
+                }
+            }
+            "windy" => {
+                for index in 0..16 {
+                    let wave = ((get_time() as f32 * 1.4) + index as f32 * 0.33).fract();
+                    let x = offset.x + wave * area.size[0];
+                    let y = offset.y + 30.0 + index as f32 * 34.0;
+                    draw_line(x - 10.0, y, x + 22.0, y - 6.0, 2.0, Color::from_rgba(232, 232, 210, 64));
+                }
+            }
+            _ => {}
+        }
+    }
+
+    fn draw_station_marker(&self, station: &StationDefinition, center: Vec2, emphasized: bool) {
+        let fill = rgba(station.color);
+        let border = if emphasized {
+            Color::from_rgba(255, 248, 204, 255)
+        } else {
+            WHITE
+        };
+        match station.kind {
+            StationKind::Alchemy => {
+                draw_poly(center.x, center.y, 3, 24.0, -90.0, fill);
+                draw_poly_lines(center.x, center.y, 3, 28.0, -90.0, 3.0, border);
+            }
+            StationKind::Shop => {
+                draw_rectangle(center.x - 22.0, center.y - 18.0, 44.0, 36.0, fill);
+                draw_rectangle_lines(center.x - 26.0, center.y - 22.0, 52.0, 44.0, 3.0, border);
+                draw_line(center.x - 12.0, center.y - 24.0, center.x + 12.0, center.y - 24.0, 3.0, border);
+            }
+            StationKind::RuneWorkshop => {
+                draw_poly(center.x, center.y, 6, 22.0, 0.0, fill);
+                draw_poly_lines(center.x, center.y, 6, 26.0, 0.0, 3.0, border);
+            }
+            StationKind::ArchiveConsole => {
+                draw_poly(center.x, center.y, 4, 22.0, 45.0, fill);
+                draw_poly_lines(center.x, center.y, 4, 27.0, 45.0, 3.0, border);
+                draw_circle(center.x, center.y, 4.0, border);
+            }
+            StationKind::QuestBoard => {
+                draw_rectangle(center.x - 18.0, center.y - 22.0, 36.0, 44.0, fill);
+                draw_rectangle_lines(center.x - 22.0, center.y - 26.0, 44.0, 52.0, 3.0, border);
+                draw_line(center.x - 12.0, center.y - 6.0, center.x + 12.0, center.y - 6.0, 2.0, border);
+                draw_line(center.x - 12.0, center.y + 4.0, center.x + 8.0, center.y + 4.0, 2.0, border);
+            }
+            StationKind::Planter => {
+                draw_rectangle(center.x - 22.0, center.y - 12.0, 44.0, 24.0, fill);
+                draw_rectangle_lines(center.x - 24.0, center.y - 14.0, 48.0, 28.0, 3.0, border);
+                draw_line(center.x, center.y - 18.0, center.x, center.y + 2.0, 3.0, border);
+            }
+            StationKind::Habitat => {
+                draw_circle(center.x, center.y, 18.0, fill);
+                draw_circle_lines(center.x, center.y, 24.0, 3.0, border);
+                draw_circle(center.x + 12.0, center.y - 10.0, 4.0, border);
+            }
+            StationKind::EndingFocus => {
+                draw_poly(center.x, center.y, 8, 20.0, 22.5, fill);
+                draw_poly_lines(center.x, center.y, 8, 26.0, 22.5, 3.0, border);
+                draw_line(center.x, center.y - 18.0, center.x, center.y + 18.0, 2.0, border);
+                draw_line(center.x - 18.0, center.y, center.x + 18.0, center.y, 2.0, border);
+            }
         }
     }
 
@@ -965,6 +1279,12 @@ impl GameplayState {
             ui_format("gameplay_new_journal_note", &[("title", title)]),
             Color::from_rgba(176, 226, 255, 255),
         );
+        self.trigger_world_feedback(
+            self.world.player.position,
+            Color::from_rgba(176, 226, 255, 255),
+            true,
+            1.6,
+        );
     }
 
     fn has_journal_milestone(&self, id: &str) -> bool {
@@ -1033,7 +1353,7 @@ impl GameplayState {
         }
     }
 
-    fn warp_lock_text(&self, data: &GameData, warp: &WarpDefinition) -> String {
+    fn warp_requirement_summary(&self, data: &GameData, warp: &WarpDefinition) -> String {
         let mut parts = Vec::new();
         if self.progression.total_brews < warp.required_total_brews {
             parts.push(format!(
@@ -1073,7 +1393,16 @@ impl GameplayState {
         if parts.is_empty() {
             warp.locked_note.clone()
         } else {
-            format!("{} needs {}.", warp.label, parts.join(", "))
+            parts.join(", ")
+        }
+    }
+
+    fn warp_lock_text(&self, data: &GameData, warp: &WarpDefinition) -> String {
+        let requirement_summary = self.warp_requirement_summary(data, warp);
+        if requirement_summary == warp.locked_note {
+            requirement_summary
+        } else {
+            format!("{} needs {}.", warp.label, requirement_summary)
         }
     }
 
