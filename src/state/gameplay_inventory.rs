@@ -1,4 +1,5 @@
 use super::*;
+use crate::content::ui_format;
 use crate::data::{ItemCategory, RecipeDefinition};
 
 impl GameplayState {
@@ -30,11 +31,11 @@ impl GameplayState {
     pub(super) fn item_best_record_label(&self, item_id: &str) -> Option<String> {
         self.progression.crafted_item_profiles
             .get(item_id)
-            .map(|profile| format!("best {}", profile.best_quality_band))
+            .map(|profile| ui_format("inventory_best", &[("band", &profile.best_quality_band)]))
             .or_else(|| {
                 self.progression.field_journal
                     .get(item_id)
-                    .map(|entry| format!("best {}", entry.best_quality_band))
+                    .map(|entry| ui_format("inventory_best", &[("band", &entry.best_quality_band)]))
             })
     }
 
@@ -53,16 +54,16 @@ impl GameplayState {
         let recipe_refs = self.known_recipe_reference_count(data, item_id);
         let mut badges = Vec::new();
         if quest_refs > 0 {
-            badges.push("quest".to_owned());
+            badges.push(ui_format("inventory_badge_quest", &[]));
         }
         if recipe_refs > 0 {
-            badges.push("recipe".to_owned());
+            badges.push(ui_format("inventory_badge_recipe", &[]));
         }
         if self.item_best_record_label(item_id).is_some() {
-            badges.push("best".to_owned());
+            badges.push(ui_format("inventory_badge_best", &[]));
         }
         if self.sell_is_safe(data, item_id) {
-            badges.push("safe".to_owned());
+            badges.push(ui_format("inventory_badge_safe", &[]));
         }
         badges
     }
@@ -72,10 +73,10 @@ impl GameplayState {
         let recipe_refs = self.known_recipe_reference_count(data, item_id);
         let mut parts = Vec::new();
         if quest_refs > 0 {
-            parts.push(format!("quest {quest_refs}"));
+            parts.push(ui_format("inventory_ref_quest", &[("count", &quest_refs.to_string())]));
         }
         if recipe_refs > 0 {
-            parts.push(format!("recipe {recipe_refs}"));
+            parts.push(ui_format("inventory_ref_recipe", &[("count", &recipe_refs.to_string())]));
         }
         if let Some(best_label) = self.item_best_record_label(item_id) {
             parts.push(best_label);
@@ -132,13 +133,16 @@ impl GameplayState {
             .crafted_item_profiles
             .get(&recipe.output_item_id)
             .map(|profile| profile.best_quality_band.clone())
-            .unwrap_or_else(|| "unlogged".to_owned());
+            .unwrap_or_else(|| ui_format("inventory_best_unlogged", &[]));
         let catalyst = if recipe.catalyst_tag.is_empty() {
-            "catalyst any".to_owned()
+            ui_format("inventory_catalyst_any", &[])
         } else {
-            format!("catalyst {}", recipe.catalyst_tag)
+            ui_format("inventory_catalyst_specific", &[("tag", &recipe.catalyst_tag)])
         };
-        format!("mastery {mastery}  best {best}  {catalyst}")
+        ui_format(
+            "inventory_memory_meta",
+            &[("mastery", &mastery.to_string()), ("best", &best), ("catalyst", &catalyst)],
+        )
     }
 
     pub(super) fn recipe_memory_detail(
@@ -146,7 +150,7 @@ impl GameplayState {
         data: &GameData,
         recipe: &RecipeDefinition,
     ) -> String {
-        let mut parts = vec![format!("Output {}", data.item_name(&recipe.output_item_id))];
+        let mut parts = vec![ui_format("inventory_memory_output", &[("item", data.item_name(&recipe.output_item_id))])];
         if !recipe.required_sequence.is_empty() {
             let sequence = recipe
                 .required_sequence
@@ -154,15 +158,15 @@ impl GameplayState {
                 .map(|item_id| data.item_name(item_id))
                 .collect::<Vec<_>>()
                 .join(" -> ");
-            parts.push(format!("order {sequence}"));
+            parts.push(ui_format("inventory_memory_order", &[("sequence", &sequence)]));
         }
         if let Some(profile) = self.progression.crafted_item_profiles.get(&recipe.output_item_id) {
             if !profile.inherited_traits.is_empty() {
-                parts.push(format!("traits {}", profile.inherited_traits.join(", ")));
+                parts.push(ui_format("inventory_memory_traits", &[("traits", &profile.inherited_traits.join(", "))]));
             }
         }
         if !recipe.morph_targets.is_empty() {
-            parts.push("morph path logged".to_owned());
+            parts.push(ui_format("inventory_memory_morph", &[]));
         }
         parts.join("  ")
     }
@@ -223,8 +227,8 @@ impl GameplayState {
         };
         if item.category != ItemCategory::Ingredient {
             self.runtime.status_text = self.unavailable_state_text(&format!(
-                "{} is a catalyst, not a brew ingredient.",
-                item.name
+                "{}",
+                ui_format("inventory_fill_slot_catalyst", &[("name", &item.name)])
             ));
             return;
         }
@@ -233,13 +237,16 @@ impl GameplayState {
             - u32::from(self.alchemy.slots[slot].as_deref() == Some(item_id));
         if total <= reserved {
             self.runtime.status_text = self.unavailable_state_text(&format!(
-                "No more {} ready for use.",
-                data.item_name(item_id)
+                "{}",
+                ui_format("inventory_no_more_ready", &[("name", data.item_name(item_id))])
             ));
             return;
         }
         self.alchemy.slots[slot] = Some(item_id.clone());
-        self.runtime.status_text = format!("Added {} to slot {}.", data.item_name(item_id), slot + 1);
+        self.runtime.status_text = ui_format(
+            "inventory_added_slot",
+            &[("item", data.item_name(item_id)), ("slot", &(slot + 1).to_string())],
+        );
     }
 
     pub(super) fn fill_catalyst(&mut self, data: &GameData, items: &[String]) {
@@ -251,8 +258,8 @@ impl GameplayState {
         };
         if item.category != ItemCategory::Catalyst {
             self.runtime.status_text = self.unavailable_state_text(&format!(
-                "{} cannot stabilize a brew as a catalyst.",
-                item.name
+                "{}",
+                ui_format("inventory_fill_catalyst_invalid", &[("name", &item.name)])
             ));
             return;
         }
@@ -261,11 +268,11 @@ impl GameplayState {
             - u32::from(self.alchemy.catalyst.as_deref() == Some(item_id));
         if total <= reserved {
             self.runtime.status_text =
-                self.unavailable_state_text(&format!("No more {} ready for use.", item.name));
+                self.unavailable_state_text(&ui_format("inventory_no_more_ready", &[("name", &item.name)]));
             return;
         }
         self.alchemy.catalyst = Some(item_id.clone());
-        self.runtime.status_text = format!("Prepared catalyst {}.", item.name);
+        self.runtime.status_text = ui_format("inventory_prepared_catalyst", &[("name", &item.name)]);
     }
 
     pub(super) fn selected_items(&self) -> Vec<String> {
@@ -440,34 +447,40 @@ impl GameplayState {
             let recipe_discovered = self.progression.known_recipes.insert(recipe.id.clone());
             if recipe_discovered {
                 self.push_event_toast(
-                    format!("Recipe logged: {}.", recipe.name),
+                    ui_format("inventory_recipe_logged", &[("name", &recipe.name)]),
                     Color::from_rgba(176, 226, 255, 255),
                 );
-                self.runtime.status_text = format!(
-                    "Discovered {}. {} quality, traits: {}.",
-                    recipe.name,
-                    resolution.quality_band,
-                    resolution.inherited_traits.join(", ")
+                self.runtime.status_text = ui_format(
+                    "inventory_discovered_status",
+                    &[
+                        ("recipe", &recipe.name),
+                        ("quality", resolution.quality_band),
+                        ("traits", &resolution.inherited_traits.join(", ")),
+                    ],
                 );
             } else {
-                self.runtime.status_text = format!(
-                    "Brewed {} x{} as {} quality.",
-                    data.item_name(&resolution.output_item_id),
-                    resolution.output_amount,
-                    resolution.quality_band
+                self.runtime.status_text = ui_format(
+                    "inventory_brewed_status",
+                    &[
+                        ("item", data.item_name(&resolution.output_item_id)),
+                        ("amount", &resolution.output_amount.to_string()),
+                        ("quality", resolution.quality_band),
+                    ],
                 );
             }
             if mastery_improved {
                 self.push_event_toast(
-                    format!("Mastery improved: {}.", recipe.name),
+                    ui_format("inventory_mastery_improved", &[("name", &recipe.name)]),
                     Color::from_rgba(255, 230, 170, 255),
                 );
             }
         } else {
-            self.runtime.status_text = format!(
-                "The mixture collapsed into {} quality {}.",
-                resolution.quality_band,
-                data.item_name(&resolution.output_item_id)
+            self.runtime.status_text = ui_format(
+                "inventory_collapse_status",
+                &[
+                    ("quality", resolution.quality_band),
+                    ("item", data.item_name(&resolution.output_item_id)),
+                ],
             );
         }
         let current_profile = self.progression.crafted_item_profiles.get(&resolution.output_item_id);
@@ -478,10 +491,12 @@ impl GameplayState {
         if improved_best {
             if let Some(profile) = current_profile {
                 self.push_event_toast(
-                    format!(
-                        "New best quality: {} ({})",
-                        data.item_name(&resolution.output_item_id),
-                        profile.best_quality_band
+                    ui_format(
+                        "inventory_new_best",
+                        &[
+                            ("item", data.item_name(&resolution.output_item_id)),
+                            ("band", &profile.best_quality_band),
+                        ],
                     ),
                     Color::from_rgba(188, 255, 220, 255),
                 );
@@ -489,7 +504,7 @@ impl GameplayState {
         }
         if self.progression.total_brews == 10 {
             self.push_event_toast(
-                "Station unlocked: Greenhouse access restored.",
+                &ui_format("inventory_greenhouse_unlock", &[]),
                 Color::from_rgba(200, 255, 200, 255),
             );
             self.runtime.status_text = narrative_text().statuses.greenhouse_unlock.clone();
@@ -578,17 +593,18 @@ impl GameplayState {
         for effect in &item.effects {
             self.apply_effect(effect);
         }
-        self.runtime.status_text = format!("Used {}.", item.name);
+        self.runtime.status_text = ui_format("inventory_used", &[("name", &item.name)]);
     }
 
     pub(super) fn buy_item(&mut self, data: &GameData, item_id: &str, price: u32) {
         if self.coins < price {
-            self.runtime.status_text = format!("Not enough coins for {}.", data.item_name(item_id));
+            self.runtime.status_text =
+                ui_format("inventory_not_enough_coins", &[("item", data.item_name(item_id))]);
             return;
         }
         self.coins -= price;
         *self.inventory.entry(item_id.to_owned()).or_insert(0) += 1;
-        self.runtime.status_text = format!("Bought {}.", data.item_name(item_id));
+        self.runtime.status_text = ui_format("inventory_bought", &[("item", data.item_name(item_id))]);
     }
 
     pub(super) fn sell_item(&mut self, data: &GameData, item_id: &str) {
@@ -607,10 +623,16 @@ impl GameplayState {
             self.inventory.remove(item_id);
         }
         self.coins += price;
-        self.runtime.status_text = format!("Sold {} for {} coins.", item.name, price);
+        self.runtime.status_text = ui_format(
+            "inventory_sold",
+            &[("name", &item.name), ("price", &price.to_string())],
+        );
         if self.sell_is_safe(data, item_id) {
             self.push_event_toast(
-                format!("Sold safe stock: {} (+{}c)", item.name, price),
+                ui_format(
+                    "inventory_sold_safe",
+                    &[("name", &item.name), ("price", &price.to_string())],
+                ),
                 Color::from_rgba(255, 214, 132, 255),
             );
         }

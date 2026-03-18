@@ -1,4 +1,5 @@
 use super::*;
+use crate::content::ui_format;
 
 impl GameplayState {
     pub(super) fn handle_alchemy_inputs(&mut self, data: &GameData) {
@@ -36,11 +37,13 @@ impl GameplayState {
         }
         if is_key_pressed(KeyCode::S) {
             self.alchemy.stirs += 1;
-            self.runtime.status_text = format!("Stirred the cauldron {} time(s).", self.alchemy.stirs);
+            self.runtime.status_text =
+                ui_format("alchemy_stirred", &[("count", &self.alchemy.stirs.to_string())]);
         }
         if is_key_pressed(KeyCode::T) {
             self.alchemy.timing_index = (self.alchemy.timing_index + 1) % ALCHEMY_TIMINGS.len();
-            self.runtime.status_text = format!("Timing set to {}.", self.alchemy_timing());
+            self.runtime.status_text =
+                ui_format("alchemy_timing_set", &[("timing", self.alchemy_timing())]);
         }
 
         for (slot, key) in [KeyCode::Key1, KeyCode::Key2, KeyCode::Key3]
@@ -61,14 +64,14 @@ impl GameplayState {
         }
         if is_key_pressed(KeyCode::R) {
             self.alchemy.catalyst = None;
-            self.runtime.status_text = "Removed catalyst.".to_owned();
+            self.runtime.status_text = ui_format("alchemy_removed_catalyst", &[]);
         }
         if is_key_pressed(KeyCode::C) {
             self.alchemy.slots = [None, None, None];
             self.alchemy.catalyst = None;
             self.alchemy.stirs = 0;
             self.alchemy.timing_index = 0;
-            self.runtime.status_text = "Cleared the cauldron.".to_owned();
+            self.runtime.status_text = ui_format("alchemy_cleared", &[]);
         }
         if is_key_pressed(KeyCode::Enter) || is_key_pressed(KeyCode::B) {
             self.brew_selected(data, &station);

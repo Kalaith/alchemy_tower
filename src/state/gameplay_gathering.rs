@@ -1,5 +1,6 @@
 use super::gameplay_support::rgba;
 use super::*;
+use crate::content::ui_format;
 
 impl GameplayState {
     pub(super) fn node_is_available(&self, node: &crate::data::GatherNodeDefinition) -> bool {
@@ -16,7 +17,7 @@ impl GameplayState {
                 .iter()
                 .any(|season| season == self.current_season());
         if !season_ok {
-            return "Out of season.".to_owned();
+            return ui_format("gather_out_of_season", &[]);
         }
 
         let weather_ok = node.weathers.is_empty()
@@ -26,9 +27,9 @@ impl GameplayState {
                 .any(|weather| weather == self.current_weather());
         if !weather_ok {
             if node.weathers.iter().any(|weather| weather == "rain") {
-                return "Requires rain.".to_owned();
+                return ui_format("gather_requires_rain", &[]);
             }
-            return format!("Needs {} weather.", node.weathers.join(" or "));
+            return ui_format("gather_needs_weather", &[("weather", &node.weathers.join(" or "))]);
         }
 
         let time_ok = node.time_windows.is_empty()
@@ -38,12 +39,12 @@ impl GameplayState {
                 .any(|time| time == self.current_time_window());
         if !time_ok {
             if node.time_windows.iter().any(|time| time == "evening") {
-                return "Only appears at dusk.".to_owned();
+                return ui_format("gather_only_dusk", &[]);
             }
-            return format!("Appears during {}.", node.time_windows.join(" or "));
+            return ui_format("gather_appears_during", &[("time", &node.time_windows.join(" or "))]);
         }
 
-        "No sign of it today.".to_owned()
+        ui_format("gather_no_sign", &[])
     }
 
     pub(super) fn record_field_discovery(
@@ -106,19 +107,19 @@ impl GameplayState {
                 .map(|route| route.name.as_str())
                 .unwrap_or("field notes");
             self.push_gather_toast(
-                format!("Journal note added: {}.", route_name),
+                ui_format("gather_toast_journal", &[("route", route_name)]),
                 Color::from_rgba(176, 226, 255, 255),
             );
         }
         if discovery.improved_quality {
             self.push_gather_toast(
-                format!("Better than previous quality: {}.", node.name),
+                ui_format("gather_toast_quality", &[("name", &node.name)]),
                 Color::from_rgba(255, 228, 150, 255),
             );
         }
         if discovery.variant_discovered {
             self.push_gather_toast(
-                format!("Variant discovered: {}.", node.name),
+                ui_format("gather_toast_variant", &[("name", &node.name)]),
                 Color::from_rgba(188, 255, 220, 255),
             );
         }
@@ -142,14 +143,11 @@ impl GameplayState {
             .map(|route| route.name.as_str())
             .unwrap_or("unknown route");
         if discovery.variant_discovered {
-            format!("Collected {}. Variant noted in {}.", node.name, route_name)
+            ui_format("gather_status_variant", &[("name", &node.name), ("route", route_name)])
         } else if discovery.improved_quality {
-            format!(
-                "Collected {}. Best specimen updated for {}.",
-                node.name, route_name
-            )
+            ui_format("gather_status_best", &[("name", &node.name), ("route", route_name)])
         } else {
-            format!("Collected {} from {}.", node.name, route_name)
+            ui_format("gather_status_collected", &[("name", &node.name), ("route", route_name)])
         }
     }
 }

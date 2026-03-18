@@ -1,4 +1,5 @@
 use super::*;
+use crate::content::ui_format;
 
 impl GameplayState {
     pub(super) fn initialize_npc_motion_states(&mut self, data: &GameData) {
@@ -156,7 +157,7 @@ impl GameplayState {
                 .and_then(|area_id| data.area(area_id))
                 .map(|area| area.name.as_str())
                 .unwrap_or(area_name);
-            format!("travelling through {} toward {}", area_name, target_name)
+            ui_format("npc_travelling", &[("area", area_name), ("target", target_name)])
         } else {
             format!("{} this {}", area_name, self.current_time_window())
         }

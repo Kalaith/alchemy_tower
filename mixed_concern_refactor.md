@@ -1,5 +1,5 @@
 - [x] Split the alchemy rules engine into focused submodules so recipe matching, quality scoring, morph logic, trait inheritance, and fallback salvage are isolated.
 - [x] Remove `mod.rs` entry points and rename module roots to explicit file names that describe the module they host.
 - [x] Split `src/content.rs` into focused loaders for UI text, input bindings, and narrative text.
-- [ ] Separate `src/data/definitions.rs` into schema types, save models, and runtime indexing/query helpers.
-- [ ] Extract shared menu/pause presentation helpers so screen state, layout math, and drawing are not duplicated.
+- [x] Separate `src/data/definitions.rs` into schema types, save models, and runtime indexing/query helpers.
+- [x] Extract shared menu/pause presentation helpers so screen state, layout math, and drawing are not duplicated.

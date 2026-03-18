@@ -4,8 +4,10 @@ use macroquad::prelude::*;
 use macroquad_toolkit::colors::dark;
 use macroquad_toolkit::input::was_clicked;
 
+use crate::content::ui_copy;
 use crate::data::GameData;
 use crate::state::{GameplayState, StateTransition};
+use crate::ui::{centered_panel_rect, draw_action_button, draw_panel_frame, inset_rect};
 
 pub struct PauseState {
     gameplay: GameplayState,
@@ -21,13 +23,13 @@ impl PauseState {
             return Some(StateTransition::ResumeGame);
         }
 
-        let (resume_x, resume_y, resume_w, resume_h) = resume_button_rect();
-        if was_clicked(resume_x, resume_y, resume_w, resume_h) {
+        let resume = resume_button_rect();
+        if was_clicked(resume.x, resume.y, resume.w, resume.h) {
             return Some(StateTransition::ResumeGame);
         }
 
-        let (menu_x, menu_y, menu_w, menu_h) = menu_button_rect();
-        if was_clicked(menu_x, menu_y, menu_w, menu_h) {
+        let menu = menu_button_rect();
+        if was_clicked(menu.x, menu.y, menu.w, menu.h) {
             return Some(StateTransition::ReturnToMenu);
         }
 
@@ -37,10 +39,7 @@ impl PauseState {
     pub fn draw(&self, data: &GameData) {
         self.gameplay.draw(data);
 
-        let width = 320.0;
-        let height = 180.0;
-        let x = screen_width() * 0.5 - width * 0.5;
-        let y = screen_height() * 0.5 - height * 0.5;
+        let panel = centered_panel_rect(320.0, 180.0);
 
         draw_rectangle(
             0.0,
@@ -49,58 +48,17 @@ impl PauseState {
             screen_height(),
             Color::from_rgba(0, 0, 0, 110),
         );
-        draw_rectangle(x, y, width, height, dark::PANEL);
-        draw_rectangle_lines(x, y, width, height, 2.0, dark::ACCENT);
-        draw_text("Paused", x + 24.0, y + 48.0, 38.0, dark::TEXT_BRIGHT);
+        draw_panel_frame(panel);
+        draw_text(ui_copy("pause_title"), panel.x + 24.0, panel.y + 48.0, 38.0, dark::TEXT_BRIGHT);
 
-        let (resume_x, resume_y, resume_w, resume_h) = resume_button_rect();
-        let resume_hovered =
-            Rect::new(resume_x, resume_y, resume_w, resume_h).contains(mouse_position().into());
-        draw_rectangle(
-            resume_x,
-            resume_y,
-            resume_w,
-            resume_h,
-            if resume_hovered {
-                dark::HOVERED
-            } else {
-                dark::ACCENT
-            },
-        );
-        draw_text(
-            "Resume",
-            resume_x + 20.0,
-            resume_y + 28.0,
-            28.0,
-            dark::TEXT_BRIGHT,
-        );
+        draw_action_button(resume_button_rect(), ui_copy("pause_resume"), 20.0);
 
-        let (menu_x, menu_y, menu_w, menu_h) = menu_button_rect();
-        let menu_hovered =
-            Rect::new(menu_x, menu_y, menu_w, menu_h).contains(mouse_position().into());
-        draw_rectangle(
-            menu_x,
-            menu_y,
-            menu_w,
-            menu_h,
-            if menu_hovered {
-                dark::HOVERED
-            } else {
-                dark::ACCENT
-            },
-        );
-        draw_text(
-            "Menu",
-            menu_x + 28.0,
-            menu_y + 28.0,
-            28.0,
-            dark::TEXT_BRIGHT,
-        );
+        draw_action_button(menu_button_rect(), ui_copy("pause_menu"), 28.0);
 
         draw_text(
-            "Esc also resumes.",
-            x + 24.0,
-            y + 148.0,
+            ui_copy("pause_resume_hint"),
+            panel.x + 24.0,
+            panel.y + 148.0,
             22.0,
             dark::TEXT_DIM,
         );
@@ -111,18 +69,10 @@ impl PauseState {
     }
 }
 
-fn resume_button_rect() -> (f32, f32, f32, f32) {
-    let width = 320.0;
-    let height = 180.0;
-    let x = screen_width() * 0.5 - width * 0.5;
-    let y = screen_height() * 0.5 - height * 0.5;
-    (x + 24.0, y + 78.0, 130.0, 42.0)
+fn resume_button_rect() -> Rect {
+    inset_rect(centered_panel_rect(320.0, 180.0), 24.0, 78.0, 130.0, 42.0)
 }
 
-fn menu_button_rect() -> (f32, f32, f32, f32) {
-    let width = 320.0;
-    let height = 180.0;
-    let x = screen_width() * 0.5 - width * 0.5;
-    let y = screen_height() * 0.5 - height * 0.5;
-    (x + 166.0, y + 78.0, 130.0, 42.0)
+fn menu_button_rect() -> Rect {
+    inset_rect(centered_panel_rect(320.0, 180.0), 166.0, 78.0, 130.0, 42.0)
 }

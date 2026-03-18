@@ -1,6 +1,6 @@
 use super::gameplay_npc::npc_motion_seed;
 use super::*;
-use crate::content::narrative_text;
+use crate::content::{narrative_text, ui_format};
 
 impl GameplayState {
     pub(super) fn greenhouse_journal_unlocked(&self) -> bool {
@@ -98,82 +98,6 @@ impl GameplayState {
         runtime.position + perpendicular * sway
     }
 
-    pub(super) fn draw_overlay_backdrop(&self) {
-        draw_rectangle(
-            0.0,
-            0.0,
-            screen_width(),
-            screen_height(),
-            Color::from_rgba(0, 0, 0, 150),
-        );
-    }
-
-    pub(super) fn draw_overlay_subtitle(&self, x: f32, y: f32, text: &str) {
-        draw_text(text, x + 20.0, y + 52.0, 24.0, dark::TEXT_DIM);
-    }
-
-    pub(super) fn draw_overlay_footer(&self, x: f32, y: f32, w: f32, h: f32, text: &str) {
-        draw_rectangle(
-            x + 16.0,
-            y + h - 38.0,
-            w - 32.0,
-            24.0,
-            Color::from_rgba(24, 26, 34, 255),
-        );
-        draw_text(text, x + 24.0, y + h - 20.0, 18.0, dark::TEXT_DIM);
-    }
-
-    pub(super) fn draw_state_banner(&self, x: f32, y: f32, w: f32, text: &str, is_locked: bool) {
-        let color = if is_locked {
-            Color::from_rgba(120, 72, 72, 255)
-        } else {
-            Color::from_rgba(68, 74, 88, 255)
-        };
-        draw_rectangle(x, y, w, 32.0, color);
-        draw_rectangle_lines(x, y, w, 32.0, 2.0, dark::ACCENT);
-        draw_text(text, x + 10.0, y + 21.0, 18.0, dark::TEXT_BRIGHT);
-    }
-
-    pub(super) fn draw_selection_card(
-        &self,
-        x: f32,
-        y: f32,
-        w: f32,
-        h: f32,
-        selected: bool,
-        enabled: bool,
-        title: &str,
-        subtitle: &str,
-        meta: &str,
-    ) {
-        let bg = if selected {
-            dark::ACCENT
-        } else {
-            Color::from_rgba(38, 40, 50, 255)
-        };
-        let text_color = if enabled {
-            dark::TEXT_BRIGHT
-        } else {
-            dark::TEXT_DIM
-        };
-        draw_rectangle(x, y, w, h, bg);
-        draw_rectangle_lines(x, y, w, h, 2.0, if selected { WHITE } else { dark::ACCENT });
-        draw_text(title, x + 12.0, y + 22.0, 22.0, text_color);
-        if !subtitle.is_empty() {
-            draw_text(subtitle, x + 12.0, y + 42.0, 18.0, dark::TEXT_DIM);
-        }
-        if !meta.is_empty() {
-            let measured = measure_text(meta, None, 18, 1.0);
-            draw_text(
-                meta,
-                x + w - measured.width - 12.0,
-                y + 22.0,
-                18.0,
-                dark::TEXT_DIM,
-            );
-        }
-    }
-
     pub(super) fn item_card_meta(
         &self,
         data: &GameData,
@@ -197,11 +121,11 @@ impl GameplayState {
     }
 
     pub(super) fn locked_state_text(&self, detail: &str) -> String {
-        format!("Locked: {detail}")
+        ui_format("locked_prefix", &[("detail", detail)])
     }
 
     pub(super) fn unavailable_state_text(&self, detail: &str) -> String {
-        format!("Unavailable: {detail}")
+        ui_format("unavailable_prefix", &[("detail", detail)])
     }
 
     pub(super) fn current_time_window(&self) -> &'static str {
@@ -215,7 +139,7 @@ impl GameplayState {
     }
 
     pub(super) fn current_clock_minutes(&self) -> f32 {
-        (self.world.day_clock_seconds / 960.0) * 24.0 * 60.0
+        (self.world.day_clock_seconds / self.world.day_length_seconds) * 24.0 * 60.0
     }
 }
 
@@ -275,37 +199,4 @@ pub(super) fn initial_journal_milestones() -> Vec<JournalMilestoneEntry> {
         .to_journal_entry()]
 }
 
-pub(super) fn draw_wrapped_text(
-    text: &str,
-    x: f32,
-    y: f32,
-    max_width: f32,
-    font_size: f32,
-    line_height: f32,
-    color: Color,
-) {
-    let mut line = String::new();
-    let mut line_y = y;
-
-    for word in text.split_whitespace() {
-        let candidate = if line.is_empty() {
-            word.to_owned()
-        } else {
-            format!("{line} {word}")
-        };
-        if measure_text(&candidate, None, font_size as u16, 1.0).width <= max_width {
-            line = candidate;
-        } else {
-            if !line.is_empty() {
-                draw_text(&line, x, line_y, font_size, color);
-                line_y += line_height;
-            }
-            line = word.to_owned();
-        }
-    }
-
-    if !line.is_empty() {
-        draw_text(&line, x, line_y, font_size, color);
-    }
-}
 

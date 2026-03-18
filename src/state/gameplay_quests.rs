@@ -1,4 +1,5 @@
 use super::*;
+use crate::content::ui_format;
 
 impl GameplayState {
     pub(super) fn handle_dialogue_inputs(&mut self, data: &GameData) {
@@ -42,13 +43,12 @@ impl GameplayState {
             self.progression.started_quests.insert(quest.id.clone());
             *self.progression.relationships.entry(npc.id.clone()).or_insert(0) += 1;
             self.push_event_toast(
-                format!("Quest accepted: {}.", quest.title),
+                ui_format("quests_accepted_toast", &[("title", &quest.title)]),
                 Color::from_rgba(255, 230, 170, 255),
             );
-            self.runtime.status_text = format!(
-                "Accepted quest: {}. {}",
-                quest.title,
-                self.quest_location_hint(data, quest)
+            self.runtime.status_text = ui_format(
+                "quests_accepted_status",
+                &[("title", &quest.title), ("hint", &self.quest_location_hint(data, quest))],
             );
             return;
         }
@@ -76,13 +76,15 @@ impl GameplayState {
                 self.push_journal_milestone(&milestone.id, &milestone.title, &milestone.text);
             }
             self.push_event_toast(
-                format!("Quest complete: {}.", quest.title),
+                ui_format("quests_complete_toast", &[("title", &quest.title)]),
                 Color::from_rgba(188, 255, 220, 255),
             );
-            self.runtime.status_text = format!(
-                "Delivered {} and earned {} coins.",
-                data.item_name(&quest.required_item_id),
-                quest.reward_coins
+            self.runtime.status_text = ui_format(
+                "quests_delivered_status",
+                &[
+                    ("item", data.item_name(&quest.required_item_id)),
+                    ("coins", &quest.reward_coins.to_string()),
+                ],
             );
         } else {
             self.ui.dialogue_open = false;
@@ -117,20 +119,19 @@ impl GameplayState {
                 self.progression.started_quests.insert(quest_id.clone());
                 if let Some(quest) = data.quest(quest_id) {
                     self.push_event_toast(
-                        format!("Quest accepted: {}.", quest.title),
+                        ui_format("quests_accepted_toast", &[("title", &quest.title)]),
                         Color::from_rgba(255, 230, 170, 255),
                     );
                 }
                 self.runtime.status_text = data
                     .quest(quest_id)
                     .map(|quest| {
-                        format!(
-                            "Accepted board request: {}. {}",
-                            quest.title,
-                            self.quest_location_hint(data, quest)
+                        ui_format(
+                            "quests_board_accepted_status",
+                            &[("title", &quest.title), ("hint", &self.quest_location_hint(data, quest))],
                         )
                     })
-                    .unwrap_or_else(|| "Accepted board request.".to_owned());
+                    .unwrap_or_else(|| ui_format("quests_board_accepted_default", &[]));
             }
         }
     }
@@ -174,17 +175,27 @@ impl GameplayState {
 
         if self.quest_requirements_met(data, quest) {
             format!(
-                "{} {} I can smell the {} from here.",
-                npc.dialogue_progress,
-                self.npc_context_line(data, npc),
-                data.item_name(&quest.required_item_id)
+                "{}",
+                ui_format(
+                    "quests_dialogue_smell",
+                    &[
+                        ("progress", &npc.dialogue_progress),
+                        ("context", &self.npc_context_line(data, npc)),
+                        ("item", data.item_name(&quest.required_item_id)),
+                    ],
+                )
             )
         } else {
             format!(
-                "{} {} {}",
-                npc.dialogue_progress,
-                self.npc_context_line(data, npc),
-                self.quest_requirement_summary(data, quest)
+                "{}",
+                ui_format(
+                    "quests_dialogue_requirements",
+                    &[
+                        ("progress", &npc.dialogue_progress),
+                        ("context", &self.npc_context_line(data, npc)),
+                        ("requirements", &self.quest_requirement_summary(data, quest)),
+                    ],
+                )
             )
         }
     }
@@ -194,35 +205,36 @@ impl GameplayState {
             .then(|| data.quest(&npc.quest_id))
             .flatten()
         else {
-            return "Enter confirm  |  Esc close".to_owned();
+            return ui_format("quests_dialogue_footer_default", &[]);
         };
 
         if self.progression.completed_quests.contains(&quest.id) {
-            return "Enter confirm  |  Esc close".to_owned();
+            return ui_format("quests_dialogue_footer_default", &[]);
         }
         if !self.progression.started_quests.contains(&quest.id) {
             if !self.quest_is_available(quest) {
                 return self.locked_state_text(&self.quest_unlock_summary(quest));
             }
-            return format!(
-                "Enter confirm  |  Reward {} coins  |  Esc close",
-                quest.reward_coins
-            );
+            return ui_format("quests_dialogue_footer_reward", &[("coins", &quest.reward_coins.to_string())]);
         }
 
         if self.quest_requirements_met(data, quest) {
-            format!(
-                "Enter confirm delivery  |  {} x{}  |  Reward {} coins",
-                data.item_name(&quest.required_item_id),
-                quest.required_amount,
-                quest.reward_coins
+            ui_format(
+                "quests_dialogue_footer_delivery",
+                &[
+                    ("item", data.item_name(&quest.required_item_id)),
+                    ("amount", &quest.required_amount.to_string()),
+                    ("coins", &quest.reward_coins.to_string()),
+                ],
             )
         } else {
-            format!(
-                "{} {} x{}  |  Enter confirm  |  Esc close",
-                self.unavailable_state_text(&self.quest_requirement_summary(data, quest)),
-                data.item_name(&quest.required_item_id),
-                quest.required_amount
+            ui_format(
+                "quests_dialogue_footer_unavailable",
+                &[
+                    ("requirements", &self.unavailable_state_text(&self.quest_requirement_summary(data, quest))),
+                    ("item", data.item_name(&quest.required_item_id)),
+                    ("amount", &quest.required_amount.to_string()),
+                ],
             )
         }
     }
@@ -276,20 +288,20 @@ impl GameplayState {
             .cloned()
             .collect::<Vec<_>>();
         if !missing_prereqs.is_empty() {
-            reasons.push(format!("finish {}", missing_prereqs.join(", ")));
+            reasons.push(ui_format("quests_unlock_finish", &[("quests", &missing_prereqs.join(", "))]));
         }
         if !quest.required_unlocked_warp.is_empty()
             && !self.progression.unlocked_warps.contains(&quest.required_unlocked_warp)
         {
-            reasons.push("restore the greenhouse".to_owned());
+            reasons.push(ui_format("quests_unlock_greenhouse", &[]));
         }
         if self.progression.total_brews < quest.minimum_total_brews {
-            reasons.push(format!("reach {} total brews", quest.minimum_total_brews));
+            reasons.push(ui_format("quests_unlock_brews", &[("brews", &quest.minimum_total_brews.to_string())]));
         }
         if reasons.is_empty() {
-            "This request is not open yet.".to_owned()
+            ui_format("quests_unlock_closed", &[])
         } else {
-            format!("This request opens after you {}", reasons.join(" and "))
+            ui_format("quests_unlock_after", &[("reasons", &reasons.join(" and "))])
         }
     }
 
@@ -305,7 +317,7 @@ impl GameplayState {
             .unwrap_or_default();
         let mut requirements = Vec::new();
         if carried < quest.required_amount {
-            requirements.push(format!("carry {}/{}", carried, quest.required_amount));
+            requirements.push(ui_format("quests_requirement_carry", &[("carried", &carried.to_string()), ("required", &quest.required_amount.to_string())]));
         }
         if !quest.minimum_quality_band.is_empty() {
             let met = self
@@ -318,7 +330,7 @@ impl GameplayState {
                 })
                 .unwrap_or(false);
             if !met {
-                requirements.push(format!("quality {}", quest.minimum_quality_band));
+                requirements.push(ui_format("quests_requirement_quality", &[("band", &quest.minimum_quality_band)]));
             }
         }
         if trait_requirement_target(quest) > 0 {
@@ -346,7 +358,7 @@ impl GameplayState {
         }
 
         if requirements.is_empty() {
-            "ready".to_owned()
+            ui_format("quests_requirement_ready", &[])
         } else {
             requirements.join(", ")
         }
@@ -446,27 +458,29 @@ fn trait_requirement_summary(quest: &QuestDefinition) -> String {
     let required_traits = quest_required_traits(quest);
     let target = trait_requirement_target(quest);
     if target == 0 {
-        return "trait ready".to_owned();
+        return ui_format("quests_trait_ready", &[]);
     }
     if target >= required_traits.len() {
-        return format!("traits {}", required_traits.join(" + "));
+        return ui_format("quests_trait_all", &[("traits", &required_traits.join(" + "))]);
     }
-    format!("traits {target}/{} {}", required_traits.len(), required_traits.join(", "))
+    ui_format(
+        "quests_trait_partial",
+        &[("target", &target.to_string()), ("count", &required_traits.len().to_string()), ("traits", &required_traits.join(", "))],
+    )
 }
 
 fn effect_requirement_summary(quest: &QuestDefinition) -> String {
     let required_effects = quest_required_effect_kinds(quest);
     let target = effect_requirement_target(quest);
     if target == 0 {
-        return "effect ready".to_owned();
+        return ui_format("quests_effect_ready", &[]);
     }
     if target >= required_effects.len() {
-        return format!("effects {}", required_effects.join(" + "));
+        return ui_format("quests_effect_all", &[("effects", &required_effects.join(" + "))]);
     }
-    format!(
-        "effects {target}/{} {}",
-        required_effects.len(),
-        required_effects.join(", ")
+    ui_format(
+        "quests_effect_partial",
+        &[("target", &target.to_string()), ("count", &required_effects.len().to_string()), ("effects", &required_effects.join(", "))],
     )
 }
 

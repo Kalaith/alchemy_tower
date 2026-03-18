@@ -1,14 +1,19 @@
 //! Data definitions and embedded content loading.
 
-mod definitions;
+mod game_data;
 mod loader;
+mod save_models;
+mod schema;
 
-pub use definitions::{
-    AreaDefinition, CraftedItemProfileEntry, EffectDefinition, EffectKind, ElementProfile,
-    ExperimentLogEntry, FieldJournalEntry, GameData, GatherNodeDefinition, HabitatStateEntry,
-    InventoryEntry, ItemCategory, ItemDefinition, JournalMilestoneEntry, NpcDefinition,
-    PlanterStateEntry, QuestDefinition, RecipeDefinition, RecipeMasteryEntry, RectDefinition,
-    RelationshipEntry, RuneRecipeDefinition, SaveData, StationDefinition, StationKind,
-    WarpDefinition,
+pub use game_data::GameData;
+pub use save_models::{
+    CraftedItemProfileEntry, ExperimentLogEntry, FieldJournalEntry, InventoryEntry,
+    RecipeMasteryEntry, RelationshipEntry, SaveData,
+};
+pub use schema::{
+    AreaDefinition, EffectDefinition, EffectKind, ElementProfile, GatherNodeDefinition,
+    HabitatStateEntry, ItemCategory, ItemDefinition, JournalMilestoneEntry, NpcDefinition,
+    PlanterStateEntry, QuestDefinition, RecipeDefinition, RectDefinition, RuneRecipeDefinition,
+    StationDefinition, StationKind, WarpDefinition,
 };
 pub use loader::GameDataLoader;

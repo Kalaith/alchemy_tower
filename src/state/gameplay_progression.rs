@@ -1,4 +1,5 @@
 use super::*;
+use crate::content::ui_format;
 use crate::data::ItemCategory;
 
 #[allow(dead_code)]
@@ -64,11 +65,11 @@ impl GameplayState {
         recipe: &crate::data::RecipeDefinition,
     ) {
         let Some(output_amount) = self.inventory.get_mut(&recipe.output_item_id) else {
-            self.runtime.status_text = format!("No {} available to disassemble.", recipe.name);
+            self.runtime.status_text = ui_format("progression_no_disassemble", &[("name", &recipe.name)]);
             return;
         };
         if *output_amount == 0 {
-            self.runtime.status_text = format!("No {} available to disassemble.", recipe.name);
+            self.runtime.status_text = ui_format("progression_no_disassemble", &[("name", &recipe.name)]);
             return;
         }
 
@@ -88,14 +89,11 @@ impl GameplayState {
         }
 
         self.push_event_toast(
-            format!("Archive disassembly: {}.", recipe.name),
+            ui_format("progression_disassembly_toast", &[("name", &recipe.name)]),
             Color::from_rgba(214, 204, 170, 255),
         );
-        self.runtime.status_text = format!(
-            "Disassembled {} into {}.",
-            recipe.name,
-            returned.join(", ")
-        );
+        self.runtime.status_text =
+            ui_format("progression_disassembled", &[("name", &recipe.name), ("items", &returned.join(", "))]);
     }
 
     pub(super) fn duplication_candidates(&self, data: &GameData) -> Vec<String> {
@@ -139,30 +137,29 @@ impl GameplayState {
 
     pub(super) fn duplicate_item(&mut self, data: &GameData, item_id: &str) {
         let Some(item) = data.item(item_id) else {
-            self.runtime.status_text = "That pattern is not stable enough to duplicate.".to_owned();
+            self.runtime.status_text = ui_format("progression_duplicate_unstable", &[]);
             return;
         };
         if !duplication_item_allowed(item) {
-            self.runtime.status_text = format!("{} resists duplication.", item.name);
+            self.runtime.status_text = ui_format("progression_duplicate_resists", &[("name", &item.name)]);
             return;
         }
         if self.inventory.get(item_id).copied().unwrap_or_default() == 0 {
-            self.runtime.status_text = format!("No {} available to duplicate.", item.name);
+            self.runtime.status_text = ui_format("progression_duplicate_none", &[("name", &item.name)]);
             return;
         }
 
         let cost = duplication_cost(item);
         if self.coins < cost {
-            self.runtime.status_text = format!(
-                "Need {} more coins to duplicate {}.",
-                cost.saturating_sub(self.coins),
-                item.name
+            self.runtime.status_text = ui_format(
+                "progression_duplicate_need_coins",
+                &[("coins", &cost.saturating_sub(self.coins).to_string()), ("name", &item.name)],
             );
             return;
         }
 
         let Some(catalyst_item_id) = self.duplication_catalyst_item_id(data) else {
-            self.runtime.status_text = "A starlight catalyst is required for duplication.".to_owned();
+            self.runtime.status_text = ui_format("progression_duplicate_need_catalyst", &[]);
             return;
         };
 
@@ -176,14 +173,16 @@ impl GameplayState {
         *self.inventory.entry(item_id.to_owned()).or_insert(0) += 1;
 
         self.push_event_toast(
-            format!("Duplicated {}.", item.name),
+            ui_format("progression_duplicate_toast", &[("name", &item.name)]),
             Color::from_rgba(216, 182, 255, 255),
         );
-        self.runtime.status_text = format!(
-            "Duplicated {} by spending {} coins and {}.",
-            item.name,
-            cost,
-            data.item_name(&catalyst_item_id)
+        self.runtime.status_text = ui_format(
+            "progression_duplicate_status",
+            &[
+                ("name", &item.name),
+                ("cost", &cost.to_string()),
+                ("catalyst", data.item_name(&catalyst_item_id)),
+            ],
         );
     }
 
@@ -260,14 +259,13 @@ impl GameplayState {
         state.mutation_note = formula.mutation_note.clone();
 
         self.push_event_toast(
-            format!("Planter mutation: {}.", data.item_name(&state.planted_item_id)),
+            ui_format("progression_planter_mutation", &[("item", data.item_name(&state.planted_item_id))]),
             Color::from_rgba(188, 255, 220, 255),
         );
 
-        Some(format!(
-            "{} infuses the bed and coaxes a {} strain.",
-            data.item_name(catalyst_item_id),
-            formula.mutation_note
+        Some(ui_format(
+            "progression_planter_mutation_status",
+            &[("catalyst", data.item_name(catalyst_item_id)), ("strain", &formula.mutation_note)],
         ))
     }
 }

@@ -1,6 +1,5 @@
 //! Serializable game definitions shared across systems.
 
-use std::collections::HashMap;
 use std::fmt;
 
 use serde::{Deserialize, Serialize};
@@ -178,6 +177,13 @@ impl RectDefinition {
             && point.y >= self.y
             && point.y <= self.y + self.h
     }
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize)]
+pub struct JournalMilestoneEntry {
+    pub id: String,
+    pub title: String,
+    pub text: String,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -454,13 +460,6 @@ pub struct PlanterStateEntry {
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
-pub struct JournalMilestoneEntry {
-    pub id: String,
-    pub title: String,
-    pub text: String,
-}
-
-#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct HabitatStateEntry {
     pub station_id: String,
     #[serde(default)]
@@ -489,251 +488,6 @@ pub struct AreaDefinition {
     pub gather_nodes: Vec<GatherNodeDefinition>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
-pub struct GameData {
-    pub config: GameConfig,
-    pub areas: Vec<AreaDefinition>,
-    #[serde(default)]
-    pub gathering_routes: Vec<GatheringRouteDefinition>,
-    #[serde(default)]
-    pub npcs: Vec<NpcDefinition>,
-    #[serde(default)]
-    pub quests: Vec<QuestDefinition>,
-    pub items: Vec<ItemDefinition>,
-    pub recipes: Vec<RecipeDefinition>,
-    #[serde(default)]
-    pub rune_recipes: Vec<RuneRecipeDefinition>,
-    #[serde(default)]
-    pub mutation_formulas: Vec<MutationFormulaDefinition>,
-    pub stations: Vec<StationDefinition>,
-    #[serde(skip)]
-    area_index: HashMap<String, usize>,
-    #[serde(skip)]
-    item_index: HashMap<String, usize>,
-    #[serde(skip)]
-    route_index: HashMap<String, usize>,
-    #[serde(skip)]
-    npc_index: HashMap<String, usize>,
-    #[serde(skip)]
-    quest_index: HashMap<String, usize>,
-    #[serde(skip)]
-    mutation_formula_index: HashMap<String, Vec<usize>>,
-}
-
-impl GameData {
-    pub fn build_indexes(&mut self) {
-        self.area_index = self
-            .areas
-            .iter()
-            .enumerate()
-            .map(|(index, area)| (area.id.clone(), index))
-            .collect();
-        self.item_index = self
-            .items
-            .iter()
-            .enumerate()
-            .map(|(index, item)| (item.id.clone(), index))
-            .collect();
-        self.route_index = self
-            .gathering_routes
-            .iter()
-            .enumerate()
-            .map(|(index, route)| (route.id.clone(), index))
-            .collect();
-        self.npc_index = self
-            .npcs
-            .iter()
-            .enumerate()
-            .map(|(index, npc)| (npc.id.clone(), index))
-            .collect();
-        self.quest_index = self
-            .quests
-            .iter()
-            .enumerate()
-            .map(|(index, quest)| (quest.id.clone(), index))
-            .collect();
-        let mut mutation_formula_index = HashMap::<String, Vec<usize>>::new();
-        for (index, formula) in self.mutation_formulas.iter().enumerate() {
-            mutation_formula_index
-                .entry(formula.seed_item_id.clone())
-                .or_default()
-                .push(index);
-        }
-        self.mutation_formula_index = mutation_formula_index;
-    }
-
-    pub fn area(&self, area_id: &str) -> Option<&AreaDefinition> {
-        self.area_index
-            .get(area_id)
-            .and_then(|index| self.areas.get(*index))
-    }
-
-    pub fn fallback() -> Self {
-        let mut data: Self =
-            serde_json::from_str(include_str!("../../assets/data/game_data.json"))
-                .expect("embedded fallback game_data.json must remain valid");
-        data.build_indexes();
-        data
-    }
-
-    pub fn item(&self, item_id: &str) -> Option<&ItemDefinition> {
-        self.item_index
-            .get(item_id)
-            .and_then(|index| self.items.get(*index))
-    }
-
-    pub fn item_name<'a>(&'a self, item_id: &'a str) -> &'a str {
-        self.item(item_id)
-            .map(|item| item.name.as_str())
-            .unwrap_or(item_id)
-    }
-
-    pub fn route(&self, route_id: &str) -> Option<&GatheringRouteDefinition> {
-        self.route_index
-            .get(route_id)
-            .and_then(|index| self.gathering_routes.get(*index))
-    }
-
-    pub fn npc(&self, npc_id: &str) -> Option<&NpcDefinition> {
-        self.npc_index
-            .get(npc_id)
-            .and_then(|index| self.npcs.get(*index))
-    }
-
-    pub fn quest(&self, quest_id: &str) -> Option<&QuestDefinition> {
-        self.quest_index
-            .get(quest_id)
-            .and_then(|index| self.quests.get(*index))
-    }
-
-    #[cfg(test)]
-    pub fn recipe_for_output(&self, item_id: &str) -> Option<&RecipeDefinition> {
-        self.recipes
-            .iter()
-            .find(|recipe| recipe.output_item_id == item_id)
-    }
-
-    pub fn mutation_formulas_for_seed(
-        &self,
-        seed_item_id: &str,
-    ) -> Vec<&MutationFormulaDefinition> {
-        self.mutation_formula_index
-            .get(seed_item_id)
-            .into_iter()
-            .flatten()
-            .filter_map(|index| self.mutation_formulas.get(*index))
-            .collect()
-    }
-}
-
-#[derive(Clone, Debug, Deserialize, Serialize)]
-pub struct InventoryEntry {
-    pub item_id: String,
-    pub amount: u32,
-}
-
-#[derive(Clone, Debug, Deserialize, Serialize)]
-pub struct RecipeMasteryEntry {
-    pub recipe_id: String,
-    pub successful_brews: u32,
-}
-
-#[derive(Clone, Debug, Deserialize, Serialize)]
-pub struct CraftedItemProfileEntry {
-    pub item_id: String,
-    #[serde(default)]
-    pub best_quality_score: u32,
-    #[serde(default)]
-    pub best_quality_band: String,
-    #[serde(default)]
-    pub inherited_traits: Vec<String>,
-    #[serde(default)]
-    pub effect_kinds: Vec<String>,
-}
-
-#[derive(Clone, Debug, Deserialize, Serialize)]
-pub struct ExperimentLogEntry {
-    #[serde(default)]
-    pub recipe_id: String,
-    pub output_item_id: String,
-    #[serde(default)]
-    pub quality_score: u32,
-    #[serde(default)]
-    pub quality_band: String,
-    #[serde(default)]
-    pub stable: bool,
-    #[serde(default)]
-    pub catalyst_item_id: String,
-    #[serde(default)]
-    pub morph_output_item_id: String,
-    #[serde(default)]
-    pub day_index: u32,
-}
-
-#[derive(Clone, Debug, Deserialize, Serialize)]
-pub struct SaveData {
-    pub version: u32,
-    pub current_area: String,
-    pub player_position: [f32; 2],
-    pub day_clock_seconds: f32,
-    #[serde(default = "default_vitality")]
-    pub vitality: f32,
-    #[serde(default)]
-    pub coins: u32,
-    pub inventory: Vec<InventoryEntry>,
-    pub gathered_nodes: Vec<String>,
-    #[serde(default)]
-    pub known_recipes: Vec<String>,
-    #[serde(default)]
-    pub day_index: u32,
-    #[serde(default)]
-    pub field_journal: Vec<FieldJournalEntry>,
-    #[serde(default)]
-    pub started_quests: Vec<String>,
-    #[serde(default)]
-    pub completed_quests: Vec<String>,
-    #[serde(default)]
-    pub recipe_mastery: Vec<RecipeMasteryEntry>,
-    #[serde(default)]
-    pub crafted_item_profiles: Vec<CraftedItemProfileEntry>,
-    #[serde(default)]
-    pub experiment_log: Vec<ExperimentLogEntry>,
-    #[serde(default)]
-    pub total_brews: u32,
-    #[serde(default)]
-    pub unlocked_warps: Vec<String>,
-    #[serde(default)]
-    pub planter_states: Vec<PlanterStateEntry>,
-    #[serde(default)]
-    pub journal_milestones: Vec<JournalMilestoneEntry>,
-    #[serde(default)]
-    pub relationships: Vec<RelationshipEntry>,
-    #[serde(default)]
-    pub habitat_states: Vec<HabitatStateEntry>,
-}
-
-#[derive(Clone, Debug, Deserialize, Serialize)]
-pub struct RelationshipEntry {
-    pub npc_id: String,
-    pub value: i32,
-}
-
-#[derive(Clone, Debug, Deserialize, Serialize)]
-pub struct FieldJournalEntry {
-    pub item_id: String,
-    pub route_id: String,
-    pub season: String,
-    pub weather: String,
-    pub time_window: String,
-    pub note: String,
-    #[serde(default)]
-    pub best_quality: u32,
-    #[serde(default)]
-    pub best_quality_band: String,
-    #[serde(default)]
-    pub variant_name: String,
-}
-
 fn default_heat() -> i32 {
     2
 }
@@ -756,8 +510,4 @@ fn default_item_rarity() -> u8 {
 
 fn default_synthesis_weight() -> u32 {
     1
-}
-
-fn default_vitality() -> f32 {
-    100.0
 }

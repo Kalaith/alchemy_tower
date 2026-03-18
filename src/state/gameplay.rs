@@ -6,7 +6,7 @@ use macroquad::prelude::*;
 use macroquad_toolkit::colors::dark;
 
 use crate::alchemy::{quality_band, resolve_brew};
-use crate::content::{input_bindings, narrative_text, ui_text};
+use crate::content::{input_bindings, narrative_text, ui_copy, ui_format, ui_text};
 use crate::data::{
     AreaDefinition, CraftedItemProfileEntry, EffectDefinition, EffectKind, ExperimentLogEntry,
     FieldJournalEntry, GameData, HabitatStateEntry, InventoryEntry, ItemCategory,
@@ -16,7 +16,7 @@ use crate::data::{
 };
 use crate::save::SaveRepository;
 use crate::state::StateTransition;
-use crate::ui::{draw_interaction_prompt, draw_panel};
+use crate::ui::draw_panel;
 
 #[path = "gameplay_gathering.rs"]
 mod gameplay_gathering;
@@ -26,7 +26,7 @@ mod gameplay_input;
 mod gameplay_inventory;
 #[path = "gameplay_npc.rs"]
 mod gameplay_npc;
-#[path = "gameplay_overlays.rs"]
+#[path = "../ui/overlays.rs"]
 mod gameplay_overlays;
 #[path = "gameplay_persistence.rs"]
 mod gameplay_persistence;
@@ -36,10 +36,14 @@ mod gameplay_progression;
 mod gameplay_quests;
 #[path = "gameplay_support.rs"]
 mod gameplay_support;
+#[path = "../ui/hud.rs"]
+mod ui_hud;
+#[path = "../ui/world_prompts.rs"]
+mod ui_world_prompts;
 
 use self::gameplay_support::{
-    clock_text, draw_wrapped_text, effect_name, initial_journal_milestones, planter_stage_label,
-    quality_band_rank, rgba, starting_day_time,
+    clock_text, effect_name, initial_journal_milestones, planter_stage_label, quality_band_rank,
+    rgba, starting_day_time,
 };
 
 const PLAYER_RADIUS: f32 = 14.0;
@@ -168,6 +172,7 @@ struct WorldState {
     player: PlayerAvatar,
     day_index: u32,
     day_clock_seconds: f32,
+    day_length_seconds: f32,
     gathered_nodes: HashSet<String>,
     available_nodes: HashSet<String>,
 }
@@ -224,6 +229,7 @@ impl GameplayState {
                 },
                 day_index: 0,
                 day_clock_seconds: starting_day_time(data),
+                day_length_seconds: data.config.day_length_seconds,
                 gathered_nodes: HashSet::new(),
                 available_nodes: HashSet::new(),
             },
@@ -288,13 +294,13 @@ impl GameplayState {
             }
             if self.ui.ending_open {
                 self.ui.ending_open = false;
-                self.runtime.status_text = "Stepped back from the observatory lens.".to_owned();
+                self.runtime.status_text = ui_format("gameplay_observatory_back", &[]);
                 return None;
             }
             if self.ui.dialogue_open {
                 self.ui.dialogue_open = false;
                 self.ui.current_npc_id = None;
-                self.runtime.status_text = "Ended conversation.".to_owned();
+                self.runtime.status_text = ui_format("gameplay_conversation_ended", &[]);
                 return None;
             }
             if self.ui.journal_open {
@@ -392,14 +398,14 @@ impl GameplayState {
             self.runtime.status_text =
                 match gameplay_persistence::GameplayStateLoader::save_slot(self, data) {
                     Ok(()) => "Saved progress.".to_owned(),
-                    Err(error) => format!("Save failed: {error}"),
+                    Err(error) => ui_format("gameplay_save_failed", &[("error", &error)]),
                 };
         }
         if is_key_pressed(KeyCode::F9) {
             self.runtime.status_text =
                 match gameplay_persistence::GameplayStateLoader::load_slot(self, data) {
                     Ok(()) => "Loaded progress.".to_owned(),
-                    Err(error) => format!("Load failed: {error}"),
+                    Err(error) => ui_format("gameplay_load_failed", &[("error", &error)]),
                 };
         }
 
@@ -408,7 +414,7 @@ impl GameplayState {
 
     pub fn draw(&self, data: &GameData) {
         let Some(area) = data.area(&self.world.current_area_id) else {
-            draw_text("Missing area data", 40.0, 80.0, 32.0, RED);
+            draw_text(ui_copy("gameplay_missing_area"), 40.0, 80.0, 32.0, RED);
             return;
         };
 
@@ -505,7 +511,7 @@ impl GameplayState {
         if let Some(npc) = self.nearby_npc(data) {
             self.ui.dialogue_open = true;
             self.ui.current_npc_id = Some(npc.id.clone());
-            self.runtime.status_text = format!("Talking to {}.", npc.name);
+            self.runtime.status_text = ui_format("gameplay_talking_to", &[("name", &npc.name)]);
             return;
         }
 
@@ -514,20 +520,20 @@ impl GameplayState {
                 self.ui.shop_open = true;
                 self.ui.shop_buy_tab = true;
                 self.ui.shop_index = 0;
-                self.runtime.status_text = format!("Opened {}.", station.name);
+                self.runtime.status_text = ui_format("gameplay_opened_station", &[("name", &station.name)]);
                 return;
             }
             if station.kind == StationKind::RuneWorkshop {
                 self.ui.rune_open = true;
                 self.ui.rune_index = 0;
-                self.runtime.status_text = format!("Opened {}.", station.name);
+                self.runtime.status_text = ui_format("gameplay_opened_station", &[("name", &station.name)]);
                 return;
             }
             if station.kind == StationKind::ArchiveConsole {
                 self.ui.archive_open = true;
                 self.ui.archive_tab = 0;
                 self.ui.archive_index = 0;
-                self.runtime.status_text = format!("Opened {}.", station.name);
+                self.runtime.status_text = ui_format("gameplay_opened_station", &[("name", &station.name)]);
                 return;
             }
             if station.kind == StationKind::EndingFocus {
@@ -538,7 +544,7 @@ impl GameplayState {
                         "Observatory Ending",
                         "At the tower's highest lens, the missing wizard's final path resolved into a choice to leave the tower alive rather than master it forever.",
                     );
-                    self.runtime.status_text = "The observatory aligns with the restored tower.".to_owned();
+                    self.runtime.status_text = ui_format("gameplay_observatory_aligned", &[]);
                 } else {
                     self.runtime.status_text =
                         "The observatory remains dark. The archives are not complete.".to_owned();
@@ -578,10 +584,10 @@ impl GameplayState {
                         );
                     }
                     self.push_event_toast(
-                        format!("Route restored: {}.", warp.label),
+                        ui_format("gameplay_route_restored", &[("label", &warp.label)]),
                         Color::from_rgba(188, 255, 220, 255),
                     );
-                    self.runtime.status_text = format!("Repaired access to {}.", warp.label);
+                    self.runtime.status_text = ui_format("gameplay_repaired_access", &[("label", &warp.label)]);
                 } else {
                     self.runtime.status_text = self.warp_lock_text(data, warp);
                     return;
@@ -590,7 +596,7 @@ impl GameplayState {
             self.world.current_area_id = warp.target_area.clone();
             self.world.player.position = vec2(warp.target_position[0], warp.target_position[1]);
             self.refresh_available_nodes(data);
-            self.runtime.status_text = format!("Entered {}", warp.label);
+            self.runtime.status_text = ui_format("gameplay_entered", &[("label", &warp.label)]);
             return;
         }
 
@@ -776,200 +782,6 @@ impl GameplayState {
         draw_circle(center.x + 5.0, center.y - 4.0, 2.5, WHITE);
     }
 
-    fn draw_hud(&self, area: &AreaDefinition, data: &GameData) {
-        draw_panel(18.0, 18.0, 430.0, 176.0, "Status");
-        draw_text(&area.name, 34.0, 58.0, 32.0, dark::TEXT_BRIGHT);
-        draw_text(
-            &format!("Coins {}", self.coins),
-            276.0,
-            58.0,
-            28.0,
-            Color::from_rgba(255, 214, 132, 255),
-        );
-        draw_text(
-            &format!("Vitality {:.0}", self.vitality),
-            34.0,
-            86.0,
-            24.0,
-            Color::from_rgba(126, 220, 158, 255),
-        );
-        draw_text(
-            &format!(
-                "Time {}",
-                clock_text(self.world.day_clock_seconds, data.config.day_length_seconds)
-            ),
-            34.0,
-            112.0,
-            24.0,
-            dark::TEXT,
-        );
-        draw_text(
-            &format!("Tower Progress {}/10 brews", self.progression.total_brews.min(10)),
-            34.0,
-            138.0,
-            22.0,
-            dark::TEXT_DIM,
-        );
-        draw_text(
-            &format!(
-                "{} / {} / Day {}",
-                self.current_season(),
-                self.current_weather(),
-                self.world.day_index + 1
-            ),
-            220.0,
-            112.0,
-            20.0,
-            dark::TEXT_DIM,
-        );
-        draw_text(&self.runtime.status_text, 34.0, 138.0, 20.0, dark::TEXT_DIM);
-        if let Some(quest_title) = self.active_quest_title(data) {
-            draw_text(
-                &format!("Quest: {}", quest_title),
-                34.0,
-                160.0,
-                20.0,
-                Color::from_rgba(255, 230, 170, 255),
-            );
-            if let Some(location_hint) = self.active_quest_location_hint(data) {
-                draw_text(
-                    &format!("Turn-in trail: {}", location_hint),
-                    34.0,
-                    180.0,
-                    18.0,
-                    dark::TEXT_DIM,
-                );
-            }
-        }
-
-        draw_panel(screen_width() - 320.0, 18.0, 302.0, 222.0, "Inventory");
-        let mut y = 58.0;
-        let inventory_items = self.sorted_inventory_items(data);
-        if inventory_items.is_empty() {
-            draw_text(
-                "No stock recorded.",
-                screen_width() - 302.0,
-                y,
-                22.0,
-                dark::TEXT_DIM,
-            );
-        } else {
-            for item_id in inventory_items {
-                let amount = self.inventory.get(&item_id).copied().unwrap_or_default();
-                draw_text(
-                    &format!("{} x{}", data.item_name(&item_id), amount),
-                    screen_width() - 302.0,
-                    y,
-                    20.0,
-                    dark::TEXT,
-                );
-                y += 18.0;
-                let context = self.inventory_reference_summary(data, &item_id);
-                draw_text(
-                    if context.is_empty() {
-                        "stocked"
-                    } else {
-                        &context
-                    },
-                    screen_width() - 302.0,
-                    y,
-                    16.0,
-                    dark::TEXT_DIM,
-                );
-                y += 26.0;
-                if y > 214.0 {
-                    break;
-                }
-            }
-        }
-
-        draw_panel(screen_width() - 320.0, 252.0, 302.0, 154.0, "Effects");
-        let mut ey = 292.0;
-        if self.runtime.active_effects.is_empty() {
-            draw_text(
-                "No active potion effects.",
-                screen_width() - 302.0,
-                ey,
-                22.0,
-                dark::TEXT_DIM,
-            );
-        } else {
-            for effect in &self.runtime.active_effects {
-                draw_text(
-                    &format!(
-                        "{} {:.0}s",
-                        effect_name(effect.kind),
-                        effect.remaining_seconds.ceil()
-                    ),
-                    screen_width() - 302.0,
-                    ey,
-                    22.0,
-                    dark::TEXT_BRIGHT,
-                );
-                ey += 22.0;
-                draw_text(
-                    &effect.description,
-                    screen_width() - 302.0,
-                    ey,
-                    18.0,
-                    dark::TEXT_DIM,
-                );
-                ey += 24.0;
-            }
-        }
-
-        draw_panel(18.0, screen_height() - 166.0, 560.0, 148.0, "Potion Belt");
-        let potions = self.quick_potions(data);
-        let mut py = screen_height() - 126.0;
-        if potions.is_empty() {
-            draw_text(
-                "No brewed potions available.",
-                34.0,
-                py,
-                22.0,
-                dark::TEXT_DIM,
-            );
-        } else {
-            for (index, item_id) in potions.iter().take(3).enumerate() {
-                let amount = self.inventory.get(item_id).copied().unwrap_or_default();
-                draw_text(
-                    &format!(
-                        "{}: {} x{}",
-                        ["Z", "X", "C"][index],
-                        data.item_name(item_id),
-                        amount
-                    ),
-                    34.0,
-                    py,
-                    22.0,
-                    dark::TEXT_BRIGHT,
-                );
-                py += 22.0;
-                let detail = data
-                    .item(item_id)
-                    .map(|item| {
-                        item.effects
-                            .iter()
-                            .map(|effect| effect.description.as_str())
-                            .collect::<Vec<_>>()
-                            .join(" / ")
-                    })
-                    .unwrap_or_default();
-                draw_text(&detail, 34.0, py, 18.0, dark::TEXT_DIM);
-                py += 26.0;
-            }
-        }
-        draw_text(
-            "J: Field Journal",
-            418.0,
-            screen_height() - 26.0,
-            18.0,
-            dark::TEXT_DIM,
-        );
-        self.draw_gather_toasts();
-        self.draw_gather_feedbacks(area);
-    }
-
     fn draw_gather_node(
         &self,
         data: &GameData,
@@ -1057,203 +869,6 @@ impl GameplayState {
             );
             draw_circle(center.x - 5.0, center.y - 2.0, 4.0, outline);
             draw_circle(center.x + 5.0, center.y + 1.0, 4.0, outline);
-        }
-    }
-
-    fn draw_gather_toasts(&self) {
-        let start_x = screen_width() * 0.5 - 200.0;
-        let mut y = 28.0;
-        for toast in self.runtime.gather_toasts.iter().take(3).rev() {
-            let alpha = (toast.remaining_seconds / 2.2).clamp(0.0, 1.0);
-            let bg = Color::new(18.0 / 255.0, 18.0 / 255.0, 24.0 / 255.0, alpha * 0.9);
-            let border = Color::new(toast.color.r, toast.color.g, toast.color.b, alpha);
-            let text = Color::new(toast.color.r, toast.color.g, toast.color.b, alpha);
-            draw_rectangle(start_x, y, 400.0, 28.0, bg);
-            draw_rectangle_lines(start_x, y, 400.0, 28.0, 2.0, border);
-            draw_text(&toast.text, start_x + 10.0, y + 19.0, 20.0, text);
-            y += 34.0;
-        }
-    }
-
-    fn draw_gather_feedbacks(&self, area: &AreaDefinition) {
-        let offset = self.camera_offset(area);
-        for feedback in &self.runtime.gather_feedbacks {
-            let life = feedback.remaining_seconds;
-            let t = 1.0
-                - if feedback.emphasis {
-                    life / 0.8
-                } else {
-                    life / 0.45
-                };
-            let radius = if feedback.emphasis {
-                12.0 + t * 24.0
-            } else {
-                10.0 + t * 16.0
-            };
-            let alpha = (1.0 - t).clamp(0.0, 1.0);
-            let color = Color::new(feedback.color.r, feedback.color.g, feedback.color.b, alpha);
-            let screen_pos = offset + feedback.position;
-            draw_circle_lines(screen_pos.x, screen_pos.y, radius, 2.0, color);
-            for index in 0..4 {
-                let angle = t * 0.8 + index as f32 * std::f32::consts::FRAC_PI_2;
-                let sparkle = vec2(angle.cos(), angle.sin()) * (radius + 4.0);
-                draw_circle(
-                    screen_pos.x + sparkle.x,
-                    screen_pos.y + sparkle.y,
-                    2.0,
-                    color,
-                );
-            }
-        }
-    }
-
-    fn draw_prompt(&self, area: &AreaDefinition, offset: Vec2, data: &GameData) {
-        if let Some(npc) = self.nearby_npc(data) {
-            let npc_pos = self.npc_runtime_state(data, npc).position;
-            let pos = vec2(offset.x + npc_pos.x, offset.y + npc_pos.y - 42.0);
-            draw_interaction_prompt(pos, &format!("E: Talk to {}", npc.name));
-            return;
-        }
-
-        if let Some(station) = self.nearby_station(data) {
-            let pos = vec2(
-                offset.x + station.position[0],
-                offset.y + station.position[1] - 42.0,
-            );
-            if station.kind == StationKind::Alchemy {
-                draw_interaction_prompt(
-                    pos,
-                    &format!(
-                        "{}: {}",
-                        input_bindings().alchemy.open,
-                        ui_text().prompts.open_alchemy
-                    ),
-                );
-            } else if station.kind == StationKind::Shop {
-                draw_interaction_prompt(
-                    pos,
-                    &format!(
-                        "{}: {}",
-                        input_bindings().global.interact,
-                        ui_text().prompts.browse_shop
-                    ),
-                );
-            } else if station.kind == StationKind::RuneWorkshop {
-                draw_interaction_prompt(
-                    pos,
-                    &format!(
-                        "{}: {}",
-                        input_bindings().global.interact,
-                        ui_text().prompts.open_rune_workshop
-                    ),
-                );
-            } else if station.kind == StationKind::ArchiveConsole {
-                draw_interaction_prompt(
-                    pos,
-                    &format!(
-                        "{}: {}",
-                        input_bindings().global.interact,
-                        ui_text().prompts.reconstruct_archives
-                    ),
-                );
-            } else if station.kind == StationKind::EndingFocus {
-                draw_interaction_prompt(
-                    pos,
-                    &format!(
-                        "{}: {}",
-                        input_bindings().global.interact,
-                        ui_text().prompts.focus_observatory
-                    ),
-                );
-            } else if station.kind == StationKind::QuestBoard {
-                draw_interaction_prompt(
-                    pos,
-                    &format!(
-                        "{}: {}",
-                        input_bindings().global.interact,
-                        ui_text().prompts.read_request_board
-                    ),
-                );
-            } else if station.kind == StationKind::Planter {
-                let label = self
-                    .progression
-                    .planter_states
-                    .get(&station.id)
-                    .map(|state| {
-                        if state.ready {
-                            "E: Harvest planter"
-                        } else if state.planted_item_id.is_empty() {
-                            "E: Plant rare specimen"
-                        } else if state.tended_day != self.world.day_index {
-                            "E: Tend planter"
-                        } else {
-                            "E: Check growth"
-                        }
-                    })
-                    .unwrap_or("E: Plant rare specimen");
-                draw_interaction_prompt(pos, label);
-            } else if station.kind == StationKind::Habitat {
-                let label = self
-                    .progression
-                    .habitat_states
-                    .get(&station.id)
-                    .map(|state| {
-                        if state.creature_item_id.is_empty() {
-                            "E: Place creature"
-                        } else if self.world.day_index
-                            >= state
-                                .last_harvest_day
-                                .saturating_add(station.habitat_harvest_days.max(1))
-                        {
-                            "E: Harvest habitat"
-                        } else {
-                            "E: Check habitat"
-                        }
-                    })
-                    .unwrap_or("E: Place creature");
-                draw_interaction_prompt(pos, label);
-            }
-            return;
-        }
-
-        if let Some(warp) = area
-            .warps
-            .iter()
-            .find(|warp| warp.rect.contains_point(self.world.player.position))
-        {
-            let pos = vec2(
-                offset.x + self.world.player.position.x,
-                offset.y + self.world.player.position.y - 36.0,
-            );
-            if self.warp_is_unlocked(warp) {
-                draw_interaction_prompt(pos, &format!("E: Enter {}", warp.label));
-            } else {
-                draw_interaction_prompt(pos, &self.warp_lock_text(data, warp));
-            }
-            return;
-        }
-
-        if let Some(node) = area.gather_nodes.iter().find(|node| {
-            !self.world.gathered_nodes.contains(&node.id)
-                && self
-                    .world
-                    .player
-                    .position
-                    .distance(vec2(node.position[0], node.position[1]))
-                    <= node.radius + data.config.interaction_range + 28.0
-        }) {
-            let pos = vec2(
-                offset.x + node.position[0],
-                offset.y + node.position[1] - node.radius - 18.0,
-            );
-            if self.node_is_available(node) {
-                draw_interaction_prompt(pos, &format!("E: Gather {}", node.name));
-            } else {
-                draw_interaction_prompt(
-                    pos,
-                    &format!("{}: {}", node.name, self.gather_unavailable_reason(node)),
-                );
-            }
         }
     }
 
@@ -1347,7 +962,7 @@ impl GameplayState {
             text: text.to_owned(),
         });
         self.push_event_toast(
-            format!("New journal note: {}.", title),
+            ui_format("gameplay_new_journal_note", &[("title", title)]),
             Color::from_rgba(176, 226, 255, 255),
         );
     }
@@ -1542,7 +1157,7 @@ impl GameplayState {
                             station.name, text
                         )
                     } else {
-                        format!("A careful tending pushes {} to ripeness.", station.name)
+                        ui_format("gameplay_tending_ripeness", &[("station", &station.name)])
                     };
                 } else {
                     self.runtime.status_text = if let Some(text) = mutation_text {
@@ -1609,7 +1224,8 @@ impl GameplayState {
         state.mutation_yield_bonus = 0;
         state.mutation_growth_bonus_days = 0;
         state.mutation_note.clear();
-        self.runtime.status_text = format!("Planted {} in {}.", data.item_name(&item_id), station.name);
+        self.runtime.status_text =
+            ui_format("gameplay_planted", &[("item", data.item_name(&item_id)), ("station", &station.name)]);
         self.progression.planter_states.insert(station.id.clone(), state);
     }
 
