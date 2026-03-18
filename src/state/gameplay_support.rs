@@ -441,28 +441,40 @@ impl GameplayState {
             })
             .unwrap_or(false);
         let has_quick_potions = !self.quick_potions(data).is_empty();
-        let next_hint = if !self.runtime.tutorial.save_hint_shown {
+        let next_hint = if !self.runtime.tutorial.crow_intro_hint_shown {
+            self.runtime.tutorial.crow_intro_hint_shown = true;
+            Some((
+                ui_copy("tutorial_crow_intro").to_owned(),
+                Color::from_rgba(176, 226, 255, 255),
+            ))
+        } else if !self.runtime.tutorial.save_hint_shown {
             self.runtime.tutorial.save_hint_shown = true;
             Some((
-                "F5 saves and F9 reloads your current run.",
+                ui_copy("tutorial_save").to_owned(),
                 Color::from_rgba(176, 226, 255, 255),
             ))
         } else if !self.runtime.tutorial.journal_hint_shown {
             self.runtime.tutorial.journal_hint_shown = true;
             Some((
-                "Press J to open the field journal for routes, brews, and notes.",
+                ui_copy("tutorial_journal").to_owned(),
                 Color::from_rgba(255, 230, 170, 255),
             ))
         } else if !self.runtime.tutorial.alchemy_hint_shown && near_alchemy {
             self.runtime.tutorial.alchemy_hint_shown = true;
             Some((
-                "Press E or Tab near a cauldron to start brewing.",
+                ui_copy("tutorial_alchemy_open").to_owned(),
                 Color::from_rgba(188, 255, 220, 255),
+            ))
+        } else if !self.runtime.tutorial.brew_goal_hint_shown && self.progression.total_brews == 0 && near_alchemy {
+            self.runtime.tutorial.brew_goal_hint_shown = true;
+            Some((
+                ui_copy("tutorial_brew_goal").to_owned(),
+                Color::from_rgba(255, 230, 170, 255),
             ))
         } else if !self.runtime.tutorial.potion_hint_shown && has_quick_potions {
             self.runtime.tutorial.potion_hint_shown = true;
             Some((
-                "Use Z, X, and C for the first three potions on your belt.",
+                ui_copy("tutorial_potions").to_owned(),
                 Color::from_rgba(255, 214, 132, 255),
             ))
         } else if !self.runtime.tutorial.gather_hint_shown
@@ -471,8 +483,26 @@ impl GameplayState {
         {
             self.runtime.tutorial.gather_hint_shown = true;
             Some((
-                "Bright nodes can be gathered with E. Early route notes build your journal quickly.",
+                ui_copy("tutorial_gather").to_owned(),
                 Color::from_rgba(188, 255, 220, 255),
+            ))
+        } else if !self.runtime.tutorial.mira_hint_shown
+            && self.progression.total_brews > 0
+            && !self.progression.completed_quests.contains("healing_for_mira")
+        {
+            self.runtime.tutorial.mira_hint_shown = true;
+            Some((
+                ui_copy("tutorial_mira_delivery").to_owned(),
+                Color::from_rgba(188, 255, 220, 255),
+            ))
+        } else if !self.runtime.tutorial.rowan_hint_shown
+            && self.progression.completed_quests.contains("healing_for_mira")
+            && !self.progression.completed_quests.contains("glow_for_rowan")
+        {
+            self.runtime.tutorial.rowan_hint_shown = true;
+            Some((
+                ui_copy("tutorial_rowan_goal").to_owned(),
+                Color::from_rgba(255, 230, 170, 255),
             ))
         } else if !self.runtime.tutorial.quest_hint_shown
             && self.progression.started_quests.is_empty()
@@ -481,7 +511,7 @@ impl GameplayState {
         {
             self.runtime.tutorial.quest_hint_shown = true;
             Some((
-                "Gold markers mean new requests. Talk to highlighted townsfolk or read the board to start your first hand-in loop.",
+                ui_copy("tutorial_quest").to_owned(),
                 Color::from_rgba(255, 230, 170, 255),
             ))
         } else if !self.runtime.tutorial.delivery_hint_shown
@@ -494,13 +524,13 @@ impl GameplayState {
         {
             self.runtime.tutorial.delivery_hint_shown = true;
             Some((
-                "A highlighted requester is ready for delivery. Return with E to cash in the order.",
+                ui_copy("tutorial_delivery_ready").to_owned(),
                 Color::from_rgba(188, 255, 220, 255),
             ))
         } else if !self.runtime.tutorial.route_hint_shown && unlockable_warp_here {
             self.runtime.tutorial.route_hint_shown = true;
             Some((
-                "Green gates can be restored now. Step onto the marked route and press E to open the next floor.",
+                ui_copy("tutorial_route_ready").to_owned(),
                 Color::from_rgba(176, 226, 255, 255),
             ))
         } else {

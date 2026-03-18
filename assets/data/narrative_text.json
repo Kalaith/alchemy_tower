@@ -13,7 +13,17 @@
     "greenhouse_expanded": {
       "id": "greenhouse_expanded",
       "title": "Greenhouse Expanded",
-      "text": "Brin reset the old planter wards. A new moon bed is active on the north side of the greenhouse."
+      "text": "Brin reset the old planter wards. A new moon bed is active on the north side of the greenhouse, and the town finally has reason to believe the valley can recover in more than scraps."
+    },
+    "first_true_brew": {
+      "id": "first_true_brew",
+      "title": "First Useful Brew",
+      "text": "The first successful brew was not important because it proved the tower still worked. It mattered because someone in town could actually use it."
+    },
+    "first_town_relief": {
+      "id": "first_town_relief",
+      "title": "First Town Relief",
+      "text": "Mira's first delivered draught changed the conversation in the square. The tower is no longer just a ruin above town. It has begun helping again."
     },
     "containment_stable": {
       "id": "containment_stable",
@@ -28,10 +38,23 @@
     "archive_reconstruction_missing": "Final timeline still has missing pieces.",
     "save_unknown_area": "Save referenced an unknown area.",
     "cauldron_empty": "The cauldron is empty.",
-    "greenhouse_unlock": "The tower greenhouse unlocks upstairs after your tenth brew."
+    "greenhouse_unlock": "The tower greenhouse unlocks upstairs after your tenth brew. If it can be restored, the town may have its first reliable growing refuge again."
   },
   "overlays": {
     "observatory_epilogue": "The restored tower resolves its own history through the lens above the clouds. The wizard did not vanish in failure. They chose distance over domination, leaving a machine of rooms that only remains safe when used with restraint. The tower is not yours to conquer. It is yours to tend.",
     "observatory_footer": "Enter or Esc to step back"
+  },
+  "phase1": {
+    "crow_default": "If the valley still has a chance, it will begin with careful help, not grand correction.",
+    "crow_after_healing": "A town that can rest can still choose what to mend next. Good. Relief comes before restoration.",
+    "crow_after_glow": "Safer roads change more than a single walk home. Once people stop bracing for dusk, they begin imagining tomorrow again.",
+    "crow_after_greenhouse": "This room was never meant to feed the tower alone. It was meant to steady the valley. Remember that.",
+    "elric_after_healing": "Mira says your draught held steady. That matters. People talk differently about the tower when it actually eases a burden.",
+    "elric_after_glow": "Rowan's route reports have calmed down. One safe road is not a solved town, but it proves conditions can be pushed back.",
+    "elric_after_greenhouse": "If Brin can get real growth out of the greenhouse again, then this is no longer a private curiosity. It becomes civic recovery.",
+    "brin_after_healing": "If Mira can keep people upright, there may still be enough hands left to tend what little has not failed.",
+    "ione_after_glow": "A stable carried light on a public road tells me the tower's work once extended beyond its own walls. That matters more than the formula alone.",
+    "mira_after_greenhouse": "Fresh growth and steadier medicines in the same week. That is the first time this town has sounded hopeful in a long while.",
+    "rowan_after_greenhouse": "The greenhouse glow reaches farther than the glass. People walk easier when they can see something living return."
   }
 }

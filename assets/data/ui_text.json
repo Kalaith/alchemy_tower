@@ -256,6 +256,18 @@
     "world_marker_final_focus": "final focus",
     "world_marker_turn_in": "turn in",
     "world_marker_awaiting_brew": "awaiting brew",
-    "world_marker_request": "request"
+    "world_marker_request": "request",
+    "tutorial_crow_intro": "Crow: Start inside the tower. Gather Whisper Moss and Arcane Dust with E, then bring them to the cauldron.",
+    "tutorial_save": "F5 saves and F9 reloads your current run.",
+    "tutorial_journal": "Press J to open the field journal for routes, brews, and notes.",
+    "tutorial_alchemy_open": "Crow: Press E or Tab near the cauldron to begin your first brew.",
+    "tutorial_brew_goal": "Crow: Brew something restorative first. Mira needs real medicine, not experiments for their own sake.",
+    "tutorial_potions": "Use Z, X, and C for the first three potions on your belt.",
+    "tutorial_gather": "Bright nodes can be gathered with E. Early route notes build your journal quickly.",
+    "tutorial_quest": "Gold markers mean new requests. Talk to highlighted townsfolk or read the board to start your first hand-in loop.",
+    "tutorial_mira_delivery": "Crow: Take your first reliable draught to Mira in town. Relief is the fastest way to earn trust.",
+    "tutorial_rowan_goal": "Crow: Rowan needs steady light for the darkening road. A clean Glow Potion is the next useful step.",
+    "tutorial_delivery_ready": "A highlighted requester is ready for delivery. Return with E to cash in the order.",
+    "tutorial_route_ready": "Green gates can be restored now. Step onto the marked route and press E to open the next floor."
   }
 }

@@ -74,7 +74,10 @@ impl GameplayState {
                     .entry(quest.giver_npc_id.clone())
                     .or_insert(0) += 2;
             }
-            if quest.id == "cultivation_for_brin" {
+            if quest.id == "healing_for_mira" {
+                let milestone = &narrative_text().milestones.first_town_relief;
+                self.push_journal_milestone(&milestone.id, &milestone.title, &milestone.text);
+            } else if quest.id == "cultivation_for_brin" {
                 let milestone = &narrative_text().milestones.greenhouse_expanded;
                 self.push_journal_milestone(&milestone.id, &milestone.title, &milestone.text);
             } else if quest.id == "containment_for_lyra" {
@@ -171,29 +174,37 @@ impl GameplayState {
             .then(|| data.quest(&npc.quest_id))
             .flatten()
         else {
-            return npc.dialogue_complete.clone();
+            return self.append_npc_story_line(&npc.id, npc.dialogue_complete.clone());
         };
 
         if self.progression.completed_quests.contains(&quest.id) {
-            return npc.dialogue_complete.clone();
+            return self.append_npc_story_line(&npc.id, npc.dialogue_complete.clone());
         }
         if !self.progression.started_quests.contains(&quest.id) {
             if !self.quest_is_available(quest) {
-                return format!(
+                return self.append_npc_story_line(
+                    &npc.id,
+                    format!(
                     "{} {}",
                     npc.dialogue_start,
                     self.quest_unlock_summary(quest)
+                ),
                 );
             }
-            return format!(
+            return self.append_npc_story_line(
+                &npc.id,
+                format!(
                 "{} {}",
                 npc.dialogue_start,
                 self.npc_context_line(data, npc)
+            ),
             );
         }
 
         if self.quest_requirements_met(data, quest) {
-            format!(
+            self.append_npc_story_line(
+                &npc.id,
+                format!(
                 "{}",
                 ui_format(
                     "quests_dialogue_smell",
@@ -203,9 +214,12 @@ impl GameplayState {
                         ("item", data.item_name(&quest.required_item_id)),
                     ],
                 )
+            ),
             )
         } else {
-            format!(
+            self.append_npc_story_line(
+                &npc.id,
+                format!(
                 "{}",
                 ui_format(
                     "quests_dialogue_requirements",
@@ -215,6 +229,7 @@ impl GameplayState {
                         ("requirements", &self.quest_requirement_summary(data, quest)),
                     ],
                 )
+            ),
             )
         }
     }

@@ -15,7 +15,13 @@ This file describes what the game currently supports based on the source code an
 - Camera follow, impact shake, and immediate-mode UI panels/prompts.
 - Day clock, day rollover, weather state, season state, and time-of-day windows.
 - In-world route/station/NPC prompts with contextual requirement or readiness messaging.
-- First-run contextual tutorial toasts for save/load, journal, brewing, potions, early gathering, quest pickup, delivery, and route restoration.
+- First-run contextual tutorial toasts for:
+  - Crow-led first gather and first brew guidance
+  - save/load
+  - journal use
+  - quest pickup and first delivery
+  - early progression from Mira to Rowan to greenhouse restoration
+  - potions and route restoration
 
 ## World Content
 
@@ -259,9 +265,19 @@ Current rune outputs:
   - now/later/usually schedule hints
   - active quest turn-in guidance
   - in-world request/turn-in highlighting for key NPCs
+- Current authored story framing emphasizes:
+  - people-first quest motivations
+  - a town crisis driven by ecological decline
+  - the Crow as an early tower guide
+  - cross-NPC Phase 1 reaction lines after early quest progress
+  - visible early town recovery flourishes tied to quest completion
+- Early journal milestones now mark:
+  - first useful brew
+  - first town relief through alchemy
 
 Current authored NPCs:
 
+- `Crow`
 - `Mira`
 - `Rowan`
 - `Mayor Elric`

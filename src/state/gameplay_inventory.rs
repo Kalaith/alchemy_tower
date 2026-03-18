@@ -559,6 +559,10 @@ impl GameplayState {
             .or_insert(0) += resolution.output_amount;
         self.progression.total_brews += 1;
         self.record_experiment_log(&resolution);
+        if self.progression.total_brews == 1 {
+            let milestone = &narrative_text().milestones.first_true_brew;
+            self.push_journal_milestone(&milestone.id, &milestone.title, &milestone.text);
+        }
         let previous_profile = self
             .progression
             .crafted_item_profiles

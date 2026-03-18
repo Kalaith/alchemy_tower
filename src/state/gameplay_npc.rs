@@ -2,6 +2,53 @@ use super::*;
 use crate::content::ui_format;
 
 impl GameplayState {
+    pub(super) fn npc_phase1_followup_line(&self, npc_id: &str) -> Option<&str> {
+        let phase1 = &narrative_text().phase1;
+        if self.has_journal_milestone("greenhouse_repaired")
+            || self.progression.completed_quests.contains("cultivation_for_brin")
+        {
+            return match npc_id {
+                "crow_guide" => Some(phase1.crow_after_greenhouse.as_str()),
+                "mayor_elric" => Some(phase1.elric_after_greenhouse.as_str()),
+                "mira_apothecary" => Some(phase1.mira_after_greenhouse.as_str()),
+                "rowan_herbalist" => Some(phase1.rowan_after_greenhouse.as_str()),
+                _ => None,
+            };
+        }
+        if self.progression.completed_quests.contains("glow_for_rowan") {
+            return match npc_id {
+                "crow_guide" => Some(phase1.crow_after_glow.as_str()),
+                "mayor_elric" => Some(phase1.elric_after_glow.as_str()),
+                "ione_archivist" => Some(phase1.ione_after_glow.as_str()),
+                _ => None,
+            };
+        }
+        if self.progression.completed_quests.contains("healing_for_mira") {
+            return match npc_id {
+                "crow_guide" => Some(phase1.crow_after_healing.as_str()),
+                "mayor_elric" => Some(phase1.elric_after_healing.as_str()),
+                "brin_groundskeeper" => Some(phase1.brin_after_healing.as_str()),
+                _ => None,
+            };
+        }
+        if npc_id == "crow_guide" {
+            return Some(phase1.crow_default.as_str());
+        }
+        None
+    }
+
+    pub(super) fn append_npc_story_line(&self, npc_id: &str, base: String) -> String {
+        if let Some(extra) = self.npc_phase1_followup_line(npc_id) {
+            if base.contains(extra) {
+                base
+            } else {
+                format!("{base} {extra}")
+            }
+        } else {
+            base
+        }
+    }
+
     pub(super) fn initialize_npc_motion_states(&mut self, data: &GameData) {
         self.runtime.npc_motion_states.clear();
         let walk_speed = (data.config.move_speed * 0.16).max(24.0);
@@ -427,7 +474,7 @@ impl GameplayState {
 
     pub(super) fn npc_context_line(&self, data: &GameData, npc: &NpcDefinition) -> String {
         let relationship = self.progression.relationships.get(&npc.id).copied().unwrap_or_default();
-        format!(
+        let base = format!(
             "Now: {}. Later: {}. Usually: {}. Rapport {}. Role {}.",
             self.npc_now_hint(data, npc),
             self.npc_later_hint(data, npc),
@@ -438,7 +485,8 @@ impl GameplayState {
             } else {
                 npc.role.as_str()
             }
-        )
+        );
+        self.append_npc_story_line(&npc.id, base)
     }
 
     pub(super) fn active_schedule_index(&self, npc: &NpcDefinition) -> Option<usize> {

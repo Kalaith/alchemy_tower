@@ -9,6 +9,7 @@ pub struct NarrativeText {
     pub milestones: NarrativeMilestones,
     pub statuses: NarrativeStatuses,
     pub overlays: NarrativeOverlays,
+    pub phase1: NarrativePhase1,
 }
 
 #[derive(Debug, Deserialize)]
@@ -16,6 +17,8 @@ pub struct NarrativeMilestones {
     pub entry_lab_recovered: NarrativeMilestone,
     pub archive_revelation: NarrativeMilestone,
     pub greenhouse_expanded: NarrativeMilestone,
+    pub first_true_brew: NarrativeMilestone,
+    pub first_town_relief: NarrativeMilestone,
     pub containment_stable: NarrativeMilestone,
 }
 
@@ -51,6 +54,21 @@ pub struct NarrativeStatuses {
 pub struct NarrativeOverlays {
     pub observatory_epilogue: String,
     pub observatory_footer: String,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct NarrativePhase1 {
+    pub crow_default: String,
+    pub crow_after_healing: String,
+    pub crow_after_glow: String,
+    pub crow_after_greenhouse: String,
+    pub elric_after_healing: String,
+    pub elric_after_glow: String,
+    pub elric_after_greenhouse: String,
+    pub brin_after_healing: String,
+    pub ione_after_glow: String,
+    pub mira_after_greenhouse: String,
+    pub rowan_after_greenhouse: String,
 }
 
 pub fn narrative_text() -> &'static NarrativeText {

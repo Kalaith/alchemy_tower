@@ -285,11 +285,15 @@ struct RuntimeState {
 #[derive(Clone, Debug)]
 struct TutorialState {
     next_hint_delay_seconds: f32,
+    crow_intro_hint_shown: bool,
     save_hint_shown: bool,
     journal_hint_shown: bool,
     alchemy_hint_shown: bool,
     potion_hint_shown: bool,
     gather_hint_shown: bool,
+    brew_goal_hint_shown: bool,
+    mira_hint_shown: bool,
+    rowan_hint_shown: bool,
     quest_hint_shown: bool,
     delivery_hint_shown: bool,
     route_hint_shown: bool,
@@ -354,11 +358,15 @@ impl GameplayState {
                 last_brew_setup: None,
                 tutorial: TutorialState {
                     next_hint_delay_seconds: 1.5,
+                    crow_intro_hint_shown: false,
                     save_hint_shown: false,
                     journal_hint_shown: false,
                     alchemy_hint_shown: false,
                     potion_hint_shown: false,
                     gather_hint_shown: false,
+                    brew_goal_hint_shown: false,
+                    mira_hint_shown: false,
+                    rowan_hint_shown: false,
                     quest_hint_shown: false,
                     delivery_hint_shown: false,
                     route_hint_shown: false,
@@ -838,6 +846,7 @@ impl GameplayState {
             }
         }
         self.draw_environment_overlay(area, offset);
+        self.draw_phase1_story_flourishes(area, offset);
         for blocker in &area.blockers {
             draw_rectangle(
                 offset.x + blocker.x,
@@ -1019,6 +1028,76 @@ impl GameplayState {
                     let x = offset.x + wave * area.size[0];
                     let y = offset.y + 30.0 + index as f32 * 34.0;
                     draw_line(x - 10.0, y, x + 22.0, y - 6.0, 2.0, Color::from_rgba(232, 232, 210, 64));
+                }
+            }
+            _ => {}
+        }
+    }
+
+    fn draw_phase1_story_flourishes(&self, area: &AreaDefinition, offset: Vec2) {
+        match area.id.as_str() {
+            "town_square" => {
+                if self.progression.completed_quests.contains("healing_for_mira") {
+                    let shelf = Color::from_rgba(122, 88, 66, 255);
+                    let bottle = Color::from_rgba(176, 226, 255, 255);
+                    draw_rectangle(offset.x + 684.0, offset.y + 670.0, 72.0, 18.0, shelf);
+                    draw_rectangle(offset.x + 694.0, offset.y + 652.0, 10.0, 18.0, bottle);
+                    draw_rectangle(offset.x + 714.0, offset.y + 646.0, 12.0, 24.0, Color::from_rgba(255, 214, 132, 255));
+                    draw_rectangle(offset.x + 736.0, offset.y + 654.0, 10.0, 16.0, bottle);
+                }
+                if self.progression.completed_quests.contains("glow_for_rowan") {
+                    for (x, y) in [(536.0, 540.0), (610.0, 470.0), (696.0, 404.0)] {
+                        let pulse = ((get_time() as f32 * 2.2) + x * 0.01).sin() * 0.5 + 0.5;
+                        draw_circle(
+                            offset.x + x,
+                            offset.y + y,
+                            10.0 + pulse * 2.5,
+                            Color::from_rgba(255, 228, 150, 120),
+                        );
+                        draw_circle(
+                            offset.x + x,
+                            offset.y + y,
+                            5.0,
+                            Color::from_rgba(255, 244, 188, 255),
+                        );
+                    }
+                }
+                if self.has_journal_milestone("greenhouse_repaired")
+                    || self.progression.completed_quests.contains("cultivation_for_brin")
+                {
+                    for (x, y, color) in [
+                        (598.0, 760.0, Color::from_rgba(126, 220, 158, 255)),
+                        (640.0, 744.0, Color::from_rgba(239, 205, 90, 255)),
+                        (676.0, 764.0, Color::from_rgba(188, 255, 220, 255)),
+                    ] {
+                        draw_circle(offset.x + x, offset.y + y, 8.0, color);
+                        draw_line(
+                            offset.x + x,
+                            offset.y + y + 8.0,
+                            offset.x + x,
+                            offset.y + y + 18.0,
+                            2.0,
+                            Color::from_rgba(88, 152, 102, 255),
+                        );
+                    }
+                }
+            }
+            "greenhouse_floor" => {
+                if self.progression.completed_quests.contains("cultivation_for_brin") {
+                    for (x, y) in [(690.0, 190.0), (742.0, 174.0), (794.0, 190.0)] {
+                        draw_circle(
+                            offset.x + x,
+                            offset.y + y,
+                            10.0,
+                            Color::from_rgba(126, 220, 158, 255),
+                        );
+                        draw_circle(
+                            offset.x + x + 10.0,
+                            offset.y + y - 4.0,
+                            7.0,
+                            Color::from_rgba(239, 205, 90, 255),
+                        );
+                    }
                 }
             }
             _ => {}
