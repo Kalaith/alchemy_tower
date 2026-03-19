@@ -11,8 +11,9 @@ pub use save_models::{
     RecipeMasteryEntry, RelationshipEntry, SaveData,
 };
 pub use schema::{
-    AreaDefinition, EffectDefinition, EffectKind, ElementProfile, GatherNodeDefinition,
-    HabitatStateEntry, ItemCategory, ItemDefinition, JournalMilestoneEntry, NpcDefinition,
+    AreaDefinition, EffectDefinition, EffectKind, ElementProfile, GameConfig,
+    GatherNodeDefinition, GatheringRouteDefinition, HabitatStateEntry, ItemCategory,
+    ItemDefinition, JournalMilestoneEntry, MutationFormulaDefinition, NpcDefinition,
     PlanterStateEntry, QuestDefinition, RecipeDefinition, RectDefinition, RuneRecipeDefinition,
     StationDefinition, StationKind, WarpDefinition,
 };

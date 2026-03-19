@@ -170,15 +170,16 @@ impl GameplayState {
     }
 
     pub(super) fn current_dialogue_text(&self, data: &GameData, npc: &NpcDefinition) -> String {
+        let dialogue = self.npc_dialogue_selection(data, npc);
         let Some(quest) = (!npc.quest_id.is_empty())
             .then(|| data.quest(&npc.quest_id))
             .flatten()
         else {
-            return self.append_npc_story_line(&npc.id, npc.dialogue_complete.clone());
+            return self.append_npc_story_line(&npc.id, dialogue.complete.to_owned());
         };
 
         if self.progression.completed_quests.contains(&quest.id) {
-            return self.append_npc_story_line(&npc.id, npc.dialogue_complete.clone());
+            return self.append_npc_story_line(&npc.id, dialogue.complete.to_owned());
         }
         if !self.progression.started_quests.contains(&quest.id) {
             if !self.quest_is_available(quest) {
@@ -186,7 +187,7 @@ impl GameplayState {
                     &npc.id,
                     format!(
                     "{} {}",
-                    npc.dialogue_start,
+                    dialogue.start,
                     self.quest_unlock_summary(quest)
                 ),
                 );
@@ -195,7 +196,7 @@ impl GameplayState {
                 &npc.id,
                 format!(
                 "{} {}",
-                npc.dialogue_start,
+                dialogue.start,
                 self.npc_context_line(data, npc)
             ),
             );
@@ -209,7 +210,7 @@ impl GameplayState {
                 ui_format(
                     "quests_dialogue_smell",
                     &[
-                        ("progress", &npc.dialogue_progress),
+                        ("progress", dialogue.progress),
                         ("context", &self.npc_context_line(data, npc)),
                         ("item", data.item_name(&quest.required_item_id)),
                     ],
@@ -224,7 +225,7 @@ impl GameplayState {
                 ui_format(
                     "quests_dialogue_requirements",
                     &[
-                        ("progress", &npc.dialogue_progress),
+                        ("progress", dialogue.progress),
                         ("context", &self.npc_context_line(data, npc)),
                         ("requirements", &self.quest_requirement_summary(data, quest)),
                     ],

@@ -1,0 +1,245 @@
+{
+  "recipes": [
+    {
+      "id": "healing_draught_recipe",
+      "name": "Healing Draught",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        {
+          "item_id": "sunleaf",
+          "amount": 1
+        },
+        {
+          "item_id": "whisper_moss",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "healing_draught",
+      "output_amount": 1,
+      "description": "Simple and dependable. The town would gladly buy it.",
+      "required_heat": 1,
+      "required_stirs": 1,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "The missing wizard marked this one as the baseline for all restorative work.",
+      "minimum_quality": 24,
+      "preferred_traits": [
+        "healing"
+      ],
+      "guaranteed_traits": [
+        "restorative"
+      ],
+      "minimum_elements": {
+        "vita": 3,
+        "ember": 0,
+        "mist": 0,
+        "lux": 0
+      },
+      "catalyst_tag": "",
+      "catalyst_quality_bonus": 0,
+      "required_timing": "steady",
+      "required_sequence": [
+        "sunleaf",
+        "whisper_moss"
+      ],
+      "morph_targets": []
+    },
+    {
+      "id": "glow_potion_recipe",
+      "name": "Glow Potion",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        {
+          "item_id": "arcane_dust",
+          "amount": 1
+        },
+        {
+          "item_id": "moon_fern",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "glow_potion",
+      "output_amount": 1,
+      "description": "Useful for cellar work, cave paths, and dramatic entrances.",
+      "required_heat": 2,
+      "required_stirs": 2,
+      "unstable_output_item_id": "lantern_leak",
+      "lore_note": "A proper glow brew should throw light without setting your eyebrows on fire.",
+      "minimum_quality": 34,
+      "preferred_traits": [
+        "luminous",
+        "arcane"
+      ],
+      "guaranteed_traits": [
+        "soft_glow"
+      ],
+      "minimum_elements": {
+        "vita": 0,
+        "ember": 0,
+        "mist": 2,
+        "lux": 5
+      },
+      "catalyst_tag": "starlight",
+      "catalyst_quality_bonus": 8,
+      "required_timing": "steady",
+      "required_sequence": [
+        "arcane_dust",
+        "moon_fern"
+      ],
+      "morph_targets": [
+        {
+          "output_item_id": "star_lantern_elixir",
+          "minimum_quality": 72,
+          "catalyst_tag": "starlight",
+          "required_heat": 2,
+          "required_stirs": 3,
+          "required_timing": "late",
+          "required_sequence": [
+            "arcane",
+            "luminous"
+          ],
+          "room_bonus_required": true
+        }
+      ]
+    },
+    {
+      "id": "stamina_tonic_recipe",
+      "name": "Stamina Tonic",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        {
+          "item_id": "ember_root",
+          "amount": 1
+        },
+        {
+          "item_id": "mist_moth_wing",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "stamina_tonic",
+      "output_amount": 1,
+      "description": "Strong enough to feel illegal, but technically herbal.",
+      "required_heat": 3,
+      "required_stirs": 3,
+      "unstable_output_item_id": "rush_draught",
+      "lore_note": "The formula trades elegance for force and should not be taken before sleep.",
+      "minimum_quality": 38,
+      "preferred_traits": [
+        "vigor",
+        "volatile"
+      ],
+      "guaranteed_traits": [
+        "quickstep"
+      ],
+      "minimum_elements": {
+        "vita": 0,
+        "ember": 4,
+        "mist": 2,
+        "lux": 0
+      },
+      "catalyst_tag": "",
+      "catalyst_quality_bonus": 0,
+      "required_timing": "early",
+      "required_sequence": [
+        "ember_root",
+        "mist_moth_wing"
+      ],
+      "morph_targets": []
+    },
+    {
+      "id": "beastcalm_extract_recipe",
+      "name": "Beastcalm Extract",
+      "station_id": "greenhouse_still",
+      "ingredients": [
+        {
+          "item_id": "lumen_dust",
+          "amount": 1
+        },
+        {
+          "item_id": "dew_slime",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "beastcalm_extract",
+      "output_amount": 1,
+      "description": "A containment tonic brewed from calm creature harvests.",
+      "required_heat": 2,
+      "required_stirs": 1,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "The old keeper preferred creature harvests that could be taken without distress.",
+      "minimum_quality": 36,
+      "preferred_traits": [
+        "calm",
+        "luminous"
+      ],
+      "guaranteed_traits": [
+        "calm"
+      ],
+      "minimum_elements": {
+        "vita": 1,
+        "ember": 0,
+        "mist": 2,
+        "lux": 2
+      },
+      "catalyst_tag": "",
+      "catalyst_quality_bonus": 0,
+      "required_timing": "steady",
+      "required_sequence": [
+        "luminous",
+        "calm"
+      ],
+      "morph_targets": []
+    }
+  ],
+  "rune_recipes": [
+    {
+      "id": "splash_glow_recipe",
+      "station_id": "rune_workbench",
+      "input_item_id": "glow_potion",
+      "rune_item_id": "splash_rune",
+      "output_item_id": "splash_glow_potion",
+      "description": "Reworks a glow brew into a wider, faster lantern discharge."
+    },
+    {
+      "id": "echo_healing_recipe",
+      "station_id": "rune_workbench",
+      "input_item_id": "healing_draught",
+      "rune_item_id": "echo_rune",
+      "output_item_id": "echo_healing_draught",
+      "description": "Threads a second restorative pulse through the draught."
+    },
+    {
+      "id": "delay_stamina_recipe",
+      "station_id": "rune_workbench",
+      "input_item_id": "stamina_tonic",
+      "rune_item_id": "delay_rune",
+      "output_item_id": "delayed_stamina_tonic",
+      "description": "Converts a sharp stimulant into a steadier delayed release."
+    }
+  ],
+  "mutation_formulas": [
+    {
+      "id": "moon_fern_glow_mutation",
+      "seed_item_id": "moon_fern",
+      "required_effect_kind": "glow",
+      "yield_bonus": 1,
+      "growth_bonus_days": 1,
+      "mutation_note": "moonlit"
+    },
+    {
+      "id": "ember_root_speed_mutation",
+      "seed_item_id": "ember_root",
+      "required_effect_kind": "speed",
+      "yield_bonus": 1,
+      "growth_bonus_days": 1,
+      "mutation_note": "quickfire"
+    },
+    {
+      "id": "arcane_dust_glow_mutation",
+      "seed_item_id": "arcane_dust",
+      "required_effect_kind": "glow",
+      "yield_bonus": 1,
+      "growth_bonus_days": 0,
+      "mutation_note": "radiant"
+    }
+  ]
+}

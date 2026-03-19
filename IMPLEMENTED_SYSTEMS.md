@@ -1,11 +1,11 @@
 # Implemented Systems
 
-This file describes what the game currently supports based on the source code and authored game data in `src/` and `assets/data/game_data.json`.
+This file describes what the game currently supports based on the source code and authored game data in `src/` and `assets/data/game_data_*.json`.
 
 ## Runtime Structure
 
 - Macroquad game loop with `Menu`, `Gameplay`, and `Pause` states.
-- JSON-driven content loading through embedded `game_data.json`.
+- JSON-driven content loading through embedded split `game_data_*.json` files.
 - Native JSON save/load support with versioned save data.
 
 ## Core Exploration
@@ -245,6 +245,7 @@ Current rune outputs:
 - Authored NPCs with:
   - role
   - dialogue variants
+  - optional Phase 1 staged dialogue maps
   - quest assignment
   - time-of-day schedules
 - NPC visibility and position change by time window.
@@ -270,6 +271,7 @@ Current rune outputs:
   - a town crisis driven by ecological decline
   - the Crow as an early tower guide
   - cross-NPC Phase 1 reaction lines after early quest progress
+  - staged Phase 1 dialogue progression keyed off first brew, first town relief, active requests, quest completion, and greenhouse recovery
   - visible early town recovery flourishes tied to quest completion
 - Early journal milestones now mark:
   - first useful brew

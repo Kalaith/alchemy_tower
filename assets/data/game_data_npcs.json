@@ -1,0 +1,515 @@
+{
+  "npcs": [
+    {
+      "id": "crow_guide",
+      "name": "Crow",
+      "area_id": "tower_entry",
+      "position": [
+        500.0,
+        250.0
+      ],
+      "interaction_radius": 56.0,
+      "color": [
+        84,
+        88,
+        98,
+        255
+      ],
+      "dialogue_start": "The tower still listens. That is more than I expected.",
+      "dialogue_progress": "Start with simple brews. The valley is already fraying at the edges.",
+      "dialogue_complete": "The tower still listens. Start with simple brews, help the town breathe easier, and pay attention to what each room was meant to mend.",
+      "quest_id": "",
+      "role": "tower crow",
+      "crow_phase1_dialogue": {
+        "first_meeting": "Use what the tower still gives cleanly. Gather. Brew. Help one person first. Grand plans can wait.",
+        "first_brew": "Better. A stable brew is only worth anything once it leaves the bench. Take it into town.",
+        "first_quest_complete": "You changed the air down there. Keep doing that. The tower remembers steady hands better than bold ones.",
+        "first_tower_restoration": "The greenhouse woke because you treated it carefully. Remember that. This place answers care before ambition."
+      },
+      "schedule": [
+        {
+          "time_window": "morning",
+          "area_id": "tower_entry",
+          "position": [
+            500.0,
+            250.0
+          ]
+        },
+        {
+          "time_window": "day",
+          "area_id": "tower_entry",
+          "position": [
+            542.0,
+            214.0
+          ]
+        },
+        {
+          "time_window": "evening",
+          "area_id": "tower_entry",
+          "position": [
+            462.0,
+            270.0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mira_apothecary",
+      "name": "Mira",
+      "area_id": "town_square",
+      "position": [
+        720.0,
+        640.0
+      ],
+      "interaction_radius": 56.0,
+      "color": [
+        255,
+        182,
+        150,
+        255
+      ],
+      "dialogue_start": "If you really mean to work that tower, help me first. Half the square comes to me tired, aching, and trying to pretend they are not worn thin. I need one proper Healing Draught I can trust.",
+      "dialogue_progress": "Have you brewed that Healing Draught yet? I need something steady enough for a real patient, not something that merely glows nicely in a bottle.",
+      "dialogue_complete": "That draught settled a pounding head and let someone sleep for the first time in days. If the tower can still make medicine like this, people will start hoping again.",
+      "quest_id": "healing_for_mira",
+      "role": "shopkeeper",
+      "phase1_dialogue": {
+        "intro": "I have had people at this counter since dawn with headaches, shaking hands, and that worn-out look they all swear is nothing. If the tower can still do any good, prove it where it counts.",
+        "pre_help_concern": "I will stop hinting. I need one proper Healing Draught. Tea is not touching this kind of strain anymore.",
+        "active_request": "Make it steady enough for real sleep. I do not need something pretty. I need something dependable.",
+        "post_help_relief": "That did it. They slept through the night, ate a full meal, and stopped wincing every time someone spoke too loudly. I have not seen that kind of turnaround in weeks.",
+        "town_recovery_observation": "I am still busy, but not buried. That is a difference I can feel in my shoulders. Fresh growth upstairs is helping too. People come in sounding less frightened."
+      },
+      "schedule": [
+        {
+          "time_window": "morning",
+          "area_id": "town_square",
+          "position": [
+            720.0,
+            640.0
+          ]
+        },
+        {
+          "time_window": "day",
+          "area_id": "town_square",
+          "position": [
+            760.0,
+            610.0
+          ]
+        },
+        {
+          "time_window": "evening",
+          "area_id": "town_square",
+          "position": [
+            690.0,
+            628.0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rowan_herbalist",
+      "name": "Rowan",
+      "area_id": "town_square",
+      "position": [
+        446.0,
+        590.0
+      ],
+      "interaction_radius": 56.0,
+      "color": [
+        176,
+        240,
+        166,
+        255
+      ],
+      "dialogue_start": "The road home keeps getting darker before the lamps do. If you can brew a Glow Potion that holds steady, I could stop treating every dusk walk like a dare.",
+      "dialogue_progress": "I need a Glow Potion with a soft carry to it. Something you can trust in your hand, not a sputtering little panic-light.",
+      "dialogue_complete": "That glow holds like a lantern wick in still air. Good. If the roads can feel safe again, maybe the rest of the valley can too.",
+      "quest_id": "glow_for_rowan",
+      "role": "herbalist rival",
+      "phase1_dialogue": {
+        "intro": "Something about dusk has gone off. Same road, same stones, but once the light drops I start second-guessing every bend.",
+        "pre_help_concern": "Mira says your brews are holding, so here it is: I need a light that does not hiss, spit, or die the moment the road starts feeling wrong.",
+        "active_request": "Soft glow. Steady hand. No showmanship. I want to get home without feeling chased by my own imagination.",
+        "post_help_relief": "That was the first easy walk home I have had in a while. I even stopped to relight the lower posts instead of bolting past them.",
+        "town_recovery_observation": "The lamps are holding longer now, and that greenhouse glow helps more than I thought it would. People are taking the road again instead of making excuses to wait for morning."
+      },
+      "schedule": [
+        {
+          "time_window": "morning",
+          "area_id": "town_square",
+          "position": [
+            446.0,
+            590.0
+          ]
+        },
+        {
+          "time_window": "day",
+          "area_id": "moonlit_forest",
+          "position": [
+            356.0,
+            500.0
+          ]
+        },
+        {
+          "time_window": "evening",
+          "area_id": "town_square",
+          "position": [
+            486.0,
+            552.0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mayor_elric",
+      "name": "Mayor Elric",
+      "area_id": "town_square",
+      "position": [
+        910.0,
+        260.0
+      ],
+      "interaction_radius": 56.0,
+      "color": [
+        216,
+        204,
+        150,
+        255
+      ],
+      "dialogue_start": "What worries me is not one bad season. It is the pattern. The beds are thinner, the workers tire faster, and every fix now costs twice what it used to. If your tower can still make a disciplined Stamina Tonic, I want proof the old place can help the whole town, not just itself.",
+      "dialogue_progress": "A civic tonic must be reliable. We need steadier hands and longer mornings, not another dramatic tower mishap.",
+      "dialogue_complete": "That is the kind of work a town can build around. If the tower can support people instead of frightening them, I can justify opening more roads and repair funds.",
+      "quest_id": "stamina_for_elric",
+      "role": "mayor",
+      "phase1_dialogue": {
+        "intro": "A town can survive one hard season. What concerns me is repetition. Thinner soil. Shorter tempers. Tired crews. Lamps needing twice the oil they used to.",
+        "pre_help_concern": "People are beginning to trust the tower again, cautiously. If that trust is to hold, I need work that benefits more than a single doorstep.",
+        "active_request": "My repair crews need a Stamina Tonic that is clean, controlled, and repeatable. I will not trade one public problem for another.",
+        "post_help_relief": "Useful work. The crews kept at it without the usual noon collapse, and we cleared jobs that have been slipping for days.",
+        "town_recovery_observation": "This is the first week in some time that the town feels as though it is gaining ground instead of merely losing it more slowly."
+      },
+      "schedule": [
+        {
+          "time_window": "morning",
+          "area_id": "town_square",
+          "position": [
+            910.0,
+            260.0
+          ]
+        },
+        {
+          "time_window": "day",
+          "area_id": "town_square",
+          "position": [
+            980.0,
+            240.0
+          ]
+        },
+        {
+          "time_window": "evening",
+          "area_id": "town_square",
+          "position": [
+            932.0,
+            278.0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ione_archivist",
+      "name": "Ione",
+      "area_id": "town_square",
+      "position": [
+        1010.0,
+        620.0
+      ],
+      "interaction_radius": 56.0,
+      "color": [
+        170,
+        206,
+        255,
+        255
+      ],
+      "dialogue_start": "The old notes suggest the tower served more than itself. If you can produce the starlit branch of the glow formula, I may finally have something solid to compare them against.",
+      "dialogue_progress": "I am still waiting on evidence. Hope is useful, but it does not sort an archive.",
+      "dialogue_complete": "Yes... this is enough to work from. If the records are right, restoring the tower may restore more than its rooms.",
+      "quest_id": "star_elixir_for_ione",
+      "role": "archivist",
+      "phase1_dialogue": {
+        "intro": "The surviving notes keep linking things I would have thought separate. Soil. Lamps. Paths. Pollinators. I cannot yet say why.",
+        "pre_help_concern": "Your work is making the fragments easier to read. I still lack proof, though I doubt the tower was ever meant for study alone.",
+        "active_request": "Bring me the starlit branch of the glow formula. If it resolves as I suspect, it may clarify what these older records were trying to describe.",
+        "post_help_relief": "That helps more than I expected. The older formulas may have supported the valley in ways we no longer understand.",
+        "town_recovery_observation": "The greenhouse has made some of the old records less obscure. They read less like fable now, and more like instructions."
+      },
+      "schedule": [
+        {
+          "time_window": "morning",
+          "area_id": "town_square",
+          "position": [
+            1010.0,
+            620.0
+          ]
+        },
+        {
+          "time_window": "day",
+          "area_id": "tower_entry",
+          "position": [
+            320.0,
+            220.0
+          ]
+        },
+        {
+          "time_window": "evening",
+          "area_id": "town_square",
+          "position": [
+            1080.0,
+            620.0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "brin_groundskeeper",
+      "name": "Brin",
+      "area_id": "town_square",
+      "position": [
+        618.0,
+        734.0
+      ],
+      "interaction_radius": 56.0,
+      "color": [
+        198,
+        160,
+        120,
+        255
+      ],
+      "dialogue_start": "The town beds are failing from the roots up. Not dead, just tired. If the greenhouse opens again, we might have one place left that remembers how to grow properly.",
+      "dialogue_progress": "The old tower beds never liked haste. If we wake them, we do it gently and we do it for the whole valley, not for show.",
+      "dialogue_complete": "You are starting to treat the tower like a living place again. If the greenhouse keeps answering, we may be able to feed more than a few stubborn planters.",
+      "quest_id": "cultivation_for_brin",
+      "role": "groundskeeper",
+      "phase1_dialogue": {
+        "intro": "The beds are tired clear through. Water runs off. Roots stall out. Even the bees look like they cannot be bothered.",
+        "pre_help_concern": "Mira says people are sleeping again and Rowan is not flinching at every dusk walk. Good. If the greenhouse opens, maybe we can get one patch of honest growth going.",
+        "active_request": "Bring me a clean Glow Potion once we can get into that room. The old planter wards like a gentle hand. Push too hard and they sulk.",
+        "post_help_relief": "There we are. The bed has taken. Not much yet, but the roots are answering, and that is more than we have had in a while.",
+        "town_recovery_observation": "See the color coming back? Better stems, better leaf, more little wings under the glass. That is enough to keep a grower going."
+      },
+      "schedule": [
+        {
+          "time_window": "morning",
+          "area_id": "town_square",
+          "position": [
+            618.0,
+            734.0
+          ]
+        },
+        {
+          "time_window": "day",
+          "area_id": "town_square",
+          "position": [
+            562.0,
+            704.0
+          ]
+        },
+        {
+          "time_window": "evening",
+          "area_id": "town_square",
+          "position": [
+            676.0,
+            720.0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lyra_keeper",
+      "name": "Lyra",
+      "area_id": "town_square",
+      "position": [
+        1116.0,
+        486.0
+      ],
+      "interaction_radius": 56.0,
+      "color": [
+        188,
+        208,
+        255,
+        255
+      ],
+      "dialogue_start": "The small creatures are changing their habits. Fewer pollinators, stranger nesting, too much fear where there used to be routine. If we reopen the containment floor, we do it to shelter and steady them, not to trap them.",
+      "dialogue_progress": "A calm specimen is worth more than any carcass. If the valley is to heal, the creatures have to trust us enough to return to their place in it.",
+      "dialogue_complete": "Good. The habitats are behaving like living rooms instead of traps now. That is the only kind of tower work I will stand beside.",
+      "quest_id": "containment_for_lyra",
+      "role": "creature keeper",
+      "phase1_dialogue": {
+        "intro": "The little ones are uneasy. Moths are scattering, burrowers are shifting nests, and anything timid has been acting half-spooked for days.",
+        "pre_help_concern": "Brin sees it in the beds. Rowan feels it on the road. I see it in the creatures first. If the tower opens further, I want it used to settle them, not pen them.",
+        "active_request": "Bring me a Beastcalm Extract when the containment room is ready. I need the wards to feel safe again, or nothing small will stay where it should.",
+        "post_help_relief": "Much better. The moths stopped throwing themselves at the frame, and the slugs went back to the damp channels almost at once.",
+        "town_recovery_observation": "Things are quieter lately. More pollinators in the air, less panic in the little creatures. That matters more than most people think."
+      },
+      "schedule": [
+        {
+          "time_window": "morning",
+          "area_id": "town_square",
+          "position": [
+            1116.0,
+            486.0
+          ]
+        },
+        {
+          "time_window": "day",
+          "area_id": "town_square",
+          "position": [
+            1066.0,
+            534.0
+          ]
+        },
+        {
+          "time_window": "evening",
+          "area_id": "town_square",
+          "position": [
+            1152.0,
+            450.0
+          ]
+        }
+      ]
+    }
+  ],
+  "quests": [
+    {
+      "id": "healing_for_mira",
+      "title": "Something For The Headaches",
+      "description": "Deliver 1 Fine-or-better Healing Draught to Mira so she can treat the town's growing wave of stress and sleepless pain.",
+      "required_item_id": "healing_draught",
+      "required_amount": 1,
+      "reward_coins": 30,
+      "giver_npc_id": "mira_apothecary",
+      "minimum_quality_band": "Fine",
+      "required_trait": "restorative",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 0
+    },
+    {
+      "id": "glow_for_rowan",
+      "title": "A Safer Walk Home",
+      "description": "Deliver 1 Excellent Glow Potion with the soft_glow trait to Rowan so the darkening road home feels safe again.",
+      "required_item_id": "glow_potion",
+      "required_amount": 1,
+      "reward_coins": 42,
+      "giver_npc_id": "rowan_herbalist",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "soft_glow",
+      "required_effect_kind": "glow",
+      "prerequisite_quests": [
+        "healing_for_mira"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 4
+    },
+    {
+      "id": "cultivation_for_brin",
+      "title": "The First Living Bed",
+      "description": "Deliver 1 Fine Glow Potion after the greenhouse opens so Brin can wake the old planter wards and give the town one reliable growing space again.",
+      "required_item_id": "glow_potion",
+      "required_amount": 1,
+      "reward_coins": 48,
+      "giver_npc_id": "brin_groundskeeper",
+      "minimum_quality_band": "Fine",
+      "required_trait": "",
+      "required_effect_kind": "glow",
+      "prerequisite_quests": [
+        "glow_for_rowan"
+      ],
+      "required_unlocked_warp": "entry_to_greenhouse",
+      "minimum_total_brews": 12
+    },
+    {
+      "id": "stamina_for_elric",
+      "title": "For The Work Crews",
+      "description": "Deliver 1 Fine Stamina Tonic with the quickstep trait to Mayor Elric so the town crews can keep up repairs without collapsing early.",
+      "required_item_id": "stamina_tonic",
+      "required_amount": 1,
+      "reward_coins": 55,
+      "giver_npc_id": "mayor_elric",
+      "minimum_quality_band": "Fine",
+      "required_trait": "quickstep",
+      "required_effect_kind": "speed",
+      "prerequisite_quests": [
+        "cultivation_for_brin"
+      ],
+      "required_unlocked_warp": "entry_to_greenhouse",
+      "minimum_total_brews": 14
+    },
+    {
+      "id": "star_elixir_for_ione",
+      "title": "Proof The Tower Once Healed",
+      "description": "Deliver 1 Star Lantern Elixir to Ione so she can prove the tower's old work reached beyond its own walls.",
+      "required_item_id": "star_lantern_elixir",
+      "required_amount": 1,
+      "reward_coins": 80,
+      "giver_npc_id": "ione_archivist",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "soft_glow",
+      "required_effect_kind": "glow",
+      "prerequisite_quests": [
+        "glow_for_rowan"
+      ],
+      "required_unlocked_warp": "entry_to_greenhouse",
+      "minimum_total_brews": 18
+    },
+    {
+      "id": "board_glasshouse_stock",
+      "title": "Board Order: Night Lantern Stock",
+      "description": "Supply 1 Glow Potion so the night watch can keep the reopened greenhouse and footpaths safely lit.",
+      "required_item_id": "glow_potion",
+      "required_amount": 1,
+      "reward_coins": 32,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Fine",
+      "required_trait": "",
+      "required_effect_kind": "glow",
+      "prerequisite_quests": [
+        "healing_for_mira"
+      ],
+      "required_unlocked_warp": "entry_to_greenhouse",
+      "minimum_total_brews": 10
+    },
+    {
+      "id": "board_restorative_stash",
+      "title": "Board Order: Restorative Shelves",
+      "description": "Supply 1 Healing Draught for the infirmary shelves while the town copes with fatigue and strain.",
+      "required_item_id": "healing_draught",
+      "required_amount": 1,
+      "reward_coins": 28,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Serviceable",
+      "required_trait": "",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 4
+    },
+    {
+      "id": "containment_for_lyra",
+      "title": "Gentle Habitats",
+      "description": "Deliver 1 Beastcalm Extract so Lyra can tune the habitat wards and begin steadying the valley's unsettled small creatures.",
+      "required_item_id": "beastcalm_extract",
+      "required_amount": 1,
+      "reward_coins": 72,
+      "giver_npc_id": "lyra_keeper",
+      "minimum_quality_band": "Fine",
+      "required_trait": "calm",
+      "required_effect_kind": "glow",
+      "prerequisite_quests": [
+        "cultivation_for_brin"
+      ],
+      "required_unlocked_warp": "greenhouse_to_containment",
+      "minimum_total_brews": 18
+    }
+  ]
+}

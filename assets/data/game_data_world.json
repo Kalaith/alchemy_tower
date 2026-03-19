@@ -1,0 +1,1333 @@
+{
+  "areas": [
+    {
+      "id": "tower_entry",
+      "name": "Tower Entry Laboratory",
+      "size": [
+        960.0,
+        720.0
+      ],
+      "background": [
+        64,
+        60,
+        72,
+        255
+      ],
+      "accent": [
+        98,
+        88,
+        110,
+        255
+      ],
+      "blockers": [
+        {
+          "x": 80.0,
+          "y": 84.0,
+          "w": 200.0,
+          "h": 60.0
+        },
+        {
+          "x": 620.0,
+          "y": 108.0,
+          "w": 210.0,
+          "h": 70.0
+        },
+        {
+          "x": 340.0,
+          "y": 500.0,
+          "w": 220.0,
+          "h": 90.0
+        }
+      ],
+      "warps": [
+        {
+          "id": "entry_to_town",
+          "label": "Town Square",
+          "rect": {
+            "x": 432.0,
+            "y": 656.0,
+            "w": 96.0,
+            "h": 48.0
+          },
+          "target_area": "town_square",
+          "target_position": [
+            516.0,
+            112.0
+          ]
+        },
+        {
+          "id": "entry_to_greenhouse",
+          "label": "Greenhouse Floor",
+          "rect": {
+            "x": 850.0,
+            "y": 80.0,
+            "w": 70.0,
+            "h": 120.0
+          },
+          "target_area": "greenhouse_floor",
+          "target_position": [
+            148.0,
+            360.0
+          ],
+          "required_total_brews": 10,
+          "required_coins": 40,
+          "required_item_id": "moon_fern",
+          "required_item_amount": 2,
+          "unlock_milestones": [
+            {
+              "id": "greenhouse_repaired",
+              "title": "Greenhouse Repaired",
+              "text": "The upper greenhouse seal finally yielded. For the first time in years, the town has one place that may truly remember how to grow for the valley instead of merely surviving it."
+            }
+          ],
+          "locked_note": "The staircase seal hums. The greenhouse could become the town's first real turning point if you can prove the tower is worth trusting again."
+        }
+      ],
+      "gather_nodes": [
+        {
+          "id": "tower_moss_01",
+          "name": "Whisper Moss",
+          "item_id": "whisper_moss",
+          "color": [
+            96,
+            214,
+            150,
+            255
+          ],
+          "position": [
+            164.0,
+            238.0
+          ],
+          "radius": 14.0,
+          "route_id": "tower_ruin_edge",
+          "seasons": [
+            "spring",
+            "summer",
+            "autumn"
+          ],
+          "weathers": [
+            "clear",
+            "mist"
+          ],
+          "time_windows": [
+            "morning",
+            "day"
+          ],
+          "spawn_chance": 85,
+          "note": "Soft growth near old stone and shaded mortar."
+        },
+        {
+          "id": "tower_dust_01",
+          "name": "Arcane Dust",
+          "item_id": "arcane_dust",
+          "color": [
+            170,
+            130,
+            250,
+            255
+          ],
+          "position": [
+            760.0,
+            228.0
+          ],
+          "radius": 14.0,
+          "route_id": "tower_ruin_edge",
+          "seasons": [
+            "spring",
+            "summer",
+            "autumn",
+            "winter"
+          ],
+          "weathers": [
+            "clear",
+            "windy"
+          ],
+          "time_windows": [
+            "day",
+            "evening"
+          ],
+          "spawn_chance": 65,
+          "note": "Residual powder that collects where old magic cracked."
+        }
+      ]
+    },
+    {
+      "id": "town_square",
+      "name": "Town Square",
+      "size": [
+        1280.0,
+        900.0
+      ],
+      "background": [
+        104,
+        150,
+        108,
+        255
+      ],
+      "accent": [
+        152,
+        106,
+        80,
+        255
+      ],
+      "blockers": [
+        {
+          "x": 182.0,
+          "y": 140.0,
+          "w": 180.0,
+          "h": 160.0
+        },
+        {
+          "x": 916.0,
+          "y": 128.0,
+          "w": 180.0,
+          "h": 160.0
+        },
+        {
+          "x": 530.0,
+          "y": 340.0,
+          "w": 220.0,
+          "h": 180.0
+        }
+      ],
+      "warps": [
+        {
+          "id": "town_to_tower",
+          "label": "Tower Entry",
+          "rect": {
+            "x": 472.0,
+            "y": 36.0,
+            "w": 120.0,
+            "h": 58.0
+          },
+          "target_area": "tower_entry",
+          "target_position": [
+            480.0,
+            610.0
+          ]
+        },
+        {
+          "id": "town_to_forest",
+          "label": "Moonlit Forest",
+          "rect": {
+            "x": 1186.0,
+            "y": 372.0,
+            "w": 66.0,
+            "h": 140.0
+          },
+          "target_area": "moonlit_forest",
+          "target_position": [
+            112.0,
+            418.0
+          ]
+        }
+      ],
+      "gather_nodes": [
+        {
+          "id": "town_herb_01",
+          "name": "Sunleaf",
+          "item_id": "sunleaf",
+          "color": [
+            239,
+            205,
+            90,
+            255
+          ],
+          "position": [
+            404.0,
+            664.0
+          ],
+          "radius": 14.0,
+          "route_id": "creekside_meadow",
+          "seasons": [
+            "spring",
+            "summer"
+          ],
+          "weathers": [
+            "clear",
+            "windy"
+          ],
+          "time_windows": [
+            "morning",
+            "day"
+          ],
+          "spawn_chance": 90,
+          "note": "Bright leaves favor open patches near warm footpaths."
+        }
+      ]
+    },
+    {
+      "id": "moonlit_forest",
+      "name": "Moonlit Forest",
+      "size": [
+        1440.0,
+        960.0
+      ],
+      "background": [
+        54,
+        88,
+        82,
+        255
+      ],
+      "accent": [
+        46,
+        66,
+        58,
+        255
+      ],
+      "blockers": [
+        {
+          "x": 236.0,
+          "y": 188.0,
+          "w": 220.0,
+          "h": 180.0
+        },
+        {
+          "x": 676.0,
+          "y": 470.0,
+          "w": 250.0,
+          "h": 200.0
+        },
+        {
+          "x": 1030.0,
+          "y": 164.0,
+          "w": 180.0,
+          "h": 140.0
+        }
+      ],
+      "warps": [
+        {
+          "id": "forest_to_town",
+          "label": "Town Square",
+          "rect": {
+            "x": 24.0,
+            "y": 368.0,
+            "w": 68.0,
+            "h": 150.0
+          },
+          "target_area": "town_square",
+          "target_position": [
+            1120.0,
+            418.0
+          ]
+        }
+      ],
+      "gather_nodes": [
+        {
+          "id": "forest_fern_01",
+          "name": "Moon Fern",
+          "item_id": "moon_fern",
+          "color": [
+            144,
+            255,
+            176,
+            255
+          ],
+          "position": [
+            284.0,
+            564.0
+          ],
+          "radius": 16.0,
+          "route_id": "moonlit_grove",
+          "seasons": [
+            "spring",
+            "autumn"
+          ],
+          "weathers": [
+            "clear",
+            "mist"
+          ],
+          "time_windows": [
+            "evening",
+            "night"
+          ],
+          "spawn_chance": 70,
+          "note": "Pale fronds glow best in low light near the grove."
+        },
+        {
+          "id": "forest_root_01",
+          "name": "Ember Root",
+          "item_id": "ember_root",
+          "color": [
+            255,
+            124,
+            74,
+            255
+          ],
+          "position": [
+            924.0,
+            780.0
+          ],
+          "radius": 16.0,
+          "route_id": "charred_hollow",
+          "seasons": [
+            "autumn",
+            "winter"
+          ],
+          "weathers": [
+            "clear",
+            "windy"
+          ],
+          "time_windows": [
+            "day",
+            "evening"
+          ],
+          "spawn_chance": 75,
+          "note": "Warm roots surface where old burn scars still hold heat."
+        },
+        {
+          "id": "forest_moth_01",
+          "name": "Mist Moth Wing",
+          "item_id": "mist_moth_wing",
+          "color": [
+            170,
+            215,
+            255,
+            255
+          ],
+          "position": [
+            1214.0,
+            542.0
+          ],
+          "radius": 14.0,
+          "route_id": "moonlit_grove",
+          "seasons": [
+            "spring",
+            "summer",
+            "autumn"
+          ],
+          "weathers": [
+            "mist",
+            "rain"
+          ],
+          "time_windows": [
+            "evening",
+            "night"
+          ],
+          "spawn_chance": 60,
+          "note": "Wing scales cling to reeds and bark after damp dusk flights."
+        },
+        {
+          "id": "forest_glow_moth_01",
+          "name": "Glow Moth",
+          "item_id": "glow_moth",
+          "color": [
+            228,
+            224,
+            146,
+            255
+          ],
+          "position": [
+            1090.0,
+            320.0
+          ],
+          "radius": 16.0,
+          "route_id": "moonlit_grove",
+          "seasons": [
+            "spring",
+            "summer",
+            "autumn"
+          ],
+          "weathers": [
+            "clear",
+            "mist"
+          ],
+          "time_windows": [
+            "evening",
+            "night"
+          ],
+          "spawn_chance": 55,
+          "note": "A living lantern moth that settles only where moonlight holds steady."
+        }
+      ]
+    },
+    {
+      "id": "greenhouse_floor",
+      "name": "Tower Greenhouse",
+      "size": [
+        960.0,
+        720.0
+      ],
+      "background": [
+        82,
+        114,
+        92,
+        255
+      ],
+      "accent": [
+        120,
+        164,
+        116,
+        255
+      ],
+      "blockers": [
+        {
+          "x": 94.0,
+          "y": 88.0,
+          "w": 180.0,
+          "h": 140.0
+        },
+        {
+          "x": 640.0,
+          "y": 108.0,
+          "w": 200.0,
+          "h": 120.0
+        },
+        {
+          "x": 330.0,
+          "y": 484.0,
+          "w": 280.0,
+          "h": 110.0
+        }
+      ],
+      "warps": [
+        {
+          "id": "greenhouse_to_entry",
+          "label": "Tower Entry",
+          "rect": {
+            "x": 80.0,
+            "y": 316.0,
+            "w": 64.0,
+            "h": 120.0
+          },
+          "target_area": "tower_entry",
+          "target_position": [
+            820.0,
+            160.0
+          ]
+        },
+        {
+          "id": "greenhouse_to_containment",
+          "label": "Containment Floor",
+          "rect": {
+            "x": 828.0,
+            "y": 110.0,
+            "w": 70.0,
+            "h": 120.0
+          },
+          "target_area": "containment_floor",
+          "target_position": [
+            150.0,
+            340.0
+          ],
+          "required_total_brews": 18,
+          "required_coins": 60,
+          "required_item_id": "moon_fern",
+          "required_item_amount": 2,
+          "unlock_milestones": [
+            {
+              "id": "containment_repaired",
+              "title": "Containment Restored",
+              "text": "The containment lift answers again. The tower is ready to shelter magical creatures instead of merely studying their remains."
+            }
+          ],
+          "locked_note": "The containment lift stays inert. The tower wants more proven alchemy before it trusts you with creatures."
+        }
+      ],
+      "gather_nodes": [
+        {
+          "id": "greenhouse_sunleaf_01",
+          "name": "Cultivated Sunleaf",
+          "item_id": "sunleaf",
+          "color": [
+            239,
+            205,
+            90,
+            255
+          ],
+          "position": [
+            320.0,
+            248.0
+          ],
+          "radius": 14.0,
+          "route_id": "greenhouse_walk",
+          "seasons": [],
+          "weathers": [],
+          "time_windows": [
+            "day",
+            "evening"
+          ],
+          "spawn_chance": 80,
+          "note": "A sheltered patch that keeps medicinal herbs alive between seasons."
+        },
+        {
+          "id": "greenhouse_moss_01",
+          "name": "Glasshouse Moss",
+          "item_id": "whisper_moss",
+          "color": [
+            96,
+            214,
+            150,
+            255
+          ],
+          "position": [
+            704.0,
+            280.0
+          ],
+          "radius": 14.0,
+          "route_id": "greenhouse_walk",
+          "seasons": [],
+          "weathers": [],
+          "time_windows": [
+            "morning",
+            "day"
+          ],
+          "spawn_chance": 75,
+          "note": "Condensation and old wards make the greenhouse stones bloom softly."
+        },
+        {
+          "id": "greenhouse_dew_slug_01",
+          "name": "Dew Slug",
+          "item_id": "dew_slug",
+          "color": [
+            148,
+            210,
+            238,
+            255
+          ],
+          "position": [
+            538.0,
+            340.0
+          ],
+          "radius": 15.0,
+          "route_id": "greenhouse_walk",
+          "seasons": [],
+          "weathers": [
+            "mist",
+            "rain"
+          ],
+          "time_windows": [
+            "morning",
+            "day"
+          ],
+          "spawn_chance": 50,
+          "note": "These gentle slugs gather where greenhouse glass sweats at dawn."
+        }
+      ]
+    },
+    {
+      "id": "containment_floor",
+      "name": "Creature Containment",
+      "size": [
+        960.0,
+        720.0
+      ],
+      "background": [
+        68,
+        86,
+        110,
+        255
+      ],
+      "accent": [
+        112,
+        136,
+        172,
+        255
+      ],
+      "blockers": [
+        {
+          "x": 100.0,
+          "y": 100.0,
+          "w": 200.0,
+          "h": 120.0
+        },
+        {
+          "x": 646.0,
+          "y": 100.0,
+          "w": 180.0,
+          "h": 120.0
+        },
+        {
+          "x": 336.0,
+          "y": 500.0,
+          "w": 280.0,
+          "h": 100.0
+        }
+      ],
+      "warps": [
+        {
+          "id": "containment_to_greenhouse",
+          "label": "Greenhouse Floor",
+          "rect": {
+            "x": 80.0,
+            "y": 280.0,
+            "w": 66.0,
+            "h": 120.0
+          },
+          "target_area": "greenhouse_floor",
+          "target_position": [
+            790.0,
+            180.0
+          ]
+        },
+        {
+          "id": "containment_to_rune_workshop",
+          "label": "Rune Workshop",
+          "rect": {
+            "x": 830.0,
+            "y": 120.0,
+            "w": 64.0,
+            "h": 120.0
+          },
+          "target_area": "rune_workshop_floor",
+          "target_position": [
+            150.0,
+            340.0
+          ],
+          "required_total_brews": 24,
+          "required_coins": 80,
+          "required_item_id": "lumen_dust",
+          "required_item_amount": 2,
+          "unlock_milestones": [
+            {
+              "id": "rune_workshop_restored",
+              "title": "Rune Workshop Restored",
+              "text": "The rune benches hum again. Potions can now be reshaped after brewing instead of only before it."
+            }
+          ],
+          "locked_note": "The rune workshop remains shuttered until the tower trusts your handling of stranger forces."
+        }
+      ],
+      "gather_nodes": []
+    },
+    {
+      "id": "rune_workshop_floor",
+      "name": "Rune Workshop",
+      "size": [
+        960.0,
+        720.0
+      ],
+      "background": [
+        92,
+        74,
+        96,
+        255
+      ],
+      "accent": [
+        148,
+        126,
+        166,
+        255
+      ],
+      "blockers": [
+        {
+          "x": 100.0,
+          "y": 100.0,
+          "w": 180.0,
+          "h": 120.0
+        },
+        {
+          "x": 660.0,
+          "y": 100.0,
+          "w": 180.0,
+          "h": 120.0
+        },
+        {
+          "x": 328.0,
+          "y": 500.0,
+          "w": 300.0,
+          "h": 90.0
+        }
+      ],
+      "warps": [
+        {
+          "id": "rune_to_containment",
+          "label": "Containment Floor",
+          "rect": {
+            "x": 78.0,
+            "y": 284.0,
+            "w": 66.0,
+            "h": 120.0
+          },
+          "target_area": "containment_floor",
+          "target_position": [
+            790.0,
+            180.0
+          ]
+        },
+        {
+          "id": "rune_to_archives",
+          "label": "Archives",
+          "rect": {
+            "x": 832.0,
+            "y": 118.0,
+            "w": 64.0,
+            "h": 120.0
+          },
+          "target_area": "archive_floor",
+          "target_position": [
+            150.0,
+            340.0
+          ],
+          "required_total_brews": 30,
+          "required_coins": 90,
+          "required_item_id": "star_lantern_elixir",
+          "required_item_amount": 1,
+          "locked_note": "The archive vault remains sealed until you can prove the tower's higher work is stable."
+        }
+      ],
+      "gather_nodes": []
+    },
+    {
+      "id": "archive_floor",
+      "name": "Tower Archives",
+      "size": [
+        960.0,
+        720.0
+      ],
+      "background": [
+        80,
+        78,
+        66,
+        255
+      ],
+      "accent": [
+        132,
+        126,
+        106,
+        255
+      ],
+      "blockers": [
+        {
+          "x": 110.0,
+          "y": 104.0,
+          "w": 200.0,
+          "h": 120.0
+        },
+        {
+          "x": 648.0,
+          "y": 104.0,
+          "w": 190.0,
+          "h": 120.0
+        },
+        {
+          "x": 328.0,
+          "y": 496.0,
+          "w": 300.0,
+          "h": 98.0
+        }
+      ],
+      "warps": [
+        {
+          "id": "archives_to_rune",
+          "label": "Rune Workshop",
+          "rect": {
+            "x": 80.0,
+            "y": 284.0,
+            "w": 64.0,
+            "h": 120.0
+          },
+          "target_area": "rune_workshop_floor",
+          "target_position": [
+            790.0,
+            180.0
+          ]
+        },
+        {
+          "id": "archives_to_observatory",
+          "label": "Portal Observatory",
+          "rect": {
+            "x": 830.0,
+            "y": 118.0,
+            "w": 64.0,
+            "h": 120.0
+          },
+          "target_area": "observatory_floor",
+          "target_position": [
+            150.0,
+            340.0
+          ],
+          "required_journal_milestone": "archive_revelation",
+          "required_journal_hint": "recover the archive revelation",
+          "locked_note": "The observatory gate does not respond until the archive timeline is complete."
+        }
+      ],
+      "gather_nodes": []
+    },
+    {
+      "id": "observatory_floor",
+      "name": "Portal Observatory",
+      "size": [
+        960.0,
+        720.0
+      ],
+      "background": [
+        34,
+        42,
+        68,
+        255
+      ],
+      "accent": [
+        96,
+        128,
+        180,
+        255
+      ],
+      "blockers": [
+        {
+          "x": 140.0,
+          "y": 140.0,
+          "w": 160.0,
+          "h": 100.0
+        },
+        {
+          "x": 662.0,
+          "y": 138.0,
+          "w": 160.0,
+          "h": 100.0
+        },
+        {
+          "x": 330.0,
+          "y": 520.0,
+          "w": 300.0,
+          "h": 70.0
+        }
+      ],
+      "warps": [
+        {
+          "id": "observatory_to_archives",
+          "label": "Tower Archives",
+          "rect": {
+            "x": 80.0,
+            "y": 284.0,
+            "w": 64.0,
+            "h": 120.0
+          },
+          "target_area": "archive_floor",
+          "target_position": [
+            790.0,
+            180.0
+          ]
+        }
+      ],
+      "gather_nodes": []
+    }
+  ],
+  "gathering_routes": [
+    {
+      "id": "tower_ruin_edge",
+      "name": "Tower Ruin Edge",
+      "area_id": "tower_entry",
+      "description": "A short route around the old tower walls where moss and residual dust collect."
+    },
+    {
+      "id": "creekside_meadow",
+      "name": "Creekside Meadow",
+      "area_id": "town_square",
+      "description": "Sunny verge and creekbank patches just outside town, reliable for beginner herb runs."
+    },
+    {
+      "id": "moonlit_grove",
+      "name": "Moonlit Grove",
+      "area_id": "moonlit_forest",
+      "description": "A shaded forest route that rewards evening and misty gathering."
+    },
+    {
+      "id": "charred_hollow",
+      "name": "Charred Hollow",
+      "area_id": "moonlit_forest",
+      "description": "A warmer pocket of the forest where roots and mineral reagents surface near old fire scars."
+    },
+    {
+      "id": "greenhouse_walk",
+      "name": "Greenhouse Walk",
+      "area_id": "greenhouse_floor",
+      "description": "A tiny cultivated loop that preserves a few reliable herbs inside the tower."
+    },
+    {
+      "id": "containment_ring",
+      "name": "Containment Ring",
+      "area_id": "containment_floor",
+      "description": "Quiet habitat cells fitted for harmless magical specimens and renewable harvests."
+    },
+    {
+      "id": "archive_stack",
+      "name": "Archive Stack",
+      "area_id": "archive_floor",
+      "description": "A sealed record hall where journals, floor logs, and theory notes can be reconstructed into one timeline."
+    },
+    {
+      "id": "observatory_span",
+      "name": "Observatory Span",
+      "area_id": "observatory_floor",
+      "description": "A high lens chamber that turns the tower's history into a final view rather than a weapon."
+    }
+  ],
+  "stations": [
+    {
+      "id": "entry_cauldron",
+      "name": "Entry Cauldron",
+      "kind": "alchemy",
+      "area_id": "tower_entry",
+      "position": [
+        466.0,
+        258.0
+      ],
+      "interaction_radius": 54.0,
+      "color": [
+        118,
+        255,
+        214,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 6,
+        "favored_traits": [
+          "healing",
+          "luminous"
+        ],
+        "favored_categories": [
+          "catalyst"
+        ],
+        "description": "The entry lab still holds enough old wards to steady restorative and luminous brews."
+      }
+    },
+    {
+      "id": "greenhouse_still",
+      "name": "Greenhouse Still",
+      "kind": "alchemy",
+      "area_id": "greenhouse_floor",
+      "position": [
+        470.0,
+        210.0
+      ],
+      "interaction_radius": 54.0,
+      "color": [
+        180,
+        255,
+        180,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 10,
+        "favored_traits": [
+          "healing",
+          "pure",
+          "restorative"
+        ],
+        "favored_categories": [
+          "ingredient",
+          "catalyst"
+        ],
+        "description": "Sun-warmed glass and irrigation sigils make careful restorative work easier here."
+      },
+      "planter_harvest_days": 0
+    },
+    {
+      "id": "greenhouse_planter_west",
+      "name": "West Planter Bed",
+      "kind": "planter",
+      "area_id": "greenhouse_floor",
+      "position": [
+        286.0,
+        470.0
+      ],
+      "interaction_radius": 48.0,
+      "color": [
+        196,
+        248,
+        184,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 0,
+        "favored_traits": [],
+        "favored_categories": [],
+        "description": ""
+      },
+      "planter_harvest_days": 2,
+      "planter_seed_ids": [
+        "ember_root",
+        "mist_moth_wing"
+      ],
+      "planter_yield_bonus": 1
+    },
+    {
+      "id": "greenhouse_planter_east",
+      "name": "East Planter Bed",
+      "kind": "planter",
+      "area_id": "greenhouse_floor",
+      "position": [
+        650.0,
+        470.0
+      ],
+      "interaction_radius": 48.0,
+      "color": [
+        196,
+        248,
+        184,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 0,
+        "favored_traits": [],
+        "favored_categories": [],
+        "description": ""
+      },
+      "planter_harvest_days": 2,
+      "planter_seed_ids": [
+        "moon_fern",
+        "arcane_dust"
+      ],
+      "planter_yield_bonus": 1
+    },
+    {
+      "id": "greenhouse_planter_north",
+      "name": "Expanded Moon Bed",
+      "kind": "planter",
+      "area_id": "greenhouse_floor",
+      "position": [
+        472.0,
+        570.0
+      ],
+      "interaction_radius": 48.0,
+      "color": [
+        220,
+        255,
+        220,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 0,
+        "favored_traits": [],
+        "favored_categories": [],
+        "description": ""
+      },
+      "planter_harvest_days": 1,
+      "planter_seed_ids": [
+        "moon_fern"
+      ],
+      "planter_yield_bonus": 2,
+      "required_completed_quest": "cultivation_for_brin",
+      "required_total_brews": 12
+    },
+    {
+      "id": "town_request_board",
+      "name": "Request Board",
+      "kind": "quest_board",
+      "area_id": "town_square",
+      "position": [
+        610.0,
+        196.0
+      ],
+      "interaction_radius": 52.0,
+      "color": [
+        240,
+        220,
+        170,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 0,
+        "favored_traits": [],
+        "favored_categories": [],
+        "description": ""
+      },
+      "planter_harvest_days": 0
+    },
+    {
+      "id": "containment_habitat_moth",
+      "name": "Lantern Habitat",
+      "kind": "habitat",
+      "area_id": "containment_floor",
+      "position": [
+        328.0,
+        298.0
+      ],
+      "interaction_radius": 54.0,
+      "color": [
+        231,
+        224,
+        170,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 0,
+        "favored_traits": [],
+        "favored_categories": [],
+        "description": ""
+      },
+      "planter_harvest_days": 0,
+      "habitat_creature_ids": [
+        "glow_moth"
+      ],
+      "habitat_output_item_id": "lumen_dust",
+      "habitat_harvest_days": 1,
+      "required_total_brews": 18
+    },
+    {
+      "id": "containment_habitat_slug",
+      "name": "Mist Habitat",
+      "kind": "habitat",
+      "area_id": "containment_floor",
+      "position": [
+        622.0,
+        298.0
+      ],
+      "interaction_radius": 54.0,
+      "color": [
+        170,
+        220,
+        240,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 0,
+        "favored_traits": [],
+        "favored_categories": [],
+        "description": ""
+      },
+      "planter_harvest_days": 0,
+      "habitat_creature_ids": [
+        "dew_slug"
+      ],
+      "habitat_output_item_id": "dew_slime",
+      "habitat_harvest_days": 1,
+      "required_total_brews": 18
+    },
+    {
+      "id": "rune_workbench",
+      "name": "Rune Workbench",
+      "kind": "rune_workshop",
+      "area_id": "rune_workshop_floor",
+      "position": [
+        470.0,
+        250.0
+      ],
+      "interaction_radius": 56.0,
+      "color": [
+        216,
+        182,
+        255,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 0,
+        "favored_traits": [],
+        "favored_categories": [],
+        "description": ""
+      },
+      "planter_harvest_days": 0,
+      "required_total_brews": 24
+    },
+    {
+      "id": "archive_console",
+      "name": "Archive Console",
+      "kind": "archive_console",
+      "area_id": "archive_floor",
+      "position": [
+        470.0,
+        248.0
+      ],
+      "interaction_radius": 58.0,
+      "color": [
+        214,
+        204,
+        170,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 0,
+        "favored_traits": [],
+        "favored_categories": [],
+        "description": ""
+      },
+      "planter_harvest_days": 0,
+      "required_total_brews": 30
+    },
+    {
+      "id": "observatory_focus",
+      "name": "Astral Lens",
+      "kind": "ending_focus",
+      "area_id": "observatory_floor",
+      "position": [
+        474.0,
+        242.0
+      ],
+      "interaction_radius": 58.0,
+      "color": [
+        176,
+        206,
+        255,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 0,
+        "favored_traits": [],
+        "favored_categories": [],
+        "description": ""
+      },
+      "planter_harvest_days": 0,
+      "required_journal_milestone": "archive_revelation"
+    },
+    {
+      "id": "apothecary_counter",
+      "name": "Town Apothecary",
+      "kind": "shop",
+      "area_id": "town_square",
+      "position": [
+        288.0,
+        384.0
+      ],
+      "interaction_radius": 60.0,
+      "color": [
+        255,
+        214,
+        132,
+        255
+      ],
+      "stock": [
+        {
+          "item_id": "sunleaf",
+          "price": 8
+        },
+        {
+          "item_id": "whisper_moss",
+          "price": 7
+        },
+        {
+          "item_id": "arcane_dust",
+          "price": 12
+        },
+        {
+          "item_id": "moon_fern",
+          "price": 18
+        },
+        {
+          "item_id": "starlight_shard",
+          "price": 28
+        },
+        {
+          "item_id": "splash_rune",
+          "price": 34
+        },
+        {
+          "item_id": "echo_rune",
+          "price": 38
+        },
+        {
+          "item_id": "delay_rune",
+          "price": 36
+        }
+      ],
+      "room_bonus": {
+        "quality_bonus": 0,
+        "favored_traits": [],
+        "favored_categories": [],
+        "description": ""
+      },
+      "planter_harvest_days": 0
+    }
+  ]
+}

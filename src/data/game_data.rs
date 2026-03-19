@@ -40,6 +40,40 @@ pub struct GameData {
 }
 
 impl GameData {
+    pub(crate) fn from_parts(
+        config: GameConfig,
+        areas: Vec<AreaDefinition>,
+        gathering_routes: Vec<GatheringRouteDefinition>,
+        npcs: Vec<NpcDefinition>,
+        quests: Vec<QuestDefinition>,
+        items: Vec<ItemDefinition>,
+        recipes: Vec<RecipeDefinition>,
+        rune_recipes: Vec<RuneRecipeDefinition>,
+        mutation_formulas: Vec<MutationFormulaDefinition>,
+        stations: Vec<StationDefinition>,
+    ) -> Self {
+        let mut data = Self {
+            config,
+            areas,
+            gathering_routes,
+            npcs,
+            quests,
+            items,
+            recipes,
+            rune_recipes,
+            mutation_formulas,
+            stations,
+            area_index: HashMap::new(),
+            item_index: HashMap::new(),
+            route_index: HashMap::new(),
+            npc_index: HashMap::new(),
+            quest_index: HashMap::new(),
+            mutation_formula_index: HashMap::new(),
+        };
+        data.build_indexes();
+        data
+    }
+
     pub fn build_indexes(&mut self) {
         self.area_index = self
             .areas
@@ -89,11 +123,8 @@ impl GameData {
     }
 
     pub fn fallback() -> Self {
-        let mut data: Self =
-            serde_json::from_str(include_str!("../../assets/data/game_data.json"))
-                .expect("embedded fallback game_data.json must remain valid");
-        data.build_indexes();
-        data
+        crate::data::GameDataLoader::load_embedded()
+            .expect("embedded fallback game data must remain valid")
     }
 
     pub fn item(&self, item_id: &str) -> Option<&ItemDefinition> {

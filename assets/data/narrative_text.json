@@ -45,16 +45,16 @@
     "observatory_footer": "Enter or Esc to step back"
   },
   "phase1": {
-    "crow_default": "If the valley still has a chance, it will begin with careful help, not grand correction.",
-    "crow_after_healing": "A town that can rest can still choose what to mend next. Good. Relief comes before restoration.",
-    "crow_after_glow": "Safer roads change more than a single walk home. Once people stop bracing for dusk, they begin imagining tomorrow again.",
-    "crow_after_greenhouse": "This room was never meant to feed the tower alone. It was meant to steady the valley. Remember that.",
-    "elric_after_healing": "Mira says your draught held steady. That matters. People talk differently about the tower when it actually eases a burden.",
-    "elric_after_glow": "Rowan's route reports have calmed down. One safe road is not a solved town, but it proves conditions can be pushed back.",
-    "elric_after_greenhouse": "If Brin can get real growth out of the greenhouse again, then this is no longer a private curiosity. It becomes civic recovery.",
-    "brin_after_healing": "If Mira can keep people upright, there may still be enough hands left to tend what little has not failed.",
-    "ione_after_glow": "A stable carried light on a public road tells me the tower's work once extended beyond its own walls. That matters more than the formula alone.",
-    "mira_after_greenhouse": "Fresh growth and steadier medicines in the same week. That is the first time this town has sounded hopeful in a long while.",
-    "rowan_after_greenhouse": "The greenhouse glow reaches farther than the glass. People walk easier when they can see something living return."
+    "crow_default": "Care first. Answers later.",
+    "crow_after_healing": "Good. Let the town breathe before you ask it to believe.",
+    "crow_after_glow": "A safer road is never only a road.",
+    "crow_after_greenhouse": "Yes. That is what this room was for. Keep going carefully.",
+    "elric_after_healing": "Mira says the draught held. Practical help changes public opinion faster than speeches.",
+    "elric_after_glow": "A safer route at dusk gives people back time, labor, and nerve. That is not minor.",
+    "elric_after_greenhouse": "Once the greenhouse starts producing, the tower stops being rumor and becomes infrastructure again.",
+    "brin_after_healing": "If Mira can keep folks on their feet, maybe we can keep enough hands in the soil to matter.",
+    "ione_after_glow": "A carried light that holds on the road is useful evidence. It suggests the tower's work used to travel.",
+    "mira_after_greenhouse": "Fresh greens and steadier medicine in the same week. I had almost forgotten what that felt like.",
+    "rowan_after_greenhouse": "Funny what a bit of living light does. People stop hurrying like something is behind them."
   }
 }

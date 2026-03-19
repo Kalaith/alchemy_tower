@@ -258,6 +258,10 @@ pub struct NpcDefinition {
     pub role: String,
     #[serde(default)]
     pub schedule: Vec<NpcScheduleEntry>,
+    #[serde(default)]
+    pub phase1_dialogue: NpcPhase1DialogueDefinition,
+    #[serde(default)]
+    pub crow_phase1_dialogue: CrowPhase1DialogueDefinition,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -265,6 +269,32 @@ pub struct NpcScheduleEntry {
     pub time_window: String,
     pub area_id: String,
     pub position: [f32; 2],
+}
+
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
+pub struct NpcPhase1DialogueDefinition {
+    #[serde(default)]
+    pub intro: String,
+    #[serde(default)]
+    pub pre_help_concern: String,
+    #[serde(default)]
+    pub active_request: String,
+    #[serde(default)]
+    pub post_help_relief: String,
+    #[serde(default)]
+    pub town_recovery_observation: String,
+}
+
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
+pub struct CrowPhase1DialogueDefinition {
+    #[serde(default)]
+    pub first_meeting: String,
+    #[serde(default)]
+    pub first_brew: String,
+    #[serde(default)]
+    pub first_quest_complete: String,
+    #[serde(default)]
+    pub first_tower_restoration: String,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]

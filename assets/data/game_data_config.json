@@ -1,0 +1,13 @@
+{
+  "config": {
+    "starting_area": "tower_entry",
+    "starting_position": [
+      220.0,
+      320.0
+    ],
+    "move_speed": 220.0,
+    "interaction_range": 28.0,
+    "day_length_seconds": 2400.0,
+    "save_version": 5
+  }
+}
