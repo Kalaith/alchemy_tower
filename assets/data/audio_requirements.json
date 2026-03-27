@@ -1,0 +1,296 @@
+{
+  "version": 1,
+  "project": "alchemy_tower",
+  "audio_direction": {
+    "overall_feel": "Warm village-fantasy sound design with soft magic, tactile materials, and restrained mystery. Favor intimate, hand-made sounds over huge cinematic impacts.",
+    "mix_notes": [
+      "Keep UI and interaction sounds short and readable.",
+      "Magic should feel careful and crafted, not explosive superhero spectacle.",
+      "Town sounds should feel lived in and grounded.",
+      "Tower sounds should feel old, resonant, and slightly haunted without leaning into horror.",
+      "Avoid harsh high-end spikes that become fatiguing during repeated gathering and brewing loops."
+    ],
+    "priority_order": [
+      "core interactions",
+      "alchemy feedback",
+      "quest and unlock feedback",
+      "ui clarity",
+      "area ambience",
+      "surface-specific footsteps"
+    ]
+  },
+  "technical_guidance": {
+    "recommended_format": "wav",
+    "recommended_sample_rate_hz": 48000,
+    "recommended_bit_depth": 24,
+    "looping_rule": "Only ambience should loop cleanly. Most interaction sounds should be one-shots.",
+    "variation_rule": "Any repeated action the player performs often should have 3 to 6 variations where practical.",
+    "loudness_note": "Normalize one-shots to a consistent gameplay-safe level. Reserve higher peak energy for unlocks and major quest completions."
+  },
+  "audio_requirements": {
+    "player_movement": [
+      {
+        "id": "footstep_stone",
+        "type": "foley_oneshot_set",
+        "priority": "medium",
+        "variations": 6,
+        "prompt": "Light practical footsteps on old indoor stone, soft boot leather and subtle grit, suitable for tower floors."
+      },
+      {
+        "id": "footstep_dirt_path",
+        "type": "foley_oneshot_set",
+        "priority": "medium",
+        "variations": 6,
+        "prompt": "Soft village path footsteps with dirt, dry grass, and light boot scuff."
+      },
+      {
+        "id": "footstep_wood",
+        "type": "foley_oneshot_set",
+        "priority": "medium",
+        "variations": 5,
+        "prompt": "Short restrained wooden footstep set for boards, platforms, and interior timber spaces."
+      },
+      {
+        "id": "footstep_greenhouse",
+        "type": "foley_oneshot_set",
+        "priority": "low",
+        "variations": 5,
+        "prompt": "Damp greenhouse footstep set with soft stone, condensation, and faint leaf-brush detail."
+      }
+    ],
+    "gathering_and_collection": [
+      {
+        "id": "gather_herb_pickup",
+        "type": "interaction_oneshot_set",
+        "priority": "high",
+        "variations": 5,
+        "prompt": "Gentle herb gathering sounds with leaf pluck, stem snap, and small satchel rustle. Useful for picking up herbs and moss."
+      },
+      {
+        "id": "gather_mineral_pickup",
+        "type": "interaction_oneshot_set",
+        "priority": "high",
+        "variations": 4,
+        "prompt": "Small magical dust and crystal collection sounds, powder scrape with faint arcane shimmer."
+      },
+      {
+        "id": "gather_creature_collect",
+        "type": "interaction_oneshot_set",
+        "priority": "medium",
+        "variations": 4,
+        "prompt": "Gentle creature collection cue, careful net or jar motion with soft magical flutter rather than aggressive capture."
+      },
+      {
+        "id": "gather_rare_discovery",
+        "type": "reward_oneshot",
+        "priority": "medium",
+        "variations": 2,
+        "prompt": "A brief rewarding sparkle cue for rare finds, best-quality gathers, and notable discoveries."
+      },
+      {
+        "id": "inventory_pickup_general",
+        "type": "ui_interaction_oneshot",
+        "priority": "medium",
+        "variations": 3,
+        "prompt": "Short tidy pickup confirmation for inventory gains, light glass-cloth-paper blend without sounding like coin collection."
+      }
+    ],
+    "alchemy_and_processing": [
+      {
+        "id": "alchemy_station_open",
+        "type": "ui_interaction_oneshot",
+        "priority": "medium",
+        "variations": 2,
+        "prompt": "A short arcane workstation open cue, soft resonance and brass movement."
+      },
+      {
+        "id": "alchemy_ingredient_place",
+        "type": "interaction_oneshot_set",
+        "priority": "medium",
+        "variations": 4,
+        "prompt": "Small ingredient placement sounds for herbs, powders, and bottles entering an alchemy setup."
+      },
+      {
+        "id": "alchemy_heat_adjust",
+        "type": "ui_interaction_oneshot_set",
+        "priority": "low",
+        "variations": 3,
+        "prompt": "Subtle heat-control click or valve-turn set for adjusting brew heat."
+      },
+      {
+        "id": "alchemy_stir",
+        "type": "interaction_oneshot_set",
+        "priority": "medium",
+        "variations": 4,
+        "prompt": "Glass rod or ladle stirring a magical brew, wet circular motion with soft bubbling."
+      },
+      {
+        "id": "brew_start",
+        "type": "interaction_oneshot",
+        "priority": "high",
+        "variations": 2,
+        "prompt": "The start of a careful magical brew, liquid settling into a deliberate simmer."
+      },
+      {
+        "id": "brew_success",
+        "type": "reward_oneshot",
+        "priority": "high",
+        "variations": 3,
+        "prompt": "A satisfying successful brew cue, bubbling resolve into a soft magical chime. Rewarding but not flashy."
+      },
+      {
+        "id": "brew_collapse",
+        "type": "failure_oneshot",
+        "priority": "high",
+        "variations": 3,
+        "prompt": "A failed brew cue with sputter, muddy fizz, and magical collapse. Communicate error without sounding comic."
+      },
+      {
+        "id": "recipe_logged",
+        "type": "reward_oneshot",
+        "priority": "medium",
+        "variations": 2,
+        "prompt": "Short satisfying note-entry cue for recipe discovery and logged formula progress."
+      },
+      {
+        "id": "potion_consume",
+        "type": "interaction_oneshot_set",
+        "priority": "medium",
+        "variations": 3,
+        "prompt": "Quick potion use set with cork pop, swallow, and faint afterglow."
+      },
+      {
+        "id": "rune_apply",
+        "type": "interaction_oneshot",
+        "priority": "low",
+        "variations": 2,
+        "prompt": "A focused rune-imprinting cue, etched magical line with crisp glyph flare."
+      }
+    ],
+    "quests_progression_and_rewards": [
+      {
+        "id": "quest_accept",
+        "type": "ui_reward_oneshot",
+        "priority": "high",
+        "variations": 2,
+        "prompt": "Clear quest accepted cue, warm and forward-moving."
+      },
+      {
+        "id": "quest_complete",
+        "type": "reward_oneshot",
+        "priority": "high",
+        "variations": 2,
+        "prompt": "A stronger quest completion cue with warmth, relief, and modest triumph."
+      },
+      {
+        "id": "unlock_floor_or_route",
+        "type": "major_reward_oneshot",
+        "priority": "high",
+        "variations": 2,
+        "prompt": "A magical restoration unlock cue for floors and routes, old wards waking with hopeful resonance."
+      },
+      {
+        "id": "journal_milestone",
+        "type": "ui_reward_oneshot",
+        "priority": "high",
+        "variations": 2,
+        "prompt": "A concise milestone cue for journal discoveries and important progress markers."
+      },
+      {
+        "id": "coins_receive",
+        "type": "reward_oneshot_set",
+        "priority": "medium",
+        "variations": 3,
+        "prompt": "Small coin reward set, tidy and readable without sounding like a casino."
+      },
+      {
+        "id": "sell_item",
+        "type": "ui_interaction_oneshot_set",
+        "priority": "medium",
+        "variations": 3,
+        "prompt": "Brief shop sale cue with coin and counter texture."
+      }
+    ],
+    "ui_and_navigation": [
+      {
+        "id": "ui_move",
+        "type": "ui_interaction_oneshot_set",
+        "priority": "medium",
+        "variations": 4,
+        "prompt": "Soft UI navigation tick for moving through menus and lists."
+      },
+      {
+        "id": "ui_confirm",
+        "type": "ui_interaction_oneshot_set",
+        "priority": "medium",
+        "variations": 3,
+        "prompt": "Short confirm sound with a clean magical-fantasy polish."
+      },
+      {
+        "id": "ui_cancel",
+        "type": "ui_interaction_oneshot_set",
+        "priority": "medium",
+        "variations": 3,
+        "prompt": "Gentle cancel or close sound, clear but unobtrusive."
+      },
+      {
+        "id": "ui_dialogue_open",
+        "type": "ui_interaction_oneshot",
+        "priority": "medium",
+        "variations": 2,
+        "prompt": "A soft dialogue panel open cue, intimate and restrained."
+      },
+      {
+        "id": "ui_page_turn",
+        "type": "ui_interaction_oneshot_set",
+        "priority": "low",
+        "variations": 4,
+        "prompt": "Short book or journal page turn set for archive and journal browsing."
+      }
+    ],
+    "world_and_ambience": [
+      {
+        "id": "ambience_tower_entry",
+        "type": "ambient_loop",
+        "priority": "medium",
+        "variations": 1,
+        "prompt": "Low-key tower laboratory ambience with distant stone resonance, faint glass rattle, and soft magical hum."
+      },
+      {
+        "id": "ambience_town_square",
+        "type": "ambient_loop",
+        "priority": "medium",
+        "variations": 1,
+        "prompt": "Warm village square ambience with breeze, subtle market life, cloth, wood, and occasional distant work sounds."
+      },
+      {
+        "id": "ambience_moonlit_forest",
+        "type": "ambient_loop",
+        "priority": "medium",
+        "variations": 1,
+        "prompt": "Night forest ambience with soft insects, distant leaves, damp air, and a hint of magical stillness."
+      },
+      {
+        "id": "ambience_greenhouse_floor",
+        "type": "ambient_loop",
+        "priority": "medium",
+        "variations": 1,
+        "prompt": "Restored greenhouse ambience with condensation, gentle glass ticks, soft leaf movement, and warm humidity."
+      },
+      {
+        "id": "warp_hum",
+        "type": "ambient_loop",
+        "priority": "low",
+        "variations": 1,
+        "prompt": "A subtle magical doorway hum for active tower warps, gentle and unobtrusive."
+      },
+      {
+        "id": "day_rollover_sting",
+        "type": "transition_oneshot",
+        "priority": "low",
+        "variations": 1,
+        "prompt": "A brief end-of-day transition cue with calm closure and a touch of wonder."
+      }
+    ]
+  }
+}
