@@ -7,6 +7,7 @@ This file describes what the game currently supports based on the source code an
 - Macroquad game loop with `Menu`, `Gameplay`, and `Pause` states.
 - JSON-driven content loading through embedded split `game_data_*.json` files.
 - Native JSON save/load support with versioned save data.
+- Filesystem-backed generated texture loading for world, character, item, UI, and effect art under `assets/generated/`.
 
 ## Core Exploration
 
@@ -14,6 +15,10 @@ This file describes what the game currently supports based on the source code an
 - Multi-area travel through authored warp regions.
 - Camera follow, impact shake, and immediate-mode UI panels/prompts.
 - Day clock, day rollover, weather state, season state, and time-of-day windows.
+- Rest bed on the tower entry floor with voluntary sleep-to-morning interaction.
+- Late-night exhaustion pressure:
+  - HUD time warning turns yellow after midnight
+  - hitting 01:00 forces a collapse wake-up at 10:00 back at the tower bed with a full-screen warning flash
 - In-world route/station/NPC prompts with contextual requirement or readiness messaging.
 - First-run contextual tutorial toasts for:
   - Crow-led first gather and first brew guidance
@@ -24,6 +29,10 @@ This file describes what the game currently supports based on the source code an
   - potions and route restoration
 
 ## World Content
+
+- Procedurally generated background plates for each authored area.
+- Procedurally generated sprites for the player, authored NPCs, stations, gatherables, inventory icons, journal tab icons, toast icons, and major world effects.
+- World rendering now uses texture-backed stations, characters, gather nodes, warp glows, and feedback effects instead of only primitive placeholder shapes.
 
 Current authored areas:
 
@@ -350,4 +359,3 @@ The codebase does not currently show support for:
 - dialogue trees with player choices
 - cutscenes or branching endings
 - audio systems
-- sprite/animation asset systems beyond simple shape rendering

@@ -1,5 +1,6 @@
 use macroquad::prelude::*;
 
+mod art;
 mod alchemy;
 mod content;
 mod data;

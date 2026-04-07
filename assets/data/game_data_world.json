@@ -984,6 +984,31 @@
       }
     },
     {
+      "id": "entry_rest_bed",
+      "name": "Camp Bed",
+      "kind": "rest_bed",
+      "area_id": "tower_entry",
+      "position": [
+        176.0,
+        606.0
+      ],
+      "interaction_radius": 52.0,
+      "color": [
+        214,
+        196,
+        148,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 0,
+        "favored_traits": [],
+        "favored_categories": [],
+        "description": ""
+      },
+      "planter_harvest_days": 0
+    },
+    {
       "id": "greenhouse_still",
       "name": "Greenhouse Still",
       "kind": "alchemy",

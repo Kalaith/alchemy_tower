@@ -121,6 +121,7 @@ Why:
 
 Tasks:
 - [x] Give important stations and node types stronger silhouettes and ambient visual identity.
+- [x] Replace placeholder shape-only presentation with a generated art pass for areas, stations, characters, item icons, journal tabs, toasts, and feedback effects.
 - [x] Improve weather/time-of-day visual feedback.
 - [x] Review NPC readability so key turn-in characters remain easy to find.
 - [x] Smooth first-hour readability for first gather, first brew, first unlock, and first NPC hand-in with contextual prompts and tutorial hints.

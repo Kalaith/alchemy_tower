@@ -80,6 +80,8 @@ impl GameplayStateLoader {
 
         state.world.current_area_id = save.current_area;
         state.world.player.position = vec2(save.player_position[0], save.player_position[1]);
+        state.world.player.facing = vec2(0.0, 1.0);
+        state.world.player.moving = false;
         state.world.day_index = save.day_index;
         state.world.day_clock_seconds = save.day_clock_seconds;
         state.world.day_length_seconds = data.config.day_length_seconds;

@@ -1,4 +1,5 @@
 use super::*;
+use crate::art::{draw_texture_centered, journal_tab_icon_key, ArtAssets};
 use crate::content::{input_bindings, ui_copy, ui_format};
 use crate::ui::{
     draw_overlay_backdrop, draw_overlay_footer, draw_overlay_subtitle, draw_selection_card,
@@ -926,7 +927,7 @@ impl GameplayState {
         );
     }
 
-    pub(super) fn draw_field_journal(&self, data: &GameData) {
+    pub(super) fn draw_field_journal(&self, data: &GameData, art: &ArtAssets) {
         draw_rectangle(
             0.0,
             0.0,
@@ -1008,7 +1009,7 @@ impl GameplayState {
             );
             draw_text(
                 tab,
-                rect.x + 12.0,
+                rect.x + 34.0,
                 rect.y + 20.0,
                 18.0,
                 if selected {
@@ -1017,6 +1018,9 @@ impl GameplayState {
                     dark::TEXT_DIM
                 },
             );
+            if let Some(texture) = art.journal_tab(journal_tab_icon_key(tab)) {
+                draw_texture_centered(texture, vec2(rect.x + 18.0, rect.y + 14.0), vec2(18.0, 18.0), WHITE);
+            }
         }
 
         match tabs.get(self.ui.journal_tab).copied().unwrap_or("Routes") {
@@ -1550,7 +1554,7 @@ impl GameplayState {
         );
     }
 
-    pub(super) fn draw_alchemy_overlay(&self, data: &GameData) {
+    pub(super) fn draw_alchemy_overlay(&self, data: &GameData, art: &ArtAssets) {
         draw_overlay_backdrop();
         let x = 80.0;
         let y = 64.0;
@@ -1558,6 +1562,10 @@ impl GameplayState {
         let h = screen_height() - 128.0;
         draw_panel(x, y, w, h, "Alchemy");
         draw_overlay_subtitle(x, y, &ui_text().overlays.alchemy_subtitle);
+        if let Some(texture) = art.effect("brew_bubble_effect") {
+            let alpha = 0.55 + ((get_time() as f32 * 2.4).sin() * 0.5 + 0.5) * 0.25;
+            draw_texture_centered(texture, vec2(x + w - 54.0, y + 44.0), vec2(42.0, 42.0), Color::new(1.0, 1.0, 1.0, alpha));
+        }
 
         let items = self.alchemy_materials(data);
         draw_text(ui_copy("overlay_materials"), x + 20.0, y + 84.0, 28.0, dark::TEXT_BRIGHT);

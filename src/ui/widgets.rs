@@ -1,17 +1,16 @@
 use macroquad::prelude::*;
 use macroquad_toolkit::colors::dark;
 
+use crate::ui::truncate_text_to_width;
+
 pub fn draw_action_button(rect: Rect, label: &str, label_offset_x: f32) {
     let hovered = rect.contains(mouse_position().into());
     let fill = if hovered { dark::HOVERED } else { dark::ACCENT };
     draw_rectangle(rect.x, rect.y, rect.w, rect.h, fill);
-    draw_text(
-        label,
-        rect.x + label_offset_x,
-        rect.y + 30.0,
-        28.0,
-        dark::TEXT_BRIGHT,
-    );
+    let safe = truncate_text_to_width(label, rect.w - 20.0, 24.0);
+    let measured = measure_text(&safe, None, 24, 1.0);
+    let x = rect.x + ((rect.w - measured.width) * 0.5).max(label_offset_x.min(rect.w - 20.0));
+    draw_text(&safe, x, rect.y + 29.0, 24.0, dark::TEXT_BRIGHT);
 }
 
 pub fn draw_state_banner(x: f32, y: f32, w: f32, text: &str, is_locked: bool) {
@@ -22,7 +21,13 @@ pub fn draw_state_banner(x: f32, y: f32, w: f32, text: &str, is_locked: bool) {
     };
     draw_rectangle(x, y, w, 32.0, color);
     draw_rectangle_lines(x, y, w, 32.0, 2.0, dark::ACCENT);
-    draw_text(text, x + 10.0, y + 21.0, 18.0, dark::TEXT_BRIGHT);
+    draw_text(
+        &truncate_text_to_width(text, w - 20.0, 18.0),
+        x + 10.0,
+        y + 21.0,
+        18.0,
+        dark::TEXT_BRIGHT,
+    );
 }
 
 pub fn draw_selection_card(
@@ -48,17 +53,36 @@ pub fn draw_selection_card(
     };
     draw_rectangle(x, y, w, h, bg);
     draw_rectangle_lines(x, y, w, h, 2.0, if selected { WHITE } else { dark::ACCENT });
-    draw_text(title, x + 12.0, y + 22.0, 22.0, text_color);
+    let meta_width = if meta.is_empty() {
+        0.0
+    } else {
+        measure_text(meta, None, 16, 1.0).width.min((w * 0.34).max(56.0))
+    };
+    let title_width = (w - 30.0 - meta_width).max(80.0);
+    draw_text(
+        &truncate_text_to_width(title, title_width, 20.0),
+        x + 12.0,
+        y + 21.0,
+        20.0,
+        text_color,
+    );
     if !subtitle.is_empty() {
-        draw_text(subtitle, x + 12.0, y + 42.0, 18.0, dark::TEXT_DIM);
+        draw_text(
+            &truncate_text_to_width(subtitle, w - 24.0, 16.0),
+            x + 12.0,
+            y + 40.0,
+            16.0,
+            dark::TEXT_DIM,
+        );
     }
     if !meta.is_empty() {
-        let measured = measure_text(meta, None, 18, 1.0);
+        let safe_meta = truncate_text_to_width(meta, (w * 0.34).max(56.0), 16.0);
+        let measured = measure_text(&safe_meta, None, 16, 1.0);
         draw_text(
-            meta,
+            &safe_meta,
             x + w - measured.width - 12.0,
-            y + 22.0,
-            18.0,
+            y + 21.0,
+            16.0,
             dark::TEXT_DIM,
         );
     }

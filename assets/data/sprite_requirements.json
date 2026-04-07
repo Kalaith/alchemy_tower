@@ -88,6 +88,12 @@
         "prompt": "A restored entry-lab alchemy cauldron for a top-down game, sturdy iron basin, luminous teal simmer, copper pipes, arcane ward marks, old but cared-for magical workstation, instantly readable as brewing equipment."
       },
       {
+        "id": "entry_rest_bed",
+        "type": "world_station",
+        "image_size_px": [128, 128],
+        "prompt": "A top-down camp bed tucked into an alchemy tower entry room, sturdy wooden frame, folded blanket, practical pillow, warm safe resting place for a tired tower alchemist, readable as a sleep station."
+      },
+      {
         "id": "greenhouse_still",
         "type": "world_station",
         "image_size_px": [128, 128],

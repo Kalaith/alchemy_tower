@@ -1,7 +1,10 @@
 use super::*;
+use crate::art::{draw_texture_centered, toast_icon_for_text, ArtAssets};
 use crate::content::{input_bindings, ui_copy, ui_format};
+use crate::ui::{draw_wrapped_text, truncate_text_to_width};
 
 struct HudLine {
+    icon_id: Option<String>,
     title: String,
     detail: String,
 }
@@ -16,6 +19,7 @@ struct HudToastView {
     text: String,
     color: Color,
     alpha: f32,
+    icon_key: &'static str,
 }
 
 struct HudFeedbackView {
@@ -32,6 +36,8 @@ struct HudView {
     coins_text: String,
     vitality_text: String,
     time_text: String,
+    time_color: Color,
+    sleep_warning_text: Option<String>,
     progress_text: String,
     day_text: String,
     goal_text: String,
@@ -46,9 +52,9 @@ struct HudView {
 }
 
 impl GameplayState {
-    pub(super) fn draw_hud(&self, area: &AreaDefinition, data: &GameData) {
+    pub(super) fn draw_hud(&self, area: &AreaDefinition, data: &GameData, art: &ArtAssets) {
         let view = self.build_hud_view(area, data);
-        draw_hud_view(&view);
+        draw_hud_view(&view, art);
     }
 
     fn build_hud_view(&self, area: &AreaDefinition, data: &GameData) -> HudView {
@@ -75,6 +81,7 @@ impl GameplayState {
             let inventory_items = self.sorted_inventory_items(data);
             if inventory_items.is_empty() {
                 vec![HudLine {
+                    icon_id: None,
                     title: ui_copy("hud_inventory_empty").to_owned(),
                     detail: String::new(),
                 }]
@@ -84,6 +91,7 @@ impl GameplayState {
                     .map(|item_id| {
                         let amount = self.inventory.get(&item_id).copied().unwrap_or_default();
                         HudLine {
+                            icon_id: Some(item_id.clone()),
                             title: format!("{} x{}", data.item_name(&item_id), amount),
                             detail: String::new(),
                         }
@@ -102,6 +110,7 @@ impl GameplayState {
 
         let effects = if self.runtime.active_effects.is_empty() {
             vec![HudLine {
+                icon_id: None,
                 title: ui_copy("hud_effects_empty").to_owned(),
                 detail: String::new(),
             }]
@@ -110,6 +119,7 @@ impl GameplayState {
                 .active_effects
                 .iter()
                 .map(|effect| HudLine {
+                    icon_id: None,
                     title: format!(
                         "{} {:.0}s",
                         effect_name(effect.kind),
@@ -124,6 +134,7 @@ impl GameplayState {
             let quick = self.quick_potions(data);
             if quick.is_empty() {
                 vec![HudLine {
+                    icon_id: None,
                     title: ui_copy("hud_potions_empty").to_owned(),
                     detail: String::new(),
                 }]
@@ -144,6 +155,7 @@ impl GameplayState {
                             })
                             .unwrap_or_default();
                         HudLine {
+                            icon_id: Some(item_id.clone()),
                             title: format!(
                                 "{}: {} x{}",
                                 ["Z", "X", "C"][index],
@@ -170,6 +182,16 @@ impl GameplayState {
                 "hud_time",
                 &[("time", &clock_text(self.world.day_clock_seconds, data.config.day_length_seconds))],
             ),
+            time_color: if self.current_clock_minutes() < 60.0 {
+                Color::from_rgba(255, 214, 132, 255)
+            } else {
+                dark::TEXT
+            },
+            sleep_warning_text: if self.current_clock_minutes() < 60.0 {
+                Some(ui_copy("hud_sleep_warning").to_owned())
+            } else {
+                None
+            },
             progress_text: ui_format("hud_progress", &[("brews", &self.progression.total_brews.to_string())]),
             day_text: ui_format(
                 "hud_day",
@@ -208,6 +230,7 @@ impl GameplayState {
                 text: toast.text.clone(),
                 color: toast.color,
                 alpha: (toast.remaining_seconds / 2.2).clamp(0.0, 1.0),
+                icon_key: toast_icon_for_text(&toast.text),
             })
             .collect()
     }
@@ -256,21 +279,21 @@ impl GameplayState {
     }
 }
 
-fn draw_hud_view(view: &HudView) {
+fn draw_hud_view(view: &HudView, art: &ArtAssets) {
     draw_status_panel(view);
-    draw_inventory_panel(view);
+    draw_inventory_panel(view, art);
     draw_effects_panel(view);
-    draw_potion_panel(view);
-    draw_hud_toasts(&view.toasts);
-    draw_hud_feedbacks(&view.feedbacks);
+    draw_potion_panel(view, art);
+    draw_hud_toasts(&view.toasts, art);
+    draw_hud_feedbacks(&view.feedbacks, art);
 }
 
 fn draw_status_panel(view: &HudView) {
-    draw_panel(18.0, 18.0, 520.0, 210.0, ui_copy("hud_status_title"));
+    draw_panel(18.0, 18.0, 560.0, 276.0, ui_copy("hud_status_title"));
     draw_text(&view.area_name, 34.0, 58.0, 32.0, dark::TEXT_BRIGHT);
     draw_text(
         &view.coins_text,
-        360.0,
+        392.0,
         58.0,
         28.0,
         Color::from_rgba(255, 214, 132, 255),
@@ -282,28 +305,41 @@ fn draw_status_panel(view: &HudView) {
         24.0,
         Color::from_rgba(126, 220, 158, 255),
     );
-    draw_text(&view.time_text, 34.0, 112.0, 24.0, dark::TEXT);
+    draw_text(&view.time_text, 34.0, 112.0, 24.0, view.time_color);
     draw_text(&view.progress_text, 34.0, 136.0, 20.0, dark::TEXT_DIM);
     draw_text(&view.day_text, 220.0, 112.0, 20.0, dark::TEXT_DIM);
-    draw_text(&view.goal_text, 34.0, 158.0, 18.0, dark::TEXT_DIM);
-    draw_text(&view.status_text, 34.0, 180.0, 20.0, dark::TEXT);
-    draw_text(&view.controls_text, 34.0, 204.0, 18.0, dark::TEXT_DIM);
+    if let Some(text) = &view.sleep_warning_text {
+        draw_wrapped_text(
+            text,
+            292.0,
+            132.0,
+            250.0,
+            16.0,
+            16.0,
+            Color::from_rgba(255, 214, 132, 255),
+        );
+    }
+    draw_wrapped_text(&view.goal_text, 34.0, 158.0, 236.0, 18.0, 18.0, dark::TEXT_DIM);
+    draw_wrapped_text(&view.status_text, 34.0, 194.0, 236.0, 20.0, 20.0, dark::TEXT);
+    draw_wrapped_text(&view.controls_text, 34.0, 250.0, 236.0, 18.0, 18.0, dark::TEXT_DIM);
     if let Some(quest) = &view.quest {
-        draw_text(
+        draw_wrapped_text(
             &quest.title,
-            290.0,
-            136.0,
+            292.0,
+            172.0,
+            250.0,
+            20.0,
             20.0,
             Color::from_rgba(255, 230, 170, 255),
         );
-        draw_text(&quest.requirements, 290.0, 158.0, 18.0, dark::TEXT_DIM);
+        draw_wrapped_text(&quest.requirements, 292.0, 212.0, 250.0, 18.0, 18.0, dark::TEXT_DIM);
         if let Some(location_hint) = &quest.location_hint {
-            draw_text(location_hint, 290.0, 178.0, 18.0, dark::TEXT_DIM);
+            draw_wrapped_text(location_hint, 292.0, 248.0, 250.0, 18.0, 18.0, dark::TEXT_DIM);
         }
     }
 }
 
-fn draw_inventory_panel(view: &HudView) {
+fn draw_inventory_panel(view: &HudView, art: &ArtAssets) {
     draw_panel(
         screen_width() - 320.0,
         18.0,
@@ -313,10 +349,27 @@ fn draw_inventory_panel(view: &HudView) {
     );
     let mut y = 58.0;
     for line in &view.inventory {
-        draw_text(&line.title, screen_width() - 302.0, y, 20.0, dark::TEXT);
+        if let Some(icon_id) = &line.icon_id {
+            if let Some(texture) = art.item_icon(icon_id) {
+                draw_texture_centered(texture, vec2(screen_width() - 284.0, y + 6.0), vec2(26.0, 26.0), WHITE);
+            }
+        }
+        draw_text(
+            &truncate_text_to_width(&line.title, 214.0, 18.0),
+            screen_width() - 266.0,
+            y,
+            18.0,
+            dark::TEXT,
+        );
         y += 18.0;
         if !line.detail.is_empty() {
-            draw_text(&line.detail, screen_width() - 302.0, y, 16.0, dark::TEXT_DIM);
+            draw_text(
+                &truncate_text_to_width(&line.detail, 214.0, 16.0),
+                screen_width() - 266.0,
+                y,
+                16.0,
+                dark::TEXT_DIM,
+            );
         }
         y += 26.0;
     }
@@ -332,16 +385,22 @@ fn draw_effects_panel(view: &HudView) {
     );
     let mut y = 292.0;
     for line in &view.effects {
-        draw_text(&line.title, screen_width() - 302.0, y, 22.0, dark::TEXT_BRIGHT);
+        draw_text(
+            &truncate_text_to_width(&line.title, 270.0, 20.0),
+            screen_width() - 302.0,
+            y,
+            20.0,
+            dark::TEXT_BRIGHT,
+        );
         y += 22.0;
         if !line.detail.is_empty() {
-            draw_text(&line.detail, screen_width() - 302.0, y, 18.0, dark::TEXT_DIM);
+            draw_wrapped_text(&line.detail, screen_width() - 302.0, y, 270.0, 16.0, 16.0, dark::TEXT_DIM);
             y += 24.0;
         }
     }
 }
 
-fn draw_potion_panel(view: &HudView) {
+fn draw_potion_panel(view: &HudView, art: &ArtAssets) {
     draw_panel(
         18.0,
         screen_height() - 166.0,
@@ -351,37 +410,51 @@ fn draw_potion_panel(view: &HudView) {
     );
     let mut y = screen_height() - 126.0;
     for line in &view.potions {
-        draw_text(&line.title, 34.0, y, 22.0, dark::TEXT_BRIGHT);
+        if let Some(icon_id) = &line.icon_id {
+            if let Some(texture) = art.item_icon(icon_id) {
+                draw_texture_centered(texture, vec2(54.0, y + 2.0), vec2(30.0, 30.0), WHITE);
+            }
+        }
+        draw_text(
+            &truncate_text_to_width(&line.title, 272.0, 20.0),
+            76.0,
+            y,
+            20.0,
+            dark::TEXT_BRIGHT,
+        );
         y += 22.0;
         if !line.detail.is_empty() {
-            draw_text(&line.detail, 34.0, y, 18.0, dark::TEXT_DIM);
+            draw_wrapped_text(&line.detail, 76.0, y, 272.0, 16.0, 16.0, dark::TEXT_DIM);
             y += 26.0;
         }
     }
-    draw_text(
-        ui_copy("hud_journal_hint"),
-        370.0,
-        screen_height() - 26.0,
-        18.0,
-        dark::TEXT_DIM,
-    );
+    draw_wrapped_text(ui_copy("hud_journal_hint"), 370.0, screen_height() - 44.0, 180.0, 18.0, 18.0, dark::TEXT_DIM);
 }
 
-fn draw_hud_toasts(toasts: &[HudToastView]) {
+fn draw_hud_toasts(toasts: &[HudToastView], art: &ArtAssets) {
     let start_x = screen_width() * 0.5 - 200.0;
     let mut y = 28.0;
     for toast in toasts {
         let bg = Color::new(18.0 / 255.0, 18.0 / 255.0, 24.0 / 255.0, toast.alpha * 0.9);
         let border = Color::new(toast.color.r, toast.color.g, toast.color.b, toast.alpha);
         let text = Color::new(toast.color.r, toast.color.g, toast.color.b, toast.alpha);
-        draw_rectangle(start_x, y, 400.0, 28.0, bg);
-        draw_rectangle_lines(start_x, y, 400.0, 28.0, 2.0, border);
-        draw_text(&toast.text, start_x + 10.0, y + 19.0, 20.0, text);
-        y += 34.0;
+        draw_rectangle(start_x, y, 400.0, 36.0, bg);
+        draw_rectangle_lines(start_x, y, 400.0, 36.0, 2.0, border);
+        if let Some(texture) = art.toast_icon(toast.icon_key) {
+            draw_texture_centered(texture, vec2(start_x + 18.0, y + 18.0), vec2(20.0, 20.0), text);
+        }
+        draw_text(
+            &truncate_text_to_width(&toast.text, 350.0, 18.0),
+            start_x + 34.0,
+            y + 24.0,
+            18.0,
+            text,
+        );
+        y += 42.0;
     }
 }
 
-fn draw_hud_feedbacks(feedbacks: &[HudFeedbackView]) {
+fn draw_hud_feedbacks(feedbacks: &[HudFeedbackView], art: &ArtAssets) {
     for feedback in feedbacks {
         draw_circle_lines(
             feedback.position.x,
@@ -390,6 +463,14 @@ fn draw_hud_feedbacks(feedbacks: &[HudFeedbackView]) {
             if feedback.burst_scale > 1.5 { 3.0 } else { 2.0 },
             feedback.color,
         );
+        if let Some(texture) = art.effect("gather_feedback_sparkle") {
+            draw_texture_centered(
+                texture,
+                feedback.position,
+                vec2(feedback.radius * 2.0, feedback.radius * 2.0),
+                Color::new(feedback.color.r, feedback.color.g, feedback.color.b, feedback.color.a),
+            );
+        }
         draw_circle_lines(
             feedback.position.x,
             feedback.position.y,

@@ -62,6 +62,7 @@ impl fmt::Display for EffectKind {
 #[serde(rename_all = "snake_case")]
 pub enum StationKind {
     Alchemy,
+    RestBed,
     Shop,
     RuneWorkshop,
     ArchiveConsole,

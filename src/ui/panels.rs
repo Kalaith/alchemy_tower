@@ -1,11 +1,19 @@
 use macroquad::prelude::*;
 use macroquad_toolkit::colors::dark;
 
+use crate::ui::{draw_wrapped_text, truncate_text_to_width};
+
 pub fn draw_panel(x: f32, y: f32, width: f32, height: f32, title: &str) {
     draw_rectangle(x, y, width, height, dark::PANEL);
     draw_rectangle(x, y, width, 28.0, dark::PANEL_HEADER);
     draw_rectangle_lines(x, y, width, height, 2.0, dark::ACCENT);
-    draw_text(title, x + 12.0, y + 20.0, 22.0, dark::TEXT_BRIGHT);
+    draw_text(
+        &truncate_text_to_width(title, width - 24.0, 22.0),
+        x + 12.0,
+        y + 20.0,
+        22.0,
+        dark::TEXT_BRIGHT,
+    );
 }
 
 pub fn centered_panel_rect(width: f32, height: f32) -> Rect {
@@ -37,16 +45,22 @@ pub fn draw_overlay_backdrop() {
 }
 
 pub fn draw_overlay_subtitle(x: f32, y: f32, text: &str) {
-    draw_text(text, x + 20.0, y + 52.0, 24.0, dark::TEXT_DIM);
+    draw_wrapped_text(text, x + 20.0, y + 52.0, screen_width() - x - 40.0, 22.0, 22.0, dark::TEXT_DIM);
 }
 
 pub fn draw_overlay_footer(x: f32, y: f32, w: f32, h: f32, text: &str) {
     draw_rectangle(
         x + 16.0,
-        y + h - 38.0,
+        y + h - 46.0,
         w - 32.0,
-        24.0,
+        32.0,
         Color::from_rgba(24, 26, 34, 255),
     );
-    draw_text(text, x + 24.0, y + h - 20.0, 18.0, dark::TEXT_DIM);
+    draw_text(
+        &truncate_text_to_width(text, w - 48.0, 18.0),
+        x + 24.0,
+        y + h - 24.0,
+        18.0,
+        dark::TEXT_DIM,
+    );
 }

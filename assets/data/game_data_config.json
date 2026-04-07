@@ -7,7 +7,7 @@
     ],
     "move_speed": 220.0,
     "interaction_range": 28.0,
-    "day_length_seconds": 2400.0,
+    "day_length_seconds": 600.0,
     "save_version": 5
   }
 }

@@ -46,6 +46,12 @@ impl GameplayState {
             );
             let text = if station.kind == StationKind::Alchemy {
                 format!("E/{}: {}", input_bindings().alchemy.open, ui_text().prompts.open_alchemy)
+            } else if station.kind == StationKind::RestBed {
+                format!(
+                    "{}: {}",
+                    input_bindings().global.interact,
+                    ui_text().prompts.sleep_in_bed
+                )
             } else if station.kind == StationKind::Shop {
                 format!(
                     "{}: {}",

@@ -2,6 +2,7 @@
 
 use macroquad::prelude::*;
 
+use crate::art::ArtAssets;
 use crate::data::{GameData, GameDataLoader};
 use crate::state::{GameplayState, MenuState, PauseState, StateTransition};
 
@@ -13,6 +14,7 @@ pub enum GameState {
 
 pub struct Game {
     data: GameData,
+    art: ArtAssets,
     state: Option<GameState>,
 }
 
@@ -22,9 +24,11 @@ impl Game {
             eprintln!("Failed to load embedded game data: {error}");
             GameData::fallback()
         });
+        let art = ArtAssets::load(&data).await;
 
         Self {
             data,
+            art,
             state: Some(GameState::Menu(MenuState::new())),
         }
     }
@@ -54,9 +58,9 @@ impl Game {
             .as_ref()
             .expect("game state should always be present during draw")
         {
-            GameState::Menu(state) => state.draw(&self.data),
-            GameState::Gameplay(state) => state.draw(&self.data),
-            GameState::Paused(state) => state.draw(&self.data),
+            GameState::Menu(state) => state.draw(&self.data, &self.art),
+            GameState::Gameplay(state) => state.draw(&self.data, &self.art),
+            GameState::Paused(state) => state.draw(&self.data, &self.art),
         }
     }
 

@@ -8,5 +8,5 @@ pub use panels::{
     draw_panel, draw_panel_frame, inset_rect,
 };
 pub use prompts::draw_interaction_prompt;
-pub use text::draw_wrapped_text;
+pub use text::{draw_wrapped_text, truncate_text_to_width};
 pub use widgets::{draw_action_button, draw_selection_card, draw_state_banner};

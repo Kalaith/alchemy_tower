@@ -28,6 +28,7 @@ pub struct StatusText {
 #[derive(Debug, Deserialize)]
 pub struct PromptText {
     pub open_alchemy: String,
+    pub sleep_in_bed: String,
     pub browse_shop: String,
     pub open_rune_workshop: String,
     pub reconstruct_archives: String,
