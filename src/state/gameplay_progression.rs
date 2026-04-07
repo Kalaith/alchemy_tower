@@ -118,9 +118,10 @@ impl GameplayState {
             ));
         }
 
-        self.push_event_toast(
+        self.push_event_toast_with_icon(
             ui_format("progression_disassembly_toast", &[("name", &recipe.name)]),
             Color::from_rgba(214, 204, 170, 255),
+            "recipe_logged",
         );
         self.runtime.status_text =
             ui_format("progression_disassembled", &[("name", &recipe.name), ("items", &returned.join(", "))]);
@@ -202,9 +203,10 @@ impl GameplayState {
         }
         *self.inventory.entry(item_id.to_owned()).or_insert(0) += 1;
 
-        self.push_event_toast(
+        self.push_event_toast_with_icon(
             ui_format("progression_duplicate_toast", &[("name", &item.name)]),
             Color::from_rgba(216, 182, 255, 255),
+            "best_quality",
         );
         self.runtime.status_text = ui_format(
             "progression_duplicate_status",
@@ -288,9 +290,10 @@ impl GameplayState {
         state.mutation_growth_bonus_days = formula.growth_bonus_days;
         state.mutation_note = formula.mutation_note.clone();
 
-        self.push_event_toast(
+        self.push_event_toast_with_icon(
             ui_format("progression_planter_mutation", &[("item", data.item_name(&state.planted_item_id))]),
             Color::from_rgba(188, 255, 220, 255),
+            "best_quality",
         );
 
         Some(ui_format(

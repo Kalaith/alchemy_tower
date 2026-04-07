@@ -1,5 +1,5 @@
 use super::*;
-use crate::art::{draw_texture_centered, journal_tab_icon_key, ArtAssets};
+use crate::art::{draw_texture_centered, ArtAssets};
 use crate::content::{input_bindings, ui_copy, ui_format};
 use crate::ui::{
     draw_overlay_backdrop, draw_overlay_footer, draw_overlay_subtitle, draw_selection_card,
@@ -1018,7 +1018,7 @@ impl GameplayState {
                     dark::TEXT_DIM
                 },
             );
-            if let Some(texture) = art.journal_tab(journal_tab_icon_key(tab)) {
+            if let Some(texture) = art.journal_tab_by_label(tab) {
                 draw_texture_centered(texture, vec2(rect.x + 18.0, rect.y + 14.0), vec2(18.0, 18.0), WHITE);
             }
         }

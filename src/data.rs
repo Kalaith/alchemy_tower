@@ -11,10 +11,10 @@ pub use save_models::{
     RecipeMasteryEntry, RelationshipEntry, SaveData,
 };
 pub use schema::{
-    AreaDefinition, EffectDefinition, EffectKind, ElementProfile, GameConfig,
+    AreaDefinition, BlockerVisualStyle, EffectDefinition, EffectKind, ElementProfile, GameConfig,
     GatherNodeDefinition, GatheringRouteDefinition, HabitatStateEntry, ItemCategory,
     ItemDefinition, JournalMilestoneEntry, MutationFormulaDefinition, NpcDefinition,
-    PlanterStateEntry, QuestDefinition, RecipeDefinition, RectDefinition, RuneRecipeDefinition,
-    StationDefinition, StationKind, WarpDefinition,
+    PlanterStateEntry, QuestDefinition, RecipeDefinition, RectDefinition,
+    RuneRecipeDefinition, StationDefinition, StationKind, WarpDefinition,
 };
 pub use loader::GameDataLoader;

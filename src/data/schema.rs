@@ -72,6 +72,69 @@ pub enum StationKind {
     Habitat,
 }
 
+#[derive(Clone, Copy, Debug, Default, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(rename_all = "snake_case")]
+pub enum BlockerVisualStyle {
+    Shelf,
+    House,
+    #[default]
+    Panel,
+}
+
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
+pub struct AreaRenderDefinition {
+    #[serde(default)]
+    pub blocker_style: BlockerVisualStyle,
+    #[serde(default)]
+    pub blocker_primary: Option<[u8; 4]>,
+    #[serde(default)]
+    pub blocker_secondary: Option<[u8; 4]>,
+    #[serde(default)]
+    pub blocker_detail: Option<[u8; 4]>,
+    #[serde(default)]
+    pub blocker_alt: Option<[u8; 4]>,
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize)]
+pub struct StationRenderDefinition {
+    #[serde(default = "default_station_sprite_size")]
+    pub sprite_size: [f32; 2],
+    #[serde(default = "default_station_highlight_size_bonus")]
+    pub highlight_size_bonus: [f32; 2],
+    #[serde(default)]
+    pub overlay_effect_id: String,
+    #[serde(default = "default_zero_vec2")]
+    pub overlay_effect_offset: [f32; 2],
+    #[serde(default = "default_zero_vec2")]
+    pub overlay_effect_size: [f32; 2],
+}
+
+impl Default for StationRenderDefinition {
+    fn default() -> Self {
+        Self {
+            sprite_size: default_station_sprite_size(),
+            highlight_size_bonus: default_station_highlight_size_bonus(),
+            overlay_effect_id: String::new(),
+            overlay_effect_offset: default_zero_vec2(),
+            overlay_effect_size: default_zero_vec2(),
+        }
+    }
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize)]
+pub struct GatherNodeRenderDefinition {
+    #[serde(default = "default_gather_node_sprite_size")]
+    pub sprite_size: [f32; 2],
+}
+
+impl Default for GatherNodeRenderDefinition {
+    fn default() -> Self {
+        Self {
+            sprite_size: default_gather_node_sprite_size(),
+        }
+    }
+}
+
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct ElementProfile {
     #[serde(default)]
@@ -232,6 +295,8 @@ pub struct GatherNodeDefinition {
     pub spawn_chance: u32,
     #[serde(default)]
     pub note: String,
+    #[serde(default)]
+    pub render: GatherNodeRenderDefinition,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -465,6 +530,8 @@ pub struct StationDefinition {
     pub habitat_output_item_id: String,
     #[serde(default)]
     pub habitat_harvest_days: u32,
+    #[serde(default)]
+    pub render: StationRenderDefinition,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -517,6 +584,8 @@ pub struct AreaDefinition {
     pub blockers: Vec<RectDefinition>,
     pub warps: Vec<WarpDefinition>,
     pub gather_nodes: Vec<GatherNodeDefinition>,
+    #[serde(default)]
+    pub render: AreaRenderDefinition,
 }
 
 fn default_heat() -> i32 {
@@ -541,4 +610,20 @@ fn default_item_rarity() -> u8 {
 
 fn default_synthesis_weight() -> u32 {
     1
+}
+
+fn default_station_sprite_size() -> [f32; 2] {
+    [96.0, 96.0]
+}
+
+fn default_station_highlight_size_bonus() -> [f32; 2] {
+    [8.0, 8.0]
+}
+
+fn default_gather_node_sprite_size() -> [f32; 2] {
+    [64.0, 64.0]
+}
+
+fn default_zero_vec2() -> [f32; 2] {
+    [0.0, 0.0]
 }

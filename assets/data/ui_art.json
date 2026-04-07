@@ -1,0 +1,70 @@
+{
+  "default_toast_icon": "best_quality",
+  "journal_tabs": [
+    {
+      "label": "Routes",
+      "icon_key": "routes",
+      "path": "assets/generated/ui/journal_tabs/routes.png"
+    },
+    {
+      "label": "Notes",
+      "icon_key": "notes",
+      "path": "assets/generated/ui/journal_tabs/notes.png"
+    },
+    {
+      "label": "Brews",
+      "icon_key": "brews",
+      "path": "assets/generated/ui/journal_tabs/brews.png"
+    },
+    {
+      "label": "Greenhouse",
+      "icon_key": "greenhouse",
+      "path": "assets/generated/ui/journal_tabs/greenhouse.png"
+    },
+    {
+      "label": "Rapport",
+      "icon_key": "rapport",
+      "path": "assets/generated/ui/journal_tabs/rapport.png"
+    }
+  ],
+  "toast_icons": [
+    {
+      "key": "journal_note",
+      "path": "assets/generated/ui/toasts/journal_note.png"
+    },
+    {
+      "key": "recipe_logged",
+      "path": "assets/generated/ui/toasts/recipe_logged.png"
+    },
+    {
+      "key": "quest_accepted",
+      "path": "assets/generated/ui/toasts/quest_accepted.png"
+    },
+    {
+      "key": "quest_complete",
+      "path": "assets/generated/ui/toasts/quest_complete.png"
+    },
+    {
+      "key": "route_restored",
+      "path": "assets/generated/ui/toasts/route_restored.png"
+    },
+    {
+      "key": "best_quality",
+      "path": "assets/generated/ui/toasts/best_quality.png"
+    }
+  ],
+  "effects": [
+    {
+      "key": "gather_feedback_sparkle",
+      "path": "assets/generated/effects/gather_feedback_sparkle.png"
+    },
+    {
+      "key": "brew_bubble_effect",
+      "path": "assets/generated/effects/brew_bubble_effect.png"
+    },
+    {
+      "key": "warp_glow_effect",
+      "path": "assets/generated/effects/warp_glow_effect.png"
+    }
+  ]
+}

@@ -42,9 +42,10 @@ impl GameplayState {
             }
             self.progression.started_quests.insert(quest.id.clone());
             *self.progression.relationships.entry(npc.id.clone()).or_insert(0) += 1;
-            self.push_event_toast(
+            self.push_event_toast_with_icon(
                 ui_format("quests_accepted_toast", &[("title", &quest.title)]),
                 Color::from_rgba(255, 230, 170, 255),
+                "quest_accepted",
             );
             self.trigger_world_feedback(
                 self.world.player.position,
@@ -84,9 +85,10 @@ impl GameplayState {
                 let milestone = &narrative_text().milestones.containment_stable;
                 self.push_journal_milestone(&milestone.id, &milestone.title, &milestone.text);
             }
-            self.push_event_toast(
+            self.push_event_toast_with_icon(
                 ui_format("quests_complete_toast", &[("title", &quest.title)]),
                 Color::from_rgba(188, 255, 220, 255),
+                "quest_complete",
             );
             self.trigger_world_feedback(
                 self.world.player.position,
@@ -134,9 +136,10 @@ impl GameplayState {
             if let Some(quest_id) = available.get(self.ui.shop_index) {
                 self.progression.started_quests.insert(quest_id.clone());
                 if let Some(quest) = data.quest(quest_id) {
-                    self.push_event_toast(
+                    self.push_event_toast_with_icon(
                         ui_format("quests_accepted_toast", &[("title", &quest.title)]),
                         Color::from_rgba(255, 230, 170, 255),
+                        "quest_accepted",
                     );
                     self.trigger_world_feedback(
                         self.world.player.position,

@@ -584,9 +584,10 @@ impl GameplayState {
             );
             let recipe_discovered = self.progression.known_recipes.insert(recipe.id.clone());
             if recipe_discovered {
-                self.push_event_toast(
+                self.push_event_toast_with_icon(
                     ui_format("inventory_recipe_logged", &[("name", &recipe.name)]),
                     Color::from_rgba(176, 226, 255, 255),
+                    "recipe_logged",
                 );
                 self.runtime.status_text = ui_format(
                     "inventory_discovered_status",
@@ -617,12 +618,13 @@ impl GameplayState {
                 );
             }
             if mastery_improved {
-                self.push_event_toast(
+                self.push_event_toast_with_icon(
                     ui_format(
                         "inventory_mastery_improved",
                         &[("name", &recipe.name), ("stage", current_mastery_stage)],
                     ),
                     Color::from_rgba(255, 230, 170, 255),
+                    "best_quality",
                 );
             }
         } else {
@@ -642,7 +644,7 @@ impl GameplayState {
             .unwrap_or(current_profile.is_some());
         if improved_best {
             if let Some(profile) = current_profile {
-                self.push_event_toast(
+                self.push_event_toast_with_icon(
                     ui_format(
                         "inventory_new_best",
                         &[
@@ -651,13 +653,15 @@ impl GameplayState {
                         ],
                     ),
                     Color::from_rgba(188, 255, 220, 255),
+                    "best_quality",
                 );
             }
         }
         if self.progression.total_brews == 10 {
-            self.push_event_toast(
+            self.push_event_toast_with_icon(
                 &ui_format("inventory_greenhouse_unlock", &[]),
                 Color::from_rgba(200, 255, 200, 255),
+                "route_restored",
             );
             self.trigger_world_feedback(
                 self.world.player.position,
@@ -787,12 +791,13 @@ impl GameplayState {
             &[("name", &item.name), ("price", &price.to_string())],
         );
         if self.sell_is_safe(data, item_id) {
-            self.push_event_toast(
+            self.push_event_toast_with_icon(
                 ui_format(
                     "inventory_sold_safe",
                     &[("name", &item.name), ("price", &price.to_string())],
                 ),
                 Color::from_rgba(255, 214, 132, 255),
+                "best_quality",
             );
         }
     }

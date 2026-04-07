@@ -312,9 +312,10 @@ impl GameplayState {
                     if self.can_reconstruct_archive() {
                         let milestone = &narrative_text().milestones.archive_revelation;
                         self.push_journal_milestone(&milestone.id, &milestone.title, &milestone.text);
-                        self.push_event_toast(
+                        self.push_event_toast_with_icon(
                             "Archive restored: timeline completed.",
                             Color::from_rgba(176, 226, 255, 255),
+                            "journal_note",
                         );
                         self.trigger_world_feedback(
                             self.world.player.position,

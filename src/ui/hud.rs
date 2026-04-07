@@ -1,5 +1,5 @@
 use super::*;
-use crate::art::{draw_texture_centered, toast_icon_for_text, ArtAssets};
+use crate::art::{draw_texture_centered, ArtAssets};
 use crate::content::{input_bindings, ui_copy, ui_format};
 use crate::ui::{draw_wrapped_text, truncate_text_to_width};
 
@@ -19,7 +19,7 @@ struct HudToastView {
     text: String,
     color: Color,
     alpha: f32,
-    icon_key: &'static str,
+    icon_key: String,
 }
 
 struct HudFeedbackView {
@@ -230,7 +230,7 @@ impl GameplayState {
                 text: toast.text.clone(),
                 color: toast.color,
                 alpha: (toast.remaining_seconds / 2.2).clamp(0.0, 1.0),
-                icon_key: toast_icon_for_text(&toast.text),
+                icon_key: toast.icon_key.clone(),
             })
             .collect()
     }
@@ -440,7 +440,7 @@ fn draw_hud_toasts(toasts: &[HudToastView], art: &ArtAssets) {
         let text = Color::new(toast.color.r, toast.color.g, toast.color.b, toast.alpha);
         draw_rectangle(start_x, y, 400.0, 36.0, bg);
         draw_rectangle_lines(start_x, y, 400.0, 36.0, 2.0, border);
-        if let Some(texture) = art.toast_icon(toast.icon_key) {
+        if let Some(texture) = art.toast_icon(&toast.icon_key) {
             draw_texture_centered(texture, vec2(start_x + 18.0, y + 18.0), vec2(20.0, 20.0), text);
         }
         draw_text(

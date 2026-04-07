@@ -19,6 +19,33 @@
         110,
         255
       ],
+      "render": {
+        "blocker_style": "shelf",
+        "blocker_primary": [
+          124,
+          92,
+          70,
+          255
+        ],
+        "blocker_secondary": [
+          158,
+          122,
+          94,
+          255
+        ],
+        "blocker_detail": [
+          92,
+          62,
+          46,
+          255
+        ],
+        "blocker_alt": [
+          170,
+          222,
+          210,
+          255
+        ]
+      },
       "blockers": [
         {
           "x": 80.0,
@@ -170,6 +197,33 @@
         80,
         255
       ],
+      "render": {
+        "blocker_style": "house",
+        "blocker_primary": [
+          204,
+          184,
+          150,
+          255
+        ],
+        "blocker_secondary": [
+          160,
+          104,
+          78,
+          255
+        ],
+        "blocker_detail": [
+          120,
+          94,
+          72,
+          255
+        ],
+        "blocker_alt": [
+          142,
+          118,
+          82,
+          255
+        ]
+      },
       "blockers": [
         {
           "x": 182.0,
@@ -981,6 +1035,21 @@
           "catalyst"
         ],
         "description": "The entry lab still holds enough old wards to steady restorative and luminous brews."
+      },
+      "render": {
+        "sprite_size": [
+          128.0,
+          128.0
+        ],
+        "overlay_effect_id": "brew_bubble_effect",
+        "overlay_effect_offset": [
+          0.0,
+          -10.0
+        ],
+        "overlay_effect_size": [
+          52.0,
+          52.0
+        ]
       }
     },
     {
@@ -1006,7 +1075,13 @@
         "favored_categories": [],
         "description": ""
       },
-      "planter_harvest_days": 0
+      "planter_harvest_days": 0,
+      "render": {
+        "sprite_size": [
+          128.0,
+          128.0
+        ]
+      }
     },
     {
       "id": "greenhouse_still",
@@ -1038,7 +1113,22 @@
         ],
         "description": "Sun-warmed glass and irrigation sigils make careful restorative work easier here."
       },
-      "planter_harvest_days": 0
+      "planter_harvest_days": 0,
+      "render": {
+        "sprite_size": [
+          128.0,
+          128.0
+        ],
+        "overlay_effect_id": "brew_bubble_effect",
+        "overlay_effect_offset": [
+          0.0,
+          -10.0
+        ],
+        "overlay_effect_size": [
+          52.0,
+          52.0
+        ]
+      }
     },
     {
       "id": "greenhouse_planter_west",
@@ -1185,7 +1275,13 @@
       ],
       "habitat_output_item_id": "lumen_dust",
       "habitat_harvest_days": 1,
-      "required_total_brews": 18
+      "required_total_brews": 18,
+      "render": {
+        "sprite_size": [
+          128.0,
+          128.0
+        ]
+      }
     },
     {
       "id": "containment_habitat_slug",
@@ -1216,7 +1312,13 @@
       ],
       "habitat_output_item_id": "dew_slime",
       "habitat_harvest_days": 1,
-      "required_total_brews": 18
+      "required_total_brews": 18,
+      "render": {
+        "sprite_size": [
+          128.0,
+          128.0
+        ]
+      }
     },
     {
       "id": "rune_workbench",
@@ -1242,7 +1344,13 @@
         "description": ""
       },
       "planter_harvest_days": 0,
-      "required_total_brews": 24
+      "required_total_brews": 24,
+      "render": {
+        "sprite_size": [
+          128.0,
+          128.0
+        ]
+      }
     },
     {
       "id": "archive_console",
@@ -1268,7 +1376,13 @@
         "description": ""
       },
       "planter_harvest_days": 0,
-      "required_total_brews": 30
+      "required_total_brews": 30,
+      "render": {
+        "sprite_size": [
+          128.0,
+          128.0
+        ]
+      }
     },
     {
       "id": "observatory_focus",
@@ -1294,7 +1408,13 @@
         "description": ""
       },
       "planter_harvest_days": 0,
-      "required_journal_milestone": "archive_revelation"
+      "required_journal_milestone": "archive_revelation",
+      "render": {
+        "sprite_size": [
+          128.0,
+          128.0
+        ]
+      }
     },
     {
       "id": "apothecary_counter",
@@ -1352,7 +1472,13 @@
         "favored_categories": [],
         "description": ""
       },
-      "planter_harvest_days": 0
+      "planter_harvest_days": 0,
+      "render": {
+        "sprite_size": [
+          128.0,
+          128.0
+        ]
+      }
     }
   ]
 }
