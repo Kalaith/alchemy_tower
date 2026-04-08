@@ -8,14 +8,17 @@ This file describes what the game currently supports based on the source code an
 - JSON-driven content loading through embedded split `game_data_*.json` files.
 - Native JSON save/load support with versioned save data.
 - Filesystem-backed generated texture loading for world, character, item, UI, and effect art under `assets/generated/`.
+- Filesystem-backed generated placeholder audio loading for footsteps, herb pickup, station open, stirring, and brew result cues under `assets/generated/audio/`.
 
 ## Core Exploration
 
 - Top-down 8-direction movement with blocker collision.
 - Multi-area travel through authored warp regions.
+- Surface world layout now routes tower travel through a plains hub, with additional rock, forest, lake, desert, and rainforest branch maps.
 - Camera follow, impact shake, and immediate-mode UI panels/prompts.
 - Day clock, day rollover, weather state, season state, and time-of-day windows.
 - Rest bed on the tower entry floor with voluntary sleep-to-morning interaction.
+- Pause menu save/load actions, with `F5` and `F9` retained as secondary gameplay/pause shortcuts.
 - Late-night exhaustion pressure:
   - HUD time warning turns yellow after midnight
   - hitting 01:00 forces a collapse wake-up at 10:00 back at the tower bed with a full-screen warning flash
@@ -37,8 +40,13 @@ This file describes what the game currently supports based on the source code an
 Current authored areas:
 
 - `tower_entry`
+- `north_plains`
 - `town_square`
+- `rock_fields`
 - `moonlit_forest`
+- `lake_shore`
+- `sunscar_desert`
+- `tropical_rainforest`
 - `greenhouse_floor`
 - `containment_floor`
 - `rune_workshop_floor`
@@ -48,9 +56,14 @@ Current authored areas:
 Current authored gathering routes:
 
 - `tower_ruin_edge`
+- `plains_crossing`
+- `stone_quarry`
 - `creekside_meadow`
 - `moonlit_grove`
 - `charred_hollow`
+- `lake_shallows`
+- `sunscar_dunes`
+- `rainmist_canopy`
 - `greenhouse_walk`
 - `containment_ring`
 - `archive_stack`
@@ -117,6 +130,7 @@ Ingredient/item data supports:
 - Station-based brewing UI.
 - Three ingredient slots plus one catalyst slot.
 - Heat, stir count, and timing selection.
+- Repeat-last-brew setup recall from the alchemy station UI and keyboard flow.
 - Stable recipe matching by exact ingredient counts.
 - Unstable output fallback when process or thresholds miss.
 - Trait-derived salvage fallback for non-recipe brews.
@@ -346,6 +360,21 @@ Persistent save state currently includes:
 - journal milestones
 - NPC relationships
 
+## Audio
+
+- Procedurally generated placeholder one-shots for:
+  - tower/surface/greenhouse footsteps
+  - herb pickup
+  - alchemy station open
+  - alchemy stirring
+  - brew success and brew collapse
+- Audio playback is currently hooked into:
+  - player movement
+  - successful herb gathering
+  - opening the alchemy station
+  - stirring at the cauldron
+  - brew result resolution
+
 ## Current Gaps Relative to the Implemented Codebase
 
 The codebase does not currently show support for:
@@ -353,9 +382,7 @@ The codebase does not currently show support for:
 - combat systems
 - enemy AI
 - stamina depletion mechanics
-- sleep/bed flow
 - farming beyond greenhouse planters
 - creature feeding/care needs beyond habitat placement and timed harvest
 - dialogue trees with player choices
 - cutscenes or branching endings
-- audio systems

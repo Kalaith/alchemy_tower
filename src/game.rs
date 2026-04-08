@@ -3,6 +3,7 @@
 use macroquad::prelude::*;
 
 use crate::art::ArtAssets;
+use crate::audio::AudioAssets;
 use crate::data::{GameData, GameDataLoader};
 use crate::state::{GameplayState, MenuState, PauseState, StateTransition};
 
@@ -15,6 +16,7 @@ pub enum GameState {
 pub struct Game {
     data: GameData,
     art: ArtAssets,
+    audio: AudioAssets,
     state: Option<GameState>,
 }
 
@@ -25,10 +27,12 @@ impl Game {
             GameData::fallback()
         });
         let art = ArtAssets::load(&data).await;
+        let audio = AudioAssets::load().await;
 
         Self {
             data,
             art,
+            audio,
             state: Some(GameState::Menu(MenuState::new())),
         }
     }
@@ -40,8 +44,8 @@ impl Game {
             .expect("game state should always be present during update");
         let transition = match &mut current_state {
             GameState::Menu(state) => state.update(),
-            GameState::Gameplay(state) => state.update(&self.data),
-            GameState::Paused(state) => state.update(),
+            GameState::Gameplay(state) => state.update(&self.data, &self.audio),
+            GameState::Paused(state) => state.update(&self.data),
         };
 
         self.state = Some(match transition {

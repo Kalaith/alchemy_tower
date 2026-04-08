@@ -10,6 +10,7 @@ use crate::art::{
     draw_blocker_prop, draw_character_frame, draw_gather_node_marker, draw_priority_marker,
     draw_station_marker, draw_texture_centered, ArtAssets,
 };
+use crate::audio::AudioAssets;
 use crate::content::{input_bindings, narrative_text, ui_copy, ui_format, ui_text};
 use crate::data::{
     AreaDefinition, CraftedItemProfileEntry, EffectDefinition, EffectKind, ExperimentLogEntry,
@@ -288,6 +289,7 @@ struct RuntimeState {
     status_text: String,
     last_brew_setup: Option<SavedAlchemySetup>,
     tutorial: TutorialState,
+    footstep_cooldown_seconds: f32,
 }
 
 #[derive(Clone, Debug)]
@@ -382,6 +384,7 @@ impl GameplayState {
                     delivery_hint_shown: false,
                     route_hint_shown: false,
                 },
+                footstep_cooldown_seconds: 0.0,
             },
             ui: OverlayState {
                 shop_buy_tab: true,
@@ -396,7 +399,7 @@ impl GameplayState {
         state
     }
 
-    pub fn update(&mut self, data: &GameData) -> Option<StateTransition> {
+    pub fn update(&mut self, data: &GameData, audio: &AudioAssets) -> Option<StateTransition> {
         if is_key_pressed(KeyCode::Escape) {
             if self.alchemy.open {
                 self.alchemy.open = false;
@@ -500,7 +503,7 @@ impl GameplayState {
                 self.runtime.status_text = ui_text().statuses.closed_journal.clone();
             }
         } else if self.alchemy.open {
-            self.handle_alchemy_inputs(data);
+            self.handle_alchemy_inputs(data, audio);
         } else {
             if is_key_pressed(KeyCode::J) {
                 self.ui.journal_open = true;
@@ -512,24 +515,17 @@ impl GameplayState {
             }
             if self.runtime.gather_pause_seconds <= 0.0 {
                 self.update_movement(data, frame_time);
+                self.update_footstep_audio(audio, frame_time);
                 self.handle_potion_inputs(data);
-                self.handle_interactions(data);
+                self.handle_interactions(data, audio);
             }
         }
 
         if is_key_pressed(KeyCode::F5) {
-            self.runtime.status_text =
-                match gameplay_persistence::GameplayStateLoader::save_slot(self, data) {
-                    Ok(()) => "Saved progress.".to_owned(),
-                    Err(error) => ui_format("gameplay_save_failed", &[("error", &error)]),
-                };
+            self.save_progress(data);
         }
         if is_key_pressed(KeyCode::F9) {
-            self.runtime.status_text =
-                match gameplay_persistence::GameplayStateLoader::load_slot(self, data) {
-                    Ok(()) => "Loaded progress.".to_owned(),
-                    Err(error) => ui_format("gameplay_load_failed", &[("error", &error)]),
-                };
+            self.load_progress(data);
         }
 
         None
@@ -579,6 +575,8 @@ impl GameplayState {
         self.runtime.gather_pause_seconds = (self.runtime.gather_pause_seconds - frame_time).max(0.0);
         self.runtime.camera_shake_seconds = (self.runtime.camera_shake_seconds - frame_time).max(0.0);
         self.runtime.sleep_flash_seconds = (self.runtime.sleep_flash_seconds - frame_time).max(0.0);
+        self.runtime.footstep_cooldown_seconds =
+            (self.runtime.footstep_cooldown_seconds - frame_time).max(0.0);
         if self.runtime.camera_shake_seconds <= 0.0 {
             self.runtime.camera_shake_intensity = 0.0;
         }
@@ -618,13 +616,29 @@ impl GameplayState {
 
         let normalized = direction.normalize();
         let speed = data.config.move_speed * self.move_speed_multiplier();
+        let previous = self.world.player.position;
         let candidate = self.world.player.position + normalized * speed * frame_time;
         self.world.player.position = self.resolve_area_collision(area, candidate);
         self.world.player.facing = normalized;
-        self.world.player.moving = true;
+        self.world.player.moving = self.world.player.position.distance_squared(previous) > 0.01;
     }
 
-    fn handle_interactions(&mut self, data: &GameData) {
+    fn update_footstep_audio(&mut self, audio: &AudioAssets, frame_time: f32) {
+        if !self.world.player.moving {
+            self.runtime.footstep_cooldown_seconds = self.runtime.footstep_cooldown_seconds.min(0.06);
+            return;
+        }
+        let step_interval = (0.34 / self.move_speed_multiplier()).clamp(0.16, 0.34);
+        if self.runtime.footstep_cooldown_seconds > 0.0 {
+            self.runtime.footstep_cooldown_seconds =
+                (self.runtime.footstep_cooldown_seconds - frame_time).max(0.0);
+            return;
+        }
+        audio.play_footstep_for_area(&self.world.current_area_id);
+        self.runtime.footstep_cooldown_seconds = step_interval;
+    }
+
+    fn handle_interactions(&mut self, data: &GameData, audio: &AudioAssets) {
         if let Some(station) = self.nearby_station(data) {
             if station.kind == StationKind::Alchemy
                 && (is_key_pressed(KeyCode::Tab) || is_key_pressed(KeyCode::E))
@@ -632,6 +646,7 @@ impl GameplayState {
                 self.alchemy.open = true;
                 self.alchemy.index = 0;
                 self.runtime.status_text = ui_text().statuses.open_alchemy.clone();
+                audio.play_alchemy_open();
                 return;
             }
         }
@@ -772,10 +787,29 @@ impl GameplayState {
                 let discovery = self.record_field_discovery(data, node);
                 self.trigger_gather_feedback(data, node, &discovery);
                 self.runtime.status_text = self.gather_status_text(data, node, &discovery);
+                audio.play_gather_pickup();
             } else {
                 self.runtime.status_text = self.gather_attempt_status(data, node);
             }
         }
+    }
+
+    pub fn save_progress(&mut self, data: &GameData) {
+        self.runtime.status_text = match gameplay_persistence::GameplayStateLoader::save_slot(self, data) {
+            Ok(()) => ui_format("gameplay_saved_progress", &[]),
+            Err(error) => ui_format("gameplay_save_failed", &[("error", &error)]),
+        };
+    }
+
+    pub fn load_progress(&mut self, data: &GameData) {
+        self.runtime.status_text = match gameplay_persistence::GameplayStateLoader::load_slot(self, data) {
+            Ok(()) => ui_format("gameplay_loaded_progress", &[]),
+            Err(error) => ui_format("gameplay_load_failed", &[("error", &error)]),
+        };
+    }
+
+    pub fn pause_status_text(&self) -> &str {
+        &self.runtime.status_text
     }
 
     fn can_reconstruct_archive(&self) -> bool {

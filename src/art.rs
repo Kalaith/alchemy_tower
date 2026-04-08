@@ -61,10 +61,11 @@ impl ArtAssets {
         let catalog = ui_art_catalog();
 
         for area in &data.areas {
-            assets.backgrounds.insert(
-                area.id.clone(),
-                load_game_texture(&format!("assets/generated/areas/{}.png", area.id)).await,
-            );
+            if let Some(texture) =
+                load_game_texture(&format!("assets/generated/areas/{}.png", area.id)).await
+            {
+                assets.backgrounds.insert(area.id.clone(), texture);
+            }
         }
 
         let mut character_ids = vec![PLAYER_ID.to_owned()];
@@ -72,28 +73,32 @@ impl ArtAssets {
         character_ids.sort();
         character_ids.dedup();
         for id in character_ids {
-            assets.characters.insert(
-                id.clone(),
-                load_game_texture(&format!("assets/generated/characters/{id}.png")).await,
-            );
+            if let Some(texture) =
+                load_game_texture(&format!("assets/generated/characters/{id}.png")).await
+            {
+                assets.characters.insert(id.clone(), texture);
+            }
         }
 
         for station in &data.stations {
-            assets.stations.insert(
-                station.id.clone(),
-                load_game_texture(&format!("assets/generated/stations/{}.png", station.id)).await,
-            );
+            if let Some(texture) =
+                load_game_texture(&format!("assets/generated/stations/{}.png", station.id)).await
+            {
+                assets.stations.insert(station.id.clone(), texture);
+            }
         }
 
         for item in &data.items {
-            assets.item_icons.insert(
-                item.id.clone(),
-                load_game_texture(&format!("assets/generated/items/icons/{}.png", item.id)).await,
-            );
-            assets.world_nodes.insert(
-                item.id.clone(),
-                load_game_texture(&format!("assets/generated/items/world/{}.png", item.id)).await,
-            );
+            if let Some(texture) =
+                load_game_texture(&format!("assets/generated/items/icons/{}.png", item.id)).await
+            {
+                assets.item_icons.insert(item.id.clone(), texture);
+            }
+            if let Some(texture) =
+                load_game_texture(&format!("assets/generated/items/world/{}.png", item.id)).await
+            {
+                assets.world_nodes.insert(item.id.clone(), texture);
+            }
         }
 
         for binding in &catalog.journal_tabs {
@@ -103,22 +108,22 @@ impl ArtAssets {
             );
             assets.journal_tabs.insert(
                 binding.icon_key.clone(),
-                load_game_texture(&binding.path).await,
+                load_game_texture(&binding.path)
+                    .await
+                    .unwrap_or_else(transparent_placeholder_texture),
             );
         }
 
         for icon in &catalog.toast_icons {
-            assets.toast_icons.insert(
-                icon.key.clone(),
-                load_game_texture(&icon.path).await,
-            );
+            if let Some(texture) = load_game_texture(&icon.path).await {
+                assets.toast_icons.insert(icon.key.clone(), texture);
+            }
         }
 
         for effect in &catalog.effects {
-            assets.effects.insert(
-                effect.key.clone(),
-                load_game_texture(&effect.path).await,
-            );
+            if let Some(texture) = load_game_texture(&effect.path).await {
+                assets.effects.insert(effect.key.clone(), texture);
+            }
         }
 
         assets
@@ -361,18 +366,18 @@ pub fn draw_priority_marker(center: Vec2, color: Color) {
     draw_rectangle(center.x - 2.0, marker_y + 12.0, 4.0, 4.0, color);
 }
 
-async fn load_game_texture(path: &str) -> Texture2D {
+async fn load_game_texture(path: &str) -> Option<Texture2D> {
     match load_texture(path).await {
         Ok(texture) => {
             texture.set_filter(FilterMode::Nearest);
-            texture
+            Some(texture)
         }
-        Err(_) => fallback_texture(),
+        Err(_) => None,
     }
 }
 
-fn fallback_texture() -> Texture2D {
-    let image = Image::gen_image_color(8, 8, Color::from_rgba(255, 0, 255, 255));
+fn transparent_placeholder_texture() -> Texture2D {
+    let image = Image::gen_image_color(8, 8, Color::from_rgba(255, 255, 255, 0));
     let texture = Texture2D::from_image(&image);
     texture.set_filter(FilterMode::Nearest);
     texture

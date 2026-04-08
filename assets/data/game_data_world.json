@@ -68,18 +68,18 @@
       ],
       "warps": [
         {
-          "id": "entry_to_town",
-          "label": "Town Square",
+          "id": "entry_to_plains",
+          "label": "North Plains",
           "rect": {
             "x": 432.0,
             "y": 656.0,
             "w": 96.0,
             "h": 48.0
           },
-          "target_area": "town_square",
+          "target_area": "north_plains",
           "target_position": [
-            516.0,
-            112.0
+            640.0,
+            120.0
           ]
         },
         {
@@ -110,71 +110,140 @@
           "locked_note": "The staircase seal hums. The greenhouse could become the town's first real turning point if you can prove the tower is worth trusting again."
         }
       ],
-      "gather_nodes": [
+      "gather_nodes": []
+    },
+    {
+      "id": "north_plains",
+      "name": "North Plains",
+      "size": [
+        1280.0,
+        900.0
+      ],
+      "background": [
+        126,
+        168,
+        118,
+        255
+      ],
+      "accent": [
+        170,
+        146,
+        104,
+        255
+      ],
+      "blockers": [
         {
-          "id": "tower_moss_01",
-          "name": "Whisper Moss",
-          "item_id": "whisper_moss",
-          "color": [
-            96,
-            214,
-            150,
-            255
-          ],
-          "position": [
-            164.0,
-            238.0
-          ],
-          "radius": 14.0,
-          "route_id": "tower_ruin_edge",
-          "seasons": [
-            "spring",
-            "summer",
-            "autumn"
-          ],
-          "weathers": [
-            "clear",
-            "mist"
-          ],
-          "time_windows": [
-            "morning",
-            "day"
-          ],
-          "spawn_chance": 85,
-          "note": "Soft growth near old stone and shaded mortar."
+          "x": 214.0,
+          "y": 228.0,
+          "w": 170.0,
+          "h": 140.0
         },
         {
-          "id": "tower_dust_01",
-          "name": "Arcane Dust",
-          "item_id": "arcane_dust",
+          "x": 892.0,
+          "y": 208.0,
+          "w": 196.0,
+          "h": 154.0
+        },
+        {
+          "x": 532.0,
+          "y": 484.0,
+          "w": 224.0,
+          "h": 166.0
+        }
+      ],
+      "warps": [
+        {
+          "id": "plains_to_entry",
+          "label": "Tower Entry",
+          "rect": {
+            "x": 590.0,
+            "y": 28.0,
+            "w": 104.0,
+            "h": 56.0
+          },
+          "target_area": "tower_entry",
+          "target_position": [
+            480.0,
+            610.0
+          ]
+        },
+        {
+          "id": "plains_to_town",
+          "label": "Town Square",
+          "rect": {
+            "x": 592.0,
+            "y": 812.0,
+            "w": 104.0,
+            "h": 56.0
+          },
+          "target_area": "town_square",
+          "target_position": [
+            642.0,
+            120.0
+          ]
+        },
+        {
+          "id": "plains_to_rock_fields",
+          "label": "Rock Fields",
+          "rect": {
+            "x": 26.0,
+            "y": 372.0,
+            "w": 74.0,
+            "h": 144.0
+          },
+          "target_area": "rock_fields",
+          "target_position": [
+            1090.0,
+            454.0
+          ]
+        },
+        {
+          "id": "plains_to_forest",
+          "label": "East Forest",
+          "rect": {
+            "x": 1180.0,
+            "y": 360.0,
+            "w": 74.0,
+            "h": 144.0
+          },
+          "target_area": "moonlit_forest",
+          "target_position": [
+            120.0,
+            438.0
+          ]
+        }
+      ],
+      "gather_nodes": [
+        {
+          "id": "plains_sunleaf_01",
+          "name": "Sunleaf",
+          "item_id": "sunleaf",
           "color": [
-            170,
-            130,
-            250,
+            239,
+            205,
+            90,
             255
           ],
           "position": [
-            760.0,
-            228.0
+            704.0,
+            536.0
           ],
           "radius": 14.0,
-          "route_id": "tower_ruin_edge",
+          "route_id": "plains_crossing",
           "seasons": [
             "spring",
-            "summer",
-            "autumn",
-            "winter"
+            "summer"
           ],
           "weathers": [
             "clear",
             "windy"
           ],
           "time_windows": [
-            "day",
-            "evening"
+            "morning",
+            "day"
           ],
-          "spawn_chance": 65,
-          "note": "Residual powder that collects where old magic cracked."
+          "spawn_chance": 90,
+          "note": "Warm meadow patches between the tower road and the town path."
         }
       ]
     },
@@ -246,73 +315,71 @@
       ],
       "warps": [
         {
-          "id": "town_to_tower",
-          "label": "Tower Entry",
+          "id": "town_to_plains",
+          "label": "North Plains",
           "rect": {
             "x": 472.0,
             "y": 36.0,
             "w": 120.0,
             "h": 58.0
           },
-          "target_area": "tower_entry",
+          "target_area": "north_plains",
           "target_position": [
-            480.0,
-            610.0
+            642.0,
+            780.0
           ]
         },
         {
-          "id": "town_to_forest",
-          "label": "Moonlit Forest",
+          "id": "town_to_lake",
+          "label": "Lake Shore",
+          "rect": {
+            "x": 24.0,
+            "y": 356.0,
+            "w": 70.0,
+            "h": 148.0
+          },
+          "target_area": "lake_shore",
+          "target_position": [
+            1084.0,
+            420.0
+          ]
+        },
+        {
+          "id": "town_to_desert",
+          "label": "South Desert",
+          "rect": {
+            "x": 586.0,
+            "y": 814.0,
+            "w": 108.0,
+            "h": 56.0
+          },
+          "target_area": "sunscar_desert",
+          "target_position": [
+            640.0,
+            120.0
+          ]
+        },
+        {
+          "id": "town_to_rainforest",
+          "label": "Tropical Rainforest",
           "rect": {
             "x": 1186.0,
             "y": 372.0,
             "w": 66.0,
             "h": 140.0
           },
-          "target_area": "moonlit_forest",
+          "target_area": "tropical_rainforest",
           "target_position": [
             112.0,
             418.0
           ]
         }
       ],
-      "gather_nodes": [
-        {
-          "id": "town_herb_01",
-          "name": "Sunleaf",
-          "item_id": "sunleaf",
-          "color": [
-            239,
-            205,
-            90,
-            255
-          ],
-          "position": [
-            404.0,
-            664.0
-          ],
-          "radius": 14.0,
-          "route_id": "creekside_meadow",
-          "seasons": [
-            "spring",
-            "summer"
-          ],
-          "weathers": [
-            "clear",
-            "windy"
-          ],
-          "time_windows": [
-            "morning",
-            "day"
-          ],
-          "spawn_chance": 90,
-          "note": "Bright leaves favor open patches near warm footpaths."
-        }
-      ]
+      "gather_nodes": []
     },
     {
       "id": "moonlit_forest",
-      "name": "Moonlit Forest",
+      "name": "East Forest",
       "size": [
         1440.0,
         960.0
@@ -351,18 +418,18 @@
       ],
       "warps": [
         {
-          "id": "forest_to_town",
-          "label": "Town Square",
+          "id": "forest_to_plains",
+          "label": "North Plains",
           "rect": {
             "x": 24.0,
             "y": 368.0,
             "w": 68.0,
             "h": 150.0
           },
-          "target_area": "town_square",
+          "target_area": "north_plains",
           "target_position": [
-            1120.0,
-            418.0
+            1148.0,
+            438.0
           ]
         }
       ],
@@ -492,6 +559,367 @@
           ],
           "spawn_chance": 55,
           "note": "A living lantern moth that settles only where moonlight holds steady."
+        }
+      ]
+    },
+    {
+      "id": "rock_fields",
+      "name": "Rock Fields",
+      "size": [
+        1200.0,
+        900.0
+      ],
+      "background": [
+        122,
+        124,
+        112,
+        255
+      ],
+      "accent": [
+        164,
+        146,
+        118,
+        255
+      ],
+      "blockers": [
+        {
+          "x": 202.0,
+          "y": 154.0,
+          "w": 214.0,
+          "h": 188.0
+        },
+        {
+          "x": 706.0,
+          "y": 192.0,
+          "w": 248.0,
+          "h": 176.0
+        },
+        {
+          "x": 442.0,
+          "y": 536.0,
+          "w": 300.0,
+          "h": 146.0
+        }
+      ],
+      "warps": [
+        {
+          "id": "rocks_to_plains",
+          "label": "North Plains",
+          "rect": {
+            "x": 1110.0,
+            "y": 384.0,
+            "w": 58.0,
+            "h": 140.0
+          },
+          "target_area": "north_plains",
+          "target_position": [
+            150.0,
+            454.0
+          ]
+        }
+      ],
+      "gather_nodes": [
+        {
+          "id": "rocks_dust_01",
+          "name": "Arcane Dust",
+          "item_id": "arcane_dust",
+          "color": [
+            170,
+            130,
+            250,
+            255
+          ],
+          "position": [
+            818.0,
+            478.0
+          ],
+          "radius": 14.0,
+          "route_id": "stone_quarry",
+          "seasons": [
+            "spring",
+            "summer",
+            "autumn",
+            "winter"
+          ],
+          "weathers": [
+            "clear",
+            "windy"
+          ],
+          "time_windows": [
+            "day",
+            "evening"
+          ],
+          "spawn_chance": 65,
+          "note": "Residual powder settles into cracks between broken standing stones."
+        }
+      ]
+    },
+    {
+      "id": "lake_shore",
+      "name": "Lake Shore",
+      "size": [
+        1200.0,
+        900.0
+      ],
+      "background": [
+        98,
+        148,
+        172,
+        255
+      ],
+      "accent": [
+        170,
+        210,
+        220,
+        255
+      ],
+      "blockers": [
+        {
+          "x": 156.0,
+          "y": 116.0,
+          "w": 230.0,
+          "h": 170.0
+        },
+        {
+          "x": 734.0,
+          "y": 132.0,
+          "w": 206.0,
+          "h": 146.0
+        },
+        {
+          "x": 462.0,
+          "y": 538.0,
+          "w": 260.0,
+          "h": 150.0
+        }
+      ],
+      "warps": [
+        {
+          "id": "lake_to_town",
+          "label": "Town Square",
+          "rect": {
+            "x": 1104.0,
+            "y": 368.0,
+            "w": 60.0,
+            "h": 152.0
+          },
+          "target_area": "town_square",
+          "target_position": [
+            136.0,
+            428.0
+          ]
+        }
+      ],
+      "gather_nodes": [
+        {
+          "id": "lake_slug_01",
+          "name": "Dew Slug",
+          "item_id": "dew_slug",
+          "color": [
+            148,
+            210,
+            238,
+            255
+          ],
+          "position": [
+            530.0,
+            420.0
+          ],
+          "radius": 15.0,
+          "route_id": "lake_shallows",
+          "seasons": [],
+          "weathers": [
+            "mist",
+            "rain"
+          ],
+          "time_windows": [
+            "morning",
+            "day"
+          ],
+          "spawn_chance": 55,
+          "note": "These gentle slugs gather where the reeds hold cool morning moisture."
+        }
+      ]
+    },
+    {
+      "id": "sunscar_desert",
+      "name": "South Desert",
+      "size": [
+        1280.0,
+        960.0
+      ],
+      "background": [
+        194,
+        164,
+        104,
+        255
+      ],
+      "accent": [
+        220,
+        198,
+        138,
+        255
+      ],
+      "blockers": [
+        {
+          "x": 236.0,
+          "y": 190.0,
+          "w": 210.0,
+          "h": 154.0
+        },
+        {
+          "x": 828.0,
+          "y": 202.0,
+          "w": 248.0,
+          "h": 180.0
+        },
+        {
+          "x": 508.0,
+          "y": 602.0,
+          "w": 276.0,
+          "h": 134.0
+        }
+      ],
+      "warps": [
+        {
+          "id": "desert_to_town",
+          "label": "Town Square",
+          "rect": {
+            "x": 596.0,
+            "y": 28.0,
+            "w": 102.0,
+            "h": 58.0
+          },
+          "target_area": "town_square",
+          "target_position": [
+            640.0,
+            770.0
+          ]
+        }
+      ],
+      "gather_nodes": [
+        {
+          "id": "desert_root_01",
+          "name": "Ember Root",
+          "item_id": "ember_root",
+          "color": [
+            255,
+            124,
+            74,
+            255
+          ],
+          "position": [
+            694.0,
+            506.0
+          ],
+          "radius": 16.0,
+          "route_id": "sunscar_dunes",
+          "seasons": [
+            "autumn",
+            "winter"
+          ],
+          "weathers": [
+            "clear",
+            "windy"
+          ],
+          "time_windows": [
+            "day",
+            "evening"
+          ],
+          "spawn_chance": 75,
+          "note": "Heat-baked roots surface where the sand has thinned over old mineral scars."
+        }
+      ]
+    },
+    {
+      "id": "tropical_rainforest",
+      "name": "Tropical Rainforest",
+      "size": [
+        1280.0,
+        960.0
+      ],
+      "background": [
+        64,
+        116,
+        94,
+        255
+      ],
+      "accent": [
+        108,
+        164,
+        132,
+        255
+      ],
+      "blockers": [
+        {
+          "x": 210.0,
+          "y": 152.0,
+          "w": 198.0,
+          "h": 174.0
+        },
+        {
+          "x": 824.0,
+          "y": 182.0,
+          "w": 246.0,
+          "h": 182.0
+        },
+        {
+          "x": 492.0,
+          "y": 572.0,
+          "w": 310.0,
+          "h": 146.0
+        }
+      ],
+      "warps": [
+        {
+          "id": "rainforest_to_town",
+          "label": "Town Square",
+          "rect": {
+            "x": 28.0,
+            "y": 382.0,
+            "w": 62.0,
+            "h": 150.0
+          },
+          "target_area": "town_square",
+          "target_position": [
+            1120.0,
+            430.0
+          ]
+        }
+      ],
+      "gather_nodes": [
+        {
+          "id": "rainforest_moss_01",
+          "name": "Whisper Moss",
+          "item_id": "whisper_moss",
+          "color": [
+            96,
+            214,
+            150,
+            255
+          ],
+          "position": [
+            624.0,
+            476.0
+          ],
+          "radius": 14.0,
+          "route_id": "rainmist_canopy",
+          "seasons": [
+            "spring",
+            "summer",
+            "autumn"
+          ],
+          "weathers": [
+            "clear",
+            "mist",
+            "rain"
+          ],
+          "time_windows": [
+            "morning",
+            "day"
+          ],
+          "spawn_chance": 85,
+          "note": "Soft growth thrives on soaked roots and shade-heavy trunks."
         }
       ]
     },
@@ -962,25 +1390,55 @@
       "id": "tower_ruin_edge",
       "name": "Tower Ruin Edge",
       "area_id": "tower_entry",
-      "description": "A short route around the old tower walls where moss and residual dust collect."
+      "description": "A short route around the old tower walls between the interior lab and the open plains."
+    },
+    {
+      "id": "plains_crossing",
+      "name": "Plains Crossing",
+      "area_id": "north_plains",
+      "description": "Open grassland between the tower road and the town, good for broad daylight gathering."
+    },
+    {
+      "id": "stone_quarry",
+      "name": "Stone Quarry",
+      "area_id": "rock_fields",
+      "description": "A broken field of rock shelves and mineral scars where powdery catalyst remnants settle."
     },
     {
       "id": "creekside_meadow",
       "name": "Creekside Meadow",
       "area_id": "town_square",
-      "description": "Sunny verge and creekbank patches just outside town, reliable for beginner herb runs."
+      "description": "The town’s inner footpaths and verge, now serving more as a crossroads than a gathering lane."
     },
     {
       "id": "moonlit_grove",
       "name": "Moonlit Grove",
       "area_id": "moonlit_forest",
-      "description": "A shaded forest route that rewards evening and misty gathering."
+      "description": "The eastern forest path from the plains, shaded and strongest at dusk."
     },
     {
       "id": "charred_hollow",
       "name": "Charred Hollow",
       "area_id": "moonlit_forest",
-      "description": "A warmer pocket of the forest where roots and mineral reagents surface near old fire scars."
+      "description": "A warmer pocket of the east forest where roots and reagents surface near old fire scars."
+    },
+    {
+      "id": "lake_shallows",
+      "name": "Lake Shallows",
+      "area_id": "lake_shore",
+      "description": "A cool reed-lined lakeside where moisture-loving specimens appear in the morning."
+    },
+    {
+      "id": "sunscar_dunes",
+      "name": "Sunscar Dunes",
+      "area_id": "sunscar_desert",
+      "description": "Dry southern dunes and exposed mineral seams where heat-touched roots can survive."
+    },
+    {
+      "id": "rainmist_canopy",
+      "name": "Rainmist Canopy",
+      "area_id": "tropical_rainforest",
+      "description": "A humid eastern jungle path with dense shade, wet bark, and persistent mist."
     },
     {
       "id": "greenhouse_walk",

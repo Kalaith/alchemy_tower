@@ -51,7 +51,7 @@ Tasks:
 - [x] Add first-run tutorial toasts for journal, brewing, potion belt use, and save/load.
 - [x] Show contextual prompts for nearby stations more aggressively.
 - [x] Make alchemy-specific controls easier to parse inside the alchemy overlay.
-- [ ] Review whether save/load controls should remain developer-like shortcuts or move into pause/menu UI.
+- [x] Review whether save/load controls should remain developer-like shortcuts or move into pause/menu UI.
 
 ## 4. Progression Guidance and Next-Goal Messaging
 
@@ -84,7 +84,7 @@ Why:
 - Strong feedback can make the existing MVP feel substantially more finished.
 
 Tasks:
-- [ ] Add audio support for core interactions: gather, brew success, brew collapse, quest complete, unlock, sell, and journal discovery.
+- [ ] Extend the placeholder audio pass beyond movement, gather pickup, and brewing into quest completion, unlocks, selling, and journal discovery.
 - [x] Strengthen particles or ring effects for rare gathers, recipe discoveries, and unlocks.
 - [x] Add subtle camera shake or emphasis on major interactions.
 - [x] Add a stronger day-rollover moment.

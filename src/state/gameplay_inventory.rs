@@ -1,4 +1,5 @@
 use super::*;
+use crate::audio::AudioAssets;
 use crate::content::ui_format;
 use crate::data::{ItemCategory, RecipeDefinition};
 use std::collections::BTreeMap;
@@ -510,7 +511,12 @@ impl GameplayState {
         }
     }
 
-    pub(super) fn brew_selected(&mut self, data: &GameData, station: &StationDefinition) {
+    pub(super) fn brew_selected(
+        &mut self,
+        data: &GameData,
+        station: &StationDefinition,
+        audio: &AudioAssets,
+    ) {
         let selected = self.selected_items();
         if selected.is_empty() {
             self.runtime.status_text = narrative_text().statuses.cauldron_empty.clone();
@@ -637,6 +643,7 @@ impl GameplayState {
                 ],
             );
         }
+        audio.play_brew_result(self.brew_is_stable(&resolution));
         let current_profile = self.progression.crafted_item_profiles.get(&resolution.output_item_id);
         let improved_best = current_profile
             .zip(previous_profile.as_ref())

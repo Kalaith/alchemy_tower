@@ -334,16 +334,46 @@
         "prompt": "Top-down magical tower entry laboratory, old stone, copper fixtures, restored cauldron corner, worn research surfaces, mysterious but welcoming first playable space."
       },
       {
+        "id": "north_plains",
+        "type": "background_plate",
+        "image_size_px": [1920, 1080],
+        "prompt": "Top-down open plains between an old alchemy tower and the town, broad grass paths, scattered stones, wind-shaped field edges, readable crossroads atmosphere."
+      },
+      {
         "id": "town_square",
         "type": "background_plate",
         "image_size_px": [1920, 1080],
         "prompt": "Top-down village square, warm market paths, apothecary frontage, request board area, bright readable social hub with soft fantasy atmosphere."
       },
       {
+        "id": "rock_fields",
+        "type": "background_plate",
+        "image_size_px": [1920, 1080],
+        "prompt": "Top-down rocky field west of the plains, broken stone shelves, dry grass seams, mineral scars, rugged gathering zone with strong readable rock shapes."
+      },
+      {
         "id": "moonlit_forest",
         "type": "background_plate",
         "image_size_px": [1920, 1080],
-        "prompt": "Top-down moonlit forest route, damp glades, luminous herbs, pale moon clearings, magical but grounded gathering area."
+        "prompt": "Top-down east forest route from the plains, damp glades, luminous herbs, pale clearings, magical but grounded woodland gathering area."
+      },
+      {
+        "id": "lake_shore",
+        "type": "background_plate",
+        "image_size_px": [1920, 1080],
+        "prompt": "Top-down lakeside west of town, reed-lined shore, shallow water inlets, cool stones, soft reflective atmosphere, readable shoreline exploration space."
+      },
+      {
+        "id": "sunscar_desert",
+        "type": "background_plate",
+        "image_size_px": [1920, 1080],
+        "prompt": "Top-down southern desert, sun-baked sand, mineral ridges, dry wind paths, sparse hardy growth, readable harsh but explorable environment."
+      },
+      {
+        "id": "tropical_rainforest",
+        "type": "background_plate",
+        "image_size_px": [1920, 1080],
+        "prompt": "Top-down tropical rainforest east of town, dense canopy shadows, soaked roots, broad-leaf growth, warm humid atmosphere, readable jungle pathways."
       },
       {
         "id": "greenhouse_floor",

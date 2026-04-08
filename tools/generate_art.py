@@ -172,9 +172,19 @@ def icon(item, size, world=False):
 
 def area(name):
     colors = {
-        "tower_entry": ("#5f5367", "#2b2d39"), "town_square": ("#7ca36d", "#55724c"), "moonlit_forest": ("#4f6e68", "#1d2932"),
-        "greenhouse_floor": ("#709379", "#425845"), "containment_floor": ("#57708c", "#2b3647"), "rune_workshop_floor": ("#6c5b78", "#31263a"),
-        "archive_floor": ("#7d715a", "#383227"), "observatory_floor": ("#303f6b", "#11192a"),
+        "tower_entry": ("#5f5367", "#2b2d39"),
+        "north_plains": ("#7fa66c", "#526d41"),
+        "town_square": ("#7ca36d", "#55724c"),
+        "rock_fields": ("#8f8773", "#535046"),
+        "moonlit_forest": ("#4f6e68", "#1d2932"),
+        "lake_shore": ("#73a9bd", "#385c6b"),
+        "sunscar_desert": ("#c89f59", "#7f6131"),
+        "tropical_rainforest": ("#4d8a67", "#1f4735"),
+        "greenhouse_floor": ("#709379", "#425845"),
+        "containment_floor": ("#57708c", "#2b3647"),
+        "rune_workshop_floor": ("#6c5b78", "#31263a"),
+        "archive_floor": ("#7d715a", "#383227"),
+        "observatory_floor": ("#303f6b", "#11192a"),
     }[name]
     img = Image.new("RGBA", (1920, 1080), rgb(colors[0]))
     d = ImageDraw.Draw(img)

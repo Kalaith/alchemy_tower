@@ -2,6 +2,7 @@ use macroquad::prelude::*;
 
 mod art;
 mod alchemy;
+mod audio;
 mod content;
 mod data;
 mod game;
