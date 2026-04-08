@@ -81,10 +81,7 @@ struct ActiveEffect {
 
 #[derive(Clone, Debug)]
 struct GatherToast {
-    text: String,
     remaining_seconds: f32,
-    color: Color,
-    icon_key: String,
 }
 
 #[derive(Clone, Debug)]

@@ -1,6 +1,5 @@
 use super::gameplay_npc::npc_motion_seed;
 use super::*;
-use crate::art::default_toast_icon_key;
 use crate::content::{narrative_text, ui_copy, ui_format};
 
 impl GameplayState {
@@ -118,22 +117,19 @@ impl GameplayState {
     }
 
     pub(super) fn push_event_toast(&mut self, text: impl Into<String>, color: Color) {
-        self.push_event_toast_with_icon(text, color, default_toast_icon_key());
+        self.push_event_toast_with_icon(text, color, "");
     }
 
     pub(super) fn push_event_toast_with_icon(
         &mut self,
-        text: impl Into<String>,
-        color: Color,
-        icon_key: &str,
+        _text: impl Into<String>,
+        _color: Color,
+        _icon_key: &str,
     ) {
         self.runtime.gather_toasts.insert(
             0,
             GatherToast {
-                text: text.into(),
                 remaining_seconds: 2.2,
-                color,
-                icon_key: icon_key.to_owned(),
             },
         );
         self.runtime.gather_toasts.truncate(3);

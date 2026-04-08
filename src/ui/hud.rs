@@ -15,13 +15,6 @@ struct HudQuestView {
     location_hint: Option<String>,
 }
 
-struct HudToastView {
-    text: String,
-    color: Color,
-    alpha: f32,
-    icon_key: String,
-}
-
 struct HudFeedbackView {
     position: Vec2,
     radius: f32,
@@ -47,7 +40,6 @@ struct HudView {
     inventory: Vec<HudLine>,
     effects: Vec<HudLine>,
     potions: Vec<HudLine>,
-    toasts: Vec<HudToastView>,
     feedbacks: Vec<HudFeedbackView>,
 }
 
@@ -215,24 +207,8 @@ impl GameplayState {
             inventory,
             effects,
             potions,
-            toasts: self.build_hud_toasts(),
             feedbacks: self.build_hud_feedbacks(area),
         }
-    }
-
-    fn build_hud_toasts(&self) -> Vec<HudToastView> {
-        self.runtime
-            .gather_toasts
-            .iter()
-            .take(3)
-            .rev()
-            .map(|toast| HudToastView {
-                text: toast.text.clone(),
-                color: toast.color,
-                alpha: (toast.remaining_seconds / 2.2).clamp(0.0, 1.0),
-                icon_key: toast.icon_key.clone(),
-            })
-            .collect()
     }
 
     fn build_hud_feedbacks(&self, area: &AreaDefinition) -> Vec<HudFeedbackView> {
@@ -284,7 +260,6 @@ fn draw_hud_view(view: &HudView, art: &ArtAssets) {
     draw_inventory_panel(view, art);
     draw_effects_panel(view);
     draw_potion_panel(view, art);
-    draw_hud_toasts(&view.toasts, art);
     draw_hud_feedbacks(&view.feedbacks, art);
 }
 
@@ -429,29 +404,6 @@ fn draw_potion_panel(view: &HudView, art: &ArtAssets) {
         }
     }
     draw_wrapped_text(ui_copy("hud_journal_hint"), 370.0, screen_height() - 44.0, 180.0, 18.0, 18.0, dark::TEXT_DIM);
-}
-
-fn draw_hud_toasts(toasts: &[HudToastView], art: &ArtAssets) {
-    let start_x = screen_width() * 0.5 - 200.0;
-    let mut y = 28.0;
-    for toast in toasts {
-        let bg = Color::new(18.0 / 255.0, 18.0 / 255.0, 24.0 / 255.0, toast.alpha * 0.9);
-        let border = Color::new(toast.color.r, toast.color.g, toast.color.b, toast.alpha);
-        let text = Color::new(toast.color.r, toast.color.g, toast.color.b, toast.alpha);
-        draw_rectangle(start_x, y, 400.0, 36.0, bg);
-        draw_rectangle_lines(start_x, y, 400.0, 36.0, 2.0, border);
-        if let Some(texture) = art.toast_icon(&toast.icon_key) {
-            draw_texture_centered(texture, vec2(start_x + 18.0, y + 18.0), vec2(20.0, 20.0), text);
-        }
-        draw_text(
-            &truncate_text_to_width(&toast.text, 350.0, 18.0),
-            start_x + 34.0,
-            y + 24.0,
-            18.0,
-            text,
-        );
-        y += 42.0;
-    }
 }
 
 fn draw_hud_feedbacks(feedbacks: &[HudFeedbackView], art: &ArtAssets) {

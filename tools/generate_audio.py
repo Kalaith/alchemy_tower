@@ -56,6 +56,43 @@ def add_noise(
         buffer[index] += filtered * volume * amp
 
 
+def add_lowpass_noise(
+    buffer: list[float],
+    rng: random.Random,
+    volume: float,
+    attack: float,
+    decay: float,
+    smoothing: float,
+) -> None:
+    filtered = 0.0
+    length = len(buffer)
+    for index in range(length):
+        progress = index / max(length - 1, 1)
+        amp = envelope(progress, attack, decay)
+        value = rng.uniform(-1.0, 1.0)
+        filtered += (value - filtered) * smoothing
+        buffer[index] += filtered * volume * amp
+
+
+def add_impulse(
+    buffer: list[float],
+    offset_seconds: float,
+    duration_seconds: float,
+    frequency: float,
+    volume: float,
+) -> None:
+    start = max(0, int(offset_seconds * SAMPLE_RATE))
+    duration = max(1, int(duration_seconds * SAMPLE_RATE))
+    end = min(len(buffer), start + duration)
+    if start >= end:
+        return
+    for index in range(start, end):
+        progress = (index - start) / max(duration - 1, 1)
+        amp = envelope(progress, 0.08, 0.92)
+        phase = (index - start) / SAMPLE_RATE
+        buffer[index] += math.sin(2.0 * math.pi * frequency * phase) * volume * amp
+
+
 def normalize(buffer: list[float], target: float = 0.9) -> list[float]:
     peak = max((abs(sample) for sample in buffer), default=1.0)
     if peak <= 0.0001:
@@ -66,31 +103,36 @@ def normalize(buffer: list[float], target: float = 0.9) -> list[float]:
 
 def footstep_stone(seed: int) -> list[float]:
     rng = random.Random(seed)
-    duration = 0.14 + rng.uniform(0.0, 0.03)
+    duration = 0.11 + rng.uniform(0.0, 0.025)
     buffer = [0.0] * int(SAMPLE_RATE * duration)
-    add_noise(buffer, rng, 0.26, 0.01, 0.25, highpass_strength=0.42)
-    add_sine(buffer, 120 + rng.uniform(-20, 15), 0.28, 0.005, 0.18)
-    add_sine(buffer, 210 + rng.uniform(-25, 25), 0.12, 0.01, 0.22)
-    return normalize(buffer, 0.72)
+    add_impulse(buffer, 0.0, duration * 0.72, 92 + rng.uniform(-8, 10), 0.42)
+    add_sine(buffer, 148 + rng.uniform(-12, 12), 0.12, 0.004, 0.22)
+    add_lowpass_noise(buffer, rng, 0.07, 0.006, 0.18, 0.11)
+    add_noise(buffer, rng, 0.03, 0.003, 0.09, highpass_strength=0.5)
+    return normalize(buffer, 0.58)
 
 
 def footstep_dirt(seed: int) -> list[float]:
     rng = random.Random(seed)
-    duration = 0.16 + rng.uniform(0.0, 0.04)
+    duration = 0.13 + rng.uniform(0.0, 0.035)
     buffer = [0.0] * int(SAMPLE_RATE * duration)
-    add_noise(buffer, rng, 0.32, 0.01, 0.32, highpass_strength=0.18)
-    add_sine(buffer, 95 + rng.uniform(-15, 15), 0.14, 0.01, 0.28)
-    return normalize(buffer, 0.7)
+    add_impulse(buffer, 0.0, duration * 0.8, 82 + rng.uniform(-8, 8), 0.28)
+    add_lowpass_noise(buffer, rng, 0.13, 0.008, 0.24, 0.09)
+    add_noise(buffer, rng, 0.025, 0.006, 0.14, highpass_strength=0.2)
+    add_sine(buffer, 118 + rng.uniform(-10, 12), 0.08, 0.01, 0.2)
+    return normalize(buffer, 0.54)
 
 
 def footstep_greenhouse(seed: int) -> list[float]:
     rng = random.Random(seed)
-    duration = 0.18 + rng.uniform(0.0, 0.04)
+    duration = 0.14 + rng.uniform(0.0, 0.035)
     buffer = [0.0] * int(SAMPLE_RATE * duration)
-    add_noise(buffer, rng, 0.24, 0.012, 0.34, highpass_strength=0.15)
-    add_sine(buffer, 140 + rng.uniform(-18, 18), 0.11, 0.008, 0.24)
-    add_sine(buffer, 520 + rng.uniform(-60, 60), 0.05, 0.03, 0.18)
-    return normalize(buffer, 0.66)
+    add_impulse(buffer, 0.0, duration * 0.78, 88 + rng.uniform(-10, 8), 0.24)
+    add_lowpass_noise(buffer, rng, 0.1, 0.008, 0.26, 0.1)
+    add_noise(buffer, rng, 0.02, 0.01, 0.16, highpass_strength=0.12)
+    add_sine(buffer, 176 + rng.uniform(-15, 15), 0.07, 0.008, 0.2)
+    add_sine(buffer, 360 + rng.uniform(-25, 25), 0.025, 0.02, 0.12)
+    return normalize(buffer, 0.5)
 
 
 def gather_pickup(seed: int) -> list[float]:

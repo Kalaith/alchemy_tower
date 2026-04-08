@@ -23,7 +23,7 @@ This file describes what the game currently supports based on the source code an
   - HUD time warning turns yellow after midnight
   - hitting 01:00 forces a collapse wake-up at 10:00 back at the tower bed with a full-screen warning flash
 - In-world route/station/NPC prompts with contextual requirement or readiness messaging.
-- First-run contextual tutorial toasts for:
+- First-run contextual tutorial hint timing for:
   - Crow-led first gather and first brew guidance
   - save/load
   - journal use
@@ -34,7 +34,7 @@ This file describes what the game currently supports based on the source code an
 ## World Content
 
 - Procedurally generated background plates for each authored area.
-- Procedurally generated sprites for the player, authored NPCs, stations, gatherables, inventory icons, journal tab icons, toast icons, and major world effects.
+- Procedurally generated sprites for the player, authored NPCs, stations, gatherables, inventory icons, journal tab icons, and major world effects.
 - World rendering now uses texture-backed stations, characters, gather nodes, warp glows, and feedback effects instead of only primitive placeholder shapes.
 
 Current authored areas:
@@ -83,7 +83,7 @@ Current authored gathering routes:
 - Herb availability rules are learned only after the first successful collection of that herb.
 - Learned herb conditions are surfaced in the field journal rather than exposed directly in map prompts.
 - Gathered specimens are tracked in a field journal with route, season, weather, time window, best quality snapshot, variant label, and learned availability context.
-- Gather feedback includes world bursts, HUD toasts, best-quality notifications, and variant discovery messaging.
+- Gather feedback includes world bursts and progression/status updates for best-quality results and variant discovery messaging.
 
 ## Inventory and Economy
 
@@ -368,6 +368,7 @@ Persistent save state currently includes:
   - alchemy station open
   - alchemy stirring
   - brew success and brew collapse
+- Footstep placeholders are tuned toward short low-impact thumps with light surface grit rather than broad hiss/noise.
 - Audio playback is currently hooked into:
   - player movement
   - successful herb gathering

@@ -13,10 +13,7 @@ const PLAYER_ID: &str = "player_tower_alchemist";
 
 #[derive(Debug, Deserialize)]
 struct UiArtCatalog {
-    #[serde(default)]
-    default_toast_icon: String,
     journal_tabs: Vec<JournalTabIconBinding>,
-    toast_icons: Vec<UiIconAssetDefinition>,
     effects: Vec<UiIconAssetDefinition>,
 }
 
@@ -41,7 +38,6 @@ pub struct ArtAssets {
     world_nodes: HashMap<String, Texture2D>,
     journal_tabs: HashMap<String, Texture2D>,
     journal_tab_bindings: HashMap<String, String>,
-    toast_icons: HashMap<String, Texture2D>,
     effects: HashMap<String, Texture2D>,
 }
 
@@ -55,7 +51,6 @@ impl ArtAssets {
             world_nodes: HashMap::new(),
             journal_tabs: HashMap::new(),
             journal_tab_bindings: HashMap::new(),
-            toast_icons: HashMap::new(),
             effects: HashMap::new(),
         };
         let catalog = ui_art_catalog();
@@ -114,12 +109,6 @@ impl ArtAssets {
             );
         }
 
-        for icon in &catalog.toast_icons {
-            if let Some(texture) = load_game_texture(&icon.path).await {
-                assets.toast_icons.insert(icon.key.clone(), texture);
-            }
-        }
-
         for effect in &catalog.effects {
             if let Some(texture) = load_game_texture(&effect.path).await {
                 assets.effects.insert(effect.key.clone(), texture);
@@ -162,21 +151,8 @@ impl ArtAssets {
         self.journal_tab(key)
     }
 
-    pub fn toast_icon(&self, key: &str) -> Option<&Texture2D> {
-        self.toast_icons.get(key)
-    }
-
     pub fn effect(&self, id: &str) -> Option<&Texture2D> {
         self.effects.get(id)
-    }
-}
-
-pub fn default_toast_icon_key() -> &'static str {
-    let key = ui_art_catalog().default_toast_icon.as_str();
-    if key.is_empty() {
-        "best_quality"
-    } else {
-        key
     }
 }
 
