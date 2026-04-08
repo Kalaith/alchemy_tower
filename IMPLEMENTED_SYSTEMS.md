@@ -16,6 +16,12 @@ This file describes what the game currently supports based on the source code an
 - Multi-area travel through authored warp regions.
 - Surface world layout now routes tower travel through a plains hub, with additional rock, forest, lake, desert, and rainforest branch maps.
 - Camera follow, impact shake, and immediate-mode UI panels/prompts.
+- Gameplay HUD now uses:
+  - compact vitality/coins and time/day/weather cards
+  - a one-line goal tracker with quest detail when relevant
+  - a temporary area-name banner on room entry
+  - a bottom quick-belt slot bar for potions
+  - a hover-expand right drawer for inventory and active effects
 - Day clock, day rollover, weather state, season state, and time-of-day windows.
 - Rest bed on the tower entry floor with voluntary sleep-to-morning interaction.
 - Pause menu save/load actions, with `F5` and `F9` retained as secondary gameplay/pause shortcuts.

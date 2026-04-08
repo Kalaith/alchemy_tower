@@ -39,7 +39,8 @@ Tasks:
 - [x] Stop capping displayed tower progress at `10` brews when the underlying progression continues beyond that.
 - [x] Make the current quest and its location hint more prominent.
 - [x] Add a compact gameplay controls strip such as `E interact`, `J journal`, and `Esc pause`.
-- [ ] Review inventory/effects/potion panel spacing at common desktop and smaller window sizes.
+- [x] Replace the always-on multi-panel HUD with a compact status layout, slot-based potion belt, and collapsible right-side drawer.
+- [x] Review inventory/effects/potion panel spacing at common desktop and smaller window sizes.
 
 ## 3. Control Discoverability and Onboarding
 

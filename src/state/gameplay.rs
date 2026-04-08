@@ -287,6 +287,9 @@ struct RuntimeState {
     last_brew_setup: Option<SavedAlchemySetup>,
     tutorial: TutorialState,
     footstep_cooldown_seconds: f32,
+    area_banner_area_id: String,
+    area_banner_label: String,
+    area_banner_seconds: f32,
 }
 
 #[derive(Clone, Debug)]
@@ -364,7 +367,7 @@ impl GameplayState {
                 camera_shake_intensity: 0.0,
                 sleep_flash_seconds: 0.0,
                 npc_motion_states: BTreeMap::new(),
-                status_text: "Gather ingredients and experiment at the tower cauldron.".to_owned(),
+                status_text: String::new(),
                 last_brew_setup: None,
                 tutorial: TutorialState {
                     next_hint_delay_seconds: 1.5,
@@ -382,6 +385,12 @@ impl GameplayState {
                     route_hint_shown: false,
                 },
                 footstep_cooldown_seconds: 0.0,
+                area_banner_area_id: data.config.starting_area.clone(),
+                area_banner_label: data
+                    .area(&data.config.starting_area)
+                    .map(|area| area.name.clone())
+                    .unwrap_or_default(),
+                area_banner_seconds: 2.6,
             },
             ui: OverlayState {
                 shop_buy_tab: true,
@@ -449,6 +458,7 @@ impl GameplayState {
             self.advance_to_next_day(data, true);
         }
         self.handle_sleep_pressure(data);
+        self.update_area_banner(data, frame_time);
         self.update_active_effects(frame_time);
         self.update_gather_feedback(frame_time);
         self.update_npc_motion(data, frame_time);

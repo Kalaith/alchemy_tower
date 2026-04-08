@@ -3,6 +3,19 @@ use super::*;
 use crate::content::{narrative_text, ui_copy, ui_format};
 
 impl GameplayState {
+    pub(super) fn update_area_banner(&mut self, data: &GameData, frame_time: f32) {
+        self.runtime.area_banner_seconds =
+            (self.runtime.area_banner_seconds - frame_time).max(0.0);
+        if self.runtime.area_banner_area_id != self.world.current_area_id {
+            self.runtime.area_banner_area_id = self.world.current_area_id.clone();
+            self.runtime.area_banner_label = data
+                .area(&self.world.current_area_id)
+                .map(|area| area.name.clone())
+                .unwrap_or_default();
+            self.runtime.area_banner_seconds = 2.6;
+        }
+    }
+
     pub(super) fn locked_warps<'a>(&self, data: &'a GameData) -> Vec<&'a WarpDefinition> {
         data.areas
             .iter()
