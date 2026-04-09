@@ -79,6 +79,12 @@ pub enum BlockerVisualStyle {
     House,
     #[default]
     Panel,
+    Grass,
+    Quarry,
+    Forest,
+    Reeds,
+    Dunes,
+    Rainforest,
 }
 
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
@@ -125,12 +131,15 @@ impl Default for StationRenderDefinition {
 pub struct GatherNodeRenderDefinition {
     #[serde(default = "default_gather_node_sprite_size")]
     pub sprite_size: [f32; 2],
+    #[serde(default)]
+    pub sprite_id: String,
 }
 
 impl Default for GatherNodeRenderDefinition {
     fn default() -> Self {
         Self {
             sprite_size: default_gather_node_sprite_size(),
+            sprite_id: String::new(),
         }
     }
 }

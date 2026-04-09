@@ -61,6 +61,10 @@ pub fn ui_copy(key: &str) -> &'static str {
         .unwrap_or_else(|| panic!("missing ui text copy key: {key}"))
 }
 
+pub fn ui_copy_optional(key: &str) -> Option<&'static str> {
+    ui_text().copy.get(key).map(String::as_str)
+}
+
 pub fn ui_format(key: &str, replacements: &[(&str, &str)]) -> String {
     let mut text = ui_copy(key).to_owned();
     for (name, value) in replacements {

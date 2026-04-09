@@ -7,8 +7,8 @@ mod schema;
 
 pub use game_data::GameData;
 pub use save_models::{
-    CraftedItemProfileEntry, ExperimentLogEntry, FieldJournalEntry, InventoryEntry,
-    RecipeMasteryEntry, RelationshipEntry, SaveData,
+    CraftedItemProfileEntry, ExperimentLogEntry, FieldJournalEntry, HerbMemoryEntry,
+    InventoryEntry, PotionMemoryEntry, RecipeMasteryEntry, RelationshipEntry, SaveData,
 };
 pub use schema::{
     AreaDefinition, BlockerVisualStyle, EffectDefinition, EffectKind, ElementProfile, GameConfig,

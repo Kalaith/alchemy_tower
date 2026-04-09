@@ -113,7 +113,7 @@ Tasks:
 - [x] Increase or redesign the experiment-log cap so longer saves retain more useful history.
 - [x] Add paging or filtering to experiment history and archive lists.
 - [x] Cross-link recipes, morph outcomes, and best attempts where practical.
-- [ ] Make the journal feel more like a player memory system than a static report.
+- [x] Make the journal feel more like a player memory system than a static report.
 
 ## 9. World Readability and Pacing Polish
 
@@ -126,6 +126,7 @@ Tasks:
 - [x] Improve weather/time-of-day visual feedback.
 - [x] Review NPC readability so key turn-in characters remain easy to find.
 - [x] Smooth first-hour readability for first gather, first brew, first unlock, and first NPC hand-in with contextual prompts and tutorial hints.
+- [x] Complete the authored surface biome pass with distinct layouts, biome-native resources, seasonal spawn plans, biome prop art, and refreshed background plates.
 - [ ] Run a fresh-user first-hour pass and revisit archive/journal-return pacing with that feedback.
 
 ## Notes

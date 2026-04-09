@@ -131,24 +131,69 @@
         104,
         255
       ],
+      "render": {
+        "blocker_style": "grass",
+        "blocker_primary": [
+          108,
+          146,
+          84,
+          255
+        ],
+        "blocker_secondary": [
+          156,
+          196,
+          110,
+          255
+        ],
+        "blocker_detail": [
+          86,
+          118,
+          68,
+          255
+        ],
+        "blocker_alt": [
+          238,
+          220,
+          138,
+          255
+        ]
+      },
       "blockers": [
         {
-          "x": 214.0,
-          "y": 228.0,
-          "w": 170.0,
-          "h": 140.0
+          "x": 118.0,
+          "y": 152.0,
+          "w": 190.0,
+          "h": 96.0
         },
         {
-          "x": 892.0,
-          "y": 208.0,
-          "w": 196.0,
-          "h": 154.0
+          "x": 430.0,
+          "y": 176.0,
+          "w": 130.0,
+          "h": 82.0
         },
         {
-          "x": 532.0,
-          "y": 484.0,
-          "w": 224.0,
-          "h": 166.0
+          "x": 854.0,
+          "y": 146.0,
+          "w": 210.0,
+          "h": 110.0
+        },
+        {
+          "x": 188.0,
+          "y": 454.0,
+          "w": 162.0,
+          "h": 96.0
+        },
+        {
+          "x": 756.0,
+          "y": 470.0,
+          "w": 190.0,
+          "h": 108.0
+        },
+        {
+          "x": 514.0,
+          "y": 654.0,
+          "w": 178.0,
+          "h": 88.0
         }
       ],
       "warps": [
@@ -225,8 +270,8 @@
             255
           ],
           "position": [
-            704.0,
-            536.0
+            768.0,
+            248.0
           ],
           "radius": 14.0,
           "route_id": "plains_crossing",
@@ -243,7 +288,78 @@
             "day"
           ],
           "spawn_chance": 90,
-          "note": "Warm meadow patches between the tower road and the town path."
+          "note": "Warm meadow patches cluster along the main road where the plains stay open to the sun.",
+          "render": {
+            "sprite_id": "sunleaf_plains"
+          }
+        },
+        {
+          "id": "plains_field_bloom_01",
+          "name": "Field Bloom",
+          "item_id": "field_bloom",
+          "color": [
+            246,
+            215,
+            132,
+            255
+          ],
+          "position": [
+            408.0,
+            286.0
+          ],
+          "radius": 14.0,
+          "route_id": "plains_crossing",
+          "seasons": [
+            "spring",
+            "summer",
+            "autumn"
+          ],
+          "weathers": [
+            "clear",
+            "mist"
+          ],
+          "time_windows": [
+            "morning",
+            "day"
+          ],
+          "spawn_chance": 85,
+          "note": "These meadow flowers thrive along the wagon-cut verges that stay bright through spring.",
+          "render": {
+            "sprite_id": "field_bloom_plains"
+          }
+        },
+        {
+          "id": "plains_moss_01",
+          "name": "Whisper Moss",
+          "item_id": "whisper_moss",
+          "color": [
+            96,
+            214,
+            150,
+            255
+          ],
+          "position": [
+            286.0,
+            622.0
+          ],
+          "radius": 14.0,
+          "route_id": "plains_crossing",
+          "seasons": [
+            "spring",
+            "winter"
+          ],
+          "weathers": [
+            "clear",
+            "mist"
+          ],
+          "time_windows": [
+            "morning"
+          ],
+          "spawn_chance": 60,
+          "note": "Low standing stones on the southern road hold just enough cool shade for a brief moss flush.",
+          "render": {
+            "sprite_id": "whisper_moss_plains"
+          }
         }
       ]
     },
@@ -396,24 +512,69 @@
         58,
         255
       ],
+      "render": {
+        "blocker_style": "forest",
+        "blocker_primary": [
+          84,
+          58,
+          42,
+          255
+        ],
+        "blocker_secondary": [
+          62,
+          112,
+          76,
+          255
+        ],
+        "blocker_detail": [
+          34,
+          58,
+          42,
+          255
+        ],
+        "blocker_alt": [
+          174,
+          228,
+          182,
+          170
+        ]
+      },
       "blockers": [
         {
-          "x": 236.0,
-          "y": 188.0,
-          "w": 220.0,
-          "h": 180.0
+          "x": 140.0,
+          "y": 112.0,
+          "w": 240.0,
+          "h": 176.0
         },
         {
-          "x": 676.0,
-          "y": 470.0,
-          "w": 250.0,
-          "h": 200.0
+          "x": 430.0,
+          "y": 282.0,
+          "w": 168.0,
+          "h": 124.0
         },
         {
-          "x": 1030.0,
-          "y": 164.0,
-          "w": 180.0,
-          "h": 140.0
+          "x": 698.0,
+          "y": 126.0,
+          "w": 214.0,
+          "h": 154.0
+        },
+        {
+          "x": 1024.0,
+          "y": 118.0,
+          "w": 210.0,
+          "h": 152.0
+        },
+        {
+          "x": 786.0,
+          "y": 566.0,
+          "w": 272.0,
+          "h": 172.0
+        },
+        {
+          "x": 328.0,
+          "y": 650.0,
+          "w": 198.0,
+          "h": 144.0
         }
       ],
       "warps": [
@@ -445,8 +606,8 @@
             255
           ],
           "position": [
-            284.0,
-            564.0
+            304.0,
+            514.0
           ],
           "radius": 16.0,
           "route_id": "moonlit_grove",
@@ -463,7 +624,10 @@
             "night"
           ],
           "spawn_chance": 70,
-          "note": "Pale fronds glow best in low light near the grove."
+          "note": "Pale fronds gather in the first cool glade once the canopy closes out the day.",
+          "render": {
+            "sprite_id": "moon_fern_forest"
+          }
         },
         {
           "id": "forest_root_01",
@@ -476,12 +640,13 @@
             255
           ],
           "position": [
-            924.0,
-            780.0
+            906.0,
+            760.0
           ],
           "radius": 16.0,
           "route_id": "charred_hollow",
           "seasons": [
+            "summer",
             "autumn",
             "winter"
           ],
@@ -494,7 +659,10 @@
             "evening"
           ],
           "spawn_chance": 75,
-          "note": "Warm roots surface where old burn scars still hold heat."
+          "note": "Warm roots surface where the charred hollow keeps heat trapped under the forest floor.",
+          "render": {
+            "sprite_id": "ember_root_forest"
+          }
         },
         {
           "id": "forest_moth_01",
@@ -507,8 +675,8 @@
             255
           ],
           "position": [
-            1214.0,
-            542.0
+            1116.0,
+            518.0
           ],
           "radius": 14.0,
           "route_id": "moonlit_grove",
@@ -526,7 +694,10 @@
             "night"
           ],
           "spawn_chance": 60,
-          "note": "Wing scales cling to reeds and bark after damp dusk flights."
+          "note": "Wing scales catch on fern tips and bark where the grove narrows at dusk.",
+          "render": {
+            "sprite_id": "mist_moth_wing_forest"
+          }
         },
         {
           "id": "forest_glow_moth_01",
@@ -539,8 +710,8 @@
             255
           ],
           "position": [
-            1090.0,
-            320.0
+            1002.0,
+            268.0
           ],
           "radius": 16.0,
           "route_id": "moonlit_grove",
@@ -558,7 +729,44 @@
             "night"
           ],
           "spawn_chance": 55,
-          "note": "A living lantern moth that settles only where moonlight holds steady."
+          "note": "Lantern moths settle only in the high glade where the canopy parts without losing shelter.",
+          "render": {
+            "sprite_id": "glow_moth_forest"
+          }
+        },
+        {
+          "id": "forest_moss_01",
+          "name": "Whisper Moss",
+          "item_id": "whisper_moss",
+          "color": [
+            96,
+            214,
+            150,
+            255
+          ],
+          "position": [
+            492.0,
+            816.0
+          ],
+          "radius": 14.0,
+          "route_id": "moonlit_grove",
+          "seasons": [
+            "spring",
+            "winter"
+          ],
+          "weathers": [
+            "clear",
+            "mist"
+          ],
+          "time_windows": [
+            "morning",
+            "day"
+          ],
+          "spawn_chance": 65,
+          "note": "The shaded root line below the glade keeps enough damp for moss even when the path stays passable.",
+          "render": {
+            "sprite_id": "whisper_moss_forest"
+          }
         }
       ]
     },
@@ -581,24 +789,63 @@
         118,
         255
       ],
+      "render": {
+        "blocker_style": "quarry",
+        "blocker_primary": [
+          116,
+          112,
+          102,
+          255
+        ],
+        "blocker_secondary": [
+          166,
+          154,
+          136,
+          255
+        ],
+        "blocker_detail": [
+          80,
+          76,
+          72,
+          255
+        ],
+        "blocker_alt": [
+          176,
+          146,
+          242,
+          255
+        ]
+      },
       "blockers": [
         {
-          "x": 202.0,
-          "y": 154.0,
-          "w": 214.0,
-          "h": 188.0
+          "x": 144.0,
+          "y": 122.0,
+          "w": 230.0,
+          "h": 136.0
         },
         {
-          "x": 706.0,
-          "y": 192.0,
-          "w": 248.0,
-          "h": 176.0
+          "x": 388.0,
+          "y": 252.0,
+          "w": 176.0,
+          "h": 110.0
         },
         {
-          "x": 442.0,
-          "y": 536.0,
-          "w": 300.0,
-          "h": 146.0
+          "x": 620.0,
+          "y": 108.0,
+          "w": 230.0,
+          "h": 144.0
+        },
+        {
+          "x": 760.0,
+          "y": 332.0,
+          "w": 168.0,
+          "h": 220.0
+        },
+        {
+          "x": 344.0,
+          "y": 560.0,
+          "w": 360.0,
+          "h": 118.0
         }
       ],
       "warps": [
@@ -630,8 +877,8 @@
             255
           ],
           "position": [
-            818.0,
-            478.0
+            816.0,
+            274.0
           ],
           "radius": 14.0,
           "route_id": "stone_quarry",
@@ -650,7 +897,78 @@
             "evening"
           ],
           "spawn_chance": 65,
-          "note": "Residual powder settles into cracks between broken standing stones."
+          "note": "Residual powder settles in the upper cut where the quarry shelves fracture into narrow lanes.",
+          "render": {
+            "sprite_id": "arcane_dust_quarry"
+          }
+        },
+        {
+          "id": "rocks_lichen_01",
+          "name": "Quarry Lichen",
+          "item_id": "quarry_lichen",
+          "color": [
+            168,
+            210,
+            186,
+            255
+          ],
+          "position": [
+            426.0,
+            700.0
+          ],
+          "radius": 14.0,
+          "route_id": "stone_quarry",
+          "seasons": [
+            "spring",
+            "winter"
+          ],
+          "weathers": [
+            "clear",
+            "mist"
+          ],
+          "time_windows": [
+            "morning",
+            "day"
+          ],
+          "spawn_chance": 80,
+          "note": "Cold lower shelves grow mineral lichen where quarry runoff gathers under broken ledges.",
+          "render": {
+            "sprite_id": "quarry_lichen_quarry"
+          }
+        },
+        {
+          "id": "rocks_root_01",
+          "name": "Ember Root",
+          "item_id": "ember_root",
+          "color": [
+            255,
+            124,
+            74,
+            255
+          ],
+          "position": [
+            684.0,
+            466.0
+          ],
+          "radius": 16.0,
+          "route_id": "stone_quarry",
+          "seasons": [
+            "summer",
+            "autumn"
+          ],
+          "weathers": [
+            "clear",
+            "windy"
+          ],
+          "time_windows": [
+            "day",
+            "evening"
+          ],
+          "spawn_chance": 55,
+          "note": "The sun-struck seam at mid-quarry throws enough heat for roots to harden between seasons.",
+          "render": {
+            "sprite_id": "ember_root_quarry"
+          }
         }
       ]
     },
@@ -673,24 +991,69 @@
         220,
         255
       ],
+      "render": {
+        "blocker_style": "reeds",
+        "blocker_primary": [
+          124,
+          154,
+          138,
+          255
+        ],
+        "blocker_secondary": [
+          90,
+          146,
+          174,
+          255
+        ],
+        "blocker_detail": [
+          196,
+          210,
+          128,
+          255
+        ],
+        "blocker_alt": [
+          154,
+          164,
+          170,
+          255
+        ]
+      },
       "blockers": [
         {
-          "x": 156.0,
-          "y": 116.0,
-          "w": 230.0,
-          "h": 170.0
-        },
-        {
-          "x": 734.0,
-          "y": 132.0,
-          "w": 206.0,
-          "h": 146.0
-        },
-        {
-          "x": 462.0,
-          "y": 538.0,
-          "w": 260.0,
+          "x": 122.0,
+          "y": 96.0,
+          "w": 210.0,
           "h": 150.0
+        },
+        {
+          "x": 352.0,
+          "y": 204.0,
+          "w": 146.0,
+          "h": 112.0
+        },
+        {
+          "x": 578.0,
+          "y": 108.0,
+          "w": 184.0,
+          "h": 124.0
+        },
+        {
+          "x": 786.0,
+          "y": 188.0,
+          "w": 164.0,
+          "h": 112.0
+        },
+        {
+          "x": 402.0,
+          "y": 566.0,
+          "w": 248.0,
+          "h": 132.0
+        },
+        {
+          "x": 720.0,
+          "y": 620.0,
+          "w": 210.0,
+          "h": 118.0
         }
       ],
       "warps": [
@@ -712,6 +1075,41 @@
       ],
       "gather_nodes": [
         {
+          "id": "lake_reedflower_01",
+          "name": "Reedflower",
+          "item_id": "reedflower",
+          "color": [
+            214,
+            241,
+            255,
+            255
+          ],
+          "position": [
+            318.0,
+            382.0
+          ],
+          "radius": 15.0,
+          "route_id": "lake_shallows",
+          "seasons": [
+            "spring",
+            "summer"
+          ],
+          "weathers": [
+            "clear",
+            "mist",
+            "rain"
+          ],
+          "time_windows": [
+            "morning",
+            "day"
+          ],
+          "spawn_chance": 88,
+          "note": "The first reed bend west of town opens into cool flower pockets when the lake wind stays gentle.",
+          "render": {
+            "sprite_id": "reedflower_lake"
+          }
+        },
+        {
           "id": "lake_slug_01",
           "name": "Dew Slug",
           "item_id": "dew_slug",
@@ -722,12 +1120,16 @@
             255
           ],
           "position": [
-            530.0,
-            420.0
+            562.0,
+            438.0
           ],
           "radius": 15.0,
           "route_id": "lake_shallows",
-          "seasons": [],
+          "seasons": [
+            "spring",
+            "summer",
+            "autumn"
+          ],
           "weathers": [
             "mist",
             "rain"
@@ -736,8 +1138,113 @@
             "morning",
             "day"
           ],
-          "spawn_chance": 55,
-          "note": "These gentle slugs gather where the reeds hold cool morning moisture."
+          "spawn_chance": 60,
+          "note": "These gentle slugs gather where the reed beds hold cool morning moisture against the stones.",
+          "render": {
+            "sprite_id": "dew_slug_lake"
+          }
+        },
+        {
+          "id": "lake_moth_01",
+          "name": "Mist Moth Wing",
+          "item_id": "mist_moth_wing",
+          "color": [
+            170,
+            215,
+            255,
+            255
+          ],
+          "position": [
+            846.0,
+            322.0
+          ],
+          "radius": 14.0,
+          "route_id": "lake_shallows",
+          "seasons": [
+            "summer",
+            "autumn"
+          ],
+          "weathers": [
+            "mist",
+            "rain"
+          ],
+          "time_windows": [
+            "evening",
+            "night"
+          ],
+          "spawn_chance": 58,
+          "note": "Damp dusk flights leave powder on the outer reeds and weathered dock posts.",
+          "render": {
+            "sprite_id": "mist_moth_wing_lake"
+          }
+        },
+        {
+          "id": "lake_fern_01",
+          "name": "Moon Fern",
+          "item_id": "moon_fern",
+          "color": [
+            144,
+            255,
+            176,
+            255
+          ],
+          "position": [
+            434.0,
+            720.0
+          ],
+          "radius": 15.0,
+          "route_id": "lake_shallows",
+          "seasons": [
+            "spring",
+            "winter"
+          ],
+          "weathers": [
+            "clear",
+            "mist"
+          ],
+          "time_windows": [
+            "evening",
+            "night"
+          ],
+          "spawn_chance": 50,
+          "note": "Shaded coves at the south edge keep enough cool reflected light for a sparse fern line.",
+          "render": {
+            "sprite_id": "moon_fern_lake"
+          }
+        },
+        {
+          "id": "lake_moss_01",
+          "name": "Whisper Moss",
+          "item_id": "whisper_moss",
+          "color": [
+            96,
+            214,
+            150,
+            255
+          ],
+          "position": [
+            768.0,
+            598.0
+          ],
+          "radius": 14.0,
+          "route_id": "lake_shallows",
+          "seasons": [
+            "spring",
+            "winter"
+          ],
+          "weathers": [
+            "mist",
+            "rain"
+          ],
+          "time_windows": [
+            "morning",
+            "day"
+          ],
+          "spawn_chance": 62,
+          "note": "Shoreline stones below the reed beds keep just enough damp for a cool-weather moss band.",
+          "render": {
+            "sprite_id": "whisper_moss_lake"
+          }
         }
       ]
     },
@@ -760,24 +1267,69 @@
         138,
         255
       ],
+      "render": {
+        "blocker_style": "dunes",
+        "blocker_primary": [
+          202,
+          170,
+          106,
+          255
+        ],
+        "blocker_secondary": [
+          228,
+          202,
+          136,
+          255
+        ],
+        "blocker_detail": [
+          142,
+          106,
+          64,
+          255
+        ],
+        "blocker_alt": [
+          144,
+          152,
+          94,
+          255
+        ]
+      },
       "blockers": [
         {
-          "x": 236.0,
-          "y": 190.0,
-          "w": 210.0,
-          "h": 154.0
+          "x": 186.0,
+          "y": 142.0,
+          "w": 180.0,
+          "h": 104.0
         },
         {
-          "x": 828.0,
-          "y": 202.0,
-          "w": 248.0,
-          "h": 180.0
+          "x": 438.0,
+          "y": 238.0,
+          "w": 174.0,
+          "h": 120.0
         },
         {
-          "x": 508.0,
-          "y": 602.0,
-          "w": 276.0,
-          "h": 134.0
+          "x": 808.0,
+          "y": 164.0,
+          "w": 222.0,
+          "h": 128.0
+        },
+        {
+          "x": 962.0,
+          "y": 404.0,
+          "w": 142.0,
+          "h": 188.0
+        },
+        {
+          "x": 512.0,
+          "y": 590.0,
+          "w": 288.0,
+          "h": 118.0
+        },
+        {
+          "x": 228.0,
+          "y": 674.0,
+          "w": 184.0,
+          "h": 96.0
         }
       ],
       "warps": [
@@ -799,6 +1351,72 @@
       ],
       "gather_nodes": [
         {
+          "id": "desert_sunspike_01",
+          "name": "Sunspike",
+          "item_id": "sunspike",
+          "color": [
+            255,
+            200,
+            100,
+            255
+          ],
+          "position": [
+            742.0,
+            282.0
+          ],
+          "radius": 16.0,
+          "route_id": "sunscar_dunes",
+          "seasons": [
+            "spring",
+            "summer"
+          ],
+          "weathers": [
+            "clear"
+          ],
+          "time_windows": [
+            "day"
+          ],
+          "spawn_chance": 88,
+          "note": "Sunspike rises along the exposed dune lane once spring light turns sharp and uninterrupted.",
+          "render": {
+            "sprite_id": "sunspike_desert"
+          }
+        },
+        {
+          "id": "desert_dust_01",
+          "name": "Arcane Dust",
+          "item_id": "arcane_dust",
+          "color": [
+            170,
+            130,
+            250,
+            255
+          ],
+          "position": [
+            940.0,
+            506.0
+          ],
+          "radius": 14.0,
+          "route_id": "sunscar_dunes",
+          "seasons": [
+            "spring",
+            "winter"
+          ],
+          "weathers": [
+            "clear",
+            "windy"
+          ],
+          "time_windows": [
+            "day",
+            "evening"
+          ],
+          "spawn_chance": 52,
+          "note": "Dry wind catches catalyst dust in the stone scars where the dunes thin out.",
+          "render": {
+            "sprite_id": "arcane_dust_desert"
+          }
+        },
+        {
           "id": "desert_root_01",
           "name": "Ember Root",
           "item_id": "ember_root",
@@ -809,8 +1427,8 @@
             255
           ],
           "position": [
-            694.0,
-            506.0
+            624.0,
+            730.0
           ],
           "radius": 16.0,
           "route_id": "sunscar_dunes",
@@ -826,8 +1444,11 @@
             "day",
             "evening"
           ],
-          "spawn_chance": 75,
-          "note": "Heat-baked roots surface where the sand has thinned over old mineral scars."
+          "spawn_chance": 78,
+          "note": "Heat-baked roots surface where the lower dunes peel back from old mineral scars.",
+          "render": {
+            "sprite_id": "ember_root_desert"
+          }
         }
       ]
     },
@@ -850,24 +1471,69 @@
         132,
         255
       ],
+      "render": {
+        "blocker_style": "rainforest",
+        "blocker_primary": [
+          94,
+          72,
+          56,
+          255
+        ],
+        "blocker_secondary": [
+          52,
+          126,
+          84,
+          255
+        ],
+        "blocker_detail": [
+          28,
+          76,
+          54,
+          255
+        ],
+        "blocker_alt": [
+          188,
+          236,
+          218,
+          120
+        ]
+      },
       "blockers": [
         {
-          "x": 210.0,
-          "y": 152.0,
-          "w": 198.0,
-          "h": 174.0
+          "x": 176.0,
+          "y": 118.0,
+          "w": 188.0,
+          "h": 160.0
         },
         {
-          "x": 824.0,
-          "y": 182.0,
-          "w": 246.0,
-          "h": 182.0
+          "x": 428.0,
+          "y": 214.0,
+          "w": 176.0,
+          "h": 120.0
         },
         {
-          "x": 492.0,
-          "y": 572.0,
+          "x": 790.0,
+          "y": 144.0,
+          "w": 214.0,
+          "h": 170.0
+        },
+        {
+          "x": 1032.0,
+          "y": 324.0,
+          "w": 162.0,
+          "h": 210.0
+        },
+        {
+          "x": 470.0,
+          "y": 560.0,
           "w": 310.0,
-          "h": 146.0
+          "h": 132.0
+        },
+        {
+          "x": 206.0,
+          "y": 650.0,
+          "w": 212.0,
+          "h": 110.0
         }
       ],
       "warps": [
@@ -899,8 +1565,8 @@
             255
           ],
           "position": [
-            624.0,
-            476.0
+            576.0,
+            428.0
           ],
           "radius": 14.0,
           "route_id": "rainmist_canopy",
@@ -919,7 +1585,112 @@
             "day"
           ],
           "spawn_chance": 85,
-          "note": "Soft growth thrives on soaked roots and shade-heavy trunks."
+          "note": "Soft growth thrives where root arches shade the main jungle path even after rain breaks.",
+          "render": {
+            "sprite_id": "whisper_moss_rainforest"
+          }
+        },
+        {
+          "id": "rainforest_orchid_01",
+          "name": "Rain Orchid",
+          "item_id": "rain_orchid",
+          "color": [
+            240,
+            167,
+            200,
+            255
+          ],
+          "position": [
+            904.0,
+            336.0
+          ],
+          "radius": 15.0,
+          "route_id": "rainmist_canopy",
+          "seasons": [
+            "spring",
+            "summer"
+          ],
+          "weathers": [
+            "mist",
+            "rain"
+          ],
+          "time_windows": [
+            "morning",
+            "day"
+          ],
+          "spawn_chance": 72,
+          "note": "The brightest orchids open in wet clearings where filtered light reaches the lower jungle floor.",
+          "render": {
+            "sprite_id": "rain_orchid_rainforest"
+          }
+        },
+        {
+          "id": "rainforest_moth_01",
+          "name": "Mist Moth Wing",
+          "item_id": "mist_moth_wing",
+          "color": [
+            170,
+            215,
+            255,
+            255
+          ],
+          "position": [
+            1026.0,
+            626.0
+          ],
+          "radius": 14.0,
+          "route_id": "rainmist_canopy",
+          "seasons": [
+            "summer",
+            "autumn"
+          ],
+          "weathers": [
+            "mist",
+            "rain"
+          ],
+          "time_windows": [
+            "evening",
+            "night"
+          ],
+          "spawn_chance": 60,
+          "note": "Dense canopy turns evening flights into a drifting ribbon of scales along the lower leaves.",
+          "render": {
+            "sprite_id": "mist_moth_wing_rainforest"
+          }
+        },
+        {
+          "id": "rainforest_slug_01",
+          "name": "Dew Slug",
+          "item_id": "dew_slug",
+          "color": [
+            148,
+            210,
+            238,
+            255
+          ],
+          "position": [
+            344.0,
+            782.0
+          ],
+          "radius": 15.0,
+          "route_id": "rainmist_canopy",
+          "seasons": [
+            "spring",
+            "winter"
+          ],
+          "weathers": [
+            "mist",
+            "rain"
+          ],
+          "time_windows": [
+            "morning",
+            "day"
+          ],
+          "spawn_chance": 56,
+          "note": "The wettest clearings near the return path gather slugs once the runoff slows enough to leave puddled edges.",
+          "render": {
+            "sprite_id": "dew_slug_rainforest"
+          }
         }
       ]
     },
@@ -1396,13 +2167,13 @@
       "id": "plains_crossing",
       "name": "Plains Crossing",
       "area_id": "north_plains",
-      "description": "Open grassland between the tower road and the town, good for broad daylight gathering."
+      "description": "An open plains crossroads shaped by field roads, low grass obstacles, and bright verges that read clearly even in the first spring pass."
     },
     {
       "id": "stone_quarry",
       "name": "Stone Quarry",
       "area_id": "rock_fields",
-      "description": "A broken field of rock shelves and mineral scars where powdery catalyst remnants settle."
+      "description": "A broken quarry lane with choke points, shelf cuts, and mineral scars where catalyst residue and stone-fed growth collect."
     },
     {
       "id": "creekside_meadow",
@@ -1414,31 +2185,31 @@
       "id": "moonlit_grove",
       "name": "Moonlit Grove",
       "area_id": "moonlit_forest",
-      "description": "The eastern forest path from the plains, shaded and strongest at dusk."
+      "description": "The first winding forest path from the plains, with glades and canopy breaks that favor dusk gathering."
     },
     {
       "id": "charred_hollow",
       "name": "Charred Hollow",
       "area_id": "moonlit_forest",
-      "description": "A warmer pocket of the east forest where roots and reagents surface near old fire scars."
+      "description": "A hotter side pocket off the forest path where old fire scars keep roots active later into the year."
     },
     {
       "id": "lake_shallows",
       "name": "Lake Shallows",
       "area_id": "lake_shore",
-      "description": "A cool reed-lined lakeside where moisture-loving specimens appear in the morning."
+      "description": "A curved shoreline route with reed beds, cool coves, and shallow-water edges that favor early moisture gathers."
     },
     {
       "id": "sunscar_dunes",
       "name": "Sunscar Dunes",
       "area_id": "sunscar_desert",
-      "description": "Dry southern dunes and exposed mineral seams where heat-touched roots can survive."
+      "description": "A dune-lane approach cut by exposed stone scars and sparse shelter pockets where heat-touched growth survives."
     },
     {
       "id": "rainmist_canopy",
       "name": "Rainmist Canopy",
       "area_id": "tropical_rainforest",
-      "description": "A humid eastern jungle path with dense shade, wet bark, and persistent mist."
+      "description": "A layered jungle path with root arches, wet clearings, and persistent mist beneath a heavy canopy."
     },
     {
       "id": "greenhouse_walk",

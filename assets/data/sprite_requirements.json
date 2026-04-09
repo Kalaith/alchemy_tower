@@ -218,6 +218,179 @@
         "prompt": "A plump translucent dew slug with pale blue moisture sheen, gentle magical creature, readable from above, suitable as world node and icon."
       },
       {
+        "id": "field_bloom",
+        "type": "icon_and_world_node",
+        "world_sprite_px": [64, 64],
+        "icon_size_px": [64, 64],
+        "prompt": "A sunny roadside meadow flower cluster with pale gold petals and a light airy silhouette, readable from above, suitable as gather node and icon."
+      },
+      {
+        "id": "quarry_lichen",
+        "type": "icon_and_world_node",
+        "world_sprite_px": [64, 64],
+        "icon_size_px": [64, 64],
+        "prompt": "Mineral-fed quarry lichen clinging to broken stone, muted sage and dust tones, readable top-down silhouette, suitable as gather node and icon."
+      },
+      {
+        "id": "reedflower",
+        "type": "icon_and_world_node",
+        "world_sprite_px": [64, 64],
+        "icon_size_px": [64, 64],
+        "prompt": "A pale reed bed blossom with slender stems and cool lake petals, readable top-down silhouette, suitable as gather node and icon."
+      },
+      {
+        "id": "sunspike",
+        "type": "icon_and_world_node",
+        "world_sprite_px": [64, 64],
+        "icon_size_px": [64, 64],
+        "prompt": "A hardy desert herb with bright heat-gold spikes and resinous core, readable from above, suitable as gather node and icon."
+      },
+      {
+        "id": "rain_orchid",
+        "type": "icon_and_world_node",
+        "world_sprite_px": [64, 64],
+        "icon_size_px": [64, 64],
+        "prompt": "A humid jungle orchid with broad pink petals and wet green leaves, readable from above, suitable as gather node and icon."
+      },
+      {
+        "id": "sunleaf_plains",
+        "type": "world_node_variant",
+        "world_sprite_px": [64, 64],
+        "prompt": "A plains-specific sunleaf world node with meadow markers and wind-laid grass around it, readable from above."
+      },
+      {
+        "id": "field_bloom_plains",
+        "type": "world_node_variant",
+        "world_sprite_px": [64, 64],
+        "prompt": "A plains field bloom node with open roadside framing and soft field-light accents, readable from above."
+      },
+      {
+        "id": "whisper_moss_plains",
+        "type": "world_node_variant",
+        "world_sprite_px": [64, 64],
+        "prompt": "A plains whisper moss node growing around low standing stones and roadside shade, readable from above."
+      },
+      {
+        "id": "arcane_dust_quarry",
+        "type": "world_node_variant",
+        "world_sprite_px": [64, 64],
+        "prompt": "An arcane dust node settled into quarry cracks with stone shelf debris, readable from above."
+      },
+      {
+        "id": "quarry_lichen_quarry",
+        "type": "world_node_variant",
+        "world_sprite_px": [64, 64],
+        "prompt": "A quarry lichen node spread across a chipped slate ledge with mineral flakes, readable from above."
+      },
+      {
+        "id": "ember_root_quarry",
+        "type": "world_node_variant",
+        "world_sprite_px": [64, 64],
+        "prompt": "An ember root node surfacing through a hot quarry seam with broken stone around it, readable from above."
+      },
+      {
+        "id": "moon_fern_forest",
+        "type": "world_node_variant",
+        "world_sprite_px": [64, 64],
+        "prompt": "A moon fern node framed by dense forest groundcover and cool moonlit shade, readable from above."
+      },
+      {
+        "id": "mist_moth_wing_forest",
+        "type": "world_node_variant",
+        "world_sprite_px": [64, 64],
+        "prompt": "A mist moth wing node caught on forest bark and ferns, readable from above."
+      },
+      {
+        "id": "glow_moth_forest",
+        "type": "world_node_variant",
+        "world_sprite_px": [64, 64],
+        "prompt": "A glow moth node hovering in a forest glade with soft moonlit halo, readable from above."
+      },
+      {
+        "id": "whisper_moss_forest",
+        "type": "world_node_variant",
+        "world_sprite_px": [64, 64],
+        "prompt": "A forest whisper moss node gathered at a shaded trunk base, readable from above."
+      },
+      {
+        "id": "ember_root_forest",
+        "type": "world_node_variant",
+        "world_sprite_px": [64, 64],
+        "prompt": "An ember root node emerging from a charred hollow in the forest floor, readable from above."
+      },
+      {
+        "id": "reedflower_lake",
+        "type": "world_node_variant",
+        "world_sprite_px": [64, 64],
+        "prompt": "A lake reedflower node standing in shallow reeds with water-edge highlights, readable from above."
+      },
+      {
+        "id": "dew_slug_lake",
+        "type": "world_node_variant",
+        "world_sprite_px": [64, 64],
+        "prompt": "A dew slug node on wet lakeshore stones with reeds around it, readable from above."
+      },
+      {
+        "id": "mist_moth_wing_lake",
+        "type": "world_node_variant",
+        "world_sprite_px": [64, 64],
+        "prompt": "A mist moth wing node gathered from lake reeds and damp bark, readable from above."
+      },
+      {
+        "id": "moon_fern_lake",
+        "type": "world_node_variant",
+        "world_sprite_px": [64, 64],
+        "prompt": "A moon fern node rooted in a shaded lakeside cove, readable from above."
+      },
+      {
+        "id": "whisper_moss_lake",
+        "type": "world_node_variant",
+        "world_sprite_px": [64, 64],
+        "prompt": "A whisper moss node clinging to cool shoreline stones, readable from above."
+      },
+      {
+        "id": "ember_root_desert",
+        "type": "world_node_variant",
+        "world_sprite_px": [64, 64],
+        "prompt": "An ember root node surfacing from a sun-baked desert scar with drifting sand, readable from above."
+      },
+      {
+        "id": "sunspike_desert",
+        "type": "world_node_variant",
+        "world_sprite_px": [64, 64],
+        "prompt": "A sunspike node in exposed dunes with heat-bright sand ridges, readable from above."
+      },
+      {
+        "id": "arcane_dust_desert",
+        "type": "world_node_variant",
+        "world_sprite_px": [64, 64],
+        "prompt": "An arcane dust node trapped in desert stone cracks and dry wind lines, readable from above."
+      },
+      {
+        "id": "whisper_moss_rainforest",
+        "type": "world_node_variant",
+        "world_sprite_px": [64, 64],
+        "prompt": "A rainforest whisper moss node climbing wet roots and broad leaves, readable from above."
+      },
+      {
+        "id": "rain_orchid_rainforest",
+        "type": "world_node_variant",
+        "world_sprite_px": [64, 64],
+        "prompt": "A rainforest orchid node with humid broad-leaf framing and soft mist bloom, readable from above."
+      },
+      {
+        "id": "mist_moth_wing_rainforest",
+        "type": "world_node_variant",
+        "world_sprite_px": [64, 64],
+        "prompt": "A mist moth wing node caught on glossy jungle leaves, readable from above."
+      },
+      {
+        "id": "dew_slug_rainforest",
+        "type": "world_node_variant",
+        "world_sprite_px": [64, 64],
+        "prompt": "A dew slug node on soaked rainforest roots and puddled clearings, readable from above."
+      },
+      {
         "id": "lumen_dust",
         "type": "inventory_icon",
         "icon_size_px": [64, 64],
@@ -337,7 +510,7 @@
         "id": "north_plains",
         "type": "background_plate",
         "image_size_px": [1920, 1080],
-        "prompt": "Top-down open plains between an old alchemy tower and the town, broad grass paths, scattered stones, wind-shaped field edges, readable crossroads atmosphere."
+        "prompt": "Top-down spring plains between an old alchemy tower and the town, open field roads, low grass obstacles, marker posts, and bright meadow pockets, readable authored crossroads atmosphere."
       },
       {
         "id": "town_square",
@@ -349,31 +522,31 @@
         "id": "rock_fields",
         "type": "background_plate",
         "image_size_px": [1920, 1080],
-        "prompt": "Top-down rocky field west of the plains, broken stone shelves, dry grass seams, mineral scars, rugged gathering zone with strong readable rock shapes."
+        "prompt": "Top-down broken quarry west of the plains, authored stone lanes, choke points, mineral shelves, and dust seams, rugged gathering zone with strong readable rock shapes."
       },
       {
         "id": "moonlit_forest",
         "type": "background_plate",
         "image_size_px": [1920, 1080],
-        "prompt": "Top-down east forest route from the plains, damp glades, luminous herbs, pale clearings, magical but grounded woodland gathering area."
+        "prompt": "Top-down moonlit forest east of the plains, winding tree paths, damp glades, denser canopy pockets, and a charred hollow branch, magical but grounded woodland gathering area."
       },
       {
         "id": "lake_shore",
         "type": "background_plate",
         "image_size_px": [1920, 1080],
-        "prompt": "Top-down lakeside west of town, reed-lined shore, shallow water inlets, cool stones, soft reflective atmosphere, readable shoreline exploration space."
+        "prompt": "Top-down lakeside west of town, authored shoreline curves, reed beds, shallow-water edges, and cool stone coves, readable shoreline exploration space."
       },
       {
         "id": "sunscar_desert",
         "type": "background_plate",
         "image_size_px": [1920, 1080],
-        "prompt": "Top-down southern desert, sun-baked sand, mineral ridges, dry wind paths, sparse hardy growth, readable harsh but explorable environment."
+        "prompt": "Top-down southern desert with authored dune lanes, exposed stone scars, sparse shelter pockets, and hard sunlit travel lines, readable harsh but explorable environment."
       },
       {
         "id": "tropical_rainforest",
         "type": "background_plate",
         "image_size_px": [1920, 1080],
-        "prompt": "Top-down tropical rainforest east of town, dense canopy shadows, soaked roots, broad-leaf growth, warm humid atmosphere, readable jungle pathways."
+        "prompt": "Top-down tropical rainforest east of town, layered jungle paths, root arches, broad-leaf growth, and wet clearings under dense canopy, readable jungle pathways."
       },
       {
         "id": "greenhouse_floor",

@@ -33,7 +33,24 @@ impl GameplayStateLoader {
             gathered_nodes: state.world.gathered_nodes.iter().cloned().collect(),
             known_recipes: state.progression.known_recipes.iter().cloned().collect(),
             day_index: state.world.day_index,
-            field_journal: state.progression.field_journal.values().cloned().collect(),
+            field_journal: state
+                .progression
+                .herb_memories
+                .values()
+                .filter(|entry| entry.learned)
+                .map(|entry| FieldJournalEntry {
+                    item_id: entry.item_id.clone(),
+                    route_id: entry.learned_route_id.clone(),
+                    season: String::new(),
+                    weather: String::new(),
+                    time_window: String::new(),
+                    note: entry.note.clone(),
+                    best_quality: entry.best_quality,
+                    best_quality_band: entry.best_quality_band.clone(),
+                    variant_name: entry.variant_name.clone(),
+                })
+                .collect(),
+            herb_memories: state.progression.herb_memories.values().cloned().collect(),
             started_quests: state.progression.started_quests.iter().cloned().collect(),
             completed_quests: state.progression.completed_quests.iter().cloned().collect(),
             recipe_mastery: state
@@ -47,6 +64,7 @@ impl GameplayStateLoader {
                 .collect(),
             crafted_item_profiles: state.progression.crafted_item_profiles.values().cloned().collect(),
             experiment_log: state.progression.experiment_log.clone(),
+            potion_memories: state.progression.potion_memories.values().cloned().collect(),
             unlocked_warps: state.progression.unlocked_warps.iter().cloned().collect(),
             planter_states: state.progression.planter_states.values().cloned().collect(),
             habitat_states: state.progression.habitat_states.values().cloned().collect(),
@@ -95,11 +113,35 @@ impl GameplayStateLoader {
             .collect();
         state.world.gathered_nodes = save.gathered_nodes.into_iter().collect();
         state.progression.known_recipes = save.known_recipes.into_iter().collect();
-        state.progression.field_journal = save
-            .field_journal
+        state.progression.herb_memories = save
+            .herb_memories
             .into_iter()
             .map(|entry| (entry.item_id.clone(), entry))
             .collect();
+        if state.progression.herb_memories.is_empty() {
+            state.progression.herb_memories = save
+                .field_journal
+                .into_iter()
+                .map(|entry| {
+                    (
+                        entry.item_id.clone(),
+                        HerbMemoryEntry {
+                            item_id: entry.item_id,
+                            first_seen_day: state.world.day_index,
+                            first_seen_route_id: entry.route_id.clone(),
+                            seen: true,
+                            learned: true,
+                            learned_day: state.world.day_index,
+                            learned_route_id: entry.route_id,
+                            note: entry.note,
+                            best_quality: entry.best_quality,
+                            best_quality_band: entry.best_quality_band,
+                            variant_name: entry.variant_name,
+                        },
+                    )
+                })
+                .collect();
+        }
         state.progression.started_quests = save.started_quests.into_iter().collect();
         state.progression.completed_quests = save.completed_quests.into_iter().collect();
         state.progression.recipe_mastery = save
@@ -113,6 +155,11 @@ impl GameplayStateLoader {
             .map(|entry| (entry.item_id.clone(), entry))
             .collect();
         state.progression.experiment_log = save.experiment_log;
+        state.progression.potion_memories = save
+            .potion_memories
+            .into_iter()
+            .map(|entry| (entry.item_id.clone(), entry))
+            .collect();
         state.progression.unlocked_warps = save.unlocked_warps.into_iter().collect();
         state.progression.planter_states = save
             .planter_states
@@ -140,6 +187,7 @@ impl GameplayStateLoader {
             ..Default::default()
         };
         state.alchemy = AlchemySession::default();
+        state.rebuild_memory_state(data);
         state.refresh_available_nodes(data);
         Ok(())
     }

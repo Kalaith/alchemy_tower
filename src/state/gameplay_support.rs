@@ -552,7 +552,7 @@ impl GameplayState {
                 Color::from_rgba(255, 214, 132, 255),
             ))
         } else if !self.runtime.tutorial.gather_hint_shown
-            && self.progression.field_journal.is_empty()
+            && self.progression.herb_memories.is_empty()
             && nearby_available_node
         {
             self.runtime.tutorial.gather_hint_shown = true;

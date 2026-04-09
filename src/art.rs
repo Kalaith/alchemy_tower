@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use std::fs;
 use std::sync::OnceLock;
 
 use macroquad::prelude::*;
@@ -89,18 +90,29 @@ impl ArtAssets {
             {
                 assets.item_icons.insert(item.id.clone(), texture);
             }
-            if let Some(texture) =
-                load_game_texture(&format!("assets/generated/items/world/{}.png", item.id)).await
-            {
-                assets.world_nodes.insert(item.id.clone(), texture);
+        }
+
+        if let Ok(entries) = fs::read_dir("assets/generated/items/world") {
+            let mut paths = entries
+                .filter_map(|entry| entry.ok())
+                .map(|entry| entry.path())
+                .filter(|path| path.extension().and_then(|ext| ext.to_str()) == Some("png"))
+                .collect::<Vec<_>>();
+            paths.sort();
+            for path in paths {
+                let Some(stem) = path.file_stem().and_then(|stem| stem.to_str()) else {
+                    continue;
+                };
+                if let Some(texture) = load_game_texture(&path.to_string_lossy()).await {
+                    assets.world_nodes.insert(stem.to_owned(), texture);
+                }
             }
         }
 
         for binding in &catalog.journal_tabs {
-            assets.journal_tab_bindings.insert(
-                binding.label.clone(),
-                binding.icon_key.clone(),
-            );
+            assets
+                .journal_tab_bindings
+                .insert(binding.label.clone(), binding.icon_key.clone());
             assets.journal_tabs.insert(
                 binding.icon_key.clone(),
                 load_game_texture(&binding.path)
@@ -169,7 +181,13 @@ pub fn draw_texture_centered(texture: &Texture2D, center: Vec2, size: Vec2, tint
     );
 }
 
-pub fn draw_character_frame(texture: &Texture2D, center: Vec2, facing: Vec2, moving: bool, alpha: f32) {
+pub fn draw_character_frame(
+    texture: &Texture2D,
+    center: Vec2,
+    facing: Vec2,
+    moving: bool,
+    alpha: f32,
+) {
     let row = if facing.y > 0.5 {
         0.0
     } else if facing.x < -0.5 {
@@ -197,7 +215,12 @@ pub fn draw_character_frame(texture: &Texture2D, center: Vec2, facing: Vec2, mov
     );
 }
 
-pub fn draw_blocker_prop(area: &AreaDefinition, blocker: &RectDefinition, index: usize, offset: Vec2) {
+pub fn draw_blocker_prop(
+    area: &AreaDefinition,
+    blocker: &RectDefinition,
+    index: usize,
+    offset: Vec2,
+) {
     let x = offset.x + blocker.x;
     let y = offset.y + blocker.y;
     let w = blocker.w;
@@ -207,10 +230,22 @@ pub fn draw_blocker_prop(area: &AreaDefinition, blocker: &RectDefinition, index:
 
     match area.render.blocker_style {
         BlockerVisualStyle::Shelf => {
-            let wood = color_from_option(area.render.blocker_primary, Color::from_rgba(124, 92, 70, 255));
-            let top = color_from_option(area.render.blocker_secondary, Color::from_rgba(158, 122, 94, 255));
-            let detail = color_from_option(area.render.blocker_detail, Color::from_rgba(92, 62, 46, 255));
-            let bottle_a = color_from_option(area.render.blocker_alt, Color::from_rgba(170, 222, 210, 255));
+            let wood = color_from_option(
+                area.render.blocker_primary,
+                Color::from_rgba(124, 92, 70, 255),
+            );
+            let top = color_from_option(
+                area.render.blocker_secondary,
+                Color::from_rgba(158, 122, 94, 255),
+            );
+            let detail = color_from_option(
+                area.render.blocker_detail,
+                Color::from_rgba(92, 62, 46, 255),
+            );
+            let bottle_a = color_from_option(
+                area.render.blocker_alt,
+                Color::from_rgba(170, 222, 210, 255),
+            );
             draw_rectangle(x, y, w, h, wood);
             draw_rectangle(x + 6.0, y + 6.0, w - 12.0, h - 12.0, top);
             for shelf in 0..(h / 26.0).max(1.0) as i32 {
@@ -222,17 +257,32 @@ pub fn draw_blocker_prop(area: &AreaDefinition, blocker: &RectDefinition, index:
             for bottle in 0..3 {
                 let bx = x + 18.0 + bottle as f32 * ((w - 36.0) / 3.0);
                 draw_rectangle(bx, y + 14.0, 10.0, 18.0, bottle_a);
-                draw_rectangle(bx + 2.0, y + 34.0, 6.0, 12.0, Color::from_rgba(255, 214, 132, 255));
+                draw_rectangle(
+                    bx + 2.0,
+                    y + 34.0,
+                    6.0,
+                    12.0,
+                    Color::from_rgba(255, 214, 132, 255),
+                );
             }
         }
         BlockerVisualStyle::House => {
-            let wall = color_from_option(area.render.blocker_primary, Color::from_rgba(204, 184, 150, 255));
+            let wall = color_from_option(
+                area.render.blocker_primary,
+                Color::from_rgba(204, 184, 150, 255),
+            );
             let roof = if index % 2 == 0 {
-                color_from_option(area.render.blocker_secondary, Color::from_rgba(160, 104, 78, 255))
+                color_from_option(
+                    area.render.blocker_secondary,
+                    Color::from_rgba(160, 104, 78, 255),
+                )
             } else {
                 color_from_option(area.render.blocker_alt, Color::from_rgba(142, 118, 82, 255))
             };
-            let doorway = color_from_option(area.render.blocker_detail, Color::from_rgba(120, 94, 72, 255));
+            let doorway = color_from_option(
+                area.render.blocker_detail,
+                Color::from_rgba(120, 94, 72, 255),
+            );
             draw_rectangle(x, y, w, h, wall);
             draw_rectangle(x - 4.0, y - 8.0, w + 8.0, 18.0, roof);
             draw_rectangle(x + 12.0, y + 18.0, w - 24.0, h - 28.0, doorway);
@@ -248,15 +298,213 @@ pub fn draw_blocker_prop(area: &AreaDefinition, blocker: &RectDefinition, index:
                     1.0,
                 ),
             );
-            let detail = color_from_option(area.render.blocker_detail, Color::from_rgba(240, 238, 220, 100));
+            let detail = color_from_option(
+                area.render.blocker_detail,
+                Color::from_rgba(240, 238, 220, 100),
+            );
             draw_rectangle(x, y, w, h, outer);
             draw_rectangle(x + 6.0, y + 6.0, w - 12.0, h - 12.0, inner);
             draw_rectangle_lines(x, y, w, h, 2.0, detail);
         }
+        BlockerVisualStyle::Grass => {
+            let base = color_from_option(
+                area.render.blocker_primary,
+                Color::from_rgba(104, 146, 82, 255),
+            );
+            let light = color_from_option(
+                area.render.blocker_secondary,
+                Color::from_rgba(146, 186, 104, 255),
+            );
+            let flower = color_from_option(
+                area.render.blocker_alt,
+                Color::from_rgba(236, 218, 132, 255),
+            );
+            draw_rectangle(x, y, w, h, base);
+            for tuft in 0..6 {
+                let tx = x + 18.0 + tuft as f32 * ((w - 36.0) / 6.0);
+                let sway = if tuft % 2 == 0 { -6.0 } else { 6.0 };
+                draw_triangle(
+                    vec2(tx - 10.0, y + h),
+                    vec2(tx, y + 18.0 + (tuft % 3) as f32 * 8.0),
+                    vec2(tx + 10.0 + sway, y + h - 10.0),
+                    light,
+                );
+                if tuft % 2 == 0 {
+                    draw_circle(tx + 6.0, y + 26.0 + tuft as f32 * 3.0, 4.0, flower);
+                }
+            }
+        }
+        BlockerVisualStyle::Quarry => {
+            let stone = color_from_option(
+                area.render.blocker_primary,
+                Color::from_rgba(116, 112, 102, 255),
+            );
+            let face = color_from_option(
+                area.render.blocker_secondary,
+                Color::from_rgba(156, 148, 132, 255),
+            );
+            let crack = color_from_option(
+                area.render.blocker_detail,
+                Color::from_rgba(82, 78, 74, 255),
+            );
+            let mineral = color_from_option(
+                area.render.blocker_alt,
+                Color::from_rgba(174, 144, 238, 255),
+            );
+            draw_rectangle(x, y, w, h, stone);
+            draw_rectangle(x + 10.0, y + 10.0, w - 20.0, h * 0.28, face);
+            draw_rectangle(x + 18.0, y + h * 0.42, w - 36.0, h * 0.22, face);
+            draw_rectangle(x + 12.0, y + h * 0.72, w - 24.0, h * 0.14, face);
+            draw_line(x + 18.0, y + 16.0, x + w - 24.0, y + h - 22.0, 3.0, crack);
+            draw_line(
+                x + w * 0.48,
+                y + 14.0,
+                x + w * 0.36,
+                y + h - 20.0,
+                2.0,
+                crack,
+            );
+            draw_triangle(
+                vec2(x + w - 34.0, y + 22.0),
+                vec2(x + w - 18.0, y + 48.0),
+                vec2(x + w - 50.0, y + 54.0),
+                mineral,
+            );
+        }
+        BlockerVisualStyle::Forest => {
+            let trunk = color_from_option(
+                area.render.blocker_primary,
+                Color::from_rgba(84, 58, 42, 255),
+            );
+            let canopy = color_from_option(
+                area.render.blocker_secondary,
+                Color::from_rgba(58, 102, 74, 255),
+            );
+            let dark = color_from_option(
+                area.render.blocker_detail,
+                Color::from_rgba(34, 56, 42, 255),
+            );
+            let glow = color_from_option(
+                area.render.blocker_alt,
+                Color::from_rgba(168, 224, 178, 180),
+            );
+            draw_rectangle(x, y, w, h, dark);
+            for tree in 0..3 {
+                let tx = x + w * (0.22 + tree as f32 * 0.28);
+                draw_rectangle(tx - 8.0, y + h * 0.45, 16.0, h * 0.38, trunk);
+                draw_circle(tx, y + h * 0.34, h.min(w) * 0.16, canopy);
+                draw_circle(tx - 18.0, y + h * 0.38, h.min(w) * 0.12, canopy);
+                draw_circle(tx + 18.0, y + h * 0.38, h.min(w) * 0.12, canopy);
+            }
+            draw_circle(x + w * 0.72, y + h * 0.28, 10.0, glow);
+        }
+        BlockerVisualStyle::Reeds => {
+            let bank = color_from_option(
+                area.render.blocker_primary,
+                Color::from_rgba(116, 146, 132, 255),
+            );
+            let water = color_from_option(
+                area.render.blocker_secondary,
+                Color::from_rgba(88, 142, 170, 255),
+            );
+            let reed = color_from_option(
+                area.render.blocker_detail,
+                Color::from_rgba(188, 204, 124, 255),
+            );
+            let stone = color_from_option(
+                area.render.blocker_alt,
+                Color::from_rgba(154, 164, 168, 255),
+            );
+            draw_rectangle(x, y, w, h, bank);
+            draw_rectangle(x + 6.0, y + h * 0.38, w - 12.0, h * 0.48, water);
+            for tuft in 0..8 {
+                let tx = x + 14.0 + tuft as f32 * ((w - 28.0) / 8.0);
+                draw_line(tx, y + h * 0.44, tx - 3.0, y + h * 0.1, 3.0, reed);
+                draw_line(tx + 4.0, y + h * 0.48, tx + 7.0, y + h * 0.16, 2.0, reed);
+            }
+            for rock in 0..3 {
+                draw_circle(
+                    x + 18.0 + rock as f32 * (w - 36.0) / 2.0,
+                    y + h * 0.78,
+                    10.0,
+                    stone,
+                );
+            }
+        }
+        BlockerVisualStyle::Dunes => {
+            let sand = color_from_option(
+                area.render.blocker_primary,
+                Color::from_rgba(198, 166, 102, 255),
+            );
+            let ridge = color_from_option(
+                area.render.blocker_secondary,
+                Color::from_rgba(222, 196, 130, 255),
+            );
+            let stone = color_from_option(
+                area.render.blocker_detail,
+                Color::from_rgba(138, 102, 64, 255),
+            );
+            let shrub =
+                color_from_option(area.render.blocker_alt, Color::from_rgba(138, 148, 92, 255));
+            draw_rectangle(x, y, w, h, sand);
+            draw_circle(x + w * 0.22, y + h * 0.72, h * 0.28, ridge);
+            draw_circle(x + w * 0.56, y + h * 0.62, h * 0.24, ridge);
+            draw_circle(x + w * 0.84, y + h * 0.78, h * 0.22, ridge);
+            draw_triangle(
+                vec2(x + w * 0.52, y + h * 0.26),
+                vec2(x + w * 0.64, y + h * 0.52),
+                vec2(x + w * 0.42, y + h * 0.58),
+                stone,
+            );
+            draw_circle(x + 22.0, y + h - 22.0, 8.0, shrub);
+            draw_circle(x + 34.0, y + h - 26.0, 6.0, shrub);
+        }
+        BlockerVisualStyle::Rainforest => {
+            let root = color_from_option(
+                area.render.blocker_primary,
+                Color::from_rgba(92, 70, 54, 255),
+            );
+            let leaf = color_from_option(
+                area.render.blocker_secondary,
+                Color::from_rgba(46, 118, 82, 255),
+            );
+            let deep = color_from_option(
+                area.render.blocker_detail,
+                Color::from_rgba(26, 74, 52, 255),
+            );
+            let mist = color_from_option(
+                area.render.blocker_alt,
+                Color::from_rgba(182, 232, 214, 120),
+            );
+            draw_rectangle(x, y, w, h, deep);
+            for cluster in 0..3 {
+                let cx = x + w * (0.24 + cluster as f32 * 0.28);
+                draw_rectangle(cx - 10.0, y + h * 0.46, 20.0, h * 0.36, root);
+                draw_circle(cx, y + h * 0.28, h.min(w) * 0.18, leaf);
+                draw_triangle(
+                    vec2(cx - 26.0, y + h * 0.56),
+                    vec2(cx - 4.0, y + h * 0.44),
+                    vec2(cx - 12.0, y + h * 0.76),
+                    root,
+                );
+                draw_triangle(
+                    vec2(cx + 26.0, y + h * 0.56),
+                    vec2(cx + 4.0, y + h * 0.44),
+                    vec2(cx + 12.0, y + h * 0.76),
+                    root,
+                );
+            }
+            draw_circle(x + w * 0.82, y + h * 0.26, 12.0, mist);
+        }
     }
 }
 
-pub fn draw_station_marker(station: &StationDefinition, center: Vec2, emphasized: bool, art: &ArtAssets) {
+pub fn draw_station_marker(
+    station: &StationDefinition,
+    center: Vec2,
+    emphasized: bool,
+    art: &ArtAssets,
+) {
     if let Some(texture) = art.station(&station.id) {
         let size = vec2(station.render.sprite_size[0], station.render.sprite_size[1]);
         draw_texture_centered(texture, center, size, WHITE);
@@ -316,7 +564,12 @@ pub fn draw_gather_node_marker(
     let aura = Color::new(color.r, color.g, color.b, aura_alpha as f32 / 255.0);
     draw_circle(center.x, center.y, node.radius + 2.0, aura);
 
-    if let Some(texture) = art.world_node(&node.item_id) {
+    let sprite_id = if node.render.sprite_id.is_empty() {
+        &node.item_id
+    } else {
+        &node.render.sprite_id
+    };
+    if let Some(texture) = art.world_node(sprite_id) {
         let pulse_scale = 1.0 + if available { pulse * 0.08 } else { 0.0 };
         let size = vec2(node.render.sprite_size[0], node.render.sprite_size[1]) * pulse_scale;
         draw_texture_centered(

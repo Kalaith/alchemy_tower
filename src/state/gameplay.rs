@@ -14,10 +14,10 @@ use crate::audio::AudioAssets;
 use crate::content::{input_bindings, narrative_text, ui_copy, ui_format, ui_text};
 use crate::data::{
     AreaDefinition, CraftedItemProfileEntry, EffectDefinition, EffectKind, ExperimentLogEntry,
-    FieldJournalEntry, GameData, HabitatStateEntry, InventoryEntry, ItemCategory,
-    JournalMilestoneEntry, NpcDefinition, PlanterStateEntry, QuestDefinition,
-    RecipeMasteryEntry, RelationshipEntry, SaveData, StationDefinition, StationKind,
-    WarpDefinition,
+    FieldJournalEntry, GameData, HabitatStateEntry, HerbMemoryEntry, InventoryEntry,
+    ItemCategory, JournalMilestoneEntry, NpcDefinition, PlanterStateEntry, PotionMemoryEntry,
+    QuestDefinition, RecipeMasteryEntry, RelationshipEntry, SaveData, StationDefinition,
+    StationKind, WarpDefinition,
 };
 use crate::save::SaveRepository;
 use crate::state::StateTransition;
@@ -270,7 +270,8 @@ struct ProgressionState {
     relationships: BTreeMap<String, i32>,
     started_quests: HashSet<String>,
     completed_quests: HashSet<String>,
-    field_journal: BTreeMap<String, FieldJournalEntry>,
+    herb_memories: BTreeMap<String, HerbMemoryEntry>,
+    potion_memories: BTreeMap<String, PotionMemoryEntry>,
 }
 
 #[derive(Clone, Debug)]
@@ -353,7 +354,8 @@ impl GameplayState {
                 relationships: BTreeMap::new(),
                 started_quests: HashSet::new(),
                 completed_quests: HashSet::new(),
-                field_journal: BTreeMap::new(),
+                herb_memories: BTreeMap::new(),
+                potion_memories: BTreeMap::new(),
             },
             coins: 24,
             vitality: 100.0,
@@ -769,7 +771,6 @@ impl GameplayState {
             self.world.player.position = vec2(warp.target_position[0], warp.target_position[1]);
             self.world.player.moving = false;
             self.refresh_available_nodes(data);
-            self.runtime.status_text = ui_format("gameplay_entered", &[("label", &warp.label)]);
             self.trigger_world_feedback(
                 self.world.player.position,
                 Color::from_rgba(255, 245, 160, 255),
@@ -791,6 +792,7 @@ impl GameplayState {
             if self.node_is_available(node) {
                 self.world.gathered_nodes.insert(node.id.clone());
                 *self.inventory.entry(node.item_id.clone()).or_insert(0) += 1;
+                self.note_inventory_observation(data, &node.item_id);
                 let discovery = self.record_field_discovery(data, node);
                 self.trigger_gather_feedback(data, node, &discovery);
                 self.runtime.status_text = self.gather_status_text(data, node, &discovery);
@@ -862,6 +864,8 @@ impl GameplayState {
             .inventory
             .entry(recipe.output_item_id.clone())
             .or_insert(0) += 1;
+        self.note_inventory_observation(data, &recipe.output_item_id);
+        self.ensure_potion_memory_learned(&recipe.output_item_id, None);
         self.push_journal_milestone(
             "first_rune_imbuing",
             "First Rune Imbuing",
@@ -1447,6 +1451,7 @@ impl GameplayState {
                 .inventory
                 .entry(state.planted_item_id.clone())
                 .or_insert(0) += harvest_amount;
+            self.note_inventory_observation(data, &state.planted_item_id);
             self.runtime.status_text = if mutation_note.is_empty() {
                 format!(
                     "Harvested {} x{} from {}.",
@@ -1645,17 +1650,20 @@ impl GameplayState {
             .saturating_add(station.habitat_harvest_days.max(1));
         if self.world.day_index >= ready_day {
             let amount = 1 + u32::from(self.progression.total_brews >= 20);
+            let output_item_id = station.habitat_output_item_id.clone();
             *self
                 .inventory
-                .entry(station.habitat_output_item_id.clone())
+                .entry(output_item_id.clone())
                 .or_insert(0) += amount;
             state.last_harvest_day = self.world.day_index;
+            let station_name = station.name.clone();
             self.runtime.status_text = format!(
                 "Collected {} x{} from {}.",
-                data.item_name(&station.habitat_output_item_id),
+                data.item_name(&output_item_id),
                 amount,
-                station.name
+                station_name
             );
+            self.note_inventory_observation(data, &output_item_id);
         } else {
             let days_left = ready_day.saturating_sub(self.world.day_index);
             self.runtime.status_text = format!(

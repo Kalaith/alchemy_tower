@@ -391,6 +391,276 @@
       "synthesis_value": 2
     },
     {
+      "id": "field_bloom",
+      "name": "Field Bloom",
+      "category": "ingredient",
+      "base_value": 5,
+      "color": [
+        246,
+        215,
+        132,
+        255
+      ],
+      "description": "A hardy meadow flower gathered where the plains roads stay sun-warm but the soil still holds spring water.",
+      "quality": 24,
+      "rarity": 1,
+      "elements": {
+        "vita": 1,
+        "ember": 0,
+        "mist": 0,
+        "lux": 2
+      },
+      "traits": [
+        "restorative",
+        "luminous"
+      ],
+      "source_conditions": [
+        "spring to autumn",
+        "open roadside verges",
+        "clear mornings or calm afternoons"
+      ],
+      "wild_variants": [
+        {
+          "id": "field_bloom_larksun",
+          "name": "Larksun Bloom",
+          "required_conditions": [
+            "spring",
+            "morning"
+          ],
+          "bonus_traits": [
+            "pure"
+          ],
+          "quality_bonus": 7,
+          "elements": {
+            "vita": 1,
+            "ember": 0,
+            "mist": 0,
+            "lux": 1
+          },
+          "synthesis_weight_bonus": 1,
+          "synthesis_value_bonus": 2
+        }
+      ],
+      "synthesis_weight": 2,
+      "synthesis_value": 2
+    },
+    {
+      "id": "quarry_lichen",
+      "name": "Quarry Lichen",
+      "category": "ingredient",
+      "base_value": 7,
+      "color": [
+        168,
+        210,
+        186,
+        255
+      ],
+      "description": "Mineral-fed lichen that spreads over broken quarry ledges and takes on a dusty alchemical tang.",
+      "quality": 30,
+      "rarity": 2,
+      "elements": {
+        "vita": 0,
+        "ember": 0,
+        "mist": 1,
+        "lux": 1
+      },
+      "traits": [
+        "arcane",
+        "pure"
+      ],
+      "source_conditions": [
+        "spring and winter",
+        "cold quarry shelves",
+        "stone that still remembers reagents"
+      ],
+      "wild_variants": [
+        {
+          "id": "quarry_lichen_sparked",
+          "name": "Sparked Quarry Lichen",
+          "required_conditions": [
+            "windy",
+            "day"
+          ],
+          "bonus_traits": [
+            "volatile"
+          ],
+          "quality_bonus": 8,
+          "elements": {
+            "vita": 0,
+            "ember": 1,
+            "mist": 0,
+            "lux": 1
+          },
+          "synthesis_weight_bonus": 1,
+          "synthesis_value_bonus": 3
+        }
+      ],
+      "synthesis_weight": 2,
+      "synthesis_value": 3
+    },
+    {
+      "id": "reedflower",
+      "name": "Reedflower",
+      "category": "ingredient",
+      "base_value": 6,
+      "color": [
+        214,
+        241,
+        255,
+        255
+      ],
+      "description": "A pale lakeside blossom that only opens where reeds soften the wind and hold cool spray.",
+      "quality": 26,
+      "rarity": 1,
+      "elements": {
+        "vita": 1,
+        "ember": 0,
+        "mist": 2,
+        "lux": 0
+      },
+      "traits": [
+        "calm",
+        "pure"
+      ],
+      "source_conditions": [
+        "spring and summer",
+        "reed beds",
+        "misty or clear mornings"
+      ],
+      "wild_variants": [
+        {
+          "id": "reedflower_mirrorwake",
+          "name": "Mirrorwake Reedflower",
+          "required_conditions": [
+            "summer",
+            "morning"
+          ],
+          "bonus_traits": [
+            "soft_glow"
+          ],
+          "quality_bonus": 8,
+          "elements": {
+            "vita": 0,
+            "ember": 0,
+            "mist": 1,
+            "lux": 1
+          },
+          "synthesis_weight_bonus": 1,
+          "synthesis_value_bonus": 2
+        }
+      ],
+      "synthesis_weight": 2,
+      "synthesis_value": 2
+    },
+    {
+      "id": "sunspike",
+      "name": "Sunspike",
+      "category": "ingredient",
+      "base_value": 7,
+      "color": [
+        255,
+        200,
+        100,
+        255
+      ],
+      "description": "A bright desert stalk that hardens into resinous heat traps under full sun.",
+      "quality": 28,
+      "rarity": 2,
+      "elements": {
+        "vita": 0,
+        "ember": 2,
+        "mist": 0,
+        "lux": 2
+      },
+      "traits": [
+        "warm",
+        "vigor"
+      ],
+      "source_conditions": [
+        "spring and summer",
+        "exposed dunes",
+        "clear daylight"
+      ],
+      "wild_variants": [
+        {
+          "id": "sunspike_glasscrest",
+          "name": "Glasscrest Sunspike",
+          "required_conditions": [
+            "summer",
+            "day"
+          ],
+          "bonus_traits": [
+            "volatile"
+          ],
+          "quality_bonus": 9,
+          "elements": {
+            "vita": 0,
+            "ember": 1,
+            "mist": 0,
+            "lux": 1
+          },
+          "synthesis_weight_bonus": 1,
+          "synthesis_value_bonus": 3
+        }
+      ],
+      "synthesis_weight": 3,
+      "synthesis_value": 3
+    },
+    {
+      "id": "rain_orchid",
+      "name": "Rain Orchid",
+      "category": "ingredient",
+      "base_value": 8,
+      "color": [
+        240,
+        167,
+        200,
+        255
+      ],
+      "description": "A broad-petaled jungle orchid that drinks from hanging mist and wet bark.",
+      "quality": 32,
+      "rarity": 2,
+      "elements": {
+        "vita": 1,
+        "ember": 0,
+        "mist": 2,
+        "lux": 1
+      },
+      "traits": [
+        "calm",
+        "luminous"
+      ],
+      "source_conditions": [
+        "spring and summer",
+        "humid clearings",
+        "rain or heavy mist"
+      ],
+      "wild_variants": [
+        {
+          "id": "rain_orchid_stormkissed",
+          "name": "Stormkissed Rain Orchid",
+          "required_conditions": [
+            "rain",
+            "day"
+          ],
+          "bonus_traits": [
+            "pure"
+          ],
+          "quality_bonus": 10,
+          "elements": {
+            "vita": 1,
+            "ember": 0,
+            "mist": 1,
+            "lux": 1
+          },
+          "synthesis_weight_bonus": 1,
+          "synthesis_value_bonus": 3
+        }
+      ],
+      "synthesis_weight": 2,
+      "synthesis_value": 3
+    },
+    {
       "id": "lumen_dust",
       "name": "Lumen Dust",
       "category": "ingredient",

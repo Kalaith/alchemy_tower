@@ -111,6 +111,7 @@ impl GameplayState {
         let mut returned = Vec::new();
         for ingredient in &recipe.ingredients {
             *self.inventory.entry(ingredient.item_id.clone()).or_insert(0) += ingredient.amount;
+            self.note_inventory_observation(data, &ingredient.item_id);
             returned.push(format!(
                 "{} x{}",
                 data.item_name(&ingredient.item_id),
@@ -202,6 +203,7 @@ impl GameplayState {
             }
         }
         *self.inventory.entry(item_id.to_owned()).or_insert(0) += 1;
+        self.note_inventory_observation(data, item_id);
 
         self.push_event_toast_with_icon(
             ui_format("progression_duplicate_toast", &[("name", &item.name)]),

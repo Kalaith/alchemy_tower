@@ -65,6 +65,8 @@ pub struct SaveData {
     #[serde(default)]
     pub field_journal: Vec<FieldJournalEntry>,
     #[serde(default)]
+    pub herb_memories: Vec<HerbMemoryEntry>,
+    #[serde(default)]
     pub started_quests: Vec<String>,
     #[serde(default)]
     pub completed_quests: Vec<String>,
@@ -74,6 +76,8 @@ pub struct SaveData {
     pub crafted_item_profiles: Vec<CraftedItemProfileEntry>,
     #[serde(default)]
     pub experiment_log: Vec<ExperimentLogEntry>,
+    #[serde(default)]
+    pub potion_memories: Vec<PotionMemoryEntry>,
     #[serde(default)]
     pub total_brews: u32,
     #[serde(default)]
@@ -108,6 +112,52 @@ pub struct FieldJournalEntry {
     pub best_quality_band: String,
     #[serde(default)]
     pub variant_name: String,
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize)]
+pub struct HerbMemoryEntry {
+    pub item_id: String,
+    #[serde(default)]
+    pub first_seen_day: u32,
+    #[serde(default)]
+    pub first_seen_route_id: String,
+    #[serde(default)]
+    pub seen: bool,
+    #[serde(default)]
+    pub learned: bool,
+    #[serde(default)]
+    pub learned_day: u32,
+    #[serde(default)]
+    pub learned_route_id: String,
+    #[serde(default)]
+    pub note: String,
+    #[serde(default)]
+    pub best_quality: u32,
+    #[serde(default)]
+    pub best_quality_band: String,
+    #[serde(default)]
+    pub variant_name: String,
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize)]
+pub struct PotionMemoryEntry {
+    pub item_id: String,
+    #[serde(default)]
+    pub first_seen_day: u32,
+    #[serde(default)]
+    pub seen: bool,
+    #[serde(default)]
+    pub learned: bool,
+    #[serde(default)]
+    pub learned_day: u32,
+    #[serde(default)]
+    pub successful_brews: u32,
+    #[serde(default)]
+    pub best_quality_score: u32,
+    #[serde(default)]
+    pub best_quality_band: String,
+    #[serde(default)]
+    pub last_recipe_id: String,
 }
 
 fn default_vitality() -> f32 {

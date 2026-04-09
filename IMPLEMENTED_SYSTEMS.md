@@ -15,6 +15,13 @@ This file describes what the game currently supports based on the source code an
 - Top-down 8-direction movement with blocker collision.
 - Multi-area travel through authored warp regions.
 - Surface world layout now routes tower travel through a plains hub, with additional rock, forest, lake, desert, and rainforest branch maps.
+- Each non-town surface biome now has a distinct traversal layout and authored blocker language:
+  - `north_plains`: open field roads and low-grass clusters
+  - `rock_fields`: broken quarry lanes and shelf choke points
+  - `moonlit_forest`: winding tree paths, glades, and a charred hollow pocket
+  - `lake_shore`: shoreline curves, reed beds, and shallow-water coves
+  - `sunscar_desert`: dune lanes, exposed stone scars, and sparse shelter pockets
+  - `tropical_rainforest`: layered jungle paths, root arches, and wet clearings
 - Camera follow, impact shake, and immediate-mode UI panels/prompts.
 - Gameplay HUD now uses:
   - compact vitality/coins and time/day/weather cards
@@ -25,6 +32,7 @@ This file describes what the game currently supports based on the source code an
 - Day clock, day rollover, weather state, season state, and time-of-day windows.
 - Rest bed on the tower entry floor with voluntary sleep-to-morning interaction.
 - Pause menu save/load actions, with `F5` and `F9` retained as secondary gameplay/pause shortcuts.
+- Major overlays now share a stronger panel language with boxed subtitles/footers, framed content sections, consistent tab treatment, and more legible action/selection states across alchemy, shop, archive, rune, and quest screens.
 - Late-night exhaustion pressure:
   - HUD time warning turns yellow after midnight
   - hitting 01:00 forces a collapse wake-up at 10:00 back at the tower bed with a full-screen warning flash
@@ -40,8 +48,11 @@ This file describes what the game currently supports based on the source code an
 ## World Content
 
 - Procedurally generated background plates for each authored area.
+- Surface biome background plates now reflect each map's authored identity instead of sharing one generic blocker pattern.
 - Procedurally generated sprites for the player, authored NPCs, stations, gatherables, inventory icons, journal tab icons, and major world effects.
+- Surface gather nodes now support biome-specific world-sprite overrides so shared resources can read differently by location.
 - World rendering now uses texture-backed stations, characters, gather nodes, warp glows, and feedback effects instead of only primitive placeholder shapes.
+- Surface blockers now render with biome-specific procedural prop art instead of a single generic panel treatment.
 
 Current authored areas:
 
@@ -83,13 +94,24 @@ Current authored gathering routes:
   - weather gating
   - time-window gating
   - daily spawn chance
+  - optional biome-specific sprite overrides
   - field journal note capture
 - Node availability refreshes by day.
 - Gather node silhouettes vary by item type for faster world scanning.
+- Surface biome spawn plans now cover Spring, Summer, Autumn, and Winter with biome-native and shared-resource mixes.
 - Herb availability rules are learned only after the first successful collection of that herb.
-- Learned herb conditions are surfaced in the field journal rather than exposed directly in map prompts.
-- Gathered specimens are tracked in a field journal with route, season, weather, time window, best quality snapshot, variant label, and learned availability context.
+- The journal now distinguishes herb memories that are only `seen` from those fully `learned`.
+- Learned herb conditions are surfaced in the journal memory view rather than exposed directly in map prompts.
+- Gathered specimens now build herb memory entries with authored flavor summaries, first-seen vs learned state, best quality snapshots, and variant notes.
 - Gather feedback includes world bursts and progression/status updates for best-quality results and variant discovery messaging.
+
+Current biome-native surface ingredients:
+
+- `field_bloom`
+- `quarry_lichen`
+- `reedflower`
+- `sunspike`
+- `rain_orchid`
 
 ## Inventory and Economy
 
@@ -167,6 +189,7 @@ Ingredient/item data supports:
   - known formula with unstable or imperfect setup
 - Instability/failure reasons listed explicitly in the preview panel.
 - Known formula memory and mastery summaries surfaced directly in the alchemy/archive UI.
+- The journal now tracks potion memories separately from archive experiment logs, with `seen`, `learned`, and `successfully brewed` state distinctions plus authored recap text for discovered outputs.
 
 Current authored brew recipes:
 
@@ -342,7 +365,7 @@ Current authored quests:
   - all/stable/unstable filtering
   - page-aware browsing
   - cross-links into recipe mastery and morph history
-- Journal tabs surface routes, notes, brew ledger, greenhouse state, rapport, and milestone/readiness summaries.
+- Journal tabs surface routes, herb memories, potion memories, greenhouse state, rapport, and milestone/readiness summaries.
 
 ## Save Data
 
@@ -358,7 +381,9 @@ Persistent save state currently includes:
 - known recipes
 - recipe mastery
 - crafted item profiles
-- field journal entries
+- herb memories
+- potion memories
+- legacy field journal entries for backward-compatible save migration
 - started/completed quests
 - unlocked warps
 - planter states

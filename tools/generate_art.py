@@ -133,26 +133,75 @@ def icon(item, size, world=False):
     img = Image.new("RGBA", (w, h), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
     cx, cy = w / 2, h / 2 + (4 if world else 0)
+    style_suffix = None
+    base_item = item
+    for suffix in ["plains", "quarry", "forest", "lake", "desert", "rainforest"]:
+        token = f"_{suffix}"
+        if item.endswith(token):
+            base_item = item[: -len(token)]
+            style_suffix = suffix
+            break
     if world:
         d.ellipse(box(cx, cy + 18, 16, 7), fill=(10, 12, 18, 70))
-    if item in {"whisper_moss", "sunleaf", "moon_fern", "ember_root"}:
-        colors = {"whisper_moss": "#74d59f", "sunleaf": "#efd05c", "moon_fern": "#b8ffd0", "ember_root": "#f18555"}
+    if item in {
+        "whisper_moss",
+        "sunleaf",
+        "moon_fern",
+        "ember_root",
+        "field_bloom",
+        "quarry_lichen",
+        "reedflower",
+        "sunspike",
+        "rain_orchid",
+    } or base_item in {
+        "whisper_moss",
+        "sunleaf",
+        "moon_fern",
+        "ember_root",
+        "field_bloom",
+        "quarry_lichen",
+        "reedflower",
+        "sunspike",
+        "rain_orchid",
+    }:
+        colors = {
+            "whisper_moss": "#74d59f",
+            "sunleaf": "#efd05c",
+            "moon_fern": "#b8ffd0",
+            "ember_root": "#f18555",
+            "field_bloom": "#f6d784",
+            "quarry_lichen": "#a8d2ba",
+            "reedflower": "#d6f1ff",
+            "sunspike": "#ffc864",
+            "rain_orchid": "#f0a7c8",
+        }
         for ox, oy in [(-10, 2), (2, -4), (12, 4), (-2, 10)]:
-            d.ellipse(box(cx + ox, cy + oy, 9, 12), fill=rgb(colors[item]))
-    elif item in {"arcane_dust", "lumen_dust", "starlight_shard"}:
-        c = {"arcane_dust": "#a781ff", "lumen_dust": "#f1e7a3", "starlight_shard": "#dbe5ff"}[item]
+            d.ellipse(box(cx + ox, cy + oy, 9, 12), fill=rgb(colors[base_item]))
+        if base_item == "field_bloom":
+            d.ellipse(box(cx, cy - 2, 7, 7), fill=rgb("#fff2ba"))
+        elif base_item == "quarry_lichen":
+            d.rectangle((cx - 18, cy + 8, cx + 18, cy + 18), fill=rgb("#6b746d"))
+        elif base_item == "reedflower":
+            for rx in [-12, 0, 12]:
+                d.line((cx + rx, cy + 18, cx + rx - 2, cy - 10), fill=rgb("#9fc58a"), width=2)
+        elif base_item == "sunspike":
+            d.polygon([(cx, cy - 18), (cx - 12, cy + 16), (cx + 12, cy + 16)], fill=rgb("#fff0aa"))
+        elif base_item == "rain_orchid":
+            d.ellipse(box(cx, cy + 2, 8, 10), fill=rgb("#fff4c8"))
+    elif base_item in {"arcane_dust", "lumen_dust", "starlight_shard"}:
+        c = {"arcane_dust": "#a781ff", "lumen_dust": "#f1e7a3", "starlight_shard": "#dbe5ff"}[base_item]
         for ox, oy in [(-10, 8), (0, 0), (12, 10)]:
             d.polygon([(cx + ox, cy + oy - 10), (cx + ox - 8, cy + oy), (cx + ox, cy + oy + 10), (cx + ox + 8, cy + oy)], fill=rgb(c))
-    elif item in {"mist_moth_wing", "glow_moth"}:
-        c = "#b8d7ff" if item == "mist_moth_wing" else "#f2e49a"
+    elif base_item in {"mist_moth_wing", "glow_moth"}:
+        c = "#b8d7ff" if base_item == "mist_moth_wing" else "#f2e49a"
         d.ellipse(box(cx - 12, cy + 2, 12, 16), fill=rgb(c))
         d.ellipse(box(cx + 12, cy + 2, 12, 16), fill=rgb(c))
         d.ellipse(box(cx, cy + 4, 5, 13), fill=rgb("#fff3c7"))
-    elif item == "dew_slug":
+    elif base_item == "dew_slug":
         d.ellipse(box(cx, cy + 6, 18, 12), fill=rgb("#b5e8ff"))
         d.line((cx - 18, cy + 4, cx - 24, cy - 6), fill=rgb("#e3fbff"), width=2)
-    elif item in {"splash_rune", "echo_rune", "delay_rune"}:
-        c = {"splash_rune": "#7dc0ff", "echo_rune": "#c7b4ff", "delay_rune": "#ffc189"}[item]
+    elif base_item in {"splash_rune", "echo_rune", "delay_rune"}:
+        c = {"splash_rune": "#7dc0ff", "echo_rune": "#c7b4ff", "delay_rune": "#ffc189"}[base_item]
         d.rounded_rectangle((cx - 18, cy - 18, cx + 18, cy + 18), radius=8, fill=rgb("#8a877f"))
         d.arc((cx - 12, cy - 10, cx + 12, cy + 12), 210, 330, fill=rgb(c), width=4)
     else:
@@ -167,19 +216,32 @@ def icon(item, size, world=False):
         d.rectangle((cx - 5, cy - 28, cx + 5, cy - 22), fill=rgb("#8b6a4d"))
         d.rounded_rectangle((cx - 16, cy - 14, cx + 16, cy + 22), radius=10, fill=rgb("#d9dfe8", 220))
         d.rounded_rectangle((cx - 12, cy - 2, cx + 12, cy + 18), radius=8, fill=rgb(c))
+    if world and style_suffix:
+        if style_suffix == "plains":
+            d.line((cx - 20, cy + 18, cx + 20, cy + 6), fill=rgb("#fff4bf", 140), width=3)
+        elif style_suffix == "quarry":
+            d.rectangle((cx - 18, cy + 10, cx + 18, cy + 18), fill=rgb("#70675f", 170))
+        elif style_suffix == "forest":
+            d.ellipse(box(cx, cy + 4, 20, 14), outline=rgb("#c3ffd5", 140), width=2)
+        elif style_suffix == "lake":
+            d.arc((cx - 22, cy - 2, cx + 18, cy + 26), 180, 340, fill=rgb("#d8f4ff", 160), width=3)
+        elif style_suffix == "desert":
+            d.arc((cx - 20, cy + 4, cx + 20, cy + 26), 200, 340, fill=rgb("#ffe4a6", 150), width=3)
+        elif style_suffix == "rainforest":
+            d.line((cx - 18, cy + 20, cx + 12, cy - 10), fill=rgb("#d4ffe6", 140), width=3)
     return img
 
 
 def area(name):
     colors = {
         "tower_entry": ("#5f5367", "#2b2d39"),
-        "north_plains": ("#7fa66c", "#526d41"),
+        "north_plains": ("#8fb96f", "#587245"),
         "town_square": ("#7ca36d", "#55724c"),
-        "rock_fields": ("#8f8773", "#535046"),
-        "moonlit_forest": ("#4f6e68", "#1d2932"),
-        "lake_shore": ("#73a9bd", "#385c6b"),
-        "sunscar_desert": ("#c89f59", "#7f6131"),
-        "tropical_rainforest": ("#4d8a67", "#1f4735"),
+        "rock_fields": ("#958978", "#585148"),
+        "moonlit_forest": ("#52756a", "#1d2932"),
+        "lake_shore": ("#85bdd0", "#446d79"),
+        "sunscar_desert": ("#d0aa69", "#8a6537"),
+        "tropical_rainforest": ("#5a9d74", "#1f4735"),
         "greenhouse_floor": ("#709379", "#425845"),
         "containment_floor": ("#57708c", "#2b3647"),
         "rune_workshop_floor": ("#6c5b78", "#31263a"),
@@ -193,9 +255,42 @@ def area(name):
         c1, c2 = rgb(colors[0]), rgb(colors[1])
         c = tuple(int(c1[i] * (1 - t) + c2[i] * t) for i in range(4))
         d.line((0, y, 1920, y), fill=c)
-    for gy in range(0, 1080, 96):
-        for gx in range(0, 1920, 96):
-            d.rounded_rectangle((gx + 6, gy + 6, gx + 88, gy + 88), radius=10, outline=(0, 0, 0, 25), width=2)
+    if name == "north_plains":
+        for y in range(100, 1080, 140):
+            d.arc((120, y - 60, 1780, y + 160), 195, 345, fill=rgb("#d9c38c", 120), width=18)
+        for x in range(120, 1820, 220):
+            d.ellipse((x, 150 + (x % 160), x + 90, 210 + (x % 160)), fill=rgb("#e3d48f", 120))
+    elif name == "rock_fields":
+        for x, y, w, h in [(140, 220, 520, 150), (840, 180, 580, 170), (520, 640, 700, 180)]:
+            d.rounded_rectangle((x, y, x + w, y + h), radius=26, fill=rgb("#71685c", 220))
+            d.rounded_rectangle((x + 24, y + 18, x + w - 24, y + 54), radius=20, fill=rgb("#b0a18e", 180))
+        for x, y in [(420, 420), (980, 470), (790, 740)]:
+            d.polygon([(x, y - 34), (x - 28, y), (x, y + 34), (x + 28, y)], fill=rgb("#b79df9", 90))
+    elif name == "moonlit_forest":
+        for x in range(120, 1840, 220):
+            d.ellipse((x, 90 + (x % 140), x + 240, 300 + (x % 140)), fill=rgb("#355742", 120))
+            d.rectangle((x + 90, 260 + (x % 140), x + 118, 460 + (x % 140)), fill=rgb("#4b3429", 160))
+        d.ellipse((700, 460, 1120, 760), fill=rgb("#b2d6bd", 70))
+    elif name == "lake_shore":
+        d.rounded_rectangle((90, 280, 1080, 980), radius=160, fill=rgb("#5fa0c0", 170))
+        d.rounded_rectangle((260, 360, 1000, 940), radius=140, fill=rgb("#7cc3de", 160))
+        for x in range(180, 1080, 70):
+            d.line((x, 340, x - 14, 200), fill=rgb("#d9d59a", 120), width=6)
+    elif name == "sunscar_desert":
+        for y in range(180, 1080, 170):
+            d.arc((60, y - 80, 1860, y + 160), 190, 350, fill=rgb("#ecd08c", 150), width=30)
+        for x, y in [(420, 280), (1140, 360), (860, 760)]:
+            d.polygon([(x, y - 70), (x - 55, y + 32), (x + 42, y + 64)], fill=rgb("#9c7343", 180))
+    elif name == "tropical_rainforest":
+        for x in range(80, 1860, 180):
+            d.ellipse((x, 70 + (x % 110), x + 220, 280 + (x % 110)), fill=rgb("#2f6f4d", 150))
+            d.rectangle((x + 92, 250 + (x % 110), x + 120, 500 + (x % 110)), fill=rgb("#5b402f", 170))
+        for x, y in [(380, 740), (980, 700), (1420, 620)]:
+            d.arc((x - 120, y - 60, x + 120, y + 90), 180, 340, fill=rgb("#8d5f3f", 170), width=16)
+    else:
+        for gy in range(0, 1080, 96):
+            for gx in range(0, 1920, 96):
+                d.rounded_rectangle((gx + 6, gy + 6, gx + 88, gy + 88), radius=10, outline=(0, 0, 0, 25), width=2)
     return img.filter(ImageFilter.GaussianBlur(0.2))
 
 
@@ -254,9 +349,10 @@ def main():
     for req in REQ["sprite_requirements"]["stations"]:
         save(station(req["id"], req["image_size_px"]), Path("stations") / f'{req["id"]}.png')
     for req in REQ["sprite_requirements"]["items_and_gatherables"]:
-        size = req.get("icon_size_px") or req.get("world_sprite_px")
-        save(icon(req["id"], size), Path("items/icons") / f'{req["id"]}.png')
-        if req["type"] == "icon_and_world_node":
+        if req["type"] in {"icon_and_world_node", "inventory_icon"}:
+            size = req.get("icon_size_px") or req.get("world_sprite_px")
+            save(icon(req["id"], size), Path("items/icons") / f'{req["id"]}.png')
+        if req["type"] in {"icon_and_world_node", "world_node_variant"}:
             save(icon(req["id"], req["world_sprite_px"], True), Path("items/world") / f'{req["id"]}.png')
     for req in REQ["sprite_requirements"]["areas"]:
         save(area(req["id"]), Path("areas") / f'{req["id"]}.png')

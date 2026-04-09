@@ -53,10 +53,153 @@ impl GameplayState {
             .get(item_id)
             .map(|profile| ui_format("inventory_best", &[("band", &profile.best_quality_band)]))
             .or_else(|| {
-                self.progression.field_journal
+                self.progression.herb_memories
                     .get(item_id)
                     .map(|entry| ui_format("inventory_best", &[("band", &entry.best_quality_band)]))
             })
+    }
+
+    pub(super) fn note_inventory_observation(&mut self, data: &GameData, item_id: &str) {
+        let Some(item) = data.item(item_id) else {
+            return;
+        };
+        match item.category {
+            ItemCategory::Ingredient => self.ensure_herb_memory_seen(item_id, None),
+            ItemCategory::Potion => self.ensure_potion_memory_seen(item_id),
+            _ => {}
+        }
+    }
+
+    pub(super) fn ensure_potion_memory_seen(&mut self, item_id: &str) {
+        let entry = self
+            .progression
+            .potion_memories
+            .entry(item_id.to_owned())
+            .or_insert_with(|| PotionMemoryEntry {
+                item_id: item_id.to_owned(),
+                first_seen_day: self.world.day_index,
+                seen: true,
+                learned: false,
+                learned_day: 0,
+                successful_brews: 0,
+                best_quality_score: 0,
+                best_quality_band: ui_copy("inventory_best_unlogged").to_owned(),
+                last_recipe_id: String::new(),
+            });
+        if !entry.seen {
+            entry.seen = true;
+            entry.first_seen_day = self.world.day_index;
+        }
+    }
+
+    pub(super) fn ensure_potion_memory_learned(&mut self, item_id: &str, recipe_id: Option<&str>) {
+        self.ensure_potion_memory_seen(item_id);
+        let entry = self
+            .progression
+            .potion_memories
+            .get_mut(item_id)
+            .expect("potion memory should exist after ensure");
+        if !entry.learned {
+            entry.learned = true;
+            entry.learned_day = self.world.day_index;
+        }
+        if let Some(recipe_id) = recipe_id {
+            if entry.last_recipe_id.is_empty() {
+                entry.last_recipe_id = recipe_id.to_owned();
+            }
+        }
+    }
+
+    pub(super) fn record_potion_result_memory(
+        &mut self,
+        item_id: &str,
+        recipe_id: Option<&str>,
+        stable: bool,
+        quality_score: u32,
+        quality_band: &str,
+    ) {
+        self.ensure_potion_memory_learned(item_id, recipe_id);
+        let entry = self
+            .progression
+            .potion_memories
+            .get_mut(item_id)
+            .expect("potion memory should exist after learn");
+        if stable {
+            entry.successful_brews += 1;
+        }
+        if quality_score >= entry.best_quality_score {
+            entry.best_quality_score = quality_score;
+            entry.best_quality_band = quality_band.to_owned();
+        }
+        if let Some(recipe_id) = recipe_id {
+            entry.last_recipe_id = recipe_id.to_owned();
+        }
+    }
+
+    pub(super) fn potion_memories<'a>(&'a self, data: &'a GameData) -> Vec<&'a PotionMemoryEntry> {
+        let mut entries = self.progression.potion_memories.values().collect::<Vec<_>>();
+        entries.sort_by(|left, right| {
+            right
+                .successful_brews
+                .cmp(&left.successful_brews)
+                .then(right.learned.cmp(&left.learned))
+                .then(right.best_quality_score.cmp(&left.best_quality_score))
+                .then(data.item_name(&left.item_id).cmp(data.item_name(&right.item_id)))
+        });
+        entries
+    }
+
+    pub(super) fn rebuild_memory_state(&mut self, data: &GameData) {
+        let inventory_items = self.inventory.keys().cloned().collect::<Vec<_>>();
+        for item_id in inventory_items {
+            self.note_inventory_observation(data, &item_id);
+        }
+
+        if self.progression.potion_memories.is_empty() {
+            for entry in self.progression.experiment_log.clone() {
+                if data
+                    .item(&entry.output_item_id)
+                    .map(|item| item.category == ItemCategory::Potion)
+                    .unwrap_or(false)
+                {
+                    self.record_potion_result_memory(
+                        &entry.output_item_id,
+                        (!entry.recipe_id.is_empty()).then_some(entry.recipe_id.as_str()),
+                        entry.stable,
+                        entry.quality_score,
+                        &entry.quality_band,
+                    );
+                }
+            }
+        }
+
+        for recipe in &data.recipes {
+            if self.progression.known_recipes.contains(&recipe.id) {
+                self.ensure_potion_memory_learned(&recipe.output_item_id, Some(&recipe.id));
+            }
+        }
+
+        let crafted_profiles = self
+            .progression
+            .crafted_item_profiles
+            .values()
+            .cloned()
+            .collect::<Vec<_>>();
+        for profile in crafted_profiles {
+            if data
+                .item(&profile.item_id)
+                .map(|item| item.category == ItemCategory::Potion)
+                .unwrap_or(false)
+            {
+                self.ensure_potion_memory_learned(&profile.item_id, None);
+                if let Some(memory) = self.progression.potion_memories.get_mut(&profile.item_id) {
+                    if profile.best_quality_score >= memory.best_quality_score {
+                        memory.best_quality_score = profile.best_quality_score;
+                        memory.best_quality_band = profile.best_quality_band.clone();
+                    }
+                }
+            }
+        }
     }
 
     pub(super) fn sell_is_safe(&self, data: &GameData, item_id: &str) -> bool {
@@ -563,6 +706,7 @@ impl GameplayState {
             .inventory
             .entry(resolution.output_item_id.clone())
             .or_insert(0) += resolution.output_amount;
+        self.note_inventory_observation(data, &resolution.output_item_id);
         self.progression.total_brews += 1;
         self.record_experiment_log(&resolution);
         if self.progression.total_brews == 1 {
@@ -575,6 +719,19 @@ impl GameplayState {
             .get(&resolution.output_item_id)
             .cloned();
         self.record_crafted_item_profile(data, &resolution.output_item_id, &resolution);
+        if data
+            .item(&resolution.output_item_id)
+            .map(|item| item.category == ItemCategory::Potion)
+            .unwrap_or(false)
+        {
+            self.record_potion_result_memory(
+                &resolution.output_item_id,
+                resolution.recipe.map(|recipe| recipe.id.as_str()),
+                stable_brew,
+                resolution.quality_score,
+                resolution.quality_band,
+            );
+        }
         if let Some(recipe) = resolution.recipe {
             let previous_mastery = self.recipe_mastery_brews(&recipe.id);
             let stable_brew = self.brew_is_stable(&resolution);
@@ -774,6 +931,7 @@ impl GameplayState {
         }
         self.coins -= price;
         *self.inventory.entry(item_id.to_owned()).or_insert(0) += 1;
+        self.note_inventory_observation(data, item_id);
         self.runtime.status_text = ui_format("inventory_bought", &[("item", data.item_name(item_id))]);
     }
 
