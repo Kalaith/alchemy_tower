@@ -47,19 +47,24 @@ struct EmbeddedCraftingData {
 pub struct GameDataLoader;
 
 impl GameDataLoader {
-    pub fn load_embedded() -> Result<GameData, serde_json::Error> {
+    pub fn load_embedded() -> Result<GameData, String> {
         let config: EmbeddedConfigData =
-            serde_json::from_str(include_str!("../../assets/data/game_data_config.json"))?;
+            serde_json::from_str(include_str!("../../assets/data/game_data_config.json"))
+                .map_err(|error| error.to_string())?;
         let world: EmbeddedWorldData =
-            serde_json::from_str(include_str!("../../assets/data/game_data_world.json"))?;
+            serde_json::from_str(include_str!("../../assets/data/game_data_world.json"))
+                .map_err(|error| error.to_string())?;
         let npc: EmbeddedNpcData =
-            serde_json::from_str(include_str!("../../assets/data/game_data_npcs.json"))?;
+            serde_json::from_str(include_str!("../../assets/data/game_data_npcs.json"))
+                .map_err(|error| error.to_string())?;
         let items: EmbeddedItemData =
-            serde_json::from_str(include_str!("../../assets/data/game_data_items.json"))?;
+            serde_json::from_str(include_str!("../../assets/data/game_data_items.json"))
+                .map_err(|error| error.to_string())?;
         let crafting: EmbeddedCraftingData =
-            serde_json::from_str(include_str!("../../assets/data/game_data_crafting.json"))?;
+            serde_json::from_str(include_str!("../../assets/data/game_data_crafting.json"))
+                .map_err(|error| error.to_string())?;
 
-        Ok(GameData::from_parts(
+        GameData::from_parts(
             config.config,
             world.areas,
             world.gathering_routes,
@@ -70,6 +75,6 @@ impl GameDataLoader {
             crafting.rune_recipes,
             crafting.mutation_formulas,
             world.stations,
-        ))
+        )
     }
 }

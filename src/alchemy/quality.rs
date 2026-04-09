@@ -1,24 +1,25 @@
 use std::collections::BTreeMap;
 
+use crate::content::ui_copy;
 use crate::data::{ItemDefinition, RecipeDefinition, StationDefinition};
 
 pub fn quality_band(score: u32) -> &'static str {
     match score {
-        0..=19 => "Crude",
-        20..=39 => "Serviceable",
-        40..=59 => "Fine",
-        60..=79 => "Excellent",
-        _ => "Masterwork",
+        0..=19 => ui_copy("quality_band_crude"),
+        20..=39 => ui_copy("quality_band_serviceable"),
+        40..=59 => ui_copy("quality_band_fine"),
+        60..=79 => ui_copy("quality_band_excellent"),
+        _ => ui_copy("quality_band_masterwork"),
     }
 }
 
 pub fn mastery_stage(successful_brews: u32) -> &'static str {
     match successful_brews {
-        0 => "Unknown",
-        1 => "Guessed",
-        2..=3 => "Discovered",
-        4..=6 => "Refined",
-        _ => "Mastered",
+        0 => ui_copy("mastery_stage_unknown"),
+        1 => ui_copy("mastery_stage_guessed"),
+        2..=3 => ui_copy("mastery_stage_discovered"),
+        4..=6 => ui_copy("mastery_stage_refined"),
+        _ => ui_copy("mastery_stage_mastered"),
     }
 }
 

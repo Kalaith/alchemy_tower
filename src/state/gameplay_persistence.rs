@@ -62,9 +62,19 @@ impl GameplayStateLoader {
                     successful_brews: *successful_brews,
                 })
                 .collect(),
-            crafted_item_profiles: state.progression.crafted_item_profiles.values().cloned().collect(),
+            crafted_item_profiles: state
+                .progression
+                .crafted_item_profiles
+                .values()
+                .cloned()
+                .collect(),
             experiment_log: state.progression.experiment_log.clone(),
-            potion_memories: state.progression.potion_memories.values().cloned().collect(),
+            potion_memories: state
+                .progression
+                .potion_memories
+                .values()
+                .cloned()
+                .collect(),
             unlocked_warps: state.progression.unlocked_warps.iter().cloned().collect(),
             planter_states: state.progression.planter_states.values().cloned().collect(),
             habitat_states: state.progression.habitat_states.values().cloned().collect(),
@@ -192,5 +202,3 @@ impl GameplayStateLoader {
         Ok(())
     }
 }
-
-

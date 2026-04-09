@@ -34,7 +34,10 @@ impl GameplayState {
         );
     }
 
-    pub(super) fn mastery_recipes<'a>(&self, data: &'a GameData) -> Vec<&'a crate::data::RecipeDefinition> {
+    pub(super) fn mastery_recipes<'a>(
+        &self,
+        data: &'a GameData,
+    ) -> Vec<&'a crate::data::RecipeDefinition> {
         let mut recipes = data
             .recipes
             .iter()
@@ -48,7 +51,10 @@ impl GameplayState {
         recipes
     }
 
-    pub(super) fn morph_recipes<'a>(&self, data: &'a GameData) -> Vec<&'a crate::data::RecipeDefinition> {
+    pub(super) fn morph_recipes<'a>(
+        &self,
+        data: &'a GameData,
+    ) -> Vec<&'a crate::data::RecipeDefinition> {
         let mut recipes = data
             .recipes
             .iter()
@@ -60,11 +66,11 @@ impl GameplayState {
 
     pub(super) fn archive_selection_len(&self, data: &GameData) -> usize {
         match ARCHIVE_TABS[self.ui.archive_tab] {
-            "Experiments" => self.archive_experiment_entries(data).len(),
-            "Mastery" => self.mastery_recipes(data).len(),
-            "Morphs" => self.morph_recipes(data).len(),
-            "Disassembly" => self.available_disassembly_recipes(data).len(),
-            "Duplication" => self.duplication_candidates(data).len(),
+            "experiments" => self.archive_experiment_entries(data).len(),
+            "mastery" => self.mastery_recipes(data).len(),
+            "morphs" => self.morph_recipes(data).len(),
+            "disassembly" => self.available_disassembly_recipes(data).len(),
+            "duplication" => self.duplication_candidates(data).len(),
             _ => 0,
         }
     }
@@ -95,11 +101,13 @@ impl GameplayState {
         recipe: &crate::data::RecipeDefinition,
     ) {
         let Some(output_amount) = self.inventory.get_mut(&recipe.output_item_id) else {
-            self.runtime.status_text = ui_format("progression_no_disassemble", &[("name", &recipe.name)]);
+            self.runtime.status_text =
+                ui_format("progression_no_disassemble", &[("name", &recipe.name)]);
             return;
         };
         if *output_amount == 0 {
-            self.runtime.status_text = ui_format("progression_no_disassemble", &[("name", &recipe.name)]);
+            self.runtime.status_text =
+                ui_format("progression_no_disassemble", &[("name", &recipe.name)]);
             return;
         }
 
@@ -110,7 +118,10 @@ impl GameplayState {
 
         let mut returned = Vec::new();
         for ingredient in &recipe.ingredients {
-            *self.inventory.entry(ingredient.item_id.clone()).or_insert(0) += ingredient.amount;
+            *self
+                .inventory
+                .entry(ingredient.item_id.clone())
+                .or_insert(0) += ingredient.amount;
             self.note_inventory_observation(data, &ingredient.item_id);
             returned.push(format!(
                 "{} x{}",
@@ -124,8 +135,10 @@ impl GameplayState {
             Color::from_rgba(214, 204, 170, 255),
             "recipe_logged",
         );
-        self.runtime.status_text =
-            ui_format("progression_disassembled", &[("name", &recipe.name), ("items", &returned.join(", "))]);
+        self.runtime.status_text = ui_format(
+            "progression_disassembled",
+            &[("name", &recipe.name), ("items", &returned.join(", "))],
+        );
     }
 
     pub(super) fn duplication_candidates(&self, data: &GameData) -> Vec<String> {
@@ -142,14 +155,8 @@ impl GameplayState {
             .map(|(item_id, _)| item_id.clone())
             .collect::<Vec<_>>();
         items.sort_by(|left, right| {
-            let left_cost = data
-                .item(left)
-                .map(duplication_cost)
-                .unwrap_or(u32::MAX);
-            let right_cost = data
-                .item(right)
-                .map(duplication_cost)
-                .unwrap_or(u32::MAX);
+            let left_cost = data.item(left).map(duplication_cost).unwrap_or(u32::MAX);
+            let right_cost = data.item(right).map(duplication_cost).unwrap_or(u32::MAX);
             left_cost
                 .cmp(&right_cost)
                 .then(data.item_name(left).cmp(data.item_name(right)))
@@ -173,11 +180,13 @@ impl GameplayState {
             return;
         };
         if !duplication_item_allowed(item) {
-            self.runtime.status_text = ui_format("progression_duplicate_resists", &[("name", &item.name)]);
+            self.runtime.status_text =
+                ui_format("progression_duplicate_resists", &[("name", &item.name)]);
             return;
         }
         if self.inventory.get(item_id).copied().unwrap_or_default() == 0 {
-            self.runtime.status_text = ui_format("progression_duplicate_none", &[("name", &item.name)]);
+            self.runtime.status_text =
+                ui_format("progression_duplicate_none", &[("name", &item.name)]);
             return;
         }
 
@@ -185,7 +194,10 @@ impl GameplayState {
         if self.coins < cost {
             self.runtime.status_text = ui_format(
                 "progression_duplicate_need_coins",
-                &[("coins", &cost.saturating_sub(self.coins).to_string()), ("name", &item.name)],
+                &[
+                    ("coins", &cost.saturating_sub(self.coins).to_string()),
+                    ("name", &item.name),
+                ],
             );
             return;
         }
@@ -293,14 +305,20 @@ impl GameplayState {
         state.mutation_note = formula.mutation_note.clone();
 
         self.push_event_toast_with_icon(
-            ui_format("progression_planter_mutation", &[("item", data.item_name(&state.planted_item_id))]),
+            ui_format(
+                "progression_planter_mutation",
+                &[("item", data.item_name(&state.planted_item_id))],
+            ),
             Color::from_rgba(188, 255, 220, 255),
             "best_quality",
         );
 
         Some(ui_format(
             "progression_planter_mutation_status",
-            &[("catalyst", data.item_name(catalyst_item_id)), ("strain", &formula.mutation_note)],
+            &[
+                ("catalyst", data.item_name(catalyst_item_id)),
+                ("strain", &formula.mutation_note),
+            ],
         ))
     }
 }
@@ -334,12 +352,23 @@ mod tests {
         state.disassemble_recipe(&data, recipe);
 
         assert_eq!(
-            state.inventory.get("healing_draught").copied().unwrap_or_default(),
+            state
+                .inventory
+                .get("healing_draught")
+                .copied()
+                .unwrap_or_default(),
             0
         );
-        assert_eq!(state.inventory.get("sunleaf").copied().unwrap_or_default(), 1);
         assert_eq!(
-            state.inventory.get("whisper_moss").copied().unwrap_or_default(),
+            state.inventory.get("sunleaf").copied().unwrap_or_default(),
+            1
+        );
+        assert_eq!(
+            state
+                .inventory
+                .get("whisper_moss")
+                .copied()
+                .unwrap_or_default(),
             1
         );
     }
@@ -355,9 +384,20 @@ mod tests {
 
         state.duplicate_item(&data, "glow_potion");
 
-        assert_eq!(state.inventory.get("glow_potion").copied().unwrap_or_default(), 2);
         assert_eq!(
-            state.inventory.get("starlight_shard").copied().unwrap_or_default(),
+            state
+                .inventory
+                .get("glow_potion")
+                .copied()
+                .unwrap_or_default(),
+            2
+        );
+        assert_eq!(
+            state
+                .inventory
+                .get("starlight_shard")
+                .copied()
+                .unwrap_or_default(),
             0
         );
         assert_eq!(state.coins, 63);
@@ -389,7 +429,13 @@ mod tests {
         assert_eq!(planter.mutation_formula_id, "moon_fern_glow_mutation");
         assert_eq!(planter.mutation_yield_bonus, 1);
         assert_eq!(planter.mutation_growth_bonus_days, 1);
-        assert_eq!(state.inventory.get("glow_potion").copied().unwrap_or_default(), 0);
+        assert_eq!(
+            state
+                .inventory
+                .get("glow_potion")
+                .copied()
+                .unwrap_or_default(),
+            0
+        );
     }
 }
-

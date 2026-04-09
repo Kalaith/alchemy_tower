@@ -4,8 +4,7 @@ use crate::content::{narrative_text, ui_copy, ui_format};
 
 impl GameplayState {
     pub(super) fn update_area_banner(&mut self, data: &GameData, frame_time: f32) {
-        self.runtime.area_banner_seconds =
-            (self.runtime.area_banner_seconds - frame_time).max(0.0);
+        self.runtime.area_banner_seconds = (self.runtime.area_banner_seconds - frame_time).max(0.0);
         if self.runtime.area_banner_area_id != self.world.current_area_id {
             self.runtime.area_banner_area_id = self.world.current_area_id.clone();
             self.runtime.area_banner_label = data
@@ -57,43 +56,50 @@ impl GameplayState {
             .iter()
             .find_map(|quest_id| data.quest(quest_id))?;
         let location = self.quest_location_hint(data, quest);
-        Some(format!(
-            "{}  |  {}  |  {}",
-            quest.title,
-            self.quest_requirement_summary(data, quest),
-            location
+        Some(ui_format(
+            "journal_active_summary",
+            &[
+                ("title", &quest.title),
+                ("requirements", &self.quest_requirement_summary(data, quest)),
+                ("location", &location),
+            ],
         ))
     }
 
     pub(super) fn milestone_status_lines(&self) -> Vec<(&'static str, String, bool)> {
         vec![
             (
-                "Greenhouse access",
-                if self.progression.unlocked_warps.contains("entry_to_greenhouse") {
-                    "Greenhouse floor restored.".to_owned()
+                ui_copy("milestone_greenhouse_access"),
+                if self
+                    .progression
+                    .unlocked_warps
+                    .contains("entry_to_greenhouse")
+                {
+                    ui_copy("milestone_greenhouse_restored").to_owned()
                 } else {
-                    "Reach 10 brews, 40 coins, and carry 2 Moon Fern.".to_owned()
+                    ui_copy("milestone_greenhouse_locked").to_owned()
                 },
-                self.progression.unlocked_warps.contains("entry_to_greenhouse"),
+                self.progression
+                    .unlocked_warps
+                    .contains("entry_to_greenhouse"),
             ),
             (
-                "Archive reconstruction",
+                ui_copy("milestone_archive_reconstruction"),
                 if self.has_journal_milestone("archive_revelation") {
-                    "Archive revelation recovered.".to_owned()
+                    ui_copy("milestone_archive_recovered").to_owned()
                 } else if self.can_reconstruct_archive() {
-                    "Ready at the archive console.".to_owned()
+                    ui_copy("milestone_archive_ready").to_owned()
                 } else {
-                    "Finish star_elixir_for_ione, containment_for_lyra, and restore the tower floors."
-                        .to_owned()
+                    ui_copy("milestone_archive_locked").to_owned()
                 },
                 self.has_journal_milestone("archive_revelation") || self.can_reconstruct_archive(),
             ),
             (
-                "Observatory access",
+                ui_copy("milestone_observatory_access"),
                 if self.has_journal_milestone("archive_revelation") {
-                    "Portal Observatory can be opened from the archives.".to_owned()
+                    ui_copy("milestone_observatory_ready").to_owned()
                 } else {
-                    "Recover the archive revelation.".to_owned()
+                    ui_copy("milestone_observatory_locked").to_owned()
                 },
                 self.has_journal_milestone("archive_revelation"),
             ),
@@ -101,15 +107,21 @@ impl GameplayState {
     }
 
     pub(super) fn greenhouse_journal_unlocked(&self) -> bool {
-        self.progression.unlocked_warps.contains("entry_to_greenhouse")
+        self.progression
+            .unlocked_warps
+            .contains("entry_to_greenhouse")
     }
 
     pub(super) fn journal_tabs(&self) -> Vec<&'static str> {
-        let mut tabs = vec!["Routes", "Notes", "Brews"];
+        let mut tabs = vec![
+            ui_copy("journal_tab_routes"),
+            ui_copy("journal_tab_notes"),
+            ui_copy("journal_tab_brews"),
+        ];
         if self.greenhouse_journal_unlocked() {
-            tabs.push("Greenhouse");
+            tabs.push(ui_copy("journal_tab_greenhouse"));
         }
-        tabs.push("Rapport");
+        tabs.push(ui_copy("journal_tab_rapport"));
         tabs
     }
 
@@ -276,8 +288,7 @@ impl GameplayState {
     }
 
     pub(super) fn set_clock_minutes(&mut self, minutes: f32) {
-        self.world.day_clock_seconds =
-            (minutes / (24.0 * 60.0)) * self.world.day_length_seconds;
+        self.world.day_clock_seconds = (minutes / (24.0 * 60.0)) * self.world.day_length_seconds;
     }
 
     pub(super) fn advance_to_next_day(&mut self, data: &GameData, with_feedback: bool) {
@@ -286,10 +297,12 @@ impl GameplayState {
         self.advance_planters(data);
         self.refresh_available_nodes(data);
         if with_feedback {
-            self.runtime.status_text = format!(
-                "A new day begins: {} in {}.",
-                self.current_weather(),
-                self.current_season()
+            self.runtime.status_text = ui_format(
+                "day_begin_status",
+                &[
+                    ("weather", self.current_weather()),
+                    ("season", self.current_season()),
+                ],
             );
             self.trigger_world_feedback(
                 self.world.player.position,
@@ -308,7 +321,11 @@ impl GameplayState {
         }
         self.set_clock_minutes(wake_minutes);
         if forced_home {
-            if let Some(bed) = data.stations.iter().find(|station| station.id == "entry_rest_bed") {
+            if let Some(bed) = data
+                .stations
+                .iter()
+                .find(|station| station.id == "entry_rest_bed")
+            {
                 self.world.current_area_id = bed.area_id.clone();
                 self.world.player.position = vec2(bed.position[0], bed.position[1] + 52.0);
                 self.world.player.facing = vec2(0.0, -1.0);
@@ -317,8 +334,7 @@ impl GameplayState {
             self.runtime.sleep_flash_seconds = 1.2;
             self.runtime.status_text = ui_copy("gameplay_fainted_home").to_owned();
         } else {
-            self.runtime.status_text =
-                ui_format("gameplay_slept_until", &[("time", "07:00")]);
+            self.runtime.status_text = ui_format("gameplay_slept_until", &[("time", "07:00")]);
         }
     }
 
@@ -344,7 +360,7 @@ impl GameplayState {
         }
 
         if self.can_reconstruct_archive() && !self.has_journal_milestone("archive_revelation") {
-            return "Reconstruct the archive timeline from the console.".to_owned();
+            return ui_copy("goal_reconstruct_archive").to_owned();
         }
 
         if let Some(quest) = data
@@ -354,22 +370,20 @@ impl GameplayState {
             .filter(|quest| !self.progression.completed_quests.contains(&quest.id))
             .find(|quest| self.quest_is_available(quest))
         {
-            return format!(
-                "Accept {} from {}.",
-                quest.title,
-                self.quest_location_hint(data, quest)
+            return ui_format(
+                "goal_accept_quest",
+                &[("title", &quest.title), ("location", &self.quest_location_hint(data, quest))],
             );
         }
 
         if let Some(warp) = self.next_locked_warp(data) {
-            return format!(
-                "Restore {}: {}.",
-                warp.label,
-                self.warp_requirement_summary(data, warp)
+            return ui_format(
+                "goal_restore_route",
+                &[("label", &warp.label), ("requirements", &self.warp_requirement_summary(data, warp))],
             );
         }
 
-        "Keep gathering, brewing, and filling the archive.".to_owned()
+        ui_copy("goal_keep_working").to_owned()
     }
 
     pub(super) fn station_world_label(
@@ -471,14 +485,7 @@ impl GameplayState {
         }
         if self.runtime.tutorial.next_hint_delay_seconds > 0.0
             || !self.runtime.gather_toasts.is_empty()
-            || self.ui.journal_open
-            || self.ui.quest_board_open
-            || self.ui.shop_open
-            || self.ui.rune_open
-            || self.ui.archive_open
-            || self.ui.dialogue_open
-            || self.ui.ending_open
-            || self.alchemy.open
+            || self.overlay().is_some()
         {
             return;
         }
@@ -539,7 +546,10 @@ impl GameplayState {
                 ui_copy("tutorial_alchemy_open").to_owned(),
                 Color::from_rgba(188, 255, 220, 255),
             ))
-        } else if !self.runtime.tutorial.brew_goal_hint_shown && self.progression.total_brews == 0 && near_alchemy {
+        } else if !self.runtime.tutorial.brew_goal_hint_shown
+            && self.progression.total_brews == 0
+            && near_alchemy
+        {
             self.runtime.tutorial.brew_goal_hint_shown = true;
             Some((
                 ui_copy("tutorial_brew_goal").to_owned(),
@@ -562,7 +572,10 @@ impl GameplayState {
             ))
         } else if !self.runtime.tutorial.mira_hint_shown
             && self.progression.total_brews > 0
-            && !self.progression.completed_quests.contains("healing_for_mira")
+            && !self
+                .progression
+                .completed_quests
+                .contains("healing_for_mira")
         {
             self.runtime.tutorial.mira_hint_shown = true;
             Some((
@@ -570,7 +583,10 @@ impl GameplayState {
                 Color::from_rgba(188, 255, 220, 255),
             ))
         } else if !self.runtime.tutorial.rowan_hint_shown
-            && self.progression.completed_quests.contains("healing_for_mira")
+            && self
+                .progression
+                .completed_quests
+                .contains("healing_for_mira")
             && !self.progression.completed_quests.contains("glow_for_rowan")
         {
             self.runtime.tutorial.rowan_hint_shown = true;
@@ -633,33 +649,33 @@ pub(super) fn clock_text(day_clock_seconds: f32, full_day_seconds: f32) -> Strin
 
 pub(super) fn effect_name(kind: EffectKind) -> &'static str {
     match kind {
-        EffectKind::Glow => "Glow",
-        EffectKind::Speed => "Quickstep",
-        EffectKind::Misfire => "Residue",
-        EffectKind::Restore => "Restore",
+        EffectKind::Glow => ui_copy("effect_name_glow"),
+        EffectKind::Speed => ui_copy("effect_name_speed"),
+        EffectKind::Misfire => ui_copy("effect_name_misfire"),
+        EffectKind::Restore => ui_copy("effect_name_restore"),
     }
 }
 
 pub(super) fn quality_band_rank(band: &str) -> u8 {
     match band {
-        "Crude" => 0,
-        "Serviceable" => 1,
-        "Fine" => 2,
-        "Excellent" => 3,
-        "Masterwork" => 4,
+        value if value == ui_copy("quality_band_crude") => 0,
+        value if value == ui_copy("quality_band_serviceable") => 1,
+        value if value == ui_copy("quality_band_fine") => 2,
+        value if value == ui_copy("quality_band_excellent") => 3,
+        value if value == ui_copy("quality_band_masterwork") => 4,
         _ => 0,
     }
 }
 
 pub(super) fn planter_stage_label(growth_days: u32, total_days: u32) -> &'static str {
     if growth_days == 0 {
-        "seeded"
+        ui_copy("planter_stage_seeded")
     } else if growth_days >= total_days {
-        "ripe"
+        ui_copy("planter_stage_ripe")
     } else if growth_days * 2 >= total_days {
-        "budding"
+        ui_copy("planter_stage_budding")
     } else {
-        "sprouting"
+        ui_copy("planter_stage_sprouting")
     }
 }
 
@@ -722,5 +738,3 @@ mod tests {
         assert!(state.world.gathered_nodes.is_empty());
     }
 }
-
-

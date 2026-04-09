@@ -122,11 +122,17 @@ impl GameplayState {
             .unwrap_or_else(|| self.next_goal_summary(data));
 
         HudView {
-            vitality_text: ui_format("hud_vitality", &[("vitality", &format!("{:.0}", self.vitality))]),
+            vitality_text: ui_format(
+                "hud_vitality",
+                &[("vitality", &format!("{:.0}", self.vitality))],
+            ),
             coins_text: ui_format("hud_coins", &[("coins", &self.coins.to_string())]),
             time_text: ui_format(
                 "hud_time",
-                &[("time", &clock_text(self.world.day_clock_seconds, data.config.day_length_seconds))],
+                &[(
+                    "time",
+                    &clock_text(self.world.day_clock_seconds, data.config.day_length_seconds),
+                )],
             ),
             time_color: if self.current_clock_minutes() < 60.0 {
                 Color::from_rgba(255, 214, 132, 255)
@@ -199,12 +205,7 @@ impl GameplayState {
                     (10.0 + t * 16.0) * feedback.burst_scale
                 };
                 let alpha = (1.0 - t).clamp(0.0, 1.0);
-                let color = Color::new(
-                    feedback.color.r,
-                    feedback.color.g,
-                    feedback.color.b,
-                    alpha,
-                );
+                let color = Color::new(feedback.color.r, feedback.color.g, feedback.color.b, alpha);
                 let screen_pos = offset + feedback.position;
                 let sparkle_points = std::array::from_fn(|index| {
                     let angle = t * 1.1 + index as f32 * (std::f32::consts::TAU / 8.0);
@@ -241,7 +242,13 @@ fn draw_status_cards(view: &HudView) {
     draw_glass_card(left, Color::from_rgba(126, 220, 158, 66), 176);
     draw_glass_card(right, Color::from_rgba(176, 226, 255, 66), 176);
 
-    draw_text(&view.vitality_text, left.x + 16.0, left.y + 28.0, 24.0, Color::from_rgba(126, 220, 158, 255));
+    draw_text(
+        &view.vitality_text,
+        left.x + 16.0,
+        left.y + 28.0,
+        24.0,
+        Color::from_rgba(126, 220, 158, 255),
+    );
     draw_text(
         &view.coins_text,
         left.x + 16.0,
@@ -250,7 +257,13 @@ fn draw_status_cards(view: &HudView) {
         Color::from_rgba(255, 214, 132, 255),
     );
 
-    draw_text(&view.time_text, right.x + 16.0, right.y + 28.0, 24.0, view.time_color);
+    draw_text(
+        &view.time_text,
+        right.x + 16.0,
+        right.y + 28.0,
+        24.0,
+        view.time_color,
+    );
     draw_text(
         &truncate_text_to_width(&view.day_text, right.w - 32.0, 18.0),
         right.x + 16.0,
@@ -277,7 +290,13 @@ fn draw_status_cards(view: &HudView) {
 fn draw_goal_tracker(view: &HudView) {
     let rect = Rect::new(18.0, 102.0, 220.0, 54.0);
     draw_glass_card(rect, Color::from_rgba(255, 230, 170, 62), 150);
-    draw_text(&view.goal_prefix, rect.x + 14.0, rect.y + 22.0, 15.0, dark::TEXT_DIM);
+    draw_text(
+        &view.goal_prefix,
+        rect.x + 14.0,
+        rect.y + 22.0,
+        15.0,
+        dark::TEXT_DIM,
+    );
     draw_text(
         &truncate_text_to_width(&view.goal_text, rect.w - 28.0, 18.0),
         rect.x + 14.0,
@@ -297,7 +316,12 @@ fn draw_area_banner(view: &HudView) {
     let x = screen_width() * 0.5 - width * 0.5;
     let y = 22.0 + (1.0 - view.area_banner_alpha) * 12.0;
     let fill = (170.0 * view.area_banner_alpha) as u8;
-    let border = Color::new(176.0 / 255.0, 226.0 / 255.0, 255.0 / 255.0, view.area_banner_alpha);
+    let border = Color::new(
+        176.0 / 255.0,
+        226.0 / 255.0,
+        255.0 / 255.0,
+        view.area_banner_alpha,
+    );
     let text = Color::new(1.0, 0.97, 0.9, view.area_banner_alpha);
 
     draw_rectangle(x, y, width, height, Color::from_rgba(18, 20, 28, fill));
@@ -421,16 +445,18 @@ fn draw_drawer_section(
     art: &ArtAssets,
 ) {
     draw_text(title, x, y, 16.0, dark::TEXT_DIM);
-    draw_rectangle(
-        x,
-        y + 8.0,
-        width,
-        82.0,
-        Color::from_rgba(18, 20, 28, 148),
-    );
+    draw_rectangle(x, y + 8.0, width, 82.0, Color::from_rgba(18, 20, 28, 148));
 
     if lines.is_empty() {
-        draw_wrapped_text(empty_text, x + 10.0, y + 30.0, width - 20.0, 16.0, 16.0, dark::TEXT_DIM);
+        draw_wrapped_text(
+            empty_text,
+            x + 10.0,
+            y + 30.0,
+            width - 20.0,
+            16.0,
+            16.0,
+            dark::TEXT_DIM,
+        );
         return;
     }
 
@@ -438,10 +464,19 @@ fn draw_drawer_section(
     for line in lines.iter().take(3) {
         if let Some(icon_id) = &line.icon_id {
             if let Some(texture) = art.item_icon(icon_id) {
-                draw_texture_centered(texture, vec2(x + 13.0, cursor_y - 6.0), vec2(18.0, 18.0), WHITE);
+                draw_texture_centered(
+                    texture,
+                    vec2(x + 13.0, cursor_y - 6.0),
+                    vec2(18.0, 18.0),
+                    WHITE,
+                );
             }
         }
-        let text_x = if line.icon_id.is_some() { x + 28.0 } else { x + 10.0 };
+        let text_x = if line.icon_id.is_some() {
+            x + 28.0
+        } else {
+            x + 10.0
+        };
         draw_text(
             &truncate_text_to_width(&line.title, width - (text_x - x) - 10.0, 16.0),
             text_x,
@@ -480,11 +515,22 @@ fn draw_potion_belt(view: &HudView, art: &ArtAssets) {
             Color::from_rgba(114, 122, 140, 92)
         };
         draw_glass_card(rect, border, 176);
-        draw_text(slot.key_label, rect.x + 10.0, rect.y + 18.0, 16.0, dark::TEXT_DIM);
+        draw_text(
+            slot.key_label,
+            rect.x + 10.0,
+            rect.y + 18.0,
+            16.0,
+            dark::TEXT_DIM,
+        );
 
         if let Some(icon_id) = &slot.icon_id {
             if let Some(texture) = art.item_icon(icon_id) {
-                draw_texture_centered(texture, vec2(rect.x + rect.w * 0.5, rect.y + 35.0), vec2(34.0, 34.0), WHITE);
+                draw_texture_centered(
+                    texture,
+                    vec2(rect.x + rect.w * 0.5, rect.y + 35.0),
+                    vec2(34.0, 34.0),
+                    WHITE,
+                );
             }
             draw_text(
                 &truncate_text_to_width(&slot.item_name, rect.w - 16.0, 14.0),

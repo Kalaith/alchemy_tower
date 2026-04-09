@@ -24,7 +24,7 @@ impl Game {
     pub async fn new() -> Self {
         let data = GameDataLoader::load_embedded().unwrap_or_else(|error| {
             eprintln!("Failed to load embedded game data: {error}");
-            GameData::fallback()
+            GameData::runtime_fallback()
         });
         let art = ArtAssets::load(&data).await;
         let audio = AudioAssets::load().await;

@@ -1,4 +1,5 @@
 use crate::data::{GameData, ItemDefinition, RecipeDefinition};
+use crate::content::{ui_copy, ui_format};
 
 use super::matching::sequence_matches;
 
@@ -52,7 +53,7 @@ pub(super) fn morph_trigger_hint(
     let morph = recipe.morph_targets.first()?;
 
     if quality_score < morph.minimum_quality {
-        return Some("A finer brew might reveal a hidden branch.".to_owned());
+        return Some(ui_copy("morph_hint_quality").to_owned());
     }
     if !morph.catalyst_tag.is_empty()
         && !catalyst
@@ -63,37 +64,34 @@ pub(super) fn morph_trigger_hint(
             })
             .unwrap_or(false)
     {
-        return Some(format!(
-            "A {} catalyst could bend this recipe into a new shape.",
-            morph.catalyst_tag
-        ));
+        return Some(ui_format("morph_hint_catalyst", &[("tag", &morph.catalyst_tag)]));
     }
     if heat != morph.required_heat {
-        return Some(format!(
-            "A different heat could push this brew into a new branch. Try heat {}.",
-            morph.required_heat
+        return Some(ui_format(
+            "morph_hint_heat",
+            &[("value", &morph.required_heat.to_string())],
         ));
     }
     if stirs != morph.required_stirs {
-        return Some(format!(
-            "An altered stirring pattern may trigger a morph. Aim for {} stir(s).",
-            morph.required_stirs
+        return Some(ui_format(
+            "morph_hint_stirs",
+            &[("value", &morph.required_stirs.to_string())],
         ));
     }
     if !morph.required_timing.is_empty() && morph.required_timing != timing {
-        return Some(format!(
-            "The branch seems sensitive to timing. Try a {} finish.",
-            morph.required_timing
+        return Some(ui_format(
+            "morph_hint_timing",
+            &[("value", &morph.required_timing)],
         ));
     }
     if !morph.required_sequence.is_empty()
         && !sequence_matches(data, selected_items, &morph.required_sequence)
     {
-        return Some("A different ingredient order may unlock a hidden branch.".to_owned());
+        return Some(ui_copy("morph_hint_sequence").to_owned());
     }
     if morph.room_bonus_required && !room_bonus_applied {
-        return Some("This formula may branch only when the room itself favors it.".to_owned());
+        return Some(ui_copy("morph_hint_room").to_owned());
     }
 
-    Some("The recipe is straining toward another form.".to_owned())
+    Some(ui_copy("morph_hint_generic").to_owned())
 }

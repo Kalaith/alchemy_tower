@@ -1,5 +1,5 @@
-use std::sync::OnceLock;
 use std::collections::HashMap;
+use std::sync::{Mutex, OnceLock};
 
 use serde::Deserialize;
 
@@ -45,20 +45,68 @@ pub struct OverlayText {
     pub alchemy_subtitle: String,
 }
 
+impl UiText {
+    fn fallback() -> Self {
+        Self {
+            statuses: StatusText {
+                closed_alchemy: "[missing ui_text.statuses.closed_alchemy]".to_owned(),
+                closed_shop: "[missing ui_text.statuses.closed_shop]".to_owned(),
+                closed_rune: "[missing ui_text.statuses.closed_rune]".to_owned(),
+                closed_archive: "[missing ui_text.statuses.closed_archive]".to_owned(),
+                closed_journal: "[missing ui_text.statuses.closed_journal]".to_owned(),
+                closed_quest_board: "[missing ui_text.statuses.closed_quest_board]".to_owned(),
+                open_journal: "[missing ui_text.statuses.open_journal]".to_owned(),
+                open_alchemy: "[missing ui_text.statuses.open_alchemy]".to_owned(),
+                reading_quest_board: "[missing ui_text.statuses.reading_quest_board]".to_owned(),
+            },
+            prompts: PromptText {
+                open_alchemy: "[missing ui_text.prompts.open_alchemy]".to_owned(),
+                sleep_in_bed: "[missing ui_text.prompts.sleep_in_bed]".to_owned(),
+                browse_shop: "[missing ui_text.prompts.browse_shop]".to_owned(),
+                open_rune_workshop: "[missing ui_text.prompts.open_rune_workshop]".to_owned(),
+                reconstruct_archives: "[missing ui_text.prompts.reconstruct_archives]".to_owned(),
+                focus_observatory: "[missing ui_text.prompts.focus_observatory]".to_owned(),
+                read_request_board: "[missing ui_text.prompts.read_request_board]".to_owned(),
+            },
+            overlays: OverlayText {
+                shop_subtitle: "[missing ui_text.overlays.shop_subtitle]".to_owned(),
+                rune_subtitle: "[missing ui_text.overlays.rune_subtitle]".to_owned(),
+                archive_subtitle: "[missing ui_text.overlays.archive_subtitle]".to_owned(),
+                quest_board_subtitle: "[missing ui_text.overlays.quest_board_subtitle]".to_owned(),
+                alchemy_subtitle: "[missing ui_text.overlays.alchemy_subtitle]".to_owned(),
+            },
+            copy: HashMap::new(),
+        }
+    }
+}
+
 pub fn ui_text() -> &'static UiText {
     static TEXT: OnceLock<UiText> = OnceLock::new();
     TEXT.get_or_init(|| {
-        serde_json::from_str(include_str!("../../assets/data/ui_text.json"))
-            .expect("embedded ui_text.json should be valid")
+        serde_json::from_str(include_str!("../../assets/data/ui_text.json")).unwrap_or_else(
+            |error| {
+                eprintln!("Failed to load embedded ui_text.json: {error}");
+                UiText::fallback()
+            },
+        )
     })
 }
 
 pub fn ui_copy(key: &str) -> &'static str {
+    static MISSING_COPY: OnceLock<Mutex<HashMap<String, &'static str>>> = OnceLock::new();
     ui_text()
         .copy
         .get(key)
         .map(String::as_str)
-        .unwrap_or_else(|| panic!("missing ui text copy key: {key}"))
+        .unwrap_or_else(|| {
+            let cache = MISSING_COPY.get_or_init(|| Mutex::new(HashMap::new()));
+            let mut cache = cache
+                .lock()
+                .expect("missing ui text cache lock should succeed");
+            *cache
+                .entry(key.to_owned())
+                .or_insert_with(|| Box::leak(format!("[missing ui copy: {key}]").into_boxed_str()))
+        })
 }
 
 pub fn ui_copy_optional(key: &str) -> Option<&'static str> {

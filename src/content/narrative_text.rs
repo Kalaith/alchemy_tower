@@ -20,6 +20,9 @@ pub struct NarrativeMilestones {
     pub first_true_brew: NarrativeMilestone,
     pub first_town_relief: NarrativeMilestone,
     pub containment_stable: NarrativeMilestone,
+    pub containment_started: NarrativeMilestone,
+    pub first_rune_imbuing: NarrativeMilestone,
+    pub observatory_ending: NarrativeMilestone,
 }
 
 #[derive(Debug, Deserialize, Clone)]

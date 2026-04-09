@@ -1,3 +1,4 @@
+use crate::content::ui_copy;
 use crate::data::{GameData, RecipeDefinition, StationDefinition};
 
 use super::fallback::{fallback_traits, infer_trait_output, salvage_quality};
@@ -164,7 +165,7 @@ pub fn resolve_brew<'a>(
         room_bonus_applied: false,
         minimum_quality_met: false,
         minimum_elements_met: false,
-        failure_reasons: vec!["No known base recipe.".to_owned()],
+        failure_reasons: vec![ui_copy("brew_failure_no_recipe").to_owned()],
         morph_hint: None,
     }
 }
@@ -182,31 +183,31 @@ fn brew_failure_reasons(
     let mut reasons = Vec::new();
 
     if heat < recipe.required_heat {
-        reasons.push("Heat too low.".to_owned());
+        reasons.push(ui_copy("brew_failure_heat_low").to_owned());
     } else if heat > recipe.required_heat {
-        reasons.push("Heat too high.".to_owned());
+        reasons.push(ui_copy("brew_failure_heat_high").to_owned());
     }
 
     if stirs < recipe.required_stirs {
-        reasons.push("Too few stirs.".to_owned());
+        reasons.push(ui_copy("brew_failure_stirs_low").to_owned());
     } else if stirs > recipe.required_stirs {
-        reasons.push("Too many stirs.".to_owned());
+        reasons.push(ui_copy("brew_failure_stirs_high").to_owned());
     }
 
     if !timing_match && !recipe.required_timing.is_empty() {
-        reasons.push("Timing is off.".to_owned());
+        reasons.push(ui_copy("brew_failure_timing").to_owned());
     }
     if !sequence_match && !recipe.required_sequence.is_empty() {
-        reasons.push("Wrong ingredient sequence.".to_owned());
+        reasons.push(ui_copy("brew_failure_sequence").to_owned());
     }
     if !catalyst_match && !recipe.catalyst_tag.is_empty() {
-        reasons.push("Catalyst mismatch.".to_owned());
+        reasons.push(ui_copy("brew_failure_catalyst").to_owned());
     }
     if !minimum_elements_met && recipe.minimum_elements.total() > 0 {
-        reasons.push("Element threshold missed.".to_owned());
+        reasons.push(ui_copy("brew_failure_elements").to_owned());
     }
     if !minimum_quality_met && recipe.minimum_quality > 0 {
-        reasons.push("Quality too low to stabilize the recipe.".to_owned());
+        reasons.push(ui_copy("brew_failure_quality").to_owned());
     }
 
     reasons

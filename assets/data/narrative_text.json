@@ -29,6 +29,21 @@
       "id": "containment_stable",
       "title": "Habitats Stabilized",
       "text": "Lyra tuned the habitat wards. Gentle collection from tower creatures can now support regular alchemical work."
+    },
+    "containment_started": {
+      "id": "containment_started",
+      "title": "Containment Floor",
+      "text": "The creature habitats are stable enough to hold gentle tower specimens. Managed collection can begin."
+    },
+    "first_rune_imbuing": {
+      "id": "first_rune_imbuing",
+      "title": "First Rune Imbuing",
+      "text": "The workshop accepted a finished potion and changed its behavior after the fact. The tower's later methods were more modular than the entry lab ever suggested."
+    },
+    "observatory_ending": {
+      "id": "observatory_ending",
+      "title": "Observatory Ending",
+      "text": "At the tower's highest lens, the missing wizard's final path resolved into a choice to leave the tower alive rather than master it forever."
     }
   },
   "statuses": {

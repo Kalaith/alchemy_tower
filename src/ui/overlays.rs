@@ -56,6 +56,17 @@ fn draw_overlay_tab(rect: Rect, label: &str, selected: bool) {
     );
 }
 
+fn archive_tab_label(tab: &str) -> &'static str {
+    ui_copy(match tab {
+        "timeline" => "overlay_archive_tab_timeline",
+        "experiments" => "overlay_archive_tab_experiments",
+        "mastery" => "overlay_archive_tab_mastery",
+        "morphs" => "overlay_archive_tab_morphs",
+        "disassembly" => "overlay_archive_tab_disassembly",
+        _ => "overlay_archive_tab_duplication",
+    })
+}
+
 impl GameplayState {
     pub(super) fn draw_shop_overlay(&self, data: &GameData) {
         let Some(station) = self.nearby_station(data) else {
@@ -77,21 +88,21 @@ impl GameplayState {
         );
         draw_overlay_tab(
             Rect::new(x + 20.0, y + 88.0, 112.0, 30.0),
-            "Buy",
+            ui_copy("overlay_shop_buy_tab"),
             self.ui.shop_buy_tab,
         );
         draw_overlay_tab(
             Rect::new(x + 140.0, y + 88.0, 112.0, 30.0),
-            "Sell",
+            ui_copy("overlay_shop_sell_tab"),
             !self.ui.shop_buy_tab,
         );
         draw_overlay_section_title(
             x + 20.0,
             y + 148.0,
             if self.ui.shop_buy_tab {
-                "Stock"
+                ui_copy("overlay_shop_stock")
             } else {
-                "Sellable Stock"
+                ui_copy("overlay_shop_sellable_stock")
             },
             Some(&ui_format(
                 "overlay_sort_mode",
@@ -140,9 +151,9 @@ impl GameplayState {
         }
         if entries.is_empty() {
             let empty_text = if self.ui.shop_buy_tab {
-                self.unavailable_state_text("Nothing is stocked right now.")
+                self.unavailable_state_text(ui_copy("overlay_shop_empty_buy"))
             } else {
-                self.unavailable_state_text("Nothing safe to sell right now.")
+                self.unavailable_state_text(ui_copy("overlay_shop_empty_sell"))
             };
             draw_state_banner(x + 32.0, row_y - 16.0, w - 64.0, &empty_text, false);
         } else {
@@ -192,12 +203,14 @@ impl GameplayState {
             y,
             w,
             h,
-            &format!(
-                "{} switch tab  |  {} select  |  V sort  |  {} confirm  |  {} close",
-                input_bindings().shop.switch_tab,
-                input_bindings().navigation.select,
-                input_bindings().global.confirm,
-                input_bindings().global.cancel,
+            &ui_format(
+                "overlay_shop_footer",
+                &[
+                    ("switch", &input_bindings().shop.switch_tab),
+                    ("select", &input_bindings().navigation.select),
+                    ("confirm", &input_bindings().global.confirm),
+                    ("close", &input_bindings().global.cancel),
+                ],
             ),
         );
     }
@@ -214,7 +227,7 @@ impl GameplayState {
         draw_panel(x, y, w, h, &station.name);
         draw_overlay_subtitle(x, y, &ui_text().overlays.rune_subtitle);
         let recipes = self.available_rune_recipes(data, station);
-        draw_overlay_section_title(x + 20.0, y + 124.0, "Rune Drafts", None);
+        draw_overlay_section_title(x + 20.0, y + 124.0, ui_copy("overlay_rune_drafts"), None);
         draw_overlay_section_box(x + 20.0, y + 138.0, w - 40.0, h - 200.0);
         let mut row_y = y + 172.0;
         if recipes.is_empty() {
@@ -222,7 +235,7 @@ impl GameplayState {
                 x + 32.0,
                 row_y - 16.0,
                 w - 64.0,
-                &self.unavailable_state_text("Bring a potion and a matching rune here."),
+                &self.unavailable_state_text(ui_copy("overlay_rune_empty")),
                 false,
             );
         } else {
@@ -254,12 +267,10 @@ impl GameplayState {
             y,
             w,
             h,
-            &format!(
-                "{} select  |  {} confirm  |  {} close",
-                input_bindings().navigation.select,
-                input_bindings().global.confirm,
-                input_bindings().global.cancel,
-            ),
+            &ui_copy("overlay_rune_footer")
+                .replace("{select}", &input_bindings().navigation.select)
+                .replace("{confirm}", &input_bindings().global.confirm)
+                .replace("{close}", &input_bindings().global.cancel),
         );
     }
 
@@ -269,16 +280,16 @@ impl GameplayState {
         let y = 70.0;
         let w = screen_width() - 300.0;
         let h = screen_height() - 140.0;
-        draw_panel(x, y, w, h, "Archives");
+        draw_panel(x, y, w, h, ui_copy("overlay_archive_title"));
         draw_overlay_subtitle(x, y, &ui_text().overlays.archive_subtitle);
         self.draw_archive_tabs(x, y, w);
 
         match ARCHIVE_TABS[self.ui.archive_tab] {
-            "Timeline" => self.draw_archive_timeline_section(x, y, w, h),
-            "Experiments" => self.draw_archive_experiments_section(data, x, y, w, h),
-            "Mastery" => self.draw_archive_mastery_section(data, x, y, w, h),
-            "Morphs" => self.draw_archive_morphs_section(data, x, y, w, h),
-            "Disassembly" => self.draw_archive_disassembly_section(data, x, y, w, h),
+            "timeline" => self.draw_archive_timeline_section(x, y, w, h),
+            "experiments" => self.draw_archive_experiments_section(data, x, y, w, h),
+            "mastery" => self.draw_archive_mastery_section(data, x, y, w, h),
+            "morphs" => self.draw_archive_morphs_section(data, x, y, w, h),
+            "disassembly" => self.draw_archive_disassembly_section(data, x, y, w, h),
             _ => self.draw_archive_duplication_section(data, x, y, w, h),
         }
         draw_overlay_footer(x, y, w, h, &self.archive_footer_text());
@@ -288,7 +299,7 @@ impl GameplayState {
         for (index, tab) in ARCHIVE_TABS.iter().enumerate() {
             let rect = Rect::new(x + 20.0 + index as f32 * 148.0, y + 54.0, 136.0, 30.0);
             let selected = index == self.ui.archive_tab;
-            draw_overlay_tab(rect, tab, selected);
+            draw_overlay_tab(rect, archive_tab_label(tab), selected);
             if rect.x + rect.w > x + w - 20.0 {
                 break;
             }
@@ -297,7 +308,7 @@ impl GameplayState {
 
     fn draw_archive_timeline_section(&self, x: f32, y: f32, w: f32, h: f32) {
         draw_text(
-            "Recovered Milestones",
+            ui_copy("overlay_archive_section_timeline"),
             x + 20.0,
             y + 122.0,
             26.0,
@@ -390,7 +401,7 @@ impl GameplayState {
                 x + 20.0,
                 y + 144.0,
                 w - 40.0,
-                &self.unavailable_state_text("No experiments logged yet."),
+                &self.unavailable_state_text(ui_copy("overlay_archive_empty_experiments")),
                 false,
             );
             return;
@@ -419,7 +430,7 @@ impl GameplayState {
             let selected = index == selected_index;
             let title = data.item_name(&entry.output_item_id);
             let detail = if entry.recipe_id.is_empty() {
-                "Unknown recipe".to_owned()
+                ui_copy("overlay_archive_unknown_recipe").to_owned()
             } else {
                 data.recipes
                     .iter()
@@ -436,11 +447,20 @@ impl GameplayState {
                 true,
                 title,
                 &detail,
-                &format!(
-                    "day {}  {} {}",
-                    entry.day_index + 1,
-                    entry.quality_band,
-                    if entry.stable { "stable" } else { "unstable" }
+                &ui_format(
+                    "overlay_archive_entry_meta",
+                    &[
+                        ("day", &(entry.day_index + 1).to_string()),
+                        ("band", &entry.quality_band),
+                        (
+                            "state",
+                            ui_copy(if entry.stable {
+                                "overlay_archive_state_stable"
+                            } else {
+                                "overlay_archive_state_unstable"
+                            }),
+                        ),
+                    ],
                 ),
             );
             list_y += 64.0;
@@ -465,9 +485,12 @@ impl GameplayState {
             dark::TEXT_BRIGHT,
         );
         draw_text(
-            &format!(
-                "Quality: {} ({})",
-                selected_entry.quality_score, selected_entry.quality_band
+            &ui_format(
+                "overlay_archive_quality",
+                &[
+                    ("quality", &selected_entry.quality_score.to_string()),
+                    ("band", &selected_entry.quality_band),
+                ],
             ),
             x + 410.0,
             y + 184.0,
@@ -475,13 +498,16 @@ impl GameplayState {
             dark::TEXT_DIM,
         );
         draw_text(
-            &format!(
-                "Result: {}",
-                if selected_entry.stable {
-                    "stable synthesis"
-                } else {
-                    "unstable salvage"
-                }
+            &ui_format(
+                "overlay_archive_result",
+                &[(
+                    "result",
+                    ui_copy(if selected_entry.stable {
+                        "overlay_archive_result_stable"
+                    } else {
+                        "overlay_archive_result_unstable"
+                    }),
+                )],
             ),
             x + 410.0,
             y + 208.0,
@@ -489,13 +515,16 @@ impl GameplayState {
             dark::TEXT_DIM,
         );
         draw_text(
-            &format!(
-                "Catalyst: {}",
-                if selected_entry.catalyst_item_id.is_empty() {
-                    "none".to_owned()
-                } else {
-                    data.item_name(&selected_entry.catalyst_item_id).to_owned()
-                }
+            &ui_format(
+                "overlay_archive_catalyst",
+                &[(
+                    "item",
+                    if selected_entry.catalyst_item_id.is_empty() {
+                        ui_copy("overlay_archive_none")
+                    } else {
+                        data.item_name(&selected_entry.catalyst_item_id)
+                    },
+                )],
             ),
             x + 410.0,
             y + 232.0,
@@ -503,14 +532,16 @@ impl GameplayState {
             dark::TEXT_DIM,
         );
         draw_text(
-            &format!(
-                "Morph: {}",
-                if selected_entry.morph_output_item_id.is_empty() {
-                    "none".to_owned()
-                } else {
-                    data.item_name(&selected_entry.morph_output_item_id)
-                        .to_owned()
-                }
+            &ui_format(
+                "overlay_archive_morph",
+                &[(
+                    "item",
+                    if selected_entry.morph_output_item_id.is_empty() {
+                        ui_copy("overlay_archive_none")
+                    } else {
+                        data.item_name(&selected_entry.morph_output_item_id)
+                    },
+                )],
             ),
             x + 410.0,
             y + 256.0,
@@ -523,9 +554,12 @@ impl GameplayState {
             .find(|recipe| recipe.id == selected_entry.recipe_id)
         {
             draw_text(
-                &format!(
-                    "Mastery now: {}",
-                    crate::alchemy::mastery_stage(self.recipe_mastery_brews(&recipe.id))
+                &ui_format(
+                    "overlay_archive_mastery_now",
+                    &[(
+                        "stage",
+                        crate::alchemy::mastery_stage(self.recipe_mastery_brews(&recipe.id)),
+                    )],
                 ),
                 x + 410.0,
                 y + 282.0,
@@ -533,7 +567,10 @@ impl GameplayState {
                 dark::TEXT_DIM,
             );
             draw_text(
-                &format!("Memory: {}", self.recipe_memory_meta(data, recipe)),
+                &ui_format(
+                    "overlay_archive_memory",
+                    &[("text", &self.recipe_memory_meta(data, recipe))],
+                ),
                 x + 410.0,
                 y + 306.0,
                 18.0,
@@ -565,7 +602,7 @@ impl GameplayState {
                 x + 20.0,
                 y + 144.0,
                 w - 40.0,
-                &self.unavailable_state_text("No mastered formulas recorded yet."),
+                &self.unavailable_state_text(ui_copy("overlay_archive_empty_mastery")),
                 false,
             );
             return;
@@ -604,10 +641,12 @@ impl GameplayState {
         );
         draw_text(&recipe.name, x + 410.0, y + 156.0, 24.0, dark::TEXT_BRIGHT);
         draw_text(
-            &format!(
-                "Stage: {}  Successful brews: {}",
-                crate::alchemy::mastery_stage(mastery),
-                mastery
+            &ui_format(
+                "overlay_archive_mastery_stage",
+                &[
+                    ("stage", crate::alchemy::mastery_stage(mastery)),
+                    ("count", &mastery.to_string()),
+                ],
             ),
             x + 410.0,
             y + 184.0,
@@ -620,9 +659,12 @@ impl GameplayState {
             .get(&recipe.output_item_id)
         {
             draw_text(
-                &format!(
-                    "Best result: {} ({})",
-                    profile.best_quality_score, profile.best_quality_band
+                &ui_format(
+                    "overlay_archive_best_result",
+                    &[
+                        ("quality", &profile.best_quality_score.to_string()),
+                        ("band", &profile.best_quality_band),
+                    ],
                 ),
                 x + 410.0,
                 y + 210.0,
@@ -630,13 +672,16 @@ impl GameplayState {
                 dark::TEXT_DIM,
             );
             draw_text(
-                &format!(
-                    "Traits carried: {}",
-                    if profile.inherited_traits.is_empty() {
-                        "none".to_owned()
-                    } else {
-                        profile.inherited_traits.join(", ")
-                    }
+                &ui_format(
+                    "overlay_archive_traits_carried",
+                    &[(
+                        "traits",
+                        &if profile.inherited_traits.is_empty() {
+                            ui_copy("overlay_archive_none").to_owned()
+                        } else {
+                            profile.inherited_traits.join(", ")
+                        },
+                    )],
                 ),
                 x + 410.0,
                 y + 236.0,
@@ -652,10 +697,12 @@ impl GameplayState {
             .find(|entry| entry.recipe_id == recipe.id)
         {
             draw_text(
-                &format!(
-                    "Last logged attempt: day {} as {}",
-                    entry.day_index + 1,
-                    entry.quality_band
+                &ui_format(
+                    "overlay_archive_last_attempt",
+                    &[
+                        ("day", &(entry.day_index + 1).to_string()),
+                        ("band", &entry.quality_band),
+                    ],
                 ),
                 x + 410.0,
                 y + 262.0,
@@ -688,7 +735,7 @@ impl GameplayState {
                 x + 20.0,
                 y + 144.0,
                 w - 40.0,
-                &self.unavailable_state_text("No branching formulas recovered yet."),
+                &self.unavailable_state_text(ui_copy("overlay_archive_empty_morphs")),
                 false,
             );
             return;
@@ -706,7 +753,10 @@ impl GameplayState {
                 true,
                 &recipe.name,
                 &recipe.description,
-                &format!("{} branch(es)", recipe.morph_targets.len()),
+                &ui_format(
+                    "overlay_archive_branches",
+                    &[("count", &recipe.morph_targets.len().to_string())],
+                ),
             );
             list_y += 64.0;
         }
@@ -725,10 +775,12 @@ impl GameplayState {
             })
         {
             draw_text(
-                &format!(
-                    "Last morph logged: day {} -> {}",
-                    entry.day_index + 1,
-                    data.item_name(&entry.morph_output_item_id)
+                &ui_format(
+                    "overlay_archive_last_morph",
+                    &[
+                        ("day", &(entry.day_index + 1).to_string()),
+                        ("item", data.item_name(&entry.morph_output_item_id)),
+                    ],
                 ),
                 x + 410.0,
                 y + 146.0,
@@ -746,7 +798,11 @@ impl GameplayState {
                 &format!(
                     "{}{}",
                     data.item_name(&morph.output_item_id),
-                    if discovered { " [logged]" } else { "" }
+                    if discovered {
+                        ui_copy("overlay_archive_logged_suffix")
+                    } else {
+                        ""
+                    }
                 ),
                 x + 410.0,
                 detail_y,
@@ -768,7 +824,7 @@ impl GameplayState {
                     &[("value", &morph.required_stirs.to_string())],
                 ),
                 if morph.catalyst_tag.is_empty() {
-                    ui_format("overlay_condition_catalyst", &[("value", "any")])
+                    ui_format("overlay_condition_catalyst", &[("value", ui_copy("overlay_any"))])
                 } else {
                     ui_format(
                         "overlay_condition_catalyst",
@@ -776,7 +832,7 @@ impl GameplayState {
                     )
                 },
                 if morph.required_timing.is_empty() {
-                    ui_format("overlay_condition_timing", &[("value", "any")])
+                    ui_format("overlay_condition_timing", &[("value", ui_copy("overlay_any"))])
                 } else {
                     ui_format(
                         "overlay_condition_timing",
@@ -812,7 +868,7 @@ impl GameplayState {
                 x + 20.0,
                 y + 144.0,
                 w - 40.0,
-                &self.unavailable_state_text("Bring a brewed item from a logged recipe."),
+                &self.unavailable_state_text(ui_copy("overlay_archive_empty_disassembly")),
                 false,
             );
             return;
@@ -830,12 +886,17 @@ impl GameplayState {
                 true,
                 data.item_name(&recipe.output_item_id),
                 &recipe.name,
-                &format!(
-                    "owned {}",
-                    self.inventory
-                        .get(&recipe.output_item_id)
-                        .copied()
-                        .unwrap_or_default()
+                &ui_format(
+                    "overlay_archive_owned",
+                    &[(
+                        "count",
+                        &self
+                            .inventory
+                            .get(&recipe.output_item_id)
+                            .copied()
+                            .unwrap_or_default()
+                            .to_string(),
+                    )],
                 ),
             );
             list_y += 64.0;
@@ -852,10 +913,12 @@ impl GameplayState {
         let mut detail_y = y + 156.0;
         for ingredient in &recipe.ingredients {
             draw_text(
-                &format!(
-                    "{} x{}",
-                    data.item_name(&ingredient.item_id),
-                    ingredient.amount
+                &ui_format(
+                    "overlay_input_amount",
+                    &[
+                        ("item", data.item_name(&ingredient.item_id)),
+                        ("amount", &ingredient.amount.to_string()),
+                    ],
                 ),
                 x + 410.0,
                 detail_y,
@@ -865,7 +928,7 @@ impl GameplayState {
             detail_y += 24.0;
         }
         draw_wrapped_text(
-            "Enter confirm will break one brewed item back into its authored recipe inputs.",
+            ui_copy("overlay_archive_disassembly_help"),
             x + 410.0,
             detail_y + 18.0,
             w - 430.0,
@@ -889,9 +952,7 @@ impl GameplayState {
                 x + 20.0,
                 y + 144.0,
                 w - 40.0,
-                &self.unavailable_state_text(
-                    "Bring a potion, ingredient, or catalyst plus a starlight shard.",
-                ),
+                &self.unavailable_state_text(ui_copy("overlay_archive_empty_duplication")),
                 false,
             );
             return;
@@ -912,10 +973,15 @@ impl GameplayState {
                 self.can_duplicate_item(data, item_id),
                 data.item_name(item_id),
                 &self.inventory_reference_summary(data, item_id),
-                &format!(
-                    "owned {}  cost {}c",
-                    self.inventory.get(item_id).copied().unwrap_or_default(),
-                    item.base_value + u32::from(item.rarity) * 10
+                &ui_format(
+                    "overlay_archive_owned_cost",
+                    &[
+                        (
+                            "count",
+                            &self.inventory.get(item_id).copied().unwrap_or_default().to_string(),
+                        ),
+                        ("cost", &(item.base_value + u32::from(item.rarity) * 10).to_string()),
+                    ],
                 ),
             );
             list_y += 64.0;
@@ -953,12 +1019,15 @@ impl GameplayState {
             dark::TEXT_DIM,
         );
         draw_text(
-            &format!(
-                "Catalyst: {}",
-                self.duplication_catalyst_item_id(data)
-                    .as_deref()
-                    .map(|id| data.item_name(id))
-                    .unwrap_or("starlight shard required")
+            &ui_format(
+                "overlay_archive_duplication_catalyst",
+                &[(
+                    "item",
+                    self.duplication_catalyst_item_id(data)
+                        .as_deref()
+                        .map(|id| data.item_name(id))
+                        .unwrap_or(ui_copy("overlay_archive_duplication_catalyst_required")),
+                )],
             ),
             x + 410.0,
             y + 210.0,
@@ -966,7 +1035,7 @@ impl GameplayState {
             dark::TEXT_DIM,
         );
         draw_wrapped_text(
-            "Enter confirm will consume one starlight catalyst and the listed coin cost to create one additional copy.",
+            ui_copy("overlay_archive_duplication_help"),
             x + 410.0,
             y + 244.0,
             w - 430.0,
@@ -978,17 +1047,11 @@ impl GameplayState {
 
     fn archive_footer_text(&self) -> String {
         match ARCHIVE_TABS[self.ui.archive_tab] {
-            "Timeline" => "Left/Right section  |  Enter reconstruct  |  Esc close".to_owned(),
-            "Disassembly" | "Duplication" => {
-                "Left/Right section  |  Up/Down select  |  Enter confirm  |  Esc close".to_owned()
-            }
-            "Experiments" => {
-                "Left/Right section  |  Up/Down browse  |  F filter  |  Esc close".to_owned()
-            }
-            "Mastery" | "Morphs" => {
-                "Left/Right section  |  Up/Down browse  |  Esc close".to_owned()
-            }
-            _ => "Left/Right section  |  Esc close".to_owned(),
+            "timeline" => ui_copy("overlay_archive_footer_timeline").to_owned(),
+            "disassembly" | "duplication" => ui_copy("overlay_archive_footer_confirm").to_owned(),
+            "experiments" => ui_copy("overlay_archive_footer_filter").to_owned(),
+            "mastery" | "morphs" => ui_copy("overlay_archive_footer_browse").to_owned(),
+            _ => ui_copy("overlay_archive_footer_close").to_owned(),
         }
     }
 
@@ -1004,7 +1067,7 @@ impl GameplayState {
         let y = 110.0;
         let w = screen_width() - 340.0;
         let h = screen_height() - 220.0;
-        draw_panel(x, y, w, h, "Observatory");
+        draw_panel(x, y, w, h, ui_copy("overlay_ending_title"));
         draw_wrapped_text(
             &narrative_text().overlays.observatory_epilogue,
             x + 24.0,
@@ -1024,7 +1087,7 @@ impl GameplayState {
     }
 
     pub(super) fn draw_dialogue_overlay(&self, data: &GameData) {
-        let Some(npc_id) = &self.ui.current_npc_id else {
+        let Some(npc_id) = self.dialogue_npc_id() else {
             return;
         };
         let Some(npc) = data.npc(npc_id) else {
@@ -1102,7 +1165,7 @@ impl GameplayState {
         let y = 72.0;
         let w = screen_width() - 240.0;
         let h = screen_height() - 144.0;
-        draw_panel(x, y, w, h, "Field Journal");
+        draw_panel(x, y, w, h, ui_copy("overlay_journal_title"));
         let close_rect = self.journal_close_rect();
         let close_hovered = close_rect.contains(mouse_position().into());
         draw_rectangle(
@@ -1125,17 +1188,19 @@ impl GameplayState {
             if close_hovered { WHITE } else { dark::ACCENT },
         );
         draw_text(
-            "Close",
+            ui_copy("overlay_close"),
             close_rect.x + 18.0,
             close_rect.y + 19.0,
             18.0,
             dark::TEXT_BRIGHT,
         );
         draw_text(
-            &format!(
-                "Current Conditions: {} / {}",
-                self.current_season(),
-                self.current_weather()
+            &ui_format(
+                "overlay_current_conditions",
+                &[
+                    ("season", self.current_season()),
+                    ("weather", self.current_weather()),
+                ],
             ),
             x + 20.0,
             y + 50.0,
@@ -1191,15 +1256,19 @@ impl GameplayState {
             }
         }
 
-        match tabs.get(self.ui.journal_tab).copied().unwrap_or("Routes") {
-            "Routes" => self.draw_journal_routes_tab(data, x, y, w, h),
-            "Notes" => self.draw_journal_notes_tab(data, x, y, w, h),
-            "Brews" => self.draw_journal_brews_tab(data, x, y, w, h),
-            "Greenhouse" => self.draw_journal_greenhouse_tab(data, x, y, w, h),
+        let greenhouse_unlocked = self
+            .progression
+            .completed_quests
+            .contains("entry_to_greenhouse");
+        match self.ui.journal_tab {
+            0 => self.draw_journal_routes_tab(data, x, y, w, h),
+            1 => self.draw_journal_notes_tab(data, x, y, w, h),
+            2 => self.draw_journal_brews_tab(data, x, y, w, h),
+            3 if greenhouse_unlocked => self.draw_journal_greenhouse_tab(data, x, y, w, h),
             _ => self.draw_journal_rapport_tab(data, x, y, w, h),
         }
         draw_text(
-            "Click tabs  |  Left/Right switch tab  |  Esc or J to close",
+            ui_copy("overlay_journal_footer"),
             x + 20.0,
             y + h - 20.0,
             18.0,
@@ -1376,7 +1445,7 @@ impl GameplayState {
         let locked_warps = self.locked_warps(data);
         if locked_warps.is_empty() {
             draw_text(
-                "All current tower routes are restored.",
+                ui_copy("overlay_routes_all_restored"),
                 x + 34.0,
                 y + h - 108.0,
                 20.0,
@@ -1651,7 +1720,7 @@ impl GameplayState {
 
     fn draw_journal_greenhouse_tab(&self, data: &GameData, x: f32, y: f32, _w: f32, h: f32) {
         draw_text(
-            "Greenhouse Beds",
+            ui_copy("overlay_greenhouse_beds"),
             x + 20.0,
             y + 136.0,
             26.0,
@@ -1671,7 +1740,7 @@ impl GameplayState {
                 .get(&station.id)
                 .map(|state| {
                     if state.planted_item_id.is_empty() {
-                        "empty".to_owned()
+                        ui_copy("overlay_greenhouse_none").to_owned()
                     } else if state.ready {
                         if state.mutation_note.is_empty() {
                             ui_format(
@@ -1679,10 +1748,12 @@ impl GameplayState {
                                 &[("item", data.item_name(&state.planted_item_id))],
                             )
                         } else {
-                            format!(
-                                "ready: {} ({})",
-                                data.item_name(&state.planted_item_id),
-                                state.mutation_note
+                            ui_format(
+                                "overlay_greenhouse_ready_meta",
+                                &[
+                                    ("item", data.item_name(&state.planted_item_id)),
+                                    ("mutation", &state.mutation_note),
+                                ],
                             )
                         }
                     } else {
@@ -1707,7 +1778,7 @@ impl GameplayState {
                         }
                     }
                 })
-                .unwrap_or("empty".to_owned());
+                .unwrap_or_else(|| ui_copy("overlay_greenhouse_none").to_owned());
             draw_text(&station.name, x + 20.0, bed_y, 22.0, dark::TEXT_BRIGHT);
             bed_y += 22.0;
             draw_text(&summary, x + 20.0, bed_y, 18.0, dark::TEXT_DIM);
@@ -1718,7 +1789,7 @@ impl GameplayState {
         }
         if !any_planter {
             draw_text(
-                "No greenhouse beds are available yet.",
+                ui_copy("overlay_greenhouse_empty"),
                 x + 20.0,
                 bed_y,
                 20.0,
@@ -1744,15 +1815,20 @@ impl GameplayState {
                 .copied()
                 .unwrap_or_default();
             draw_text(
-                &format!(
-                    "{} [{}] rapport {}",
-                    npc.name,
-                    if npc.role.is_empty() {
-                        "townsfolk"
-                    } else {
-                        npc.role.as_str()
-                    },
-                    rapport
+                &ui_format(
+                    "overlay_rapport_line",
+                    &[
+                        ("name", &npc.name),
+                        (
+                            "role",
+                            if npc.role.is_empty() {
+                                ui_copy("overlay_rapport_empty")
+                            } else {
+                                npc.role.as_str()
+                            },
+                        ),
+                        ("value", &rapport.to_string()),
+                    ],
                 ),
                 x + 20.0,
                 rapport_y,
@@ -1804,10 +1880,10 @@ impl GameplayState {
         let y = 90.0;
         let w = screen_width() - 360.0;
         let h = screen_height() - 180.0;
-        draw_panel(x, y, w, h, "Town Requests");
+        draw_panel(x, y, w, h, ui_copy("overlay_quest_board_title"));
         draw_overlay_subtitle(x, y, &ui_text().overlays.quest_board_subtitle);
         let available = self.available_board_quests(data);
-        draw_overlay_section_title(x + 20.0, y + 122.0, "Available Requests", None);
+        draw_overlay_section_title(x + 20.0, y + 122.0, ui_copy("overlay_quest_available"), None);
         draw_overlay_section_box(x + 20.0, y + 136.0, w - 40.0, 232.0);
         let mut row_y = y + 168.0;
         if available.is_empty() {
@@ -1815,7 +1891,7 @@ impl GameplayState {
                 x + 32.0,
                 row_y - 16.0,
                 w - 64.0,
-                &self.unavailable_state_text("No new board requests."),
+                &self.unavailable_state_text(ui_copy("overlay_quest_none_available")),
                 false,
             );
         } else {
@@ -1842,7 +1918,7 @@ impl GameplayState {
             }
         }
         draw_text(
-            "Locked Requests",
+            ui_copy("overlay_quest_locked"),
             x + 20.0,
             y + h - 200.0,
             22.0,
@@ -1858,7 +1934,7 @@ impl GameplayState {
             .filter(|quest| !self.quest_is_available(quest))
             .collect::<Vec<_>>();
         let locked_text = if locked.is_empty() {
-            "None".to_owned()
+            ui_copy("overlay_none").to_owned()
         } else {
             locked
                 .iter()
@@ -1882,7 +1958,7 @@ impl GameplayState {
             dark::TEXT_DIM,
         );
         draw_text(
-            "Active Orders",
+            ui_copy("overlay_quest_active"),
             x + 20.0,
             y + h - 120.0,
             24.0,
@@ -1897,7 +1973,7 @@ impl GameplayState {
             .map(|quest| quest.title.clone())
             .collect::<Vec<_>>();
         let active_text = if active_orders.is_empty() {
-            "None".to_owned()
+            ui_copy("overlay_none").to_owned()
         } else {
             active_orders.join(", ")
         };
@@ -1915,12 +1991,10 @@ impl GameplayState {
             y,
             w,
             h,
-            &format!(
-                "{} select  |  {} confirm  |  {} close",
-                input_bindings().navigation.select,
-                input_bindings().global.confirm,
-                input_bindings().global.cancel,
-            ),
+            &ui_copy("overlay_rune_footer")
+                .replace("{select}", &input_bindings().navigation.select)
+                .replace("{confirm}", &input_bindings().global.confirm)
+                .replace("{close}", &input_bindings().global.cancel),
         );
     }
 
@@ -1930,7 +2004,7 @@ impl GameplayState {
         let y = 64.0;
         let w = screen_width() - 160.0;
         let h = screen_height() - 128.0;
-        draw_panel(x, y, w, h, "Alchemy");
+        draw_panel(x, y, w, h, ui_copy("overlay_alchemy_title"));
         draw_overlay_subtitle(x, y, &ui_text().overlays.alchemy_subtitle);
         if let Some(texture) = art.effect("brew_bubble_effect") {
             let alpha = 0.55 + ((get_time() as f32 * 2.4).sin() * 0.5 + 0.5) * 0.25;
@@ -1959,7 +2033,7 @@ impl GameplayState {
                 x + 30.0,
                 iy - 12.0,
                 262.0,
-                &self.unavailable_state_text("No ingredients prepared."),
+                &self.unavailable_state_text(ui_copy("overlay_alchemy_empty_materials")),
                 false,
             );
         } else {
@@ -1984,11 +2058,13 @@ impl GameplayState {
                         data,
                         item_id,
                         amount,
-                        &format!(
-                            "ready {}  reserved {}  {}",
-                            ready,
-                            self.reserved_count(item_id),
-                            self.inventory_reference_summary(data, item_id)
+                        &ui_format(
+                            "overlay_materials_meta",
+                            &[
+                                ("ready", &ready.to_string()),
+                                ("reserved", &self.reserved_count(item_id).to_string()),
+                                ("reference", &self.inventory_reference_summary(data, item_id)),
+                            ],
                         ),
                     ),
                 );
@@ -1996,13 +2072,15 @@ impl GameplayState {
             }
         }
 
-        draw_overlay_section_title(x + 20.0, y + 270.0, "Controls", None);
+        draw_overlay_section_title(x + 20.0, y + 270.0, ui_copy("overlay_alchemy_controls"), None);
         draw_overlay_section_box(x + 18.0, y + 284.0, 286.0, 74.0);
         draw_wrapped_text(
-            &format!(
-                "{} browse  {} adjust heat  S stir  T timing",
-                input_bindings().navigation.select,
-                input_bindings().alchemy.heat,
+            &ui_format(
+                "overlay_alchemy_controls_line1",
+                &[
+                    ("browse", &input_bindings().navigation.select),
+                    ("heat", &input_bindings().alchemy.heat),
+                ],
             ),
             x + 32.0,
             y + 304.0,
@@ -2012,10 +2090,12 @@ impl GameplayState {
             dark::TEXT_DIM,
         );
         draw_wrapped_text(
-            &format!(
-                "{} fill slots  {} catalyst  Enter or B brew  Y repeat  V sort  C clear",
-                input_bindings().alchemy.fill_slots,
-                input_bindings().alchemy.catalyst,
+            &ui_format(
+                "overlay_alchemy_controls_line2",
+                &[
+                    ("fill", &input_bindings().alchemy.fill_slots),
+                    ("catalyst", &input_bindings().alchemy.catalyst),
+                ],
             ),
             x + 32.0,
             y + 334.0,
@@ -2028,11 +2108,13 @@ impl GameplayState {
         draw_overlay_section_title(x + 340.0, y + 84.0, ui_copy("overlay_slots"), None);
         draw_overlay_section_box(x + 340.0, y + 98.0, w - 360.0, 134.0);
         draw_text(
-            &format!(
-                "Heat {}  Stirs {}  Timing {}",
-                self.alchemy.heat,
-                self.alchemy.stirs,
-                self.alchemy_timing()
+            &ui_format(
+                "overlay_alchemy_process",
+                &[
+                    ("heat", &self.alchemy.heat.to_string()),
+                    ("stirs", &self.alchemy.stirs.to_string()),
+                    ("timing", self.alchemy_timing()),
+                ],
             ),
             x + 340.0,
             y + 106.0,
@@ -2086,7 +2168,7 @@ impl GameplayState {
                 self.alchemy.slots[slot]
                     .as_deref()
                     .map(|id| data.item_name(id))
-                    .unwrap_or("Empty"),
+                    .unwrap_or(ui_copy("overlay_alchemy_empty_slot")),
                 sx + 12.0,
                 y + 188.0,
                 20.0,
@@ -2138,7 +2220,7 @@ impl GameplayState {
                 .catalyst
                 .as_deref()
                 .map(|id| data.item_name(id))
-                .unwrap_or("Empty"),
+                .unwrap_or(ui_copy("overlay_alchemy_empty_slot")),
             x + 772.0,
             y + 188.0,
             20.0,
@@ -2185,24 +2267,24 @@ impl GameplayState {
             let preview_uncertain = known && self.preview_is_uncertain(&preview);
             let stable_preview = self.brew_is_stable(&preview);
             let preview_title = if preview.recipe.is_none() {
-                "Unknown salvage".to_owned()
+                ui_copy("overlay_alchemy_preview_unknown_salvage").to_owned()
             } else if known && stable_preview && !preview_uncertain {
                 ui_format(
                     "overlay_known_result",
                     &[("item", data.item_name(&preview.output_item_id))],
                 )
             } else if !known {
-                "Unlogged formula".to_owned()
+                ui_copy("overlay_alchemy_preview_unlogged").to_owned()
             } else if preview_uncertain {
-                "Known base, uncertain branch".to_owned()
+                ui_copy("overlay_alchemy_preview_uncertain").to_owned()
             } else if !preview.process_match {
-                "Known formula, unstable process".to_owned()
+                ui_copy("overlay_alchemy_preview_unstable_process").to_owned()
             } else if !preview.minimum_elements_met {
-                "Known formula, element shortfall".to_owned()
+                ui_copy("overlay_alchemy_preview_element_shortfall").to_owned()
             } else if !preview.minimum_quality_met {
-                "Known formula, quality shortfall".to_owned()
+                ui_copy("overlay_alchemy_preview_quality_shortfall").to_owned()
             } else {
-                "Known formula, imperfect setup".to_owned()
+                ui_copy("overlay_alchemy_preview_imperfect").to_owned()
             };
             draw_text(
                 &preview_title,
@@ -2212,10 +2294,12 @@ impl GameplayState {
                 dark::TEXT_BRIGHT,
             );
             draw_text(
-                &format!(
-                    "Output: {} x{}",
-                    data.item_name(&preview.output_item_id),
-                    preview.output_amount
+                &ui_format(
+                    "overlay_alchemy_output",
+                    &[
+                        ("item", data.item_name(&preview.output_item_id)),
+                        ("amount", &preview.output_amount.to_string()),
+                    ],
                 ),
                 x + 360.0,
                 y + 326.0,
@@ -2223,9 +2307,13 @@ impl GameplayState {
                 dark::TEXT,
             );
             draw_text(
-                &format!(
-                    "Quality forecast: {} ({})  Mastery: {}",
-                    preview.quality_score, preview.quality_band, preview.mastery_stage
+                &ui_format(
+                    "overlay_alchemy_quality_forecast",
+                    &[
+                        ("quality", &preview.quality_score.to_string()),
+                        ("band", &preview.quality_band),
+                        ("mastery", &preview.mastery_stage),
+                    ],
                 ),
                 x + 360.0,
                 y + 348.0,
@@ -2233,13 +2321,16 @@ impl GameplayState {
                 dark::TEXT_DIM,
             );
             draw_text(
-                &format!(
-                    "Traits: {}",
-                    if preview.inherited_traits.is_empty() {
-                        "none".to_owned()
-                    } else {
-                        preview.inherited_traits.join(", ")
-                    }
+                &ui_format(
+                    "overlay_alchemy_traits",
+                    &[(
+                        "traits",
+                        &if preview.inherited_traits.is_empty() {
+                            ui_copy("overlay_alchemy_traits_none").to_owned()
+                        } else {
+                            preview.inherited_traits.join(", ")
+                        },
+                    )],
                 ),
                 x + 360.0,
                 y + 370.0,
@@ -2247,17 +2338,20 @@ impl GameplayState {
                 dark::TEXT_DIM,
             );
             draw_text(
-                &format!(
-                    "Read: {}",
-                    if preview.recipe.is_none() {
-                        "fallback salvage"
-                    } else if !known {
-                        "formula matches, but not yet logged"
-                    } else if stable_preview {
-                        "stable result if brewed now"
-                    } else {
-                        "result is known, but the current setup will degrade it"
-                    }
+                &ui_format(
+                    "overlay_alchemy_read",
+                    &[(
+                        "text",
+                        ui_copy(if preview.recipe.is_none() {
+                            "overlay_alchemy_read_fallback"
+                        } else if !known {
+                            "overlay_alchemy_read_unlogged"
+                        } else if stable_preview {
+                            "overlay_alchemy_read_stable"
+                        } else {
+                            "overlay_alchemy_read_degraded"
+                        }),
+                    )],
                 ),
                 x + 360.0,
                 y + 392.0,
@@ -2267,18 +2361,44 @@ impl GameplayState {
             let mut process_y = y + 416.0;
             if let Some(recipe) = preview.recipe {
                 draw_text(
-                    &format!(
-                        "Needs heat {} stir {} timing {}. Process: {} / quality: {} / elements: {}.",
-                        recipe.required_heat,
-                        recipe.required_stirs,
-                        if recipe.required_timing.is_empty() {
-                            "any"
-                        } else {
-                            recipe.required_timing.as_str()
-                        },
-                        if preview.process_match { "stable" } else { "unstable" },
-                        if preview.minimum_quality_met { "pass" } else { "fail" },
-                        if preview.minimum_elements_met { "pass" } else { "fail" }
+                    &ui_format(
+                        "overlay_alchemy_requirements",
+                        &[
+                            ("heat", &recipe.required_heat.to_string()),
+                            ("stirs", &recipe.required_stirs.to_string()),
+                            (
+                                "timing",
+                                if recipe.required_timing.is_empty() {
+                                    ui_copy("overlay_any")
+                                } else {
+                                    recipe.required_timing.as_str()
+                                },
+                            ),
+                            (
+                                "process",
+                                ui_copy(if preview.process_match {
+                                    "overlay_archive_state_stable"
+                                } else {
+                                    "overlay_archive_state_unstable"
+                                }),
+                            ),
+                            (
+                                "quality",
+                                ui_copy(if preview.minimum_quality_met {
+                                    "overlay_pass"
+                                } else {
+                                    "overlay_fail"
+                                }),
+                            ),
+                            (
+                                "elements",
+                                ui_copy(if preview.minimum_elements_met {
+                                    "overlay_pass"
+                                } else {
+                                    "overlay_fail"
+                                }),
+                            ),
+                        ],
                     ),
                     x + 360.0,
                     process_y,
@@ -2287,28 +2407,42 @@ impl GameplayState {
                 );
                 process_y += 22.0;
                 draw_text(
-                    &format!(
-                        "Catalyst: {}  Timing: {}  Sequence: {}  Room bonus: {}",
-                        if preview.catalyst_match {
-                            "match"
-                        } else {
-                            "miss"
-                        },
-                        if preview.timing_match {
-                            "match"
-                        } else {
-                            "miss"
-                        },
-                        if preview.sequence_match {
-                            "match"
-                        } else {
-                            "miss"
-                        },
-                        if preview.room_bonus_applied {
-                            "active"
-                        } else {
-                            "inactive"
-                        }
+                    &ui_format(
+                        "overlay_alchemy_process_flags",
+                        &[
+                            (
+                                "catalyst",
+                                ui_copy(if preview.catalyst_match {
+                                    "overlay_match"
+                                } else {
+                                    "overlay_miss"
+                                }),
+                            ),
+                            (
+                                "timing",
+                                ui_copy(if preview.timing_match {
+                                    "overlay_match"
+                                } else {
+                                    "overlay_miss"
+                                }),
+                            ),
+                            (
+                                "sequence",
+                                ui_copy(if preview.sequence_match {
+                                    "overlay_match"
+                                } else {
+                                    "overlay_miss"
+                                }),
+                            ),
+                            (
+                                "room",
+                                ui_copy(if preview.room_bonus_applied {
+                                    "overlay_active"
+                                } else {
+                                    "overlay_inactive"
+                                }),
+                            ),
+                        ],
                     ),
                     x + 360.0,
                     process_y,
@@ -2318,7 +2452,7 @@ impl GameplayState {
                 process_y += 24.0;
                 if !preview.failure_reasons.is_empty() {
                     draw_text(
-                        "Instability points:",
+                        ui_copy("overlay_alchemy_instability_points"),
                         x + 360.0,
                         process_y,
                         18.0,
@@ -2341,31 +2475,30 @@ impl GameplayState {
                 .recipe
                 .map(|recipe| {
                     if let Some(morph_output_item_id) = &preview.morph_output_item_id {
-                        format!(
-                            "Morph ready: {} will branch into {}.",
-                            recipe.name,
-                            data.item_name(morph_output_item_id)
+                        ui_format(
+                            "overlay_alchemy_morph_ready",
+                            &[
+                                ("recipe", &recipe.name),
+                                ("item", data.item_name(morph_output_item_id)),
+                            ],
                         )
                     } else if let Some(morph_hint) = &preview.morph_hint {
                         morph_hint.clone()
                     } else if known && preview_uncertain {
-                        "Known base recipe, unknown catalyst interaction.".to_owned()
+                        ui_copy("overlay_alchemy_unknown_catalyst_branch").to_owned()
                     } else if known && stable_preview {
                         recipe.description.clone()
                     } else if !preview.process_match {
-                        "The ingredients are right, but the technique will distort the brew."
-                            .to_owned()
+                        ui_copy("overlay_alchemy_distort").to_owned()
                     } else if !preview.minimum_elements_met {
-                        "The base formula is right, but the mixture is missing enough elemental weight."
-                            .to_owned()
+                        ui_copy("overlay_alchemy_missing_elements").to_owned()
                     } else if !preview.minimum_quality_met {
-                        "The formula is correct, but the current quality will not stabilize it."
-                            .to_owned()
+                        ui_copy("overlay_alchemy_missing_quality").to_owned()
                     } else {
-                        "The ingredients resonate, but the formula is not yet proven.".to_owned()
+                        ui_copy("overlay_alchemy_not_proven").to_owned()
                     }
                 })
-                .unwrap_or("These ingredients will collapse into murky sludge.".to_owned());
+                .unwrap_or_else(|| ui_copy("overlay_alchemy_collapse").to_owned());
             let detail_y = if preview.recipe.is_some() && !preview.failure_reasons.is_empty() {
                 process_y + 8.0
             } else {
@@ -2382,7 +2515,7 @@ impl GameplayState {
             );
         }
 
-        draw_overlay_section_title(x + 20.0, y + 392.0, "Known Formulae", None);
+        draw_overlay_section_title(x + 20.0, y + 392.0, ui_copy("overlay_alchemy_known_formulae"), None);
         draw_overlay_section_box(x + 18.0, y + 406.0, 286.0, 142.0);
         let mut ky = y + 424.0;
         let mut any_known = false;
@@ -2423,7 +2556,7 @@ impl GameplayState {
         }
         if !any_known {
             draw_text(
-                "No formulae recorded yet.",
+                ui_copy("overlay_alchemy_no_formulae"),
                 x + 32.0,
                 ky,
                 20.0,

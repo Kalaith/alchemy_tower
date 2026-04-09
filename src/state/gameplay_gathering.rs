@@ -1,6 +1,6 @@
 use super::gameplay_support::rgba;
 use super::*;
-use crate::content::ui_format;
+use crate::content::{ui_copy, ui_format};
 use std::collections::BTreeSet;
 
 impl GameplayState {
@@ -36,7 +36,10 @@ impl GameplayState {
                 .learned
                 .cmp(&left.learned)
                 .then(right.best_quality.cmp(&left.best_quality))
-                .then(data.item_name(&left.item_id).cmp(data.item_name(&right.item_id)))
+                .then(
+                    data.item_name(&left.item_id)
+                        .cmp(data.item_name(&right.item_id)),
+                )
         });
         entries
     }
@@ -196,7 +199,7 @@ impl GameplayState {
             let route_name = data
                 .route(&node.route_id)
                 .map(|route| route.name.as_str())
-                .unwrap_or("field notes");
+                .unwrap_or(ui_copy("gather_fallback_notes"));
             self.push_gather_toast(
                 ui_format("gather_toast_journal", &[("route", route_name)]),
                 Color::from_rgba(176, 226, 255, 255),
@@ -233,13 +236,22 @@ impl GameplayState {
         let route_name = data
             .route(&node.route_id)
             .map(|route| route.name.as_str())
-            .unwrap_or("unknown route");
+            .unwrap_or(ui_copy("gather_fallback_route"));
         if discovery.variant_discovered {
-            ui_format("gather_status_variant", &[("name", &node.name), ("route", route_name)])
+            ui_format(
+                "gather_status_variant",
+                &[("name", &node.name), ("route", route_name)],
+            )
         } else if discovery.improved_quality {
-            ui_format("gather_status_best", &[("name", &node.name), ("route", route_name)])
+            ui_format(
+                "gather_status_best",
+                &[("name", &node.name), ("route", route_name)],
+            )
         } else {
-            ui_format("gather_status_collected", &[("name", &node.name), ("route", route_name)])
+            ui_format(
+                "gather_status_collected",
+                &[("name", &node.name), ("route", route_name)],
+            )
         }
     }
 
@@ -270,4 +282,3 @@ impl GameplayState {
         }
     }
 }
-

@@ -14,10 +14,10 @@ use crate::audio::AudioAssets;
 use crate::content::{input_bindings, narrative_text, ui_copy, ui_format, ui_text};
 use crate::data::{
     AreaDefinition, CraftedItemProfileEntry, EffectDefinition, EffectKind, ExperimentLogEntry,
-    FieldJournalEntry, GameData, HabitatStateEntry, HerbMemoryEntry, InventoryEntry,
-    ItemCategory, JournalMilestoneEntry, NpcDefinition, PlanterStateEntry, PotionMemoryEntry,
-    QuestDefinition, RecipeMasteryEntry, RelationshipEntry, SaveData, StationDefinition,
-    StationKind, WarpDefinition,
+    FieldJournalEntry, GameData, HabitatStateEntry, HerbMemoryEntry, InventoryEntry, ItemCategory,
+    JournalMilestoneEntry, NpcDefinition, PlanterStateEntry, PotionMemoryEntry, QuestDefinition,
+    RecipeMasteryEntry, RelationshipEntry, SaveData, StationDefinition, StationKind,
+    WarpDefinition,
 };
 use crate::save::SaveRepository;
 use crate::state::StateTransition;
@@ -56,12 +56,12 @@ const CAMERA_PADDING: f32 = 160.0;
 const SLOT_COUNT: usize = 3;
 const ALCHEMY_TIMINGS: [&str; 3] = ["steady", "early", "late"];
 const ARCHIVE_TABS: [&str; 6] = [
-    "Timeline",
-    "Experiments",
-    "Mastery",
-    "Morphs",
-    "Disassembly",
-    "Duplication",
+    "timeline",
+    "experiments",
+    "mastery",
+    "morphs",
+    "disassembly",
+    "duplication",
 ];
 
 #[derive(Clone, Debug)]
@@ -131,22 +131,27 @@ struct NpcMotionTracker {
 
 #[derive(Clone, Debug, Default)]
 struct OverlayState {
-    journal_open: bool,
     journal_tab: usize,
-    quest_board_open: bool,
-    shop_open: bool,
     shop_buy_tab: bool,
     shop_index: usize,
-    rune_open: bool,
     rune_index: usize,
-    archive_open: bool,
     archive_tab: usize,
     archive_index: usize,
     archive_experiment_filter: ArchiveExperimentFilter,
-    ending_open: bool,
-    dialogue_open: bool,
-    current_npc_id: Option<String>,
+    current: Option<OverlayScreen>,
     inventory_sort_mode: InventorySortMode,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+enum OverlayScreen {
+    Journal,
+    QuestBoard,
+    Shop,
+    Rune,
+    Archive,
+    Ending,
+    Dialogue(String),
+    Alchemy,
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -165,7 +170,6 @@ enum ArchiveExperimentFilter {
 
 #[derive(Clone, Debug)]
 struct AlchemySession {
-    open: bool,
     index: usize,
     heat: i32,
     stirs: u32,
@@ -186,7 +190,6 @@ struct SavedAlchemySetup {
 impl Default for AlchemySession {
     fn default() -> Self {
         Self {
-            open: false,
             index: 0,
             heat: 2,
             stirs: 0,
@@ -323,6 +326,25 @@ pub struct GameplayState {
 }
 
 impl GameplayState {
+    fn overlay(&self) -> Option<&OverlayScreen> {
+        self.ui.current.as_ref()
+    }
+
+    fn set_overlay(&mut self, overlay: OverlayScreen) {
+        self.ui.current = Some(overlay);
+    }
+
+    fn clear_overlay(&mut self) {
+        self.ui.current = None;
+    }
+
+    fn dialogue_npc_id(&self) -> Option<&str> {
+        match self.overlay() {
+            Some(OverlayScreen::Dialogue(npc_id)) => Some(npc_id.as_str()),
+            _ => None,
+        }
+    }
+
     pub fn new(data: &GameData) -> Self {
         let mut state = Self {
             world: WorldState {
@@ -409,45 +431,18 @@ impl GameplayState {
 
     pub fn update(&mut self, data: &GameData, audio: &AudioAssets) -> Option<StateTransition> {
         if is_key_pressed(KeyCode::Escape) {
-            if self.alchemy.open {
-                self.alchemy.open = false;
-                self.runtime.status_text = ui_text().statuses.closed_alchemy.clone();
-                return None;
-            }
-            if self.ui.shop_open {
-                self.ui.shop_open = false;
-                self.runtime.status_text = ui_text().statuses.closed_shop.clone();
-                return None;
-            }
-            if self.ui.rune_open {
-                self.ui.rune_open = false;
-                self.runtime.status_text = ui_text().statuses.closed_rune.clone();
-                return None;
-            }
-            if self.ui.archive_open {
-                self.ui.archive_open = false;
-                self.runtime.status_text = ui_text().statuses.closed_archive.clone();
-                return None;
-            }
-            if self.ui.ending_open {
-                self.ui.ending_open = false;
-                self.runtime.status_text = ui_format("gameplay_observatory_back", &[]);
-                return None;
-            }
-            if self.ui.dialogue_open {
-                self.ui.dialogue_open = false;
-                self.ui.current_npc_id = None;
-                self.runtime.status_text = ui_format("gameplay_conversation_ended", &[]);
-                return None;
-            }
-            if self.ui.journal_open {
-                self.ui.journal_open = false;
-                self.runtime.status_text = ui_text().statuses.closed_journal.clone();
-                return None;
-            }
-            if self.ui.quest_board_open {
-                self.ui.quest_board_open = false;
-                self.runtime.status_text = ui_text().statuses.closed_quest_board.clone();
+            if let Some(overlay) = self.overlay().cloned() {
+                self.clear_overlay();
+                self.runtime.status_text = match overlay {
+                    OverlayScreen::Alchemy => ui_text().statuses.closed_alchemy.clone(),
+                    OverlayScreen::Shop => ui_text().statuses.closed_shop.clone(),
+                    OverlayScreen::Rune => ui_text().statuses.closed_rune.clone(),
+                    OverlayScreen::Archive => ui_text().statuses.closed_archive.clone(),
+                    OverlayScreen::Ending => ui_format("gameplay_observatory_back", &[]),
+                    OverlayScreen::Dialogue(_) => ui_format("gameplay_conversation_ended", &[]),
+                    OverlayScreen::Journal => ui_text().statuses.closed_journal.clone(),
+                    OverlayScreen::QuestBoard => ui_text().statuses.closed_quest_board.clone(),
+                };
                 return None;
             }
             return Some(StateTransition::Pause);
@@ -466,56 +461,56 @@ impl GameplayState {
         self.update_npc_motion(data, frame_time);
         self.update_tutorial_hints(data, frame_time);
 
-        if self.ui.dialogue_open {
-            self.handle_dialogue_inputs(data);
-        } else if self.ui.shop_open {
-            self.handle_shop_inputs(data);
-        } else if self.ui.rune_open {
-            self.handle_rune_inputs(data);
-        } else if self.ui.archive_open {
-            self.handle_archive_inputs(data);
-        } else if self.ui.ending_open {
-            if is_key_pressed(KeyCode::Escape) || is_key_pressed(KeyCode::Enter) {
-                self.ui.ending_open = false;
-            }
-        } else if self.ui.quest_board_open {
-            self.handle_quest_board_inputs(data);
-        } else if self.ui.journal_open {
-            let journal_tab_count = self.journal_tabs().len();
-            self.ui.journal_tab = self.ui.journal_tab.min(journal_tab_count.saturating_sub(1));
-            if is_mouse_button_pressed(MouseButton::Left) {
-                let mouse = mouse_position().into();
-                if self.journal_close_rect().contains(mouse) {
-                    self.ui.journal_open = false;
-                    self.runtime.status_text = ui_text().statuses.closed_journal.clone();
-                    return None;
-                }
-                for index in 0..journal_tab_count {
-                    if self
-                        .journal_tab_rect(index, journal_tab_count)
-                        .contains(mouse)
-                    {
-                        self.ui.journal_tab = index;
-                        break;
+        if let Some(overlay) = self.overlay().cloned() {
+            match overlay {
+                OverlayScreen::Dialogue(_) => self.handle_dialogue_inputs(data),
+                OverlayScreen::Shop => self.handle_shop_inputs(data),
+                OverlayScreen::Rune => self.handle_rune_inputs(data),
+                OverlayScreen::Archive => self.handle_archive_inputs(data),
+                OverlayScreen::Ending => {
+                    if is_key_pressed(KeyCode::Escape) || is_key_pressed(KeyCode::Enter) {
+                        self.clear_overlay();
                     }
                 }
+                OverlayScreen::QuestBoard => self.handle_quest_board_inputs(data),
+                OverlayScreen::Journal => {
+                    let journal_tab_count = self.journal_tabs().len();
+                    self.ui.journal_tab =
+                        self.ui.journal_tab.min(journal_tab_count.saturating_sub(1));
+                    if is_mouse_button_pressed(MouseButton::Left) {
+                        let mouse = mouse_position().into();
+                        if self.journal_close_rect().contains(mouse) {
+                            self.clear_overlay();
+                            self.runtime.status_text = ui_text().statuses.closed_journal.clone();
+                            return None;
+                        }
+                        for index in 0..journal_tab_count {
+                            if self
+                                .journal_tab_rect(index, journal_tab_count)
+                                .contains(mouse)
+                            {
+                                self.ui.journal_tab = index;
+                                break;
+                            }
+                        }
+                    }
+                    if is_key_pressed(KeyCode::Left) {
+                        self.ui.journal_tab = self.ui.journal_tab.saturating_sub(1);
+                    }
+                    if is_key_pressed(KeyCode::Right) {
+                        self.ui.journal_tab =
+                            (self.ui.journal_tab + 1).min(journal_tab_count.saturating_sub(1));
+                    }
+                    if is_key_pressed(KeyCode::J) {
+                        self.clear_overlay();
+                        self.runtime.status_text = ui_text().statuses.closed_journal.clone();
+                    }
+                }
+                OverlayScreen::Alchemy => self.handle_alchemy_inputs(data, audio),
             }
-            if is_key_pressed(KeyCode::Left) {
-                self.ui.journal_tab = self.ui.journal_tab.saturating_sub(1);
-            }
-            if is_key_pressed(KeyCode::Right) {
-                self.ui.journal_tab =
-                    (self.ui.journal_tab + 1).min(journal_tab_count.saturating_sub(1));
-            }
-            if is_key_pressed(KeyCode::J) {
-                self.ui.journal_open = false;
-                self.runtime.status_text = ui_text().statuses.closed_journal.clone();
-            }
-        } else if self.alchemy.open {
-            self.handle_alchemy_inputs(data, audio);
         } else {
             if is_key_pressed(KeyCode::J) {
-                self.ui.journal_open = true;
+                self.set_overlay(OverlayScreen::Journal);
                 self.ui.journal_tab = 0;
                 self.runtime.status_text = ui_text().statuses.open_journal.clone();
             }
@@ -550,24 +545,16 @@ impl GameplayState {
         self.draw_area(area, offset, data, art);
         self.draw_player(offset, art);
         self.draw_hud(area, data, art);
-        if self.ui.dialogue_open {
-            self.draw_dialogue_overlay(data);
-        } else if self.ui.shop_open {
-            self.draw_shop_overlay(data);
-        } else if self.ui.rune_open {
-            self.draw_rune_overlay(data);
-        } else if self.ui.archive_open {
-            self.draw_archive_overlay(data);
-        } else if self.ui.ending_open {
-            self.draw_ending_overlay();
-        } else if self.ui.quest_board_open {
-            self.draw_quest_board_overlay(data);
-        } else if self.ui.journal_open {
-            self.draw_field_journal(data, art);
-        } else if !self.alchemy.open {
-            self.draw_prompt(area, offset, data);
-        } else {
-            self.draw_alchemy_overlay(data, art);
+        match self.overlay() {
+            Some(OverlayScreen::Dialogue(_)) => self.draw_dialogue_overlay(data),
+            Some(OverlayScreen::Shop) => self.draw_shop_overlay(data),
+            Some(OverlayScreen::Rune) => self.draw_rune_overlay(data),
+            Some(OverlayScreen::Archive) => self.draw_archive_overlay(data),
+            Some(OverlayScreen::Ending) => self.draw_ending_overlay(),
+            Some(OverlayScreen::QuestBoard) => self.draw_quest_board_overlay(data),
+            Some(OverlayScreen::Journal) => self.draw_field_journal(data, art),
+            Some(OverlayScreen::Alchemy) => self.draw_alchemy_overlay(data, art),
+            None => self.draw_prompt(area, offset, data),
         }
         self.draw_sleep_flash_overlay();
     }
@@ -576,13 +563,16 @@ impl GameplayState {
         for effect in &mut self.runtime.active_effects {
             effect.remaining_seconds -= frame_time;
         }
-        self.runtime.active_effects
+        self.runtime
+            .active_effects
             .retain(|effect| effect.remaining_seconds > 0.0);
     }
 
     fn update_gather_feedback(&mut self, frame_time: f32) {
-        self.runtime.gather_pause_seconds = (self.runtime.gather_pause_seconds - frame_time).max(0.0);
-        self.runtime.camera_shake_seconds = (self.runtime.camera_shake_seconds - frame_time).max(0.0);
+        self.runtime.gather_pause_seconds =
+            (self.runtime.gather_pause_seconds - frame_time).max(0.0);
+        self.runtime.camera_shake_seconds =
+            (self.runtime.camera_shake_seconds - frame_time).max(0.0);
         self.runtime.sleep_flash_seconds = (self.runtime.sleep_flash_seconds - frame_time).max(0.0);
         self.runtime.footstep_cooldown_seconds =
             (self.runtime.footstep_cooldown_seconds - frame_time).max(0.0);
@@ -592,12 +582,14 @@ impl GameplayState {
         for toast in &mut self.runtime.gather_toasts {
             toast.remaining_seconds -= frame_time;
         }
-        self.runtime.gather_toasts
+        self.runtime
+            .gather_toasts
             .retain(|toast| toast.remaining_seconds > 0.0);
         for feedback in &mut self.runtime.gather_feedbacks {
             feedback.remaining_seconds -= frame_time;
         }
-        self.runtime.gather_feedbacks
+        self.runtime
+            .gather_feedbacks
             .retain(|feedback| feedback.remaining_seconds > 0.0);
     }
 
@@ -634,7 +626,8 @@ impl GameplayState {
 
     fn update_footstep_audio(&mut self, audio: &AudioAssets, frame_time: f32) {
         if !self.world.player.moving {
-            self.runtime.footstep_cooldown_seconds = self.runtime.footstep_cooldown_seconds.min(0.06);
+            self.runtime.footstep_cooldown_seconds =
+                self.runtime.footstep_cooldown_seconds.min(0.06);
             return;
         }
         let step_interval = (0.34 / self.move_speed_multiplier()).clamp(0.16, 0.34);
@@ -652,7 +645,7 @@ impl GameplayState {
             if station.kind == StationKind::Alchemy
                 && (is_key_pressed(KeyCode::Tab) || is_key_pressed(KeyCode::E))
             {
-                self.alchemy.open = true;
+                self.set_overlay(OverlayScreen::Alchemy);
                 self.alchemy.index = 0;
                 self.runtime.status_text = ui_text().statuses.open_alchemy.clone();
                 audio.play_alchemy_open();
@@ -668,50 +661,48 @@ impl GameplayState {
         }
 
         if let Some(npc) = self.nearby_npc(data) {
-            self.ui.dialogue_open = true;
-            self.ui.current_npc_id = Some(npc.id.clone());
+            self.set_overlay(OverlayScreen::Dialogue(npc.id.clone()));
             self.runtime.status_text = ui_format("gameplay_talking_to", &[("name", &npc.name)]);
             return;
         }
 
         if let Some(station) = self.nearby_station(data) {
             if station.kind == StationKind::Shop {
-                self.ui.shop_open = true;
+                self.set_overlay(OverlayScreen::Shop);
                 self.ui.shop_buy_tab = true;
                 self.ui.shop_index = 0;
-                self.runtime.status_text = ui_format("gameplay_opened_station", &[("name", &station.name)]);
+                self.runtime.status_text =
+                    ui_format("gameplay_opened_station", &[("name", &station.name)]);
                 return;
             }
             if station.kind == StationKind::RuneWorkshop {
-                self.ui.rune_open = true;
+                self.set_overlay(OverlayScreen::Rune);
                 self.ui.rune_index = 0;
-                self.runtime.status_text = ui_format("gameplay_opened_station", &[("name", &station.name)]);
+                self.runtime.status_text =
+                    ui_format("gameplay_opened_station", &[("name", &station.name)]);
                 return;
             }
             if station.kind == StationKind::ArchiveConsole {
-                self.ui.archive_open = true;
+                self.set_overlay(OverlayScreen::Archive);
                 self.ui.archive_tab = 0;
                 self.ui.archive_index = 0;
-                self.runtime.status_text = ui_format("gameplay_opened_station", &[("name", &station.name)]);
+                self.runtime.status_text =
+                    ui_format("gameplay_opened_station", &[("name", &station.name)]);
                 return;
             }
             if station.kind == StationKind::EndingFocus {
                 if self.has_journal_milestone("archive_revelation") {
-                    self.ui.ending_open = true;
-                    self.push_journal_milestone(
-                        "observatory_ending",
-                        "Observatory Ending",
-                        "At the tower's highest lens, the missing wizard's final path resolved into a choice to leave the tower alive rather than master it forever.",
-                    );
+                    self.set_overlay(OverlayScreen::Ending);
+                    let milestone = &narrative_text().milestones.observatory_ending;
+                    self.push_journal_milestone(&milestone.id, &milestone.title, &milestone.text);
                     self.runtime.status_text = ui_format("gameplay_observatory_aligned", &[]);
                 } else {
-                    self.runtime.status_text =
-                        "The observatory remains dark. The archives are not complete.".to_owned();
+                    self.runtime.status_text = ui_copy("observatory_locked").to_owned();
                 }
                 return;
             }
             if station.kind == StationKind::QuestBoard {
-                self.ui.quest_board_open = true;
+                self.set_overlay(OverlayScreen::QuestBoard);
                 self.ui.shop_index = 0;
                 self.runtime.status_text = ui_text().statuses.reading_quest_board.clone();
                 return;
@@ -761,7 +752,8 @@ impl GameplayState {
                         2.0,
                     );
                     self.trigger_camera_shake(0.18, 4.8);
-                    self.runtime.status_text = ui_format("gameplay_repaired_access", &[("label", &warp.label)]);
+                    self.runtime.status_text =
+                        ui_format("gameplay_repaired_access", &[("label", &warp.label)]);
                 } else {
                     self.runtime.status_text = self.warp_lock_text(data, warp);
                     return;
@@ -804,17 +796,19 @@ impl GameplayState {
     }
 
     pub fn save_progress(&mut self, data: &GameData) {
-        self.runtime.status_text = match gameplay_persistence::GameplayStateLoader::save_slot(self, data) {
-            Ok(()) => ui_format("gameplay_saved_progress", &[]),
-            Err(error) => ui_format("gameplay_save_failed", &[("error", &error)]),
-        };
+        self.runtime.status_text =
+            match gameplay_persistence::GameplayStateLoader::save_slot(self, data) {
+                Ok(()) => ui_format("gameplay_saved_progress", &[]),
+                Err(error) => ui_format("gameplay_save_failed", &[("error", &error)]),
+            };
     }
 
     pub fn load_progress(&mut self, data: &GameData) {
-        self.runtime.status_text = match gameplay_persistence::GameplayStateLoader::load_slot(self, data) {
-            Ok(()) => ui_format("gameplay_loaded_progress", &[]),
-            Err(error) => ui_format("gameplay_load_failed", &[("error", &error)]),
-        };
+        self.runtime.status_text =
+            match gameplay_persistence::GameplayStateLoader::load_slot(self, data) {
+                Ok(()) => ui_format("gameplay_loaded_progress", &[]),
+                Err(error) => ui_format("gameplay_load_failed", &[("error", &error)]),
+            };
     }
 
     pub fn pause_status_text(&self) -> &str {
@@ -822,8 +816,13 @@ impl GameplayState {
     }
 
     fn can_reconstruct_archive(&self) -> bool {
-        self.progression.completed_quests.contains("star_elixir_for_ione")
-            && self.progression.completed_quests.contains("containment_for_lyra")
+        self.progression
+            .completed_quests
+            .contains("star_elixir_for_ione")
+            && self
+                .progression
+                .completed_quests
+                .contains("containment_for_lyra")
             && self.has_journal_milestone("greenhouse_repaired")
             && self.has_journal_milestone("containment_repaired")
             && self.has_journal_milestone("rune_workshop_restored")
@@ -866,16 +865,15 @@ impl GameplayState {
             .or_insert(0) += 1;
         self.note_inventory_observation(data, &recipe.output_item_id);
         self.ensure_potion_memory_learned(&recipe.output_item_id, None);
-        self.push_journal_milestone(
-            "first_rune_imbuing",
-            "First Rune Imbuing",
-            "The workshop accepted a finished potion and changed its behavior after the fact. The tower's later methods were more modular than the entry lab ever suggested.",
-        );
-        self.runtime.status_text = format!(
-            "Imbued {} with {} to create {}.",
-            data.item_name(&recipe.input_item_id),
-            data.item_name(&recipe.rune_item_id),
-            data.item_name(&recipe.output_item_id)
+        let milestone = &narrative_text().milestones.first_rune_imbuing;
+        self.push_journal_milestone(&milestone.id, &milestone.title, &milestone.text);
+        self.runtime.status_text = ui_format(
+            "rune_imbued_status",
+            &[
+                ("input", data.item_name(&recipe.input_item_id)),
+                ("rune", data.item_name(&recipe.rune_item_id)),
+                ("output", data.item_name(&recipe.output_item_id)),
+            ],
         );
     }
 
@@ -892,7 +890,13 @@ impl GameplayState {
                 },
             );
         } else {
-            draw_rectangle(offset.x, offset.y, area.size[0], area.size[1], rgba(area.background));
+            draw_rectangle(
+                offset.x,
+                offset.y,
+                area.size[0],
+                area.size[1],
+                rgba(area.background),
+            );
         }
         self.draw_environment_overlay(area, offset);
         self.draw_phase1_story_flourishes(area, offset);
@@ -920,7 +924,12 @@ impl GameplayState {
                     offset.y + warp.rect.y,
                     warp.rect.w,
                     warp.rect.h,
-                    Color::new(188.0 / 255.0, 255.0 / 255.0, 220.0 / 255.0, 0.10 + pulse * 0.08),
+                    Color::new(
+                        188.0 / 255.0,
+                        255.0 / 255.0,
+                        220.0 / 255.0,
+                        0.10 + pulse * 0.08,
+                    ),
                 );
                 draw_circle_lines(
                     center.x,
@@ -948,7 +957,10 @@ impl GameplayState {
             .into_iter()
             .filter(|station| station.area_id == area.id)
         {
-            let center = vec2(offset.x + station.position[0], offset.y + station.position[1]);
+            let center = vec2(
+                offset.x + station.position[0],
+                offset.y + station.position[1],
+            );
             let player_distance = self
                 .world
                 .player
@@ -991,7 +1003,13 @@ impl GameplayState {
             if priority.is_some()
                 || self.world.player.position.distance(pos) <= npc.interaction_radius + 54.0
             {
-                draw_text(&npc.name, center.x - 34.0, center.y - 28.0, 18.0, dark::TEXT_BRIGHT);
+                draw_text(
+                    &npc.name,
+                    center.x - 34.0,
+                    center.y - 28.0,
+                    18.0,
+                    dark::TEXT_BRIGHT,
+                );
             }
             if let Some((label, color)) = priority {
                 draw_priority_marker(center, color);
@@ -1043,7 +1061,12 @@ impl GameplayState {
                     let drift = ((get_time() as f32 * 0.4) + index as f32 * 0.6).sin() * 18.0;
                     let x = offset.x + 80.0 + index as f32 * 110.0 + drift;
                     let y = offset.y + 60.0 + (index % 4) as f32 * 120.0;
-                    draw_circle(x, y, 42.0 + (index % 3) as f32 * 12.0, Color::from_rgba(240, 244, 248, 20));
+                    draw_circle(
+                        x,
+                        y,
+                        42.0 + (index % 3) as f32 * 12.0,
+                        Color::from_rgba(240, 244, 248, 20),
+                    );
                 }
             }
             "rain" => {
@@ -1058,7 +1081,14 @@ impl GameplayState {
                     let wave = ((get_time() as f32 * 2.8) + index as f32 * 0.4).fract();
                     let x = offset.x + (index as f32 * 48.0).rem_euclid(area.size[0]);
                     let y = offset.y + wave * area.size[1];
-                    draw_line(x, y, x - 8.0, y + 16.0, 2.0, Color::from_rgba(200, 224, 255, 120));
+                    draw_line(
+                        x,
+                        y,
+                        x - 8.0,
+                        y + 16.0,
+                        2.0,
+                        Color::from_rgba(200, 224, 255, 120),
+                    );
                 }
             }
             "windy" => {
@@ -1066,7 +1096,14 @@ impl GameplayState {
                     let wave = ((get_time() as f32 * 1.4) + index as f32 * 0.33).fract();
                     let x = offset.x + wave * area.size[0];
                     let y = offset.y + 30.0 + index as f32 * 34.0;
-                    draw_line(x - 10.0, y, x + 22.0, y - 6.0, 2.0, Color::from_rgba(232, 232, 210, 64));
+                    draw_line(
+                        x - 10.0,
+                        y,
+                        x + 22.0,
+                        y - 6.0,
+                        2.0,
+                        Color::from_rgba(232, 232, 210, 64),
+                    );
                 }
             }
             _ => {}
@@ -1076,12 +1113,22 @@ impl GameplayState {
     fn draw_phase1_story_flourishes(&self, area: &AreaDefinition, offset: Vec2) {
         match area.id.as_str() {
             "town_square" => {
-                if self.progression.completed_quests.contains("healing_for_mira") {
+                if self
+                    .progression
+                    .completed_quests
+                    .contains("healing_for_mira")
+                {
                     let shelf = Color::from_rgba(122, 88, 66, 255);
                     let bottle = Color::from_rgba(176, 226, 255, 255);
                     draw_rectangle(offset.x + 684.0, offset.y + 670.0, 72.0, 18.0, shelf);
                     draw_rectangle(offset.x + 694.0, offset.y + 652.0, 10.0, 18.0, bottle);
-                    draw_rectangle(offset.x + 714.0, offset.y + 646.0, 12.0, 24.0, Color::from_rgba(255, 214, 132, 255));
+                    draw_rectangle(
+                        offset.x + 714.0,
+                        offset.y + 646.0,
+                        12.0,
+                        24.0,
+                        Color::from_rgba(255, 214, 132, 255),
+                    );
                     draw_rectangle(offset.x + 736.0, offset.y + 654.0, 10.0, 16.0, bottle);
                 }
                 if self.progression.completed_quests.contains("glow_for_rowan") {
@@ -1102,7 +1149,10 @@ impl GameplayState {
                     }
                 }
                 if self.has_journal_milestone("greenhouse_repaired")
-                    || self.progression.completed_quests.contains("cultivation_for_brin")
+                    || self
+                        .progression
+                        .completed_quests
+                        .contains("cultivation_for_brin")
                 {
                     for (x, y, color) in [
                         (598.0, 760.0, Color::from_rgba(126, 220, 158, 255)),
@@ -1122,7 +1172,11 @@ impl GameplayState {
                 }
             }
             "greenhouse_floor" => {
-                if self.progression.completed_quests.contains("cultivation_for_brin") {
+                if self
+                    .progression
+                    .completed_quests
+                    .contains("cultivation_for_brin")
+                {
                     for (x, y) in [(690.0, 190.0), (742.0, 174.0), (794.0, 190.0)] {
                         draw_circle(
                             offset.x + x,
@@ -1154,7 +1208,13 @@ impl GameplayState {
             );
         }
         if let Some(texture) = art.player() {
-            draw_character_frame(texture, center, self.world.player.facing, self.world.player.moving, 1.0);
+            draw_character_frame(
+                texture,
+                center,
+                self.world.player.facing,
+                self.world.player.moving,
+                1.0,
+            );
         } else {
             draw_circle(
                 center.x,
@@ -1277,14 +1337,21 @@ impl GameplayState {
     }
 
     fn push_journal_milestone(&mut self, id: &str, title: &str, text: &str) {
-        if self.progression.journal_milestones.iter().any(|entry| entry.id == id) {
+        if self
+            .progression
+            .journal_milestones
+            .iter()
+            .any(|entry| entry.id == id)
+        {
             return;
         }
-        self.progression.journal_milestones.push(JournalMilestoneEntry {
-            id: id.to_owned(),
-            title: title.to_owned(),
-            text: text.to_owned(),
-        });
+        self.progression
+            .journal_milestones
+            .push(JournalMilestoneEntry {
+                id: id.to_owned(),
+                title: title.to_owned(),
+                text: text.to_owned(),
+            });
         self.push_event_toast_with_icon(
             ui_format("gameplay_new_journal_note", &[("title", title)]),
             Color::from_rgba(176, 226, 255, 255),
@@ -1299,7 +1366,10 @@ impl GameplayState {
     }
 
     fn has_journal_milestone(&self, id: &str) -> bool {
-        self.progression.journal_milestones.iter().any(|entry| entry.id == id)
+        self.progression
+            .journal_milestones
+            .iter()
+            .any(|entry| entry.id == id)
     }
 
     fn nearby_station<'a>(&self, data: &'a GameData) -> Option<&'a StationDefinition> {
@@ -1367,15 +1437,24 @@ impl GameplayState {
     fn warp_requirement_summary(&self, data: &GameData, warp: &WarpDefinition) -> String {
         let mut parts = Vec::new();
         if self.progression.total_brews < warp.required_total_brews {
-            parts.push(format!(
-                "{} more brews",
-                warp.required_total_brews.saturating_sub(self.progression.total_brews)
+            parts.push(ui_format(
+                "gameplay_requirement_more_brews",
+                &[(
+                    "count",
+                    &warp
+                        .required_total_brews
+                        .saturating_sub(self.progression.total_brews)
+                        .to_string(),
+                )],
             ));
         }
         if self.coins < warp.required_coins {
-            parts.push(format!(
-                "{} more coins",
-                warp.required_coins.saturating_sub(self.coins)
+            parts.push(ui_format(
+                "gameplay_requirement_more_coins",
+                &[(
+                    "count",
+                    &warp.required_coins.saturating_sub(self.coins).to_string(),
+                )],
             ));
         }
         if !warp.required_item_id.is_empty() {
@@ -1385,10 +1464,15 @@ impl GameplayState {
                 .copied()
                 .unwrap_or_default();
             if owned < warp.required_item_amount {
-                parts.push(format!(
-                    "{} x{}",
-                    data.item_name(&warp.required_item_id),
-                    warp.required_item_amount.saturating_sub(owned)
+                parts.push(ui_format(
+                    "gameplay_requirement_item_amount",
+                    &[
+                        ("item", data.item_name(&warp.required_item_id)),
+                        (
+                            "amount",
+                            &warp.required_item_amount.saturating_sub(owned).to_string(),
+                        ),
+                    ],
                 ));
             }
         }
@@ -1396,7 +1480,7 @@ impl GameplayState {
             && !self.has_journal_milestone(&warp.required_journal_milestone)
         {
             parts.push(if warp.required_journal_hint.is_empty() {
-                "recover the required archive entry".to_owned()
+                ui_copy("gameplay_requirement_archive_entry").to_owned()
             } else {
                 warp.required_journal_hint.clone()
             });
@@ -1413,7 +1497,10 @@ impl GameplayState {
         if requirement_summary == warp.locked_note {
             requirement_summary
         } else {
-            format!("{} needs {}.", warp.label, requirement_summary)
+            ui_format(
+                "gameplay_warp_lock_text",
+                &[("label", &warp.label), ("requirements", &requirement_summary)],
+            )
         }
     }
 
@@ -1424,9 +1511,11 @@ impl GameplayState {
             .filter(|state| state.planted_item_id.is_empty())
             .and_then(|_| self.planter_seed_choice(data, station));
         let mutation_candidate = existing_state.as_ref().and_then(|state| {
-            (!state.planted_item_id.is_empty() && !state.ready && state.mutation_formula_id.is_empty())
-                .then(|| self.planter_mutation_candidate(data, &state.planted_item_id))
-                .flatten()
+            (!state.planted_item_id.is_empty()
+                && !state.ready
+                && state.mutation_formula_id.is_empty())
+            .then(|| self.planter_mutation_candidate(data, &state.planted_item_id))
+            .flatten()
         });
         let mut state = self
             .progression
@@ -1453,19 +1542,23 @@ impl GameplayState {
                 .or_insert(0) += harvest_amount;
             self.note_inventory_observation(data, &state.planted_item_id);
             self.runtime.status_text = if mutation_note.is_empty() {
-                format!(
-                    "Harvested {} x{} from {}.",
-                    data.item_name(&state.planted_item_id),
-                    harvest_amount,
-                    station.name
+                ui_format(
+                    "gameplay_planter_harvested",
+                    &[
+                        ("item", data.item_name(&state.planted_item_id)),
+                        ("amount", &harvest_amount.to_string()),
+                        ("station", &station.name),
+                    ],
                 )
             } else {
-                format!(
-                    "Harvested {} x{} from {}. Mutation: {}.",
-                    data.item_name(&state.planted_item_id),
-                    harvest_amount,
-                    station.name,
-                    mutation_note
+                ui_format(
+                    "gameplay_planter_harvested_mutation",
+                    &[
+                        ("item", data.item_name(&state.planted_item_id)),
+                        ("amount", &harvest_amount.to_string()),
+                        ("station", &station.name),
+                        ("mutation", &mutation_note),
+                    ],
                 )
             };
             state.planted_item_id.clear();
@@ -1476,7 +1569,9 @@ impl GameplayState {
             state.mutation_yield_bonus = 0;
             state.mutation_growth_bonus_days = 0;
             state.mutation_note.clear();
-            self.progression.planter_states.insert(station.id.clone(), state);
+            self.progression
+                .planter_states
+                .insert(station.id.clone(), state);
             return;
         }
         if !state.planted_item_id.is_empty() {
@@ -1493,26 +1588,30 @@ impl GameplayState {
                 if state.growth_days >= growth_target {
                     state.ready = true;
                     self.runtime.status_text = if let Some(text) = mutation_text {
-                        format!(
-                            "A careful tending pushes {} to ripeness. {}",
-                            station.name, text
+                        ui_format(
+                            "gameplay_planter_ripeness_mutation",
+                            &[("station", &station.name), ("mutation", &text)],
                         )
                     } else {
                         ui_format("gameplay_tending_ripeness", &[("station", &station.name)])
                     };
                 } else {
                     self.runtime.status_text = if let Some(text) = mutation_text {
-                        format!(
-                            "Tended {}. Growth stage: {}. {}",
-                            station.name,
-                            planter_stage_label(state.growth_days, growth_target),
-                            text
+                        ui_format(
+                            "gameplay_planter_tended_mutation",
+                            &[
+                                ("station", &station.name),
+                                ("stage", planter_stage_label(state.growth_days, growth_target)),
+                                ("mutation", &text),
+                            ],
                         )
                     } else {
-                        format!(
-                            "Tended {}. Growth stage: {}.",
-                            station.name,
-                            planter_stage_label(state.growth_days, growth_target)
+                        ui_format(
+                            "gameplay_planter_tended",
+                            &[
+                                ("station", &station.name),
+                                ("stage", planter_stage_label(state.growth_days, growth_target)),
+                            ],
                         )
                     };
                 }
@@ -1523,33 +1622,44 @@ impl GameplayState {
                     .saturating_sub(state.mutation_growth_bonus_days)
                     .max(1);
                 let days_left = growth_target.saturating_sub(state.growth_days);
-                self.runtime.status_text = format!(
-                    "{} is {}. {} day(s) left.",
-                    station.name,
-                    planter_stage_label(state.growth_days, growth_target),
-                    days_left
+                self.runtime.status_text = ui_format(
+                    "gameplay_planter_status",
+                    &[
+                        ("station", &station.name),
+                        ("stage", planter_stage_label(state.growth_days, growth_target)),
+                        ("days", &days_left.to_string()),
+                    ],
                 );
             }
-            self.progression.planter_states.insert(station.id.clone(), state);
+            self.progression
+                .planter_states
+                .insert(station.id.clone(), state);
             return;
         }
 
         let Some(item_id) = candidate else {
             self.runtime.status_text = if station.planter_seed_ids.is_empty() {
-                "Planters need a rarer ingredient specimen to cultivate.".to_owned()
+                ui_copy("gameplay_planter_need_rare").to_owned()
             } else {
-                format!(
-                    "{} accepts: {}.",
-                    station.name,
-                    station
-                        .planter_seed_ids
-                        .iter()
-                        .map(|item_id| data.item_name(item_id))
-                        .collect::<Vec<_>>()
-                        .join(", ")
+                ui_format(
+                    "gameplay_planter_accepts",
+                    &[
+                        ("station", &station.name),
+                        (
+                            "items",
+                            &station
+                                .planter_seed_ids
+                                .iter()
+                                .map(|item_id| data.item_name(item_id))
+                                .collect::<Vec<_>>()
+                                .join(", "),
+                        ),
+                    ],
                 )
             };
-            self.progression.planter_states.insert(station.id.clone(), state);
+            self.progression
+                .planter_states
+                .insert(station.id.clone(), state);
             return;
         };
         if let Some(amount) = self.inventory.get_mut(&item_id) {
@@ -1565,9 +1675,16 @@ impl GameplayState {
         state.mutation_yield_bonus = 0;
         state.mutation_growth_bonus_days = 0;
         state.mutation_note.clear();
-        self.runtime.status_text =
-            ui_format("gameplay_planted", &[("item", data.item_name(&item_id)), ("station", &station.name)]);
-        self.progression.planter_states.insert(station.id.clone(), state);
+        self.runtime.status_text = ui_format(
+            "gameplay_planted",
+            &[
+                ("item", data.item_name(&item_id)),
+                ("station", &station.name),
+            ],
+        );
+        self.progression
+            .planter_states
+            .insert(station.id.clone(), state);
     }
 
     fn planter_seed_choice(&self, data: &GameData, station: &StationDefinition) -> Option<String> {
@@ -1613,15 +1730,20 @@ impl GameplayState {
 
         if state.creature_item_id.is_empty() {
             let Some(creature_id) = candidate else {
-                self.runtime.status_text = format!(
-                    "{} accepts {}.",
-                    station.name,
-                    station
-                        .habitat_creature_ids
-                        .iter()
-                        .map(|item_id| data.item_name(item_id))
-                        .collect::<Vec<_>>()
-                        .join(", ")
+                self.runtime.status_text = ui_format(
+                    "gameplay_habitat_accepts",
+                    &[
+                        ("station", &station.name),
+                        (
+                            "items",
+                            &station
+                                .habitat_creature_ids
+                                .iter()
+                                .map(|item_id| data.item_name(item_id))
+                                .collect::<Vec<_>>()
+                                .join(", "),
+                        ),
+                    ],
                 );
                 return;
             };
@@ -1632,15 +1754,15 @@ impl GameplayState {
             state.creature_item_id = creature_id.clone();
             state.placed_day = self.world.day_index;
             state.last_harvest_day = self.world.day_index;
+            let milestone = &narrative_text().milestones.containment_started;
             self.push_journal_milestone(
-                "containment_started",
-                "Containment Floor",
-                "The creature habitats are stable enough to hold gentle tower specimens. Managed collection can begin.",
+                &milestone.id,
+                &milestone.title,
+                &milestone.text,
             );
-            self.runtime.status_text = format!(
-                "Settled {} into {}.",
-                data.item_name(&creature_id),
-                station.name
+            self.runtime.status_text = ui_format(
+                "gameplay_habitat_settled",
+                &[("item", data.item_name(&creature_id)), ("station", &station.name)],
             );
             return;
         }
@@ -1651,26 +1773,27 @@ impl GameplayState {
         if self.world.day_index >= ready_day {
             let amount = 1 + u32::from(self.progression.total_brews >= 20);
             let output_item_id = station.habitat_output_item_id.clone();
-            *self
-                .inventory
-                .entry(output_item_id.clone())
-                .or_insert(0) += amount;
+            *self.inventory.entry(output_item_id.clone()).or_insert(0) += amount;
             state.last_harvest_day = self.world.day_index;
             let station_name = station.name.clone();
-            self.runtime.status_text = format!(
-                "Collected {} x{} from {}.",
-                data.item_name(&output_item_id),
-                amount,
-                station_name
+            self.runtime.status_text = ui_format(
+                "gameplay_habitat_collected",
+                &[
+                    ("item", data.item_name(&output_item_id)),
+                    ("amount", &amount.to_string()),
+                    ("station", &station_name),
+                ],
             );
             self.note_inventory_observation(data, &output_item_id);
         } else {
             let days_left = ready_day.saturating_sub(self.world.day_index);
-            self.runtime.status_text = format!(
-                "{} is calm. {} day(s) until more {}.",
-                data.item_name(&state.creature_item_id),
-                days_left,
-                data.item_name(&station.habitat_output_item_id)
+            self.runtime.status_text = ui_format(
+                "gameplay_habitat_waiting",
+                &[
+                    ("creature", data.item_name(&state.creature_item_id)),
+                    ("days", &days_left.to_string()),
+                    ("output", data.item_name(&station.habitat_output_item_id)),
+                ],
             );
         }
     }
@@ -1714,7 +1837,9 @@ impl GameplayState {
     }
 
     fn effect_active(&self, kind: EffectKind) -> bool {
-        self.runtime.active_effects.iter().any(|effect| effect.kind == kind)
+        self.runtime
+            .active_effects
+            .iter()
+            .any(|effect| effect.kind == kind)
     }
 }
-

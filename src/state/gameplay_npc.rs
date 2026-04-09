@@ -1,5 +1,5 @@
 use super::*;
-use crate::content::ui_format;
+use crate::content::{ui_copy, ui_format};
 
 pub(super) struct NpcDialogueSelection<'a> {
     pub(super) start: &'a str,
@@ -10,19 +10,29 @@ pub(super) struct NpcDialogueSelection<'a> {
 impl GameplayState {
     pub(super) fn phase1_town_recovery_reached(&self) -> bool {
         self.has_journal_milestone("greenhouse_repaired")
-            || self.progression.completed_quests.contains("cultivation_for_brin")
+            || self
+                .progression
+                .completed_quests
+                .contains("cultivation_for_brin")
     }
 
     pub(super) fn phase1_first_relief_reached(&self) -> bool {
         self.has_journal_milestone("first_town_relief")
-            || self.progression.completed_quests.contains("healing_for_mira")
+            || self
+                .progression
+                .completed_quests
+                .contains("healing_for_mira")
     }
 
     pub(super) fn phase1_first_brew_reached(&self) -> bool {
         self.has_journal_milestone("first_true_brew") || self.progression.total_brews > 0
     }
 
-    pub(super) fn npc_dialogue_selection<'a>(&'a self, data: &GameData, npc: &'a NpcDefinition) -> NpcDialogueSelection<'a> {
+    pub(super) fn npc_dialogue_selection<'a>(
+        &'a self,
+        data: &GameData,
+        npc: &'a NpcDefinition,
+    ) -> NpcDialogueSelection<'a> {
         let mut selection = NpcDialogueSelection {
             start: npc.dialogue_start.as_str(),
             progress: npc.dialogue_progress.as_str(),
@@ -32,9 +42,13 @@ impl GameplayState {
         if npc.id == "crow_guide" {
             let crow = &npc.crow_phase1_dialogue;
             if !crow.first_meeting.is_empty() {
-                let line = if self.phase1_town_recovery_reached() && !crow.first_tower_restoration.is_empty() {
+                let line = if self.phase1_town_recovery_reached()
+                    && !crow.first_tower_restoration.is_empty()
+                {
                     crow.first_tower_restoration.as_str()
-                } else if self.phase1_first_relief_reached() && !crow.first_quest_complete.is_empty() {
+                } else if self.phase1_first_relief_reached()
+                    && !crow.first_quest_complete.is_empty()
+                {
                     crow.first_quest_complete.as_str()
                 } else if self.phase1_first_brew_reached() && !crow.first_brew.is_empty() {
                     crow.first_brew.as_str()
@@ -58,7 +72,9 @@ impl GameplayState {
         let quest_completed = quest
             .map(|quest| self.progression.completed_quests.contains(&quest.id))
             .unwrap_or(false);
-        let quest_available = quest.map(|quest| self.quest_is_available(quest)).unwrap_or(false);
+        let quest_available = quest
+            .map(|quest| self.quest_is_available(quest))
+            .unwrap_or(false);
 
         if self.phase1_town_recovery_reached() && !phase1.town_recovery_observation.is_empty() {
             selection.start = phase1.town_recovery_observation.as_str();
@@ -102,7 +118,11 @@ impl GameplayState {
                 _ => None,
             };
         }
-        if self.progression.completed_quests.contains("healing_for_mira") {
+        if self
+            .progression
+            .completed_quests
+            .contains("healing_for_mira")
+        {
             return match npc_id {
                 "crow_guide" => Some(phase1.crow_after_healing.as_str()),
                 "mayor_elric" => Some(phase1.elric_after_healing.as_str()),
@@ -133,7 +153,9 @@ impl GameplayState {
         let walk_speed = (data.config.move_speed * 0.16).max(24.0);
         for npc in &data.npcs {
             let tracker = self.initial_npc_motion_tracker(data, npc, walk_speed);
-            self.runtime.npc_motion_states.insert(npc.id.clone(), tracker);
+            self.runtime
+                .npc_motion_states
+                .insert(npc.id.clone(), tracker);
         }
     }
 
@@ -227,7 +249,9 @@ impl GameplayState {
             }
 
             self.advance_npc_tracker(&mut tracker, walk_speed, frame_time);
-            self.runtime.npc_motion_states.insert(npc.id.clone(), tracker);
+            self.runtime
+                .npc_motion_states
+                .insert(npc.id.clone(), tracker);
         }
     }
 
@@ -245,7 +269,8 @@ impl GameplayState {
 
     pub(super) fn nearby_npc<'a>(&self, data: &'a GameData) -> Option<&'a NpcDefinition> {
         self.visible_npcs(data).into_iter().find(|npc| {
-            self.world.player
+            self.world
+                .player
                 .position
                 .distance(self.npc_runtime_state(data, npc).position)
                 <= npc.interaction_radius
@@ -275,7 +300,7 @@ impl GameplayState {
         let area_name = data
             .area(&runtime.area_id)
             .map(|area| area.name.as_str())
-            .unwrap_or("somewhere in town");
+            .unwrap_or(ui_copy("npc_hint_somewhere"));
         if runtime.moving {
             let target_name = runtime
                 .target_area_id
@@ -283,15 +308,21 @@ impl GameplayState {
                 .and_then(|area_id| data.area(area_id))
                 .map(|area| area.name.as_str())
                 .unwrap_or(area_name);
-            ui_format("npc_travelling", &[("area", area_name), ("target", target_name)])
+            ui_format(
+                "npc_travelling",
+                &[("area", area_name), ("target", target_name)],
+            )
         } else {
-            format!("{} this {}", area_name, self.current_time_window())
+            ui_format(
+                "npc_hint_here_now",
+                &[("area", area_name), ("time", self.current_time_window())],
+            )
         }
     }
 
     pub(super) fn npc_later_hint(&self, data: &GameData, npc: &NpcDefinition) -> String {
         let Some(current_index) = self.active_schedule_index(npc) else {
-            return "routine unclear".to_owned();
+            return ui_copy("npc_hint_routine_unclear").to_owned();
         };
         let later_windows = ["day", "evening", "night", "morning"];
         let current_window = self.current_time_window();
@@ -309,9 +340,12 @@ impl GameplayState {
                 let next_index = (current_index + 1) % npc.schedule.len();
                 data.area(&npc.schedule[next_index].area_id)
                     .map(|area| area.name.as_str())
-                    .unwrap_or("unknown")
+                    .unwrap_or(ui_copy("npc_hint_unknown"))
             });
-        format!("{later_area} by {next_window}")
+        ui_format(
+            "npc_hint_later",
+            &[("area", later_area), ("time", next_window)],
+        )
     }
 
     pub(super) fn npc_usual_hint(&self, data: &GameData, npc: &NpcDefinition) -> String {
@@ -320,7 +354,7 @@ impl GameplayState {
             .filter_map(|time_window| {
                 self.npc_schedule_area_for_time(npc, time_window)
                     .and_then(|area_id| data.area(area_id))
-                    .map(|area| format!("{time_window} {}", area.name))
+                    .map(|area| ui_format("npc_hint_usual", &[("time", time_window), ("area", &area.name)]))
             })
             .collect::<Vec<_>>()
             .join("  |  ")
@@ -542,28 +576,40 @@ impl GameplayState {
     pub(super) fn quest_location_hint(&self, data: &GameData, quest: &QuestDefinition) -> String {
         data.npc(&quest.giver_npc_id)
             .map(|npc| {
-                format!(
-                    "Now {}  |  Later {}",
-                    self.npc_now_hint(data, npc),
-                    self.npc_later_hint(data, npc)
+                ui_format(
+                    "npc_quest_location",
+                    &[
+                        ("now", &self.npc_now_hint(data, npc)),
+                        ("later", &self.npc_later_hint(data, npc)),
+                    ],
                 )
             })
-            .unwrap_or_else(|| "Check the request board for delivery details.".to_owned())
+            .unwrap_or_else(|| ui_copy("npc_quest_location_fallback").to_owned())
     }
 
     pub(super) fn npc_context_line(&self, data: &GameData, npc: &NpcDefinition) -> String {
-        let relationship = self.progression.relationships.get(&npc.id).copied().unwrap_or_default();
-        let base = format!(
-            "Now: {}. Later: {}. Usually: {}. Rapport {}. Role {}.",
-            self.npc_now_hint(data, npc),
-            self.npc_later_hint(data, npc),
-            self.npc_usual_hint(data, npc),
-            relationship,
-            if npc.role.is_empty() {
-                "townsfolk"
-            } else {
-                npc.role.as_str()
-            }
+        let relationship = self
+            .progression
+            .relationships
+            .get(&npc.id)
+            .copied()
+            .unwrap_or_default();
+        let base = ui_format(
+            "npc_context_line",
+            &[
+                ("now", &self.npc_now_hint(data, npc)),
+                ("later", &self.npc_later_hint(data, npc)),
+                ("usual", &self.npc_usual_hint(data, npc)),
+                ("rapport", &relationship.to_string()),
+                (
+                    "role",
+                    if npc.role.is_empty() {
+                        ui_copy("overlay_rapport_empty")
+                    } else {
+                        npc.role.as_str()
+                    },
+                ),
+            ],
         );
         self.append_npc_story_line(&npc.id, base)
     }
@@ -803,7 +849,10 @@ mod tests {
             .area_path(&data, "town_square", "tower_entry")
             .expect("town should connect to tower");
 
-        assert_eq!(path, vec!["town_to_plains".to_owned(), "plains_to_entry".to_owned()]);
+        assert_eq!(
+            path,
+            vec!["town_to_plains".to_owned(), "plains_to_entry".to_owned()]
+        );
     }
 
     #[test]
@@ -815,7 +864,10 @@ mod tests {
             .area_path(&data, "town_square", "moonlit_forest")
             .expect("town should connect to east forest");
 
-        assert_eq!(path, vec!["town_to_plains".to_owned(), "plains_to_forest".to_owned()]);
+        assert_eq!(
+            path,
+            vec!["town_to_plains".to_owned(), "plains_to_forest".to_owned()]
+        );
     }
 }
 
@@ -901,5 +953,3 @@ pub(super) fn line_intersects_expanded_rect(
 
     t0 <= t1
 }
-
-

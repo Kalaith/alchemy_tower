@@ -1,20 +1,23 @@
 use super::*;
 use crate::audio::AudioAssets;
-use crate::content::ui_format;
+use crate::content::{ui_copy, ui_format};
 
 impl GameplayState {
     pub(super) fn handle_alchemy_inputs(&mut self, data: &GameData, audio: &AudioAssets) {
         let Some(station) = self.nearby_station(data).cloned() else {
-            self.alchemy.open = false;
+            self.clear_overlay();
             return;
         };
         if station.kind != StationKind::Alchemy {
-            self.alchemy.open = false;
+            self.clear_overlay();
             return;
         }
 
-        if is_key_pressed(KeyCode::Tab) || is_key_pressed(KeyCode::Escape) || is_key_pressed(KeyCode::E) {
-            self.alchemy.open = false;
+        if is_key_pressed(KeyCode::Tab)
+            || is_key_pressed(KeyCode::Escape)
+            || is_key_pressed(KeyCode::E)
+        {
+            self.clear_overlay();
             self.runtime.status_text = ui_text().statuses.closed_alchemy.clone();
             return;
         }
@@ -180,8 +183,10 @@ impl GameplayState {
     fn increment_alchemy_stirs(&mut self, audio: &AudioAssets) {
         self.alchemy.stirs += 1;
         audio.play_alchemy_stir();
-        self.runtime.status_text =
-            ui_format("alchemy_stirred", &[("count", &self.alchemy.stirs.to_string())]);
+        self.runtime.status_text = ui_format(
+            "alchemy_stirred",
+            &[("count", &self.alchemy.stirs.to_string())],
+        );
     }
 
     fn cycle_alchemy_timing(&mut self) {
@@ -200,11 +205,11 @@ impl GameplayState {
 
     pub(super) fn handle_shop_inputs(&mut self, data: &GameData) {
         let Some(station) = self.nearby_station(data) else {
-            self.ui.shop_open = false;
+            self.clear_overlay();
             return;
         };
         if station.kind != StationKind::Shop {
-            self.ui.shop_open = false;
+            self.clear_overlay();
             return;
         }
 
@@ -250,17 +255,17 @@ impl GameplayState {
 
     pub(super) fn handle_rune_inputs(&mut self, data: &GameData) {
         let Some(station) = self.nearby_station(data) else {
-            self.ui.rune_open = false;
+            self.clear_overlay();
             return;
         };
         if station.kind != StationKind::RuneWorkshop {
-            self.ui.rune_open = false;
+            self.clear_overlay();
             return;
         }
         let recipes = self.available_rune_recipes(data, station);
         if recipes.is_empty() {
             if is_key_pressed(KeyCode::Escape) || is_key_pressed(KeyCode::E) {
-                self.ui.rune_open = false;
+                self.clear_overlay();
             }
             return;
         }
@@ -276,7 +281,7 @@ impl GameplayState {
             }
         }
         if is_key_pressed(KeyCode::Escape) {
-            self.ui.rune_open = false;
+            self.clear_overlay();
             self.runtime.status_text = ui_text().statuses.closed_rune.clone();
         }
     }
@@ -305,18 +310,22 @@ impl GameplayState {
             self.ui.archive_index = 0;
         }
 
-        if ARCHIVE_TABS[self.ui.archive_tab] == "Experiments" && is_key_pressed(KeyCode::F) {
+        if ARCHIVE_TABS[self.ui.archive_tab] == "experiments" && is_key_pressed(KeyCode::F) {
             self.cycle_archive_experiment_filter();
         }
 
         if is_key_pressed(KeyCode::Enter) {
             match ARCHIVE_TABS[self.ui.archive_tab] {
-                "Timeline" => {
+                "timeline" => {
                     if self.can_reconstruct_archive() {
                         let milestone = &narrative_text().milestones.archive_revelation;
-                        self.push_journal_milestone(&milestone.id, &milestone.title, &milestone.text);
+                        self.push_journal_milestone(
+                            &milestone.id,
+                            &milestone.title,
+                            &milestone.text,
+                        );
                         self.push_event_toast_with_icon(
-                            "Archive restored: timeline completed.",
+                            ui_copy("archive_timeline_restored_toast"),
                             Color::from_rgba(176, 226, 255, 255),
                             "journal_note",
                         );
@@ -336,13 +345,13 @@ impl GameplayState {
                             .clone();
                     }
                 }
-                "Disassembly" => {
+                "disassembly" => {
                     let recipes = self.available_disassembly_recipes(data);
                     if let Some(recipe) = recipes.get(self.ui.archive_index).copied() {
                         self.disassemble_recipe(data, recipe);
                     }
                 }
-                "Duplication" => {
+                "duplication" => {
                     let items = self.duplication_candidates(data);
                     if let Some(item_id) = items.get(self.ui.archive_index) {
                         self.duplicate_item(data, item_id);
@@ -352,7 +361,7 @@ impl GameplayState {
             }
         }
         if is_key_pressed(KeyCode::Escape) {
-            self.ui.archive_open = false;
+            self.clear_overlay();
             self.runtime.status_text = ui_text().statuses.closed_archive.clone();
         }
     }
@@ -368,5 +377,3 @@ impl GameplayState {
         }
     }
 }
-
-

@@ -45,7 +45,11 @@ impl GameplayState {
                 offset.y + station.position[1] - 42.0,
             );
             let text = if station.kind == StationKind::Alchemy {
-                format!("E/{}: {}", input_bindings().alchemy.open, ui_text().prompts.open_alchemy)
+                format!(
+                    "E/{}: {}",
+                    input_bindings().alchemy.open,
+                    ui_text().prompts.open_alchemy
+                )
             } else if station.kind == StationKind::RestBed {
                 format!(
                     "{}: {}",
