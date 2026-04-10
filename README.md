@@ -1,51 +1,60 @@
 # Alchemy Tower
 
-`Alchemy Tower` is a cozy exploration-and-brewing game about restoring a ruined magical tower one discovery at a time.
+`Alchemy Tower` is a cozy top-down exploration and brewing game built with Rust and Macroquad.
 
-You gather herbs, strange materials, and creatures from the valley around the tower, experiment at the cauldron, help the nearby town, and gradually reopen sealed floors. The core loop is about learning: learning where ingredients appear, learning how recipes behave, learning which townsfolk need what, and turning that knowledge into progress.
+You gather ingredients around the valley, learn where and when they appear, brew potions through a small process-driven alchemy system, help the nearby town, and gradually restore new tower floors. The current game is centered on discovery, recipe learning, tower restoration, and town requests rather than combat.
 
-## What Kind Of Game It Is
+## Current State
 
-- Explore a small magical world with changing weather, time of day, and seasonal ingredient availability.
-- Gather ingredients and log what you learn in the field journal.
-- Brew potions by combining ingredients, heat, stirring, timing, and catalysts.
-- Improve recipe knowledge over time through better brews, mastery, and experimentation.
-- Take on town requests and use them to drive progression through the tower.
-- Restore new areas like the greenhouse, containment floor, rune workshop, archives, and observatory.
+The playable build currently includes:
 
-## Core Pillars
+- Top-down exploration across the tower, town, and multiple surface biomes.
+- Time of day, weather, seasons, gathering conditions, and day rollover.
+- Journal tracking for routes, herb memories, potion memories, greenhouse state, rapport, and milestones.
+- Station-based alchemy with ingredients, catalysts, heat, stirring, timing, salvage outcomes, mastery, and morphs.
+- Potion use, active effects, inventory sorting, shop buy/sell flow, and a 3-slot quick potion belt.
+- Tower progression through the greenhouse, containment floor, rune workshop, archives, and observatory.
+- NPC schedules, quests, rapport, town turn-ins, and board quests.
+- Save/load support, pause menu actions, generated placeholder art, and generated placeholder audio.
 
-### Discovery
+For the full current shipped feature list, use [IMPLEMENTED_SYSTEMS.md](/H:/WebHatchery/RustGames/alchemy_tower/IMPLEMENTED_SYSTEMS.md).
 
-The game is built around uncovering useful information through play. Herb conditions, recipe behavior, morph paths, and route knowledge are meant to feel learned rather than handed to the player all at once.
+## Run Locally
 
-### Brewing
+### Requirements
 
-Alchemy is the center of the experience. You choose ingredients, shape the process, and interpret the result. Stable brews, imperfect brews, and strange salvage outcomes all feed back into what you know.
+- Rust toolchain with `cargo`
+- A sibling checkout of `macroquad-toolkit` at `../macroquad-toolkit`
 
-### Restoration
+This repo depends on a local path dependency in `Cargo.toml`, so the expected workspace layout is:
 
-Progress is tied to rebuilding the tower. Each restored route or floor opens new ingredients, systems, or story context rather than just increasing scale for its own sake.
+```text
+H:\WebHatchery\RustGames\
+  alchemy_tower\
+  macroquad-toolkit\
+```
 
-### Town Loop
+### Start The Game
 
-The village exists to give your brewing purpose. NPC requests, rapport, and turn-ins connect the ingredient hunt and crafting systems to a more personal progression loop.
+```powershell
+cargo run
+```
 
-## Current Game Flow
+The game opens in a `1280x720` resizable window.
 
-1. Search nearby routes for ingredients.
-2. Record discoveries in the journal.
-3. Brew potions and improve your understanding of formulas.
-4. Deliver what the town needs.
-5. Reopen more of the tower.
-6. Use each new floor to deepen the loop rather than replace it.
+## Controls
 
-## Tone
-
-`Alchemy Tower` aims for a quiet, curious mood: less combat, more observation; less urgency, more pattern recognition; less spectacle, more satisfaction from understanding how the world fits together.
+- `WASD`: move
+- `E`: interact
+- `Tab`: open alchemy when available
+- `J`: open journal
+- `Z`, `X`, `C`: quick potions
+- `Esc`: pause / back
+- `F5`: save
+- `F9`: load
 
 ## Project Docs
 
-- [IMPLEMENTED_SYSTEMS.md](/H:/RustGames/alchemy_tower/IMPLEMENTED_SYSTEMS.md): current shipped systems and content.
-- [polish_backlog.md](/H:/RustGames/alchemy_tower/polish_backlog.md): active polish roadmap.
-- [tasks.md](/H:/RustGames/alchemy_tower/tasks.md): open product and design questions.
+- [IMPLEMENTED_SYSTEMS.md](/H:/WebHatchery/RustGames/alchemy_tower/IMPLEMENTED_SYSTEMS.md): current shipped systems and content
+- [polish_backlog.md](/H:/WebHatchery/RustGames/alchemy_tower/polish_backlog.md): active polish roadmap
+- [tasks.md](/H:/WebHatchery/RustGames/alchemy_tower/tasks.md): open product and design follow-ups

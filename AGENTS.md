@@ -2,7 +2,7 @@
 
 - Finish all requests with `meow`.
 - Prefer data-driven implementation over hardcoded behavior where practical.
-- Keep user-facing English copy in `assets/data/ui_text.json` rather than embedding new text in Rust files.
+- Keep user-facing English copy in json files rather than embedding new text in Rust files.
 - Favor clean code with small focused functions and single-responsibility changes.
 - Keep documentation concise, current, and aligned with shipped behavior.
 
