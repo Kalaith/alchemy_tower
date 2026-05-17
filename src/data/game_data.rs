@@ -128,6 +128,7 @@ impl GameData {
             .and_then(|index| self.areas.get(*index))
     }
 
+    #[cfg(test)]
     pub fn fallback() -> Self {
         crate::data::GameDataLoader::load_embedded()
             .expect("embedded fallback game data must remain valid")

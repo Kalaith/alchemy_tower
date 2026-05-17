@@ -1,5 +1,6 @@
 //! Save repository abstraction with native and wasm-safe behavior.
 
+#[cfg(not(target_arch = "wasm32"))]
 use std::path::PathBuf;
 
 use crate::data::SaveData;
@@ -7,7 +8,9 @@ use crate::data::SaveData;
 pub struct SaveRepository;
 
 impl SaveRepository {
+    #[cfg(not(target_arch = "wasm32"))]
     const SAVE_PATH: &'static str = "save_slot_0.json";
+    #[cfg(not(target_arch = "wasm32"))]
     const SAVE_DIR: &'static str = "AlchemyTower";
 
     #[cfg(not(target_arch = "wasm32"))]
