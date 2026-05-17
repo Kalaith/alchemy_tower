@@ -7,6 +7,7 @@ use crate::data::{
     MutationFormulaDefinition, NpcDefinition, QuestDefinition, RecipeDefinition,
     RuneRecipeDefinition, StationDefinition,
 };
+use macroquad_toolkit::data_loader::load_embedded_json_labeled;
 
 #[derive(Debug, Deserialize)]
 struct EmbeddedConfigData {
@@ -48,21 +49,26 @@ pub struct GameDataLoader;
 
 impl GameDataLoader {
     pub fn load_embedded() -> Result<GameData, String> {
-        let config: EmbeddedConfigData =
-            serde_json::from_str(include_str!("../../assets/data/game_data_config.json"))
-                .map_err(|error| error.to_string())?;
-        let world: EmbeddedWorldData =
-            serde_json::from_str(include_str!("../../assets/data/game_data_world.json"))
-                .map_err(|error| error.to_string())?;
-        let npc: EmbeddedNpcData =
-            serde_json::from_str(include_str!("../../assets/data/game_data_npcs.json"))
-                .map_err(|error| error.to_string())?;
-        let items: EmbeddedItemData =
-            serde_json::from_str(include_str!("../../assets/data/game_data_items.json"))
-                .map_err(|error| error.to_string())?;
-        let crafting: EmbeddedCraftingData =
-            serde_json::from_str(include_str!("../../assets/data/game_data_crafting.json"))
-                .map_err(|error| error.to_string())?;
+        let config: EmbeddedConfigData = load_embedded_json_labeled(
+            "game_data_config",
+            include_str!("../../assets/data/game_data_config.json"),
+        )?;
+        let world: EmbeddedWorldData = load_embedded_json_labeled(
+            "game_data_world",
+            include_str!("../../assets/data/game_data_world.json"),
+        )?;
+        let npc: EmbeddedNpcData = load_embedded_json_labeled(
+            "game_data_npcs",
+            include_str!("../../assets/data/game_data_npcs.json"),
+        )?;
+        let items: EmbeddedItemData = load_embedded_json_labeled(
+            "game_data_items",
+            include_str!("../../assets/data/game_data_items.json"),
+        )?;
+        let crafting: EmbeddedCraftingData = load_embedded_json_labeled(
+            "game_data_crafting",
+            include_str!("../../assets/data/game_data_crafting.json"),
+        )?;
 
         GameData::from_parts(
             config.config,

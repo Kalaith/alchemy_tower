@@ -1,6 +1,6 @@
 //! Save repository abstraction with native and wasm-safe behavior.
 
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
 
 use crate::data::SaveData;
 
@@ -13,15 +13,7 @@ impl SaveRepository {
     #[cfg(not(target_arch = "wasm32"))]
     pub fn save(save_data: &SaveData) -> Result<(), String> {
         let json = serde_json::to_string_pretty(save_data).map_err(|error| error.to_string())?;
-        let save_path = Self::save_path()?;
-        let save_dir = save_path
-            .parent()
-            .ok_or_else(|| "Save path has no parent directory".to_owned())?;
-        std::fs::create_dir_all(save_dir).map_err(|error| error.to_string())?;
-
-        let temp_path = save_path.with_extension("json.tmp");
-        std::fs::write(&temp_path, json).map_err(|error| error.to_string())?;
-        Self::replace_atomically(&temp_path, &save_path)
+        macroquad_toolkit::persistence::save_string_atomic(Self::save_path()?, &json)
     }
 
     #[cfg(target_arch = "wasm32")]
@@ -43,27 +35,7 @@ impl SaveRepository {
 
     #[cfg(not(target_arch = "wasm32"))]
     fn save_path() -> Result<PathBuf, String> {
-        let base_dir = std::env::var_os("LOCALAPPDATA")
-            .or_else(|| std::env::var_os("APPDATA"))
-            .map(PathBuf::from)
-            .or_else(|| {
-                std::env::var_os("HOME").map(|home| {
-                    let mut path = PathBuf::from(home);
-                    path.push(".local");
-                    path.push("share");
-                    path
-                })
-            })
-            .ok_or_else(|| "Could not resolve a user data directory for saves".to_owned())?;
-
-        Ok(base_dir.join(Self::SAVE_DIR).join(Self::SAVE_PATH))
-    }
-
-    #[cfg(not(target_arch = "wasm32"))]
-    fn replace_atomically(temp_path: &Path, save_path: &Path) -> Result<(), String> {
-        if save_path.exists() {
-            std::fs::remove_file(save_path).map_err(|error| error.to_string())?;
-        }
-        std::fs::rename(temp_path, save_path).map_err(|error| error.to_string())
+        macroquad_toolkit::persistence::get_app_data_path(Self::SAVE_DIR, Self::SAVE_PATH)
+            .ok_or_else(|| "Could not resolve a user data directory for saves".to_owned())
     }
 }

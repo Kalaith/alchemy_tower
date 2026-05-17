@@ -372,14 +372,20 @@ impl GameplayState {
         {
             return ui_format(
                 "goal_accept_quest",
-                &[("title", &quest.title), ("location", &self.quest_location_hint(data, quest))],
+                &[
+                    ("title", &quest.title),
+                    ("location", &self.quest_location_hint(data, quest)),
+                ],
             );
         }
 
         if let Some(warp) = self.next_locked_warp(data) {
             return ui_format(
                 "goal_restore_route",
-                &[("label", &warp.label), ("requirements", &self.warp_requirement_summary(data, warp))],
+                &[
+                    ("label", &warp.label),
+                    ("requirements", &self.warp_requirement_summary(data, warp)),
+                ],
             );
         }
 

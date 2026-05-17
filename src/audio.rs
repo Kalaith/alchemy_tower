@@ -28,7 +28,11 @@ impl AudioAssets {
 
     pub fn play_footstep_for_area(&self, area_id: &str) {
         match area_id {
-            "tower_entry" | "archive_floor" | "containment_floor" | "rune_workshop_floor" | "observatory_floor" => {
+            "tower_entry"
+            | "archive_floor"
+            | "containment_floor"
+            | "rune_workshop_floor"
+            | "observatory_floor" => {
                 play_random(&self.footstep_stone, 0.34);
             }
             "greenhouse_floor" => play_random(&self.footstep_greenhouse, 0.30),

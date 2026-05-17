@@ -8,7 +8,9 @@ use crate::art::ArtAssets;
 use crate::content::ui_copy;
 use crate::data::GameData;
 use crate::state::{GameplayState, StateTransition};
-use crate::ui::{centered_panel_rect, draw_action_button, draw_panel_frame, draw_wrapped_text, inset_rect};
+use crate::ui::{
+    centered_panel_rect, draw_action_button, draw_panel_frame, draw_wrapped_text, inset_rect,
+};
 
 pub struct PauseState {
     gameplay: GameplayState,
@@ -60,7 +62,13 @@ impl PauseState {
             Color::from_rgba(0, 0, 0, 110),
         );
         draw_panel_frame(panel);
-        draw_text(ui_copy("pause_title"), panel.x + 24.0, panel.y + 48.0, 38.0, dark::TEXT_BRIGHT);
+        draw_text(
+            ui_copy("pause_title"),
+            panel.x + 24.0,
+            panel.y + 48.0,
+            38.0,
+            dark::TEXT_BRIGHT,
+        );
 
         draw_action_button(resume_button_rect(), ui_copy("pause_resume"), 20.0);
         draw_action_button(save_button_rect(), ui_copy("pause_save"), 20.0);

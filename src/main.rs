@@ -1,7 +1,7 @@
 use macroquad::prelude::*;
 
-mod art;
 mod alchemy;
+mod art;
 mod audio;
 mod content;
 mod data;

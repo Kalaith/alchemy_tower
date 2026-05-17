@@ -185,7 +185,9 @@ pub(super) fn room_bonus_applies(
         .favored_categories
         .iter()
         .any(|category| {
-            ingredients.iter().any(|item| item.category.as_str() == category)
+            ingredients
+                .iter()
+                .any(|item| item.category.as_str() == category)
                 || catalyst
                     .map(|item| item.category.as_str() == category)
                     .unwrap_or(false)

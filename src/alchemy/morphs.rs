@@ -1,5 +1,5 @@
-use crate::data::{GameData, ItemDefinition, RecipeDefinition};
 use crate::content::{ui_copy, ui_format};
+use crate::data::{GameData, ItemDefinition, RecipeDefinition};
 
 use super::matching::sequence_matches;
 
@@ -64,7 +64,10 @@ pub(super) fn morph_trigger_hint(
             })
             .unwrap_or(false)
     {
-        return Some(ui_format("morph_hint_catalyst", &[("tag", &morph.catalyst_tag)]));
+        return Some(ui_format(
+            "morph_hint_catalyst",
+            &[("tag", &morph.catalyst_tag)],
+        ));
     }
     if heat != morph.required_heat {
         return Some(ui_format(

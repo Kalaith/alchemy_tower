@@ -6,6 +6,7 @@ mod save_models;
 mod schema;
 
 pub use game_data::GameData;
+pub use loader::GameDataLoader;
 pub use save_models::{
     CraftedItemProfileEntry, ExperimentLogEntry, FieldJournalEntry, HerbMemoryEntry,
     InventoryEntry, PotionMemoryEntry, RecipeMasteryEntry, RelationshipEntry, SaveData,
@@ -14,7 +15,6 @@ pub use schema::{
     AreaDefinition, BlockerVisualStyle, EffectDefinition, EffectKind, ElementProfile, GameConfig,
     GatherNodeDefinition, GatheringRouteDefinition, HabitatStateEntry, ItemCategory,
     ItemDefinition, JournalMilestoneEntry, MutationFormulaDefinition, NpcDefinition,
-    PlanterStateEntry, QuestDefinition, RecipeDefinition, RectDefinition,
-    RuneRecipeDefinition, StationDefinition, StationKind, WarpDefinition,
+    PlanterStateEntry, QuestDefinition, RecipeDefinition, RectDefinition, RuneRecipeDefinition,
+    StationDefinition, StationKind, WarpDefinition,
 };
-pub use loader::GameDataLoader;

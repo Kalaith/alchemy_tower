@@ -1499,7 +1499,10 @@ impl GameplayState {
         } else {
             ui_format(
                 "gameplay_warp_lock_text",
-                &[("label", &warp.label), ("requirements", &requirement_summary)],
+                &[
+                    ("label", &warp.label),
+                    ("requirements", &requirement_summary),
+                ],
             )
         }
     }
@@ -1601,7 +1604,10 @@ impl GameplayState {
                             "gameplay_planter_tended_mutation",
                             &[
                                 ("station", &station.name),
-                                ("stage", planter_stage_label(state.growth_days, growth_target)),
+                                (
+                                    "stage",
+                                    planter_stage_label(state.growth_days, growth_target),
+                                ),
                                 ("mutation", &text),
                             ],
                         )
@@ -1610,7 +1616,10 @@ impl GameplayState {
                             "gameplay_planter_tended",
                             &[
                                 ("station", &station.name),
-                                ("stage", planter_stage_label(state.growth_days, growth_target)),
+                                (
+                                    "stage",
+                                    planter_stage_label(state.growth_days, growth_target),
+                                ),
                             ],
                         )
                     };
@@ -1626,7 +1635,10 @@ impl GameplayState {
                     "gameplay_planter_status",
                     &[
                         ("station", &station.name),
-                        ("stage", planter_stage_label(state.growth_days, growth_target)),
+                        (
+                            "stage",
+                            planter_stage_label(state.growth_days, growth_target),
+                        ),
                         ("days", &days_left.to_string()),
                     ],
                 );
@@ -1755,14 +1767,13 @@ impl GameplayState {
             state.placed_day = self.world.day_index;
             state.last_harvest_day = self.world.day_index;
             let milestone = &narrative_text().milestones.containment_started;
-            self.push_journal_milestone(
-                &milestone.id,
-                &milestone.title,
-                &milestone.text,
-            );
+            self.push_journal_milestone(&milestone.id, &milestone.title, &milestone.text);
             self.runtime.status_text = ui_format(
                 "gameplay_habitat_settled",
-                &[("item", data.item_name(&creature_id)), ("station", &station.name)],
+                &[
+                    ("item", data.item_name(&creature_id)),
+                    ("station", &station.name),
+                ],
             );
             return;
         }

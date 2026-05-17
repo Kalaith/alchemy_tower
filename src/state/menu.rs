@@ -8,7 +8,9 @@ use crate::art::{draw_character_frame, draw_texture_centered, ArtAssets};
 use crate::content::{input_bindings, ui_copy, ui_format};
 use crate::data::GameData;
 use crate::state::StateTransition;
-use crate::ui::{centered_panel_rect, draw_action_button, draw_panel_frame, draw_wrapped_text, inset_rect};
+use crate::ui::{
+    centered_panel_rect, draw_action_button, draw_panel_frame, draw_wrapped_text, inset_rect,
+};
 
 pub struct MenuState;
 
@@ -73,7 +75,13 @@ impl MenuState {
 
         draw_panel_frame(panel);
 
-        draw_text(ui_copy("menu_title"), panel.x + 28.0, panel.y + 60.0, 42.0, dark::TEXT_BRIGHT);
+        draw_text(
+            ui_copy("menu_title"),
+            panel.x + 28.0,
+            panel.y + 60.0,
+            42.0,
+            dark::TEXT_BRIGHT,
+        );
         draw_wrapped_text(
             ui_copy("menu_subtitle"),
             panel.x + 28.0,
@@ -84,7 +92,10 @@ impl MenuState {
             dark::TEXT,
         );
         draw_text(
-            &ui_format("menu_starting_area", &[("area", &data.config.starting_area)]),
+            &ui_format(
+                "menu_starting_area",
+                &[("area", &data.config.starting_area)],
+            ),
             panel.x + 28.0,
             panel.y + 165.0,
             22.0,

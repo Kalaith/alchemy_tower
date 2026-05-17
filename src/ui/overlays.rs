@@ -824,7 +824,10 @@ impl GameplayState {
                     &[("value", &morph.required_stirs.to_string())],
                 ),
                 if morph.catalyst_tag.is_empty() {
-                    ui_format("overlay_condition_catalyst", &[("value", ui_copy("overlay_any"))])
+                    ui_format(
+                        "overlay_condition_catalyst",
+                        &[("value", ui_copy("overlay_any"))],
+                    )
                 } else {
                     ui_format(
                         "overlay_condition_catalyst",
@@ -832,7 +835,10 @@ impl GameplayState {
                     )
                 },
                 if morph.required_timing.is_empty() {
-                    ui_format("overlay_condition_timing", &[("value", ui_copy("overlay_any"))])
+                    ui_format(
+                        "overlay_condition_timing",
+                        &[("value", ui_copy("overlay_any"))],
+                    )
                 } else {
                     ui_format(
                         "overlay_condition_timing",
@@ -978,9 +984,17 @@ impl GameplayState {
                     &[
                         (
                             "count",
-                            &self.inventory.get(item_id).copied().unwrap_or_default().to_string(),
+                            &self
+                                .inventory
+                                .get(item_id)
+                                .copied()
+                                .unwrap_or_default()
+                                .to_string(),
                         ),
-                        ("cost", &(item.base_value + u32::from(item.rarity) * 10).to_string()),
+                        (
+                            "cost",
+                            &(item.base_value + u32::from(item.rarity) * 10).to_string(),
+                        ),
                     ],
                 ),
             );
@@ -1883,7 +1897,12 @@ impl GameplayState {
         draw_panel(x, y, w, h, ui_copy("overlay_quest_board_title"));
         draw_overlay_subtitle(x, y, &ui_text().overlays.quest_board_subtitle);
         let available = self.available_board_quests(data);
-        draw_overlay_section_title(x + 20.0, y + 122.0, ui_copy("overlay_quest_available"), None);
+        draw_overlay_section_title(
+            x + 20.0,
+            y + 122.0,
+            ui_copy("overlay_quest_available"),
+            None,
+        );
         draw_overlay_section_box(x + 20.0, y + 136.0, w - 40.0, 232.0);
         let mut row_y = y + 168.0;
         if available.is_empty() {
@@ -2063,7 +2082,10 @@ impl GameplayState {
                             &[
                                 ("ready", &ready.to_string()),
                                 ("reserved", &self.reserved_count(item_id).to_string()),
-                                ("reference", &self.inventory_reference_summary(data, item_id)),
+                                (
+                                    "reference",
+                                    &self.inventory_reference_summary(data, item_id),
+                                ),
                             ],
                         ),
                     ),
@@ -2072,7 +2094,12 @@ impl GameplayState {
             }
         }
 
-        draw_overlay_section_title(x + 20.0, y + 270.0, ui_copy("overlay_alchemy_controls"), None);
+        draw_overlay_section_title(
+            x + 20.0,
+            y + 270.0,
+            ui_copy("overlay_alchemy_controls"),
+            None,
+        );
         draw_overlay_section_box(x + 18.0, y + 284.0, 286.0, 74.0);
         draw_wrapped_text(
             &ui_format(
@@ -2515,7 +2542,12 @@ impl GameplayState {
             );
         }
 
-        draw_overlay_section_title(x + 20.0, y + 392.0, ui_copy("overlay_alchemy_known_formulae"), None);
+        draw_overlay_section_title(
+            x + 20.0,
+            y + 392.0,
+            ui_copy("overlay_alchemy_known_formulae"),
+            None,
+        );
         draw_overlay_section_box(x + 18.0, y + 406.0, 286.0, 142.0);
         let mut ky = y + 424.0;
         let mut any_known = false;
