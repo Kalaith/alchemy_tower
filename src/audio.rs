@@ -1,5 +1,8 @@
-use macroquad::audio::{load_sound, play_sound, PlaySoundParams, Sound};
+use macroquad::audio::{load_sound, load_sound_from_bytes, play_sound, PlaySoundParams, Sound};
 use macroquad::rand::gen_range;
+use macroquad_toolkit::assets::AssetPack;
+
+const GENERATED_ASSET_PACK: &str = "assets/generated.zip";
 
 pub struct AudioAssets {
     footstep_stone: Vec<Sound>,
@@ -14,15 +17,18 @@ pub struct AudioAssets {
 
 impl AudioAssets {
     pub async fn load() -> Self {
+        let asset_pack = AssetPack::load(GENERATED_ASSET_PACK).await.ok();
+
         Self {
-            footstep_stone: load_variations("footstep_stone", 6).await,
-            footstep_dirt_path: load_variations("footstep_dirt_path", 6).await,
-            footstep_greenhouse: load_variations("footstep_greenhouse", 5).await,
-            gather_pickup: load_variations("gather_herb_pickup", 5).await,
-            alchemy_open: load_variations("alchemy_station_open", 2).await,
-            alchemy_stir: load_variations("alchemy_stir", 4).await,
-            brew_success: load_variations("brew_success", 3).await,
-            brew_collapse: load_variations("brew_collapse", 3).await,
+            footstep_stone: load_variations("footstep_stone", 6, asset_pack.as_ref()).await,
+            footstep_dirt_path: load_variations("footstep_dirt_path", 6, asset_pack.as_ref()).await,
+            footstep_greenhouse: load_variations("footstep_greenhouse", 5, asset_pack.as_ref())
+                .await,
+            gather_pickup: load_variations("gather_herb_pickup", 5, asset_pack.as_ref()).await,
+            alchemy_open: load_variations("alchemy_station_open", 2, asset_pack.as_ref()).await,
+            alchemy_stir: load_variations("alchemy_stir", 4, asset_pack.as_ref()).await,
+            brew_success: load_variations("brew_success", 3, asset_pack.as_ref()).await,
+            brew_collapse: load_variations("brew_collapse", 3, asset_pack.as_ref()).await,
         }
     }
 
@@ -61,10 +67,21 @@ impl AudioAssets {
     }
 }
 
-async fn load_variations(base_name: &str, count: usize) -> Vec<Sound> {
+async fn load_variations(
+    base_name: &str,
+    count: usize,
+    asset_pack: Option<&AssetPack>,
+) -> Vec<Sound> {
     let mut sounds = Vec::new();
     for index in 1..=count {
         let path = format!("assets/generated/audio/{base_name}_{index}.wav");
+        if let Some(bytes) = asset_pack.and_then(|pack| pack.bytes(&path)) {
+            if let Ok(sound) = load_sound_from_bytes(bytes).await {
+                sounds.push(sound);
+                continue;
+            }
+        }
+
         if let Ok(sound) = load_sound(&path).await {
             sounds.push(sound);
         }

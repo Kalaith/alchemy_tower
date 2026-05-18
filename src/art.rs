@@ -1,8 +1,8 @@
 use std::collections::HashMap;
-use std::fs;
 use std::sync::OnceLock;
 
 use macroquad::prelude::*;
+use macroquad_toolkit::assets::{AssetManager, TextureConfig};
 use serde::Deserialize;
 
 use crate::data::{
@@ -11,6 +11,7 @@ use crate::data::{
 };
 
 const PLAYER_ID: &str = "player_tower_alchemist";
+const GENERATED_ASSET_PACK: &str = "assets/generated.zip";
 
 #[derive(Debug, Deserialize)]
 struct UiArtCatalog {
@@ -32,36 +33,27 @@ struct UiIconAssetDefinition {
 }
 
 pub struct ArtAssets {
-    backgrounds: HashMap<String, Texture2D>,
-    characters: HashMap<String, Texture2D>,
-    stations: HashMap<String, Texture2D>,
-    item_icons: HashMap<String, Texture2D>,
-    world_nodes: HashMap<String, Texture2D>,
-    journal_tabs: HashMap<String, Texture2D>,
+    manager: AssetManager,
     journal_tab_bindings: HashMap<String, String>,
-    effects: HashMap<String, Texture2D>,
 }
 
 impl ArtAssets {
     pub async fn load(data: &GameData) -> Self {
-        let mut assets = Self {
-            backgrounds: HashMap::new(),
-            characters: HashMap::new(),
-            stations: HashMap::new(),
-            item_icons: HashMap::new(),
-            world_nodes: HashMap::new(),
-            journal_tabs: HashMap::new(),
-            journal_tab_bindings: HashMap::new(),
-            effects: HashMap::new(),
-        };
+        let mut manager = AssetManager::new();
+        manager.set_placeholder_texture_direct(transparent_placeholder_texture());
+        manager.load_asset_pack(GENERATED_ASSET_PACK).await.ok();
+
+        let mut texture_configs = Vec::new();
+        let mut journal_tab_bindings = HashMap::new();
         let catalog = ui_art_catalog();
 
         for area in &data.areas {
-            if let Some(texture) =
-                load_game_texture(&format!("assets/generated/areas/{}.png", area.id)).await
-            {
-                assets.backgrounds.insert(area.id.clone(), texture);
-            }
+            push_texture_config(
+                &mut texture_configs,
+                "background",
+                &area.id,
+                format!("assets/generated/areas/{}.png", area.id),
+            );
         }
 
         let mut character_ids = vec![PLAYER_ID.to_owned()];
@@ -69,73 +61,88 @@ impl ArtAssets {
         character_ids.sort();
         character_ids.dedup();
         for id in character_ids {
-            if let Some(texture) =
-                load_game_texture(&format!("assets/generated/characters/{id}.png")).await
-            {
-                assets.characters.insert(id.clone(), texture);
-            }
+            push_texture_config(
+                &mut texture_configs,
+                "character",
+                &id,
+                format!("assets/generated/characters/{id}.png"),
+            );
         }
 
         for station in &data.stations {
-            if let Some(texture) =
-                load_game_texture(&format!("assets/generated/stations/{}.png", station.id)).await
-            {
-                assets.stations.insert(station.id.clone(), texture);
-            }
+            push_texture_config(
+                &mut texture_configs,
+                "station",
+                &station.id,
+                format!("assets/generated/stations/{}.png", station.id),
+            );
         }
 
         for item in &data.items {
-            if let Some(texture) =
-                load_game_texture(&format!("assets/generated/items/icons/{}.png", item.id)).await
-            {
-                assets.item_icons.insert(item.id.clone(), texture);
-            }
+            push_texture_config(
+                &mut texture_configs,
+                "item_icon",
+                &item.id,
+                format!("assets/generated/items/icons/{}.png", item.id),
+            );
         }
 
-        if let Ok(entries) = fs::read_dir("assets/generated/items/world") {
-            let mut paths = entries
-                .filter_map(|entry| entry.ok())
-                .map(|entry| entry.path())
-                .filter(|path| path.extension().and_then(|ext| ext.to_str()) == Some("png"))
-                .collect::<Vec<_>>();
-            paths.sort();
-            for path in paths {
-                let Some(stem) = path.file_stem().and_then(|stem| stem.to_str()) else {
-                    continue;
-                };
-                if let Some(texture) = load_game_texture(&path.to_string_lossy()).await {
-                    assets.world_nodes.insert(stem.to_owned(), texture);
+        let mut world_node_ids = data
+            .areas
+            .iter()
+            .flat_map(|area| area.gather_nodes.iter())
+            .map(|node| {
+                if node.render.sprite_id.is_empty() {
+                    node.item_id.clone()
+                } else {
+                    node.render.sprite_id.clone()
                 }
-            }
+            })
+            .collect::<Vec<_>>();
+        world_node_ids.sort();
+        world_node_ids.dedup();
+        for id in world_node_ids {
+            push_texture_config(
+                &mut texture_configs,
+                "world_node",
+                &id,
+                format!("assets/generated/items/world/{id}.png"),
+            );
         }
 
         for binding in &catalog.journal_tabs {
-            assets
-                .journal_tab_bindings
-                .insert(binding.label.clone(), binding.icon_key.clone());
-            assets.journal_tabs.insert(
-                binding.icon_key.clone(),
-                load_game_texture(&binding.path)
-                    .await
-                    .unwrap_or_else(transparent_placeholder_texture),
+            journal_tab_bindings.insert(binding.label.clone(), binding.icon_key.clone());
+            push_texture_config(
+                &mut texture_configs,
+                "journal_tab",
+                &binding.icon_key,
+                binding.path.clone(),
             );
         }
 
         for effect in &catalog.effects {
-            if let Some(texture) = load_game_texture(&effect.path).await {
-                assets.effects.insert(effect.key.clone(), texture);
-            }
+            push_texture_config(
+                &mut texture_configs,
+                "effect",
+                &effect.key,
+                effect.path.clone(),
+            );
         }
 
-        assets
+        manager.load_texture_configs(&texture_configs).await;
+
+        Self {
+            manager,
+            journal_tab_bindings,
+        }
     }
 
     pub fn background(&self, id: &str) -> Option<&Texture2D> {
-        self.backgrounds.get(id)
+        self.texture("background", id)
     }
 
     pub fn character(&self, id: &str) -> Option<&Texture2D> {
-        self.characters.get(id)
+        self.texture("character", id)
     }
 
     pub fn player(&self) -> Option<&Texture2D> {
@@ -143,19 +150,20 @@ impl ArtAssets {
     }
 
     pub fn station(&self, id: &str) -> Option<&Texture2D> {
-        self.stations.get(id)
+        self.texture("station", id)
     }
 
     pub fn item_icon(&self, id: &str) -> Option<&Texture2D> {
-        self.item_icons.get(id)
+        self.texture("item_icon", id)
     }
 
     pub fn world_node(&self, id: &str) -> Option<&Texture2D> {
-        self.world_nodes.get(id)
+        self.texture("world_node", id)
     }
 
     pub fn journal_tab(&self, key: &str) -> Option<&Texture2D> {
-        self.journal_tabs.get(key)
+        self.manager
+            .get_texture_or_placeholder(&asset_key("journal_tab", key))
     }
 
     pub fn journal_tab_by_label(&self, label: &str) -> Option<&Texture2D> {
@@ -164,7 +172,11 @@ impl ArtAssets {
     }
 
     pub fn effect(&self, id: &str) -> Option<&Texture2D> {
-        self.effects.get(id)
+        self.texture("effect", id)
+    }
+
+    fn texture(&self, category: &str, id: &str) -> Option<&Texture2D> {
+        self.manager.get_texture(&asset_key(category, id))
     }
 }
 
@@ -595,21 +607,23 @@ pub fn draw_priority_marker(center: Vec2, color: Color) {
     draw_rectangle(center.x - 2.0, marker_y + 12.0, 4.0, 4.0, color);
 }
 
-async fn load_game_texture(path: &str) -> Option<Texture2D> {
-    match load_texture(path).await {
-        Ok(texture) => {
-            texture.set_filter(FilterMode::Nearest);
-            Some(texture)
-        }
-        Err(_) => None,
-    }
-}
-
 fn transparent_placeholder_texture() -> Texture2D {
     let image = Image::gen_image_color(8, 8, Color::from_rgba(255, 255, 255, 0));
     let texture = Texture2D::from_image(&image);
     texture.set_filter(FilterMode::Nearest);
     texture
+}
+
+fn push_texture_config(configs: &mut Vec<TextureConfig>, category: &str, id: &str, path: String) {
+    configs.push(TextureConfig {
+        key: asset_key(category, id),
+        path,
+        filter: None,
+    });
+}
+
+fn asset_key(category: &str, id: &str) -> String {
+    format!("{category}:{id}")
 }
 
 fn ui_art_catalog() -> &'static UiArtCatalog {
