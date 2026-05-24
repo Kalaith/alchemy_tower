@@ -255,18 +255,6 @@ impl GameplayState {
         }
     }
 
-    pub(super) fn active_quest_location_hint(&self, data: &GameData) -> Option<String> {
-        self.progression.started_quests.iter().find_map(|quest_id| {
-            let quest = data.quest(quest_id)?;
-            let npc = data.npc(&quest.giver_npc_id)?;
-            Some(format!(
-                "Now {}  |  Later {}",
-                self.npc_now_hint(data, npc),
-                self.npc_later_hint(data, npc)
-            ))
-        })
-    }
-
     pub(super) fn nearby_npc<'a>(&self, data: &'a GameData) -> Option<&'a NpcDefinition> {
         self.visible_npcs(data).into_iter().find(|npc| {
             self.world

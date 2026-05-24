@@ -644,24 +644,6 @@ pub(super) fn rgba(values: [u8; 4]) -> Color {
     Color::from_rgba(values[0], values[1], values[2], values[3])
 }
 
-pub(super) fn clock_text(day_clock_seconds: f32, full_day_seconds: f32) -> String {
-    let total_minutes = ((day_clock_seconds / full_day_seconds) * 24.0 * 60.0) as i32;
-    format!(
-        "{:02}:{:02}",
-        (total_minutes / 60).rem_euclid(24),
-        total_minutes.rem_euclid(60)
-    )
-}
-
-pub(super) fn effect_name(kind: EffectKind) -> &'static str {
-    match kind {
-        EffectKind::Glow => ui_copy("effect_name_glow"),
-        EffectKind::Speed => ui_copy("effect_name_speed"),
-        EffectKind::Misfire => ui_copy("effect_name_misfire"),
-        EffectKind::Restore => ui_copy("effect_name_restore"),
-    }
-}
-
 pub(super) fn quality_band_rank(band: &str) -> u8 {
     match band {
         value if value == ui_copy("quality_band_crude") => 0,

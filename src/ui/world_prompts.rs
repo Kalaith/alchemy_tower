@@ -133,6 +133,28 @@ impl GameplayState {
             }
         }
 
+        if let Some(station) = self
+            .visible_stations(data)
+            .into_iter()
+            .filter(|station| station.area_id == area.id)
+            .find(|station| {
+                station.kind == StationKind::Alchemy
+                    && self.station_world_label(data, station).is_some()
+            })
+        {
+            return Some(WorldPromptView {
+                position: vec2(
+                    offset.x + station.position[0],
+                    offset.y + station.position[1] - 42.0,
+                ),
+                text: format!(
+                    "E/{}: {}",
+                    input_bindings().alchemy.open,
+                    ui_text().prompts.open_alchemy
+                ),
+            });
+        }
+
         if let Some(warp) = area
             .warps
             .iter()

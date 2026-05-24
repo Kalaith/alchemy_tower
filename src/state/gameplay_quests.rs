@@ -112,13 +112,6 @@ impl GameplayState {
         }
     }
 
-    pub(super) fn active_quest_title<'a>(&'a self, data: &'a GameData) -> Option<&'a str> {
-        self.progression
-            .started_quests
-            .iter()
-            .find_map(|quest_id| data.quest(quest_id).map(|quest| quest.title.as_str()))
-    }
-
     pub(super) fn handle_quest_board_inputs(&mut self, data: &GameData) {
         if is_key_pressed(KeyCode::Escape) {
             self.clear_overlay();

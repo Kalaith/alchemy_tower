@@ -23,12 +23,14 @@ This file describes what the game currently supports based on the source code an
   - `sunscar_desert`: dune lanes, exposed stone scars, and sparse shelter pockets
   - `tropical_rainforest`: layered jungle paths, root arches, and wet clearings
 - Camera follow, impact shake, and immediate-mode UI panels/prompts.
-- Gameplay HUD now uses:
-  - compact vitality/coins and time/day/weather cards
-  - a one-line goal tracker with quest detail when relevant
-  - a temporary area-name banner on room entry
-  - a bottom quick-belt slot bar for potions
-  - a hover-expand right drawer for inventory and active effects
+- Gameplay HUD now uses an ornate workshop-journal presentation with layered warm backing plates and cut-corner brass panel frames:
+  - a carved circular vitality medallion with brass ticks, wreath accents, a connector flourish, and a backed brass coin chip with an embossed coin face
+  - a parchment-style current-goal note with title, request description, location hint, item badge, stitched margin details, an inner note sheet, and a framed requirement/action strip
+  - a permanent top-center location banner with subtitle cap plates, inner brass rails, side medallions, rivets, and a mounted center gem
+  - a time/day/weather plaque with inset bands, rivets, and a mounted sun medallion, paired with a decorative compass frame with map ticks and a brass/teal rosette
+  - a right-side bag/effects/journal status plaque with carved rails, rivets, section medallions, and ornamental dividers
+  - stacked notched control tags and a bottom framed potion belt with inner rails, brass endcaps, glass bottle glows, and textured slot frames
+  - subtle HUD-owned workshop atmosphere with teal/warm light pools, edge vignette, foliage silhouettes, and brass filigree knots
 - Day clock, day rollover, weather state, season state, and time-of-day windows.
 - Rest bed on the tower entry floor with voluntary sleep-to-morning interaction.
 - Pause menu save/load actions, with `F5` and `F9` retained as secondary gameplay/pause shortcuts.
@@ -37,6 +39,8 @@ This file describes what the game currently supports based on the source code an
   - HUD time warning turns yellow after midnight
   - hitting 01:00 forces a collapse wake-up at 10:00 back at the tower bed with a full-screen warning flash
 - In-world route/station/NPC prompts with contextual requirement or readiness messaging.
+- In-world station names and priority markers now draw as compact beveled marker plates instead of bare map text.
+- Early alchemy guidance now surfaces a lower-right `Brew Cauldron` action prompt with matching brass flourishes and a carved key medallion while the entry cauldron is the active priority station.
 - First-run contextual tutorial hint timing for:
   - Crow-led first gather and first brew guidance
   - save/load

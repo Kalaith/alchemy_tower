@@ -41,6 +41,7 @@ Tasks:
 - [x] Add a compact gameplay controls strip such as `E interact`, `J journal`, and `Esc pause`.
 - [x] Replace the always-on multi-panel HUD with a compact status layout, slot-based potion belt, and collapsible right-side drawer.
 - [x] Review inventory/effects/potion panel spacing at common desktop and smaller window sizes.
+- [x] Rework the gameplay HUD toward an ornate field-journal/tower-workshop style with layered warm backing plates, cut-corner brass panels, brass filigree knots, a connected carved/ticked medallion and coin-chip cluster, structured journal-style goal note with item badge and framed action strip, carved title banner, notched control tags, inset time/weather plaque, map-ticked compass frame, carved right-side status plaque, status icons, subtle workshop atmosphere, ornate lower-right action prompt, and a rail-framed textured glass-potion belt.
 
 ## 3. Control Discoverability and Onboarding
 
@@ -51,6 +52,8 @@ Tasks:
 - [x] Expand menu control copy to surface the most important actions before gameplay starts.
 - [x] Add first-run tutorial toasts for journal, brewing, potion belt use, and save/load.
 - [x] Show contextual prompts for nearby stations more aggressively.
+- [x] Surface the early `Brew Cauldron` prompt as a HUD-style primary action while the cauldron is the priority station.
+- [x] Restyle station names and priority markers as compact ornate in-world plates.
 - [x] Make alchemy-specific controls easier to parse inside the alchemy overlay.
 - [x] Review whether save/load controls should remain developer-like shortcuts or move into pause/menu UI.
 
