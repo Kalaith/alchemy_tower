@@ -802,12 +802,17 @@ impl GameplayState {
             };
     }
 
-    pub fn load_progress(&mut self, data: &GameData) {
-        self.runtime.status_text =
-            match gameplay_persistence::GameplayStateLoader::load_slot(self, data) {
-                Ok(()) => ui_format("gameplay_loaded_progress", &[]),
-                Err(error) => ui_format("gameplay_load_failed", &[("error", &error)]),
-            };
+    pub fn load_progress(&mut self, data: &GameData) -> bool {
+        match gameplay_persistence::GameplayStateLoader::load_slot(self, data) {
+            Ok(()) => {
+                self.runtime.status_text = ui_format("gameplay_loaded_progress", &[]);
+                true
+            }
+            Err(error) => {
+                self.runtime.status_text = ui_format("gameplay_load_failed", &[("error", &error)]);
+                false
+            }
+        }
     }
 
     pub fn pause_status_text(&self) -> &str {

@@ -19,9 +19,21 @@ impl SaveRepository {
         macroquad_toolkit::persistence::save_string_atomic(Self::save_path()?, &json)
     }
 
+    #[cfg(not(target_arch = "wasm32"))]
+    pub fn exists() -> bool {
+        Self::save_path()
+            .map(|path| path.exists())
+            .unwrap_or_default()
+    }
+
     #[cfg(target_arch = "wasm32")]
     pub fn save(_save_data: &SaveData) -> Result<(), String> {
         Err("Save is not wired for wasm yet".to_owned())
+    }
+
+    #[cfg(target_arch = "wasm32")]
+    pub fn exists() -> bool {
+        false
     }
 
     #[cfg(not(target_arch = "wasm32"))]

@@ -2,7 +2,7 @@ use std::collections::HashMap;
 use std::sync::OnceLock;
 
 use macroquad::prelude::*;
-use macroquad_toolkit::assets::{AssetManager, TextureConfig};
+use macroquad_toolkit::assets::{AssetManager, TextureConfig, TextureFilter};
 use serde::Deserialize;
 
 use crate::data::{
@@ -15,6 +15,8 @@ const GENERATED_ASSET_PACK: &str = "assets/generated.zip";
 
 #[derive(Debug, Deserialize)]
 struct UiArtCatalog {
+    #[serde(default)]
+    title_screens: Vec<UiIconAssetDefinition>,
     journal_tabs: Vec<JournalTabIconBinding>,
     effects: Vec<UiIconAssetDefinition>,
 }
@@ -129,6 +131,16 @@ impl ArtAssets {
             );
         }
 
+        for title_screen in &catalog.title_screens {
+            push_texture_config_with_filter(
+                &mut texture_configs,
+                "title_screen",
+                &title_screen.key,
+                title_screen.path.clone(),
+                TextureFilter::Linear,
+            );
+        }
+
         manager.load_texture_configs(&texture_configs).await;
 
         Self {
@@ -175,9 +187,43 @@ impl ArtAssets {
         self.texture("effect", id)
     }
 
+    pub fn title_screen(&self, id: &str) -> Option<&Texture2D> {
+        self.texture("title_screen", id)
+    }
+
     fn texture(&self, category: &str, id: &str) -> Option<&Texture2D> {
         self.manager.get_texture(&asset_key(category, id))
     }
+}
+
+pub fn draw_texture_cover(texture: &Texture2D, rect: Rect, tint: Color) {
+    let texture_width = texture.width();
+    let texture_height = texture.height();
+    if texture_width <= 0.0 || texture_height <= 0.0 || rect.w <= 0.0 || rect.h <= 0.0 {
+        return;
+    }
+
+    let texture_aspect = texture_width / texture_height;
+    let rect_aspect = rect.w / rect.h;
+    let source = if texture_aspect > rect_aspect {
+        let width = texture_height * rect_aspect;
+        Rect::new((texture_width - width) * 0.5, 0.0, width, texture_height)
+    } else {
+        let height = texture_width / rect_aspect;
+        Rect::new(0.0, (texture_height - height) * 0.5, texture_width, height)
+    };
+
+    draw_texture_ex(
+        texture,
+        rect.x,
+        rect.y,
+        tint,
+        DrawTextureParams {
+            source: Some(source),
+            dest_size: Some(vec2(rect.w, rect.h)),
+            ..Default::default()
+        },
+    );
 }
 
 pub fn draw_texture_centered(texture: &Texture2D, center: Vec2, size: Vec2, tint: Color) {
@@ -619,6 +665,20 @@ fn push_texture_config(configs: &mut Vec<TextureConfig>, category: &str, id: &st
         key: asset_key(category, id),
         path,
         filter: None,
+    });
+}
+
+fn push_texture_config_with_filter(
+    configs: &mut Vec<TextureConfig>,
+    category: &str,
+    id: &str,
+    path: String,
+    filter: TextureFilter,
+) {
+    configs.push(TextureConfig {
+        key: asset_key(category, id),
+        path,
+        filter: Some(filter),
     });
 }
 

@@ -43,7 +43,7 @@ impl Game {
             .take()
             .expect("game state should always be present during update");
         let transition = match &mut current_state {
-            GameState::Menu(state) => state.update(),
+            GameState::Menu(state) => state.update(&self.data),
             GameState::Gameplay(state) => state.update(&self.data, &self.audio),
             GameState::Paused(state) => state.update(&self.data),
         };
@@ -70,7 +70,7 @@ impl Game {
 
     fn apply_transition(&self, current_state: GameState, transition: StateTransition) -> GameState {
         match transition {
-            StateTransition::StartGame => GameState::Gameplay(GameplayState::new(&self.data)),
+            StateTransition::EnterGameplay(gameplay) => GameState::Gameplay(gameplay),
             StateTransition::ReturnToMenu => GameState::Menu(MenuState::new()),
             StateTransition::Pause => match current_state {
                 GameState::Gameplay(gameplay) => GameState::Paused(PauseState::new(gameplay)),

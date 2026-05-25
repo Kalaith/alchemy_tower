@@ -1,5 +1,11 @@
 {
   "default_toast_icon": "best_quality",
+  "title_screens": [
+    {
+      "key": "main",
+      "path": "assets/generated/ui/title_screen.png"
+    }
+  ],
   "journal_tabs": [
     {
       "label": "Routes",

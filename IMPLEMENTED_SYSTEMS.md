@@ -8,6 +8,9 @@ This file describes what the game currently supports based on the source code an
 - JSON-driven content loading through embedded split `game_data_*.json` files.
 - Native JSON save/load support with versioned save data.
 - Filesystem-backed generated texture loading for world, character, item, UI, and effect art under `assets/generated/`.
+- The title screen uses a dedicated UI art image with centered title treatment and title actions for `New Game`, `Load Game`, and `Settings`, with gameplay-area background art retained as a fallback.
+- `Load Game` checks for an existing save before loading and reports when no save exists.
+- Title-screen settings include an immediate fullscreen toggle, also available with `F11` while the settings view is open.
 - Filesystem-backed generated placeholder audio loading for footsteps, herb pickup, station open, stirring, and brew result cues under `assets/generated/audio/`.
 
 ## Core Exploration

@@ -49,7 +49,7 @@ Why:
 - The MVP already has many useful inputs, but several of them are learned only by reading footer text or code.
 
 Tasks:
-- [x] Expand menu control copy to surface the most important actions before gameplay starts.
+- [x] Replace the startup control-copy menu with a proper title screen action stack, load feedback, and a fullscreen settings toggle; gameplay controls now surface through the HUD, pause screen, and station overlays.
 - [x] Add first-run tutorial toasts for journal, brewing, potion belt use, and save/load.
 - [x] Show contextual prompts for nearby stations more aggressively.
 - [x] Surface the early `Brew Cauldron` prompt as a HUD-style primary action while the cauldron is the priority station.

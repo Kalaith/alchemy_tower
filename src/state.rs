@@ -8,9 +8,8 @@ pub use gameplay::GameplayState;
 pub use menu::MenuState;
 pub use pause::PauseState;
 
-#[derive(Clone, Copy, Debug)]
 pub enum StateTransition {
-    StartGame,
+    EnterGameplay(GameplayState),
     ReturnToMenu,
     Pause,
     ResumeGame,

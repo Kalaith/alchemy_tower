@@ -1,6 +1,6 @@
 use super::*;
 use crate::art::{draw_texture_centered, ArtAssets};
-use crate::content::{ui_copy, ui_format};
+use crate::content::{input_bindings, ui_copy, ui_format};
 use crate::ui::{draw_wrapped_text, truncate_text_to_width};
 
 const HOTBAR_SLOT_COUNT: usize = 8;
@@ -835,10 +835,19 @@ fn draw_control_tags() {
     let x = 22.0;
     let y = screen_height() - 184.0;
     let rows = [
-        ("Tab", ui_copy("hud_control_alchemy")),
-        ("J", ui_copy("hud_drawer_journal")),
+        (
+            input_bindings().alchemy.open.as_str(),
+            ui_copy("hud_control_alchemy"),
+        ),
+        (
+            input_bindings().global.journal.as_str(),
+            ui_copy("hud_drawer_journal"),
+        ),
         ("V", ui_copy("hud_control_sort")),
-        ("Esc", ui_copy("hud_control_pause")),
+        (
+            input_bindings().global.cancel.as_str(),
+            ui_copy("hud_control_pause"),
+        ),
     ];
     for (index, (key, label)) in rows.iter().enumerate() {
         draw_control_tag(
