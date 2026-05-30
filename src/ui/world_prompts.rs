@@ -1,6 +1,8 @@
-use super::*;
-use crate::content::{ui_copy, ui_format};
+use super::GameplayState;
+use crate::content::{input_bindings, ui_copy, ui_format, ui_text};
+use crate::data::{AreaDefinition, GameData, StationKind};
 use crate::ui::draw_interaction_prompt;
+use macroquad::prelude::*;
 
 struct WorldPromptView {
     position: Vec2,

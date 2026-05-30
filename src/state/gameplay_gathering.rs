@@ -1,10 +1,12 @@
 use super::gameplay_support::rgba;
-use super::*;
+use super::{FieldDiscoveryFeedback, GatherFeedback, GatherToast, GameplayState};
 use crate::content::{ui_copy, ui_format};
+use crate::data::{GameData, GatherNodeDefinition, HerbMemoryEntry, ItemCategory};
+use macroquad::prelude::*;
 use std::collections::BTreeSet;
 
 impl GameplayState {
-    pub(super) fn node_is_available(&self, node: &crate::data::GatherNodeDefinition) -> bool {
+    pub(super) fn node_is_available(&self, node: &GatherNodeDefinition) -> bool {
         self.world.available_nodes.contains(&node.id)
     }
 
@@ -55,7 +57,7 @@ impl GameplayState {
     pub(super) fn gather_attempt_status(
         &self,
         _data: &GameData,
-        node: &crate::data::GatherNodeDefinition,
+        node: &GatherNodeDefinition,
     ) -> String {
         if self.item_has_field_notes(&node.item_id) {
             ui_format("gather_attempt_known", &[("name", &node.name)])
@@ -124,7 +126,7 @@ impl GameplayState {
     pub(super) fn record_field_discovery(
         &mut self,
         data: &GameData,
-        node: &crate::data::GatherNodeDefinition,
+        node: &GatherNodeDefinition,
     ) -> FieldDiscoveryFeedback {
         let (best_quality, variant_name) = self
             .current_item_quality_snapshot(data, node.item_id.as_str())
@@ -180,7 +182,7 @@ impl GameplayState {
     pub(super) fn trigger_gather_feedback(
         &mut self,
         data: &GameData,
-        node: &crate::data::GatherNodeDefinition,
+        node: &GatherNodeDefinition,
         discovery: &FieldDiscoveryFeedback,
     ) {
         let center = vec2(node.position[0], node.position[1]);
@@ -230,7 +232,7 @@ impl GameplayState {
     pub(super) fn gather_status_text(
         &self,
         data: &GameData,
-        node: &crate::data::GatherNodeDefinition,
+        node: &GatherNodeDefinition,
         discovery: &FieldDiscoveryFeedback,
     ) -> String {
         let route_name = data
