@@ -1,6 +1,9 @@
 use super::GameplayState;
 use crate::data::{GameData, StationKind};
-use macroquad::prelude::{is_key_pressed, KeyCode};
+use crate::input::{
+    confirm_pressed, select_next_pressed, select_previous_pressed, sort_pressed,
+    switch_next_pressed, switch_previous_pressed,
+};
 
 impl GameplayState {
     pub(super) fn handle_shop_inputs(&mut self, data: &GameData) {
@@ -13,14 +16,14 @@ impl GameplayState {
             return;
         }
 
-        if is_key_pressed(KeyCode::Left) || is_key_pressed(KeyCode::Right) {
+        if switch_previous_pressed() || switch_next_pressed() {
             self.ui.shop_buy_tab = !self.ui.shop_buy_tab;
             self.ui.shop_index = 0;
         }
-        if is_key_pressed(KeyCode::Up) {
+        if select_previous_pressed() {
             self.ui.shop_index = self.ui.shop_index.saturating_sub(1);
         }
-        if is_key_pressed(KeyCode::Down) {
+        if select_next_pressed() {
             let max_index = if self.ui.shop_buy_tab {
                 station.stock.len().saturating_sub(1)
             } else {
@@ -28,11 +31,11 @@ impl GameplayState {
             };
             self.ui.shop_index = (self.ui.shop_index + 1).min(max_index);
         }
-        if is_key_pressed(KeyCode::V) {
+        if sort_pressed() {
             self.cycle_inventory_sort_mode();
             self.ui.shop_index = 0;
         }
-        if is_key_pressed(KeyCode::Enter) {
+        if confirm_pressed() {
             if self.ui.shop_buy_tab {
                 if let Some(stock) = station.stock.get(self.ui.shop_index) {
                     self.buy_item(data, &stock.item_id, stock.price);

@@ -1,11 +1,12 @@
-use super::gameplay_npc_pathing::{
-    clamp_npc_point, matching_arrival_position, point_outside_path_blockers, segment_is_clear,
-    warp_center,
+use super::gameplay_npc_pathing::{matching_arrival_position, warp_center};
+use super::gameplay_path_geometry::{
+    clamp_npc_point, point_outside_path_blockers, segment_is_clear,
 };
-use super::{GameplayState, TravelSegment, PLAYER_RADIUS};
+use super::gameplay_npc_types::TravelSegment;
+use super::gameplay_world_types::PLAYER_RADIUS;
+use super::GameplayState;
 use crate::data::{AreaDefinition, GameData};
 use macroquad::prelude::{vec2, Vec2};
-use std::collections::BTreeMap;
 
 impl GameplayState {
     pub(super) fn travel_segments(
@@ -156,43 +157,4 @@ impl GameplayState {
         order.into_iter().map(|index| nodes[index]).collect()
     }
 
-    pub(super) fn area_path(
-        &self,
-        data: &GameData,
-        start_area_id: &str,
-        target_area_id: &str,
-    ) -> Option<Vec<String>> {
-        let mut frontier = vec![start_area_id.to_owned()];
-        let mut came_from = BTreeMap::<String, (String, String)>::new();
-        let mut index = 0;
-
-        while index < frontier.len() {
-            let area_id = frontier[index].clone();
-            index += 1;
-            if area_id == target_area_id {
-                break;
-            }
-            let area = data.area(&area_id)?;
-            for warp in &area.warps {
-                if !came_from.contains_key(&warp.target_area) && warp.target_area != start_area_id {
-                    came_from.insert(warp.target_area.clone(), (area_id.clone(), warp.id.clone()));
-                    frontier.push(warp.target_area.clone());
-                }
-            }
-        }
-
-        if start_area_id != target_area_id && !came_from.contains_key(target_area_id) {
-            return None;
-        }
-
-        let mut path = Vec::<String>::new();
-        let mut current = target_area_id.to_owned();
-        while current != start_area_id {
-            let (previous_area, warp_id) = came_from.get(&current)?.clone();
-            path.push(warp_id);
-            current = previous_area;
-        }
-        path.reverse();
-        Some(path)
-    }
 }

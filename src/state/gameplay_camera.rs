@@ -1,5 +1,7 @@
 use super::gameplay_npc::npc_motion_seed;
-use super::{GameplayState, NpcRuntimeState, CAMERA_PADDING, PLAYER_RADIUS};
+use super::gameplay_npc_types::NpcRuntimeState;
+use super::gameplay_world_types::{CAMERA_PADDING, PLAYER_RADIUS};
+use super::GameplayState;
 use crate::data::{AreaDefinition, NpcDefinition};
 use macroquad::prelude::{get_time, screen_height, screen_width, vec2, Vec2};
 

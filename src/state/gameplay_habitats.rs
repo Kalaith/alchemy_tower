@@ -1,8 +1,28 @@
 use super::GameplayState;
-use crate::content::{narrative_text, ui_format};
+use crate::content::{narrative_text, ui_copy, ui_format};
 use crate::data::{GameData, HabitatStateEntry, StationDefinition};
 
 impl GameplayState {
+    pub(super) fn habitat_prompt_text(&self, station: &StationDefinition) -> String {
+        self.progression
+            .habitat_states
+            .get(&station.id)
+            .map(|habitat| {
+                if habitat.creature_item_id.is_empty() {
+                    ui_copy("world_prompt_habitat_place").to_owned()
+                } else if self.world.day_index
+                    >= habitat
+                        .last_harvest_day
+                        .saturating_add(station.habitat_harvest_days.max(1))
+                {
+                    ui_copy("world_prompt_habitat_harvest").to_owned()
+                } else {
+                    ui_copy("world_prompt_habitat_check").to_owned()
+                }
+            })
+            .unwrap_or_else(|| ui_copy("world_prompt_habitat_place").to_owned())
+    }
+
     pub(super) fn interact_with_habitat(&mut self, data: &GameData, station: &StationDefinition) {
         let candidate = self
             .inventory

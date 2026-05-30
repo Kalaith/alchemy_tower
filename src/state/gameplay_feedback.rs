@@ -1,4 +1,6 @@
+use super::gameplay_feedback_types::{GatherFeedback, GatherToast};
 use super::GameplayState;
+use macroquad::prelude::{Color, Vec2};
 
 impl GameplayState {
     pub(super) fn update_active_effects(&mut self, frame_time: f32) {
@@ -35,4 +37,43 @@ impl GameplayState {
             .retain(|feedback| feedback.remaining_seconds > 0.0);
     }
 
+    pub(super) fn push_event_toast(&mut self, text: impl Into<String>, color: Color) {
+        self.push_event_toast_with_icon(text, color, "");
+    }
+
+    pub(super) fn push_event_toast_with_icon(
+        &mut self,
+        _text: impl Into<String>,
+        _color: Color,
+        _icon_key: &str,
+    ) {
+        self.runtime.gather_toasts.insert(
+            0,
+            GatherToast {
+                remaining_seconds: 2.2,
+            },
+        );
+        self.runtime.gather_toasts.truncate(3);
+    }
+
+    pub(super) fn trigger_camera_shake(&mut self, seconds: f32, intensity: f32) {
+        self.runtime.camera_shake_seconds = self.runtime.camera_shake_seconds.max(seconds);
+        self.runtime.camera_shake_intensity = self.runtime.camera_shake_intensity.max(intensity);
+    }
+
+    pub(super) fn trigger_world_feedback(
+        &mut self,
+        position: Vec2,
+        color: Color,
+        emphasis: bool,
+        burst_scale: f32,
+    ) {
+        self.runtime.gather_feedbacks.push(GatherFeedback {
+            position,
+            remaining_seconds: if emphasis { 0.9 } else { 0.55 },
+            color,
+            emphasis,
+            burst_scale,
+        });
+    }
 }

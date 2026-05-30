@@ -2,32 +2,37 @@ use crate::content::ui_copy;
 use crate::data::{GameData, RecipeDefinition, StationDefinition};
 
 use super::fallback::{fallback_traits, infer_trait_output, salvage_quality};
-use super::matching::{match_recipe, selected_item_defs, total_elements};
-use super::morphs::{morph_output, morph_trigger_hint};
-use super::quality::{calculate_quality, quality_band, room_bonus_applies};
-use super::traits::inherited_traits;
+use super::matching::{match_recipe, selected_item_defs};
+use super::quality::quality_band;
 
-pub struct BrewResolution<'a> {
-    pub recipe: Option<&'a RecipeDefinition>,
-    pub output_item_id: String,
-    pub output_amount: u32,
-    pub process_match: bool,
-    pub quality_score: u32,
-    pub quality_band: &'static str,
-    pub inherited_traits: Vec<String>,
-    pub mastery_stage: &'static str,
-    pub morph_output_item_id: Option<String>,
-    pub timing_match: bool,
-    pub sequence_match: bool,
-    pub catalyst_match: bool,
-    pub room_bonus_applied: bool,
-    pub minimum_quality_met: bool,
-    pub minimum_elements_met: bool,
-    pub failure_reasons: Vec<String>,
-    pub morph_hint: Option<String>,
+#[path = "brewing_known.rs"]
+mod brewing_known;
+#[path = "brewing_failures.rs"]
+mod brewing_failures;
+
+use self::brewing_known::resolve_known_recipe_brew;
+
+pub(crate) struct BrewResolution<'a> {
+    pub(crate) recipe: Option<&'a RecipeDefinition>,
+    pub(crate) output_item_id: String,
+    pub(crate) output_amount: u32,
+    pub(crate) process_match: bool,
+    pub(crate) quality_score: u32,
+    pub(crate) quality_band: &'static str,
+    pub(crate) inherited_traits: Vec<String>,
+    pub(crate) mastery_stage: &'static str,
+    pub(crate) morph_output_item_id: Option<String>,
+    pub(crate) timing_match: bool,
+    pub(crate) sequence_match: bool,
+    pub(crate) catalyst_match: bool,
+    pub(crate) room_bonus_applied: bool,
+    pub(crate) minimum_quality_met: bool,
+    pub(crate) minimum_elements_met: bool,
+    pub(crate) failure_reasons: Vec<String>,
+    pub(crate) morph_hint: Option<String>,
 }
 
-pub fn resolve_brew<'a>(
+pub(crate) fn resolve_brew<'a>(
     data: &'a GameData,
     station: &StationDefinition,
     selected_items: &[String],
@@ -38,112 +43,17 @@ pub fn resolve_brew<'a>(
     mastery_brews: u32,
 ) -> BrewResolution<'a> {
     if let Some(recipe) = match_recipe(data, station, selected_items) {
-        let ingredient_items = selected_item_defs(data, selected_items);
-        let catalyst = catalyst_item.and_then(|item_id| data.item(item_id));
-        let timing_match = recipe.required_timing.is_empty() || recipe.required_timing == timing;
-        let sequence_match =
-            super::matching::sequence_matches(data, selected_items, &recipe.required_sequence);
-        let catalyst_match = recipe.catalyst_tag.is_empty()
-            || catalyst
-                .map(|item| {
-                    item.catalyst_tags
-                        .iter()
-                        .any(|tag| tag == &recipe.catalyst_tag)
-                })
-                .unwrap_or(false);
-        let elements = total_elements(&ingredient_items, catalyst);
-        let minimum_elements_met = elements.meets(&recipe.minimum_elements);
-        let room_bonus_applied = room_bonus_applies(station, &ingredient_items, catalyst);
-        let quality_score = calculate_quality(
-            recipe,
+        return resolve_known_recipe_brew(
+            data,
             station,
-            &ingredient_items,
-            catalyst,
+            selected_items,
+            catalyst_item,
             heat,
             stirs,
-            timing_match,
-            sequence_match,
-            catalyst_match,
-            room_bonus_applied,
-            minimum_elements_met,
+            timing,
             mastery_brews,
-        );
-        let minimum_quality_met = quality_score >= recipe.minimum_quality;
-        let process_match = recipe.required_heat == heat
-            && recipe.required_stirs == stirs
-            && timing_match
-            && sequence_match
-            && catalyst_match;
-        let stable = process_match && minimum_quality_met && minimum_elements_met;
-        let inherited_traits = inherited_traits(recipe, &ingredient_items, catalyst);
-        let morph_output_item_id = if stable {
-            morph_output(
-                data,
-                recipe,
-                quality_score,
-                catalyst,
-                heat,
-                stirs,
-                timing,
-                selected_items,
-                room_bonus_applied,
-            )
-        } else {
-            None
-        };
-        let failure_reasons = brew_failure_reasons(
             recipe,
-            heat,
-            stirs,
-            timing_match,
-            sequence_match,
-            catalyst_match,
-            minimum_quality_met,
-            minimum_elements_met,
         );
-        let morph_hint = if stable && morph_output_item_id.is_none() {
-            morph_trigger_hint(
-                data,
-                recipe,
-                quality_score,
-                catalyst,
-                heat,
-                stirs,
-                timing,
-                selected_items,
-                room_bonus_applied,
-            )
-        } else {
-            None
-        };
-        let output_item_id = morph_output_item_id.clone().unwrap_or_else(|| {
-            if stable {
-                recipe.output_item_id.clone()
-            } else {
-                recipe.unstable_output_item_id.clone()
-            }
-        });
-        let output_amount = recipe.output_amount + mastery_output_bonus(mastery_brews);
-
-        return BrewResolution {
-            recipe: Some(recipe),
-            output_item_id,
-            output_amount,
-            process_match,
-            quality_score,
-            quality_band: quality_band(quality_score),
-            inherited_traits,
-            mastery_stage: super::quality::mastery_stage(mastery_brews + u32::from(stable)),
-            morph_output_item_id,
-            timing_match,
-            sequence_match,
-            catalyst_match,
-            room_bonus_applied,
-            minimum_quality_met,
-            minimum_elements_met,
-            failure_reasons,
-            morph_hint,
-        };
     }
 
     let ingredient_items = selected_item_defs(data, selected_items);
@@ -167,56 +77,5 @@ pub fn resolve_brew<'a>(
         minimum_elements_met: false,
         failure_reasons: vec![ui_copy("brew_failure_no_recipe").to_owned()],
         morph_hint: None,
-    }
-}
-
-fn brew_failure_reasons(
-    recipe: &RecipeDefinition,
-    heat: i32,
-    stirs: u32,
-    timing_match: bool,
-    sequence_match: bool,
-    catalyst_match: bool,
-    minimum_quality_met: bool,
-    minimum_elements_met: bool,
-) -> Vec<String> {
-    let mut reasons = Vec::new();
-
-    if heat < recipe.required_heat {
-        reasons.push(ui_copy("brew_failure_heat_low").to_owned());
-    } else if heat > recipe.required_heat {
-        reasons.push(ui_copy("brew_failure_heat_high").to_owned());
-    }
-
-    if stirs < recipe.required_stirs {
-        reasons.push(ui_copy("brew_failure_stirs_low").to_owned());
-    } else if stirs > recipe.required_stirs {
-        reasons.push(ui_copy("brew_failure_stirs_high").to_owned());
-    }
-
-    if !timing_match && !recipe.required_timing.is_empty() {
-        reasons.push(ui_copy("brew_failure_timing").to_owned());
-    }
-    if !sequence_match && !recipe.required_sequence.is_empty() {
-        reasons.push(ui_copy("brew_failure_sequence").to_owned());
-    }
-    if !catalyst_match && !recipe.catalyst_tag.is_empty() {
-        reasons.push(ui_copy("brew_failure_catalyst").to_owned());
-    }
-    if !minimum_elements_met && recipe.minimum_elements.total() > 0 {
-        reasons.push(ui_copy("brew_failure_elements").to_owned());
-    }
-    if !minimum_quality_met && recipe.minimum_quality > 0 {
-        reasons.push(ui_copy("brew_failure_quality").to_owned());
-    }
-
-    reasons
-}
-
-fn mastery_output_bonus(mastery_brews: u32) -> u32 {
-    if mastery_brews >= 6 {
-        1
-    } else {
-        0
     }
 }

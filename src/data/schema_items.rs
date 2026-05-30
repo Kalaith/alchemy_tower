@@ -2,59 +2,59 @@ use super::{EffectKind, ElementProfile, ItemCategory};
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
-pub struct WildVariantDefinition {
-    pub id: String,
-    pub name: String,
+pub(crate) struct WildVariantDefinition {
+    pub(crate) id: String,
+    pub(crate) name: String,
     #[serde(default)]
-    pub required_conditions: Vec<String>,
+    pub(crate) required_conditions: Vec<String>,
     #[serde(default)]
-    pub bonus_traits: Vec<String>,
+    pub(crate) bonus_traits: Vec<String>,
     #[serde(default)]
-    pub quality_bonus: u32,
+    pub(crate) quality_bonus: u32,
     #[serde(default)]
-    pub elements: ElementProfile,
+    pub(crate) elements: ElementProfile,
     #[serde(default)]
-    pub synthesis_weight_bonus: u32,
+    pub(crate) synthesis_weight_bonus: u32,
     #[serde(default)]
-    pub synthesis_value_bonus: u32,
+    pub(crate) synthesis_value_bonus: u32,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
-pub struct ItemDefinition {
-    pub id: String,
-    pub name: String,
-    pub category: ItemCategory,
-    pub base_value: u32,
-    pub color: [u8; 4],
-    pub description: String,
+pub(crate) struct ItemDefinition {
+    pub(crate) id: String,
+    pub(crate) name: String,
+    pub(crate) category: ItemCategory,
+    pub(crate) base_value: u32,
+    pub(crate) color: [u8; 4],
+    pub(crate) description: String,
     #[serde(default = "default_item_quality")]
-    pub quality: u32,
+    pub(crate) quality: u32,
     #[serde(default = "default_item_rarity")]
-    pub rarity: u8,
+    pub(crate) rarity: u8,
     #[serde(default)]
-    pub elements: ElementProfile,
+    pub(crate) elements: ElementProfile,
     #[serde(default)]
-    pub traits: Vec<String>,
+    pub(crate) traits: Vec<String>,
     #[serde(default)]
-    pub source_conditions: Vec<String>,
+    pub(crate) source_conditions: Vec<String>,
     #[serde(default)]
-    pub wild_variants: Vec<WildVariantDefinition>,
+    pub(crate) wild_variants: Vec<WildVariantDefinition>,
     #[serde(default = "default_synthesis_weight")]
-    pub synthesis_weight: u32,
+    pub(crate) synthesis_weight: u32,
     #[serde(default)]
-    pub synthesis_value: u32,
+    pub(crate) synthesis_value: u32,
     #[serde(default)]
-    pub catalyst_tags: Vec<String>,
+    pub(crate) catalyst_tags: Vec<String>,
     #[serde(default)]
-    pub effects: Vec<EffectDefinition>,
+    pub(crate) effects: Vec<EffectDefinition>,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
-pub struct EffectDefinition {
-    pub kind: EffectKind,
-    pub magnitude: f32,
-    pub duration_seconds: f32,
-    pub description: String,
+pub(crate) struct EffectDefinition {
+    pub(crate) kind: EffectKind,
+    pub(crate) magnitude: f32,
+    pub(crate) duration_seconds: f32,
+    pub(crate) description: String,
 }
 
 fn default_item_quality() -> u32 {

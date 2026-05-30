@@ -7,6 +7,6 @@ mod morphs;
 mod quality;
 mod traits;
 
-pub use brewing::{resolve_brew, BrewResolution};
-pub use matching::match_recipe;
-pub use quality::{mastery_stage, quality_band};
+pub(crate) use brewing::{resolve_brew, BrewResolution};
+pub(crate) use matching::match_recipe;
+pub(crate) use quality::{mastery_stage, quality_band};

@@ -1,4 +1,5 @@
-use super::{ArchiveExperimentFilter, GameplayState, ARCHIVE_TABS};
+use super::gameplay_overlay_types::{ArchiveExperimentFilter, ARCHIVE_TABS};
+use super::GameplayState;
 use crate::content::ui_format;
 use crate::data::{ExperimentLogEntry, GameData, RecipeDefinition};
 
@@ -62,6 +63,21 @@ impl GameplayState {
             .collect::<Vec<_>>();
         recipes.sort_by(|left, right| left.name.cmp(&right.name));
         recipes
+    }
+
+    pub(super) fn last_morph_output<'a>(
+        &'a self,
+        recipe_id: &str,
+    ) -> Option<&'a ExperimentLogEntry> {
+        self.progression
+            .experiment_log
+            .iter()
+            .rev()
+            .find(|entry| entry.recipe_id == recipe_id && !entry.morph_output_item_id.is_empty())
+    }
+
+    pub(super) fn morph_output_discovered(&self, item_id: &str) -> bool {
+        self.progression.crafted_item_profiles.contains_key(item_id)
     }
 
     pub(super) fn archive_selection_len(&self, data: &GameData) -> usize {

@@ -1,9 +1,9 @@
 use macroquad::prelude::*;
 use macroquad_toolkit::colors::dark;
 
-use crate::ui::truncate_text_to_width;
+use super::truncate_text_to_width;
 
-pub fn draw_action_button(rect: Rect, label: &str, label_offset_x: f32) {
+pub(crate) fn draw_action_button(rect: Rect, label: &str, label_offset_x: f32) {
     let hovered = rect.contains(mouse_position().into());
     let fill = if hovered {
         Color::from_rgba(34, 40, 52, 220)
@@ -35,7 +35,7 @@ pub fn draw_action_button(rect: Rect, label: &str, label_offset_x: f32) {
     );
 }
 
-pub fn draw_state_banner(x: f32, y: f32, w: f32, text: &str, is_locked: bool) {
+pub(crate) fn draw_state_banner(x: f32, y: f32, w: f32, text: &str, is_locked: bool) {
     let color = if is_locked {
         Color::from_rgba(54, 36, 40, 194)
     } else {
@@ -63,7 +63,7 @@ pub fn draw_state_banner(x: f32, y: f32, w: f32, text: &str, is_locked: bool) {
     );
 }
 
-pub fn draw_selection_card(
+pub(crate) fn draw_selection_card(
     x: f32,
     y: f32,
     w: f32,

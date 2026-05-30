@@ -1,10 +1,14 @@
-use macroquad::audio::{load_sound, load_sound_from_bytes, play_sound, PlaySoundParams, Sound};
-use macroquad::rand::gen_range;
-use macroquad_toolkit::assets::AssetPack;
+use macroquad::audio::Sound;
 
-const GENERATED_ASSET_PACK: &str = "assets/generated.zip";
+#[path = "audio_loading.rs"]
+mod audio_loading;
+#[path = "audio_playback.rs"]
+mod audio_playback;
 
-pub struct AudioAssets {
+use self::audio_loading::{load_generated_asset_pack, load_variations};
+use self::audio_playback::play_random;
+
+pub(crate) struct AudioAssets {
     footstep_stone: Vec<Sound>,
     footstep_dirt_path: Vec<Sound>,
     footstep_greenhouse: Vec<Sound>,
@@ -16,8 +20,8 @@ pub struct AudioAssets {
 }
 
 impl AudioAssets {
-    pub async fn load() -> Self {
-        let asset_pack = AssetPack::load(GENERATED_ASSET_PACK).await.ok();
+    pub(crate) async fn load() -> Self {
+        let asset_pack = load_generated_asset_pack().await;
 
         Self {
             footstep_stone: load_variations("footstep_stone", 6, asset_pack.as_ref()).await,
@@ -32,7 +36,7 @@ impl AudioAssets {
         }
     }
 
-    pub fn play_footstep_for_area(&self, area_id: &str) {
+    pub(crate) fn play_footstep_for_area(&self, area_id: &str) {
         match area_id {
             "tower_entry"
             | "archive_floor"
@@ -46,59 +50,23 @@ impl AudioAssets {
         }
     }
 
-    pub fn play_gather_pickup(&self) {
+    pub(crate) fn play_gather_pickup(&self) {
         play_random(&self.gather_pickup, 0.42);
     }
 
-    pub fn play_alchemy_open(&self) {
+    pub(crate) fn play_alchemy_open(&self) {
         play_random(&self.alchemy_open, 0.42);
     }
 
-    pub fn play_alchemy_stir(&self) {
+    pub(crate) fn play_alchemy_stir(&self) {
         play_random(&self.alchemy_stir, 0.38);
     }
 
-    pub fn play_brew_result(&self, success: bool) {
+    pub(crate) fn play_brew_result(&self, success: bool) {
         if success {
             play_random(&self.brew_success, 0.48);
         } else {
             play_random(&self.brew_collapse, 0.44);
         }
     }
-}
-
-async fn load_variations(
-    base_name: &str,
-    count: usize,
-    asset_pack: Option<&AssetPack>,
-) -> Vec<Sound> {
-    let mut sounds = Vec::new();
-    for index in 1..=count {
-        let path = format!("assets/generated/audio/{base_name}_{index}.wav");
-        if let Some(bytes) = asset_pack.and_then(|pack| pack.bytes(&path)) {
-            if let Ok(sound) = load_sound_from_bytes(bytes).await {
-                sounds.push(sound);
-                continue;
-            }
-        }
-
-        if let Ok(sound) = load_sound(&path).await {
-            sounds.push(sound);
-        }
-    }
-    sounds
-}
-
-fn play_random(sounds: &[Sound], volume: f32) {
-    if sounds.is_empty() {
-        return;
-    }
-    let index = gen_range(0, sounds.len() as i32) as usize;
-    play_sound(
-        &sounds[index],
-        PlaySoundParams {
-            looped: false,
-            volume,
-        },
-    );
 }

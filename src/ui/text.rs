@@ -1,14 +1,14 @@
 use macroquad::prelude::*;
 
-pub fn wrapped_lines(text: &str, max_width: f32, font_size: f32) -> Vec<String> {
+pub(crate) fn wrapped_lines(text: &str, max_width: f32, font_size: f32) -> Vec<String> {
     macroquad_toolkit::ui::wrap_text(text, max_width, font_size)
 }
 
-pub fn truncate_text_to_width(text: &str, max_width: f32, font_size: f32) -> String {
+pub(crate) fn truncate_text_to_width(text: &str, max_width: f32, font_size: f32) -> String {
     macroquad_toolkit::ui::truncate_text_to_width(text, max_width, font_size)
 }
 
-pub fn draw_wrapped_text(
+pub(crate) fn draw_wrapped_text(
     text: &str,
     x: f32,
     y: f32,

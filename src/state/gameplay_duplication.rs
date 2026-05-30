@@ -118,7 +118,7 @@ fn duplication_item_allowed(item: &ItemDefinition) -> bool {
     )
 }
 
-fn duplication_cost(item: &ItemDefinition) -> u32 {
+pub(super) fn duplication_cost(item: &ItemDefinition) -> u32 {
     item.base_value + u32::from(item.rarity) * 10
 }
 

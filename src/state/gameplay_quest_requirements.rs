@@ -1,4 +1,3 @@
-use crate::content::ui_format;
 use crate::data::{GameData, QuestDefinition};
 
 pub(super) fn quest_required_traits(quest: &QuestDefinition) -> Vec<&str> {
@@ -94,53 +93,9 @@ pub(super) fn effect_requirement_met(
     matching_requirement_count(&required_effects, &owned_effects) >= target
 }
 
-pub(super) fn trait_requirement_summary(quest: &QuestDefinition) -> String {
-    let required_traits = quest_required_traits(quest);
-    let target = trait_requirement_target(quest);
-    if target == 0 {
-        return ui_format("quests_trait_ready", &[]);
-    }
-    if target >= required_traits.len() {
-        return ui_format(
-            "quests_trait_all",
-            &[("traits", &required_traits.join(" + "))],
-        );
-    }
-    ui_format(
-        "quests_trait_partial",
-        &[
-            ("target", &target.to_string()),
-            ("count", &required_traits.len().to_string()),
-            ("traits", &required_traits.join(", ")),
-        ],
-    )
-}
-
-pub(super) fn effect_requirement_summary(quest: &QuestDefinition) -> String {
-    let required_effects = quest_required_effect_kinds(quest);
-    let target = effect_requirement_target(quest);
-    if target == 0 {
-        return ui_format("quests_effect_ready", &[]);
-    }
-    if target >= required_effects.len() {
-        return ui_format(
-            "quests_effect_all",
-            &[("effects", &required_effects.join(" + "))],
-        );
-    }
-    ui_format(
-        "quests_effect_partial",
-        &[
-            ("target", &target.to_string()),
-            ("count", &required_effects.len().to_string()),
-            ("effects", &required_effects.join(", ")),
-        ],
-    )
-}
-
 #[cfg(test)]
 mod tests {
-    use super::{effect_requirement_summary, trait_requirement_met};
+    use super::trait_requirement_met;
     use crate::data::QuestDefinition;
 
     fn test_quest() -> QuestDefinition {
@@ -191,15 +146,4 @@ mod tests {
         assert!(!trait_requirement_met(&quest, &["restorative".to_owned()]));
     }
 
-    #[test]
-    fn multi_effect_requirement_summary_shows_band_threshold() {
-        let mut quest = test_quest();
-        quest.required_effect_kinds = vec!["glow".to_owned(), "restore".to_owned()];
-        quest.minimum_effect_matches = 1;
-
-        assert_eq!(
-            effect_requirement_summary(&quest),
-            "effects 1/2 glow, restore"
-        );
-    }
 }

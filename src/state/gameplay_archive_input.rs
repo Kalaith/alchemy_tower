@@ -1,15 +1,20 @@
-use super::{GameplayState, ARCHIVE_TABS};
+use super::gameplay_overlay_types::ARCHIVE_TABS;
+use super::GameplayState;
 use crate::content::{narrative_text, ui_copy, ui_text};
 use crate::data::GameData;
-use macroquad::prelude::{is_key_pressed, Color, KeyCode};
+use crate::input::{
+    archive_filter_pressed, cancel_pressed, confirm_pressed, select_next_pressed, select_previous_pressed,
+    switch_next_pressed, switch_previous_pressed,
+};
+use macroquad::prelude::Color;
 
 impl GameplayState {
     pub(super) fn handle_archive_inputs(&mut self, data: &GameData) {
-        if is_key_pressed(KeyCode::Left) {
+        if switch_previous_pressed() {
             self.ui.archive_tab = self.ui.archive_tab.saturating_sub(1);
             self.ui.archive_index = 0;
         }
-        if is_key_pressed(KeyCode::Right) {
+        if switch_next_pressed() {
             self.ui.archive_tab =
                 (self.ui.archive_tab + 1).min(ARCHIVE_TABS.len().saturating_sub(1));
             self.ui.archive_index = 0;
@@ -17,10 +22,10 @@ impl GameplayState {
 
         let selection_len = self.archive_selection_len(data);
         if selection_len > 0 {
-            if is_key_pressed(KeyCode::Up) {
+            if select_previous_pressed() {
                 self.ui.archive_index = self.ui.archive_index.saturating_sub(1);
             }
-            if is_key_pressed(KeyCode::Down) {
+            if select_next_pressed() {
                 self.ui.archive_index =
                     (self.ui.archive_index + 1).min(selection_len.saturating_sub(1));
             }
@@ -28,11 +33,11 @@ impl GameplayState {
             self.ui.archive_index = 0;
         }
 
-        if ARCHIVE_TABS[self.ui.archive_tab] == "experiments" && is_key_pressed(KeyCode::F) {
+        if ARCHIVE_TABS[self.ui.archive_tab] == "experiments" && archive_filter_pressed() {
             self.cycle_archive_experiment_filter();
         }
 
-        if is_key_pressed(KeyCode::Enter) {
+        if confirm_pressed() {
             match ARCHIVE_TABS[self.ui.archive_tab] {
                 "timeline" => self.handle_archive_timeline_submit(),
                 "disassembly" => {
@@ -50,7 +55,7 @@ impl GameplayState {
                 _ => {}
             }
         }
-        if is_key_pressed(KeyCode::Escape) {
+        if cancel_pressed() {
             self.clear_overlay();
             self.runtime.status_text = ui_text().statuses.closed_archive.clone();
         }

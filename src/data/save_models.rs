@@ -2,162 +2,104 @@ use serde::{Deserialize, Serialize};
 
 use super::schema::{HabitatStateEntry, JournalMilestoneEntry, PlanterStateEntry};
 
+#[path = "save_memory_models.rs"]
+mod save_memory_models;
+pub(crate) use self::save_memory_models::{FieldJournalEntry, HerbMemoryEntry, PotionMemoryEntry};
+
 #[derive(Clone, Debug, Deserialize, Serialize)]
-pub struct InventoryEntry {
-    pub item_id: String,
-    pub amount: u32,
+pub(crate) struct InventoryEntry {
+    pub(crate) item_id: String,
+    pub(crate) amount: u32,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
-pub struct RecipeMasteryEntry {
-    pub recipe_id: String,
-    pub successful_brews: u32,
+pub(crate) struct RecipeMasteryEntry {
+    pub(crate) recipe_id: String,
+    pub(crate) successful_brews: u32,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
-pub struct CraftedItemProfileEntry {
-    pub item_id: String,
+pub(crate) struct CraftedItemProfileEntry {
+    pub(crate) item_id: String,
     #[serde(default)]
-    pub best_quality_score: u32,
+    pub(crate) best_quality_score: u32,
     #[serde(default)]
-    pub best_quality_band: String,
+    pub(crate) best_quality_band: String,
     #[serde(default)]
-    pub inherited_traits: Vec<String>,
+    pub(crate) inherited_traits: Vec<String>,
     #[serde(default)]
-    pub effect_kinds: Vec<String>,
+    pub(crate) effect_kinds: Vec<String>,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
-pub struct ExperimentLogEntry {
+pub(crate) struct ExperimentLogEntry {
     #[serde(default)]
-    pub recipe_id: String,
-    pub output_item_id: String,
+    pub(crate) recipe_id: String,
+    pub(crate) output_item_id: String,
     #[serde(default)]
-    pub quality_score: u32,
+    pub(crate) quality_score: u32,
     #[serde(default)]
-    pub quality_band: String,
+    pub(crate) quality_band: String,
     #[serde(default)]
-    pub stable: bool,
+    pub(crate) stable: bool,
     #[serde(default)]
-    pub catalyst_item_id: String,
+    pub(crate) catalyst_item_id: String,
     #[serde(default)]
-    pub morph_output_item_id: String,
+    pub(crate) morph_output_item_id: String,
     #[serde(default)]
-    pub day_index: u32,
+    pub(crate) day_index: u32,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
-pub struct SaveData {
-    pub version: u32,
-    pub current_area: String,
-    pub player_position: [f32; 2],
-    pub day_clock_seconds: f32,
+pub(crate) struct SaveData {
+    pub(crate) version: u32,
+    pub(crate) current_area: String,
+    pub(crate) player_position: [f32; 2],
+    pub(crate) day_clock_seconds: f32,
     #[serde(default = "default_vitality")]
-    pub vitality: f32,
+    pub(crate) vitality: f32,
     #[serde(default)]
-    pub coins: u32,
-    pub inventory: Vec<InventoryEntry>,
-    pub gathered_nodes: Vec<String>,
+    pub(crate) coins: u32,
+    pub(crate) inventory: Vec<InventoryEntry>,
+    pub(crate) gathered_nodes: Vec<String>,
     #[serde(default)]
-    pub known_recipes: Vec<String>,
+    pub(crate) known_recipes: Vec<String>,
     #[serde(default)]
-    pub day_index: u32,
+    pub(crate) day_index: u32,
     #[serde(default)]
-    pub field_journal: Vec<FieldJournalEntry>,
+    pub(crate) field_journal: Vec<FieldJournalEntry>,
     #[serde(default)]
-    pub herb_memories: Vec<HerbMemoryEntry>,
+    pub(crate) herb_memories: Vec<HerbMemoryEntry>,
     #[serde(default)]
-    pub started_quests: Vec<String>,
+    pub(crate) started_quests: Vec<String>,
     #[serde(default)]
-    pub completed_quests: Vec<String>,
+    pub(crate) completed_quests: Vec<String>,
     #[serde(default)]
-    pub recipe_mastery: Vec<RecipeMasteryEntry>,
+    pub(crate) recipe_mastery: Vec<RecipeMasteryEntry>,
     #[serde(default)]
-    pub crafted_item_profiles: Vec<CraftedItemProfileEntry>,
+    pub(crate) crafted_item_profiles: Vec<CraftedItemProfileEntry>,
     #[serde(default)]
-    pub experiment_log: Vec<ExperimentLogEntry>,
+    pub(crate) experiment_log: Vec<ExperimentLogEntry>,
     #[serde(default)]
-    pub potion_memories: Vec<PotionMemoryEntry>,
+    pub(crate) potion_memories: Vec<PotionMemoryEntry>,
     #[serde(default)]
-    pub total_brews: u32,
+    pub(crate) total_brews: u32,
     #[serde(default)]
-    pub unlocked_warps: Vec<String>,
+    pub(crate) unlocked_warps: Vec<String>,
     #[serde(default)]
-    pub planter_states: Vec<PlanterStateEntry>,
+    pub(crate) planter_states: Vec<PlanterStateEntry>,
     #[serde(default)]
-    pub journal_milestones: Vec<JournalMilestoneEntry>,
+    pub(crate) journal_milestones: Vec<JournalMilestoneEntry>,
     #[serde(default)]
-    pub relationships: Vec<RelationshipEntry>,
+    pub(crate) relationships: Vec<RelationshipEntry>,
     #[serde(default)]
-    pub habitat_states: Vec<HabitatStateEntry>,
+    pub(crate) habitat_states: Vec<HabitatStateEntry>,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
-pub struct RelationshipEntry {
-    pub npc_id: String,
-    pub value: i32,
-}
-
-#[derive(Clone, Debug, Deserialize, Serialize)]
-pub struct FieldJournalEntry {
-    pub item_id: String,
-    pub route_id: String,
-    pub season: String,
-    pub weather: String,
-    pub time_window: String,
-    pub note: String,
-    #[serde(default)]
-    pub best_quality: u32,
-    #[serde(default)]
-    pub best_quality_band: String,
-    #[serde(default)]
-    pub variant_name: String,
-}
-
-#[derive(Clone, Debug, Deserialize, Serialize)]
-pub struct HerbMemoryEntry {
-    pub item_id: String,
-    #[serde(default)]
-    pub first_seen_day: u32,
-    #[serde(default)]
-    pub first_seen_route_id: String,
-    #[serde(default)]
-    pub seen: bool,
-    #[serde(default)]
-    pub learned: bool,
-    #[serde(default)]
-    pub learned_day: u32,
-    #[serde(default)]
-    pub learned_route_id: String,
-    #[serde(default)]
-    pub note: String,
-    #[serde(default)]
-    pub best_quality: u32,
-    #[serde(default)]
-    pub best_quality_band: String,
-    #[serde(default)]
-    pub variant_name: String,
-}
-
-#[derive(Clone, Debug, Deserialize, Serialize)]
-pub struct PotionMemoryEntry {
-    pub item_id: String,
-    #[serde(default)]
-    pub first_seen_day: u32,
-    #[serde(default)]
-    pub seen: bool,
-    #[serde(default)]
-    pub learned: bool,
-    #[serde(default)]
-    pub learned_day: u32,
-    #[serde(default)]
-    pub successful_brews: u32,
-    #[serde(default)]
-    pub best_quality_score: u32,
-    #[serde(default)]
-    pub best_quality_band: String,
-    #[serde(default)]
-    pub last_recipe_id: String,
+pub(crate) struct RelationshipEntry {
+    pub(crate) npc_id: String,
+    pub(crate) value: i32,
 }
 
 fn default_vitality() -> f32 {

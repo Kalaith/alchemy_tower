@@ -3,16 +3,50 @@
     "confirm": "Enter",
     "cancel": "Esc",
     "interact": "E",
-    "journal": "J"
+    "journal": "J",
+    "sort": "V",
+    "save": "F5",
+    "load": "F9",
+    "fullscreen": "F11",
+    "quick_potions": ["Z", "X", "C"]
   },
   "navigation": {
-    "select": "Up/Down"
+    "select": "Up/Down",
+    "select_previous": "Up",
+    "select_next": "Down",
+    "switch": "Left/Right",
+    "switch_previous": "Left",
+    "switch_next": "Right"
+  },
+  "movement": {
+    "up": ["W", "Up"],
+    "down": ["S", "Down"],
+    "left": ["A", "Left"],
+    "right": ["D", "Right"]
   },
   "alchemy": {
     "open": "Tab",
     "heat": "Left/Right",
+    "heat_decrease": "Left",
+    "heat_increase": "Right",
     "fill_slots": "1/2/3",
-    "catalyst": "F"
+    "fill_slot_keys": ["1", "2", "3"],
+    "clear_slot_keys": ["Q", "W", "E"],
+    "stir": "S",
+    "timing": "T",
+    "catalyst": "F",
+    "remove_catalyst": "R",
+    "clear": "C",
+    "repeat": "Y",
+    "brew": "Enter",
+    "brew_alternate": "B"
+  },
+  "archive": {
+    "filter": "F"
+  },
+  "dialogue": {
+    "advance": "Enter",
+    "advance_alternate": "Space"
   },
   "shop": {
     "switch_tab": "Left/Right"

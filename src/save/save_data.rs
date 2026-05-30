@@ -1,56 +1,21 @@
-//! Save repository abstraction with native and wasm-safe behavior.
+//! Platform-selected save/load API.
 
 #[cfg(not(target_arch = "wasm32"))]
-use std::path::PathBuf;
+#[path = "save_native.rs"]
+mod platform;
+#[cfg(not(target_arch = "wasm32"))]
+#[path = "save_native_path.rs"]
+mod save_native_path;
+#[cfg(target_arch = "wasm32")]
+#[path = "save_wasm.rs"]
+mod platform;
+#[path = "save_codec.rs"]
+mod save_codec;
+#[path = "save_errors.rs"]
+mod save_errors;
 
-use crate::data::SaveData;
-
-pub struct SaveRepository;
-
-impl SaveRepository {
-    #[cfg(not(target_arch = "wasm32"))]
-    const SAVE_PATH: &'static str = "save_slot_0.json";
-    #[cfg(not(target_arch = "wasm32"))]
-    const SAVE_DIR: &'static str = "AlchemyTower";
-
-    #[cfg(not(target_arch = "wasm32"))]
-    pub fn save(save_data: &SaveData) -> Result<(), String> {
-        let json = serde_json::to_string_pretty(save_data).map_err(|error| error.to_string())?;
-        macroquad_toolkit::persistence::save_string_atomic(Self::save_path()?, &json)
-    }
-
-    #[cfg(not(target_arch = "wasm32"))]
-    pub fn exists() -> bool {
-        Self::save_path()
-            .map(|path| path.exists())
-            .unwrap_or_default()
-    }
-
-    #[cfg(target_arch = "wasm32")]
-    pub fn save(_save_data: &SaveData) -> Result<(), String> {
-        Err("Save is not wired for wasm yet".to_owned())
-    }
-
-    #[cfg(target_arch = "wasm32")]
-    pub fn exists() -> bool {
-        false
-    }
-
-    #[cfg(not(target_arch = "wasm32"))]
-    pub fn load() -> Result<SaveData, String> {
-        let json =
-            std::fs::read_to_string(Self::save_path()?).map_err(|error| error.to_string())?;
-        serde_json::from_str(&json).map_err(|error| error.to_string())
-    }
-
-    #[cfg(target_arch = "wasm32")]
-    pub fn load() -> Result<SaveData, String> {
-        Err("Load is not wired for wasm yet".to_owned())
-    }
-
-    #[cfg(not(target_arch = "wasm32"))]
-    fn save_path() -> Result<PathBuf, String> {
-        macroquad_toolkit::persistence::get_app_data_path(Self::SAVE_DIR, Self::SAVE_PATH)
-            .ok_or_else(|| "Could not resolve a user data directory for saves".to_owned())
-    }
-}
+pub(crate) use self::platform::{exists, load, save};
+pub(crate) use self::save_errors::{
+    SAVE_ERROR_USER_DATA_DIR_MISSING, SAVE_ERROR_WASM_LOAD_UNAVAILABLE,
+    SAVE_ERROR_WASM_SAVE_UNAVAILABLE,
+};

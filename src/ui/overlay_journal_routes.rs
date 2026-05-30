@@ -1,12 +1,16 @@
-use super::GameplayState;
-use crate::content::{ui_copy, ui_format};
-use crate::data::GameData;
-use crate::ui::draw_wrapped_text;
+use crate::content::ui_copy;
+use crate::view_models::journal::{JournalHerbMemoriesView, JournalRoutesTabView};
+use super::draw_wrapped_text;
 use macroquad::prelude::{draw_rectangle, draw_rectangle_lines, draw_text, Color};
 use macroquad_toolkit::colors::dark;
 
-impl GameplayState {
-    pub(super) fn draw_journal_routes_tab(&self, data: &GameData, x: f32, y: f32, w: f32, h: f32) {
+pub(crate) fn draw_journal_routes_tab_view(
+    view: &JournalRoutesTabView,
+    x: f32,
+    y: f32,
+    w: f32,
+    h: f32,
+) {
         draw_text(
             ui_copy("overlay_known_routes"),
             x + 20.0,
@@ -15,148 +19,23 @@ impl GameplayState {
             dark::TEXT_BRIGHT,
         );
         let mut route_y = y + 168.0;
-        for route in &data.gathering_routes {
-            draw_text(&route.name, x + 20.0, route_y, 22.0, dark::TEXT_BRIGHT);
+        for route in &view.route_rows {
+            draw_text(&route.title, x + 20.0, route_y, 22.0, dark::TEXT_BRIGHT);
             route_y += 22.0;
-            draw_text(&route.description, x + 20.0, route_y, 18.0, dark::TEXT_DIM);
+            draw_text(&route.detail, x + 20.0, route_y, 18.0, dark::TEXT_DIM);
             route_y += 28.0;
             if route_y > y + h - 40.0 {
                 break;
             }
         }
 
-        draw_text(
-            ui_copy("overlay_herb_memories"),
+        draw_journal_herb_memories_view(
+            &view.herb_memories,
             x + 420.0,
             y + 136.0,
-            26.0,
-            dark::TEXT_BRIGHT,
+            w - 440.0,
+            y + h - 170.0,
         );
-        let mut entry_y = y + 168.0;
-        let herb_memories = self.herb_memories(data);
-        if herb_memories.is_empty() {
-            draw_text(
-                ui_copy("journal_memory_no_herbs"),
-                x + 420.0,
-                entry_y,
-                22.0,
-                dark::TEXT_DIM,
-            );
-        } else {
-            for entry in herb_memories {
-                draw_text(
-                    data.item_name(&entry.item_id),
-                    x + 420.0,
-                    entry_y,
-                    22.0,
-                    dark::TEXT_BRIGHT,
-                );
-                entry_y += 22.0;
-                draw_text(
-                    &ui_format(
-                        "journal_memory_state_line",
-                        &[("state", ui_copy(self.herb_memory_state_key(&entry.item_id)))],
-                    ),
-                    x + 420.0,
-                    entry_y,
-                    18.0,
-                    dark::TEXT_DIM,
-                );
-                entry_y += 20.0;
-                let route_label = if entry.learned {
-                    data.route(&entry.learned_route_id)
-                        .map(|route| route.name.as_str())
-                        .unwrap_or_else(|| ui_copy("journal_memory_unknown_place"))
-                } else {
-                    data.route(&entry.first_seen_route_id)
-                        .map(|route| route.name.as_str())
-                        .unwrap_or_else(|| ui_copy("journal_memory_unknown_place"))
-                };
-                let route_copy_key = if entry.learned {
-                    "journal_memory_learned_at"
-                } else {
-                    "journal_memory_observed_at"
-                };
-                draw_text(
-                    &ui_format(route_copy_key, &[("route", route_label)]),
-                    x + 420.0,
-                    entry_y,
-                    18.0,
-                    dark::TEXT_DIM,
-                );
-                entry_y += 20.0;
-                draw_wrapped_text(
-                    &self.journal_herb_summary(data, &entry.item_id),
-                    x + 420.0,
-                    entry_y,
-                    w - 440.0,
-                    16.0,
-                    18.0,
-                    dark::TEXT_DIM,
-                );
-                entry_y += 40.0;
-                let conditions = if entry.learned {
-                    self.learned_gathering_conditions(data, &entry.item_id)
-                        .unwrap_or_else(|| ui_copy("journal_memory_conditions_unknown").to_owned())
-                } else {
-                    ui_copy("journal_memory_conditions_unknown").to_owned()
-                };
-                draw_wrapped_text(
-                    &conditions,
-                    x + 420.0,
-                    entry_y,
-                    w - 440.0,
-                    16.0,
-                    18.0,
-                    dark::TEXT_DIM,
-                );
-                entry_y += 28.0;
-                if entry.best_quality > 0 {
-                    draw_text(
-                        &ui_format(
-                            "journal_memory_best_specimen",
-                            &[
-                                ("quality", &entry.best_quality.to_string()),
-                                ("band", &entry.best_quality_band),
-                            ],
-                        ),
-                        x + 420.0,
-                        entry_y,
-                        18.0,
-                        dark::TEXT_DIM,
-                    );
-                    entry_y += 20.0;
-                }
-                if !entry.variant_name.is_empty() {
-                    draw_text(
-                        &ui_format(
-                            "journal_memory_variant",
-                            &[("variant", &entry.variant_name)],
-                        ),
-                        x + 420.0,
-                        entry_y,
-                        18.0,
-                        dark::TEXT_DIM,
-                    );
-                    entry_y += 20.0;
-                }
-                if entry.learned && !entry.note.is_empty() {
-                    draw_wrapped_text(
-                        &entry.note,
-                        x + 420.0,
-                        entry_y,
-                        w - 440.0,
-                        16.0,
-                        18.0,
-                        dark::TEXT_DIM,
-                    );
-                    entry_y += 30.0;
-                }
-                if entry_y > y + h - 170.0 {
-                    break;
-                }
-            }
-        }
         draw_text(
             ui_copy("overlay_progress_routes"),
             x + 20.0,
@@ -172,10 +51,9 @@ impl GameplayState {
             Color::from_rgba(38, 40, 50, 255),
         );
         draw_rectangle_lines(x + 20.0, y + h - 140.0, w - 40.0, 96.0, 2.0, dark::ACCENT);
-        let locked_warps = self.locked_warps(data);
-        if locked_warps.is_empty() {
+        if let Some(all_restored_text) = &view.route_progress.all_restored_text {
             draw_text(
-                ui_copy("overlay_routes_all_restored"),
+                all_restored_text,
                 x + 34.0,
                 y + h - 108.0,
                 20.0,
@@ -183,9 +61,9 @@ impl GameplayState {
             );
         } else {
             let mut unlock_y = y + h - 108.0;
-            for warp in locked_warps.into_iter().take(2) {
+            for line in &view.route_progress.locked_lines {
                 draw_wrapped_text(
-                    &format!("{}: {}", warp.label, self.warp_lock_text(data, warp)),
+                    line,
                     x + 34.0,
                     unlock_y,
                     w - 68.0,
@@ -196,6 +74,77 @@ impl GameplayState {
                 unlock_y += 34.0;
             }
         }
+}
+
+fn draw_journal_herb_memories_view(
+    view: &JournalHerbMemoriesView,
+    x: f32,
+    title_y: f32,
+    text_width: f32,
+    bottom_limit: f32,
+) {
+    draw_text(
+        ui_copy("overlay_herb_memories"),
+        x,
+        title_y,
+        26.0,
+        dark::TEXT_BRIGHT,
+    );
+    let mut entry_y = title_y + 32.0;
+    if view.entries.is_empty() {
+        draw_text(&view.empty_text, x, entry_y, 22.0, dark::TEXT_DIM);
+        return;
     }
 
+    for entry in &view.entries {
+        draw_text(&entry.title, x, entry_y, 22.0, dark::TEXT_BRIGHT);
+        entry_y += 22.0;
+        draw_text(&entry.state_line, x, entry_y, 18.0, dark::TEXT_DIM);
+        entry_y += 20.0;
+        draw_text(&entry.route_line, x, entry_y, 18.0, dark::TEXT_DIM);
+        entry_y += 20.0;
+        draw_wrapped_text(
+            &entry.summary,
+            x,
+            entry_y,
+            text_width,
+            16.0,
+            18.0,
+            dark::TEXT_DIM,
+        );
+        entry_y += 40.0;
+        draw_wrapped_text(
+            &entry.conditions,
+            x,
+            entry_y,
+            text_width,
+            16.0,
+            18.0,
+            dark::TEXT_DIM,
+        );
+        entry_y += 28.0;
+        if let Some(best_specimen_text) = &entry.best_specimen_text {
+            draw_text(best_specimen_text, x, entry_y, 18.0, dark::TEXT_DIM);
+            entry_y += 20.0;
+        }
+        if let Some(variant_text) = &entry.variant_text {
+            draw_text(variant_text, x, entry_y, 18.0, dark::TEXT_DIM);
+            entry_y += 20.0;
+        }
+        if let Some(note_text) = &entry.note_text {
+            draw_wrapped_text(
+                note_text,
+                x,
+                entry_y,
+                text_width,
+                16.0,
+                18.0,
+                dark::TEXT_DIM,
+            );
+            entry_y += 30.0;
+        }
+        if entry_y > bottom_limit {
+            break;
+        }
+    }
 }

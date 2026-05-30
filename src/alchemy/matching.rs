@@ -2,7 +2,7 @@ use std::collections::BTreeMap;
 
 use crate::data::{ElementProfile, GameData, ItemDefinition, RecipeDefinition, StationDefinition};
 
-pub fn match_recipe<'a>(
+pub(crate) fn match_recipe<'a>(
     data: &'a GameData,
     station: &StationDefinition,
     selected_items: &[String],

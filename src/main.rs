@@ -6,6 +6,9 @@ mod audio;
 mod content;
 mod data;
 mod game;
+mod input;
+mod menu_layout;
+mod pause_layout;
 mod save;
 mod state;
 mod ui;
@@ -14,7 +17,7 @@ use game::Game;
 
 fn window_conf() -> Conf {
     Conf {
-        window_title: "Alchemy Tower".to_owned(),
+        window_title: content::ui_copy("window_title").to_owned(),
         window_width: 1280,
         window_height: 720,
         window_resizable: true,

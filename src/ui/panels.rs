@@ -1,9 +1,9 @@
 use macroquad::prelude::*;
 use macroquad_toolkit::colors::dark;
 
-use crate::ui::{draw_wrapped_text, truncate_text_to_width};
+use super::{draw_wrapped_text, truncate_text_to_width};
 
-pub fn draw_panel(x: f32, y: f32, width: f32, height: f32, title: &str) {
+pub(crate) fn draw_panel(x: f32, y: f32, width: f32, height: f32, title: &str) {
     let style = macroquad_toolkit::ui::SurfaceStyle::new(dark::PANEL)
         .with_shadow(vec2(8.0, 10.0), Color::from_rgba(0, 0, 0, 96))
         .with_header(34.0, dark::PANEL_HEADER)
@@ -26,26 +26,13 @@ pub fn draw_panel(x: f32, y: f32, width: f32, height: f32, title: &str) {
     );
 }
 
-pub fn centered_panel_rect(width: f32, height: f32) -> Rect {
-    Rect::new(
-        screen_width() * 0.5 - width * 0.5,
-        screen_height() * 0.5 - height * 0.5,
-        width,
-        height,
-    )
-}
-
-pub fn inset_rect(panel: Rect, offset_x: f32, offset_y: f32, width: f32, height: f32) -> Rect {
-    Rect::new(panel.x + offset_x, panel.y + offset_y, width, height)
-}
-
-pub fn draw_panel_frame(panel: Rect) {
+pub(crate) fn draw_panel_frame(panel: Rect) {
     let style =
         macroquad_toolkit::ui::SurfaceStyle::new(dark::PANEL).with_border(2.0, dark::ACCENT);
     macroquad_toolkit::ui::draw_surface(panel, &style);
 }
 
-pub fn draw_overlay_backdrop() {
+pub(crate) fn draw_overlay_backdrop() {
     draw_rectangle(
         0.0,
         0.0,
@@ -55,7 +42,7 @@ pub fn draw_overlay_backdrop() {
     );
 }
 
-pub fn draw_overlay_subtitle(x: f32, y: f32, text: &str) {
+pub(crate) fn draw_overlay_subtitle(x: f32, y: f32, text: &str) {
     let width = screen_width() - x * 2.0 - 40.0;
     let surface = macroquad_toolkit::ui::SurfaceStyle::new(Color::from_rgba(16, 18, 26, 176))
         .with_border(1.0, Color::from_rgba(160, 170, 190, 52));
@@ -71,7 +58,7 @@ pub fn draw_overlay_subtitle(x: f32, y: f32, text: &str) {
     );
 }
 
-pub fn draw_overlay_footer(x: f32, y: f32, w: f32, h: f32, text: &str) {
+pub(crate) fn draw_overlay_footer(x: f32, y: f32, w: f32, h: f32, text: &str) {
     let surface = macroquad_toolkit::ui::SurfaceStyle::new(Color::from_rgba(16, 18, 26, 172))
         .with_border(1.0, Color::from_rgba(160, 170, 190, 44));
     macroquad_toolkit::ui::draw_surface(

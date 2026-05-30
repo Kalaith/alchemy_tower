@@ -1,7 +1,7 @@
 use super::GameplayState;
-use crate::content::ui_copy;
-use crate::data::{GameData, StationKind};
-use macroquad::prelude::{vec2, Color};
+use crate::content::{input_bindings, ui_copy, ui_format};
+use crate::data::GameData;
+use macroquad::prelude::Color;
 
 impl GameplayState {
     pub(super) fn update_tutorial_hints(&mut self, data: &GameData, frame_time: f32) {
@@ -16,37 +16,10 @@ impl GameplayState {
             return;
         }
 
-        let near_alchemy = self
-            .nearby_station(data)
-            .map(|station| station.kind == StationKind::Alchemy)
-            .unwrap_or(false);
-        let near_quest_npc = self
-            .nearby_npc(data)
-            .and_then(|npc| self.npc_world_label(data, npc))
-            .is_some();
-        let nearby_available_node = data
-            .area(&self.world.current_area_id)
-            .map(|area| {
-                area.gather_nodes.iter().any(|node| {
-                    !self.world.gathered_nodes.contains(&node.id)
-                        && self.node_is_available(node)
-                        && self
-                            .world
-                            .player
-                            .position
-                            .distance(vec2(node.position[0], node.position[1]))
-                            <= node.radius + data.config.interaction_range + 36.0
-                })
-            })
-            .unwrap_or(false);
-        let unlockable_warp_here = data
-            .area(&self.world.current_area_id)
-            .map(|area| {
-                area.warps
-                    .iter()
-                    .any(|warp| !self.warp_is_unlocked(warp) && self.can_unlock_warp(warp))
-            })
-            .unwrap_or(false);
+        let near_alchemy = self.tutorial_near_alchemy_station(data);
+        let near_quest_npc = self.tutorial_near_quest_npc(data);
+        let nearby_available_node = self.tutorial_near_available_gather_node(data);
+        let unlockable_warp_here = self.tutorial_unlockable_warp_here(data);
         let has_quick_potions = !self.quick_potions(data).is_empty();
         let next_hint = if !self.runtime.tutorial.crow_intro_hint_shown {
             self.runtime.tutorial.crow_intro_hint_shown = true;
@@ -57,7 +30,13 @@ impl GameplayState {
         } else if !self.runtime.tutorial.save_hint_shown {
             self.runtime.tutorial.save_hint_shown = true;
             Some((
-                ui_copy("tutorial_save").to_owned(),
+                ui_format(
+                    "tutorial_save",
+                    &[
+                        ("save", &input_bindings().global.save),
+                        ("load", &input_bindings().global.load),
+                    ],
+                ),
                 Color::from_rgba(176, 226, 255, 255),
             ))
         } else if !self.runtime.tutorial.journal_hint_shown {
@@ -83,8 +62,9 @@ impl GameplayState {
             ))
         } else if !self.runtime.tutorial.potion_hint_shown && has_quick_potions {
             self.runtime.tutorial.potion_hint_shown = true;
+            let quick_potions = input_bindings().global.quick_potions.join(", ");
             Some((
-                ui_copy("tutorial_potions").to_owned(),
+                ui_format("tutorial_potions", &[("quick_potions", &quick_potions)]),
                 Color::from_rgba(255, 214, 132, 255),
             ))
         } else if !self.runtime.tutorial.gather_hint_shown
@@ -131,12 +111,7 @@ impl GameplayState {
                 Color::from_rgba(255, 230, 170, 255),
             ))
         } else if !self.runtime.tutorial.delivery_hint_shown
-            && self
-                .progression
-                .started_quests
-                .iter()
-                .filter_map(|quest_id| data.quest(quest_id))
-                .any(|quest| self.quest_requirements_met(data, quest))
+            && self.tutorial_delivery_ready(data)
         {
             self.runtime.tutorial.delivery_hint_shown = true;
             Some((

@@ -3,46 +3,48 @@ use std::sync::{Mutex, OnceLock};
 
 use serde::Deserialize;
 
+use super::embedded_json::parse_json_or_else;
+
 #[derive(Debug, Deserialize)]
-pub struct UiText {
-    pub statuses: StatusText,
-    pub prompts: PromptText,
-    pub overlays: OverlayText,
+pub(crate) struct UiText {
+    pub(crate) statuses: StatusText,
+    pub(crate) prompts: PromptText,
+    pub(crate) overlays: OverlayText,
     #[serde(default)]
-    pub copy: HashMap<String, String>,
+    pub(crate) copy: HashMap<String, String>,
 }
 
 #[derive(Debug, Deserialize)]
-pub struct StatusText {
-    pub closed_alchemy: String,
-    pub closed_shop: String,
-    pub closed_rune: String,
-    pub closed_archive: String,
-    pub closed_journal: String,
-    pub closed_quest_board: String,
-    pub open_journal: String,
-    pub open_alchemy: String,
-    pub reading_quest_board: String,
+pub(crate) struct StatusText {
+    pub(crate) closed_alchemy: String,
+    pub(crate) closed_shop: String,
+    pub(crate) closed_rune: String,
+    pub(crate) closed_archive: String,
+    pub(crate) closed_journal: String,
+    pub(crate) closed_quest_board: String,
+    pub(crate) open_journal: String,
+    pub(crate) open_alchemy: String,
+    pub(crate) reading_quest_board: String,
 }
 
 #[derive(Debug, Deserialize)]
-pub struct PromptText {
-    pub open_alchemy: String,
-    pub sleep_in_bed: String,
-    pub browse_shop: String,
-    pub open_rune_workshop: String,
-    pub reconstruct_archives: String,
-    pub focus_observatory: String,
-    pub read_request_board: String,
+pub(crate) struct PromptText {
+    pub(crate) open_alchemy: String,
+    pub(crate) sleep_in_bed: String,
+    pub(crate) browse_shop: String,
+    pub(crate) open_rune_workshop: String,
+    pub(crate) reconstruct_archives: String,
+    pub(crate) focus_observatory: String,
+    pub(crate) read_request_board: String,
 }
 
 #[derive(Debug, Deserialize)]
-pub struct OverlayText {
-    pub shop_subtitle: String,
-    pub rune_subtitle: String,
-    pub archive_subtitle: String,
-    pub quest_board_subtitle: String,
-    pub alchemy_subtitle: String,
+pub(crate) struct OverlayText {
+    pub(crate) shop_subtitle: String,
+    pub(crate) rune_subtitle: String,
+    pub(crate) archive_subtitle: String,
+    pub(crate) quest_board_subtitle: String,
+    pub(crate) alchemy_subtitle: String,
 }
 
 impl UiText {
@@ -80,19 +82,18 @@ impl UiText {
     }
 }
 
-pub fn ui_text() -> &'static UiText {
+pub(crate) fn ui_text() -> &'static UiText {
     static TEXT: OnceLock<UiText> = OnceLock::new();
     TEXT.get_or_init(|| {
-        serde_json::from_str(include_str!("../../assets/data/ui_text.json")).unwrap_or_else(
-            |error| {
-                eprintln!("Failed to load embedded ui_text.json: {error}");
-                UiText::fallback()
-            },
+        parse_json_or_else(
+            include_str!("../../assets/data/ui_text.json"),
+            "ui_text.json",
+            UiText::fallback,
         )
     })
 }
 
-pub fn ui_copy(key: &str) -> &'static str {
+pub(crate) fn ui_copy(key: &str) -> &'static str {
     static MISSING_COPY: OnceLock<Mutex<HashMap<String, &'static str>>> = OnceLock::new();
     ui_text()
         .copy
@@ -100,23 +101,25 @@ pub fn ui_copy(key: &str) -> &'static str {
         .map(String::as_str)
         .unwrap_or_else(|| {
             let cache = MISSING_COPY.get_or_init(|| Mutex::new(HashMap::new()));
-            let mut cache = cache
-                .lock()
-                .expect("missing ui text cache lock should succeed");
-            *cache
-                .entry(key.to_owned())
-                .or_insert_with(|| Box::leak(format!("[missing ui copy: {key}]").into_boxed_str()))
+            let Ok(mut cache) = cache.lock() else {
+                return missing_ui_copy(key);
+            };
+            *cache.entry(key.to_owned()).or_insert_with(|| missing_ui_copy(key))
         })
 }
 
-pub fn ui_copy_optional(key: &str) -> Option<&'static str> {
+pub(crate) fn ui_copy_optional(key: &str) -> Option<&'static str> {
     ui_text().copy.get(key).map(String::as_str)
 }
 
-pub fn ui_format(key: &str, replacements: &[(&str, &str)]) -> String {
+pub(crate) fn ui_format(key: &str, replacements: &[(&str, &str)]) -> String {
     let mut text = ui_copy(key).to_owned();
     for (name, value) in replacements {
         text = text.replace(&format!("{{{name}}}"), value);
     }
     text
+}
+
+fn missing_ui_copy(key: &str) -> &'static str {
+    Box::leak(format!("[missing ui copy: {key}]").into_boxed_str())
 }

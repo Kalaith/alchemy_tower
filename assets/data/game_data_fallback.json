@@ -1,0 +1,31 @@
+{
+  "config": {
+    "starting_area": "fallback_room",
+    "starting_position": [320.0, 180.0],
+    "move_speed": 180.0,
+    "interaction_range": 42.0,
+    "day_length_seconds": 600.0,
+    "save_version": 1
+  },
+  "areas": [
+    {
+      "id": "fallback_room",
+      "name": "Fallback Room",
+      "size": [640.0, 360.0],
+      "background": [22, 24, 30, 255],
+      "accent": [160, 170, 190, 255],
+      "blockers": [],
+      "warps": [],
+      "gather_nodes": [],
+      "render": {}
+    }
+  ],
+  "gathering_routes": [],
+  "npcs": [],
+  "quests": [],
+  "items": [],
+  "recipes": [],
+  "rune_recipes": [],
+  "mutation_formulas": [],
+  "stations": []
+}

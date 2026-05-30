@@ -1,4 +1,5 @@
-use super::{ActiveEffect, GameplayState};
+use super::gameplay_feedback_types::ActiveEffect;
+use super::GameplayState;
 use crate::data::{EffectDefinition, EffectKind};
 
 impl GameplayState {

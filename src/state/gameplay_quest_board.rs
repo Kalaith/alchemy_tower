@@ -1,11 +1,14 @@
 use super::GameplayState;
 use crate::content::{ui_format, ui_text};
 use crate::data::GameData;
-use macroquad::prelude::{is_key_pressed, Color, KeyCode};
+use crate::input::{
+    cancel_pressed, confirm_pressed, select_next_pressed, select_previous_pressed,
+};
+use macroquad::prelude::Color;
 
 impl GameplayState {
     pub(super) fn handle_quest_board_inputs(&mut self, data: &GameData) {
-        if is_key_pressed(KeyCode::Escape) {
+        if cancel_pressed() {
             self.clear_overlay();
             self.runtime.status_text = ui_text().statuses.closed_quest_board.clone();
             return;
@@ -14,13 +17,13 @@ impl GameplayState {
         if available.is_empty() {
             return;
         }
-        if is_key_pressed(KeyCode::Up) {
+        if select_previous_pressed() {
             self.ui.shop_index = self.ui.shop_index.saturating_sub(1);
         }
-        if is_key_pressed(KeyCode::Down) {
+        if select_next_pressed() {
             self.ui.shop_index = (self.ui.shop_index + 1).min(available.len().saturating_sub(1));
         }
-        if is_key_pressed(KeyCode::Enter) {
+        if confirm_pressed() {
             if let Some(quest_id) = available.get(self.ui.shop_index) {
                 self.progression.started_quests.insert(quest_id.clone());
                 if let Some(quest) = data.quest(quest_id) {
@@ -60,6 +63,32 @@ impl GameplayState {
             .filter(|quest| !self.progression.completed_quests.contains(&quest.id))
             .filter(|quest| self.quest_is_available(quest))
             .map(|quest| quest.id.clone())
+            .collect()
+    }
+
+    pub(super) fn locked_board_quest_summaries(&self, data: &GameData) -> Vec<String> {
+        data.quests
+            .iter()
+            .filter(|quest| quest.giver_npc_id == "quest_board")
+            .filter(|quest| !self.progression.started_quests.contains(&quest.id))
+            .filter(|quest| !self.progression.completed_quests.contains(&quest.id))
+            .filter(|quest| !self.quest_is_available(quest))
+            .map(|quest| {
+                format!(
+                    "{}: {}",
+                    quest.title,
+                    self.locked_state_text(&self.quest_unlock_summary(quest))
+                )
+            })
+            .collect()
+    }
+
+    pub(super) fn active_board_quest_titles(&self, data: &GameData) -> Vec<String> {
+        self.progression
+            .started_quests
+            .iter()
+            .filter_map(|quest_id| data.quest(quest_id))
+            .map(|quest| quest.title.clone())
             .collect()
     }
 }

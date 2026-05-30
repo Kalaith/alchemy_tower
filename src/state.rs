@@ -4,11 +4,11 @@ mod gameplay;
 mod menu;
 mod pause;
 
-pub use gameplay::GameplayState;
-pub use menu::MenuState;
-pub use pause::PauseState;
+pub(crate) use gameplay::GameplayState;
+pub(crate) use menu::MenuState;
+pub(crate) use pause::PauseState;
 
-pub enum StateTransition {
+pub(crate) enum StateTransition {
     EnterGameplay(GameplayState),
     ReturnToMenu,
     Pause,

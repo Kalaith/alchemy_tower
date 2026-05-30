@@ -138,13 +138,15 @@ impl GameplayState {
     }
 
     pub(super) fn append_npc_story_line(&self, npc_id: &str, base: String) -> String {
-        if let Some(extra) = self.npc_phase1_followup_line(npc_id) {
-            if base.contains(extra) {
-                base
-            } else {
-                format!("{base} {extra}")
-            }
-        } else {
-            base
+        let extra = match self.npc_phase1_followup_line(npc_id) {
+            Some(extra) => extra,
+            None => return base,
+        };
+
+        if base.contains(extra) {
+            return base;
         }
+
+        format!("{base} {extra}")
     }
+}
