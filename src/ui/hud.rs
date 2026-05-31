@@ -67,6 +67,7 @@ mod hud_status_vitals;
 #[path = "hud_text.rs"]
 mod hud_text;
 
+use super::text::{draw_wrapped_text, truncate_text_to_width};
 use self::hud_belt::*;
 use self::hud_control_tags::*;
 use self::hud_header::*;

@@ -10,7 +10,7 @@ pub(super) fn total_synthesis_weight(ingredients: &[&ItemDefinition]) -> u32 {
         .max(1)
 }
 
-pub(super) fn weighted_quality_average(ingredients: &[&ItemDefinition]) -> u32 {
+pub(in crate::alchemy) fn weighted_quality_average(ingredients: &[&ItemDefinition]) -> u32 {
     if ingredients.is_empty() {
         return 0;
     }

@@ -1,5 +1,5 @@
 use super::GameplayState;
-use crate::data::{GameData, MutationFormulaDefinition, PlanterStateEntry, StationDefinition};
+use crate::data::{GameData, PlanterStateEntry, StationDefinition};
 
 #[path = "gameplay_planter_status_text.rs"]
 mod status_text;
@@ -28,7 +28,7 @@ impl GameplayState {
         data: &GameData,
         station: &StationDefinition,
         state: &mut PlanterStateEntry,
-        mutation_candidate: Option<&MutationFormulaDefinition>,
+        mutation_candidate: Option<&(String, String)>,
     ) {
         if state.tended_day == self.world.day_index {
             self.report_planter_status(station, state);

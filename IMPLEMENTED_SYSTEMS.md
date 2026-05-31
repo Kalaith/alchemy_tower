@@ -32,7 +32,7 @@ This file describes what the game currently supports based on the source code an
   - a permanent top-center location banner with subtitle cap plates, inner brass rails, side medallions, rivets, and a mounted center gem
   - a time/day/weather plaque with inset bands, rivets, and a mounted sun medallion, paired with a decorative compass frame with map ticks and a brass/teal rosette
   - a right-side bag/effects/journal status plaque with carved rails, rivets, section medallions, and ornamental dividers
-  - stacked notched control tags and a bottom framed potion belt with inner rails, brass endcaps, glass bottle glows, and textured slot frames
+  - stacked notched control tags and a bottom framed field-kit belt with inner rails, brass endcaps, glass bottle glows, and textured empty slot frames
   - subtle HUD-owned workshop atmosphere with teal/warm light pools, edge vignette, foliage silhouettes, and brass filigree knots
 - Day clock, day rollover, weather state, season state, and time-of-day windows.
 - Rest bed on the tower entry floor with voluntary sleep-to-morning interaction.
@@ -50,7 +50,7 @@ This file describes what the game currently supports based on the source code an
   - journal use
   - quest pickup and first delivery
   - early progression from Mira to Rowan to greenhouse restoration
-  - potions and route restoration
+  - route restoration
 
 ## World Content
 
@@ -136,7 +136,7 @@ Current biome-native surface ingredients:
   - best record
   - safe stock
 - Reserved-count visibility in inventory and alchemy selection flows.
-- Quick potion belt for consuming up to three carried potions.
+- Field-kit belt slots render empty by default; carried potions are not auto-equipped into quick-use slots.
 
 ## Item Model
 
@@ -211,7 +211,7 @@ Current authored morph path:
 
 ## Potion Use and Effects
 
-- Immediate potion consumption from inventory.
+- Potion consumption support exists in inventory logic, but carried potions are not auto-equipped into the field-kit belt.
 - Active effect tracking over time.
 - Implemented effect kinds in gameplay logic:
   - `restore`

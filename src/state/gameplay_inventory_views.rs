@@ -24,25 +24,8 @@ impl GameplayState {
         }
     }
 
-    pub(super) fn quick_potions(&self, data: &GameData) -> Vec<String> {
-        let mut potions = self
-            .inventory
-            .iter()
-            .filter(|(item_id, amount)| {
-                **amount > 0
-                    && data
-                        .item(item_id)
-                        .map(|item| item.category == ItemCategory::Potion)
-                        .unwrap_or(false)
-            })
-            .map(|(item_id, _)| item_id.clone())
-            .collect::<Vec<_>>();
-        potions.sort_by(|left, right| {
-            let left_value = data.item(left).map(|item| item.base_value).unwrap_or(0);
-            let right_value = data.item(right).map(|item| item.base_value).unwrap_or(0);
-            right_value.cmp(&left_value).then(left.cmp(right))
-        });
-        potions
+    pub(super) fn quick_potions(&self, _data: &GameData) -> Vec<String> {
+        Vec::new()
     }
 
     pub(super) fn sell_candidates(&self, data: &GameData) -> Vec<String> {

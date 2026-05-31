@@ -58,7 +58,7 @@ pub(crate) use overlay_exports::{
     draw_pause_overlay, draw_quest_board_overlay_view, draw_rune_overlay_view,
     draw_selected_experiment_record_view, draw_shop_overlay_view, draw_sleep_flash_overlay_view,
 };
-use panels::{
+pub(crate) use panels::{
     draw_overlay_backdrop, draw_overlay_footer, draw_overlay_subtitle, draw_panel,
     draw_panel_frame,
 };

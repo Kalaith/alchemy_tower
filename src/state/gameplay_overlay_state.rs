@@ -69,9 +69,4 @@ impl GameplayState {
         self.ui.journal_tab
     }
 
-    pub(super) fn greenhouse_journal_unlocked(&self) -> bool {
-        self.progression
-            .completed_quests
-            .contains("entry_to_greenhouse")
-    }
 }

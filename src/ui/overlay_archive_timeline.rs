@@ -42,7 +42,7 @@ pub(crate) fn draw_archive_timeline_section_view(
         );
         let mut status_y = y + 156.0;
         for line in &view.status_lines {
-            draw_text(&line, x + 500.0, status_y, 20.0, dark::TEXT_DIM);
+            draw_text(line.as_str(), x + 500.0, status_y, 20.0, dark::TEXT_DIM);
             status_y += 24.0;
         }
         draw_state_banner(

@@ -46,3 +46,10 @@ Add a minimal procedural placeholder audio layer first, focused on walking, herb
 The biome pass now has authored layouts and seasonal spawn identity. Remaining product questions:
 - Which new biome-native ingredients should become recipe anchors or quest asks rather than staying as sell-and-salvage options?
 - Which biome should introduce the first stronger progression gate after the current opening plains-to-town rhythm?
+
+8. Target-based potion use
+Potions should primarily help people, plants, animals, routes, and tower systems rather than act as default self-buffs. The field kit should start empty and become an explicit applied-alchemy toolkit.
+- Define target categories: person, planter, habitat, creature, route object, obstruction, and player fallback.
+- Define core verbs: restore, reveal, grow, calm, overdrive.
+- Reserve harmful brews such as acid or poison for rare obstruction-clearing or risk/consequence cases.
+- Add an explicit equip/apply flow before reintroducing quick potion use.
