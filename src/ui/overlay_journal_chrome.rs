@@ -1,5 +1,5 @@
 use crate::art::{draw_texture_centered, ArtAssets};
-use crate::content::{input_bindings, ui_copy, ui_format};
+use crate::input::mouse_position_vec;
 use macroquad::prelude::*;
 use macroquad_toolkit::colors::dark;
 
@@ -13,8 +13,8 @@ pub(crate) fn draw_journal_backdrop() {
     );
 }
 
-pub(crate) fn draw_journal_close_button(close_rect: Rect) {
-    let close_hovered = close_rect.contains(mouse_position().into());
+pub(crate) fn draw_journal_close_button(close_rect: Rect, close_label: &str) {
+    let close_hovered = close_rect.contains(mouse_position_vec());
     draw_rectangle(
         close_rect.x,
         close_rect.y,
@@ -35,7 +35,7 @@ pub(crate) fn draw_journal_close_button(close_rect: Rect) {
         if close_hovered { WHITE } else { dark::ACCENT },
     );
     draw_text(
-        ui_copy("overlay_close"),
+        close_label,
         close_rect.x + 18.0,
         close_rect.y + 19.0,
         18.0,
@@ -43,17 +43,9 @@ pub(crate) fn draw_journal_close_button(close_rect: Rect) {
     );
 }
 
-pub(crate) fn draw_journal_current_conditions(
-    season: &str,
-    weather: &str,
-    x: f32,
-    y: f32,
-) {
+pub(crate) fn draw_journal_current_conditions(current_conditions_text: &str, x: f32, y: f32) {
     draw_text(
-        &ui_format(
-            "overlay_current_conditions",
-            &[("season", season), ("weather", weather)],
-        ),
+        current_conditions_text,
         x + 20.0,
         y + 50.0,
         24.0,
@@ -72,7 +64,7 @@ pub(crate) fn draw_journal_tabs(
             break;
         };
         let selected = selected_index == index;
-        let hovered = rect.contains(mouse_position().into());
+        let hovered = rect.contains(mouse_position_vec());
         draw_rectangle(
             rect.x,
             rect.y,
@@ -118,17 +110,9 @@ pub(crate) fn draw_journal_tabs(
     }
 }
 
-pub(crate) fn draw_journal_footer(x: f32, y: f32, h: f32) {
-    let footer = ui_format(
-        "overlay_journal_footer",
-        &[
-            ("switch", &input_bindings().navigation.switch),
-            ("close", &input_bindings().global.cancel),
-            ("journal", &input_bindings().global.journal),
-        ],
-    );
+pub(crate) fn draw_journal_footer(footer_text: &str, x: f32, y: f32, h: f32) {
     draw_text(
-        &footer,
+        footer_text,
         x + 20.0,
         y + h - 20.0,
         18.0,

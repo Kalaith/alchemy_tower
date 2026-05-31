@@ -2,6 +2,9 @@ use super::GameplayState;
 use crate::content::narrative_text;
 use crate::data::{GameData, NpcDefinition};
 
+#[path = "gameplay_npc_dialogue_text.rs"]
+mod npc_dialogue_text;
+
 pub(super) struct NpcDialogueSelection<'a> {
     pub(super) start: &'a str,
     pub(super) progress: &'a str,
@@ -147,6 +150,6 @@ impl GameplayState {
             return base;
         }
 
-        format!("{base} {extra}")
+        npc_dialogue_text::with_followup(&base, extra)
     }
 }

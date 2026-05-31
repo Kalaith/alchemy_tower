@@ -1,8 +1,13 @@
 pub(crate) mod alchemy;
 pub(crate) mod archive;
+pub(crate) mod ending;
 pub(crate) mod hud;
 pub(crate) mod journal;
+pub(crate) mod menu;
 pub(crate) mod dialogue;
+pub(crate) mod pause;
+pub(crate) mod prompt;
 pub(crate) mod quest_board;
 pub(crate) mod rune;
 pub(crate) mod shop;
+pub(crate) mod sleep;

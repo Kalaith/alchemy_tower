@@ -1,4 +1,3 @@
-use crate::content::ui_copy;
 use crate::view_models::journal::{JournalHerbMemoriesView, JournalRoutesTabView};
 use super::draw_wrapped_text;
 use macroquad::prelude::{draw_rectangle, draw_rectangle_lines, draw_text, Color};
@@ -12,7 +11,7 @@ pub(crate) fn draw_journal_routes_tab_view(
     h: f32,
 ) {
         draw_text(
-            ui_copy("overlay_known_routes"),
+            view.title,
             x + 20.0,
             y + 136.0,
             26.0,
@@ -37,7 +36,7 @@ pub(crate) fn draw_journal_routes_tab_view(
             y + h - 170.0,
         );
         draw_text(
-            ui_copy("overlay_progress_routes"),
+            view.progress_title,
             x + 20.0,
             y + h - 156.0,
             24.0,
@@ -84,7 +83,7 @@ fn draw_journal_herb_memories_view(
     bottom_limit: f32,
 ) {
     draw_text(
-        ui_copy("overlay_herb_memories"),
+        view.title,
         x,
         title_y,
         26.0,

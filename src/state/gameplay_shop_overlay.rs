@@ -1,5 +1,5 @@
 use super::GameplayState;
-use crate::content::{ui_copy, ui_format};
+use crate::content::{input_bindings, ui_copy, ui_format, ui_text};
 use crate::data::GameData;
 use crate::view_models::shop::{ShopOverlayEntry, ShopOverlayView};
 
@@ -82,7 +82,12 @@ impl GameplayState {
 
         Some(ShopOverlayView {
             station_name: station.name.clone(),
-            coin_count: self.coins,
+            subtitle: ui_text()
+                .overlays
+                .shop_subtitle
+                .replace("{coins}", &self.coins.to_string()),
+            buy_tab_label: ui_copy("overlay_shop_buy_tab").to_owned(),
+            sell_tab_label: ui_copy("overlay_shop_sell_tab").to_owned(),
             buy_tab_active: buying,
             sell_tab_active: !buying,
             stock_title: if buying {
@@ -90,14 +95,28 @@ impl GameplayState {
             } else {
                 ui_copy("overlay_shop_sellable_stock").to_owned()
             },
-            sort_label: self.inventory_sort_label().to_owned(),
+            sort_text: ui_format("overlay_sort_mode", &[("mode", self.inventory_sort_label())]),
             empty_text: if buying {
                 self.unavailable_state_text(ui_copy("overlay_shop_empty_buy"))
             } else {
                 self.unavailable_state_text(ui_copy("overlay_shop_empty_sell"))
             },
             safe_sell_banner,
+            footer_text: shop_footer_text(),
             entries,
         })
     }
+}
+
+fn shop_footer_text() -> String {
+    ui_format(
+        "overlay_shop_footer",
+        &[
+            ("switch", &input_bindings().shop.switch_tab),
+            ("select", &input_bindings().navigation.select),
+            ("sort", &input_bindings().global.sort),
+            ("confirm", &input_bindings().global.confirm),
+            ("close", &input_bindings().global.cancel),
+        ],
+    )
 }

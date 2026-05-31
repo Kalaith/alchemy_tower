@@ -1,4 +1,3 @@
-use crate::content::ui_copy;
 use crate::view_models::archive::ArchiveTimelineSectionView;
 use super::{draw_state_banner, draw_wrapped_text};
 use macroquad::prelude::*;
@@ -12,7 +11,7 @@ pub(crate) fn draw_archive_timeline_section_view(
     h: f32,
 ) {
         draw_text(
-            ui_copy("overlay_archive_section_timeline"),
+            &view.title,
             x + 20.0,
             y + 122.0,
             26.0,
@@ -35,7 +34,7 @@ pub(crate) fn draw_archive_timeline_section_view(
         }
 
         draw_text(
-            ui_copy("overlay_tower_status"),
+            &view.status_title,
             x + 500.0,
             y + 122.0,
             26.0,

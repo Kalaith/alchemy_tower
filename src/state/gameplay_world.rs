@@ -1,7 +1,8 @@
 use super::GameplayState;
-use crate::content::ui_format;
 use crate::data::{GameData, JournalMilestoneEntry};
-use macroquad::prelude::Color;
+
+#[path = "gameplay_world_text.rs"]
+mod world_text;
 
 impl GameplayState {
     pub(super) fn current_season(&self) -> &'static str {
@@ -100,17 +101,7 @@ impl GameplayState {
                 title: title.to_owned(),
                 text: text.to_owned(),
             });
-        self.push_event_toast_with_icon(
-            ui_format("gameplay_new_journal_note", &[("title", title)]),
-            Color::from_rgba(176, 226, 255, 255),
-            "journal_note",
-        );
-        self.trigger_world_feedback(
-            self.world.player.position,
-            Color::from_rgba(176, 226, 255, 255),
-            true,
-            1.6,
-        );
+        self.trigger_journal_note_feedback(world_text::new_journal_note(title));
     }
 
     pub(super) fn has_journal_milestone(&self, id: &str) -> bool {

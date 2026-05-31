@@ -5,7 +5,7 @@ pub(crate) use super::overlay_alchemy_formulae::draw_alchemy_formulae_panel_view
 pub(crate) use super::overlay_alchemy_preview::draw_alchemy_preview_panel_view;
 pub(crate) use super::overlay_alchemy_sections::draw_alchemy_materials_panel_view;
 pub(crate) use super::overlay_alchemy_slots::draw_alchemy_slots_panel_view;
-pub(crate) use super::overlay_archive_chrome::{archive_footer_text, draw_archive_tabs};
+pub(crate) use super::overlay_archive_chrome::draw_archive_tabs;
 pub(crate) use super::overlay_archive_disassembly::draw_archive_disassembly_section_view;
 pub(crate) use super::overlay_archive_duplication::draw_archive_duplication_section_view;
 pub(crate) use super::overlay_archive_experiment_detail::draw_selected_experiment_record_view;
@@ -14,7 +14,7 @@ pub(crate) use super::overlay_archive_mastery::draw_archive_mastery_section_view
 pub(crate) use super::overlay_archive_morphs::draw_archive_morphs_section_view;
 pub(crate) use super::overlay_archive_timeline::draw_archive_timeline_section_view;
 pub(crate) use super::overlay_chrome::{
-    archive_tab_label, draw_overlay_section_box, draw_overlay_section_title, draw_overlay_tab,
+    draw_overlay_section_box, draw_overlay_section_title, draw_overlay_tab,
 };
 pub(crate) use super::overlay_dialogue::draw_dialogue_overlay_view;
 pub(crate) use super::overlay_ending::draw_ending_overlay_view;

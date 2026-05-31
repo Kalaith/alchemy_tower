@@ -1,7 +1,8 @@
 use super::GameplayState;
-use crate::content::ui_copy;
 use crate::data::GameData;
-use macroquad::prelude::Color;
+
+#[path = "gameplay_support_text.rs"]
+mod support_text;
 
 impl GameplayState {
     pub(super) fn update_area_banner(&mut self, data: &GameData, frame_time: f32) {
@@ -18,31 +19,12 @@ impl GameplayState {
 
 }
 
-pub(super) fn rgba(values: [u8; 4]) -> Color {
-    Color::from_rgba(values[0], values[1], values[2], values[3])
-}
-
 pub(super) fn quality_band_rank(band: &str) -> u8 {
-    match band {
-        value if value == ui_copy("quality_band_crude") => 0,
-        value if value == ui_copy("quality_band_serviceable") => 1,
-        value if value == ui_copy("quality_band_fine") => 2,
-        value if value == ui_copy("quality_band_excellent") => 3,
-        value if value == ui_copy("quality_band_masterwork") => 4,
-        _ => 0,
-    }
+    support_text::quality_band_rank(band)
 }
 
 pub(super) fn planter_stage_label(growth_days: u32, total_days: u32) -> &'static str {
-    if growth_days == 0 {
-        ui_copy("planter_stage_seeded")
-    } else if growth_days >= total_days {
-        ui_copy("planter_stage_ripe")
-    } else if growth_days * 2 >= total_days {
-        ui_copy("planter_stage_budding")
-    } else {
-        ui_copy("planter_stage_sprouting")
-    }
+    support_text::planter_stage_label(growth_days, total_days)
 }
 
 pub(super) fn starting_day_time(data: &GameData) -> f32 {

@@ -1,4 +1,3 @@
-use crate::content::ui_copy;
 use crate::view_models::journal::JournalNotesTabView;
 use super::draw_wrapped_text;
 use macroquad::prelude::*;
@@ -12,14 +11,14 @@ pub(crate) fn draw_journal_notes_tab_view(
     h: f32,
 ) {
         draw_text(
-            ui_copy("overlay_tower_notes"),
+            view.title,
             x + 20.0,
             y + 136.0,
             26.0,
             dark::TEXT_BRIGHT,
         );
         draw_text(
-            ui_copy("overlay_progress_active"),
+            view.active_title,
             x + 20.0,
             y + 168.0,
             24.0,
@@ -44,7 +43,7 @@ pub(crate) fn draw_journal_notes_tab_view(
         );
 
         draw_text(
-            ui_copy("overlay_progress_milestones"),
+            view.milestones_title,
             x + 20.0,
             y + 286.0,
             24.0,

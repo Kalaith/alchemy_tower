@@ -1,79 +1,143 @@
-use super::gameplay_feedback_types::{GatherFeedback, GatherToast};
+use super::gameplay_feedback_primitives::rgba;
 use super::GameplayState;
-use macroquad::prelude::{Color, Vec2};
 
 impl GameplayState {
-    pub(super) fn update_active_effects(&mut self, frame_time: f32) {
-        for effect in &mut self.runtime.active_effects {
-            effect.remaining_seconds -= frame_time;
-        }
-        self.runtime
-            .active_effects
-            .retain(|effect| effect.remaining_seconds > 0.0);
+    pub(super) fn trigger_archive_reconstruction_feedback(&mut self, toast_text: impl Into<String>) {
+        let archive_color = rgba(176, 226, 255, 255);
+        self.push_event_toast_with_icon(toast_text, archive_color, "journal_note");
+        self.trigger_world_feedback(self.player_feedback_position(), archive_color, true, 2.2);
+        self.trigger_camera_shake(0.2, 5.2);
     }
 
-    pub(super) fn update_gather_feedback(&mut self, frame_time: f32) {
-        self.runtime.gather_pause_seconds =
-            (self.runtime.gather_pause_seconds - frame_time).max(0.0);
-        self.runtime.camera_shake_seconds =
-            (self.runtime.camera_shake_seconds - frame_time).max(0.0);
-        self.runtime.sleep_flash_seconds = (self.runtime.sleep_flash_seconds - frame_time).max(0.0);
-        self.runtime.footstep_cooldown_seconds =
-            (self.runtime.footstep_cooldown_seconds - frame_time).max(0.0);
-        if self.runtime.camera_shake_seconds <= 0.0 {
-            self.runtime.camera_shake_intensity = 0.0;
-        }
-        for toast in &mut self.runtime.gather_toasts {
-            toast.remaining_seconds -= frame_time;
-        }
-        self.runtime
-            .gather_toasts
-            .retain(|toast| toast.remaining_seconds > 0.0);
-        for feedback in &mut self.runtime.gather_feedbacks {
-            feedback.remaining_seconds -= frame_time;
-        }
-        self.runtime
-            .gather_feedbacks
-            .retain(|feedback| feedback.remaining_seconds > 0.0);
-    }
-
-    pub(super) fn push_event_toast(&mut self, text: impl Into<String>, color: Color) {
-        self.push_event_toast_with_icon(text, color, "");
-    }
-
-    pub(super) fn push_event_toast_with_icon(
-        &mut self,
-        _text: impl Into<String>,
-        _color: Color,
-        _icon_key: &str,
-    ) {
-        self.runtime.gather_toasts.insert(
-            0,
-            GatherToast {
-                remaining_seconds: 2.2,
-            },
+    pub(super) fn trigger_duplication_feedback(&mut self, toast_text: impl Into<String>) {
+        self.push_event_toast_with_icon(
+            toast_text,
+            rgba(216, 182, 255, 255),
+            "best_quality",
         );
-        self.runtime.gather_toasts.truncate(3);
     }
 
-    pub(super) fn trigger_camera_shake(&mut self, seconds: f32, intensity: f32) {
-        self.runtime.camera_shake_seconds = self.runtime.camera_shake_seconds.max(seconds);
-        self.runtime.camera_shake_intensity = self.runtime.camera_shake_intensity.max(intensity);
+    pub(super) fn trigger_planter_mutation_feedback(&mut self, toast_text: impl Into<String>) {
+        self.push_event_toast_with_icon(
+            toast_text,
+            rgba(188, 255, 220, 255),
+            "best_quality",
+        );
     }
 
-    pub(super) fn trigger_world_feedback(
+    pub(super) fn trigger_recipe_logged_feedback(&mut self, toast_text: impl Into<String>) {
+        self.push_event_toast_with_icon(
+            toast_text,
+            rgba(176, 226, 255, 255),
+            "recipe_logged",
+        );
+    }
+
+    pub(super) fn trigger_mastery_improved_feedback(&mut self, toast_text: impl Into<String>) {
+        self.push_event_toast_with_icon(
+            toast_text,
+            rgba(255, 230, 170, 255),
+            "best_quality",
+        );
+    }
+
+    pub(super) fn trigger_disassembly_feedback(&mut self, toast_text: impl Into<String>) {
+        self.push_event_toast_with_icon(
+            toast_text,
+            rgba(214, 204, 170, 255),
+            "recipe_logged",
+        );
+    }
+
+    pub(super) fn trigger_safe_sale_feedback(&mut self, toast_text: impl Into<String>) {
+        self.push_event_toast_with_icon(
+            toast_text,
+            rgba(255, 214, 132, 255),
+            "best_quality",
+        );
+    }
+
+    pub(super) fn trigger_quest_accepted_feedback(&mut self, toast_text: impl Into<String>) {
+        let quest_color = rgba(255, 230, 170, 255);
+        self.push_event_toast_with_icon(toast_text, quest_color, "quest_accepted");
+        self.trigger_world_feedback(self.player_feedback_position(), quest_color, false, 1.2);
+    }
+
+    pub(super) fn trigger_quest_complete_feedback(&mut self, toast_text: impl Into<String>) {
+        let quest_color = rgba(188, 255, 220, 255);
+        self.push_event_toast_with_icon(toast_text, quest_color, "quest_complete");
+        self.trigger_world_feedback(self.player_feedback_position(), quest_color, true, 1.8);
+        self.trigger_camera_shake(0.14, 3.8);
+    }
+
+    pub(super) fn trigger_warp_travel_feedback(&mut self, position: [f32; 2]) {
+        self.trigger_world_feedback(position, rgba(255, 245, 160, 255), false, 1.2);
+    }
+
+    pub(super) fn trigger_route_restored_feedback(
         &mut self,
-        position: Vec2,
-        color: Color,
-        emphasis: bool,
-        burst_scale: f32,
+        toast_text: impl Into<String>,
+        position: [f32; 2],
     ) {
-        self.runtime.gather_feedbacks.push(GatherFeedback {
-            position,
-            remaining_seconds: if emphasis { 0.9 } else { 0.55 },
-            color,
-            emphasis,
-            burst_scale,
-        });
+        let route_color = rgba(188, 255, 220, 255);
+        self.push_event_toast_with_icon(toast_text, route_color, "route_restored");
+        self.trigger_world_feedback(position, route_color, true, 2.0);
+        self.trigger_camera_shake(0.18, 4.8);
+    }
+
+    pub(super) fn trigger_brew_result_feedback(
+        &mut self,
+        station_position: [f32; 2],
+        stable_brew: bool,
+        collapsed_brew: bool,
+    ) {
+        let brew_color = if collapsed_brew {
+            rgba(196, 162, 255, 255)
+        } else if stable_brew {
+            rgba(188, 255, 220, 255)
+        } else {
+            rgba(255, 214, 132, 255)
+        };
+        self.trigger_world_feedback(
+            station_position,
+            brew_color,
+            stable_brew || collapsed_brew,
+            if stable_brew { 1.9 } else { 1.4 },
+        );
+        self.trigger_camera_shake(
+            if stable_brew { 0.12 } else { 0.08 },
+            if stable_brew { 3.6 } else { 2.0 },
+        );
+    }
+
+    pub(super) fn trigger_new_best_brew_feedback(&mut self, toast_text: impl Into<String>) {
+        self.push_event_toast_with_icon(
+            toast_text,
+            rgba(188, 255, 220, 255),
+            "best_quality",
+        );
+    }
+
+    pub(super) fn trigger_greenhouse_unlock_feedback(&mut self, toast_text: impl Into<String>) {
+        let unlock_color = rgba(200, 255, 200, 255);
+        self.push_event_toast_with_icon(toast_text, unlock_color, "route_restored");
+        self.trigger_world_feedback(self.player_feedback_position(), unlock_color, true, 2.1);
+        self.trigger_camera_shake(0.2, 5.4);
+    }
+
+    pub(super) fn trigger_day_begin_feedback(&mut self) {
+        self.trigger_world_feedback(
+            self.player_feedback_position(),
+            rgba(176, 226, 255, 255),
+            true,
+            1.5,
+        );
+        self.trigger_camera_shake(0.22, 6.0);
+    }
+
+    pub(super) fn trigger_journal_note_feedback(&mut self, toast_text: impl Into<String>) {
+        let note_color = rgba(176, 226, 255, 255);
+        self.push_event_toast_with_icon(toast_text, note_color, "journal_note");
+        self.trigger_world_feedback(self.player_feedback_position(), note_color, true, 1.6);
     }
 }

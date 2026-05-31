@@ -4,7 +4,6 @@ pub(super) use super::hud_side_hardware::{
     draw_side_status_divider, draw_side_status_hardware, draw_status_icon_medallion,
 };
 use super::HudView;
-use crate::content::ui_copy;
 use macroquad::prelude::*;
 
 pub(super) fn draw_side_status_panel(view: &HudView) {
@@ -14,7 +13,7 @@ pub(super) fn draw_side_status_panel(view: &HudView) {
     draw_panel_filigree(rect, 0.58);
     draw_side_status_hardware(rect);
     draw_centered_text(
-        ui_copy("hud_drawer_inventory"),
+        &view.inventory_label,
         rect.x,
         rect.y + 25.0,
         rect.w,
@@ -35,7 +34,7 @@ pub(super) fn draw_side_status_panel(view: &HudView) {
     );
     draw_side_status_divider(rect, rect.y + 78.0);
     draw_centered_text(
-        ui_copy("hud_drawer_effects"),
+        &view.effects_label,
         rect.x,
         rect.y + 103.0,
         rect.w,
@@ -58,7 +57,7 @@ pub(super) fn draw_side_status_panel(view: &HudView) {
         );
     } else {
         draw_centered_text(
-            ui_copy("overlay_none"),
+            &view.no_effects_label,
             rect.x,
             rect.y + 129.0,
             rect.w,
@@ -68,7 +67,7 @@ pub(super) fn draw_side_status_panel(view: &HudView) {
     }
     draw_side_status_divider(rect, rect.y + 156.0);
     draw_centered_text(
-        ui_copy("hud_drawer_journal"),
+        &view.journal_label,
         rect.x,
         rect.y + 188.0,
         rect.w,
@@ -82,7 +81,7 @@ pub(super) fn draw_side_status_panel(view: &HudView) {
     draw_book_icon(vec2(rect.x + 21.0, rect.y + 212.0), 0.8);
     draw_keycap(
         Rect::new(rect.x + 28.0, rect.y + 197.0, 30.0, 30.0),
-        "J",
+        &view.journal_key_label,
         true,
     );
 }

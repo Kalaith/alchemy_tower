@@ -1,6 +1,6 @@
 //! High-level game loop orchestration.
 
-use macroquad::prelude::*;
+use macroquad::prelude::{clear_background, Color};
 
 #[path = "game_bootstrap.rs"]
 mod game_bootstrap;

@@ -1,6 +1,11 @@
-use macroquad::prelude::{is_key_down, is_key_pressed, Vec2, KeyCode};
+#[path = "input_keys.rs"]
+mod input_keys;
+
+use macroquad::prelude::{is_mouse_button_pressed, mouse_position, MouseButton, Rect, Vec2};
+use macroquad_toolkit::input::was_clicked;
 
 use crate::content::input_bindings;
+use self::input_keys::{any_label_down, pressed_label};
 
 pub(crate) fn quick_potion_pressed(index: usize) -> bool {
     let Some(label) = input_bindings().global.quick_potions.get(index) else {
@@ -101,6 +106,31 @@ pub(crate) fn load_pressed() -> bool {
     pressed_label(&input_bindings().global.load)
 }
 
+pub(crate) fn left_mouse_pressed() -> bool {
+    is_mouse_button_pressed(MouseButton::Left)
+}
+
+pub(crate) fn mouse_position_vec() -> Vec2 {
+    mouse_position().into()
+}
+
+pub(crate) fn mouse_position_point() -> [f32; 2] {
+    let (x, y) = mouse_position();
+    [x, y]
+}
+
+pub(crate) fn rect_clicked(rect: Rect) -> bool {
+    was_clicked(rect.x, rect.y, rect.w, rect.h)
+}
+
+pub(crate) fn rect_contains_point(rect: Rect, point: [f32; 2]) -> bool {
+    rect.contains(Vec2::new(point[0], point[1]))
+}
+
+pub(crate) fn right_mouse_pressed() -> bool {
+    is_mouse_button_pressed(MouseButton::Right)
+}
+
 pub(crate) fn movement_direction() -> Vec2 {
     let movement = &input_bindings().movement;
     let mut direction = Vec2::ZERO;
@@ -137,68 +167,4 @@ pub(crate) fn switch_next_pressed() -> bool {
 
 pub(crate) fn switch_previous_pressed() -> bool {
     pressed_label(&input_bindings().navigation.switch_previous)
-}
-
-fn pressed_label(label: &str) -> bool {
-    let Some(key) = key_code_for_label(label) else {
-        return false;
-    };
-    is_key_pressed(key)
-}
-
-fn any_label_down(labels: &[String]) -> bool {
-    labels.iter().any(|label| key_down_label(label))
-}
-
-fn key_down_label(label: &str) -> bool {
-    let Some(key) = key_code_for_label(label) else {
-        return false;
-    };
-    is_key_down(key)
-}
-
-fn key_code_for_label(label: &str) -> Option<KeyCode> {
-    match label {
-        "A" => Some(KeyCode::A),
-        "B" => Some(KeyCode::B),
-        "C" => Some(KeyCode::C),
-        "D" => Some(KeyCode::D),
-        "E" => Some(KeyCode::E),
-        "F" => Some(KeyCode::F),
-        "G" => Some(KeyCode::G),
-        "H" => Some(KeyCode::H),
-        "I" => Some(KeyCode::I),
-        "J" => Some(KeyCode::J),
-        "K" => Some(KeyCode::K),
-        "L" => Some(KeyCode::L),
-        "M" => Some(KeyCode::M),
-        "N" => Some(KeyCode::N),
-        "O" => Some(KeyCode::O),
-        "P" => Some(KeyCode::P),
-        "Q" => Some(KeyCode::Q),
-        "R" => Some(KeyCode::R),
-        "S" => Some(KeyCode::S),
-        "T" => Some(KeyCode::T),
-        "U" => Some(KeyCode::U),
-        "V" => Some(KeyCode::V),
-        "W" => Some(KeyCode::W),
-        "X" => Some(KeyCode::X),
-        "Y" => Some(KeyCode::Y),
-        "Z" => Some(KeyCode::Z),
-        "Esc" | "Escape" => Some(KeyCode::Escape),
-        "Enter" => Some(KeyCode::Enter),
-        "Tab" => Some(KeyCode::Tab),
-        "F5" => Some(KeyCode::F5),
-        "F9" => Some(KeyCode::F9),
-        "F11" => Some(KeyCode::F11),
-        "Space" => Some(KeyCode::Space),
-        "1" => Some(KeyCode::Key1),
-        "2" => Some(KeyCode::Key2),
-        "3" => Some(KeyCode::Key3),
-        "Down" => Some(KeyCode::Down),
-        "Left" => Some(KeyCode::Left),
-        "Right" => Some(KeyCode::Right),
-        "Up" => Some(KeyCode::Up),
-        _ => None,
-    }
 }

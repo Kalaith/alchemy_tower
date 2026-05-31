@@ -1,12 +1,15 @@
 use super::gameplay_overlay_types::OverlayScreen;
 use super::GameplayState;
 use crate::audio::AudioAssets;
-use crate::content::ui_text;
 use crate::data::GameData;
 use crate::input::{
-    cancel_pressed, confirm_pressed, journal_pressed, switch_next_pressed, switch_previous_pressed,
+    cancel_pressed, confirm_pressed, journal_pressed, left_mouse_pressed, mouse_position_point,
+    rect_contains_point, switch_next_pressed, switch_previous_pressed,
 };
-use macroquad::prelude::*;
+use crate::journal_layout::{journal_close_rect, journal_tab_rect};
+
+#[path = "gameplay_overlay_input_text.rs"]
+mod overlay_input_text;
 
 impl GameplayState {
     pub(super) fn handle_active_overlay_inputs(
@@ -39,15 +42,15 @@ impl GameplayState {
     fn handle_journal_overlay_inputs(&mut self) {
         let journal_tab_count = self.journal_tabs().len();
         self.ui.journal_tab = self.ui.journal_tab.min(journal_tab_count.saturating_sub(1));
-        if is_mouse_button_pressed(MouseButton::Left) {
-            let mouse = mouse_position().into();
-            if self.journal_close_rect().contains(mouse) {
+        if left_mouse_pressed() {
+            let mouse = mouse_position_point();
+            if rect_contains_point(journal_close_rect(), mouse) {
                 self.clear_overlay();
-                self.runtime.status_text = ui_text().statuses.closed_journal.clone();
+                self.runtime.status_text = overlay_input_text::closed_journal();
                 return;
             }
             for index in 0..journal_tab_count {
-                if self.journal_tab_rect(index, journal_tab_count).contains(mouse) {
+                if rect_contains_point(journal_tab_rect(index, journal_tab_count), mouse) {
                     self.ui.journal_tab = index;
                     break;
                 }
@@ -61,7 +64,7 @@ impl GameplayState {
         }
         if journal_pressed() {
             self.clear_overlay();
-            self.runtime.status_text = ui_text().statuses.closed_journal.clone();
+            self.runtime.status_text = overlay_input_text::closed_journal();
         }
     }
 }

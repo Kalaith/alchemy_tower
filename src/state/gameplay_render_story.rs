@@ -1,7 +1,7 @@
 use super::GameplayState;
 use crate::data::AreaDefinition;
 use crate::ui::draw_phase1_story_flourishes_view;
-use macroquad::prelude::*;
+use macroquad::prelude::Vec2;
 
 impl GameplayState {
     pub(super) fn draw_phase1_story_flourishes(&self, area: &AreaDefinition, offset: Vec2) {

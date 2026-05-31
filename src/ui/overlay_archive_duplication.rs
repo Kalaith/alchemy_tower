@@ -1,4 +1,3 @@
-use crate::content::ui_copy;
 use crate::view_models::archive::ArchiveDuplicationSectionView;
 use super::{draw_selection_card, draw_state_banner, draw_wrapped_text};
 use macroquad::prelude::*;
@@ -12,7 +11,7 @@ pub(crate) fn draw_archive_duplication_section_view(
     _h: f32,
 ) {
         draw_text(
-            ui_copy("overlay_duplication"),
+            &view.title,
             x + 20.0,
             y + 122.0,
             26.0,
@@ -46,7 +45,7 @@ pub(crate) fn draw_archive_duplication_section_view(
         }
 
         draw_text(
-            ui_copy("overlay_duplication_cost"),
+            &view.cost_title,
             x + 410.0,
             y + 122.0,
             26.0,
@@ -77,7 +76,7 @@ pub(crate) fn draw_archive_duplication_section_view(
             dark::TEXT_DIM,
         );
         draw_wrapped_text(
-            ui_copy("overlay_archive_duplication_help"),
+            &view.help_text,
             x + 410.0,
             y + 244.0,
             w - 430.0,

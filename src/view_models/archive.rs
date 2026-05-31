@@ -1,4 +1,13 @@
+pub(crate) struct ArchiveChromeView {
+    pub(crate) title: &'static str,
+    pub(crate) subtitle: String,
+    pub(crate) tabs: Vec<&'static str>,
+    pub(crate) footer_text: String,
+}
+
 pub(crate) struct ArchiveTimelineSectionView {
+    pub(crate) title: String,
+    pub(crate) status_title: String,
     pub(crate) recent_milestones: Vec<ArchiveTimelineMilestoneView>,
     pub(crate) status_lines: Vec<String>,
     pub(crate) reconstruction_text: String,
@@ -11,6 +20,9 @@ pub(crate) struct ArchiveTimelineMilestoneView {
 }
 
 pub(crate) struct ArchiveDisassemblySectionView {
+    pub(crate) title: String,
+    pub(crate) selected_inputs_title: String,
+    pub(crate) help_text: String,
     pub(crate) empty_text: String,
     pub(crate) entries: Vec<ArchiveDisassemblyRecipeEntry>,
     pub(crate) selected_inputs: Vec<String>,
@@ -24,6 +36,9 @@ pub(crate) struct ArchiveDisassemblyRecipeEntry {
 }
 
 pub(crate) struct ArchiveDuplicationSectionView {
+    pub(crate) title: String,
+    pub(crate) cost_title: String,
+    pub(crate) help_text: String,
     pub(crate) empty_text: String,
     pub(crate) entries: Vec<ArchiveDuplicationItemEntry>,
     pub(crate) detail: Option<ArchiveDuplicationDetailView>,
@@ -44,6 +59,7 @@ pub(crate) struct ArchiveDuplicationDetailView {
 }
 
 pub(crate) struct ArchiveExperimentsSectionView {
+    pub(crate) title: String,
     pub(crate) filter_text: String,
     pub(crate) page_text: Option<String>,
     pub(crate) empty_text: String,
@@ -59,6 +75,7 @@ pub(crate) struct ArchiveExperimentEntryView {
 }
 
 pub(crate) struct ArchiveExperimentRecordView {
+    pub(crate) title: String,
     pub(crate) output_text: String,
     pub(crate) quality_text: String,
     pub(crate) result_text: String,
@@ -74,6 +91,8 @@ pub(crate) struct ArchiveExperimentRecipeMemoryView {
 }
 
 pub(crate) struct ArchiveMasterySectionView {
+    pub(crate) title: String,
+    pub(crate) detail_title: String,
     pub(crate) empty_text: String,
     pub(crate) entries: Vec<ArchiveMasteryRecipeEntry>,
     pub(crate) detail: Option<ArchiveMasteryDetailView>,
@@ -96,6 +115,8 @@ pub(crate) struct ArchiveMasteryDetailView {
 }
 
 pub(crate) struct ArchiveMorphsSectionView {
+    pub(crate) title: String,
+    pub(crate) detail_title: String,
     pub(crate) empty_text: String,
     pub(crate) entries: Vec<ArchiveMorphRecipeEntry>,
     pub(crate) detail: Option<ArchiveMorphDetailView>,

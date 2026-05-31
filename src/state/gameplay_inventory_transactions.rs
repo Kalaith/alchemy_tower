@@ -1,7 +1,8 @@
 use super::GameplayState;
-use crate::content::ui_format;
 use crate::data::GameData;
-use macroquad::prelude::Color;
+
+#[path = "gameplay_inventory_transaction_text.rs"]
+mod transaction_text;
 
 impl GameplayState {
     pub(super) fn consume_potion(&mut self, data: &GameData, item_id: &str) {
@@ -21,22 +22,18 @@ impl GameplayState {
         for effect in &item.effects {
             self.apply_effect(effect);
         }
-        self.runtime.status_text = ui_format("inventory_used", &[("name", &item.name)]);
+        self.runtime.status_text = transaction_text::potion_used(&item.name);
     }
 
     pub(super) fn buy_item(&mut self, data: &GameData, item_id: &str, price: u32) {
         if self.coins < price {
-            self.runtime.status_text = ui_format(
-                "inventory_not_enough_coins",
-                &[("item", data.item_name(item_id))],
-            );
+            self.runtime.status_text = transaction_text::not_enough_coins(data, item_id);
             return;
         }
         self.coins -= price;
         *self.inventory.entry(item_id.to_owned()).or_insert(0) += 1;
         self.note_inventory_observation(data, item_id);
-        self.runtime.status_text =
-            ui_format("inventory_bought", &[("item", data.item_name(item_id))]);
+        self.runtime.status_text = transaction_text::bought(data, item_id);
     }
 
     pub(super) fn sell_item(&mut self, data: &GameData, item_id: &str) {
@@ -55,19 +52,9 @@ impl GameplayState {
             self.inventory.remove(item_id);
         }
         self.coins += price;
-        self.runtime.status_text = ui_format(
-            "inventory_sold",
-            &[("name", &item.name), ("price", &price.to_string())],
-        );
+        self.runtime.status_text = transaction_text::sold(&item.name, price);
         if self.sell_is_safe(data, item_id) {
-            self.push_event_toast_with_icon(
-                ui_format(
-                    "inventory_sold_safe",
-                    &[("name", &item.name), ("price", &price.to_string())],
-                ),
-                Color::from_rgba(255, 214, 132, 255),
-                "best_quality",
-            );
+            self.trigger_safe_sale_feedback(transaction_text::sold_safe(&item.name, price));
         }
     }
 }

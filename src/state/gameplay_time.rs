@@ -1,7 +1,8 @@
 use super::GameplayState;
-use crate::content::{ui_copy, ui_format};
 use crate::data::GameData;
-use macroquad::prelude::{vec2, Color};
+
+#[path = "gameplay_time_status_text.rs"]
+mod time_status_text;
 
 impl GameplayState {
     pub(super) fn current_time_window(&self) -> &'static str {
@@ -28,20 +29,9 @@ impl GameplayState {
         self.advance_planters(data);
         self.refresh_available_nodes(data);
         if with_feedback {
-            self.runtime.status_text = ui_format(
-                "day_begin_status",
-                &[
-                    ("weather", self.current_weather()),
-                    ("season", self.current_season()),
-                ],
-            );
-            self.trigger_world_feedback(
-                self.world.player.position,
-                Color::from_rgba(176, 226, 255, 255),
-                true,
-                1.5,
-            );
-            self.trigger_camera_shake(0.22, 6.0);
+            self.runtime.status_text =
+                time_status_text::day_begin(self.current_weather(), self.current_season());
+            self.trigger_day_begin_feedback();
         }
     }
 
@@ -58,14 +48,14 @@ impl GameplayState {
                 .find(|station| station.id == "entry_rest_bed")
             {
                 self.world.current_area_id = bed.area_id.clone();
-                self.world.player.position = vec2(bed.position[0], bed.position[1] + 52.0);
-                self.world.player.facing = vec2(0.0, -1.0);
-                self.world.player.moving = false;
+                self.set_player_position([bed.position[0], bed.position[1] + 52.0]);
+                self.set_player_facing([0.0, -1.0]);
+                self.stop_player_motion();
             }
             self.runtime.sleep_flash_seconds = 1.2;
-            self.runtime.status_text = ui_copy("gameplay_fainted_home").to_owned();
+            self.runtime.status_text = time_status_text::fainted_home();
         } else {
-            self.runtime.status_text = ui_format("gameplay_slept_until", &[("time", "07:00")]);
+            self.runtime.status_text = time_status_text::slept_until("07:00");
         }
     }
 

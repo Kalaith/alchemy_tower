@@ -1,12 +1,15 @@
-use macroquad::prelude::*;
+use macroquad::prelude::{next_frame, Conf};
 
 mod alchemy;
+mod alchemy_layout;
+mod archive_layout;
 mod art;
 mod audio;
 mod content;
 mod data;
 mod game;
 mod input;
+mod journal_layout;
 mod menu_layout;
 mod pause_layout;
 mod save;

@@ -1,6 +1,5 @@
 use super::GameplayState;
 use crate::data::{GameData, StationKind};
-use macroquad::prelude::vec2;
 
 impl GameplayState {
     pub(super) fn tutorial_near_alchemy_station(&self, data: &GameData) -> bool {
@@ -21,11 +20,7 @@ impl GameplayState {
                 area.gather_nodes.iter().any(|node| {
                     !self.world.gathered_nodes.contains(&node.id)
                         && self.node_is_available(node)
-                        && self
-                            .world
-                            .player
-                            .position
-                            .distance(vec2(node.position[0], node.position[1]))
+                        && self.player_distance_to(node.position)
                             <= node.radius + data.config.interaction_range + 36.0
                 })
             })

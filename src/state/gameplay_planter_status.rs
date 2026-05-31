@@ -1,8 +1,9 @@
 use super::gameplay_planter_actions::planter_growth_target;
-use super::gameplay_support::planter_stage_label;
 use super::GameplayState;
-use crate::content::{ui_copy, ui_format};
 use crate::data::{GameData, PlanterStateEntry, StationDefinition};
+
+#[path = "gameplay_planter_report_text.rs"]
+mod report_text;
 
 impl GameplayState {
     pub(super) fn planter_prompt_text(&self, station: &StationDefinition) -> String {
@@ -11,16 +12,16 @@ impl GameplayState {
             .get(&station.id)
             .map(|planter| {
                 if planter.ready {
-                    ui_copy("world_prompt_planter_harvest").to_owned()
+                    self.interact_prompt_copy("world_prompt_planter_harvest", &[])
                 } else if planter.planted_item_id.is_empty() {
-                    ui_copy("world_prompt_planter_plant").to_owned()
+                    self.interact_prompt_copy("world_prompt_planter_plant", &[])
                 } else if planter.tended_day != self.world.day_index {
-                    ui_copy("world_prompt_planter_tend").to_owned()
+                    self.interact_prompt_copy("world_prompt_planter_tend", &[])
                 } else {
-                    ui_copy("world_prompt_planter_check").to_owned()
+                    self.interact_prompt_copy("world_prompt_planter_check", &[])
                 }
             })
-            .unwrap_or_else(|| ui_copy("world_prompt_planter_plant").to_owned())
+            .unwrap_or_else(|| self.interact_prompt_copy("world_prompt_planter_plant", &[]))
     }
 
     pub(super) fn report_missing_planter_seed(
@@ -28,25 +29,7 @@ impl GameplayState {
         data: &GameData,
         station: &StationDefinition,
     ) {
-        self.runtime.status_text = if station.planter_seed_ids.is_empty() {
-            ui_copy("gameplay_planter_need_rare").to_owned()
-        } else {
-            ui_format(
-                "gameplay_planter_accepts",
-                &[
-                    ("station", &station.name),
-                    (
-                        "items",
-                        &station
-                            .planter_seed_ids
-                            .iter()
-                            .map(|item_id| data.item_name(item_id))
-                            .collect::<Vec<_>>()
-                            .join(", "),
-                    ),
-                ],
-            )
-        };
+        self.runtime.status_text = report_text::missing_seed(data, station);
     }
 
     pub(super) fn report_planter_status(
@@ -56,13 +39,6 @@ impl GameplayState {
     ) {
         let growth_target = planter_growth_target(station, state);
         let days_left = growth_target.saturating_sub(state.growth_days);
-        self.runtime.status_text = ui_format(
-            "gameplay_planter_status",
-            &[
-                ("station", &station.name),
-                ("stage", planter_stage_label(state.growth_days, growth_target)),
-                ("days", &days_left.to_string()),
-            ],
-        );
+        self.runtime.status_text = report_text::planter_status(station, state, growth_target, days_left);
     }
 }

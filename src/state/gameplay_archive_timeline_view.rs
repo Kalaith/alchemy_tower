@@ -1,5 +1,5 @@
 use super::GameplayState;
-use crate::content::{narrative_text, ui_format};
+use crate::content::{narrative_text, ui_copy, ui_format};
 use crate::view_models::archive::{ArchiveTimelineMilestoneView, ArchiveTimelineSectionView};
 
 impl GameplayState {
@@ -15,6 +15,8 @@ impl GameplayState {
         };
 
         ArchiveTimelineSectionView {
+            title: ui_copy("overlay_archive_section_timeline").to_string(),
+            status_title: ui_copy("overlay_tower_status").to_string(),
             recent_milestones: summary
                 .recent_milestones
                 .into_iter()

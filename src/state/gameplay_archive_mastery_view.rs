@@ -14,6 +14,8 @@ impl GameplayState {
         let recipes = self.mastery_recipes(data);
         if recipes.is_empty() {
             return ArchiveMasterySectionView {
+                title: ui_copy("overlay_recipe_mastery").to_owned(),
+                detail_title: ui_copy("overlay_mastery_detail").to_owned(),
                 empty_text: self.unavailable_state_text(ui_copy("overlay_archive_empty_mastery")),
                 entries: Vec::new(),
                 detail: None,
@@ -30,10 +32,12 @@ impl GameplayState {
                 ArchiveMasteryRecipeEntry {
                     title: recipe.name.clone(),
                     detail: recipe.description.clone(),
-                    meta: format!(
-                        "{}  {}",
-                        mastery_stage(mastery),
-                        self.recipe_memory_meta(data, recipe)
+                    meta: ui_format(
+                        "overlay_archive_mastery_entry_meta",
+                        &[
+                            ("stage", mastery_stage(mastery)),
+                            ("memory", &self.recipe_memory_meta(data, recipe)),
+                        ],
                     ),
                     selected: index == selected_index,
                 }
@@ -60,6 +64,8 @@ impl GameplayState {
             });
 
         ArchiveMasterySectionView {
+            title: ui_copy("overlay_recipe_mastery").to_owned(),
+            detail_title: ui_copy("overlay_mastery_detail").to_owned(),
             empty_text: String::new(),
             entries,
             detail: Some(ArchiveMasteryDetailView {

@@ -12,10 +12,20 @@ impl GameplayState {
             .locked_warps(data)
             .into_iter()
             .take(2)
-            .map(|warp| format!("{}: {}", warp.label, self.warp_lock_text(data, warp)))
+            .map(|warp| {
+                ui_format(
+                    "overlay_route_locked_line",
+                    &[
+                        ("label", &warp.label),
+                        ("requirements", &self.warp_lock_text(data, warp)),
+                    ],
+                )
+            })
             .collect::<Vec<_>>();
 
         JournalRoutesTabView {
+            title: ui_copy("overlay_known_routes"),
+            progress_title: ui_copy("overlay_progress_routes"),
             route_rows: data
                 .gathering_routes
                 .iter()
@@ -38,12 +48,14 @@ impl GameplayState {
         let herb_memories = self.herb_memories(data);
         if herb_memories.is_empty() {
             return JournalHerbMemoriesView {
+                title: ui_copy("overlay_herb_memories"),
                 empty_text: ui_copy("journal_memory_no_herbs").to_owned(),
                 entries: Vec::new(),
             };
         }
 
         JournalHerbMemoriesView {
+            title: ui_copy("overlay_herb_memories"),
             empty_text: String::new(),
             entries: herb_memories
                 .into_iter()

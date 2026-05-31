@@ -2,9 +2,10 @@ use super::gameplay_alchemy_types::AlchemySession;
 use super::gameplay_overlay_types::OverlayState;
 use super::gameplay_save_migrations::{restored_herb_memories, restored_journal_milestones};
 use super::GameplayState;
-use crate::content::{narrative_text, ui_format};
 use crate::data::{GameData, SaveData};
-use macroquad::prelude::vec2;
+
+#[path = "gameplay_save_restore_text.rs"]
+mod save_restore_text;
 
 pub(super) fn apply_save_snapshot(
     state: &mut GameplayState,
@@ -12,22 +13,19 @@ pub(super) fn apply_save_snapshot(
     save: SaveData,
 ) -> Result<(), String> {
     if save.version != data.config.save_version {
-        return Err(ui_format(
-            "gameplay_save_version_incompatible",
-            &[
-                ("found", &save.version.to_string()),
-                ("expected", &data.config.save_version.to_string()),
-            ],
+        return Err(save_restore_text::incompatible_version(
+            save.version,
+            data.config.save_version,
         ));
     }
     if data.area(&save.current_area).is_none() {
-        return Err(narrative_text().statuses.save_unknown_area.clone());
+        return Err(save_restore_text::unknown_area());
     }
 
     state.world.current_area_id = save.current_area;
-    state.world.player.position = vec2(save.player_position[0], save.player_position[1]);
-    state.world.player.facing = vec2(0.0, 1.0);
-    state.world.player.moving = false;
+    state.set_player_position(save.player_position);
+    state.set_player_facing([0.0, 1.0]);
+    state.stop_player_motion();
     state.world.day_index = save.day_index;
     state.world.day_clock_seconds = save.day_clock_seconds;
     state.world.day_length_seconds = data.config.day_length_seconds;

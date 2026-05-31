@@ -1,9 +1,9 @@
-use super::gameplay_support::rgba;
+use super::gameplay_render_color::render_color;
 use super::GameplayState;
 use crate::art::ArtAssets;
 use crate::data::{AreaDefinition, GameData};
 use crate::ui::draw_npc_world_marker;
-use macroquad::prelude::*;
+use macroquad::prelude::{vec2, Vec2};
 
 impl GameplayState {
     pub(super) fn draw_area_npcs(
@@ -34,11 +34,11 @@ impl GameplayState {
                 center,
                 facing,
                 runtime.moving,
-                rgba(npc.color),
+                render_color(npc.color),
                 show_name,
                 priority
                     .as_ref()
-                    .map(|(label, color)| (label.as_str(), *color)),
+                    .map(|(label, tone)| (label.as_str(), render_color(tone.color()))),
                 art,
             );
         }

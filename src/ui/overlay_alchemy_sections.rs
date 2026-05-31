@@ -1,4 +1,4 @@
-use crate::content::{ui_copy, ui_format};
+use crate::alchemy_layout::material_row_rect_at;
 use crate::view_models::alchemy::AlchemyMaterialsPanelView;
 use super::{
     draw_overlay_section_box, draw_overlay_section_title, draw_selection_card, draw_state_banner,
@@ -12,11 +12,11 @@ pub(crate) fn draw_alchemy_materials_panel_view(
         draw_overlay_section_title(
             x + 20.0,
             y + 84.0,
-            ui_copy("overlay_materials"),
-            Some(&ui_format("overlay_sort_mode", &[("mode", &view.sort_label)])),
+            view.title,
+            Some(&view.sort_text),
         );
         draw_overlay_section_box(x + 18.0, y + 98.0, 286.0, 162.0);
-        let mut iy = y + 82.0;
+        let iy = y + 82.0;
         if view.rows.is_empty() {
             draw_state_banner(
                 x + 30.0,
@@ -26,19 +26,19 @@ pub(crate) fn draw_alchemy_materials_panel_view(
                 false,
             );
         } else {
-            for row in &view.rows {
+            for (index, row) in view.rows.iter().enumerate() {
+                let row_rect = material_row_rect_at(x, y, index);
                 draw_selection_card(
-                    x + 30.0,
-                    iy - 24.0,
+                    row_rect.x + 12.0,
+                    row_rect.y,
                     262.0,
-                    52.0,
+                    row_rect.h,
                     row.selected,
                     row.enabled,
                     &row.title,
                     &row.detail,
                     &row.meta,
                 );
-                iy += 58.0;
             }
         }
 }

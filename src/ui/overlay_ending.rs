@@ -1,9 +1,9 @@
-use crate::content::{narrative_text, ui_copy};
 use super::{draw_panel, draw_wrapped_text};
+use crate::view_models::ending::EndingOverlayView;
 use macroquad::prelude::*;
 use macroquad_toolkit::colors::dark;
 
-pub(crate) fn draw_ending_overlay_view() {
+pub(crate) fn draw_ending_overlay_view(view: &EndingOverlayView) {
     draw_rectangle(
         0.0,
         0.0,
@@ -15,9 +15,9 @@ pub(crate) fn draw_ending_overlay_view() {
     let y = 110.0;
     let w = screen_width() - 340.0;
     let h = screen_height() - 220.0;
-    draw_panel(x, y, w, h, ui_copy("overlay_ending_title"));
+    draw_panel(x, y, w, h, &view.title);
     draw_wrapped_text(
-        &narrative_text().overlays.observatory_epilogue,
+        &view.body,
         x + 24.0,
         y + 60.0,
         w - 48.0,
@@ -26,7 +26,7 @@ pub(crate) fn draw_ending_overlay_view() {
         dark::TEXT_BRIGHT,
     );
     draw_text(
-        &narrative_text().overlays.observatory_footer,
+        &view.footer,
         x + 24.0,
         y + h - 24.0,
         18.0,

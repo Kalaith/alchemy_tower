@@ -4,6 +4,7 @@ use crate::art::ArtAssets;
 use crate::content::ui_copy;
 use crate::data::GameData;
 use crate::state::{GameplayState, StateTransition};
+use crate::view_models::menu::MenuScreenView;
 
 #[path = "menu_fullscreen.rs"]
 mod menu_fullscreen;
@@ -88,12 +89,27 @@ impl MenuState {
     }
 
     pub(crate) fn draw(&self, data: &GameData, art: &ArtAssets) {
-        crate::ui::draw_menu_screen(
-            data,
-            art,
-            self.mode == TitleMode::Settings,
-            self.fullscreen_enabled,
-            &self.status_text,
-        );
+        crate::ui::draw_menu_screen(data, art, &self.menu_screen_view());
+    }
+
+    fn menu_screen_view(&self) -> MenuScreenView {
+        MenuScreenView {
+            showing_settings: self.mode == TitleMode::Settings,
+            title: ui_copy("menu_title").to_owned(),
+            subtitle: ui_copy("menu_subtitle").to_owned(),
+            new_game_label: ui_copy("menu_new_game").to_owned(),
+            load_game_label: ui_copy("menu_load_game").to_owned(),
+            settings_label: ui_copy("menu_settings").to_owned(),
+            settings_title: ui_copy("menu_settings_title").to_owned(),
+            settings_hint: ui_copy("menu_settings_hint").to_owned(),
+            fullscreen_label: ui_copy(if self.fullscreen_enabled {
+                "menu_fullscreen_on"
+            } else {
+                "menu_fullscreen_off"
+            })
+            .to_owned(),
+            settings_back_label: ui_copy("menu_settings_back").to_owned(),
+            status_text: self.status_text.clone(),
+        }
     }
 }

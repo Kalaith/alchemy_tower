@@ -1,4 +1,3 @@
-use crate::content::ui_copy;
 use macroquad::prelude::*;
 use macroquad_toolkit::colors::dark;
 
@@ -50,15 +49,4 @@ pub(crate) fn draw_overlay_tab(rect: Rect, label: &str, selected: bool) {
             dark::TEXT_DIM
         },
     );
-}
-
-pub(crate) fn archive_tab_label(tab: &str) -> &'static str {
-    ui_copy(match tab {
-        "timeline" => "overlay_archive_tab_timeline",
-        "experiments" => "overlay_archive_tab_experiments",
-        "mastery" => "overlay_archive_tab_mastery",
-        "morphs" => "overlay_archive_tab_morphs",
-        "disassembly" => "overlay_archive_tab_disassembly",
-        _ => "overlay_archive_tab_duplication",
-    })
 }

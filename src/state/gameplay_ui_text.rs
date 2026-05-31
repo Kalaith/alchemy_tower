@@ -1,5 +1,5 @@
 use super::GameplayState;
-use crate::content::{ui_copy, ui_format};
+use crate::content::{input_bindings, ui_copy, ui_format};
 use crate::data::GameData;
 
 impl GameplayState {
@@ -11,17 +11,25 @@ impl GameplayState {
         extra: &str,
     ) -> String {
         let item = data.item(item_id);
-        let base = format!(
-            "{}  q{} r{}  x{}",
-            item.map(|item| item.category.as_str()).unwrap_or("?"),
-            item.map(|item| item.quality).unwrap_or_default(),
-            item.map(|item| item.rarity).unwrap_or_default(),
-            amount
+        let quality = item
+            .map(|item| item.quality)
+            .unwrap_or_default()
+            .to_string();
+        let rarity = item.map(|item| item.rarity).unwrap_or_default().to_string();
+        let amount = amount.to_string();
+        let base = ui_format(
+            "inventory_item_meta",
+            &[
+                ("category", item.map(|item| item.category.as_str()).unwrap_or("?")),
+                ("quality", &quality),
+                ("rarity", &rarity),
+                ("amount", &amount),
+            ],
         );
         if extra.is_empty() {
             base
         } else {
-            format!("{base}  {extra}")
+            ui_format("inventory_item_meta_extra", &[("base", &base), ("extra", extra)])
         }
     }
 
@@ -33,6 +41,24 @@ impl GameplayState {
         ui_format("unavailable_prefix", &[("detail", detail)])
     }
 
+    pub(super) fn interact_prompt_copy(
+        &self,
+        copy_key: &str,
+        replacements: &[(&str, &str)],
+    ) -> String {
+        let mut pairs = Vec::with_capacity(replacements.len() + 1);
+        pairs.extend_from_slice(replacements);
+        pairs.push(("interact", input_bindings().global.interact.as_str()));
+        ui_format(copy_key, &pairs)
+    }
+
+    pub(super) fn alchemy_prompt_copy(&self, label: &str) -> String {
+        self.interact_prompt_copy(
+            "world_prompt_alchemy",
+            &[("alchemy", input_bindings().alchemy.open.as_str()), ("label", label)],
+        )
+    }
+
     pub(super) fn next_goal_summary(&self, data: &GameData) -> String {
         if let Some(quest) = self
             .progression
@@ -40,10 +66,12 @@ impl GameplayState {
             .iter()
             .find_map(|quest_id| data.quest(quest_id))
         {
-            return format!(
-                "{} ({})",
-                quest.title,
-                self.quest_requirement_summary(data, quest)
+            return ui_format(
+                "goal_active_quest",
+                &[
+                    ("title", &quest.title),
+                    ("requirements", &self.quest_requirement_summary(data, quest)),
+                ],
             );
         }
 

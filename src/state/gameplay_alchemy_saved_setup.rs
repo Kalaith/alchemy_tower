@@ -1,8 +1,10 @@
 use super::gameplay_alchemy_types::{SavedAlchemySetup, ALCHEMY_TIMINGS};
 use super::GameplayState;
-use crate::content::ui_format;
 use crate::data::GameData;
 use std::collections::BTreeMap;
+
+#[path = "gameplay_alchemy_saved_setup_text.rs"]
+mod saved_setup_text;
 
 impl GameplayState {
     pub(super) fn save_last_brew_setup(&mut self) {
@@ -17,7 +19,7 @@ impl GameplayState {
 
     pub(super) fn repeat_last_brew_setup(&mut self, data: &GameData) {
         let Some(setup) = self.runtime.last_brew_setup.clone() else {
-            self.runtime.status_text = ui_format("alchemy_repeat_none", &[]);
+            self.runtime.status_text = saved_setup_text::repeat_none();
             return;
         };
 
@@ -25,13 +27,9 @@ impl GameplayState {
         for (item_id, required) in &needed {
             let available = self.inventory.get(item_id).copied().unwrap_or_default();
             if available < *required {
-                self.runtime.status_text = self.unavailable_state_text(&ui_format(
-                    "alchemy_repeat_missing",
-                    &[
-                        ("name", data.item_name(item_id)),
-                        ("count", &required.to_string()),
-                    ],
-                ));
+                self.runtime.status_text = self.unavailable_state_text(
+                    &saved_setup_text::repeat_missing(data, item_id, *required),
+                );
                 return;
             }
         }
@@ -43,7 +41,7 @@ impl GameplayState {
             .min(ALCHEMY_TIMINGS.len().saturating_sub(1));
         self.alchemy.slots = setup.slots;
         self.alchemy.catalyst = setup.catalyst;
-        self.runtime.status_text = ui_format("alchemy_repeat_loaded", &[]);
+        self.runtime.status_text = saved_setup_text::repeat_loaded();
     }
 }
 

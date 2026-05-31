@@ -1,4 +1,3 @@
-use crate::content::ui_copy;
 use crate::view_models::archive::ArchiveMasterySectionView;
 use super::{draw_selection_card, draw_state_banner, draw_wrapped_text};
 use macroquad::prelude::*;
@@ -12,7 +11,7 @@ pub(crate) fn draw_archive_mastery_section_view(
     _h: f32,
 ) {
         draw_text(
-            ui_copy("overlay_recipe_mastery"),
+            &view.title,
             x + 20.0,
             y + 122.0,
             26.0,
@@ -46,7 +45,7 @@ pub(crate) fn draw_archive_mastery_section_view(
         }
 
         draw_text(
-            ui_copy("overlay_mastery_detail"),
+            &view.detail_title,
             x + 410.0,
             y + 122.0,
             26.0,

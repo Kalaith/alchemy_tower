@@ -1,7 +1,8 @@
 use super::GameplayState;
-use crate::content::ui_format;
 use crate::data::{GameData, ItemCategory, PlanterStateEntry};
-use macroquad::prelude::Color;
+
+#[path = "gameplay_planter_mutation_text.rs"]
+mod mutation_text;
 
 impl GameplayState {
     pub(super) fn planter_mutation_candidate(
@@ -61,21 +62,12 @@ impl GameplayState {
         state.mutation_growth_bonus_days = formula.growth_bonus_days;
         state.mutation_note = formula.mutation_note.clone();
 
-        self.push_event_toast_with_icon(
-            ui_format(
-                "progression_planter_mutation",
-                &[("item", data.item_name(&state.planted_item_id))],
-            ),
-            Color::from_rgba(188, 255, 220, 255),
-            "best_quality",
-        );
+        self.trigger_planter_mutation_feedback(mutation_text::toast(data, &state.planted_item_id));
 
-        Some(ui_format(
-            "progression_planter_mutation_status",
-            &[
-                ("catalyst", data.item_name(catalyst_item_id)),
-                ("strain", &formula.mutation_note),
-            ],
+        Some(mutation_text::status(
+            data,
+            catalyst_item_id,
+            &formula.mutation_note,
         ))
     }
 }

@@ -1,9 +1,9 @@
-use super::gameplay_support::rgba;
+use super::gameplay_render_color::render_color;
 use super::GameplayState;
 use crate::art::ArtAssets;
 use crate::data::{AreaDefinition, GameData};
 use crate::ui::draw_gather_node_world_marker;
-use macroquad::prelude::*;
+use macroquad::prelude::{vec2, Vec2};
 
 impl GameplayState {
     pub(super) fn draw_area_gather_nodes(
@@ -21,7 +21,7 @@ impl GameplayState {
             if !available {
                 continue;
             }
-            let color = rgba(node.color);
+            let color = render_color(node.color);
             let center = vec2(offset.x + node.position[0], offset.y + node.position[1]);
             draw_gather_node_world_marker(
                 node,

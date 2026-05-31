@@ -1,6 +1,10 @@
 use super::GameplayState;
-use crate::content::ui_copy;
 use crate::data::{GameData, ItemCategory, PotionMemoryEntry};
+
+#[path = "gameplay_potion_memory_entries.rs"]
+mod potion_memory_entries;
+
+use self::potion_memory_entries::{empty_effects_text, new_seen_potion_memory};
 
 pub(super) struct JournalPotionProfileSummary {
     pub(super) effects_text: String,
@@ -24,17 +28,7 @@ impl GameplayState {
             .progression
             .potion_memories
             .entry(item_id.to_owned())
-            .or_insert_with(|| PotionMemoryEntry {
-                item_id: item_id.to_owned(),
-                first_seen_day: self.world.day_index,
-                seen: true,
-                learned: false,
-                learned_day: 0,
-                successful_brews: 0,
-                best_quality_score: 0,
-                best_quality_band: ui_copy("inventory_best_unlogged").to_owned(),
-                last_recipe_id: String::new(),
-            });
+            .or_insert_with(|| new_seen_potion_memory(item_id, self.world.day_index));
         if !entry.seen {
             entry.seen = true;
             entry.first_seen_day = self.world.day_index;
@@ -107,7 +101,7 @@ impl GameplayState {
     ) -> Option<JournalPotionProfileSummary> {
         let profile = self.progression.crafted_item_profiles.get(item_id)?;
         let effects_text = if profile.effect_kinds.is_empty() {
-            ui_copy("journal_memory_effects_none").to_owned()
+            empty_effects_text()
         } else {
             profile.effect_kinds.join(", ")
         };

@@ -1,6 +1,8 @@
 use super::GameplayState;
-use crate::content::ui_format;
 use crate::data::{GameData, RecipeDefinition};
+
+#[path = "gameplay_recipe_memory_text.rs"]
+mod recipe_memory_text;
 
 impl GameplayState {
     pub(super) fn recipe_is_known(&self, recipe_id: &str) -> bool {
@@ -20,24 +22,8 @@ impl GameplayState {
             .progression
             .crafted_item_profiles
             .get(&recipe.output_item_id)
-            .map(|profile| profile.best_quality_band.clone())
-            .unwrap_or_else(|| ui_format("inventory_best_unlogged", &[]));
-        let catalyst = if recipe.catalyst_tag.is_empty() {
-            ui_format("inventory_catalyst_any", &[])
-        } else {
-            ui_format(
-                "inventory_catalyst_specific",
-                &[("tag", &recipe.catalyst_tag)],
-            )
-        };
-        ui_format(
-            "inventory_memory_meta",
-            &[
-                ("mastery", &mastery.to_string()),
-                ("best", &best),
-                ("catalyst", &catalyst),
-            ],
-        )
+            .map(|profile| profile.best_quality_band.as_str());
+        recipe_memory_text::meta(mastery, best, &recipe.catalyst_tag)
     }
 
     pub(super) fn recipe_memory_detail(
@@ -45,37 +31,12 @@ impl GameplayState {
         data: &GameData,
         recipe: &RecipeDefinition,
     ) -> String {
-        let mut parts = vec![ui_format(
-            "inventory_memory_output",
-            &[("item", data.item_name(&recipe.output_item_id))],
-        )];
-        if !recipe.required_sequence.is_empty() {
-            let sequence = recipe
-                .required_sequence
-                .iter()
-                .map(|item_id| data.item_name(item_id))
-                .collect::<Vec<_>>()
-                .join(" -> ");
-            parts.push(ui_format(
-                "inventory_memory_order",
-                &[("sequence", &sequence)],
-            ));
-        }
-        if let Some(profile) = self
+        let inherited_traits = self
             .progression
             .crafted_item_profiles
             .get(&recipe.output_item_id)
-        {
-            if !profile.inherited_traits.is_empty() {
-                parts.push(ui_format(
-                    "inventory_memory_traits",
-                    &[("traits", &profile.inherited_traits.join(", "))],
-                ));
-            }
-        }
-        if !recipe.morph_targets.is_empty() {
-            parts.push(ui_format("inventory_memory_morph", &[]));
-        }
-        parts.join("  ")
+            .map(|profile| profile.inherited_traits.as_slice())
+            .unwrap_or(&[]);
+        recipe_memory_text::detail(data, recipe, inherited_traits)
     }
 }

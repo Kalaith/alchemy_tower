@@ -1,12 +1,14 @@
 use super::gameplay_overlay_types::ARCHIVE_TABS;
 use super::GameplayState;
-use crate::content::{narrative_text, ui_copy, ui_text};
+use crate::content::narrative_text;
 use crate::data::GameData;
 use crate::input::{
     archive_filter_pressed, cancel_pressed, confirm_pressed, select_next_pressed, select_previous_pressed,
     switch_next_pressed, switch_previous_pressed,
 };
-use macroquad::prelude::Color;
+
+#[path = "gameplay_archive_input_text.rs"]
+mod archive_input_text;
 
 impl GameplayState {
     pub(super) fn handle_archive_inputs(&mut self, data: &GameData) {
@@ -57,7 +59,7 @@ impl GameplayState {
         }
         if cancel_pressed() {
             self.clear_overlay();
-            self.runtime.status_text = ui_text().statuses.closed_archive.clone();
+            self.runtime.status_text = archive_input_text::closed();
         }
     }
 
@@ -65,25 +67,10 @@ impl GameplayState {
         if self.can_reconstruct_archive() {
             let milestone = &narrative_text().milestones.archive_revelation;
             self.push_journal_milestone(&milestone.id, &milestone.title, &milestone.text);
-            self.push_event_toast_with_icon(
-                ui_copy("archive_timeline_restored_toast"),
-                Color::from_rgba(176, 226, 255, 255),
-                "journal_note",
-            );
-            self.trigger_world_feedback(
-                self.world.player.position,
-                Color::from_rgba(176, 226, 255, 255),
-                true,
-                2.2,
-            );
-            self.trigger_camera_shake(0.2, 5.2);
-            self.runtime.status_text =
-                narrative_text().statuses.archive_timeline_complete.clone();
+            self.trigger_archive_reconstruction_feedback(archive_input_text::timeline_restored_toast());
+            self.runtime.status_text = archive_input_text::timeline_complete();
         } else {
-            self.runtime.status_text = narrative_text()
-                .statuses
-                .archive_timeline_incomplete
-                .clone();
+            self.runtime.status_text = archive_input_text::timeline_incomplete();
         }
     }
 }

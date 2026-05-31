@@ -1,16 +1,18 @@
 use super::gameplay_alchemy_types::ALCHEMY_TIMINGS;
 use super::GameplayState;
 use crate::audio::AudioAssets;
-use crate::content::{ui_format, ui_text};
 use crate::data::{GameData, StationKind};
 use crate::input::{
     alchemy_brew_pressed, alchemy_catalyst_pressed, alchemy_clear_pressed,
     alchemy_clear_slot_pressed, alchemy_fill_slot_pressed, alchemy_open_pressed,
     alchemy_heat_decrease_pressed, alchemy_heat_increase_pressed, alchemy_remove_catalyst_pressed,
     alchemy_repeat_pressed, alchemy_stir_pressed, alchemy_timing_pressed, cancel_pressed,
-    interact_pressed, select_next_pressed, select_previous_pressed, sort_pressed,
+    interact_pressed, left_mouse_pressed, right_mouse_pressed, select_next_pressed,
+    select_previous_pressed, sort_pressed,
 };
-use macroquad::prelude::*;
+
+#[path = "gameplay_alchemy_input_text.rs"]
+mod alchemy_input_text;
 
 impl GameplayState {
     pub(super) fn handle_alchemy_inputs(&mut self, data: &GameData, audio: &AudioAssets) {
@@ -25,7 +27,7 @@ impl GameplayState {
 
         if alchemy_open_pressed() || cancel_pressed() || interact_pressed() {
             self.clear_overlay();
-            self.runtime.status_text = ui_text().statuses.closed_alchemy.clone();
+            self.runtime.status_text = alchemy_input_text::closed_alchemy();
             return;
         }
 
@@ -72,7 +74,7 @@ impl GameplayState {
         }
         if alchemy_remove_catalyst_pressed() {
             self.alchemy.catalyst = None;
-            self.runtime.status_text = ui_format("alchemy_removed_catalyst", &[]);
+            self.runtime.status_text = alchemy_input_text::removed_catalyst();
         }
         if alchemy_clear_pressed() {
             self.clear_alchemy_setup();
@@ -83,9 +85,9 @@ impl GameplayState {
         if alchemy_brew_pressed() {
             self.brew_selected(data, &station, audio);
         }
-        if is_mouse_button_pressed(MouseButton::Left) {
+        if left_mouse_pressed() {
             self.handle_alchemy_mouse_inputs(data, &station, &items, audio);
-        } else if is_mouse_button_pressed(MouseButton::Right) {
+        } else if right_mouse_pressed() {
             self.handle_alchemy_mouse_removals();
         }
     }
@@ -93,16 +95,12 @@ impl GameplayState {
     pub(super) fn increment_alchemy_stirs(&mut self, audio: &AudioAssets) {
         self.alchemy.stirs += 1;
         audio.play_alchemy_stir();
-        self.runtime.status_text = ui_format(
-            "alchemy_stirred",
-            &[("count", &self.alchemy.stirs.to_string())],
-        );
+        self.runtime.status_text = alchemy_input_text::stirred(self.alchemy.stirs);
     }
 
     pub(super) fn cycle_alchemy_timing(&mut self) {
         self.alchemy.timing_index = (self.alchemy.timing_index + 1) % ALCHEMY_TIMINGS.len();
-        self.runtime.status_text =
-            ui_format("alchemy_timing_set", &[("timing", self.alchemy_timing())]);
+        self.runtime.status_text = alchemy_input_text::timing_set(self.alchemy_timing());
     }
 
     pub(super) fn clear_alchemy_setup(&mut self) {
@@ -110,6 +108,6 @@ impl GameplayState {
         self.alchemy.catalyst = None;
         self.alchemy.stirs = 0;
         self.alchemy.timing_index = 0;
-        self.runtime.status_text = ui_format("alchemy_cleared", &[]);
+        self.runtime.status_text = alchemy_input_text::cleared();
     }
 }

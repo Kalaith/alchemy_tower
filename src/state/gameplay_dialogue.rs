@@ -1,8 +1,10 @@
 use super::GameplayState;
-use crate::content::{narrative_text, ui_format};
+use crate::content::narrative_text;
 use crate::data::GameData;
 use crate::input::dialogue_advance_pressed;
-use macroquad::prelude::Color;
+
+#[path = "gameplay_dialogue_quest_text.rs"]
+mod dialogue_quest_text;
 
 impl GameplayState {
     pub(super) fn handle_dialogue_inputs(&mut self, data: &GameData) {
@@ -45,24 +47,9 @@ impl GameplayState {
                 .relationships
                 .entry(npc.id.clone())
                 .or_insert(0) += 1;
-            self.push_event_toast_with_icon(
-                ui_format("quests_accepted_toast", &[("title", &quest.title)]),
-                Color::from_rgba(255, 230, 170, 255),
-                "quest_accepted",
-            );
-            self.trigger_world_feedback(
-                self.world.player.position,
-                Color::from_rgba(255, 230, 170, 255),
-                false,
-                1.2,
-            );
-            self.runtime.status_text = ui_format(
-                "quests_accepted_status",
-                &[
-                    ("title", &quest.title),
-                    ("hint", &self.quest_location_hint(data, quest)),
-                ],
-            );
+            self.trigger_quest_accepted_feedback(dialogue_quest_text::accepted_toast(&quest.title));
+            self.runtime.status_text =
+                dialogue_quest_text::accepted_status(data, quest, &self.quest_location_hint(data, quest));
             return;
         }
 
@@ -82,25 +69,8 @@ impl GameplayState {
                     .or_insert(0) += 2;
             }
             self.push_quest_completion_milestone(&quest.id);
-            self.push_event_toast_with_icon(
-                ui_format("quests_complete_toast", &[("title", &quest.title)]),
-                Color::from_rgba(188, 255, 220, 255),
-                "quest_complete",
-            );
-            self.trigger_world_feedback(
-                self.world.player.position,
-                Color::from_rgba(188, 255, 220, 255),
-                true,
-                1.8,
-            );
-            self.trigger_camera_shake(0.14, 3.8);
-            self.runtime.status_text = ui_format(
-                "quests_delivered_status",
-                &[
-                    ("item", data.item_name(&quest.required_item_id)),
-                    ("coins", &quest.reward_coins.to_string()),
-                ],
-            );
+            self.trigger_quest_complete_feedback(dialogue_quest_text::complete_toast(&quest.title));
+            self.runtime.status_text = dialogue_quest_text::delivered_status(data, quest);
         } else {
             self.clear_overlay();
         }

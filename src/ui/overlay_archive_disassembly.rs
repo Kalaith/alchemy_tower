@@ -1,4 +1,3 @@
-use crate::content::ui_copy;
 use crate::view_models::archive::ArchiveDisassemblySectionView;
 use super::{draw_selection_card, draw_state_banner, draw_wrapped_text};
 use macroquad::prelude::*;
@@ -12,7 +11,7 @@ pub(crate) fn draw_archive_disassembly_section_view(
     _h: f32,
 ) {
         draw_text(
-            ui_copy("overlay_disassembly"),
+            &view.title,
             x + 20.0,
             y + 122.0,
             26.0,
@@ -46,7 +45,7 @@ pub(crate) fn draw_archive_disassembly_section_view(
         }
 
         draw_text(
-            ui_copy("overlay_recovered_inputs"),
+            &view.selected_inputs_title,
             x + 410.0,
             y + 122.0,
             26.0,
@@ -64,7 +63,7 @@ pub(crate) fn draw_archive_disassembly_section_view(
             detail_y += 24.0;
         }
         draw_wrapped_text(
-            ui_copy("overlay_archive_disassembly_help"),
+            &view.help_text,
             x + 410.0,
             detail_y + 18.0,
             w - 430.0,

@@ -1,11 +1,9 @@
 use super::gameplay_persistence;
 use super::GameplayState;
-use crate::content::{ui_copy, ui_format};
 use crate::data::GameData;
-use crate::save::{
-    SAVE_ERROR_USER_DATA_DIR_MISSING, SAVE_ERROR_WASM_LOAD_UNAVAILABLE,
-    SAVE_ERROR_WASM_SAVE_UNAVAILABLE,
-};
+
+#[path = "gameplay_save_status_text.rs"]
+mod save_status_text;
 
 impl GameplayState {
     pub(crate) fn saved_progress_exists() -> bool {
@@ -14,24 +12,19 @@ impl GameplayState {
 
     pub(crate) fn save_progress(&mut self, data: &GameData) {
         self.runtime.status_text = match gameplay_persistence::save_slot(self, data) {
-            Ok(()) => ui_format("gameplay_saved_progress", &[]),
-            Err(error) => {
-                let message = save_error_message(&error);
-                ui_format("gameplay_save_failed", &[("error", message.as_str())])
-            }
+            Ok(()) => save_status_text::saved(),
+            Err(error) => save_status_text::save_failed(&error),
         };
     }
 
     pub(crate) fn load_progress(&mut self, data: &GameData) -> bool {
         match gameplay_persistence::load_slot(self, data) {
             Ok(()) => {
-                self.runtime.status_text = ui_format("gameplay_loaded_progress", &[]);
+                self.runtime.status_text = save_status_text::loaded();
                 true
             }
             Err(error) => {
-                let message = save_error_message(&error);
-                self.runtime.status_text =
-                    ui_format("gameplay_load_failed", &[("error", message.as_str())]);
+                self.runtime.status_text = save_status_text::load_failed(&error);
                 false
             }
         }
@@ -39,14 +32,5 @@ impl GameplayState {
 
     pub(crate) fn pause_status_text(&self) -> &str {
         &self.runtime.status_text
-    }
-}
-
-fn save_error_message(error: &str) -> String {
-    match error {
-        SAVE_ERROR_USER_DATA_DIR_MISSING => ui_copy(SAVE_ERROR_USER_DATA_DIR_MISSING).to_owned(),
-        SAVE_ERROR_WASM_SAVE_UNAVAILABLE => ui_copy(SAVE_ERROR_WASM_SAVE_UNAVAILABLE).to_owned(),
-        SAVE_ERROR_WASM_LOAD_UNAVAILABLE => ui_copy(SAVE_ERROR_WASM_LOAD_UNAVAILABLE).to_owned(),
-        _ => error.to_owned(),
     }
 }

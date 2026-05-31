@@ -1,11 +1,13 @@
 use super::gameplay_overlay_types::OverlayScreen;
 use super::GameplayState;
 use crate::audio::AudioAssets;
-use crate::content::{ui_format, ui_text};
 use crate::data::GameData;
 use crate::input::{cancel_pressed, journal_pressed, sort_pressed};
 use crate::state::StateTransition;
-use macroquad::prelude::*;
+use macroquad::prelude::get_frame_time;
+
+#[path = "gameplay_loop_status_text.rs"]
+mod loop_status_text;
 
 impl GameplayState {
     pub(crate) fn update(
@@ -16,16 +18,7 @@ impl GameplayState {
         if cancel_pressed() {
             if let Some(overlay) = self.overlay().cloned() {
                 self.clear_overlay();
-                self.runtime.status_text = match overlay {
-                    OverlayScreen::Alchemy => ui_text().statuses.closed_alchemy.clone(),
-                    OverlayScreen::Shop => ui_text().statuses.closed_shop.clone(),
-                    OverlayScreen::Rune => ui_text().statuses.closed_rune.clone(),
-                    OverlayScreen::Archive => ui_text().statuses.closed_archive.clone(),
-                    OverlayScreen::Ending => ui_format("gameplay_observatory_back", &[]),
-                    OverlayScreen::Dialogue(_) => ui_format("gameplay_conversation_ended", &[]),
-                    OverlayScreen::Journal => ui_text().statuses.closed_journal.clone(),
-                    OverlayScreen::QuestBoard => ui_text().statuses.closed_quest_board.clone(),
-                };
+                self.runtime.status_text = self.closed_overlay_status(&overlay);
                 return None;
             }
             return Some(StateTransition::Pause);
@@ -57,7 +50,7 @@ impl GameplayState {
         if journal_pressed() {
             self.set_overlay(OverlayScreen::Journal);
             self.ui.journal_tab = 0;
-            self.runtime.status_text = ui_text().statuses.open_journal.clone();
+            self.runtime.status_text = loop_status_text::open_journal();
         }
         if sort_pressed() {
             self.cycle_inventory_sort_mode();

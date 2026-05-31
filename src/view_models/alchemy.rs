@@ -1,4 +1,25 @@
+pub(crate) struct AlchemyChromeView {
+    pub(crate) title: &'static str,
+    pub(crate) subtitle: String,
+    pub(crate) footer_text: String,
+    pub(crate) action_buttons: AlchemyActionButtonsView,
+}
+
+pub(crate) struct AlchemyActionButtonsView {
+    pub(crate) sort_label: &'static str,
+    pub(crate) clear_label: &'static str,
+    pub(crate) repeat_label: &'static str,
+    pub(crate) brew_label: &'static str,
+}
+
+pub(crate) struct AlchemyControlsPanelView {
+    pub(crate) title: &'static str,
+    pub(crate) browse_heat_text: String,
+    pub(crate) action_text: String,
+}
+
 pub(crate) struct AlchemyFormulaePanelView {
+    pub(crate) title: &'static str,
     pub(crate) empty_text: String,
     pub(crate) rows: Vec<AlchemyFormulaRowView>,
 }
@@ -11,7 +32,8 @@ pub(crate) struct AlchemyFormulaRowView {
 }
 
 pub(crate) struct AlchemyMaterialsPanelView {
-    pub(crate) sort_label: String,
+    pub(crate) title: &'static str,
+    pub(crate) sort_text: String,
     pub(crate) empty_text: String,
     pub(crate) rows: Vec<AlchemyMaterialRowView>,
 }
@@ -31,6 +53,8 @@ pub(crate) enum AlchemyPreviewPanelState {
 }
 
 pub(crate) struct AlchemyPreviewPanelView {
+    pub(crate) title: &'static str,
+    pub(crate) empty_text: &'static str,
     pub(crate) state: AlchemyPreviewPanelState,
 }
 
@@ -42,13 +66,18 @@ pub(crate) struct AlchemyResolvedPreviewView {
     pub(crate) read_line: String,
     pub(crate) requirements_line: Option<String>,
     pub(crate) process_flags_line: Option<String>,
-    pub(crate) failure_reasons: Vec<String>,
+    pub(crate) failure_reasons_title: &'static str,
+    pub(crate) failure_reason_lines: Vec<String>,
     pub(crate) detail: String,
     pub(crate) has_recipe: bool,
 }
 
 pub(crate) struct AlchemySlotsPanelView {
+    pub(crate) title: &'static str,
     pub(crate) process_text: String,
+    pub(crate) stir_label: &'static str,
+    pub(crate) timing_label: &'static str,
+    pub(crate) catalyst_label: &'static str,
     pub(crate) slots: Vec<AlchemySlotView>,
     pub(crate) catalyst: AlchemyCatalystSlotView,
 }

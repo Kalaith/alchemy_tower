@@ -1,6 +1,9 @@
 pub(crate) struct RuneOverlayView {
     pub(crate) station_name: String,
+    pub(crate) subtitle: String,
+    pub(crate) drafts_title: String,
     pub(crate) empty_text: String,
+    pub(crate) footer_text: String,
     pub(crate) entries: Vec<RuneOverlayEntry>,
 }
 

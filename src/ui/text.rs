@@ -8,6 +8,10 @@ pub(crate) fn truncate_text_to_width(text: &str, max_width: f32, font_size: f32)
     macroquad_toolkit::ui::truncate_text_to_width(text, max_width, font_size)
 }
 
+pub(crate) fn draw_missing_area_message(text: &str) {
+    draw_text(text, 40.0, 80.0, 32.0, RED);
+}
+
 pub(crate) fn draw_wrapped_text(
     text: &str,
     x: f32,

@@ -1,7 +1,9 @@
 use super::GameplayState;
-use crate::content::ui_format;
 use crate::data::GameData;
 use std::collections::BTreeSet;
+
+#[path = "gameplay_gathering_conditions_text.rs"]
+mod conditions_text;
 
 impl GameplayState {
     pub(super) fn learned_gathering_conditions(
@@ -32,32 +34,6 @@ impl GameplayState {
             return None;
         }
 
-        let mut parts = Vec::new();
-        if !seasons.is_empty() {
-            parts.push(format!(
-                "season {}",
-                seasons.into_iter().collect::<Vec<_>>().join(" or ")
-            ));
-        }
-        if !weathers.is_empty() {
-            parts.push(format!(
-                "weather {}",
-                weathers.into_iter().collect::<Vec<_>>().join(" or ")
-            ));
-        }
-        if !times.is_empty() {
-            parts.push(format!(
-                "time {}",
-                times.into_iter().collect::<Vec<_>>().join(" or ")
-            ));
-        }
-        if parts.is_empty() {
-            Some(ui_format("gather_known_conditions_none", &[]))
-        } else {
-            Some(ui_format(
-                "gather_known_conditions",
-                &[("conditions", &parts.join("  |  "))],
-            ))
-        }
+        Some(conditions_text::known_conditions(seasons, weathers, times))
     }
 }

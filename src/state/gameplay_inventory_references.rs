@@ -1,6 +1,8 @@
 use super::GameplayState;
-use crate::content::ui_format;
 use crate::data::{GameData, ItemCategory};
+
+#[path = "gameplay_inventory_reference_text.rs"]
+mod reference_text;
 
 impl GameplayState {
     pub(super) fn active_quest_reference_count(&self, data: &GameData, item_id: &str) -> usize {
@@ -33,10 +35,10 @@ impl GameplayState {
         self.progression
             .crafted_item_profiles
             .get(item_id)
-            .map(|profile| ui_format("inventory_best", &[("band", &profile.best_quality_band)]))
+            .map(|profile| reference_text::best_record(&profile.best_quality_band))
             .or_else(|| {
                 self.progression.herb_memories.get(item_id).map(|entry| {
-                    ui_format("inventory_best", &[("band", &entry.best_quality_band)])
+                    reference_text::best_record(&entry.best_quality_band)
                 })
             })
     }
@@ -56,16 +58,16 @@ impl GameplayState {
         let recipe_refs = self.known_recipe_reference_count(data, item_id);
         let mut badges = Vec::new();
         if quest_refs > 0 {
-            badges.push(ui_format("inventory_badge_quest", &[]));
+            badges.push(reference_text::quest_badge());
         }
         if recipe_refs > 0 {
-            badges.push(ui_format("inventory_badge_recipe", &[]));
+            badges.push(reference_text::recipe_badge());
         }
         if self.item_best_record_label(item_id).is_some() {
-            badges.push(ui_format("inventory_badge_best", &[]));
+            badges.push(reference_text::best_badge());
         }
         if self.sell_is_safe(data, item_id) {
-            badges.push(ui_format("inventory_badge_safe", &[]));
+            badges.push(reference_text::safe_badge());
         }
         badges
     }
@@ -75,41 +77,25 @@ impl GameplayState {
         let recipe_refs = self.known_recipe_reference_count(data, item_id);
         let mut parts = Vec::new();
         if quest_refs > 0 {
-            parts.push(ui_format(
-                "inventory_ref_quest",
-                &[("count", &quest_refs.to_string())],
-            ));
+            parts.push(reference_text::quest_reference(quest_refs));
         }
         if recipe_refs > 0 {
-            parts.push(ui_format(
-                "inventory_ref_recipe",
-                &[("count", &recipe_refs.to_string())],
-            ));
+            parts.push(reference_text::recipe_reference(recipe_refs));
         }
         if let Some(best_label) = self.item_best_record_label(item_id) {
             parts.push(best_label);
         }
         let reserved = self.reserved_count(item_id);
         if reserved > 0 {
-            parts.push(ui_format(
-                "inventory_ref_reserved",
-                &[("count", &reserved.to_string())],
-            ));
+            parts.push(reference_text::reserved_reference(reserved));
         }
         if self.sell_is_safe(data, item_id) {
-            parts.push(ui_format("inventory_ref_safe", &[]));
+            parts.push(reference_text::safe_reference());
         }
         let badges = self.inventory_badges(data, item_id);
         if !badges.is_empty() {
-            parts.push(format!(
-                "[{}]",
-                badges
-                    .iter()
-                    .map(|badge| badge.as_str())
-                    .collect::<Vec<_>>()
-                    .join(", ")
-            ));
+            parts.push(reference_text::badge_summary(&badges));
         }
-        parts.join("  ")
+        reference_text::reference_summary(&parts)
     }
 }

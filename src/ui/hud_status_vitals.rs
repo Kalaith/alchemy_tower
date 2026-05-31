@@ -1,7 +1,6 @@
 use super::hud_chrome::*;
 use super::hud_primitives::*;
 use super::HudView;
-use crate::content::ui_copy;
 use macroquad::prelude::*;
 
 pub(super) fn draw_vitality_medallion(view: &HudView) {
@@ -52,7 +51,7 @@ pub(super) fn draw_vitality_medallion(view: &HudView) {
     draw_flower(vec2(center.x + 48.0, center.y - 40.0), 0.8);
     draw_flower(vec2(center.x - 52.0, center.y + 38.0), 0.58);
     draw_centered_text_shadowed(
-        ui_copy("hud_vitality_label"),
+        &view.vitality_label,
         center.x - radius,
         center.y - 12.0,
         radius * 2.0,
@@ -60,7 +59,7 @@ pub(super) fn draw_vitality_medallion(view: &HudView) {
         Color::from_rgba(210, 244, 183, 255),
     );
     draw_centered_text_shadowed(
-        &format!("{}/100", view.vitality_value),
+        &view.vitality_text,
         center.x - radius,
         center.y + 26.0,
         radius * 2.0,
@@ -77,7 +76,7 @@ pub(super) fn draw_coin_chip(view: &HudView) {
     draw_panel_filigree(rect, 0.46);
     draw_coin_face(vec2(rect.x + 30.0, rect.y + 27.0));
     draw_text(
-        ui_copy("hud_coins_label"),
+        &view.coins_label,
         rect.x + 54.0,
         rect.y + 22.0,
         15.0,

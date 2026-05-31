@@ -1,9 +1,9 @@
-use super::gameplay_support::rgba;
 use super::gameplay_feedback_types::{FieldDiscoveryFeedback, GatherFeedback};
 use super::GameplayState;
-use crate::content::{ui_copy, ui_format};
 use crate::data::{GameData, GatherNodeDefinition};
-use macroquad::prelude::*;
+
+#[path = "gameplay_gathering_text.rs"]
+mod gathering_text;
 
 impl GameplayState {
     pub(super) fn node_is_available(&self, node: &GatherNodeDefinition) -> bool {
@@ -15,11 +15,7 @@ impl GameplayState {
         _data: &GameData,
         node: &GatherNodeDefinition,
     ) -> String {
-        if self.item_has_field_notes(&node.item_id) {
-            ui_format("gather_attempt_known", &[("name", &node.name)])
-        } else {
-            ui_format("gather_attempt_none", &[])
-        }
+        gathering_text::attempt_status(self.item_has_field_notes(&node.item_id), &node.name)
     }
 
     pub(super) fn trigger_gather_feedback(
@@ -28,8 +24,8 @@ impl GameplayState {
         node: &GatherNodeDefinition,
         discovery: &FieldDiscoveryFeedback,
     ) {
-        let center = vec2(node.position[0], node.position[1]);
-        let base_color = rgba(node.color);
+        let center = [node.position[0], node.position[1]];
+        let base_color = feedback_color(node.color);
         let emphasis = discovery.variant_discovered || discovery.improved_quality;
         let duration = if emphasis { 0.8 } else { 0.45 };
         self.runtime.gather_feedbacks.push(GatherFeedback {
@@ -41,35 +37,18 @@ impl GameplayState {
         });
 
         if discovery.new_note {
-            let route_name = data
-                .route(&node.route_id)
-                .map(|route| route.name.as_str())
-                .unwrap_or(ui_copy("gather_fallback_notes"));
-            self.push_gather_toast(
-                ui_format("gather_toast_journal", &[("route", route_name)]),
-                Color::from_rgba(176, 226, 255, 255),
-            );
+            self.trigger_gather_journal_toast(gathering_text::journal_toast(data, &node.route_id));
         }
         if discovery.improved_quality {
-            self.push_gather_toast(
-                ui_format("gather_toast_quality", &[("name", &node.name)]),
-                Color::from_rgba(255, 228, 150, 255),
-            );
+            self.trigger_gather_quality_toast(gathering_text::quality_toast(&node.name));
         }
         if discovery.variant_discovered {
-            self.push_gather_toast(
-                ui_format("gather_toast_variant", &[("name", &node.name)]),
-                Color::from_rgba(188, 255, 220, 255),
-            );
+            self.trigger_gather_variant_toast(gathering_text::variant_toast(&node.name));
         }
         if emphasis {
             self.runtime.gather_pause_seconds = self.runtime.gather_pause_seconds.max(0.08);
             self.trigger_camera_shake(0.08, 2.4);
         }
-    }
-
-    pub(super) fn push_gather_toast(&mut self, text: String, color: Color) {
-        self.push_event_toast(text, color);
     }
 
     pub(super) fn gather_status_text(
@@ -78,25 +57,20 @@ impl GameplayState {
         node: &GatherNodeDefinition,
         discovery: &FieldDiscoveryFeedback,
     ) -> String {
-        let route_name = data
-            .route(&node.route_id)
-            .map(|route| route.name.as_str())
-            .unwrap_or(ui_copy("gather_fallback_route"));
-        if discovery.variant_discovered {
-            ui_format(
-                "gather_status_variant",
-                &[("name", &node.name), ("route", route_name)],
-            )
-        } else if discovery.improved_quality {
-            ui_format(
-                "gather_status_best",
-                &[("name", &node.name), ("route", route_name)],
-            )
-        } else {
-            ui_format(
-                "gather_status_collected",
-                &[("name", &node.name), ("route", route_name)],
-            )
-        }
+        gathering_text::status(
+            data,
+            node,
+            discovery.variant_discovered,
+            discovery.improved_quality,
+        )
     }
+}
+
+fn feedback_color(values: [u8; 4]) -> [f32; 4] {
+    [
+        values[0] as f32 / 255.0,
+        values[1] as f32 / 255.0,
+        values[2] as f32 / 255.0,
+        values[3] as f32 / 255.0,
+    ]
 }

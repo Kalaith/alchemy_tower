@@ -3,7 +3,6 @@ use super::Game;
 use crate::art::ArtAssets;
 use crate::audio::AudioAssets;
 use crate::data::load_embedded_or_fallback;
-use crate::state::MenuState;
 
 pub(super) async fn load_game() -> Game {
     let data = load_embedded_or_fallback();
@@ -14,6 +13,6 @@ pub(super) async fn load_game() -> Game {
         data,
         art,
         audio,
-        state: Some(GameState::Menu(MenuState::new())),
+        state: Some(GameState::new_menu()),
     }
 }

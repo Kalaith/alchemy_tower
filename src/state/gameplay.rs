@@ -18,6 +18,8 @@ mod gameplay_types;
 mod gameplay_overlay_types;
 #[path = "gameplay_overlay_state.rs"]
 mod gameplay_overlay_state;
+#[path = "gameplay_overlay_status.rs"]
+mod gameplay_overlay_status;
 #[path = "gameplay_overlay_draw_dispatch.rs"]
 mod gameplay_overlay_draw_dispatch;
 #[path = "gameplay_overlay_input_dispatch.rs"]
@@ -32,12 +34,18 @@ mod gameplay_brew_inventory;
 mod gameplay_alchemy_preview;
 #[path = "gameplay_alchemy_preview_text.rs"]
 mod gameplay_alchemy_preview_text;
+#[path = "gameplay_alchemy_preview_detail_text.rs"]
+mod gameplay_alchemy_preview_detail_text;
 #[path = "gameplay_alchemy_preview_view.rs"]
 mod gameplay_alchemy_preview_view;
 #[path = "gameplay_alchemy_preview_draw.rs"]
 mod gameplay_alchemy_preview_draw;
+#[path = "gameplay_alchemy_overlay_view.rs"]
+mod gameplay_alchemy_overlay_view;
 #[path = "gameplay_alchemy_overlay_draw.rs"]
 mod gameplay_alchemy_overlay_draw;
+#[path = "gameplay_alchemy_controls_view.rs"]
+mod gameplay_alchemy_controls_view;
 #[path = "gameplay_alchemy_controls_draw.rs"]
 mod gameplay_alchemy_controls_draw;
 #[path = "gameplay_alchemy_formulae_view.rs"]
@@ -68,6 +76,8 @@ mod gameplay_gathering_memory;
 mod gameplay_gathering_conditions;
 #[path = "gameplay_item_conditions.rs"]
 mod gameplay_item_conditions;
+#[path = "gameplay_proximity.rs"]
+mod gameplay_proximity;
 #[path = "gameplay_facilities.rs"]
 mod gameplay_facilities;
 #[path = "gameplay_habitats.rs"]
@@ -76,6 +86,8 @@ mod gameplay_habitats;
 mod gameplay_hud_goal;
 #[path = "gameplay_hud_view.rs"]
 mod gameplay_hud_view;
+#[path = "gameplay_hud_feedback_view.rs"]
+mod gameplay_hud_feedback_view;
 #[path = "gameplay_hud_draw.rs"]
 mod gameplay_hud_draw;
 #[path = "gameplay_planters.rs"]
@@ -88,22 +100,30 @@ mod gameplay_planter_status;
 mod gameplay_warps;
 #[path = "gameplay_player.rs"]
 mod gameplay_player;
+#[path = "gameplay_player_pose.rs"]
+mod gameplay_player_pose;
 #[path = "gameplay_player_interactions.rs"]
 mod gameplay_player_interactions;
 #[path = "gameplay_station_interactions.rs"]
 mod gameplay_station_interactions;
 #[path = "gameplay_interaction_targets.rs"]
 mod gameplay_interaction_targets;
+#[path = "gameplay_feedback_update.rs"]
+mod gameplay_feedback_update;
+#[path = "gameplay_feedback_primitives.rs"]
+mod gameplay_feedback_primitives;
+#[path = "gameplay_feedback_toasts.rs"]
+mod gameplay_feedback_toasts;
 #[path = "gameplay_feedback.rs"]
 mod gameplay_feedback;
 #[path = "gameplay_alchemy_input.rs"]
 mod gameplay_alchemy_input;
-#[path = "gameplay_alchemy_mouse_layout.rs"]
-mod gameplay_alchemy_mouse_layout;
 #[path = "gameplay_alchemy_mouse_input.rs"]
 mod gameplay_alchemy_mouse_input;
 #[path = "gameplay_archive_input.rs"]
 mod gameplay_archive_input;
+#[path = "gameplay_archive_overlay_view.rs"]
+mod gameplay_archive_overlay_view;
 #[path = "gameplay_archive_overlay_draw.rs"]
 mod gameplay_archive_overlay_draw;
 #[path = "gameplay_archive_progress.rs"]
@@ -154,6 +174,8 @@ mod gameplay_init;
 mod gameplay_journal_support;
 #[path = "gameplay_journal_memory_text.rs"]
 mod gameplay_journal_memory_text;
+#[path = "gameplay_journal_overlay_view.rs"]
+mod gameplay_journal_overlay_view;
 #[path = "gameplay_journal_overlay_draw.rs"]
 mod gameplay_journal_overlay_draw;
 #[path = "gameplay_journal_brews_view.rs"]
@@ -178,6 +200,8 @@ mod gameplay_journal_routes_view;
 mod gameplay_journal_routes_draw;
 #[path = "gameplay_loop.rs"]
 mod gameplay_loop;
+#[path = "gameplay_missing_area_view.rs"]
+mod gameplay_missing_area_view;
 #[path = "gameplay_draw.rs"]
 mod gameplay_draw;
 #[path = "gameplay_camera.rs"]
@@ -212,6 +236,8 @@ mod gameplay_npc_motion;
 mod gameplay_npc_schedule_timing;
 #[path = "gameplay_path_geometry.rs"]
 mod gameplay_path_geometry;
+#[path = "gameplay_npc_local_path.rs"]
+mod gameplay_npc_local_path;
 #[path = "gameplay_npc_pathing.rs"]
 mod gameplay_npc_pathing;
 #[path = "gameplay_npc_area_paths.rs"]
@@ -242,6 +268,8 @@ mod gameplay_dialogue_text;
 mod gameplay_dialogue_overlay_view;
 #[path = "gameplay_dialogue_overlay_draw.rs"]
 mod gameplay_dialogue_overlay_draw;
+#[path = "gameplay_ending_overlay_view.rs"]
+mod gameplay_ending_overlay_view;
 #[path = "gameplay_ending_overlay_draw.rs"]
 mod gameplay_ending_overlay_draw;
 #[path = "gameplay_quest_board.rs"]
@@ -260,6 +288,8 @@ mod gameplay_quest_requirements;
 mod gameplay_quest_requirement_summary;
 #[path = "gameplay_render.rs"]
 mod gameplay_render;
+#[path = "gameplay_render_color.rs"]
+mod gameplay_render_color;
 #[path = "gameplay_render_warps.rs"]
 mod gameplay_render_warps;
 #[path = "gameplay_render_environment.rs"]
@@ -274,6 +304,8 @@ mod gameplay_render_npcs;
 mod gameplay_render_gather_nodes;
 #[path = "gameplay_render_player.rs"]
 mod gameplay_render_player;
+#[path = "gameplay_sleep_flash_overlay_view.rs"]
+mod gameplay_sleep_flash_overlay_view;
 #[path = "gameplay_render_sleep.rs"]
 mod gameplay_render_sleep;
 #[path = "gameplay_save_input.rs"]
@@ -294,6 +326,8 @@ mod gameplay_world_prompt;
 mod gameplay_prompt_draw;
 #[path = "gameplay_support.rs"]
 mod gameplay_support;
+#[path = "gameplay_tutorial_hint_selection.rs"]
+mod gameplay_tutorial_hint_selection;
 #[path = "gameplay_tutorial.rs"]
 mod gameplay_tutorial;
 #[path = "gameplay_tutorial_conditions.rs"]

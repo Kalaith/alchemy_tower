@@ -80,9 +80,9 @@ pub(crate) fn draw_hud_view(view: &HudView, art: &ArtAssets) {
     draw_coin_chip(view);
     draw_goal_note(view, art);
     draw_time_panel(view);
-    draw_minimap_frame();
+    draw_minimap_frame(view);
     draw_side_status_panel(view);
-    draw_control_tags();
+    draw_control_tags(view);
     draw_potion_belt(view, art);
     draw_status_strip(view);
     draw_hud_feedbacks(&view.feedbacks, art);
@@ -90,45 +90,46 @@ pub(crate) fn draw_hud_view(view: &HudView, art: &ArtAssets) {
 
 fn draw_hud_feedbacks(feedbacks: &[HudFeedbackView], art: &ArtAssets) {
     for feedback in feedbacks {
+        let position = hud_point(feedback.position);
+        let color = hud_color(feedback.color);
         draw_circle_lines(
-            feedback.position.x,
-            feedback.position.y,
+            position.x,
+            position.y,
             feedback.radius,
             if feedback.burst_scale > 1.5 { 3.0 } else { 2.0 },
-            feedback.color,
+            color,
         );
         if let Some(texture) = art.effect("gather_feedback_sparkle") {
             draw_texture_centered(
                 texture,
-                feedback.position,
+                position,
                 vec2(feedback.radius * 2.0, feedback.radius * 2.0),
-                Color::new(
-                    feedback.color.r,
-                    feedback.color.g,
-                    feedback.color.b,
-                    feedback.color.a,
-                ),
+                color,
             );
         }
         draw_circle_lines(
-            feedback.position.x,
-            feedback.position.y,
+            position.x,
+            position.y,
             feedback.radius * 0.62,
             1.5,
-            Color::new(
-                feedback.color.r,
-                feedback.color.g,
-                feedback.color.b,
-                feedback.color.a * 0.75,
-            ),
+            Color::new(color.r, color.g, color.b, color.a * 0.75),
         );
         for sparkle in feedback.sparkle_points {
+            let sparkle = hud_point(sparkle);
             draw_circle(
                 sparkle.x,
                 sparkle.y,
                 if feedback.burst_scale > 1.4 { 2.6 } else { 2.0 },
-                feedback.color,
+                color,
             );
         }
     }
+}
+
+fn hud_color(color: [f32; 4]) -> Color {
+    Color::new(color[0], color[1], color[2], color[3])
+}
+
+fn hud_point(point: [f32; 2]) -> Vec2 {
+    vec2(point[0], point[1])
 }

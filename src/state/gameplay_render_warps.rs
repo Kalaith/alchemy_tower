@@ -2,7 +2,7 @@ use super::GameplayState;
 use crate::art::ArtAssets;
 use crate::data::AreaDefinition;
 use crate::ui::draw_warp_marker;
-use macroquad::prelude::*;
+use macroquad::prelude::{vec2, Vec2};
 
 impl GameplayState {
     pub(super) fn draw_area_warps(&self, area: &AreaDefinition, offset: Vec2, art: &ArtAssets) {

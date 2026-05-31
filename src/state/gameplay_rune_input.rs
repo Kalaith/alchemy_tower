@@ -1,9 +1,11 @@
 use super::GameplayState;
-use crate::content::ui_text;
 use crate::data::{GameData, StationKind};
 use crate::input::{
     cancel_pressed, confirm_pressed, interact_pressed, select_next_pressed, select_previous_pressed,
 };
+
+#[path = "gameplay_rune_input_text.rs"]
+mod rune_input_text;
 
 impl GameplayState {
     pub(super) fn handle_rune_inputs(&mut self, data: &GameData) {
@@ -35,7 +37,7 @@ impl GameplayState {
         }
         if cancel_pressed() {
             self.clear_overlay();
-            self.runtime.status_text = ui_text().statuses.closed_rune.clone();
+            self.runtime.status_text = rune_input_text::closed();
         }
     }
 }

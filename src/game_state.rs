@@ -10,6 +10,22 @@ pub(in crate::game) enum GameState {
 }
 
 impl GameState {
+    pub(in crate::game) fn new_menu() -> Self {
+        Self::Menu(MenuState::new())
+    }
+
+    pub(in crate::game) fn from_gameplay(gameplay: GameplayState) -> Self {
+        Self::Gameplay(gameplay)
+    }
+
+    pub(in crate::game) fn pause(gameplay: GameplayState) -> Self {
+        Self::Paused(PauseState::new(gameplay))
+    }
+
+    pub(in crate::game) fn resume(paused: PauseState) -> Self {
+        Self::Gameplay(paused.into_gameplay())
+    }
+
     pub(in crate::game) fn update(
         &mut self,
         data: &GameData,

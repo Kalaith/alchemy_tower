@@ -1,7 +1,9 @@
 use super::gameplay_overlay_types::{ArchiveExperimentFilter, ARCHIVE_TABS};
 use super::GameplayState;
-use crate::content::ui_format;
 use crate::data::{ExperimentLogEntry, GameData, RecipeDefinition};
+
+#[path = "gameplay_progression_text.rs"]
+mod progression_text;
 
 #[allow(dead_code)]
 impl GameplayState {
@@ -29,10 +31,8 @@ impl GameplayState {
     pub(super) fn cycle_archive_experiment_filter(&mut self) {
         self.ui.archive_experiment_filter = self.ui.archive_experiment_filter.next();
         self.ui.archive_index = 0;
-        self.runtime.status_text = ui_format(
-            "archive_filter_status",
-            &[("mode", self.archive_experiment_filter_label())],
-        );
+        self.runtime.status_text =
+            progression_text::archive_filter_status(self.archive_experiment_filter_label());
     }
 
     pub(super) fn mastery_recipes<'a>(

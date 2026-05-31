@@ -8,8 +8,10 @@ impl GameplayState {
         &self,
         data: &GameData,
     ) -> AlchemyMaterialsPanelView {
+        let sort_label = self.inventory_sort_label();
         AlchemyMaterialsPanelView {
-            sort_label: self.inventory_sort_label().to_owned(),
+            title: ui_copy("overlay_materials"),
+            sort_text: ui_format("overlay_sort_mode", &[("mode", sort_label)]),
             empty_text: self.unavailable_state_text(ui_copy("overlay_alchemy_empty_materials")),
             rows: self
                 .alchemy_material_cards(data)

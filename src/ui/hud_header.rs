@@ -5,7 +5,6 @@ use super::hud_chrome::*;
 use super::hud_gem_mount::*;
 use super::hud_primitives::*;
 use super::HudView;
-use crate::content::ui_copy;
 use super::truncate_text_to_width;
 use macroquad::prelude::*;
 
@@ -66,7 +65,7 @@ pub(super) fn draw_title_banner(view: &HudView) {
     draw_ornate_panel(top_plaque, fill_slate(), 0.82);
     draw_title_plaque_caps(top_plaque);
     draw_centered_text_shadowed(
-        ui_copy("menu_title"),
+        &view.game_title,
         top_plaque.x,
         top_plaque.y + 17.0,
         top_plaque.w,

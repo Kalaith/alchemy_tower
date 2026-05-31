@@ -44,6 +44,7 @@ pub(super) fn draw_goal_note(view: &HudView, art: &ArtAssets) {
         17.0,
         Color::from_rgba(218, 205, 178, 255),
         4,
+        &view.truncation_suffix,
     );
 
     if let Some(icon_id) = &view.goal.icon_id {
@@ -60,6 +61,7 @@ pub(super) fn draw_goal_note(view: &HudView, art: &ArtAssets) {
             16.0,
             muted_ink(),
             1,
+            &view.truncation_suffix,
         );
     }
 
@@ -75,6 +77,7 @@ pub(super) fn draw_goal_note(view: &HudView, art: &ArtAssets) {
             16.0,
             bright_ink(),
             1,
+            &view.truncation_suffix,
         );
     }
 }

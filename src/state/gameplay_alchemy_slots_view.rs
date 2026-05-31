@@ -9,6 +9,7 @@ impl GameplayState {
     pub(super) fn alchemy_slots_panel_view(&self, data: &GameData) -> AlchemySlotsPanelView {
         let process = self.alchemy_process_summary();
         AlchemySlotsPanelView {
+            title: ui_copy("overlay_slots"),
             process_text: ui_format(
                 "overlay_alchemy_process",
                 &[
@@ -17,6 +18,9 @@ impl GameplayState {
                     ("timing", process.timing),
                 ],
             ),
+            stir_label: ui_copy("overlay_alchemy_stir_button"),
+            timing_label: ui_copy("overlay_alchemy_timing_button"),
+            catalyst_label: ui_copy("overlay_catalyst"),
             slots: self
                 .alchemy_slot_items()
                 .into_iter()

@@ -57,13 +57,15 @@ pub(super) fn draw_wrapped_text_limited(
     line_height: f32,
     color: Color,
     max_lines: usize,
+    truncation_suffix: &str,
 ) {
     let mut lines = macroquad_toolkit::ui::wrap_text(text, max_width, font_size);
     if lines.len() > max_lines {
         lines.truncate(max_lines);
         if let Some(last) = lines.last_mut() {
             let trimmed = last.trim_end_matches('.').to_owned();
-            *last = truncate_text_to_width(&format!("{trimmed}..."), max_width, font_size);
+            let truncated = format!("{trimmed}{truncation_suffix}");
+            *last = truncate_text_to_width(&truncated, max_width, font_size);
         }
     }
     for (index, line) in lines.iter().enumerate() {

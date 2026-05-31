@@ -1,7 +1,8 @@
-use super::gameplay_support::planter_stage_label;
 use super::GameplayState;
-use crate::content::ui_format;
 use crate::data::{GameData, MutationFormulaDefinition, PlanterStateEntry, StationDefinition};
+
+#[path = "gameplay_planter_status_text.rs"]
+mod status_text;
 
 impl GameplayState {
     pub(super) fn harvest_planter(
@@ -17,26 +18,8 @@ impl GameplayState {
             .entry(state.planted_item_id.clone())
             .or_insert(0) += harvest_amount;
         self.note_inventory_observation(data, &state.planted_item_id);
-        self.runtime.status_text = if mutation_note.is_empty() {
-            ui_format(
-                "gameplay_planter_harvested",
-                &[
-                    ("item", data.item_name(&state.planted_item_id)),
-                    ("amount", &harvest_amount.to_string()),
-                    ("station", &station.name),
-                ],
-            )
-        } else {
-            ui_format(
-                "gameplay_planter_harvested_mutation",
-                &[
-                    ("item", data.item_name(&state.planted_item_id)),
-                    ("amount", &harvest_amount.to_string()),
-                    ("station", &station.name),
-                    ("mutation", &mutation_note),
-                ],
-            )
-        };
+        self.runtime.status_text =
+            status_text::harvested(data, station, state, harvest_amount, &mutation_note);
         reset_planter_after_harvest(state);
     }
 
@@ -58,33 +41,10 @@ impl GameplayState {
         let growth_target = planter_growth_target(station, state);
         if state.growth_days >= growth_target {
             state.ready = true;
-            self.runtime.status_text = if let Some(text) = mutation_text {
-                ui_format(
-                    "gameplay_planter_ripeness_mutation",
-                    &[("station", &station.name), ("mutation", &text)],
-                )
-            } else {
-                ui_format("gameplay_tending_ripeness", &[("station", &station.name)])
-            };
+            self.runtime.status_text = status_text::ripeness(station, mutation_text.as_deref());
         } else {
-            self.runtime.status_text = if let Some(text) = mutation_text {
-                ui_format(
-                    "gameplay_planter_tended_mutation",
-                    &[
-                        ("station", &station.name),
-                        ("stage", planter_stage_label(state.growth_days, growth_target)),
-                        ("mutation", &text),
-                    ],
-                )
-            } else {
-                ui_format(
-                    "gameplay_planter_tended",
-                    &[
-                        ("station", &station.name),
-                        ("stage", planter_stage_label(state.growth_days, growth_target)),
-                    ],
-                )
-            };
+            self.runtime.status_text =
+                status_text::tended(station, state, growth_target, mutation_text.as_deref());
         }
     }
 
@@ -108,15 +68,8 @@ impl GameplayState {
         state.mutation_yield_bonus = 0;
         state.mutation_growth_bonus_days = 0;
         state.mutation_note.clear();
-        self.runtime.status_text = ui_format(
-            "gameplay_planted",
-            &[
-                ("item", data.item_name(&item_id)),
-                ("station", &station.name),
-            ],
-        );
+        self.runtime.status_text = status_text::planted(data, station, &item_id);
     }
-
 }
 
 pub(super) fn planter_growth_target(station: &StationDefinition, state: &PlanterStateEntry) -> u32 {

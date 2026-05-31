@@ -1,8 +1,9 @@
+use super::gameplay_render_color::render_color;
 use super::GameplayState;
 use crate::art::ArtAssets;
 use crate::data::{AreaDefinition, GameData};
 use crate::ui::draw_station_world_marker;
-use macroquad::prelude::*;
+use macroquad::prelude::{vec2, Vec2};
 
 impl GameplayState {
     pub(super) fn draw_area_stations(
@@ -21,12 +22,7 @@ impl GameplayState {
                 offset.x + station.position[0],
                 offset.y + station.position[1],
             );
-            let player_distance = self
-                .world
-                .player
-                .position
-                .distance(vec2(station.position[0], station.position[1]));
-            let nearby = player_distance <= station.interaction_radius + 60.0;
+            let nearby = self.player_distance_to(station.position) <= station.interaction_radius + 60.0;
             let priority = self.station_world_label(data, station);
             draw_station_world_marker(
                 station,
@@ -34,7 +30,7 @@ impl GameplayState {
                 nearby,
                 priority
                     .as_ref()
-                    .map(|(label, color)| (label.as_str(), *color)),
+                    .map(|(label, tone)| (label.as_str(), render_color(tone.color()))),
                 art,
             );
         }

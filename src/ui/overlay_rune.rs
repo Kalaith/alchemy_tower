@@ -1,20 +1,20 @@
-use crate::content::{input_bindings, ui_copy, ui_text};
 use crate::view_models::rune::RuneOverlayView;
 use super::{
     draw_overlay_backdrop, draw_overlay_footer, draw_overlay_subtitle, draw_panel,
     draw_overlay_section_box, draw_overlay_section_title, draw_selection_card, draw_state_banner,
+    standard_overlay_panel_rect,
 };
-use macroquad::prelude::*;
 
 pub(crate) fn draw_rune_overlay_view(view: &RuneOverlayView) {
         draw_overlay_backdrop();
-        let x = 180.0;
-        let y = 90.0;
-        let w = screen_width() - 360.0;
-        let h = screen_height() - 180.0;
+        let panel = standard_overlay_panel_rect();
+        let x = panel.x;
+        let y = panel.y;
+        let w = panel.w;
+        let h = panel.h;
         draw_panel(x, y, w, h, &view.station_name);
-        draw_overlay_subtitle(x, y, &ui_text().overlays.rune_subtitle);
-        draw_overlay_section_title(x + 20.0, y + 124.0, ui_copy("overlay_rune_drafts"), None);
+        draw_overlay_subtitle(x, y, &view.subtitle);
+        draw_overlay_section_title(x + 20.0, y + 124.0, &view.drafts_title, None);
         draw_overlay_section_box(x + 20.0, y + 138.0, w - 40.0, h - 200.0);
         let mut row_y = y + 172.0;
         if view.entries.is_empty() {
@@ -41,14 +41,5 @@ pub(crate) fn draw_rune_overlay_view(view: &RuneOverlayView) {
                 row_y += 64.0;
             }
         }
-        draw_overlay_footer(
-            x,
-            y,
-            w,
-            h,
-            &ui_copy("overlay_rune_footer")
-                .replace("{select}", &input_bindings().navigation.select)
-                .replace("{confirm}", &input_bindings().global.confirm)
-                .replace("{close}", &input_bindings().global.cancel),
-        );
+        draw_overlay_footer(x, y, w, h, &view.footer_text);
 }

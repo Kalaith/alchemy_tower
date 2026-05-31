@@ -1,15 +1,16 @@
 use super::gameplay_overlay_types::OverlayScreen;
 use super::GameplayState;
 use crate::audio::AudioAssets;
-use crate::content::{ui_format, ui_text};
 use crate::data::{GameData, GatherNodeDefinition, NpcDefinition, StationKind, WarpDefinition};
 use crate::input::{alchemy_open_pressed, interact_pressed};
-use macroquad::prelude::{vec2, Color};
+
+#[path = "gameplay_player_interaction_text.rs"]
+mod player_interaction_text;
 
 impl GameplayState {
     pub(super) fn handle_npc_interaction(&mut self, npc: &NpcDefinition) {
         self.set_overlay(OverlayScreen::Dialogue(npc.id.clone()));
-        self.runtime.status_text = ui_format("gameplay_talking_to", &[("name", &npc.name)]);
+        self.runtime.status_text = player_interaction_text::talking_to(&npc.name);
     }
 
     pub(super) fn try_open_nearby_alchemy_shortcut(
@@ -28,7 +29,7 @@ impl GameplayState {
 
         self.set_overlay(OverlayScreen::Alchemy);
         self.alchemy.index = 0;
-        self.runtime.status_text = ui_text().statuses.open_alchemy.clone();
+        self.runtime.status_text = player_interaction_text::open_alchemy();
         audio.play_alchemy_open();
         true
     }
@@ -43,15 +44,10 @@ impl GameplayState {
             }
         }
         self.world.current_area_id = warp.target_area.clone();
-        self.world.player.position = vec2(warp.target_position[0], warp.target_position[1]);
-        self.world.player.moving = false;
+        self.set_player_position(warp.target_position);
+        self.stop_player_motion();
         self.refresh_available_nodes(data);
-        self.trigger_world_feedback(
-            self.world.player.position,
-            Color::from_rgba(255, 245, 160, 255),
-            false,
-            1.2,
-        );
+        self.trigger_warp_travel_feedback(warp.target_position);
     }
 
     pub(super) fn handle_gather_node_interaction(
@@ -79,21 +75,13 @@ impl GameplayState {
         for milestone in &warp.unlock_milestones {
             self.push_journal_milestone(&milestone.id, &milestone.title, &milestone.text);
         }
-        self.push_event_toast_with_icon(
-            ui_format("gameplay_route_restored", &[("label", &warp.label)]),
-            Color::from_rgba(188, 255, 220, 255),
-            "route_restored",
-        );
-        self.trigger_world_feedback(
-            vec2(
+        self.trigger_route_restored_feedback(
+            player_interaction_text::route_restored(&warp.label),
+            [
                 warp.rect.x + warp.rect.w * 0.5,
                 warp.rect.y + warp.rect.h * 0.5,
-            ),
-            Color::from_rgba(188, 255, 220, 255),
-            true,
-            2.0,
+            ],
         );
-        self.trigger_camera_shake(0.18, 4.8);
-        self.runtime.status_text = ui_format("gameplay_repaired_access", &[("label", &warp.label)]);
+        self.runtime.status_text = player_interaction_text::repaired_access(&warp.label);
     }
 }

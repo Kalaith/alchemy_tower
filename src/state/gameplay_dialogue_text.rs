@@ -1,5 +1,5 @@
 use super::GameplayState;
-use crate::content::ui_format;
+use crate::content::{input_bindings, ui_format};
 use crate::data::{GameData, NpcDefinition};
 
 impl GameplayState {
@@ -19,12 +19,24 @@ impl GameplayState {
             if !self.quest_is_available(quest) {
                 return self.append_npc_story_line(
                     &npc.id,
-                    format!("{} {}", dialogue.start, self.quest_unlock_summary(quest)),
+                    ui_format(
+                        "quests_dialogue_with_context",
+                        &[
+                            ("dialogue", dialogue.start),
+                            ("context", &self.quest_unlock_summary(quest)),
+                        ],
+                    ),
                 );
             }
             return self.append_npc_story_line(
                 &npc.id,
-                format!("{} {}", dialogue.start, self.npc_context_line(data, npc)),
+                ui_format(
+                    "quests_dialogue_with_context",
+                    &[
+                        ("dialogue", dialogue.start),
+                        ("context", &self.npc_context_line(data, npc)),
+                    ],
+                ),
             );
         }
 
@@ -60,24 +72,24 @@ impl GameplayState {
             .then(|| data.quest(&npc.quest_id))
             .flatten()
         else {
-            return ui_format("quests_dialogue_footer_default", &[]);
+            return dialogue_footer_text("quests_dialogue_footer_default", &[]);
         };
 
         if self.progression.completed_quests.contains(&quest.id) {
-            return ui_format("quests_dialogue_footer_default", &[]);
+            return dialogue_footer_text("quests_dialogue_footer_default", &[]);
         }
         if !self.progression.started_quests.contains(&quest.id) {
             if !self.quest_is_available(quest) {
                 return self.locked_state_text(&self.quest_unlock_summary(quest));
             }
-            return ui_format(
+            return dialogue_footer_text(
                 "quests_dialogue_footer_reward",
                 &[("coins", &quest.reward_coins.to_string())],
             );
         }
 
         if self.quest_requirements_met(data, quest) {
-            ui_format(
+            dialogue_footer_text(
                 "quests_dialogue_footer_delivery",
                 &[
                     ("item", data.item_name(&quest.required_item_id)),
@@ -86,7 +98,7 @@ impl GameplayState {
                 ],
             )
         } else {
-            ui_format(
+            dialogue_footer_text(
                 "quests_dialogue_footer_unavailable",
                 &[
                     (
@@ -99,4 +111,12 @@ impl GameplayState {
             )
         }
     }
+}
+
+fn dialogue_footer_text(copy_key: &str, replacements: &[(&str, &str)]) -> String {
+    let mut pairs = Vec::with_capacity(replacements.len() + 2);
+    pairs.extend_from_slice(replacements);
+    pairs.push(("confirm", input_bindings().global.confirm.as_str()));
+    pairs.push(("close", input_bindings().global.cancel.as_str()));
+    ui_format(copy_key, &pairs)
 }

@@ -1,7 +1,7 @@
 use super::hud_belt_frame::*;
 use super::hud_belt_slots::*;
 use super::hud_primitives::*;
-use super::{HudView, HOTBAR_SLOT_COUNT};
+use super::HudView;
 use crate::art::ArtAssets;
 use super::truncate_text_to_width;
 use macroquad::prelude::*;
@@ -9,7 +9,9 @@ use macroquad::prelude::*;
 pub(super) fn draw_potion_belt(view: &HudView, art: &ArtAssets) {
     let slot_size = 58.0;
     let gap = 12.0;
-    let width = 40.0 + slot_size * HOTBAR_SLOT_COUNT as f32 + gap * 7.0 + 40.0;
+    let slot_count = view.potions.len();
+    let width =
+        40.0 + slot_size * slot_count as f32 + gap * slot_count.saturating_sub(1) as f32 + 40.0;
     let height = 96.0;
     let x = screen_width() * 0.5 - width * 0.5;
     let y = screen_height() - 108.0;
@@ -49,18 +51,14 @@ pub(super) fn draw_potion_belt(view: &HudView, art: &ArtAssets) {
     draw_belt_hardware(rect, slot_size, gap);
     draw_gem(vec2(rect.x + rect.w * 0.5, rect.y + rect.h + 2.0), 9.0);
 
-    for index in 0..HOTBAR_SLOT_COUNT {
+    for (index, slot) in view.potions.iter().enumerate() {
         let slot_rect = Rect::new(
             x + 40.0 + index as f32 * (slot_size + gap),
             y + 16.0,
             slot_size,
             slot_size,
         );
-        if let Some(slot) = view.potions.get(index) {
-            draw_hotbar_slot(slot_rect, slot, art, index);
-        } else {
-            draw_empty_hotbar_slot(slot_rect, index);
-        }
+        draw_hotbar_slot(slot_rect, slot, art, index);
         draw_centered_text_shadowed(
             &(index + 1).to_string(),
             slot_rect.x,

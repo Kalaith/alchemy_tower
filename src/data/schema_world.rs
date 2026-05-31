@@ -20,11 +20,8 @@ pub(crate) struct RectDefinition {
 }
 
 impl RectDefinition {
-    pub(crate) fn contains_point(&self, point: macroquad::prelude::Vec2) -> bool {
-        point.x >= self.x
-            && point.x <= self.x + self.w
-            && point.y >= self.y
-            && point.y <= self.y + self.h
+    pub(crate) fn contains_xy(&self, x: f32, y: f32) -> bool {
+        x >= self.x && x <= self.x + self.w && y >= self.y && y <= self.y + self.h
     }
 }
 

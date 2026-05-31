@@ -1,4 +1,3 @@
-use crate::content::ui_copy;
 use crate::view_models::archive::ArchiveExperimentRecordView;
 use super::draw_wrapped_text;
 use macroquad::prelude::draw_text;
@@ -10,13 +9,7 @@ pub(crate) fn draw_selected_experiment_record_view(
     y: f32,
     w: f32,
 ) {
-    draw_text(
-        ui_copy("overlay_selected_record"),
-        x,
-        y,
-        26.0,
-        dark::TEXT_BRIGHT,
-    );
+    draw_text(&record.title, x, y, 26.0, dark::TEXT_BRIGHT);
     draw_text(&record.output_text, x, y + 34.0, 22.0, dark::TEXT_BRIGHT);
     draw_text(&record.quality_text, x, y + 62.0, 20.0, dark::TEXT_DIM);
     draw_text(&record.result_text, x, y + 86.0, 20.0, dark::TEXT_DIM);

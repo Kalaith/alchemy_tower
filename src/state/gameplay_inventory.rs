@@ -1,6 +1,8 @@
 use super::GameplayState;
 use crate::alchemy::BrewResolution;
-use crate::content::ui_format;
+
+#[path = "gameplay_inventory_status_text.rs"]
+mod inventory_status_text;
 
 impl GameplayState {
     pub(super) fn brew_is_stable(&self, resolution: &BrewResolution<'_>) -> bool {
@@ -15,9 +17,6 @@ impl GameplayState {
 
     pub(super) fn cycle_inventory_sort_mode(&mut self) {
         self.ui.inventory_sort_mode = self.ui.inventory_sort_mode.next();
-        self.runtime.status_text = ui_format(
-            "inventory_sort_status",
-            &[("mode", self.inventory_sort_label())],
-        );
+        self.runtime.status_text = inventory_status_text::sort_status(self.inventory_sort_label());
     }
 }

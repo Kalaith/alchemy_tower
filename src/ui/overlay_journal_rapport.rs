@@ -1,4 +1,3 @@
-use crate::content::ui_copy;
 use crate::view_models::journal::JournalRapportTabView;
 use super::draw_wrapped_text;
 use macroquad::prelude::draw_text;
@@ -12,7 +11,7 @@ pub(crate) fn draw_journal_rapport_tab_view(
     h: f32,
 ) {
         draw_text(
-            ui_copy("overlay_town_rapport"),
+            view.title,
             x + 20.0,
             y + 136.0,
             26.0,

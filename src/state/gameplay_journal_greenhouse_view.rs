@@ -17,6 +17,7 @@ impl GameplayState {
             .collect();
 
         JournalGreenhouseTabView {
+            title: ui_copy("overlay_greenhouse_beds"),
             empty_text: ui_copy("overlay_greenhouse_empty").to_owned(),
             beds,
         }
@@ -54,18 +55,21 @@ impl GameplayState {
                         .max(1)
                         .saturating_sub(state.mutation_growth_bonus_days)
                         .max(1);
+                    let item = data.item_name(&state.planted_item_id);
+                    let stage = planter_stage_label(state.growth_days, growth_target);
                     if state.mutation_note.is_empty() {
-                        format!(
-                            "{} ({})",
-                            data.item_name(&state.planted_item_id),
-                            planter_stage_label(state.growth_days, growth_target)
+                        ui_format(
+                            "overlay_greenhouse_growing",
+                            &[("item", item), ("stage", &stage)],
                         )
                     } else {
-                        format!(
-                            "{} ({}, {})",
-                            data.item_name(&state.planted_item_id),
-                            planter_stage_label(state.growth_days, growth_target),
-                            state.mutation_note
+                        ui_format(
+                            "overlay_greenhouse_growing_meta",
+                            &[
+                                ("item", item),
+                                ("stage", &stage),
+                                ("mutation", &state.mutation_note),
+                            ],
                         )
                     }
                 }

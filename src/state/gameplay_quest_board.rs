@@ -1,16 +1,17 @@
 use super::GameplayState;
-use crate::content::{ui_format, ui_text};
 use crate::data::GameData;
 use crate::input::{
     cancel_pressed, confirm_pressed, select_next_pressed, select_previous_pressed,
 };
-use macroquad::prelude::Color;
+
+#[path = "gameplay_quest_board_text.rs"]
+mod quest_board_text;
 
 impl GameplayState {
     pub(super) fn handle_quest_board_inputs(&mut self, data: &GameData) {
         if cancel_pressed() {
             self.clear_overlay();
-            self.runtime.status_text = ui_text().statuses.closed_quest_board.clone();
+            self.runtime.status_text = quest_board_text::closed();
             return;
         }
         let available = self.available_board_quests(data);
@@ -27,32 +28,17 @@ impl GameplayState {
             if let Some(quest_id) = available.get(self.ui.shop_index) {
                 self.progression.started_quests.insert(quest_id.clone());
                 if let Some(quest) = data.quest(quest_id) {
-                    self.push_event_toast_with_icon(
-                        ui_format("quests_accepted_toast", &[("title", &quest.title)]),
-                        Color::from_rgba(255, 230, 170, 255),
-                        "quest_accepted",
-                    );
-                    self.trigger_world_feedback(
-                        self.world.player.position,
-                        Color::from_rgba(255, 230, 170, 255),
-                        false,
-                        1.2,
-                    );
+                    self.trigger_quest_accepted_feedback(quest_board_text::accepted_toast(quest));
                 }
-                self.runtime.status_text = data
-                    .quest(quest_id)
-                    .map(|quest| {
-                        ui_format(
-                            "quests_board_accepted_status",
-                            &[
-                                ("title", &quest.title),
-                                ("hint", &self.quest_location_hint(data, quest)),
-                            ],
-                        )
-                    })
-                    .unwrap_or_else(|| ui_format("quests_board_accepted_default", &[]));
+                self.runtime.status_text = self.quest_board_accept_status(data, quest_id);
             }
         }
+    }
+
+    fn quest_board_accept_status(&self, data: &GameData, quest_id: &str) -> String {
+        data.quest(quest_id)
+            .map(|quest| quest_board_text::accepted_status(quest, &self.quest_location_hint(data, quest)))
+            .unwrap_or_else(quest_board_text::accepted_default)
     }
 
     pub(super) fn available_board_quests(&self, data: &GameData) -> Vec<String> {
@@ -74,11 +60,8 @@ impl GameplayState {
             .filter(|quest| !self.progression.completed_quests.contains(&quest.id))
             .filter(|quest| !self.quest_is_available(quest))
             .map(|quest| {
-                format!(
-                    "{}: {}",
-                    quest.title,
-                    self.locked_state_text(&self.quest_unlock_summary(quest))
-                )
+                let requirements = self.locked_state_text(&self.quest_unlock_summary(quest));
+                quest_board_text::locked_line(quest, &requirements)
             })
             .collect()
     }

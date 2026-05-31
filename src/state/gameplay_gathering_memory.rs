@@ -1,8 +1,12 @@
 use super::gameplay_feedback_types::FieldDiscoveryFeedback;
 use super::GameplayState;
 use crate::alchemy::quality_band;
-use crate::content::ui_copy;
 use crate::data::{GameData, GatherNodeDefinition, HerbMemoryEntry, ItemCategory};
+
+#[path = "gameplay_herb_memory_entries.rs"]
+mod herb_memory_entries;
+
+use self::herb_memory_entries::new_seen_herb_memory;
 
 impl GameplayState {
     pub(super) fn item_has_field_notes(&self, item_id: &str) -> bool {
@@ -71,18 +75,8 @@ impl GameplayState {
             .progression
             .herb_memories
             .entry(node.item_id.clone())
-            .or_insert_with(|| HerbMemoryEntry {
-                item_id: node.item_id.clone(),
-                first_seen_day: self.world.day_index,
-                first_seen_route_id: node.route_id.clone(),
-                seen: true,
-                learned: false,
-                learned_day: 0,
-                learned_route_id: String::new(),
-                note: String::new(),
-                best_quality: 0,
-                best_quality_band: ui_copy("inventory_best_unlogged").to_owned(),
-                variant_name: String::new(),
+            .or_insert_with(|| {
+                new_seen_herb_memory(&node.item_id, self.world.day_index, &node.route_id)
             });
         if !entry.seen {
             entry.seen = true;
@@ -110,18 +104,8 @@ impl GameplayState {
             .progression
             .herb_memories
             .entry(item_id.to_owned())
-            .or_insert_with(|| HerbMemoryEntry {
-                item_id: item_id.to_owned(),
-                first_seen_day: self.world.day_index,
-                first_seen_route_id: route_id.unwrap_or_default().to_owned(),
-                seen: true,
-                learned: false,
-                learned_day: 0,
-                learned_route_id: String::new(),
-                note: String::new(),
-                best_quality: 0,
-                best_quality_band: ui_copy("inventory_best_unlogged").to_owned(),
-                variant_name: String::new(),
+            .or_insert_with(|| {
+                new_seen_herb_memory(item_id, self.world.day_index, route_id.unwrap_or_default())
             });
         if !entry.seen {
             entry.seen = true;

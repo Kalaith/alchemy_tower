@@ -1,25 +1,25 @@
-use crate::content::{input_bindings, ui_copy, ui_text};
 use crate::view_models::quest_board::QuestBoardOverlayView;
 use super::{
     draw_overlay_backdrop, draw_overlay_footer, draw_overlay_subtitle, draw_panel,
     draw_overlay_section_box, draw_overlay_section_title, draw_selection_card, draw_state_banner,
-    draw_wrapped_text,
+    draw_wrapped_text, standard_overlay_panel_rect,
 };
-use macroquad::prelude::*;
+use macroquad::prelude::{draw_text};
 use macroquad_toolkit::colors::dark;
 
 pub(crate) fn draw_quest_board_overlay_view(view: &QuestBoardOverlayView) {
         draw_overlay_backdrop();
-        let x = 180.0;
-        let y = 90.0;
-        let w = screen_width() - 360.0;
-        let h = screen_height() - 180.0;
-        draw_panel(x, y, w, h, ui_copy("overlay_quest_board_title"));
-        draw_overlay_subtitle(x, y, &ui_text().overlays.quest_board_subtitle);
+        let panel = standard_overlay_panel_rect();
+        let x = panel.x;
+        let y = panel.y;
+        let w = panel.w;
+        let h = panel.h;
+        draw_panel(x, y, w, h, &view.title);
+        draw_overlay_subtitle(x, y, &view.subtitle);
         draw_overlay_section_title(
             x + 20.0,
             y + 122.0,
-            ui_copy("overlay_quest_available"),
+            &view.available_title,
             None,
         );
         draw_overlay_section_box(x + 20.0, y + 136.0, w - 40.0, 232.0);
@@ -49,7 +49,7 @@ pub(crate) fn draw_quest_board_overlay_view(view: &QuestBoardOverlayView) {
             }
         }
         draw_text(
-            ui_copy("overlay_quest_locked"),
+            &view.locked_title,
             x + 20.0,
             y + h - 200.0,
             22.0,
@@ -66,7 +66,7 @@ pub(crate) fn draw_quest_board_overlay_view(view: &QuestBoardOverlayView) {
             dark::TEXT_DIM,
         );
         draw_text(
-            ui_copy("overlay_quest_active"),
+            &view.active_title,
             x + 20.0,
             y + h - 120.0,
             24.0,
@@ -82,14 +82,5 @@ pub(crate) fn draw_quest_board_overlay_view(view: &QuestBoardOverlayView) {
             20.0,
             dark::TEXT_DIM,
         );
-        draw_overlay_footer(
-            x,
-            y,
-            w,
-            h,
-            &ui_copy("overlay_rune_footer")
-                .replace("{select}", &input_bindings().navigation.select)
-                .replace("{confirm}", &input_bindings().global.confirm)
-                .replace("{close}", &input_bindings().global.cancel),
-        );
+        draw_overlay_footer(x, y, w, h, &view.footer_text);
 }

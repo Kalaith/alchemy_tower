@@ -5,6 +5,27 @@ use super::gameplay_quest_requirements::{
 use crate::content::ui_format;
 use crate::data::QuestDefinition;
 
+pub(super) fn carry_requirement_summary(carried: u32, required: u32) -> String {
+    ui_format(
+        "quests_requirement_carry",
+        &[
+            ("carried", &carried.to_string()),
+            ("required", &required.to_string()),
+        ],
+    )
+}
+
+pub(super) fn quality_requirement_summary(minimum_quality_band: &str) -> String {
+    ui_format(
+        "quests_requirement_quality",
+        &[("band", minimum_quality_band)],
+    )
+}
+
+pub(super) fn ready_requirement_summary() -> String {
+    ui_format("quests_requirement_ready", &[])
+}
+
 pub(super) fn trait_requirement_summary(quest: &QuestDefinition) -> String {
     let required_traits = quest_required_traits(quest);
     let target = trait_requirement_target(quest);

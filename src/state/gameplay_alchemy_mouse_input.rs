@@ -1,13 +1,15 @@
 use super::gameplay_alchemy_types::SLOT_COUNT;
-use super::gameplay_alchemy_mouse_layout::{
+use crate::alchemy_layout::{
     alchemy_slot_rect, brew_rect, catalyst_rect, clear_rect, heat_down_rect, heat_up_rect,
     material_row_rect, repeat_rect, sort_rect, stirs_rect, timing_rect,
 };
 use super::GameplayState;
 use crate::audio::AudioAssets;
-use crate::content::ui_format;
 use crate::data::{GameData, StationDefinition};
-use macroquad::prelude::*;
+use crate::input::{mouse_position_point, rect_contains_point};
+
+#[path = "gameplay_alchemy_input_text.rs"]
+mod alchemy_input_text;
 
 impl GameplayState {
     pub(super) fn handle_alchemy_mouse_inputs(
@@ -17,7 +19,7 @@ impl GameplayState {
         items: &[String],
         audio: &AudioAssets,
     ) {
-        let mouse: Vec2 = mouse_position().into();
+        let mouse = mouse_position_point();
 
         if self.select_alchemy_material_row(items, mouse) {
             return;
@@ -34,22 +36,22 @@ impl GameplayState {
     }
 
     pub(super) fn handle_alchemy_mouse_removals(&mut self) {
-        let mouse: Vec2 = mouse_position().into();
+        let mouse = mouse_position_point();
         for slot in 0..SLOT_COUNT {
-            if alchemy_slot_rect(slot).contains(mouse) {
+            if rect_contains_point(alchemy_slot_rect(slot), mouse) {
                 self.alchemy.slots[slot] = None;
                 return;
             }
         }
-        if catalyst_rect().contains(mouse) {
+        if rect_contains_point(catalyst_rect(), mouse) {
             self.alchemy.catalyst = None;
-            self.runtime.status_text = ui_format("alchemy_removed_catalyst", &[]);
+            self.runtime.status_text = alchemy_input_text::removed_catalyst();
         }
     }
 
-    fn select_alchemy_material_row(&mut self, items: &[String], mouse: Vec2) -> bool {
+    fn select_alchemy_material_row(&mut self, items: &[String], mouse: [f32; 2]) -> bool {
         for (index, _) in items.iter().enumerate() {
-            if material_row_rect(index).contains(mouse) {
+            if rect_contains_point(material_row_rect(index), mouse) {
                 self.alchemy.index = index;
                 return true;
             }
@@ -57,9 +59,9 @@ impl GameplayState {
         false
     }
 
-    fn toggle_alchemy_slot(&mut self, data: &GameData, items: &[String], mouse: Vec2) -> bool {
+    fn toggle_alchemy_slot(&mut self, data: &GameData, items: &[String], mouse: [f32; 2]) -> bool {
         for slot in 0..SLOT_COUNT {
-            if !alchemy_slot_rect(slot).contains(mouse) {
+            if !rect_contains_point(alchemy_slot_rect(slot), mouse) {
                 continue;
             }
             if self.alchemy.slots[slot].is_some() {
@@ -72,13 +74,13 @@ impl GameplayState {
         false
     }
 
-    fn toggle_alchemy_catalyst(&mut self, data: &GameData, items: &[String], mouse: Vec2) -> bool {
-        if !catalyst_rect().contains(mouse) {
+    fn toggle_alchemy_catalyst(&mut self, data: &GameData, items: &[String], mouse: [f32; 2]) -> bool {
+        if !rect_contains_point(catalyst_rect(), mouse) {
             return false;
         }
         if self.alchemy.catalyst.is_some() {
             self.alchemy.catalyst = None;
-            self.runtime.status_text = ui_format("alchemy_removed_catalyst", &[]);
+            self.runtime.status_text = alchemy_input_text::removed_catalyst();
         } else if !items.is_empty() {
             self.fill_catalyst(data, items);
         }
@@ -90,38 +92,38 @@ impl GameplayState {
         data: &GameData,
         station: &StationDefinition,
         audio: &AudioAssets,
-        mouse: Vec2,
+        mouse: [f32; 2],
     ) -> bool {
-        if heat_down_rect().contains(mouse) {
+        if rect_contains_point(heat_down_rect(), mouse) {
             self.alchemy.heat = (self.alchemy.heat - 1).max(1);
             return true;
         }
-        if heat_up_rect().contains(mouse) {
+        if rect_contains_point(heat_up_rect(), mouse) {
             self.alchemy.heat = (self.alchemy.heat + 1).min(3);
             return true;
         }
-        if stirs_rect().contains(mouse) {
+        if rect_contains_point(stirs_rect(), mouse) {
             self.increment_alchemy_stirs(audio);
             return true;
         }
-        if timing_rect().contains(mouse) {
+        if rect_contains_point(timing_rect(), mouse) {
             self.cycle_alchemy_timing();
             return true;
         }
-        if sort_rect().contains(mouse) {
+        if rect_contains_point(sort_rect(), mouse) {
             self.cycle_inventory_sort_mode();
             self.alchemy.index = 0;
             return true;
         }
-        if clear_rect().contains(mouse) {
+        if rect_contains_point(clear_rect(), mouse) {
             self.clear_alchemy_setup();
             return true;
         }
-        if repeat_rect().contains(mouse) {
+        if rect_contains_point(repeat_rect(), mouse) {
             self.repeat_last_brew_setup(data);
             return true;
         }
-        if brew_rect().contains(mouse) {
+        if rect_contains_point(brew_rect(), mouse) {
             self.brew_selected(data, station, audio);
             return true;
         }

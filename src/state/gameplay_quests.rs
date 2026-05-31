@@ -3,11 +3,11 @@ use super::gameplay_quest_requirements::{
     trait_requirement_target,
 };
 use super::gameplay_quest_requirement_summary::{
-    effect_requirement_summary, trait_requirement_summary,
+    carry_requirement_summary, effect_requirement_summary, quality_requirement_summary,
+    ready_requirement_summary, trait_requirement_summary,
 };
 use super::gameplay_support::quality_band_rank;
 use super::GameplayState;
-use crate::content::ui_format;
 use crate::data::{GameData, QuestDefinition};
 
 impl GameplayState {
@@ -56,13 +56,7 @@ impl GameplayState {
             .unwrap_or_default();
         let mut requirements = Vec::new();
         if carried < quest.required_amount {
-            requirements.push(ui_format(
-                "quests_requirement_carry",
-                &[
-                    ("carried", &carried.to_string()),
-                    ("required", &quest.required_amount.to_string()),
-                ],
-            ));
+            requirements.push(carry_requirement_summary(carried, quest.required_amount));
         }
         if !quest.minimum_quality_band.is_empty() {
             let met = self
@@ -75,10 +69,7 @@ impl GameplayState {
                 })
                 .unwrap_or(false);
             if !met {
-                requirements.push(ui_format(
-                    "quests_requirement_quality",
-                    &[("band", &quest.minimum_quality_band)],
-                ));
+                requirements.push(quality_requirement_summary(&quest.minimum_quality_band));
             }
         }
         if trait_requirement_target(quest) > 0 {
@@ -107,7 +98,7 @@ impl GameplayState {
         }
 
         if requirements.is_empty() {
-            ui_format("quests_requirement_ready", &[])
+            ready_requirement_summary()
         } else {
             requirements.join(", ")
         }

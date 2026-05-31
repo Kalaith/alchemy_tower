@@ -6,6 +6,7 @@ use crate::view_models::journal::{JournalRapportRowView, JournalRapportTabView};
 impl GameplayState {
     pub(super) fn journal_rapport_tab_view(&self, data: &GameData) -> JournalRapportTabView {
         JournalRapportTabView {
+            title: ui_copy("overlay_town_rapport"),
             rows: data
                 .npcs
                 .iter()

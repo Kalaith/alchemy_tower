@@ -20,6 +20,7 @@ impl GameplayState {
 
         if entries.is_empty() {
             return ArchiveExperimentsSectionView {
+                title: ui_copy("overlay_experiment_history").to_owned(),
                 filter_text,
                 page_text: None,
                 empty_text: self.unavailable_state_text(
@@ -65,6 +66,7 @@ impl GameplayState {
             .collect();
 
         ArchiveExperimentsSectionView {
+            title: ui_copy("overlay_experiment_history").to_owned(),
             filter_text,
             page_text: Some(ui_format(
                 "overlay_page",
@@ -85,6 +87,7 @@ impl GameplayState {
         entry: &ExperimentLogEntry,
     ) -> ArchiveExperimentRecordView {
         ArchiveExperimentRecordView {
+            title: ui_copy("overlay_selected_record").to_owned(),
             output_text: ui_format("overlay_output", &[("item", data.item_name(&entry.output_item_id))]),
             quality_text: ui_format(
                 "overlay_archive_quality",

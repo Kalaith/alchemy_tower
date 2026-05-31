@@ -14,6 +14,8 @@ impl GameplayState {
         let recipes = self.morph_recipes(data);
         if recipes.is_empty() {
             return ArchiveMorphsSectionView {
+                title: ui_copy("overlay_morph_previews").to_string(),
+                detail_title: ui_copy("overlay_branch_detail").to_string(),
                 empty_text: self.unavailable_state_text(ui_copy("overlay_archive_empty_morphs")),
                 entries: Vec::new(),
                 detail: None,
@@ -50,20 +52,27 @@ impl GameplayState {
             .morph_targets
             .iter()
             .map(|morph| ArchiveMorphTargetView {
-                title: format!(
-                    "{}{}",
-                    data.item_name(&morph.output_item_id),
-                    if self.morph_output_discovered(&morph.output_item_id) {
-                        ui_copy("overlay_archive_logged_suffix")
-                    } else {
-                        ""
-                    }
+                title: ui_format(
+                    "overlay_archive_morph_target",
+                    &[
+                        ("item", data.item_name(&morph.output_item_id)),
+                        (
+                            "suffix",
+                            if self.morph_output_discovered(&morph.output_item_id) {
+                                ui_copy("overlay_archive_logged_suffix")
+                            } else {
+                                ""
+                            },
+                        ),
+                    ],
                 ),
                 conditions: archive_morph_conditions(morph),
             })
             .collect();
 
         ArchiveMorphsSectionView {
+            title: ui_copy("overlay_morph_previews").to_string(),
+            detail_title: ui_copy("overlay_branch_detail").to_string(),
             empty_text: String::new(),
             entries,
             detail: Some(ArchiveMorphDetailView {

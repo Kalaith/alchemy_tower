@@ -1,7 +1,7 @@
 use super::gameplay_npc_types::{NpcMotionTracker, TravelSegment};
 use super::GameplayState;
 use crate::data::{GameData, NpcDefinition};
-use macroquad::prelude::*;
+use macroquad::prelude::{vec2, Vec2};
 
 impl GameplayState {
     pub(super) fn initial_npc_motion_tracker(

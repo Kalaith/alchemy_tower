@@ -2,7 +2,6 @@ use super::GameplayState;
 use crate::audio::AudioAssets;
 use crate::data::GameData;
 use crate::input::{interact_pressed, movement_direction};
-use macroquad::prelude::*;
 
 impl GameplayState {
     pub(super) fn update_movement(&mut self, data: &GameData, frame_time: f32) {

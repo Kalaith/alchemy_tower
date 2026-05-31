@@ -1,7 +1,8 @@
 use super::GameplayState;
-use crate::content::ui_format;
 use crate::data::{GameData, RecipeDefinition};
-use macroquad::prelude::Color;
+
+#[path = "gameplay_disassembly_text.rs"]
+mod disassembly_text;
 
 impl GameplayState {
     pub(super) fn available_disassembly_recipes<'a>(
@@ -26,13 +27,11 @@ impl GameplayState {
 
     pub(super) fn disassemble_recipe(&mut self, data: &GameData, recipe: &RecipeDefinition) {
         let Some(output_amount) = self.inventory.get_mut(&recipe.output_item_id) else {
-            self.runtime.status_text =
-                ui_format("progression_no_disassemble", &[("name", &recipe.name)]);
+            self.runtime.status_text = disassembly_text::cannot_disassemble(&recipe.name);
             return;
         };
         if *output_amount == 0 {
-            self.runtime.status_text =
-                ui_format("progression_no_disassemble", &[("name", &recipe.name)]);
+            self.runtime.status_text = disassembly_text::cannot_disassemble(&recipe.name);
             return;
         }
 
@@ -48,22 +47,15 @@ impl GameplayState {
                 .entry(ingredient.item_id.clone())
                 .or_insert(0) += ingredient.amount;
             self.note_inventory_observation(data, &ingredient.item_id);
-            returned.push(format!(
-                "{} x{}",
-                data.item_name(&ingredient.item_id),
-                ingredient.amount
+            returned.push(disassembly_text::returned_input(
+                data,
+                &ingredient.item_id,
+                ingredient.amount,
             ));
         }
 
-        self.push_event_toast_with_icon(
-            ui_format("progression_disassembly_toast", &[("name", &recipe.name)]),
-            Color::from_rgba(214, 204, 170, 255),
-            "recipe_logged",
-        );
-        self.runtime.status_text = ui_format(
-            "progression_disassembled",
-            &[("name", &recipe.name), ("items", &returned.join(", "))],
-        );
+        self.trigger_disassembly_feedback(disassembly_text::toast(&recipe.name));
+        self.runtime.status_text = disassembly_text::disassembled(&recipe.name, &returned);
     }
 }
 

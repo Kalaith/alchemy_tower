@@ -1,7 +1,8 @@
 use super::GameplayState;
-use crate::content::ui_format;
 use crate::data::{GameData, ItemCategory, ItemDefinition};
-use macroquad::prelude::Color;
+
+#[path = "gameplay_duplication_text.rs"]
+mod duplication_text;
 
 impl GameplayState {
     pub(super) fn duplication_candidates(&self, data: &GameData) -> Vec<String> {
@@ -39,34 +40,27 @@ impl GameplayState {
 
     pub(super) fn duplicate_item(&mut self, data: &GameData, item_id: &str) {
         let Some(item) = data.item(item_id) else {
-            self.runtime.status_text = ui_format("progression_duplicate_unstable", &[]);
+            self.runtime.status_text = duplication_text::unstable();
             return;
         };
         if !duplication_item_allowed(item) {
-            self.runtime.status_text =
-                ui_format("progression_duplicate_resists", &[("name", &item.name)]);
+            self.runtime.status_text = duplication_text::resists(&item.name);
             return;
         }
         if self.inventory.get(item_id).copied().unwrap_or_default() == 0 {
-            self.runtime.status_text =
-                ui_format("progression_duplicate_none", &[("name", &item.name)]);
+            self.runtime.status_text = duplication_text::missing_source(&item.name);
             return;
         }
 
         let cost = duplication_cost(item);
         if self.coins < cost {
-            self.runtime.status_text = ui_format(
-                "progression_duplicate_need_coins",
-                &[
-                    ("coins", &cost.saturating_sub(self.coins).to_string()),
-                    ("name", &item.name),
-                ],
-            );
+            self.runtime.status_text =
+                duplication_text::need_coins(&item.name, cost.saturating_sub(self.coins));
             return;
         }
 
         let Some(catalyst_item_id) = self.duplication_catalyst_item_id(data) else {
-            self.runtime.status_text = ui_format("progression_duplicate_need_catalyst", &[]);
+            self.runtime.status_text = duplication_text::need_catalyst();
             return;
         };
 
@@ -80,19 +74,9 @@ impl GameplayState {
         *self.inventory.entry(item_id.to_owned()).or_insert(0) += 1;
         self.note_inventory_observation(data, item_id);
 
-        self.push_event_toast_with_icon(
-            ui_format("progression_duplicate_toast", &[("name", &item.name)]),
-            Color::from_rgba(216, 182, 255, 255),
-            "best_quality",
-        );
-        self.runtime.status_text = ui_format(
-            "progression_duplicate_status",
-            &[
-                ("name", &item.name),
-                ("cost", &cost.to_string()),
-                ("catalyst", data.item_name(&catalyst_item_id)),
-            ],
-        );
+        self.trigger_duplication_feedback(duplication_text::toast(&item.name));
+        self.runtime.status_text =
+            duplication_text::duplicated(data, &item.name, cost, &catalyst_item_id);
     }
 
     pub(super) fn duplication_catalyst_item_id(&self, data: &GameData) -> Option<String> {

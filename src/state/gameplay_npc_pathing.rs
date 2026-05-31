@@ -1,4 +1,4 @@
-use macroquad::prelude::*;
+use macroquad::prelude::{vec2, Vec2};
 
 #[cfg(test)]
 use super::GameplayState;

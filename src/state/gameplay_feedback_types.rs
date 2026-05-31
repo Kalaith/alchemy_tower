@@ -1,5 +1,3 @@
-use macroquad::prelude::{Color, Vec2};
-
 use crate::data::EffectKind;
 
 #[derive(Clone, Debug)]
@@ -17,9 +15,9 @@ pub(super) struct GatherToast {
 
 #[derive(Clone, Debug)]
 pub(super) struct GatherFeedback {
-    pub(super) position: Vec2,
+    pub(super) position: [f32; 2],
     pub(super) remaining_seconds: f32,
-    pub(super) color: Color,
+    pub(super) color: [f32; 4],
     pub(super) emphasis: bool,
     pub(super) burst_scale: f32,
 }

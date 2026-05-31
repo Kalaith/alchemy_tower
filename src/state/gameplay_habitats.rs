@@ -1,6 +1,9 @@
 use super::GameplayState;
-use crate::content::{narrative_text, ui_copy, ui_format};
+use crate::content::narrative_text;
 use crate::data::{GameData, HabitatStateEntry, StationDefinition};
+
+#[path = "gameplay_habitat_text.rs"]
+mod habitat_text;
 
 impl GameplayState {
     pub(super) fn habitat_prompt_text(&self, station: &StationDefinition) -> String {
@@ -9,18 +12,18 @@ impl GameplayState {
             .get(&station.id)
             .map(|habitat| {
                 if habitat.creature_item_id.is_empty() {
-                    ui_copy("world_prompt_habitat_place").to_owned()
+                    self.interact_prompt_copy("world_prompt_habitat_place", &[])
                 } else if self.world.day_index
                     >= habitat
                         .last_harvest_day
                         .saturating_add(station.habitat_harvest_days.max(1))
                 {
-                    ui_copy("world_prompt_habitat_harvest").to_owned()
+                    self.interact_prompt_copy("world_prompt_habitat_harvest", &[])
                 } else {
-                    ui_copy("world_prompt_habitat_check").to_owned()
+                    self.interact_prompt_copy("world_prompt_habitat_check", &[])
                 }
             })
-            .unwrap_or_else(|| ui_copy("world_prompt_habitat_place").to_owned())
+            .unwrap_or_else(|| self.interact_prompt_copy("world_prompt_habitat_place", &[]))
     }
 
     pub(super) fn interact_with_habitat(&mut self, data: &GameData, station: &StationDefinition) {
@@ -48,21 +51,7 @@ impl GameplayState {
 
         if state.creature_item_id.is_empty() {
             let Some(creature_id) = candidate else {
-                self.runtime.status_text = ui_format(
-                    "gameplay_habitat_accepts",
-                    &[
-                        ("station", &station.name),
-                        (
-                            "items",
-                            &station
-                                .habitat_creature_ids
-                                .iter()
-                                .map(|item_id| data.item_name(item_id))
-                                .collect::<Vec<_>>()
-                                .join(", "),
-                        ),
-                    ],
-                );
+                self.runtime.status_text = habitat_text::accepts(data, station);
                 return;
             };
             if let Some(amount) = self.inventory.get_mut(&creature_id) {
@@ -74,13 +63,7 @@ impl GameplayState {
             state.last_harvest_day = self.world.day_index;
             let milestone = &narrative_text().milestones.containment_started;
             self.push_journal_milestone(&milestone.id, &milestone.title, &milestone.text);
-            self.runtime.status_text = ui_format(
-                "gameplay_habitat_settled",
-                &[
-                    ("item", data.item_name(&creature_id)),
-                    ("station", &station.name),
-                ],
-            );
+            self.runtime.status_text = habitat_text::settled(data, station, &creature_id);
             return;
         }
 
@@ -93,24 +76,16 @@ impl GameplayState {
             *self.inventory.entry(output_item_id.clone()).or_insert(0) += amount;
             state.last_harvest_day = self.world.day_index;
             let station_name = station.name.clone();
-            self.runtime.status_text = ui_format(
-                "gameplay_habitat_collected",
-                &[
-                    ("item", data.item_name(&output_item_id)),
-                    ("amount", &amount.to_string()),
-                    ("station", &station_name),
-                ],
-            );
+            self.runtime.status_text =
+                habitat_text::collected(data, &station_name, &output_item_id, amount);
             self.note_inventory_observation(data, &output_item_id);
         } else {
             let days_left = ready_day.saturating_sub(self.world.day_index);
-            self.runtime.status_text = ui_format(
-                "gameplay_habitat_waiting",
-                &[
-                    ("creature", data.item_name(&state.creature_item_id)),
-                    ("days", &days_left.to_string()),
-                    ("output", data.item_name(&station.habitat_output_item_id)),
-                ],
+            self.runtime.status_text = habitat_text::waiting(
+                data,
+                &state.creature_item_id,
+                &station.habitat_output_item_id,
+                days_left,
             );
         }
     }

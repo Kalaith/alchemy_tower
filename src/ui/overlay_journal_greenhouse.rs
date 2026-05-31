@@ -1,4 +1,3 @@
-use crate::content::ui_copy;
 use crate::view_models::journal::JournalGreenhouseTabView;
 use macroquad::prelude::draw_text;
 use macroquad_toolkit::colors::dark;
@@ -11,7 +10,7 @@ pub(crate) fn draw_journal_greenhouse_tab_view(
     h: f32,
 ) {
         draw_text(
-            ui_copy("overlay_greenhouse_beds"),
+            view.title,
             x + 20.0,
             y + 136.0,
             26.0,

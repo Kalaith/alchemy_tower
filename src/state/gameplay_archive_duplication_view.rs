@@ -1,6 +1,6 @@
 use super::gameplay_duplication::duplication_cost;
 use super::GameplayState;
-use crate::content::{ui_copy, ui_format};
+use crate::content::{input_bindings, ui_copy, ui_format};
 use crate::data::GameData;
 use crate::view_models::archive::{
     ArchiveDuplicationDetailView, ArchiveDuplicationItemEntry, ArchiveDuplicationSectionView,
@@ -14,6 +14,9 @@ impl GameplayState {
         let item_ids = self.duplication_candidates(data);
         if item_ids.is_empty() {
             return ArchiveDuplicationSectionView {
+                title: ui_copy("overlay_duplication").to_string(),
+                cost_title: ui_copy("overlay_duplication_cost").to_string(),
+                help_text: duplication_help_text(),
                 empty_text: self.unavailable_state_text(
                     ui_copy("overlay_archive_empty_duplication"),
                 ),
@@ -72,9 +75,19 @@ impl GameplayState {
             });
 
         ArchiveDuplicationSectionView {
+            title: ui_copy("overlay_duplication").to_string(),
+            cost_title: ui_copy("overlay_duplication_cost").to_string(),
+            help_text: duplication_help_text(),
             empty_text: String::new(),
             entries,
             detail,
         }
     }
+}
+
+fn duplication_help_text() -> String {
+    ui_format(
+        "overlay_archive_duplication_help",
+        &[("confirm", &input_bindings().global.confirm)],
+    )
 }

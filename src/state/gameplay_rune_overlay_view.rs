@@ -1,5 +1,5 @@
 use super::GameplayState;
-use crate::content::{ui_copy, ui_format};
+use crate::content::{input_bindings, ui_copy, ui_format, ui_text};
 use crate::data::GameData;
 use crate::view_models::rune::{RuneOverlayEntry, RuneOverlayView};
 
@@ -11,10 +11,12 @@ impl GameplayState {
             .into_iter()
             .enumerate()
             .map(|(index, recipe)| RuneOverlayEntry {
-                title: format!(
-                    "{} -> {}",
-                    data.item_name(&recipe.input_item_id),
-                    data.item_name(&recipe.output_item_id)
+                title: ui_format(
+                    "overlay_rune_recipe_title",
+                    &[
+                        ("input", data.item_name(&recipe.input_item_id)),
+                        ("output", data.item_name(&recipe.output_item_id)),
+                    ],
                 ),
                 detail: recipe.description.clone(),
                 meta: ui_format(
@@ -27,8 +29,18 @@ impl GameplayState {
 
         Some(RuneOverlayView {
             station_name: station.name.clone(),
+            subtitle: ui_text().overlays.rune_subtitle.clone(),
+            drafts_title: ui_copy("overlay_rune_drafts").to_owned(),
             empty_text: self.unavailable_state_text(ui_copy("overlay_rune_empty")),
+            footer_text: rune_footer_text(),
             entries,
         })
     }
+}
+
+fn rune_footer_text() -> String {
+    ui_copy("overlay_rune_footer")
+        .replace("{select}", &input_bindings().navigation.select)
+        .replace("{confirm}", &input_bindings().global.confirm)
+        .replace("{close}", &input_bindings().global.cancel)
 }

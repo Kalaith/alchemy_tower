@@ -1,4 +1,3 @@
-use crate::content::ui_copy;
 use crate::view_models::alchemy::AlchemyFormulaePanelView;
 use super::{draw_overlay_section_box, draw_overlay_section_title, draw_wrapped_text};
 use macroquad::prelude::draw_text;
@@ -12,7 +11,7 @@ pub(crate) fn draw_alchemy_formulae_panel_view(
     draw_overlay_section_title(
         x + 20.0,
         y + 392.0,
-        ui_copy("overlay_alchemy_known_formulae"),
+        view.title,
         None,
     );
     draw_overlay_section_box(x + 18.0, y + 406.0, 286.0, 142.0);

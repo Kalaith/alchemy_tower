@@ -1,17 +1,11 @@
 use super::GameplayState;
 use crate::data::{GameData, StationDefinition};
-use macroquad::prelude::vec2;
 
 impl GameplayState {
     pub(super) fn nearby_station<'a>(&self, data: &'a GameData) -> Option<&'a StationDefinition> {
         self.visible_stations(data).into_iter().find(|station| {
             station.area_id == self.world.current_area_id
-                && self
-                    .world
-                    .player
-                    .position
-                    .distance(vec2(station.position[0], station.position[1]))
-                    <= station.interaction_radius
+                && self.player_distance_to(station.position) <= station.interaction_radius
         })
     }
 

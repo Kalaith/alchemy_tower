@@ -1,34 +1,16 @@
 use super::hud_chrome::*;
 use super::hud_primitives::*;
-use crate::content::{input_bindings, ui_copy};
+use super::HudView;
 use macroquad::prelude::*;
 
-pub(super) fn draw_control_tags() {
+pub(super) fn draw_control_tags(view: &HudView) {
     let x = 22.0;
     let y = screen_height() - 184.0;
-    let rows = [
-        (
-            input_bindings().alchemy.open.as_str(),
-            ui_copy("hud_control_alchemy"),
-        ),
-        (
-            input_bindings().global.journal.as_str(),
-            ui_copy("hud_drawer_journal"),
-        ),
-        (
-            input_bindings().global.sort.as_str(),
-            ui_copy("hud_control_sort"),
-        ),
-        (
-            input_bindings().global.cancel.as_str(),
-            ui_copy("hud_control_pause"),
-        ),
-    ];
-    for (index, (key, label)) in rows.iter().enumerate() {
+    for (index, tag) in view.control_tags.iter().enumerate() {
         draw_control_tag(
             Rect::new(x, y + index as f32 * 40.0, 158.0, 32.0),
-            key,
-            label,
+            &tag.key_label,
+            &tag.label,
         );
     }
 }

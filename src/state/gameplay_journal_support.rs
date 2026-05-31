@@ -1,7 +1,9 @@
 use super::GameplayState;
-use crate::content::{narrative_text, ui_copy, ui_format};
+use crate::content::narrative_text;
 use crate::data::{GameData, JournalMilestoneEntry};
-use macroquad::prelude::{screen_width, Rect};
+
+#[path = "gameplay_journal_support_text.rs"]
+mod journal_support_text;
 
 pub(super) struct JournalMilestoneSummary {
     pub(super) title: String,
@@ -16,83 +18,30 @@ impl GameplayState {
             .iter()
             .find_map(|quest_id| data.quest(quest_id))?;
         let location = self.quest_location_hint(data, quest);
-        Some(ui_format(
-            "journal_active_summary",
-            &[
-                ("title", &quest.title),
-                ("requirements", &self.quest_requirement_summary(data, quest)),
-                ("location", &location),
-            ],
+        Some(journal_support_text::active_quest_summary(
+            &quest.title,
+            &self.quest_requirement_summary(data, quest),
+            &location,
         ))
     }
 
     pub(super) fn milestone_status_lines(&self) -> Vec<(&'static str, String, bool)> {
+        let greenhouse_restored = self
+            .progression
+            .unlocked_warps
+            .contains("entry_to_greenhouse");
+        let archive_recovered = self.has_journal_milestone("archive_revelation");
+        let archive_ready = self.can_reconstruct_archive();
+
         vec![
-            (
-                ui_copy("milestone_greenhouse_access"),
-                if self
-                    .progression
-                    .unlocked_warps
-                    .contains("entry_to_greenhouse")
-                {
-                    ui_copy("milestone_greenhouse_restored").to_owned()
-                } else {
-                    ui_copy("milestone_greenhouse_locked").to_owned()
-                },
-                self.progression
-                    .unlocked_warps
-                    .contains("entry_to_greenhouse"),
-            ),
-            (
-                ui_copy("milestone_archive_reconstruction"),
-                if self.has_journal_milestone("archive_revelation") {
-                    ui_copy("milestone_archive_recovered").to_owned()
-                } else if self.can_reconstruct_archive() {
-                    ui_copy("milestone_archive_ready").to_owned()
-                } else {
-                    ui_copy("milestone_archive_locked").to_owned()
-                },
-                self.has_journal_milestone("archive_revelation") || self.can_reconstruct_archive(),
-            ),
-            (
-                ui_copy("milestone_observatory_access"),
-                if self.has_journal_milestone("archive_revelation") {
-                    ui_copy("milestone_observatory_ready").to_owned()
-                } else {
-                    ui_copy("milestone_observatory_locked").to_owned()
-                },
-                self.has_journal_milestone("archive_revelation"),
-            ),
+            journal_support_text::greenhouse_status(greenhouse_restored),
+            journal_support_text::archive_status(archive_recovered, archive_ready),
+            journal_support_text::observatory_status(archive_recovered),
         ]
     }
 
     pub(super) fn journal_tabs(&self) -> Vec<&'static str> {
-        let mut tabs = vec![
-            ui_copy("journal_tab_routes"),
-            ui_copy("journal_tab_notes"),
-            ui_copy("journal_tab_brews"),
-        ];
-        if self.greenhouse_journal_unlocked() {
-            tabs.push(ui_copy("journal_tab_greenhouse"));
-        }
-        tabs.push(ui_copy("journal_tab_rapport"));
-        tabs
-    }
-
-    pub(super) fn journal_tab_rect(&self, index: usize, tab_count: usize) -> Rect {
-        let x = 120.0;
-        let y = 72.0;
-        let w = screen_width() - 240.0;
-        let tab_y = y + 82.0;
-        let tab_w = (w - 40.0) / tab_count.max(1) as f32;
-        Rect::new(x + 20.0 + tab_w * index as f32, tab_y, tab_w - 8.0, 30.0)
-    }
-
-    pub(super) fn journal_close_rect(&self) -> Rect {
-        let x = 120.0;
-        let y = 72.0;
-        let w = screen_width() - 240.0;
-        Rect::new(x + w - 112.0, y + 16.0, 92.0, 28.0)
+        journal_support_text::tabs(self.greenhouse_journal_unlocked())
     }
 
     pub(super) fn recent_journal_milestones(&self, limit: usize) -> Vec<JournalMilestoneSummary> {
@@ -108,7 +57,7 @@ impl GameplayState {
             .collect()
     }
 
-    fn greenhouse_journal_unlocked(&self) -> bool {
+    pub(super) fn greenhouse_journal_unlocked(&self) -> bool {
         self.progression
             .unlocked_warps
             .contains("entry_to_greenhouse")

@@ -25,6 +25,7 @@ mod overlay_journal_greenhouse;
 mod overlay_journal_notes;
 mod overlay_journal_rapport;
 mod overlay_journal_routes;
+mod overlay_layout;
 mod overlay_pause;
 mod overlay_quest_board;
 mod overlay_rune;
@@ -44,8 +45,7 @@ mod world_exports;
 pub(crate) use hud::draw_hud_view;
 pub(crate) use menu_screen::draw_menu_screen;
 pub(crate) use overlay_exports::{
-    archive_footer_text, archive_tab_label, draw_alchemy_action_buttons,
-    draw_alchemy_controls_panel_view, draw_alchemy_formulae_panel_view,
+    draw_alchemy_action_buttons, draw_alchemy_controls_panel_view, draw_alchemy_formulae_panel_view,
     draw_alchemy_materials_panel_view, draw_alchemy_preview_panel_view, draw_alchemy_slots_panel_view,
     draw_archive_disassembly_section_view, draw_archive_duplication_section_view,
     draw_archive_experiments_section_view, draw_archive_mastery_section_view,
@@ -62,7 +62,9 @@ use panels::{
     draw_overlay_backdrop, draw_overlay_footer, draw_overlay_subtitle, draw_panel,
     draw_panel_frame,
 };
+use overlay_layout::standard_overlay_panel_rect;
 pub(crate) use prompts::draw_interaction_prompt;
+pub(crate) use text::draw_missing_area_message;
 use text::{draw_wrapped_text, truncate_text_to_width};
 use widgets::{draw_action_button, draw_selection_card, draw_state_banner};
 pub(crate) use world_exports::{

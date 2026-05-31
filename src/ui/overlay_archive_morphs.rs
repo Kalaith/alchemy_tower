@@ -1,4 +1,3 @@
-use crate::content::ui_copy;
 use crate::view_models::archive::ArchiveMorphsSectionView;
 use super::{draw_selection_card, draw_state_banner, draw_wrapped_text};
 use macroquad::prelude::draw_text;
@@ -12,7 +11,7 @@ pub(crate) fn draw_archive_morphs_section_view(
     _h: f32,
 ) {
         draw_text(
-            ui_copy("overlay_morph_previews"),
+            &view.title,
             x + 20.0,
             y + 122.0,
             26.0,
@@ -46,7 +45,7 @@ pub(crate) fn draw_archive_morphs_section_view(
         }
 
         draw_text(
-            ui_copy("overlay_branch_detail"),
+            &view.detail_title,
             x + 410.0,
             y + 122.0,
             26.0,

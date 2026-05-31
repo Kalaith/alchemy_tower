@@ -1,4 +1,3 @@
-use crate::content::ui_copy;
 use crate::view_models::archive::ArchiveExperimentsSectionView;
 use super::{draw_selection_card, draw_state_banner};
 use super::draw_selected_experiment_record_view;
@@ -13,7 +12,7 @@ pub(crate) fn draw_archive_experiments_section_view(
     _h: f32,
 ) {
         draw_text(
-            ui_copy("overlay_experiment_history"),
+            &view.title,
             x + 20.0,
             y + 122.0,
             26.0,

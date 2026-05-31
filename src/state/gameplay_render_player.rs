@@ -3,7 +3,7 @@ use super::GameplayState;
 use crate::art::ArtAssets;
 use crate::data::EffectKind;
 use crate::ui::draw_player_world_marker;
-use macroquad::prelude::*;
+use macroquad::prelude::Vec2;
 
 impl GameplayState {
     pub(super) fn draw_player(&self, offset: Vec2, art: &ArtAssets) {

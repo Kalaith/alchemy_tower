@@ -1,22 +1,38 @@
 use super::GameplayState;
 use crate::content::ui_copy;
 use crate::data::{GameData, NpcDefinition, StationDefinition, StationKind};
-use macroquad::prelude::Color;
+
+#[derive(Clone, Copy)]
+pub(super) enum WorldLabelTone {
+    Goal,
+    Note,
+    Ready,
+}
+
+impl WorldLabelTone {
+    pub(super) fn color(self) -> [u8; 4] {
+        match self {
+            Self::Goal => [255, 230, 170, 255],
+            Self::Note => [176, 226, 255, 255],
+            Self::Ready => [188, 255, 220, 255],
+        }
+    }
+}
 
 impl GameplayState {
     pub(super) fn station_world_label(
         &self,
         data: &GameData,
         station: &StationDefinition,
-    ) -> Option<(String, Color)> {
+    ) -> Option<(String, WorldLabelTone)> {
         match station.kind {
             StationKind::Alchemy if self.progression.total_brews < 3 => Some((
                 ui_copy("world_marker_brew_here").to_owned(),
-                Color::from_rgba(188, 255, 220, 255),
+                WorldLabelTone::Ready,
             )),
             StationKind::QuestBoard if !self.available_board_quests(data).is_empty() => Some((
                 ui_copy("world_marker_new_requests").to_owned(),
-                Color::from_rgba(255, 230, 170, 255),
+                WorldLabelTone::Goal,
             )),
             StationKind::ArchiveConsole
                 if self.can_reconstruct_archive()
@@ -24,7 +40,7 @@ impl GameplayState {
             {
                 Some((
                     ui_copy("world_marker_rebuild_ready").to_owned(),
-                    Color::from_rgba(176, 226, 255, 255),
+                    WorldLabelTone::Note,
                 ))
             }
             StationKind::Planter => self
@@ -35,7 +51,7 @@ impl GameplayState {
                 .map(|_| {
                     (
                         ui_copy("world_marker_harvest_ready").to_owned(),
-                        Color::from_rgba(188, 255, 220, 255),
+                        WorldLabelTone::Ready,
                     )
                 }),
             StationKind::Habitat => self
@@ -52,12 +68,12 @@ impl GameplayState {
                 .map(|_| {
                     (
                         ui_copy("world_marker_collect_ready").to_owned(),
-                        Color::from_rgba(188, 255, 220, 255),
+                        WorldLabelTone::Ready,
                     )
                 }),
             StationKind::EndingFocus if self.has_journal_milestone("archive_revelation") => Some((
                 ui_copy("world_marker_final_focus").to_owned(),
-                Color::from_rgba(255, 230, 170, 255),
+                WorldLabelTone::Goal,
             )),
             _ => None,
         }
@@ -67,7 +83,7 @@ impl GameplayState {
         &self,
         data: &GameData,
         npc: &NpcDefinition,
-    ) -> Option<(String, Color)> {
+    ) -> Option<(String, WorldLabelTone)> {
         let quest = (!npc.quest_id.is_empty())
             .then(|| data.quest(&npc.quest_id))
             .flatten()?;
@@ -78,18 +94,18 @@ impl GameplayState {
             if self.quest_requirements_met(data, quest) {
                 Some((
                     ui_copy("world_marker_turn_in").to_owned(),
-                    Color::from_rgba(188, 255, 220, 255),
+                    WorldLabelTone::Ready,
                 ))
             } else {
                 Some((
                     ui_copy("world_marker_awaiting_brew").to_owned(),
-                    Color::from_rgba(255, 230, 170, 255),
+                    WorldLabelTone::Goal,
                 ))
             }
         } else if self.quest_is_available(quest) {
             Some((
                 ui_copy("world_marker_request").to_owned(),
-                Color::from_rgba(255, 230, 170, 255),
+                WorldLabelTone::Goal,
             ))
         } else {
             None

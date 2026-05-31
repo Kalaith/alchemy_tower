@@ -1,4 +1,4 @@
-use macroquad::prelude::*;
+use macroquad::prelude::{vec2, Vec2};
 
 use super::gameplay_world_types::PLAYER_RADIUS;
 use crate::data::{AreaDefinition, RectDefinition};

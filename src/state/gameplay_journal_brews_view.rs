@@ -1,5 +1,5 @@
 use super::GameplayState;
-use crate::content::ui_format;
+use crate::content::{ui_copy, ui_format};
 use crate::data::GameData;
 use crate::view_models::journal::{JournalBrewMemoryView, JournalBrewsTabView};
 
@@ -8,12 +8,14 @@ impl GameplayState {
         let potion_memories = self.potion_memories(data);
         if potion_memories.is_empty() {
             return JournalBrewsTabView {
-                empty_text: crate::content::ui_copy("journal_memory_no_potions").to_owned(),
+                title: ui_copy("overlay_potion_memories"),
+                empty_text: ui_copy("journal_memory_no_potions").to_owned(),
                 entries: Vec::new(),
             };
         }
 
         JournalBrewsTabView {
+            title: ui_copy("overlay_potion_memories"),
             empty_text: String::new(),
             entries: potion_memories
                 .into_iter()

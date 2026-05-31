@@ -8,7 +8,7 @@ mod prompt_shapes;
 use self::prompt_chrome::*;
 use self::prompt_shapes::*;
 
-pub(crate) fn draw_interaction_prompt(_position: Vec2, text: &str) {
+pub(crate) fn draw_interaction_prompt(text: &str) {
     let (key, label) = split_prompt(text);
     let label_width = measure_text(label, None, 22, 1.0).width;
     let width = (label_width + 178.0).clamp(320.0, 470.0);
