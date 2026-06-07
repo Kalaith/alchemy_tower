@@ -12,5 +12,4 @@ impl GameplayState {
             self.current_weather(),
         );
     }
-
 }

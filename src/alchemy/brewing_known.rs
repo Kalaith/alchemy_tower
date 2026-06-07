@@ -1,10 +1,10 @@
 use crate::data::{GameData, RecipeDefinition, StationDefinition};
 
-use super::brewing_failures::brew_failure_reasons;
 use super::super::matching::{selected_item_defs, sequence_matches, total_elements};
 use super::super::morphs::{morph_output, morph_trigger_hint};
 use super::super::quality::{calculate_quality, mastery_stage, quality_band, room_bonus_applies};
 use super::super::traits::inherited_traits;
+use super::brewing_failures::brew_failure_reasons;
 use super::BrewResolution;
 
 pub(super) fn resolve_known_recipe_brew<'a>(

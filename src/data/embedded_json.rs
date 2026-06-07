@@ -7,6 +7,7 @@ where
     macroquad_toolkit::data_loader::load_embedded_json_labeled(label, source)
 }
 
+#[cfg(debug_assertions)]
 pub(crate) fn expect_labeled_json<T>(label: &'static str, source: &'static str) -> T
 where
     T: DeserializeOwned,

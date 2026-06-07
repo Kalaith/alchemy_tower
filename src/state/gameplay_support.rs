@@ -16,7 +16,6 @@ impl GameplayState {
             self.runtime.area_banner_seconds = 2.6;
         }
     }
-
 }
 
 pub(super) fn quality_band_rank(band: &str) -> u8 {

@@ -1,5 +1,5 @@
-use super::GameplayState;
 use super::gameplay_station_prompt::{alchemy_prompt_text, station_prompt_text};
+use super::GameplayState;
 use crate::content::ui_copy;
 use crate::data::{AreaDefinition, GameData, StationKind};
 use crate::view_models::prompt::WorldPromptView;
@@ -55,8 +55,7 @@ impl GameplayState {
         area: &AreaDefinition,
         data: &GameData,
     ) -> Option<WorldPromptView> {
-        let station = self
-            .visible_stations(data)
+        self.visible_stations(data)
             .into_iter()
             .filter(|station| station.area_id == area.id)
             .find(|station| {

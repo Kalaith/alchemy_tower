@@ -13,5 +13,8 @@ pub(super) fn timeline_complete() -> String {
 }
 
 pub(super) fn timeline_incomplete() -> String {
-    narrative_text().statuses.archive_timeline_incomplete.clone()
+    narrative_text()
+        .statuses
+        .archive_timeline_incomplete
+        .clone()
 }

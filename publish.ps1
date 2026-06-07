@@ -19,6 +19,19 @@ if (-not (Test-Path $rootPublisher)) {
     exit 1
 }
 
+if (-not $SkipBuild -and -not $DeployOnly) {
+    Push-Location $PSScriptRoot
+    try {
+        cargo test --bin alchemy_tower
+        if ($LASTEXITCODE -ne 0) {
+            Write-Error "Alchemy Tower validation tests failed."
+            exit 1
+        }
+    } finally {
+        Pop-Location
+    }
+}
+
 & $rootPublisher -RustGamePublish -ProjectDir $PSScriptRoot `
     -SkipBuild:$SkipBuild `
     -WindowsOnly:$WindowsOnly `

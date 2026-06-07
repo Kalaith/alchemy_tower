@@ -37,7 +37,13 @@ pub(super) fn draw_centered_text_shadowed(
     );
 }
 
-pub(super) fn draw_text_shadowed(text: &str, x: f32, baseline_y: f32, font_size: f32, color: Color) {
+pub(super) fn draw_text_shadowed(
+    text: &str,
+    x: f32,
+    baseline_y: f32,
+    font_size: f32,
+    color: Color,
+) {
     draw_text(
         text,
         x + 1.5,

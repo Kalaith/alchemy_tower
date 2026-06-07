@@ -1,7 +1,7 @@
+use super::gameplay_alchemy_preview_detail_text::{preview_detail, preview_title};
 use super::gameplay_alchemy_preview_text::{
     output_line, process_flags_line, quality_line, read_line, requirements_line, traits_line,
 };
-use super::gameplay_alchemy_preview_detail_text::{preview_detail, preview_title};
 use crate::alchemy::BrewResolution;
 use crate::content::{ui_copy, ui_format};
 use crate::data::GameData;
@@ -25,7 +25,8 @@ impl AlchemyPreviewPanelView {
         stable_preview: bool,
         preview_uncertain: bool,
     ) -> Self {
-        preview_panel_view(AlchemyPreviewPanelState::Resolved(AlchemyResolvedPreviewView {
+        preview_panel_view(AlchemyPreviewPanelState::Resolved(
+            AlchemyResolvedPreviewView {
                 title: preview_title(data, preview, known, stable_preview, preview_uncertain),
                 output_line: output_line(data, preview),
                 quality_line: quality_line(preview),
@@ -45,7 +46,8 @@ impl AlchemyPreviewPanelView {
                     .collect(),
                 detail: preview_detail(data, preview, known, stable_preview, preview_uncertain),
                 has_recipe: preview.recipe.is_some(),
-            }))
+            },
+        ))
     }
 }
 

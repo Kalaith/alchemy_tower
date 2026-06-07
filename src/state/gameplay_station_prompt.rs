@@ -17,11 +17,12 @@ pub(super) fn station_prompt_text(
         StationKind::ArchiveConsole => {
             interact_prompt(state, ui_text().prompts.reconstruct_archives.as_str())
         }
-        StationKind::EndingFocus => interact_prompt(state, ui_text().prompts.focus_observatory.as_str()),
+        StationKind::EndingFocus => {
+            interact_prompt(state, ui_text().prompts.focus_observatory.as_str())
+        }
         StationKind::QuestBoard => quest_board_prompt(state, data),
         StationKind::Planter => state.planter_prompt_text(station),
         StationKind::Habitat => state.habitat_prompt_text(station),
-        _ => String::new(),
     }
 }
 

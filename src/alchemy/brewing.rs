@@ -5,10 +5,10 @@ use super::fallback::{fallback_traits, infer_trait_output, salvage_quality};
 use super::matching::{match_recipe, selected_item_defs};
 use super::quality::quality_band;
 
-#[path = "brewing_known.rs"]
-mod brewing_known;
 #[path = "brewing_failures.rs"]
 mod brewing_failures;
+#[path = "brewing_known.rs"]
+mod brewing_known;
 
 use self::brewing_known::resolve_known_recipe_brew;
 

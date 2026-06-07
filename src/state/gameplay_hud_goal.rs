@@ -1,7 +1,7 @@
 use super::GameplayState;
-use crate::view_models::hud::HudGoal;
 use crate::content::{ui_copy, ui_format};
 use crate::data::{GameData, QuestDefinition};
+use crate::view_models::hud::HudGoal;
 
 impl GameplayState {
     pub(super) fn hud_goal(&self, data: &GameData) -> HudGoal {
@@ -9,7 +9,7 @@ impl GameplayState {
             return goal;
         }
 
-        if self.can_reconstruct_archive() && !self.has_journal_milestone("archive_revelation") {
+        if self.can_reconstruct_archive(data) && !self.has_journal_milestone("archive_revelation") {
             return HudGoal {
                 title: ui_copy("hud_goal_archive_title").to_owned(),
                 body: ui_copy("goal_reconstruct_archive").to_owned(),

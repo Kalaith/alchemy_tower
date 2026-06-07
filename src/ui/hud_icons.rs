@@ -1,7 +1,7 @@
-use super::hud_palette::*;
 pub(super) use super::hud_botanical_icons::{
     draw_flower, draw_leaf_cluster, draw_leaf_cluster_scaled,
 };
+use super::hud_palette::*;
 use macroquad::prelude::*;
 
 pub(super) fn draw_bag_icon(center: Vec2, scale: f32) {

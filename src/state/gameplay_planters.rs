@@ -15,22 +15,22 @@ impl GameplayState {
             .then(|| self.planter_mutation_candidate(data, &state.planted_item_id))
             .flatten()
         });
-        let mut state =
-            self.progression
-                .planter_states
-                .remove(&station.id)
-                .unwrap_or(PlanterStateEntry {
-                    station_id: station.id.clone(),
-                    planted_item_id: String::new(),
-                    planted_day: self.world.day_index,
-                    ready: false,
-                    tended_day: 0,
-                    growth_days: 0,
-                    mutation_formula_id: String::new(),
-                    mutation_yield_bonus: 0,
-                    mutation_growth_bonus_days: 0,
-                    mutation_note: String::new(),
-                });
+        let mut state = self
+            .progression
+            .planter_states
+            .remove(&station.id)
+            .unwrap_or(PlanterStateEntry {
+                station_id: station.id.clone(),
+                planted_item_id: String::new(),
+                planted_day: self.world.day_index,
+                ready: false,
+                tended_day: 0,
+                growth_days: 0,
+                mutation_formula_id: String::new(),
+                mutation_yield_bonus: 0,
+                mutation_growth_bonus_days: 0,
+                mutation_note: String::new(),
+            });
         if state.ready && !state.planted_item_id.is_empty() {
             self.harvest_planter(data, station, &mut state);
             self.progression

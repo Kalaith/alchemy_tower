@@ -1,8 +1,8 @@
 use macroquad::prelude::*;
 use macroquad_toolkit::colors::dark;
 
-use crate::input::mouse_position_vec;
 use super::truncate_text_to_width;
+use crate::input::mouse_position_vec;
 
 #[path = "widgets_selection_card.rs"]
 mod widgets_selection_card;

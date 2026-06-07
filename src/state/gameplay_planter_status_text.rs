@@ -66,11 +66,7 @@ pub(super) fn tended(
     }
 }
 
-pub(super) fn planted(
-    data: &GameData,
-    station: &StationDefinition,
-    item_id: &str,
-) -> String {
+pub(super) fn planted(data: &GameData, station: &StationDefinition, item_id: &str) -> String {
     ui_format(
         "gameplay_planted",
         &[

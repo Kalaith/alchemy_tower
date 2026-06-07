@@ -1,8 +1,7 @@
+use super::draw_wrapped_text;
 use super::hud_chrome::*;
-use super::hud_compass::*;
 use super::hud_primitives::*;
 use super::HudView;
-use super::draw_wrapped_text;
 use macroquad::prelude::*;
 
 #[path = "hud_minimap_frame.rs"]

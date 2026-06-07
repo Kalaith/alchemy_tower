@@ -1,9 +1,7 @@
 use super::GameplayState;
 use crate::content::{input_bindings, ui_copy, ui_format};
 use crate::data::GameData;
-use crate::view_models::archive::{
-    ArchiveDisassemblyRecipeEntry, ArchiveDisassemblySectionView,
-};
+use crate::view_models::archive::{ArchiveDisassemblyRecipeEntry, ArchiveDisassemblySectionView};
 
 impl GameplayState {
     pub(super) fn archive_disassembly_section_view(
@@ -16,9 +14,8 @@ impl GameplayState {
                 title: ui_copy("overlay_disassembly").to_string(),
                 selected_inputs_title: ui_copy("overlay_recovered_inputs").to_string(),
                 help_text: disassembly_help_text(),
-                empty_text: self.unavailable_state_text(
-                    ui_copy("overlay_archive_empty_disassembly"),
-                ),
+                empty_text: self
+                    .unavailable_state_text(ui_copy("overlay_archive_empty_disassembly")),
                 entries: Vec::new(),
                 selected_inputs: Vec::new(),
             };

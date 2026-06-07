@@ -1,6 +1,5 @@
 use super::GameplayState;
-use crate::content::narrative_text;
-use crate::data::GameData;
+use crate::data::{GameData, QuestDefinition};
 use crate::input::dialogue_advance_pressed;
 
 #[path = "gameplay_dialogue_quest_text.rs"]
@@ -48,8 +47,11 @@ impl GameplayState {
                 .entry(npc.id.clone())
                 .or_insert(0) += 1;
             self.trigger_quest_accepted_feedback(dialogue_quest_text::accepted_toast(&quest.title));
-            self.runtime.status_text =
-                dialogue_quest_text::accepted_status(data, quest, &self.quest_location_hint(data, quest));
+            self.runtime.status_text = dialogue_quest_text::accepted_status(
+                data,
+                quest,
+                &self.quest_location_hint(data, quest),
+            );
             return;
         }
 
@@ -68,7 +70,7 @@ impl GameplayState {
                     .entry(quest.giver_npc_id.clone())
                     .or_insert(0) += 2;
             }
-            self.push_quest_completion_milestone(&quest.id);
+            self.push_quest_completion_milestones(quest);
             self.trigger_quest_complete_feedback(dialogue_quest_text::complete_toast(&quest.title));
             self.runtime.status_text = dialogue_quest_text::delivered_status(data, quest);
         } else {
@@ -76,16 +78,9 @@ impl GameplayState {
         }
     }
 
-    fn push_quest_completion_milestone(&mut self, quest_id: &str) {
-        let milestone = match quest_id {
-            "healing_for_mira" => Some(&narrative_text().milestones.first_town_relief),
-            "cultivation_for_brin" => Some(&narrative_text().milestones.greenhouse_expanded),
-            "containment_for_lyra" => Some(&narrative_text().milestones.containment_stable),
-            _ => None,
-        };
-        if let Some(milestone) = milestone {
+    fn push_quest_completion_milestones(&mut self, quest: &QuestDefinition) {
+        for milestone in &quest.completion_milestones {
             self.push_journal_milestone(&milestone.id, &milestone.title, &milestone.text);
         }
     }
-
 }

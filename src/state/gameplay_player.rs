@@ -23,7 +23,12 @@ impl GameplayState {
         self.world.player.moving = self.world.player.position.distance_squared(previous) > 0.01;
     }
 
-    pub(super) fn update_footstep_audio(&mut self, audio: &AudioAssets, frame_time: f32) {
+    pub(super) fn update_footstep_audio(
+        &mut self,
+        data: &GameData,
+        audio: &AudioAssets,
+        frame_time: f32,
+    ) {
         if !self.world.player.moving {
             self.runtime.footstep_cooldown_seconds =
                 self.runtime.footstep_cooldown_seconds.min(0.06);
@@ -35,7 +40,9 @@ impl GameplayState {
                 (self.runtime.footstep_cooldown_seconds - frame_time).max(0.0);
             return;
         }
-        audio.play_footstep_for_area(&self.world.current_area_id);
+        if let Some(area) = data.area(&self.world.current_area_id) {
+            audio.play_footstep_for_area(area);
+        }
         self.runtime.footstep_cooldown_seconds = step_interval;
     }
 
@@ -71,5 +78,4 @@ impl GameplayState {
             self.handle_gather_node_interaction(data, audio, node);
         }
     }
-
 }

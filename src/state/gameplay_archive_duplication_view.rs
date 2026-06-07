@@ -17,9 +17,8 @@ impl GameplayState {
                 title: ui_copy("overlay_duplication").to_string(),
                 cost_title: ui_copy("overlay_duplication_cost").to_string(),
                 help_text: duplication_help_text(),
-                empty_text: self.unavailable_state_text(
-                    ui_copy("overlay_archive_empty_duplication"),
-                ),
+                empty_text: self
+                    .unavailable_state_text(ui_copy("overlay_archive_empty_duplication")),
                 entries: Vec::new(),
                 detail: None,
             };
@@ -61,7 +60,10 @@ impl GameplayState {
             .and_then(|item_id| data.item(item_id))
             .map(|item| ArchiveDuplicationDetailView {
                 target_text: ui_format("overlay_target", &[("item", &item.name)]),
-                coin_text: ui_format("overlay_coins", &[("count", &duplication_cost(item).to_string())]),
+                coin_text: ui_format(
+                    "overlay_coins",
+                    &[("count", &duplication_cost(item).to_string())],
+                ),
                 catalyst_text: ui_format(
                     "overlay_archive_duplication_catalyst",
                     &[(

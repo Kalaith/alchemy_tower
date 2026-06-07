@@ -26,9 +26,8 @@ impl GameplayState {
             } else {
                 vec2(0.0, 1.0)
             };
-            let show_name =
-                priority.is_some()
-                    || self.world.player.position.distance(pos) <= npc.interaction_radius + 54.0;
+            let show_name = priority.is_some()
+                || self.world.player.position.distance(pos) <= npc.interaction_radius + 54.0;
             draw_npc_world_marker(
                 npc,
                 center,

@@ -80,5 +80,4 @@ impl GameData {
         data.build_indexes()?;
         Ok(data)
     }
-
 }

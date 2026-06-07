@@ -1,15 +1,13 @@
+use super::gameplay_alchemy_input_text as alchemy_input_text;
 use super::gameplay_alchemy_types::SLOT_COUNT;
+use super::GameplayState;
 use crate::alchemy_layout::{
     alchemy_slot_rect, brew_rect, catalyst_rect, clear_rect, heat_down_rect, heat_up_rect,
     material_row_rect, repeat_rect, sort_rect, stirs_rect, timing_rect,
 };
-use super::GameplayState;
 use crate::audio::AudioAssets;
 use crate::data::{GameData, StationDefinition};
 use crate::input::{mouse_position_point, rect_contains_point};
-
-#[path = "gameplay_alchemy_input_text.rs"]
-mod alchemy_input_text;
 
 impl GameplayState {
     pub(super) fn handle_alchemy_mouse_inputs(
@@ -74,7 +72,12 @@ impl GameplayState {
         false
     }
 
-    fn toggle_alchemy_catalyst(&mut self, data: &GameData, items: &[String], mouse: [f32; 2]) -> bool {
+    fn toggle_alchemy_catalyst(
+        &mut self,
+        data: &GameData,
+        items: &[String],
+        mouse: [f32; 2],
+    ) -> bool {
         if !rect_contains_point(catalyst_rect(), mouse) {
             return false;
         }

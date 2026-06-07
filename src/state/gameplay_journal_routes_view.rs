@@ -100,7 +100,10 @@ impl GameplayState {
                             )
                         }),
                         variant_text: (!entry.variant_name.is_empty()).then(|| {
-                            ui_format("journal_memory_variant", &[("variant", &entry.variant_name)])
+                            ui_format(
+                                "journal_memory_variant",
+                                &[("variant", &entry.variant_name)],
+                            )
                         }),
                         note_text: (entry.learned && !entry.note.is_empty())
                             .then(|| entry.note.clone()),

@@ -1,10 +1,10 @@
 use super::GameData;
+#[cfg(test)]
+use crate::data::RecipeDefinition;
 use crate::data::{
     AreaDefinition, GatheringRouteDefinition, ItemDefinition, MutationFormulaDefinition,
     NpcDefinition, QuestDefinition,
 };
-#[cfg(test)]
-use crate::data::RecipeDefinition;
 
 impl GameData {
     pub(crate) fn area(&self, area_id: &str) -> Option<&AreaDefinition> {

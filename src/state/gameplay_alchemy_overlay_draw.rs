@@ -3,8 +3,8 @@ use crate::alchemy_layout::alchemy_panel_rect;
 use crate::art::ArtAssets;
 use crate::data::GameData;
 use crate::ui::{
-    draw_alchemy_action_buttons, draw_brew_bubble_effect, draw_overlay_backdrop, draw_overlay_footer,
-    draw_overlay_subtitle, draw_panel,
+    draw_alchemy_action_buttons, draw_brew_bubble_effect, draw_overlay_backdrop,
+    draw_overlay_footer, draw_overlay_subtitle, draw_panel,
 };
 
 impl GameplayState {

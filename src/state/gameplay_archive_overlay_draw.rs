@@ -20,7 +20,7 @@ impl GameplayState {
         draw_archive_tabs(&chrome.tabs, self.ui.archive_tab, x, y, w);
 
         match self.archive_tab_id() {
-            "timeline" => self.draw_archive_timeline_section(x, y, w, h),
+            "timeline" => self.draw_archive_timeline_section(data, x, y, w, h),
             "experiments" => self.draw_archive_experiments_section(data, x, y, w, h),
             "mastery" => self.draw_archive_mastery_section(data, x, y, w, h),
             "morphs" => self.draw_archive_morphs_section(data, x, y, w, h),

@@ -22,10 +22,9 @@ impl GameplayState {
             return;
         };
         if item.category != ItemCategory::Ingredient {
-            self.runtime.status_text =
-                self.unavailable_state_text(&alchemy_slot_text::fill_slot_requires_ingredient(
-                    &item.name,
-                ));
+            self.runtime.status_text = self.unavailable_state_text(
+                &alchemy_slot_text::fill_slot_requires_ingredient(&item.name),
+            );
             return;
         }
         let total = self.inventory.get(item_id).copied().unwrap_or_default();

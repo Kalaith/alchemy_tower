@@ -22,7 +22,8 @@ impl GameplayState {
                 offset.x + station.position[0],
                 offset.y + station.position[1],
             );
-            let nearby = self.player_distance_to(station.position) <= station.interaction_radius + 60.0;
+            let nearby =
+                self.player_distance_to(station.position) <= station.interaction_radius + 60.0;
             let priority = self.station_world_label(data, station);
             draw_station_world_marker(
                 station,

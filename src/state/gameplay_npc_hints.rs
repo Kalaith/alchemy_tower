@@ -66,9 +66,7 @@ impl GameplayState {
             .filter_map(|time_window| {
                 self.npc_schedule_area_for_time(npc, time_window)
                     .and_then(|area_id| data.area(area_id))
-                    .map(|area| {
-                        npc_hint_text::usual(time_window, &area.name)
-                    })
+                    .map(|area| npc_hint_text::usual(time_window, &area.name))
             })
             .collect::<Vec<_>>()
             .join("  |  ")

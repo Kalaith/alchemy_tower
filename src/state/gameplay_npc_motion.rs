@@ -1,4 +1,4 @@
-use super::gameplay_npc_types::{NpcMotionTracker, TravelSegment};
+use super::gameplay_npc_types::NpcMotionTracker;
 use super::GameplayState;
 use crate::data::{GameData, NpcDefinition};
 use macroquad::prelude::{vec2, Vec2};

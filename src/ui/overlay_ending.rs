@@ -25,11 +25,5 @@ pub(crate) fn draw_ending_overlay_view(view: &EndingOverlayView) {
         28.0,
         dark::TEXT_BRIGHT,
     );
-    draw_text(
-        &view.footer,
-        x + 24.0,
-        y + h - 24.0,
-        18.0,
-        dark::TEXT_DIM,
-    );
+    draw_text(&view.footer, x + 24.0, y + h - 24.0, 18.0, dark::TEXT_DIM);
 }

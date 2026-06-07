@@ -30,7 +30,10 @@ impl GameplayState {
                             .find(|recipe| recipe.id == entry.last_recipe_id)
                             .map(|recipe| recipe.name.as_str())
                             .unwrap_or(entry.last_recipe_id.as_str());
-                        Some(ui_format("journal_memory_formula", &[("formula", recipe_name)]))
+                        Some(ui_format(
+                            "journal_memory_formula",
+                            &[("formula", recipe_name)],
+                        ))
                     };
 
                     JournalBrewMemoryView {

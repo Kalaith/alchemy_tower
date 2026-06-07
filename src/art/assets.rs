@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 
 use macroquad::prelude::*;
-use macroquad_toolkit::assets::AssetManager;
+use macroquad_toolkit::assets::{AssetManager, TextureConfig};
 
 use crate::data::GameData;
 
@@ -18,18 +18,30 @@ pub(crate) struct ArtAssets {
 }
 
 impl ArtAssets {
-    pub(crate) async fn load(data: &GameData) -> Self {
+    pub(crate) async fn load(data: &GameData) -> Result<Self, String> {
         let mut manager = AssetManager::new();
         manager.set_placeholder_texture_direct(transparent_placeholder_texture());
-        manager.load_asset_pack(GENERATED_ASSET_PACK).await.ok();
+        let asset_pack_error = manager.load_asset_pack(GENERATED_ASSET_PACK).await.err();
 
         let manifest = build_texture_manifest(data);
-        manager.load_texture_configs(&manifest.texture_configs).await;
+        load_required_textures(&mut manager, &manifest.texture_configs)
+            .await
+            .map_err(|error| match asset_pack_error.as_ref() {
+                Some(pack_error) => {
+                    format!("{error}; asset pack fallback also failed: {pack_error}")
+                }
+                None => error,
+            })?;
+        if let Some(pack_error) = asset_pack_error {
+            eprintln!(
+                "Generated asset pack was not loaded; using loose asset files instead: {pack_error}"
+            );
+        }
 
-        Self {
+        Ok(Self {
             manager,
             journal_tab_bindings: manifest.journal_tab_bindings,
-        }
+        })
     }
 
     pub(crate) fn background(&self, id: &str) -> Option<&Texture2D> {
@@ -76,6 +88,35 @@ impl ArtAssets {
 
     fn texture(&self, category: &str, id: &str) -> Option<&Texture2D> {
         self.manager.get_texture(&asset_key(category, id))
+    }
+}
+
+async fn load_required_textures(
+    manager: &mut AssetManager,
+    texture_configs: &[TextureConfig],
+) -> Result<(), String> {
+    let mut failures = Vec::new();
+    for config in texture_configs {
+        let filter = config
+            .filter
+            .map(FilterMode::from)
+            .unwrap_or(FilterMode::Nearest);
+        if let Err(error) = manager
+            .load_texture_with_filter(&config.key, &config.path, filter)
+            .await
+        {
+            failures.push(format!("{} from {} ({})", config.key, config.path, error));
+        }
+    }
+
+    if failures.is_empty() {
+        Ok(())
+    } else {
+        Err(format!(
+            "failed to load {} required texture(s): {}",
+            failures.len(),
+            failures.join("; ")
+        ))
     }
 }
 

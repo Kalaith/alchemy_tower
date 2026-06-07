@@ -6,8 +6,7 @@ mod quality_factors;
 
 pub(super) use self::quality_factors::weighted_quality_average;
 use self::quality_factors::{
-    preferred_trait_matches, shared_trait_bonus, synthesis_efficiency_bonus,
-    total_synthesis_weight,
+    preferred_trait_matches, shared_trait_bonus, synthesis_efficiency_bonus, total_synthesis_weight,
 };
 
 pub(crate) fn quality_band(score: u32) -> &'static str {

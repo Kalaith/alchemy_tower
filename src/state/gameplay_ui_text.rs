@@ -20,7 +20,10 @@ impl GameplayState {
         let base = ui_format(
             "inventory_item_meta",
             &[
-                ("category", item.map(|item| item.category.as_str()).unwrap_or("?")),
+                (
+                    "category",
+                    item.map(|item| item.category.as_str()).unwrap_or("?"),
+                ),
                 ("quality", &quality),
                 ("rarity", &rarity),
                 ("amount", &amount),
@@ -29,7 +32,10 @@ impl GameplayState {
         if extra.is_empty() {
             base
         } else {
-            ui_format("inventory_item_meta_extra", &[("base", &base), ("extra", extra)])
+            ui_format(
+                "inventory_item_meta_extra",
+                &[("base", &base), ("extra", extra)],
+            )
         }
     }
 
@@ -55,7 +61,10 @@ impl GameplayState {
     pub(super) fn alchemy_prompt_copy(&self, label: &str) -> String {
         self.interact_prompt_copy(
             "world_prompt_alchemy",
-            &[("alchemy", input_bindings().alchemy.open.as_str()), ("label", label)],
+            &[
+                ("alchemy", input_bindings().alchemy.open.as_str()),
+                ("label", label),
+            ],
         )
     }
 
@@ -75,7 +84,7 @@ impl GameplayState {
             );
         }
 
-        if self.can_reconstruct_archive() && !self.has_journal_milestone("archive_revelation") {
+        if self.can_reconstruct_archive(data) && !self.has_journal_milestone("archive_revelation") {
             return ui_copy("goal_reconstruct_archive").to_owned();
         }
 

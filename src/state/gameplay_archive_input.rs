@@ -3,8 +3,8 @@ use super::GameplayState;
 use crate::content::narrative_text;
 use crate::data::GameData;
 use crate::input::{
-    archive_filter_pressed, cancel_pressed, confirm_pressed, select_next_pressed, select_previous_pressed,
-    switch_next_pressed, switch_previous_pressed,
+    archive_filter_pressed, cancel_pressed, confirm_pressed, select_next_pressed,
+    select_previous_pressed, switch_next_pressed, switch_previous_pressed,
 };
 
 #[path = "gameplay_archive_input_text.rs"]
@@ -41,7 +41,7 @@ impl GameplayState {
 
         if confirm_pressed() {
             match ARCHIVE_TABS[self.ui.archive_tab] {
-                "timeline" => self.handle_archive_timeline_submit(),
+                "timeline" => self.handle_archive_timeline_submit(data),
                 "disassembly" => {
                     let recipes = self.available_disassembly_recipes(data);
                     if let Some(recipe) = recipes.get(self.ui.archive_index).copied() {
@@ -63,11 +63,13 @@ impl GameplayState {
         }
     }
 
-    fn handle_archive_timeline_submit(&mut self) {
-        if self.can_reconstruct_archive() {
+    fn handle_archive_timeline_submit(&mut self, data: &GameData) {
+        if self.can_reconstruct_archive(data) {
             let milestone = &narrative_text().milestones.archive_revelation;
             self.push_journal_milestone(&milestone.id, &milestone.title, &milestone.text);
-            self.trigger_archive_reconstruction_feedback(archive_input_text::timeline_restored_toast());
+            self.trigger_archive_reconstruction_feedback(
+                archive_input_text::timeline_restored_toast(),
+            );
             self.runtime.status_text = archive_input_text::timeline_complete();
         } else {
             self.runtime.status_text = archive_input_text::timeline_incomplete();

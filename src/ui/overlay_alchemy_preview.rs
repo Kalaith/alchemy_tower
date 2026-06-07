@@ -24,21 +24,10 @@ pub(crate) fn draw_alchemy_preview_panel_view(
 }
 
 fn draw_empty_selection(empty_text: &str, x: f32, y: f32) {
-    draw_text(
-        empty_text,
-        x + 360.0,
-        y + 296.0,
-        22.0,
-        dark::TEXT_DIM,
-    );
+    draw_text(empty_text, x + 360.0, y + 296.0, 22.0, dark::TEXT_DIM);
 }
 
-fn draw_resolved_brew_preview_view(
-    preview: &AlchemyResolvedPreviewView,
-    x: f32,
-    y: f32,
-    w: f32,
-) {
+fn draw_resolved_brew_preview_view(preview: &AlchemyResolvedPreviewView, x: f32, y: f32, w: f32) {
     draw_text(&preview.title, x, y, 24.0, dark::TEXT_BRIGHT);
     draw_output_summary_view(preview, x, y + 30.0);
     draw_text(&preview.read_line, x, y + 96.0, 18.0, dark::TEXT_DIM);
@@ -58,11 +47,7 @@ fn draw_output_summary_view(preview: &AlchemyResolvedPreviewView, x: f32, y: f32
     draw_text(&preview.traits_line, x, y + 44.0, 18.0, dark::TEXT_DIM);
 }
 
-fn draw_brew_process_diagnostics_view(
-    preview: &AlchemyResolvedPreviewView,
-    x: f32,
-    y: f32,
-) -> f32 {
+fn draw_brew_process_diagnostics_view(preview: &AlchemyResolvedPreviewView, x: f32, y: f32) -> f32 {
     let (Some(requirements_line), Some(process_flags_line)) =
         (&preview.requirements_line, &preview.process_flags_line)
     else {
@@ -92,13 +77,7 @@ fn draw_failure_reasons_view(preview: &AlchemyResolvedPreviewView, x: f32, y: f3
     );
     next_y += 20.0;
     for reason_line in &preview.failure_reason_lines {
-        draw_text(
-            reason_line,
-            x + 12.0,
-            next_y,
-            18.0,
-            dark::TEXT_DIM,
-        );
+        draw_text(reason_line, x + 12.0, next_y, 18.0, dark::TEXT_DIM);
         next_y += 20.0;
     }
     next_y

@@ -73,7 +73,11 @@ impl GameplayState {
             .saturating_add(milestone_missing.saturating_mul(150))
     }
 
-    pub(super) fn warp_requirement_summary(&self, data: &GameData, warp: &WarpDefinition) -> String {
+    pub(super) fn warp_requirement_summary(
+        &self,
+        data: &GameData,
+        warp: &WarpDefinition,
+    ) -> String {
         requirement_text::warp_requirement_summary(data, warp, self.warp_requirement_progress(warp))
     }
 

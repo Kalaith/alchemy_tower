@@ -35,10 +35,7 @@ impl GameplayState {
             progression_text::archive_filter_status(self.archive_experiment_filter_label());
     }
 
-    pub(super) fn mastery_recipes<'a>(
-        &self,
-        data: &'a GameData,
-    ) -> Vec<&'a RecipeDefinition> {
+    pub(super) fn mastery_recipes<'a>(&self, data: &'a GameData) -> Vec<&'a RecipeDefinition> {
         let mut recipes = data
             .recipes
             .iter()
@@ -52,10 +49,7 @@ impl GameplayState {
         recipes
     }
 
-    pub(super) fn morph_recipes<'a>(
-        &self,
-        data: &'a GameData,
-    ) -> Vec<&'a RecipeDefinition> {
+    pub(super) fn morph_recipes<'a>(&self, data: &'a GameData) -> Vec<&'a RecipeDefinition> {
         let mut recipes = data
             .recipes
             .iter()

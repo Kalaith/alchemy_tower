@@ -8,7 +8,12 @@ pub(crate) fn journal_tab_rect(index: usize, tab_count: usize) -> Rect {
     let panel = journal_panel_rect();
     let tab_y = panel.y + 82.0;
     let tab_w = (panel.w - 40.0) / tab_count.max(1) as f32;
-    Rect::new(panel.x + 20.0 + tab_w * index as f32, tab_y, tab_w - 8.0, 30.0)
+    Rect::new(
+        panel.x + 20.0 + tab_w * index as f32,
+        tab_y,
+        tab_w - 8.0,
+        30.0,
+    )
 }
 
 pub(crate) fn journal_close_rect() -> Rect {

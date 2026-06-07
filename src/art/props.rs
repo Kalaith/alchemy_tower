@@ -11,9 +11,7 @@ mod props_vegetation;
 
 use self::props_architecture::{draw_house_blocker, draw_panel_blocker, draw_shelf_blocker};
 use self::props_terrain::{draw_dunes_blocker, draw_quarry_blocker, draw_reeds_blocker};
-use self::props_vegetation::{
-    draw_forest_blocker, draw_grass_blocker, draw_rainforest_blocker,
-};
+use self::props_vegetation::{draw_forest_blocker, draw_grass_blocker, draw_rainforest_blocker};
 
 pub(crate) fn draw_blocker_prop(
     area: &AreaDefinition,

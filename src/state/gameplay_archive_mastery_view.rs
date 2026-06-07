@@ -46,7 +46,10 @@ impl GameplayState {
 
         let recipe = recipes[selected_index];
         let mastery = self.recipe_mastery_brews(&recipe.id);
-        let profile = self.progression.crafted_item_profiles.get(&recipe.output_item_id);
+        let profile = self
+            .progression
+            .crafted_item_profiles
+            .get(&recipe.output_item_id);
         let last_attempt_text = self
             .progression
             .experiment_log

@@ -15,7 +15,7 @@ impl GameplayState {
                 .active_quest_summary(data)
                 .unwrap_or_else(|| self.next_goal_summary(data)),
             milestone_rows: self
-                .milestone_status_lines()
+                .milestone_status_lines(data)
                 .into_iter()
                 .map(|(label, detail, ready)| JournalMilestoneStatusView {
                     title: ui_format(

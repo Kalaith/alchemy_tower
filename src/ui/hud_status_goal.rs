@@ -1,8 +1,8 @@
 use super::hud_chrome::*;
 use super::hud_primitives::*;
+use super::truncate_text_to_width;
 use super::HudView;
 use crate::art::ArtAssets;
-use super::{draw_wrapped_text, truncate_text_to_width};
 use macroquad::prelude::*;
 
 pub(super) fn draw_goal_note(view: &HudView, art: &ArtAssets) {

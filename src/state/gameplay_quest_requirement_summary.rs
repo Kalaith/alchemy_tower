@@ -94,6 +94,7 @@ mod tests {
             prerequisite_quests: Vec::new(),
             required_unlocked_warp: String::new(),
             minimum_total_brews: 0,
+            completion_milestones: Vec::new(),
         }
     }
 

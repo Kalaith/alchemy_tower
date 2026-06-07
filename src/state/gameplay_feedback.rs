@@ -2,7 +2,10 @@ use super::gameplay_feedback_primitives::rgba;
 use super::GameplayState;
 
 impl GameplayState {
-    pub(super) fn trigger_archive_reconstruction_feedback(&mut self, toast_text: impl Into<String>) {
+    pub(super) fn trigger_archive_reconstruction_feedback(
+        &mut self,
+        toast_text: impl Into<String>,
+    ) {
         let archive_color = rgba(176, 226, 255, 255);
         self.push_event_toast_with_icon(toast_text, archive_color, "journal_note");
         self.trigger_world_feedback(self.player_feedback_position(), archive_color, true, 2.2);
@@ -10,51 +13,27 @@ impl GameplayState {
     }
 
     pub(super) fn trigger_duplication_feedback(&mut self, toast_text: impl Into<String>) {
-        self.push_event_toast_with_icon(
-            toast_text,
-            rgba(216, 182, 255, 255),
-            "best_quality",
-        );
+        self.push_event_toast_with_icon(toast_text, rgba(216, 182, 255, 255), "best_quality");
     }
 
     pub(super) fn trigger_planter_mutation_feedback(&mut self, toast_text: impl Into<String>) {
-        self.push_event_toast_with_icon(
-            toast_text,
-            rgba(188, 255, 220, 255),
-            "best_quality",
-        );
+        self.push_event_toast_with_icon(toast_text, rgba(188, 255, 220, 255), "best_quality");
     }
 
     pub(super) fn trigger_recipe_logged_feedback(&mut self, toast_text: impl Into<String>) {
-        self.push_event_toast_with_icon(
-            toast_text,
-            rgba(176, 226, 255, 255),
-            "recipe_logged",
-        );
+        self.push_event_toast_with_icon(toast_text, rgba(176, 226, 255, 255), "recipe_logged");
     }
 
     pub(super) fn trigger_mastery_improved_feedback(&mut self, toast_text: impl Into<String>) {
-        self.push_event_toast_with_icon(
-            toast_text,
-            rgba(255, 230, 170, 255),
-            "best_quality",
-        );
+        self.push_event_toast_with_icon(toast_text, rgba(255, 230, 170, 255), "best_quality");
     }
 
     pub(super) fn trigger_disassembly_feedback(&mut self, toast_text: impl Into<String>) {
-        self.push_event_toast_with_icon(
-            toast_text,
-            rgba(214, 204, 170, 255),
-            "recipe_logged",
-        );
+        self.push_event_toast_with_icon(toast_text, rgba(214, 204, 170, 255), "recipe_logged");
     }
 
     pub(super) fn trigger_safe_sale_feedback(&mut self, toast_text: impl Into<String>) {
-        self.push_event_toast_with_icon(
-            toast_text,
-            rgba(255, 214, 132, 255),
-            "best_quality",
-        );
+        self.push_event_toast_with_icon(toast_text, rgba(255, 214, 132, 255), "best_quality");
     }
 
     pub(super) fn trigger_quest_accepted_feedback(&mut self, toast_text: impl Into<String>) {
@@ -111,11 +90,7 @@ impl GameplayState {
     }
 
     pub(super) fn trigger_new_best_brew_feedback(&mut self, toast_text: impl Into<String>) {
-        self.push_event_toast_with_icon(
-            toast_text,
-            rgba(188, 255, 220, 255),
-            "best_quality",
-        );
+        self.push_event_toast_with_icon(toast_text, rgba(188, 255, 220, 255), "best_quality");
     }
 
     pub(super) fn trigger_greenhouse_unlock_feedback(&mut self, toast_text: impl Into<String>) {

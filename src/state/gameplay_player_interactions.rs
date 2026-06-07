@@ -21,8 +21,7 @@ impl GameplayState {
         let Some(station) = self.nearby_station(data) else {
             return false;
         };
-        if station.kind != StationKind::Alchemy
-            || (!alchemy_open_pressed() && !interact_pressed())
+        if station.kind != StationKind::Alchemy || (!alchemy_open_pressed() && !interact_pressed())
         {
             return false;
         }

@@ -9,6 +9,10 @@ pub(crate) struct GameConfig {
     pub(crate) interaction_range: f32,
     pub(crate) day_length_seconds: f32,
     pub(crate) save_version: u32,
+    #[serde(default)]
+    pub(crate) archive_required_completed_quests: Vec<String>,
+    #[serde(default)]
+    pub(crate) archive_required_journal_milestones: Vec<String>,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -118,6 +122,8 @@ pub(crate) struct QuestDefinition {
     pub(crate) required_unlocked_warp: String,
     #[serde(default)]
     pub(crate) minimum_total_brews: u32,
+    #[serde(default)]
+    pub(crate) completion_milestones: Vec<JournalMilestoneEntry>,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -127,6 +133,8 @@ pub(crate) struct AreaDefinition {
     pub(crate) size: [f32; 2],
     pub(crate) background: [u8; 4],
     pub(crate) accent: [u8; 4],
+    #[serde(default = "default_footstep_sound_set")]
+    pub(crate) footstep_sound_set: String,
     pub(crate) blockers: Vec<RectDefinition>,
     pub(crate) warps: Vec<WarpDefinition>,
     pub(crate) gather_nodes: Vec<GatherNodeDefinition>,
@@ -136,4 +144,8 @@ pub(crate) struct AreaDefinition {
 
 fn default_spawn_chance() -> u32 {
     100
+}
+
+fn default_footstep_sound_set() -> String {
+    "dirt_path".to_owned()
 }

@@ -35,7 +35,7 @@ impl GameplayState {
                 WorldLabelTone::Goal,
             )),
             StationKind::ArchiveConsole
-                if self.can_reconstruct_archive()
+                if self.can_reconstruct_archive(data)
                     && !self.has_journal_milestone("archive_revelation") =>
             {
                 Some((

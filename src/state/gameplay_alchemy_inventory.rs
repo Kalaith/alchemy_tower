@@ -31,7 +31,11 @@ impl GameplayState {
             self.preview_mastery_brews(data, station, &selected),
         );
         let stable_brew = self.brew_is_stable(&resolution);
-        self.trigger_brew_result_feedback(station.position, stable_brew, resolution.recipe.is_none());
+        self.trigger_brew_result_feedback(
+            station.position,
+            stable_brew,
+            resolution.recipe.is_none(),
+        );
         self.consume_brew_inputs(&selected);
         let previous_profile = self.record_brew_inventory_result(data, &resolution, stable_brew);
         self.update_brew_result_status(data, &resolution, stable_brew);
@@ -46,13 +50,17 @@ impl GameplayState {
             .unwrap_or(current_profile.is_some());
         if improved_best {
             if let Some(profile) = current_profile {
-                self.trigger_new_best_brew_feedback(
-                    alchemy_inventory_text::new_best_brew(data, &resolution.output_item_id, &profile.best_quality_band),
-                );
+                self.trigger_new_best_brew_feedback(alchemy_inventory_text::new_best_brew(
+                    data,
+                    &resolution.output_item_id,
+                    &profile.best_quality_band,
+                ));
             }
         }
         if self.progression.total_brews == 10 {
-            self.trigger_greenhouse_unlock_feedback(alchemy_inventory_text::greenhouse_unlock_toast());
+            self.trigger_greenhouse_unlock_feedback(
+                alchemy_inventory_text::greenhouse_unlock_toast(),
+            );
             self.runtime.status_text = alchemy_inventory_text::greenhouse_unlock_status();
         }
         self.alchemy.stirs = 0;

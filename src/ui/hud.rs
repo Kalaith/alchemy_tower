@@ -1,7 +1,5 @@
 use crate::art::{draw_texture_centered, ArtAssets};
-use crate::view_models::hud::{
-    HudFeedbackView, HudGoal, HudPotionSlot, HudView, HOTBAR_SLOT_COUNT,
-};
+use crate::view_models::hud::{HudFeedbackView, HudPotionSlot, HudView, HOTBAR_SLOT_COUNT};
 use macroquad::prelude::*;
 
 #[path = "hud_atmosphere.rs"]
@@ -16,6 +14,8 @@ mod hud_belt;
 mod hud_belt_frame;
 #[path = "hud_belt_slots.rs"]
 mod hud_belt_slots;
+#[path = "hud_botanical_icons.rs"]
+mod hud_botanical_icons;
 #[path = "hud_chrome.rs"]
 mod hud_chrome;
 #[path = "hud_chrome_coin.rs"]
@@ -42,8 +42,6 @@ mod hud_gem_icons;
 mod hud_gem_mount;
 #[path = "hud_header.rs"]
 mod hud_header;
-#[path = "hud_botanical_icons.rs"]
-mod hud_botanical_icons;
 #[path = "hud_icons.rs"]
 mod hud_icons;
 #[path = "hud_palette.rs"]
@@ -52,10 +50,10 @@ mod hud_palette;
 mod hud_primitives;
 #[path = "hud_shapes.rs"]
 mod hud_shapes;
-#[path = "hud_side_hardware.rs"]
-mod hud_side_hardware;
 #[path = "hud_side.rs"]
 mod hud_side;
+#[path = "hud_side_hardware.rs"]
+mod hud_side_hardware;
 #[path = "hud_status.rs"]
 mod hud_status;
 #[path = "hud_status_goal.rs"]
@@ -67,12 +65,12 @@ mod hud_status_vitals;
 #[path = "hud_text.rs"]
 mod hud_text;
 
-use super::text::{draw_wrapped_text, truncate_text_to_width};
 use self::hud_belt::*;
 use self::hud_control_tags::*;
 use self::hud_header::*;
 use self::hud_side::*;
 use self::hud_status::*;
+use super::text::{draw_wrapped_text, truncate_text_to_width};
 
 pub(crate) fn draw_hud_view(view: &HudView, art: &ArtAssets) {
     draw_hud_vignette();

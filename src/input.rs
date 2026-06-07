@@ -4,8 +4,8 @@ mod input_keys;
 use macroquad::prelude::{is_mouse_button_pressed, mouse_position, MouseButton, Rect, Vec2};
 use macroquad_toolkit::input::was_clicked;
 
-use crate::content::input_bindings;
 use self::input_keys::{any_label_down, pressed_label};
+use crate::content::input_bindings;
 
 pub(crate) fn quick_potion_pressed(index: usize) -> bool {
     let Some(label) = input_bindings().global.quick_potions.get(index) else {

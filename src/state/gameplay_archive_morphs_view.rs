@@ -7,10 +7,7 @@ use crate::view_models::archive::{
 };
 
 impl GameplayState {
-    pub(super) fn archive_morphs_section_view(
-        &self,
-        data: &GameData,
-    ) -> ArchiveMorphsSectionView {
+    pub(super) fn archive_morphs_section_view(&self, data: &GameData) -> ArchiveMorphsSectionView {
         let recipes = self.morph_recipes(data);
         if recipes.is_empty() {
             return ArchiveMorphsSectionView {

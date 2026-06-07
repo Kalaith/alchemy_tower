@@ -111,11 +111,5 @@ pub(crate) fn draw_journal_tabs(
 }
 
 pub(crate) fn draw_journal_footer(footer_text: &str, x: f32, y: f32, h: f32) {
-    draw_text(
-        footer_text,
-        x + 20.0,
-        y + h - 20.0,
-        18.0,
-        dark::TEXT_DIM,
-    );
+    draw_text(footer_text, x + 20.0, y + h - 20.0, 18.0, dark::TEXT_DIM);
 }

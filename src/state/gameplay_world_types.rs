@@ -1,7 +1,7 @@
 use std::collections::HashSet;
 
-use macroquad::prelude::Vec2;
 use macroquad::prelude::vec2;
+use macroquad::prelude::Vec2;
 
 use crate::data::GameData;
 

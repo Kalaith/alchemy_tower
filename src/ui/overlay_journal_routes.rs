@@ -1,5 +1,5 @@
-use crate::view_models::journal::{JournalHerbMemoriesView, JournalRoutesTabView};
 use super::draw_wrapped_text;
+use crate::view_models::journal::{JournalHerbMemoriesView, JournalRoutesTabView};
 use macroquad::prelude::{draw_rectangle, draw_rectangle_lines, draw_text, Color};
 use macroquad_toolkit::colors::dark;
 
@@ -10,69 +10,63 @@ pub(crate) fn draw_journal_routes_tab_view(
     w: f32,
     h: f32,
 ) {
-        draw_text(
-            view.title,
-            x + 20.0,
-            y + 136.0,
-            26.0,
-            dark::TEXT_BRIGHT,
-        );
-        let mut route_y = y + 168.0;
-        for route in &view.route_rows {
-            draw_text(&route.title, x + 20.0, route_y, 22.0, dark::TEXT_BRIGHT);
-            route_y += 22.0;
-            draw_text(&route.detail, x + 20.0, route_y, 18.0, dark::TEXT_DIM);
-            route_y += 28.0;
-            if route_y > y + h - 40.0 {
-                break;
-            }
+    draw_text(view.title, x + 20.0, y + 136.0, 26.0, dark::TEXT_BRIGHT);
+    let mut route_y = y + 168.0;
+    for route in &view.route_rows {
+        draw_text(&route.title, x + 20.0, route_y, 22.0, dark::TEXT_BRIGHT);
+        route_y += 22.0;
+        draw_text(&route.detail, x + 20.0, route_y, 18.0, dark::TEXT_DIM);
+        route_y += 28.0;
+        if route_y > y + h - 40.0 {
+            break;
         }
+    }
 
-        draw_journal_herb_memories_view(
-            &view.herb_memories,
-            x + 420.0,
-            y + 136.0,
-            w - 440.0,
-            y + h - 170.0,
-        );
+    draw_journal_herb_memories_view(
+        &view.herb_memories,
+        x + 420.0,
+        y + 136.0,
+        w - 440.0,
+        y + h - 170.0,
+    );
+    draw_text(
+        view.progress_title,
+        x + 20.0,
+        y + h - 156.0,
+        24.0,
+        dark::TEXT_BRIGHT,
+    );
+    draw_rectangle(
+        x + 20.0,
+        y + h - 140.0,
+        w - 40.0,
+        96.0,
+        Color::from_rgba(38, 40, 50, 255),
+    );
+    draw_rectangle_lines(x + 20.0, y + h - 140.0, w - 40.0, 96.0, 2.0, dark::ACCENT);
+    if let Some(all_restored_text) = &view.route_progress.all_restored_text {
         draw_text(
-            view.progress_title,
-            x + 20.0,
-            y + h - 156.0,
-            24.0,
-            dark::TEXT_BRIGHT,
+            all_restored_text,
+            x + 34.0,
+            y + h - 108.0,
+            20.0,
+            dark::TEXT_DIM,
         );
-        draw_rectangle(
-            x + 20.0,
-            y + h - 140.0,
-            w - 40.0,
-            96.0,
-            Color::from_rgba(38, 40, 50, 255),
-        );
-        draw_rectangle_lines(x + 20.0, y + h - 140.0, w - 40.0, 96.0, 2.0, dark::ACCENT);
-        if let Some(all_restored_text) = &view.route_progress.all_restored_text {
-            draw_text(
-                all_restored_text,
+    } else {
+        let mut unlock_y = y + h - 108.0;
+        for line in &view.route_progress.locked_lines {
+            draw_wrapped_text(
+                line,
                 x + 34.0,
-                y + h - 108.0,
-                20.0,
+                unlock_y,
+                w - 68.0,
+                16.0,
+                18.0,
                 dark::TEXT_DIM,
             );
-        } else {
-            let mut unlock_y = y + h - 108.0;
-            for line in &view.route_progress.locked_lines {
-                draw_wrapped_text(
-                    line,
-                    x + 34.0,
-                    unlock_y,
-                    w - 68.0,
-                    16.0,
-                    18.0,
-                    dark::TEXT_DIM,
-                );
-                unlock_y += 34.0;
-            }
+            unlock_y += 34.0;
         }
+    }
 }
 
 fn draw_journal_herb_memories_view(
@@ -82,13 +76,7 @@ fn draw_journal_herb_memories_view(
     text_width: f32,
     bottom_limit: f32,
 ) {
-    draw_text(
-        view.title,
-        x,
-        title_y,
-        26.0,
-        dark::TEXT_BRIGHT,
-    );
+    draw_text(view.title, x, title_y, 26.0, dark::TEXT_BRIGHT);
     let mut entry_y = title_y + 32.0;
     if view.entries.is_empty() {
         draw_text(&view.empty_text, x, entry_y, 22.0, dark::TEXT_DIM);

@@ -29,20 +29,12 @@ impl GameplayState {
         &ARCHIVE_TABS
     }
 
-    pub(super) fn archive_tab_selected(&self, index: usize) -> bool {
-        index == self.ui.archive_tab
-    }
-
     pub(super) fn archive_selected_index(&self, item_count: usize) -> usize {
         self.ui.archive_index.min(item_count.saturating_sub(1))
     }
 
     pub(super) fn shop_buy_tab_active(&self) -> bool {
         self.ui.shop_buy_tab
-    }
-
-    pub(super) fn shop_sell_tab_active(&self) -> bool {
-        !self.ui.shop_buy_tab
     }
 
     pub(super) fn shop_item_selected(&self, index: usize) -> bool {
@@ -61,12 +53,7 @@ impl GameplayState {
         index == self.ui.shop_index
     }
 
-    pub(super) fn journal_tab_selected(&self, index: usize) -> bool {
-        index == self.ui.journal_tab
-    }
-
     pub(super) fn journal_tab_index(&self) -> usize {
         self.ui.journal_tab
     }
-
 }

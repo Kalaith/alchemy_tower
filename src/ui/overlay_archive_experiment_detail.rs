@@ -1,5 +1,5 @@
-use crate::view_models::archive::ArchiveExperimentRecordView;
 use super::draw_wrapped_text;
+use crate::view_models::archive::ArchiveExperimentRecordView;
 use macroquad::prelude::draw_text;
 use macroquad_toolkit::colors::dark;
 
@@ -20,5 +20,13 @@ pub(crate) fn draw_selected_experiment_record_view(
     };
     draw_text(&memory.mastery_text, x, y + 160.0, 20.0, dark::TEXT_DIM);
     draw_text(&memory.memory_text, x, y + 184.0, 18.0, dark::TEXT_DIM);
-    draw_wrapped_text(&memory.detail_text, x, y + 210.0, w, 18.0, 20.0, dark::TEXT_DIM);
+    draw_wrapped_text(
+        &memory.detail_text,
+        x,
+        y + 210.0,
+        w,
+        18.0,
+        20.0,
+        dark::TEXT_DIM,
+    );
 }

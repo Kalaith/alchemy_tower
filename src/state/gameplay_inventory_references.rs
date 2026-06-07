@@ -37,9 +37,10 @@ impl GameplayState {
             .get(item_id)
             .map(|profile| reference_text::best_record(&profile.best_quality_band))
             .or_else(|| {
-                self.progression.herb_memories.get(item_id).map(|entry| {
-                    reference_text::best_record(&entry.best_quality_band)
-                })
+                self.progression
+                    .herb_memories
+                    .get(item_id)
+                    .map(|entry| reference_text::best_record(&entry.best_quality_band))
             })
     }
 

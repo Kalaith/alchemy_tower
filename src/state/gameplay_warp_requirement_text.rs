@@ -47,7 +47,10 @@ pub(super) fn warp_requirement_summary(
             "gameplay_requirement_more_coins",
             &[(
                 "count",
-                &warp.required_coins.saturating_sub(progress.coins).to_string(),
+                &warp
+                    .required_coins
+                    .saturating_sub(progress.coins)
+                    .to_string(),
             )],
         ));
     }

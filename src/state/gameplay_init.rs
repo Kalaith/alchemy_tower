@@ -1,5 +1,5 @@
-use super::gameplay_journal_support::initial_journal_milestones;
 use super::gameplay_alchemy_types::AlchemySession;
+use super::gameplay_journal_support::initial_journal_milestones;
 use super::gameplay_overlay_types::OverlayState;
 use super::gameplay_progression_types::ProgressionState;
 use super::gameplay_runtime_types::RuntimeState;
@@ -25,5 +25,4 @@ impl GameplayState {
         state.refresh_available_nodes(data);
         state
     }
-
 }

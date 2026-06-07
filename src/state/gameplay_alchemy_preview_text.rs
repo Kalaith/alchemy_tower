@@ -37,11 +37,7 @@ pub(super) fn traits_line(preview: &BrewResolution<'_>) -> String {
     )
 }
 
-pub(super) fn read_line(
-    preview: &BrewResolution<'_>,
-    known: bool,
-    stable_preview: bool,
-) -> String {
+pub(super) fn read_line(preview: &BrewResolution<'_>, known: bool, stable_preview: bool) -> String {
     ui_format(
         "overlay_alchemy_read",
         &[(

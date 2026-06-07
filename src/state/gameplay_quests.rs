@@ -1,10 +1,10 @@
-use super::gameplay_quest_requirements::{
-    effect_requirement_met, effect_requirement_target, trait_requirement_met,
-    trait_requirement_target,
-};
 use super::gameplay_quest_requirement_summary::{
     carry_requirement_summary, effect_requirement_summary, quality_requirement_summary,
     ready_requirement_summary, trait_requirement_summary,
+};
+use super::gameplay_quest_requirements::{
+    effect_requirement_met, effect_requirement_target, trait_requirement_met,
+    trait_requirement_target,
 };
 use super::gameplay_support::quality_band_rank;
 use super::GameplayState;

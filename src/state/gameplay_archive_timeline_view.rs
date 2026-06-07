@@ -1,10 +1,14 @@
 use super::GameplayState;
 use crate::content::{narrative_text, ui_copy, ui_format};
+use crate::data::GameData;
 use crate::view_models::archive::{ArchiveTimelineMilestoneView, ArchiveTimelineSectionView};
 
 impl GameplayState {
-    pub(super) fn archive_timeline_section_view(&self) -> ArchiveTimelineSectionView {
-        let summary = self.archive_timeline_summary();
+    pub(super) fn archive_timeline_section_view(
+        &self,
+        data: &GameData,
+    ) -> ArchiveTimelineSectionView {
+        let summary = self.archive_timeline_summary(data);
         let reconstruction_text = if summary.reconstruction_ready {
             narrative_text()
                 .statuses

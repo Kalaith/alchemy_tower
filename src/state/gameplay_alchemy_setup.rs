@@ -66,5 +66,4 @@ impl GameplayState {
     pub(super) fn alchemy_timing(&self) -> &'static str {
         ALCHEMY_TIMINGS[self.alchemy.timing_index]
     }
-
 }

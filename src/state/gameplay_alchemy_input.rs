@@ -1,18 +1,16 @@
+use super::gameplay_alchemy_input_text as alchemy_input_text;
 use super::gameplay_alchemy_types::ALCHEMY_TIMINGS;
 use super::GameplayState;
 use crate::audio::AudioAssets;
 use crate::data::{GameData, StationKind};
 use crate::input::{
     alchemy_brew_pressed, alchemy_catalyst_pressed, alchemy_clear_pressed,
-    alchemy_clear_slot_pressed, alchemy_fill_slot_pressed, alchemy_open_pressed,
-    alchemy_heat_decrease_pressed, alchemy_heat_increase_pressed, alchemy_remove_catalyst_pressed,
+    alchemy_clear_slot_pressed, alchemy_fill_slot_pressed, alchemy_heat_decrease_pressed,
+    alchemy_heat_increase_pressed, alchemy_open_pressed, alchemy_remove_catalyst_pressed,
     alchemy_repeat_pressed, alchemy_stir_pressed, alchemy_timing_pressed, cancel_pressed,
     interact_pressed, left_mouse_pressed, right_mouse_pressed, select_next_pressed,
     select_previous_pressed, sort_pressed,
 };
-
-#[path = "gameplay_alchemy_input_text.rs"]
-mod alchemy_input_text;
 
 impl GameplayState {
     pub(super) fn handle_alchemy_inputs(&mut self, data: &GameData, audio: &AudioAssets) {

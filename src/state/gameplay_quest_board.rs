@@ -1,8 +1,6 @@
 use super::GameplayState;
 use crate::data::GameData;
-use crate::input::{
-    cancel_pressed, confirm_pressed, select_next_pressed, select_previous_pressed,
-};
+use crate::input::{cancel_pressed, confirm_pressed, select_next_pressed, select_previous_pressed};
 
 #[path = "gameplay_quest_board_text.rs"]
 mod quest_board_text;
@@ -37,7 +35,9 @@ impl GameplayState {
 
     fn quest_board_accept_status(&self, data: &GameData, quest_id: &str) -> String {
         data.quest(quest_id)
-            .map(|quest| quest_board_text::accepted_status(quest, &self.quest_location_hint(data, quest)))
+            .map(|quest| {
+                quest_board_text::accepted_status(quest, &self.quest_location_hint(data, quest))
+            })
             .unwrap_or_else(quest_board_text::accepted_default)
     }
 

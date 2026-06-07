@@ -1,8 +1,8 @@
+pub(super) use super::hud_gem_icons::*;
+pub(super) use super::hud_icons::*;
 use super::hud_palette::*;
 use super::hud_shapes::*;
 use super::hud_text::*;
-pub(super) use super::hud_icons::*;
-pub(super) use super::hud_gem_icons::*;
 use crate::art::{draw_texture_centered, ArtAssets};
 use macroquad::prelude::*;
 

@@ -16,10 +16,7 @@ pub(super) fn missing_source(item_name: &str) -> String {
 pub(super) fn need_coins(item_name: &str, missing_coins: u32) -> String {
     ui_format(
         "progression_duplicate_need_coins",
-        &[
-            ("coins", &missing_coins.to_string()),
-            ("name", item_name),
-        ],
+        &[("coins", &missing_coins.to_string()), ("name", item_name)],
     )
 }
 

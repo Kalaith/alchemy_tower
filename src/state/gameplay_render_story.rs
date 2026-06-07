@@ -12,7 +12,9 @@ impl GameplayState {
         draw_phase1_story_flourishes_view(
             area,
             offset,
-            self.progression.completed_quests.contains("healing_for_mira"),
+            self.progression
+                .completed_quests
+                .contains("healing_for_mira"),
             self.progression.completed_quests.contains("glow_for_rowan"),
             self.has_journal_milestone("greenhouse_repaired") || cultivation_for_brin_complete,
             cultivation_for_brin_complete,

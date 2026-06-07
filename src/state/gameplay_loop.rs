@@ -57,10 +57,9 @@ impl GameplayState {
         }
         if self.runtime.gather_pause_seconds <= 0.0 {
             self.update_movement(data, frame_time);
-            self.update_footstep_audio(audio, frame_time);
+            self.update_footstep_audio(data, audio, frame_time);
             self.handle_potion_inputs(data);
             self.handle_interactions(data, audio);
         }
     }
-
 }

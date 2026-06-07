@@ -60,7 +60,8 @@ impl GameplayState {
             self.ui.journal_tab = self.ui.journal_tab.saturating_sub(1);
         }
         if switch_next_pressed() {
-            self.ui.journal_tab = (self.ui.journal_tab + 1).min(journal_tab_count.saturating_sub(1));
+            self.ui.journal_tab =
+                (self.ui.journal_tab + 1).min(journal_tab_count.saturating_sub(1));
         }
         if journal_pressed() {
             self.clear_overlay();

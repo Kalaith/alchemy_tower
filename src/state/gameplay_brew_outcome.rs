@@ -29,8 +29,11 @@ impl GameplayState {
             let recipe_discovered = self.progression.known_recipes.insert(recipe.id.clone());
             if recipe_discovered {
                 self.trigger_recipe_logged_feedback(outcome_text::recipe_logged(&recipe.name));
-                self.runtime.status_text =
-                    outcome_text::recipe_discovered(&recipe.name, resolution, current_mastery_stage);
+                self.runtime.status_text = outcome_text::recipe_discovered(
+                    &recipe.name,
+                    resolution,
+                    current_mastery_stage,
+                );
             } else {
                 self.runtime.status_text =
                     outcome_text::brewed(data, resolution, stable_brew, current_mastery_stage);

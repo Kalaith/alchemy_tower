@@ -8,9 +8,7 @@ pub(crate) fn save(save_data: &SaveData) -> Result<(), String> {
 }
 
 pub(crate) fn exists() -> bool {
-    save_path()
-        .map(|path| path.exists())
-        .unwrap_or_default()
+    save_path().map(|path| path.exists()).unwrap_or_default()
 }
 
 pub(crate) fn load() -> Result<SaveData, String> {

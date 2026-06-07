@@ -114,10 +114,7 @@ impl GameplayState {
             && (near_quest_npc || !self.available_board_quests(data).is_empty())
         {
             self.runtime.tutorial.quest_hint_shown = true;
-            return Some((
-                ui_copy("tutorial_quest").to_owned(),
-                TutorialHintTone::Goal,
-            ));
+            return Some((ui_copy("tutorial_quest").to_owned(), TutorialHintTone::Goal));
         }
         if !self.runtime.tutorial.delivery_hint_shown && self.tutorial_delivery_ready(data) {
             self.runtime.tutorial.delivery_hint_shown = true;

@@ -30,11 +30,7 @@ fn point_inside_expanded_blocker(area: &AreaDefinition, point: Vec2, margin: f32
     })
 }
 
-pub(super) fn point_outside_path_blockers(
-    area: &AreaDefinition,
-    point: Vec2,
-    margin: f32,
-) -> bool {
+pub(super) fn point_outside_path_blockers(area: &AreaDefinition, point: Vec2, margin: f32) -> bool {
     !point_inside_expanded_blocker(area, point, margin)
 }
 

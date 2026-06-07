@@ -110,5 +110,4 @@ impl GameplayState {
             .iter()
             .any(|entry| entry.id == id)
     }
-
 }

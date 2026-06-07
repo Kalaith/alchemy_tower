@@ -1,9 +1,9 @@
 use super::hud_belt_frame::*;
 use super::hud_belt_slots::*;
 use super::hud_primitives::*;
+use super::truncate_text_to_width;
 use super::HudView;
 use crate::art::ArtAssets;
-use super::truncate_text_to_width;
 use macroquad::prelude::*;
 
 pub(super) fn draw_potion_belt(view: &HudView, art: &ArtAssets) {

@@ -1,8 +1,8 @@
+use super::{draw_action_button, draw_panel_frame, draw_wrapped_text};
 use crate::pause_layout::{
     load_pause_button_rect, pause_menu_button_rect, pause_panel_rect, resume_pause_button_rect,
     save_pause_button_rect,
 };
-use super::{draw_action_button, draw_panel_frame, draw_wrapped_text};
 use crate::view_models::pause::PauseOverlayView;
 use macroquad::prelude::*;
 use macroquad_toolkit::colors::dark;

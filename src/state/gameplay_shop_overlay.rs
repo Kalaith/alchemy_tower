@@ -60,7 +60,11 @@ impl GameplayState {
             .into_iter()
             .enumerate()
             .map(|(index, draft)| {
-                let amount = self.inventory.get(&draft.item_id).copied().unwrap_or_default();
+                let amount = self
+                    .inventory
+                    .get(&draft.item_id)
+                    .copied()
+                    .unwrap_or_default();
                 let detail = self.inventory_reference_summary(data, &draft.item_id);
                 let price = draft.price.to_string();
                 let extra = if buying {
@@ -95,7 +99,10 @@ impl GameplayState {
             } else {
                 ui_copy("overlay_shop_sellable_stock").to_owned()
             },
-            sort_text: ui_format("overlay_sort_mode", &[("mode", self.inventory_sort_label())]),
+            sort_text: ui_format(
+                "overlay_sort_mode",
+                &[("mode", self.inventory_sort_label())],
+            ),
             empty_text: if buying {
                 self.unavailable_state_text(ui_copy("overlay_shop_empty_buy"))
             } else {

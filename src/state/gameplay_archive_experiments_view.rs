@@ -23,9 +23,8 @@ impl GameplayState {
                 title: ui_copy("overlay_experiment_history").to_owned(),
                 filter_text,
                 page_text: None,
-                empty_text: self.unavailable_state_text(
-                    ui_copy("overlay_archive_empty_experiments"),
-                ),
+                empty_text: self
+                    .unavailable_state_text(ui_copy("overlay_archive_empty_experiments")),
                 entries: Vec::new(),
                 selected_record: None,
             };
@@ -77,7 +76,9 @@ impl GameplayState {
             )),
             empty_text: String::new(),
             entries: row_entries,
-            selected_record: Some(self.archive_experiment_record_view(data, entries[selected_index])),
+            selected_record: Some(
+                self.archive_experiment_record_view(data, entries[selected_index]),
+            ),
         }
     }
 
@@ -88,7 +89,10 @@ impl GameplayState {
     ) -> ArchiveExperimentRecordView {
         ArchiveExperimentRecordView {
             title: ui_copy("overlay_selected_record").to_owned(),
-            output_text: ui_format("overlay_output", &[("item", data.item_name(&entry.output_item_id))]),
+            output_text: ui_format(
+                "overlay_output",
+                &[("item", data.item_name(&entry.output_item_id))],
+            ),
             quality_text: ui_format(
                 "overlay_archive_quality",
                 &[
@@ -113,7 +117,10 @@ impl GameplayState {
             ),
             morph_text: ui_format(
                 "overlay_archive_morph",
-                &[("item", &archive_item_name(data, &entry.morph_output_item_id))],
+                &[(
+                    "item",
+                    &archive_item_name(data, &entry.morph_output_item_id),
+                )],
             ),
             recipe_memory: self.archive_experiment_recipe_memory_view(data, entry),
         }
@@ -124,11 +131,17 @@ impl GameplayState {
         data: &GameData,
         entry: &ExperimentLogEntry,
     ) -> Option<ArchiveExperimentRecipeMemoryView> {
-        let recipe = data.recipes.iter().find(|recipe| recipe.id == entry.recipe_id)?;
+        let recipe = data
+            .recipes
+            .iter()
+            .find(|recipe| recipe.id == entry.recipe_id)?;
         Some(ArchiveExperimentRecipeMemoryView {
             mastery_text: ui_format(
                 "overlay_archive_mastery_now",
-                &[("stage", mastery_stage(self.recipe_mastery_brews(&recipe.id)))],
+                &[(
+                    "stage",
+                    mastery_stage(self.recipe_mastery_brews(&recipe.id)),
+                )],
             ),
             memory_text: ui_format(
                 "overlay_archive_memory",

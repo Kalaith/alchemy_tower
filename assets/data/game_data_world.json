@@ -19,6 +19,7 @@
         110,
         255
       ],
+      "footstep_sound_set": "stone",
       "render": {
         "blocker_style": "shelf",
         "blocker_primary": [
@@ -1713,6 +1714,7 @@
         116,
         255
       ],
+      "footstep_sound_set": "greenhouse",
       "blockers": [
         {
           "x": 94.0,
@@ -1877,6 +1879,7 @@
         172,
         255
       ],
+      "footstep_sound_set": "stone",
       "blockers": [
         {
           "x": 100.0,
@@ -1962,6 +1965,7 @@
         166,
         255
       ],
+      "footstep_sound_set": "stone",
       "blockers": [
         {
           "x": 100.0,
@@ -2040,6 +2044,7 @@
         106,
         255
       ],
+      "footstep_sound_set": "stone",
       "blockers": [
         {
           "x": 110.0,
@@ -2116,6 +2121,7 @@
         180,
         255
       ],
+      "footstep_sound_set": "stone",
       "blockers": [
         {
           "x": 140.0,

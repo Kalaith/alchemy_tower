@@ -1,10 +1,10 @@
 use super::menu_background::{draw_title_background, draw_title_vignette};
-use crate::menu_layout::{
-    fullscreen_toggle_rect, settings_back_rect, settings_rect, status_y, title_button_rect,
-};
 use super::{draw_action_button, draw_wrapped_text, truncate_text_to_width};
 use crate::art::ArtAssets;
 use crate::data::GameData;
+use crate::menu_layout::{
+    fullscreen_toggle_rect, settings_back_rect, settings_rect, status_y, title_button_rect,
+};
 use crate::view_models::menu::MenuScreenView;
 use macroquad::prelude::*;
 use macroquad_toolkit::colors::dark;
@@ -26,12 +26,7 @@ fn draw_title_text(view: &MenuScreenView) {
     let subtitle_size = if screen_width() < 760.0 { 21.0 } else { 26.0 };
     let title_y = if screen_height() < 500.0 { 78.0 } else { 128.0 };
 
-    draw_centered_shadow_text(
-        &view.title,
-        title_y,
-        title_size,
-        dark::TEXT_BRIGHT,
-    );
+    draw_centered_shadow_text(&view.title, title_y, title_size, dark::TEXT_BRIGHT);
     draw_centered_shadow_text(
         &view.subtitle,
         title_y + title_size * 0.74,
@@ -41,9 +36,13 @@ fn draw_title_text(view: &MenuScreenView) {
 }
 
 fn draw_title_buttons(view: &MenuScreenView) {
-    for (index, label) in [&view.new_game_label, &view.load_game_label, &view.settings_label]
-        .iter()
-        .enumerate()
+    for (index, label) in [
+        &view.new_game_label,
+        &view.load_game_label,
+        &view.settings_label,
+    ]
+    .iter()
+    .enumerate()
     {
         draw_action_button(title_button_rect(index), label, 24.0);
     }
@@ -83,11 +82,7 @@ fn draw_settings(view: &MenuScreenView) {
         Color::from_rgba(238, 231, 214, 224),
     );
 
-    draw_action_button(
-        fullscreen_toggle_rect(),
-        &view.fullscreen_label,
-        24.0,
-    );
+    draw_action_button(fullscreen_toggle_rect(), &view.fullscreen_label, 24.0);
     draw_action_button(settings_back_rect(), &view.settings_back_label, 24.0);
 }
 

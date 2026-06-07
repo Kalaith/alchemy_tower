@@ -39,6 +39,7 @@ impl GameplayState {
     ) {
         let growth_target = planter_growth_target(station, state);
         let days_left = growth_target.saturating_sub(state.growth_days);
-        self.runtime.status_text = report_text::planter_status(station, state, growth_target, days_left);
+        self.runtime.status_text =
+            report_text::planter_status(station, state, growth_target, days_left);
     }
 }

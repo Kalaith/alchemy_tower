@@ -2,7 +2,7 @@ use super::world_marker_plates::draw_world_marker_plate;
 #[path = "world_warp_markers.rs"]
 mod world_warp_markers;
 
-pub(crate) use self::world_warp_markers::{draw_unlock_ready_warp_glow, draw_warp_marker};
+pub(crate) use self::world_warp_markers::draw_warp_marker;
 
 use crate::art::{
     draw_character_frame, draw_gather_node_marker, draw_priority_marker, draw_station_marker,

@@ -39,8 +39,11 @@ pub(super) fn apply_save_snapshot(
         .collect();
     state.world.gathered_nodes = save.gathered_nodes.into_iter().collect();
     state.progression.known_recipes = save.known_recipes.into_iter().collect();
-    state.progression.herb_memories =
-        restored_herb_memories(save.herb_memories, save.field_journal, state.world.day_index);
+    state.progression.herb_memories = restored_herb_memories(
+        save.herb_memories,
+        save.field_journal,
+        state.world.day_index,
+    );
     state.progression.started_quests = save.started_quests.into_iter().collect();
     state.progression.completed_quests = save.completed_quests.into_iter().collect();
     state.progression.recipe_mastery = save

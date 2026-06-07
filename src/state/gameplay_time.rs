@@ -65,5 +65,4 @@ impl GameplayState {
             self.sleep_until(data, 10.0 * 60.0, true);
         }
     }
-
 }

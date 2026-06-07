@@ -392,7 +392,14 @@
       "required_effect_kind": "restore",
       "prerequisite_quests": [],
       "required_unlocked_warp": "",
-      "minimum_total_brews": 0
+      "minimum_total_brews": 0,
+      "completion_milestones": [
+        {
+          "id": "first_town_relief",
+          "title": "First Town Relief",
+          "text": "Mira's first delivered draught changed the conversation in the square. The tower is no longer just a ruin above town. It has begun helping again."
+        }
+      ]
     },
     {
       "id": "glow_for_rowan",
@@ -426,7 +433,14 @@
         "glow_for_rowan"
       ],
       "required_unlocked_warp": "entry_to_greenhouse",
-      "minimum_total_brews": 12
+      "minimum_total_brews": 12,
+      "completion_milestones": [
+        {
+          "id": "greenhouse_expanded",
+          "title": "Greenhouse Expanded",
+          "text": "Brin reset the old planter wards. A new moon bed is active on the north side of the greenhouse, and the town finally has reason to believe the valley can recover in more than scraps."
+        }
+      ]
     },
     {
       "id": "stamina_for_elric",
@@ -509,7 +523,14 @@
         "cultivation_for_brin"
       ],
       "required_unlocked_warp": "greenhouse_to_containment",
-      "minimum_total_brews": 18
+      "minimum_total_brews": 18,
+      "completion_milestones": [
+        {
+          "id": "containment_stable",
+          "title": "Habitats Stabilized",
+          "text": "Lyra tuned the habitat wards. Gentle collection from tower creatures can now support regular alchemical work."
+        }
+      ]
     }
   ]
 }

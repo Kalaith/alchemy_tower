@@ -34,7 +34,10 @@ pub(super) fn planter_status(
         "gameplay_planter_status",
         &[
             ("station", &station.name),
-            ("stage", planter_stage_label(state.growth_days, growth_target)),
+            (
+                "stage",
+                planter_stage_label(state.growth_days, growth_target),
+            ),
             ("days", &days_left.to_string()),
         ],
     )

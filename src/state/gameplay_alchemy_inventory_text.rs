@@ -4,10 +4,7 @@ use crate::data::GameData;
 pub(super) fn new_best_brew(data: &GameData, item_id: &str, quality_band: &str) -> String {
     ui_format(
         "inventory_new_best",
-        &[
-            ("item", data.item_name(item_id)),
-            ("band", quality_band),
-        ],
+        &[("item", data.item_name(item_id)), ("band", quality_band)],
     )
 }
 

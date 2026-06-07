@@ -17,10 +17,7 @@ pub(crate) struct NarrativeText {
 pub(crate) struct NarrativeMilestones {
     pub(crate) entry_lab_recovered: NarrativeMilestone,
     pub(crate) archive_revelation: NarrativeMilestone,
-    pub(crate) greenhouse_expanded: NarrativeMilestone,
     pub(crate) first_true_brew: NarrativeMilestone,
-    pub(crate) first_town_relief: NarrativeMilestone,
-    pub(crate) containment_stable: NarrativeMilestone,
     pub(crate) containment_started: NarrativeMilestone,
     pub(crate) first_rune_imbuing: NarrativeMilestone,
     pub(crate) observatory_ending: NarrativeMilestone,

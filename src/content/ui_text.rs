@@ -104,7 +104,9 @@ pub(crate) fn ui_copy(key: &str) -> &'static str {
             let Ok(mut cache) = cache.lock() else {
                 return missing_ui_copy(key);
             };
-            *cache.entry(key.to_owned()).or_insert_with(|| missing_ui_copy(key))
+            *cache
+                .entry(key.to_owned())
+                .or_insert_with(|| missing_ui_copy(key))
         })
 }
 

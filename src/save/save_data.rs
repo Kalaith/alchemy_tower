@@ -3,9 +3,6 @@
 #[cfg(not(target_arch = "wasm32"))]
 #[path = "save_native.rs"]
 mod platform;
-#[cfg(not(target_arch = "wasm32"))]
-#[path = "save_native_path.rs"]
-mod save_native_path;
 #[cfg(target_arch = "wasm32")]
 #[path = "save_wasm.rs"]
 mod platform;
@@ -13,9 +10,9 @@ mod platform;
 mod save_codec;
 #[path = "save_errors.rs"]
 mod save_errors;
+#[cfg(not(target_arch = "wasm32"))]
+#[path = "save_native_path.rs"]
+mod save_native_path;
 
 pub(crate) use self::platform::{exists, load, save};
-pub(crate) use self::save_errors::{
-    SAVE_ERROR_USER_DATA_DIR_MISSING, SAVE_ERROR_WASM_LOAD_UNAVAILABLE,
-    SAVE_ERROR_WASM_SAVE_UNAVAILABLE,
-};
+pub(crate) use self::save_errors::SAVE_ERROR_USER_DATA_DIR_MISSING;

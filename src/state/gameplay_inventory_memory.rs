@@ -105,8 +105,8 @@ impl GameplayState {
         } else {
             profile.effect_kinds.join(", ")
         };
-        let traits_text = (!profile.inherited_traits.is_empty())
-            .then(|| profile.inherited_traits.join(", "));
+        let traits_text =
+            (!profile.inherited_traits.is_empty()).then(|| profile.inherited_traits.join(", "));
         Some(JournalPotionProfileSummary {
             effects_text,
             traits_text,

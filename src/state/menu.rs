@@ -44,7 +44,9 @@ impl MenuState {
         }
 
         match selected_title_action() {
-            Some(TitleAction::NewGame) => Some(StateTransition::EnterGameplay(GameplayState::new(data))),
+            Some(TitleAction::NewGame) => {
+                Some(StateTransition::EnterGameplay(GameplayState::new(data)))
+            }
             Some(TitleAction::LoadGame) => self.load_game(data),
             Some(TitleAction::Settings) => {
                 self.mode = TitleMode::Settings;

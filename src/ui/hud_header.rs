@@ -1,11 +1,10 @@
 use super::hud_atmosphere::*;
 use super::hud_banner::*;
 use super::hud_banner_hardware::*;
-use super::hud_chrome::*;
 use super::hud_gem_mount::*;
 use super::hud_primitives::*;
-use super::HudView;
 use super::truncate_text_to_width;
+use super::HudView;
 use macroquad::prelude::*;
 
 pub(super) fn draw_hud_vignette() {

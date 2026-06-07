@@ -8,6 +8,15 @@
     "move_speed": 220.0,
     "interaction_range": 28.0,
     "day_length_seconds": 600.0,
-    "save_version": 5
+    "save_version": 5,
+    "archive_required_completed_quests": [
+      "star_elixir_for_ione",
+      "containment_for_lyra"
+    ],
+    "archive_required_journal_milestones": [
+      "greenhouse_repaired",
+      "containment_repaired",
+      "rune_workshop_restored"
+    ]
   }
 }

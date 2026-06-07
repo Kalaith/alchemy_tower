@@ -25,13 +25,16 @@ impl GameplayState {
         ))
     }
 
-    pub(super) fn milestone_status_lines(&self) -> Vec<(&'static str, String, bool)> {
+    pub(super) fn milestone_status_lines(
+        &self,
+        data: &GameData,
+    ) -> Vec<(&'static str, String, bool)> {
         let greenhouse_restored = self
             .progression
             .unlocked_warps
             .contains("entry_to_greenhouse");
         let archive_recovered = self.has_journal_milestone("archive_revelation");
-        let archive_ready = self.can_reconstruct_archive();
+        let archive_ready = self.can_reconstruct_archive(data);
 
         vec![
             journal_support_text::greenhouse_status(greenhouse_restored),

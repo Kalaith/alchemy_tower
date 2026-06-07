@@ -66,7 +66,6 @@ impl GameplayState {
             feedbacks: self.build_hud_feedbacks(area),
         }
     }
-
 }
 
 fn hud_control_tags() -> Vec<HudControlTag> {
