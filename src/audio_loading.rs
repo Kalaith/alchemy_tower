@@ -1,5 +1,6 @@
-use macroquad::audio::{load_sound, load_sound_from_bytes, Sound};
+use macroquad::audio::Sound;
 use macroquad_toolkit::assets::AssetPack;
+use macroquad_toolkit::audio::load_sound_from_pack_or_file;
 
 const GENERATED_ASSET_PACK: &str = "assets/generated.zip";
 
@@ -39,23 +40,7 @@ async fn load_variation(
     asset_pack: Option<&AssetPack>,
 ) -> Result<Sound, String> {
     let path = variation_path(base_name, index);
-    let mut failures = Vec::new();
-    if let Some(bytes) = asset_pack.and_then(|pack| pack.bytes(&path)) {
-        match load_sound_from_bytes(bytes).await {
-            Ok(sound) => return Ok(sound),
-            Err(error) => failures.push(format!("packed decode failed: {error:?}")),
-        }
-    } else if asset_pack.is_some() {
-        failures.push("missing from generated asset pack".to_owned());
-    }
-
-    match load_sound(&path).await {
-        Ok(sound) => Ok(sound),
-        Err(error) => {
-            failures.push(format!("loose file load failed: {error:?}"));
-            Err(format!("{} ({})", path, failures.join("; ")))
-        }
-    }
+    load_sound_from_pack_or_file(asset_pack, &path).await
 }
 
 pub(super) fn variation_path(base_name: &str, index: usize) -> String {
