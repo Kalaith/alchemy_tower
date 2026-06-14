@@ -2,6 +2,7 @@ use super::super::hud_compass::*;
 use super::super::hud_primitives::*;
 use super::super::HudView;
 use macroquad::prelude::*;
+use macroquad_toolkit::ui::draw_ui_text;
 
 pub(super) fn draw_minimap_frame(view: &HudView) {
     let center = vec2(screen_width() - 62.0, 82.0);
@@ -71,7 +72,7 @@ pub(super) fn draw_minimap_frame(view: &HudView) {
     ] {
         draw_small_diamond(marker, brass_light());
     }
-    draw_text(
+    draw_ui_text(
         &view.minimap_north_label,
         center.x - 6.0,
         center.y - radius + 17.0,

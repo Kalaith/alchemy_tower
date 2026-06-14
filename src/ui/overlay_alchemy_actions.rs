@@ -1,8 +1,9 @@
 use super::draw_action_button;
 use crate::alchemy_layout::{brew_rect_at, clear_rect_at, repeat_rect_at, sort_rect_at};
 use crate::view_models::alchemy::AlchemyActionButtonsView;
-use macroquad::prelude::{draw_rectangle, draw_rectangle_lines, draw_text, Color};
+use macroquad::prelude::{draw_rectangle, draw_rectangle_lines, Color};
 use macroquad_toolkit::colors::dark;
+use macroquad_toolkit::ui::draw_ui_text;
 
 pub(crate) fn draw_alchemy_action_buttons(view: &AlchemyActionButtonsView, x: f32, y: f32) {
     draw_action_button(sort_rect_at(x, y), view.sort_label, 0.0);
@@ -24,7 +25,7 @@ pub(crate) fn draw_alchemy_action_buttons(view: &AlchemyActionButtonsView, x: f3
         1.5,
         Color::from_rgba(188, 255, 220, 96),
     );
-    draw_text(
+    draw_ui_text(
         view.brew_label,
         brew.x + 28.0,
         brew.y + 20.0,

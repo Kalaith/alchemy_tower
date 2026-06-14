@@ -8,6 +8,7 @@ use crate::menu_layout::{
 use crate::view_models::menu::MenuScreenView;
 use macroquad::prelude::*;
 use macroquad_toolkit::colors::dark;
+use macroquad_toolkit::ui::{draw_ui_text, measure_ui_text};
 
 pub(crate) fn draw_menu_screen(data: &GameData, art: &ArtAssets, view: &MenuScreenView) {
     let has_title_screen = draw_title_background(data, art);
@@ -65,7 +66,7 @@ fn draw_settings(view: &MenuScreenView) {
         1.5,
         Color::from_rgba(240, 218, 168, 118),
     );
-    draw_text(
+    draw_ui_text(
         &view.settings_title,
         rect.x + 24.0,
         rect.y + 42.0,
@@ -92,27 +93,27 @@ fn draw_title_status(status_text: &str) {
     }
 
     let safe = truncate_text_to_width(status_text, screen_width() - 72.0, 20.0);
-    let measured = measure_text(&safe, None, 20, 1.0);
+    let measured = measure_ui_text(&safe, None, 20, 1.0);
     let x = screen_width() * 0.5 - measured.width * 0.5;
     let y = status_y();
 
-    draw_text(
+    draw_ui_text(
         &safe,
         x + 1.0,
         y + 1.0,
         20.0,
         Color::from_rgba(0, 0, 0, 190),
     );
-    draw_text(&safe, x, y, 20.0, Color::from_rgba(238, 231, 214, 230));
+    draw_ui_text(&safe, x, y, 20.0, Color::from_rgba(238, 231, 214, 230));
 }
 
 fn draw_centered_shadow_text(text: &str, y: f32, font_size: f32, color: Color) {
     let safe = truncate_text_to_width(text, screen_width() - 64.0, font_size);
-    let measured = measure_text(&safe, None, font_size as u16, 1.0);
+    let measured = measure_ui_text(&safe, None, font_size as u16, 1.0);
     let x = screen_width() * 0.5 - measured.width * 0.5;
 
     for (offset_x, offset_y) in [(-2.0, 2.0), (2.0, 2.0), (0.0, 4.0)] {
-        draw_text(
+        draw_ui_text(
             &safe,
             x + offset_x,
             y + offset_y,
@@ -120,5 +121,5 @@ fn draw_centered_shadow_text(text: &str, y: f32, font_size: f32, color: Color) {
             Color::from_rgba(0, 0, 0, 180),
         );
     }
-    draw_text(&safe, x, y, font_size, color);
+    draw_ui_text(&safe, x, y, font_size, color);
 }

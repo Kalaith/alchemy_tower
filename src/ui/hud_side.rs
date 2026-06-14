@@ -5,6 +5,7 @@ pub(super) use super::hud_side_hardware::{
 };
 use super::HudView;
 use macroquad::prelude::*;
+use macroquad_toolkit::ui::draw_ui_text;
 
 pub(super) fn draw_side_status_panel(view: &HudView) {
     let rect = Rect::new(screen_width() - 104.0, 214.0, 84.0, 238.0);
@@ -25,7 +26,7 @@ pub(super) fn draw_side_status_panel(view: &HudView) {
         Color::from_rgba(222, 174, 112, 84),
     );
     draw_bag_icon(vec2(rect.x + 29.0, rect.y + 52.0), 0.82);
-    draw_text(
+    draw_ui_text(
         &view.inventory_count.to_string(),
         rect.x + 48.0,
         rect.y + 58.0,

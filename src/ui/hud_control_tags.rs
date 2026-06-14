@@ -2,6 +2,7 @@ use super::hud_chrome::*;
 use super::hud_primitives::*;
 use super::HudView;
 use macroquad::prelude::*;
+use macroquad_toolkit::ui::draw_ui_text;
 
 pub(super) fn draw_control_tags(view: &HudView) {
     let x = 22.0;
@@ -22,7 +23,7 @@ fn draw_control_tag(rect: Rect, key: &str, label: &str) {
         key,
         false,
     );
-    draw_text(
+    draw_ui_text(
         label,
         rect.x + 64.0,
         rect.y + 22.0,

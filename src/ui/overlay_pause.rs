@@ -6,6 +6,7 @@ use crate::pause_layout::{
 use crate::view_models::pause::PauseOverlayView;
 use macroquad::prelude::*;
 use macroquad_toolkit::colors::dark;
+use macroquad_toolkit::ui::draw_ui_text;
 
 pub(crate) fn draw_pause_overlay(view: &PauseOverlayView) {
     let panel = pause_panel_rect();
@@ -18,7 +19,7 @@ pub(crate) fn draw_pause_overlay(view: &PauseOverlayView) {
         Color::from_rgba(0, 0, 0, 110),
     );
     draw_panel_frame(panel);
-    draw_text(
+    draw_ui_text(
         &view.title,
         panel.x + 24.0,
         panel.y + 48.0,

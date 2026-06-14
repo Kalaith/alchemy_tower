@@ -2,6 +2,7 @@ use macroquad::prelude::*;
 use macroquad_toolkit::colors::dark;
 
 use super::truncate_text_to_width;
+use macroquad_toolkit::ui::{draw_ui_text, measure_ui_text};
 
 pub(crate) fn draw_selection_card(
     x: f32,
@@ -42,12 +43,12 @@ fn draw_selection_card_text(
     let meta_width = if meta.is_empty() {
         0.0
     } else {
-        measure_text(meta, None, 16, 1.0)
+        measure_ui_text(meta, None, 16, 1.0)
             .width
             .min((w * 0.34).max(56.0))
     };
     let title_width = (w - 30.0 - meta_width).max(80.0);
-    draw_text(
+    draw_ui_text(
         &truncate_text_to_width(title, title_width, 20.0),
         x + 18.0,
         y + 22.0,
@@ -55,7 +56,7 @@ fn draw_selection_card_text(
         text_color,
     );
     if !subtitle.is_empty() {
-        draw_text(
+        draw_ui_text(
             &truncate_text_to_width(subtitle, w - 24.0, 16.0),
             x + 18.0,
             y + 42.0,
@@ -65,8 +66,8 @@ fn draw_selection_card_text(
     }
     if !meta.is_empty() {
         let safe_meta = truncate_text_to_width(meta, (w * 0.34).max(56.0), 16.0);
-        let measured = measure_text(&safe_meta, None, 16, 1.0);
-        draw_text(
+        let measured = measure_ui_text(&safe_meta, None, 16, 1.0);
+        draw_ui_text(
             &safe_meta,
             x + w - measured.width - 12.0,
             y + 21.0,

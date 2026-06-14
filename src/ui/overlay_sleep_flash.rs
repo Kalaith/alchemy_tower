@@ -1,6 +1,7 @@
 use super::draw_panel;
 use crate::view_models::sleep::SleepFlashOverlayView;
 use macroquad::prelude::*;
+use macroquad_toolkit::ui::draw_ui_text;
 
 pub(crate) fn draw_sleep_flash_overlay_view(view: &SleepFlashOverlayView) {
     if view.remaining_seconds <= 0.0 {
@@ -23,7 +24,7 @@ pub(crate) fn draw_sleep_flash_overlay_view(view: &SleepFlashOverlayView) {
         128.0,
         &view.title,
     );
-    draw_text(
+    draw_ui_text(
         &view.body,
         screen_width() * 0.5 - 220.0,
         screen_height() * 0.5 + 10.0,

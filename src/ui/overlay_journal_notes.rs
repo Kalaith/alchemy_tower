@@ -2,6 +2,7 @@ use super::draw_wrapped_text;
 use crate::view_models::journal::JournalNotesTabView;
 use macroquad::prelude::*;
 use macroquad_toolkit::colors::dark;
+use macroquad_toolkit::ui::draw_ui_text;
 
 pub(crate) fn draw_journal_notes_tab_view(
     view: &JournalNotesTabView,
@@ -10,8 +11,8 @@ pub(crate) fn draw_journal_notes_tab_view(
     w: f32,
     h: f32,
 ) {
-    draw_text(view.title, x + 20.0, y + 136.0, 26.0, dark::TEXT_BRIGHT);
-    draw_text(
+    draw_ui_text(view.title, x + 20.0, y + 136.0, 26.0, dark::TEXT_BRIGHT);
+    draw_ui_text(
         view.active_title,
         x + 20.0,
         y + 168.0,
@@ -36,7 +37,7 @@ pub(crate) fn draw_journal_notes_tab_view(
         dark::TEXT_DIM,
     );
 
-    draw_text(
+    draw_ui_text(
         view.milestones_title,
         x + 20.0,
         y + 286.0,
@@ -45,7 +46,7 @@ pub(crate) fn draw_journal_notes_tab_view(
     );
     let mut milestone_y = y + 318.0;
     for row in &view.milestone_rows {
-        draw_text(&row.title, x + 20.0, milestone_y, 20.0, dark::TEXT_BRIGHT);
+        draw_ui_text(&row.title, x + 20.0, milestone_y, 20.0, dark::TEXT_BRIGHT);
         milestone_y += 20.0;
         draw_wrapped_text(
             &row.detail,
@@ -61,7 +62,7 @@ pub(crate) fn draw_journal_notes_tab_view(
 
     let mut note_y = y + 448.0;
     for milestone in &view.recent_milestones {
-        draw_text(&milestone.title, x + 20.0, note_y, 22.0, dark::TEXT_BRIGHT);
+        draw_ui_text(&milestone.title, x + 20.0, note_y, 22.0, dark::TEXT_BRIGHT);
         note_y += 22.0;
         draw_wrapped_text(
             &milestone.text,

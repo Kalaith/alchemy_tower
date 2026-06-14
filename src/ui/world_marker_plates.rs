@@ -1,8 +1,9 @@
 use macroquad::prelude::*;
+use macroquad_toolkit::ui::{draw_ui_text, measure_ui_text};
 
 pub(crate) fn draw_world_marker_plate(text: &str, center: Vec2, color: Color, priority: bool) {
     let font_size = if priority { 16.0 } else { 15.0 };
-    let measured = measure_text(text, None, font_size as u16, 1.0);
+    let measured = measure_ui_text(text, None, font_size as u16, 1.0);
     let width = (measured.width + 26.0).clamp(92.0, 190.0);
     let height = if priority { 24.0 } else { 22.0 };
     let rect = Rect::new(
@@ -31,7 +32,7 @@ pub(crate) fn draw_world_marker_plate(text: &str, center: Vec2, color: Color, pr
     draw_marker_beveled_lines(rect, 6.0, 1.0, border);
     draw_marker_diamond(vec2(rect.x + 8.0, rect.y + rect.h * 0.5), border);
     draw_marker_diamond(vec2(rect.x + rect.w - 8.0, rect.y + rect.h * 0.5), border);
-    draw_text(
+    draw_ui_text(
         text,
         center.x - measured.width * 0.5,
         rect.y + rect.h - 6.0,

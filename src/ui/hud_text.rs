@@ -1,5 +1,6 @@
 use super::truncate_text_to_width;
-use macroquad::prelude::{draw_text, measure_text, Color};
+use macroquad::prelude::Color;
+use macroquad_toolkit::ui::{draw_ui_text, measure_ui_text};
 
 pub(super) fn draw_centered_text(
     text: &str,
@@ -9,8 +10,8 @@ pub(super) fn draw_centered_text(
     font_size: f32,
     color: Color,
 ) {
-    let measured = measure_text(text, None, font_size as u16, 1.0);
-    draw_text(
+    let measured = measure_ui_text(text, None, font_size as u16, 1.0);
+    draw_ui_text(
         text,
         x + (width - measured.width) * 0.5,
         baseline_y,
@@ -27,7 +28,7 @@ pub(super) fn draw_centered_text_shadowed(
     font_size: f32,
     color: Color,
 ) {
-    let measured = measure_text(text, None, font_size as u16, 1.0);
+    let measured = measure_ui_text(text, None, font_size as u16, 1.0);
     draw_text_shadowed(
         text,
         x + (width - measured.width) * 0.5,
@@ -44,14 +45,14 @@ pub(super) fn draw_text_shadowed(
     font_size: f32,
     color: Color,
 ) {
-    draw_text(
+    draw_ui_text(
         text,
         x + 1.5,
         baseline_y + 2.0,
         font_size,
         Color::from_rgba(0, 0, 0, 130),
     );
-    draw_text(text, x, baseline_y, font_size, color);
+    draw_ui_text(text, x, baseline_y, font_size, color);
 }
 
 pub(super) fn draw_wrapped_text_limited(
@@ -75,6 +76,6 @@ pub(super) fn draw_wrapped_text_limited(
         }
     }
     for (index, line) in lines.iter().enumerate() {
-        draw_text(line, x, y + index as f32 * line_height, font_size, color);
+        draw_ui_text(line, x, y + index as f32 * line_height, font_size, color);
     }
 }

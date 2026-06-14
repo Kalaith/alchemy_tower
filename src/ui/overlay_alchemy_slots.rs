@@ -6,11 +6,12 @@ use crate::alchemy_layout::{
 use crate::view_models::alchemy::AlchemySlotsPanelView;
 use macroquad::prelude::*;
 use macroquad_toolkit::colors::dark;
+use macroquad_toolkit::ui::draw_ui_text;
 
 pub(crate) fn draw_alchemy_slots_panel_view(view: &AlchemySlotsPanelView, x: f32, y: f32, w: f32) {
     draw_overlay_section_title(x + 340.0, y + 84.0, view.title, None);
     draw_overlay_section_box(x + 340.0, y + 98.0, w - 360.0, 134.0);
-    draw_text(
+    draw_ui_text(
         &view.process_text,
         x + 340.0,
         y + 106.0,
@@ -45,21 +46,21 @@ pub(crate) fn draw_alchemy_slots_panel_view(view: &AlchemySlotsPanelView, x: f32
             1.5,
             Color::from_rgba(160, 170, 190, 58),
         );
-        draw_text(
+        draw_ui_text(
             &slot_view.label,
             rect.x + 16.0,
             rect.y + 26.0,
             22.0,
             dark::TEXT_BRIGHT,
         );
-        draw_text(
+        draw_ui_text(
             &slot_view.item_name,
             rect.x + 12.0,
             rect.y + 68.0,
             20.0,
             dark::TEXT,
         );
-        draw_text(
+        draw_ui_text(
             slot_view.action_text,
             rect.x + 12.0,
             rect.y + 86.0,
@@ -90,21 +91,21 @@ pub(crate) fn draw_alchemy_slots_panel_view(view: &AlchemySlotsPanelView, x: f32
         1.5,
         Color::from_rgba(160, 170, 190, 58),
     );
-    draw_text(
+    draw_ui_text(
         view.catalyst_label,
         catalyst.x + 16.0,
         catalyst.y + 26.0,
         22.0,
         dark::TEXT_BRIGHT,
     );
-    draw_text(
+    draw_ui_text(
         &view.catalyst.item_name,
         catalyst.x + 12.0,
         catalyst.y + 68.0,
         20.0,
         dark::TEXT,
     );
-    draw_text(
+    draw_ui_text(
         view.catalyst.action_text,
         catalyst.x + 12.0,
         catalyst.y + 86.0,

@@ -1,10 +1,11 @@
 use macroquad::prelude::*;
 use macroquad_toolkit::colors::dark;
+use macroquad_toolkit::ui::{draw_ui_text, measure_ui_text};
 
 pub(crate) fn draw_overlay_section_title(x: f32, y: f32, title: &str, meta: Option<&str>) {
-    draw_text(title, x, y, 24.0, dark::TEXT_BRIGHT);
+    draw_ui_text(title, x, y, 24.0, dark::TEXT_BRIGHT);
     if let Some(meta) = meta {
-        draw_text(meta, x + 208.0, y, 18.0, dark::TEXT_DIM);
+        draw_ui_text(meta, x + 208.0, y, 18.0, dark::TEXT_DIM);
     }
 }
 
@@ -37,8 +38,8 @@ pub(crate) fn draw_overlay_tab(rect: Rect, label: &str, selected: bool) {
             Color::from_rgba(160, 170, 190, 56)
         },
     );
-    let measured = measure_text(label, None, 18, 1.0);
-    draw_text(
+    let measured = measure_ui_text(label, None, 18, 1.0);
+    draw_ui_text(
         label,
         rect.x + (rect.w - measured.width) * 0.5,
         rect.y + 21.0,

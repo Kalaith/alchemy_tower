@@ -2,6 +2,7 @@ use crate::art::{draw_texture_centered, ArtAssets};
 use crate::input::mouse_position_vec;
 use macroquad::prelude::*;
 use macroquad_toolkit::colors::dark;
+use macroquad_toolkit::ui::draw_ui_text;
 
 pub(crate) fn draw_journal_backdrop() {
     draw_rectangle(
@@ -34,7 +35,7 @@ pub(crate) fn draw_journal_close_button(close_rect: Rect, close_label: &str) {
         2.0,
         if close_hovered { WHITE } else { dark::ACCENT },
     );
-    draw_text(
+    draw_ui_text(
         close_label,
         close_rect.x + 18.0,
         close_rect.y + 19.0,
@@ -44,7 +45,7 @@ pub(crate) fn draw_journal_close_button(close_rect: Rect, close_label: &str) {
 }
 
 pub(crate) fn draw_journal_current_conditions(current_conditions_text: &str, x: f32, y: f32) {
-    draw_text(
+    draw_ui_text(
         current_conditions_text,
         x + 20.0,
         y + 50.0,
@@ -88,7 +89,7 @@ pub(crate) fn draw_journal_tabs(
                 dark::ACCENT
             },
         );
-        draw_text(
+        draw_ui_text(
             tab,
             rect.x + 34.0,
             rect.y + 20.0,
@@ -111,5 +112,5 @@ pub(crate) fn draw_journal_tabs(
 }
 
 pub(crate) fn draw_journal_footer(footer_text: &str, x: f32, y: f32, h: f32) {
-    draw_text(footer_text, x + 20.0, y + h - 20.0, 18.0, dark::TEXT_DIM);
+    draw_ui_text(footer_text, x + 20.0, y + h - 20.0, 18.0, dark::TEXT_DIM);
 }

@@ -1,4 +1,5 @@
 use macroquad::prelude::*;
+use macroquad_toolkit::ui::draw_ui_text;
 
 pub(crate) fn wrapped_lines(text: &str, max_width: f32, font_size: f32) -> Vec<String> {
     macroquad_toolkit::ui::wrap_text(text, max_width, font_size)
@@ -9,7 +10,7 @@ pub(crate) fn truncate_text_to_width(text: &str, max_width: f32, font_size: f32)
 }
 
 pub(crate) fn draw_missing_area_message(text: &str) {
-    draw_text(text, 40.0, 80.0, 32.0, RED);
+    draw_ui_text(text, 40.0, 80.0, 32.0, RED);
 }
 
 pub(crate) fn draw_wrapped_text(
@@ -23,7 +24,7 @@ pub(crate) fn draw_wrapped_text(
 ) {
     let mut line_y = y;
     for line in wrapped_lines(text, max_width, font_size) {
-        draw_text(&line, x, line_y, font_size, color);
+        draw_ui_text(&line, x, line_y, font_size, color);
         line_y += line_height;
     }
 }

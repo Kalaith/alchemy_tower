@@ -2,6 +2,7 @@ use super::hud_chrome::*;
 use super::hud_primitives::*;
 use super::HudView;
 use macroquad::prelude::*;
+use macroquad_toolkit::ui::draw_ui_text;
 
 pub(super) fn draw_vitality_medallion(view: &HudView) {
     let center = vec2(86.0, 88.0);
@@ -75,7 +76,7 @@ pub(super) fn draw_coin_chip(view: &HudView) {
     draw_ornate_panel(rect, fill_slate(), 0.9);
     draw_panel_filigree(rect, 0.46);
     draw_coin_face(vec2(rect.x + 30.0, rect.y + 27.0));
-    draw_text(
+    draw_ui_text(
         &view.coins_label,
         rect.x + 54.0,
         rect.y + 22.0,

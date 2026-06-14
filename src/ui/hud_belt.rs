@@ -5,6 +5,7 @@ use super::truncate_text_to_width;
 use super::HudView;
 use crate::art::ArtAssets;
 use macroquad::prelude::*;
+use macroquad_toolkit::ui::draw_ui_text;
 
 pub(super) fn draw_potion_belt(view: &HudView, art: &ArtAssets) {
     let slot_size = 58.0;
@@ -80,7 +81,7 @@ pub(super) fn draw_status_strip(view: &HudView) {
     let y = screen_height() - 148.0;
     let rect = Rect::new(x, y, width, 34.0);
     draw_ornate_panel(rect, Color::from_rgba(17, 17, 19, 168), 0.66);
-    draw_text(
+    draw_ui_text(
         &truncate_text_to_width(&view.status_text, width - 24.0, 17.0),
         x + 12.0,
         y + 22.0,

@@ -1,4 +1,5 @@
 use super::world_marker_plates::draw_world_marker_plate;
+use macroquad_toolkit::ui::draw_ui_text;
 #[path = "world_warp_markers.rs"]
 mod world_warp_markers;
 
@@ -60,7 +61,7 @@ pub(crate) fn draw_npc_world_marker(
         draw_circle(center.x, center.y, 18.0, fallback_color);
     }
     if show_name {
-        draw_text(
+        draw_ui_text(
             &npc.name,
             center.x - 34.0,
             center.y - 28.0,
@@ -70,7 +71,7 @@ pub(crate) fn draw_npc_world_marker(
     }
     if let Some((label, color)) = priority {
         draw_priority_marker(center, color);
-        draw_text(label, center.x - 34.0, center.y - 50.0, 18.0, color);
+        draw_ui_text(label, center.x - 34.0, center.y - 50.0, 18.0, color);
     }
 }
 

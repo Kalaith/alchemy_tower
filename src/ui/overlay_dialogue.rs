@@ -2,6 +2,7 @@ use super::{draw_panel, draw_wrapped_text};
 use crate::view_models::dialogue::DialogueOverlayView;
 use macroquad::prelude::*;
 use macroquad_toolkit::colors::dark;
+use macroquad_toolkit::ui::draw_ui_text;
 
 pub(crate) fn draw_dialogue_overlay_view(view: &DialogueOverlayView) {
     draw_rectangle(
@@ -16,8 +17,8 @@ pub(crate) fn draw_dialogue_overlay_view(view: &DialogueOverlayView) {
     let w = screen_width() - 360.0;
     let h = 226.0;
     draw_panel(x, y, w, h, &view.title);
-    draw_text(&view.now_text, x + 20.0, y + 34.0, 18.0, dark::TEXT_DIM);
-    draw_text(&view.later_text, x + 20.0, y + 54.0, 18.0, dark::TEXT_DIM);
+    draw_ui_text(&view.now_text, x + 20.0, y + 34.0, 18.0, dark::TEXT_DIM);
+    draw_ui_text(&view.later_text, x + 20.0, y + 54.0, 18.0, dark::TEXT_DIM);
     draw_wrapped_text(
         &view.usually_text,
         x + 20.0,
@@ -36,5 +37,5 @@ pub(crate) fn draw_dialogue_overlay_view(view: &DialogueOverlayView) {
         24.0,
         dark::TEXT_BRIGHT,
     );
-    draw_text(&view.footer, x + 20.0, y + h - 28.0, 20.0, dark::TEXT_DIM);
+    draw_ui_text(&view.footer, x + 20.0, y + h - 28.0, 20.0, dark::TEXT_DIM);
 }

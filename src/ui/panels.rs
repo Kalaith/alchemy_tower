@@ -2,6 +2,7 @@ use macroquad::prelude::*;
 use macroquad_toolkit::colors::dark;
 
 use super::{draw_wrapped_text, truncate_text_to_width};
+use macroquad_toolkit::ui::draw_ui_text;
 
 pub(crate) fn draw_panel(x: f32, y: f32, width: f32, height: f32, title: &str) {
     let style = macroquad_toolkit::ui::SurfaceStyle::new(dark::PANEL)
@@ -17,7 +18,7 @@ pub(crate) fn draw_panel(x: f32, y: f32, width: f32, height: f32, title: &str) {
         1.0,
         Color::from_rgba(255, 255, 255, 28),
     );
-    draw_text(
+    draw_ui_text(
         &truncate_text_to_width(title, width - 24.0, 22.0),
         x + 12.0,
         y + 24.0,
@@ -65,7 +66,7 @@ pub(crate) fn draw_overlay_footer(x: f32, y: f32, w: f32, h: f32, text: &str) {
         Rect::new(x + 16.0, y + h - 48.0, w - 32.0, 34.0),
         &surface,
     );
-    draw_text(
+    draw_ui_text(
         &truncate_text_to_width(text, w - 48.0, 18.0),
         x + 24.0,
         y + h - 23.0,

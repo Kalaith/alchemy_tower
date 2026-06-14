@@ -4,6 +4,7 @@ use super::hud_primitives::*;
 use super::HudPotionSlot;
 use crate::art::{draw_texture_centered, ArtAssets};
 use macroquad::prelude::*;
+use macroquad_toolkit::ui::draw_ui_text;
 
 #[path = "hud_belt_slot_art.rs"]
 mod hud_belt_slot_art;
@@ -28,7 +29,7 @@ pub(super) fn draw_hotbar_slot(rect: Rect, slot: &HudPotionSlot, art: &ArtAssets
             );
         }
         hud_belt_slot_art::draw_slot_sparkle(rect, slot_glow(index), 0.42);
-        draw_text(
+        draw_ui_text(
             &slot.amount.to_string(),
             rect.x + rect.w - 17.0,
             rect.y + rect.h - 9.0,

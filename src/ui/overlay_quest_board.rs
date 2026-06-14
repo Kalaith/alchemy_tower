@@ -4,8 +4,8 @@ use super::{
     draw_state_banner, draw_wrapped_text, standard_overlay_panel_rect,
 };
 use crate::view_models::quest_board::QuestBoardOverlayView;
-use macroquad::prelude::draw_text;
 use macroquad_toolkit::colors::dark;
+use macroquad_toolkit::ui::draw_ui_text;
 
 pub(crate) fn draw_quest_board_overlay_view(view: &QuestBoardOverlayView) {
     draw_overlay_backdrop();
@@ -37,7 +37,7 @@ pub(crate) fn draw_quest_board_overlay_view(view: &QuestBoardOverlayView) {
             row_y += 64.0;
         }
     }
-    draw_text(
+    draw_ui_text(
         &view.locked_title,
         x + 20.0,
         y + h - 200.0,
@@ -54,7 +54,7 @@ pub(crate) fn draw_quest_board_overlay_view(view: &QuestBoardOverlayView) {
         18.0,
         dark::TEXT_DIM,
     );
-    draw_text(
+    draw_ui_text(
         &view.active_title,
         x + 20.0,
         y + h - 120.0,

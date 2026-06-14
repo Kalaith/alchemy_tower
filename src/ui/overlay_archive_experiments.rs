@@ -1,8 +1,8 @@
 use super::draw_selected_experiment_record_view;
 use super::{draw_selection_card, draw_state_banner};
 use crate::view_models::archive::ArchiveExperimentsSectionView;
-use macroquad::prelude::draw_text;
 use macroquad_toolkit::colors::dark;
+use macroquad_toolkit::ui::draw_ui_text;
 
 pub(crate) fn draw_archive_experiments_section_view(
     view: &ArchiveExperimentsSectionView,
@@ -11,8 +11,8 @@ pub(crate) fn draw_archive_experiments_section_view(
     w: f32,
     _h: f32,
 ) {
-    draw_text(&view.title, x + 20.0, y + 122.0, 26.0, dark::TEXT_BRIGHT);
-    draw_text(
+    draw_ui_text(&view.title, x + 20.0, y + 122.0, 26.0, dark::TEXT_BRIGHT);
+    draw_ui_text(
         &view.filter_text,
         x + 220.0,
         y + 122.0,
@@ -25,7 +25,7 @@ pub(crate) fn draw_archive_experiments_section_view(
     }
 
     if let Some(page_text) = &view.page_text {
-        draw_text(page_text, x + 320.0, y + 122.0, 20.0, dark::TEXT_DIM);
+        draw_ui_text(page_text, x + 320.0, y + 122.0, 20.0, dark::TEXT_DIM);
     }
     let mut list_y = y + 154.0;
     for entry in &view.entries {

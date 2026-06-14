@@ -1,4 +1,5 @@
 use macroquad::prelude::*;
+use macroquad_toolkit::ui::{draw_ui_text, measure_ui_text};
 
 #[path = "prompt_chrome.rs"]
 mod prompt_chrome;
@@ -10,7 +11,7 @@ use self::prompt_shapes::*;
 
 pub(crate) fn draw_interaction_prompt(text: &str) {
     let (key, label) = split_prompt(text);
-    let label_width = measure_text(label, None, 22, 1.0).width;
+    let label_width = measure_ui_text(label, None, 22, 1.0).width;
     let width = (label_width + 178.0).clamp(320.0, 470.0);
     let x = screen_width() - width - 24.0;
     let y = screen_height() - 78.0;
@@ -43,7 +44,7 @@ pub(crate) fn draw_interaction_prompt(text: &str) {
         0.8,
         Color::from_rgba(249, 224, 158, 86),
     );
-    draw_text(
+    draw_ui_text(
         &truncate_to_width(label, width - 118.0, 22.0),
         label_rect.x + 19.0,
         y + 35.0,
@@ -68,8 +69,8 @@ fn split_prompt(text: &str) -> (&str, &str) {
 }
 
 fn draw_centered_text(text: &str, x: f32, baseline_y: f32, width: f32, font_size: f32) {
-    let measured = measure_text(text, None, font_size as u16, 1.0);
-    draw_text(
+    let measured = measure_ui_text(text, None, font_size as u16, 1.0);
+    draw_ui_text(
         text,
         x + (width - measured.width) * 0.5,
         baseline_y,
