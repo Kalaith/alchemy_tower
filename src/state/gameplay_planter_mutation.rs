@@ -43,9 +43,7 @@ impl GameplayState {
         if !state.mutation_formula_id.is_empty() {
             return None;
         }
-        let Some((formula_id, catalyst_item_id)) = candidate else {
-            return None;
-        };
+        let (formula_id, catalyst_item_id) = candidate?;
         let formula = data
             .mutation_formulas
             .iter()

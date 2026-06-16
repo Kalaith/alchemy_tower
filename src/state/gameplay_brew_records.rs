@@ -9,7 +9,7 @@ impl GameplayState {
         item_id: &str,
         resolution: &BrewResolution<'_>,
     ) {
-        let effect_kinds = data
+        let effect_kinds: Vec<_> = data
             .item(item_id)
             .map(|item| {
                 item.effects
@@ -17,7 +17,7 @@ impl GameplayState {
                     .map(|effect| effect.kind.to_string())
                     .collect()
             })
-            .unwrap_or_else(Vec::new);
+            .unwrap_or_default();
         let entry = self
             .progression
             .crafted_item_profiles

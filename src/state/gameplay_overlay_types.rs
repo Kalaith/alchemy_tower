@@ -43,8 +43,9 @@ pub(super) enum OverlayScreen {
     Alchemy,
 }
 
-#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
 pub(super) enum InventorySortMode {
+    #[default]
     Priority,
     Type,
     Name,
@@ -68,14 +69,9 @@ impl InventorySortMode {
     }
 }
 
-impl Default for InventorySortMode {
-    fn default() -> Self {
-        Self::Priority
-    }
-}
-
-#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
 pub(super) enum ArchiveExperimentFilter {
+    #[default]
     All,
     Stable,
     Unstable,
@@ -96,11 +92,5 @@ impl ArchiveExperimentFilter {
             Self::Stable => "stable",
             Self::Unstable => "unstable",
         }
-    }
-}
-
-impl Default for ArchiveExperimentFilter {
-    fn default() -> Self {
-        Self::All
     }
 }

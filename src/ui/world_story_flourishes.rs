@@ -21,10 +21,8 @@ pub(crate) fn draw_phase1_story_flourishes_view(
                 draw_town_square_recovery_flowers(offset);
             }
         }
-        "greenhouse_floor" => {
-            if cultivation_for_brin_complete {
-                draw_greenhouse_recovery_growth(offset);
-            }
+        "greenhouse_floor" if cultivation_for_brin_complete => {
+            draw_greenhouse_recovery_growth(offset);
         }
         _ => {}
     }

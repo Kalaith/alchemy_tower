@@ -16,12 +16,7 @@ pub(crate) fn draw_unlock_ready_warp_glow(rect: Rect, center: Vec2, offset: Vec2
         offset.y + rect.y,
         rect.w,
         rect.h,
-        Color::new(
-            188.0 / 255.0,
-            255.0 / 255.0,
-            220.0 / 255.0,
-            0.10 + pulse * 0.08,
-        ),
+        Color::new(188.0 / 255.0, 1.0, 220.0 / 255.0, 0.10 + pulse * 0.08),
     );
     draw_circle_lines(
         center.x,

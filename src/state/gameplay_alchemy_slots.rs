@@ -76,6 +76,6 @@ impl GameplayState {
     }
 
     pub(super) fn alchemy_slot_items(&self) -> Vec<Option<String>> {
-        self.alchemy.slots.iter().cloned().collect()
+        self.alchemy.slots.to_vec()
     }
 }

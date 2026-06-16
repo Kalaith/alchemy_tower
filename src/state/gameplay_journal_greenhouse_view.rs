@@ -60,14 +60,14 @@ impl GameplayState {
                     if state.mutation_note.is_empty() {
                         ui_format(
                             "overlay_greenhouse_growing",
-                            &[("item", item), ("stage", &stage)],
+                            &[("item", item), ("stage", stage)],
                         )
                     } else {
                         ui_format(
                             "overlay_greenhouse_growing_meta",
                             &[
                                 ("item", item),
-                                ("stage", &stage),
+                                ("stage", stage),
                                 ("mutation", &state.mutation_note),
                             ],
                         )

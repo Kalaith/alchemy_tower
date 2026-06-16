@@ -28,9 +28,7 @@ impl GameplayState {
         if self.toggle_alchemy_catalyst(data, items, mouse) {
             return;
         }
-        if self.handle_alchemy_control_click(data, station, audio, mouse) {
-            return;
-        }
+        self.handle_alchemy_control_click(data, station, audio, mouse);
     }
 
     pub(super) fn handle_alchemy_mouse_removals(&mut self) {

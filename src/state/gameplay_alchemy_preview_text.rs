@@ -17,8 +17,8 @@ pub(super) fn quality_line(preview: &BrewResolution<'_>) -> String {
         "overlay_alchemy_quality_forecast",
         &[
             ("quality", &preview.quality_score.to_string()),
-            ("band", &preview.quality_band),
-            ("mastery", &preview.mastery_stage),
+            ("band", preview.quality_band),
+            ("mastery", preview.mastery_stage),
         ],
     )
 }

@@ -53,7 +53,7 @@ pub(super) fn draw_house_blocker(
         area.render.blocker_primary,
         Color::from_rgba(204, 184, 150, 255),
     );
-    let roof = if index % 2 == 0 {
+    let roof = if index.is_multiple_of(2) {
         color_from_option(
             area.render.blocker_secondary,
             Color::from_rgba(160, 104, 78, 255),

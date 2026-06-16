@@ -21,7 +21,7 @@ impl GameplayState {
                     title: ui_format(
                         "journal_milestone_status_title",
                         &[
-                            ("label", &label),
+                            ("label", label),
                             (
                                 "status",
                                 if ready {
