@@ -11,6 +11,7 @@ impl GameplayState {
                 "overlay_alchemy_mouse_footer",
                 &[("close", &input_bindings().global.cancel)],
             ),
+            close_label: ui_copy("overlay_alchemy_close_button").to_string(),
             action_buttons: alchemy_action_buttons_view(),
         }
     }

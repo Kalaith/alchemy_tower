@@ -1,19 +1,38 @@
 use macroquad::prelude::{screen_height, screen_width, Rect};
 
-pub(crate) const ALCHEMY_PANEL_X: f32 = 80.0;
-pub(crate) const ALCHEMY_PANEL_Y: f32 = 64.0;
+/// The alchemy bench needs a fixed amount of room for its columns of controls.
+/// Rather than stretching the panel to the whole window (which scrambled and
+/// overlapped the contents on small screens and left huge dead space on large
+/// ones), we size the panel to this content box and center it.
+pub(crate) const ALCHEMY_CONTENT_W: f32 = 964.0;
+pub(crate) const ALCHEMY_CONTENT_H: f32 = 620.0;
+const ALCHEMY_MAX_W: f32 = 1200.0;
+const ALCHEMY_MAX_H: f32 = 780.0;
+const ALCHEMY_MARGIN: f32 = 24.0;
 
+/// Centered, clamped panel. Never shrinks below the space the controls need, so
+/// the layout stays coherent instead of overlapping when the window is small;
+/// caps its size on large monitors so the text stays readable.
 pub(crate) fn alchemy_panel_rect() -> Rect {
-    Rect::new(
-        ALCHEMY_PANEL_X,
-        ALCHEMY_PANEL_Y,
-        screen_width() - ALCHEMY_PANEL_X * 2.0,
-        screen_height() - ALCHEMY_PANEL_Y * 2.0,
-    )
+    let avail_w = screen_width() - ALCHEMY_MARGIN * 2.0;
+    let avail_h = screen_height() - ALCHEMY_MARGIN * 2.0;
+    let w = avail_w.clamp(ALCHEMY_CONTENT_W, ALCHEMY_MAX_W);
+    let h = avail_h.clamp(ALCHEMY_CONTENT_H, ALCHEMY_MAX_H);
+    let x = ((screen_width() - w) * 0.5).max(0.0);
+    let y = ((screen_height() - h) * 0.5).max(0.0);
+    Rect::new(x, y, w, h)
+}
+
+/// Origin of the current panel. Both rendering and mouse hit-testing derive
+/// their coordinates from this so a centered/clamped panel stays in sync.
+fn panel_origin() -> (f32, f32) {
+    let panel = alchemy_panel_rect();
+    (panel.x, panel.y)
 }
 
 pub(crate) fn material_row_rect(index: usize) -> Rect {
-    material_row_rect_at(ALCHEMY_PANEL_X, ALCHEMY_PANEL_Y, index)
+    let (x, y) = panel_origin();
+    material_row_rect_at(x, y, index)
 }
 
 pub(crate) fn material_row_rect_at(x: f32, y: f32, index: usize) -> Rect {
@@ -21,7 +40,8 @@ pub(crate) fn material_row_rect_at(x: f32, y: f32, index: usize) -> Rect {
 }
 
 pub(crate) fn alchemy_slot_rect(slot: usize) -> Rect {
-    alchemy_slot_rect_at(ALCHEMY_PANEL_X, ALCHEMY_PANEL_Y, slot)
+    let (x, y) = panel_origin();
+    alchemy_slot_rect_at(x, y, slot)
 }
 
 pub(crate) fn alchemy_slot_rect_at(x: f32, y: f32, slot: usize) -> Rect {
@@ -29,7 +49,8 @@ pub(crate) fn alchemy_slot_rect_at(x: f32, y: f32, slot: usize) -> Rect {
 }
 
 pub(crate) fn catalyst_rect() -> Rect {
-    catalyst_rect_at(ALCHEMY_PANEL_X, ALCHEMY_PANEL_Y)
+    let (x, y) = panel_origin();
+    catalyst_rect_at(x, y)
 }
 
 pub(crate) fn catalyst_rect_at(x: f32, y: f32) -> Rect {
@@ -37,7 +58,8 @@ pub(crate) fn catalyst_rect_at(x: f32, y: f32) -> Rect {
 }
 
 pub(crate) fn heat_down_rect() -> Rect {
-    heat_down_rect_at(ALCHEMY_PANEL_X, ALCHEMY_PANEL_Y)
+    let (x, y) = panel_origin();
+    heat_down_rect_at(x, y)
 }
 
 pub(crate) fn heat_down_rect_at(x: f32, y: f32) -> Rect {
@@ -45,7 +67,8 @@ pub(crate) fn heat_down_rect_at(x: f32, y: f32) -> Rect {
 }
 
 pub(crate) fn heat_up_rect() -> Rect {
-    heat_up_rect_at(ALCHEMY_PANEL_X, ALCHEMY_PANEL_Y)
+    let (x, y) = panel_origin();
+    heat_up_rect_at(x, y)
 }
 
 pub(crate) fn heat_up_rect_at(x: f32, y: f32) -> Rect {
@@ -53,7 +76,8 @@ pub(crate) fn heat_up_rect_at(x: f32, y: f32) -> Rect {
 }
 
 pub(crate) fn stirs_rect() -> Rect {
-    stirs_rect_at(ALCHEMY_PANEL_X, ALCHEMY_PANEL_Y)
+    let (x, y) = panel_origin();
+    stirs_rect_at(x, y)
 }
 
 pub(crate) fn stirs_rect_at(x: f32, y: f32) -> Rect {
@@ -61,7 +85,8 @@ pub(crate) fn stirs_rect_at(x: f32, y: f32) -> Rect {
 }
 
 pub(crate) fn timing_rect() -> Rect {
-    timing_rect_at(ALCHEMY_PANEL_X, ALCHEMY_PANEL_Y)
+    let (x, y) = panel_origin();
+    timing_rect_at(x, y)
 }
 
 pub(crate) fn timing_rect_at(x: f32, y: f32) -> Rect {
@@ -69,7 +94,8 @@ pub(crate) fn timing_rect_at(x: f32, y: f32) -> Rect {
 }
 
 pub(crate) fn sort_rect() -> Rect {
-    sort_rect_at(ALCHEMY_PANEL_X, ALCHEMY_PANEL_Y)
+    let (x, y) = panel_origin();
+    sort_rect_at(x, y)
 }
 
 pub(crate) fn sort_rect_at(x: f32, y: f32) -> Rect {
@@ -77,7 +103,8 @@ pub(crate) fn sort_rect_at(x: f32, y: f32) -> Rect {
 }
 
 pub(crate) fn clear_rect() -> Rect {
-    clear_rect_at(ALCHEMY_PANEL_X, ALCHEMY_PANEL_Y)
+    let (x, y) = panel_origin();
+    clear_rect_at(x, y)
 }
 
 pub(crate) fn clear_rect_at(x: f32, y: f32) -> Rect {
@@ -85,7 +112,8 @@ pub(crate) fn clear_rect_at(x: f32, y: f32) -> Rect {
 }
 
 pub(crate) fn repeat_rect() -> Rect {
-    repeat_rect_at(ALCHEMY_PANEL_X, ALCHEMY_PANEL_Y)
+    let (x, y) = panel_origin();
+    repeat_rect_at(x, y)
 }
 
 pub(crate) fn repeat_rect_at(x: f32, y: f32) -> Rect {
@@ -93,9 +121,21 @@ pub(crate) fn repeat_rect_at(x: f32, y: f32) -> Rect {
 }
 
 pub(crate) fn brew_rect() -> Rect {
-    brew_rect_at(ALCHEMY_PANEL_X, ALCHEMY_PANEL_Y)
+    let (x, y) = panel_origin();
+    brew_rect_at(x, y)
 }
 
 pub(crate) fn brew_rect_at(x: f32, y: f32) -> Rect {
     Rect::new(x + 310.0, y + 368.0, 90.0, 28.0)
+}
+
+/// Explicit close control in the panel's top-right corner. The overlay also
+/// closes on Esc, but the feedback asked for a visible exit affordance.
+pub(crate) fn alchemy_close_rect() -> Rect {
+    let panel = alchemy_panel_rect();
+    alchemy_close_rect_at(panel.x, panel.y, panel.w)
+}
+
+pub(crate) fn alchemy_close_rect_at(x: f32, y: f32, w: f32) -> Rect {
+    Rect::new(x + w - 116.0, y + 16.0, 96.0, 30.0)
 }

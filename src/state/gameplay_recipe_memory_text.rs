@@ -32,6 +32,7 @@ pub(super) fn detail(
     if !recipe.required_sequence.is_empty() {
         parts.push(order(data, recipe));
     }
+    parts.push(brew_steps(recipe));
     if !inherited_traits.is_empty() {
         parts.push(ui_format(
             "inventory_memory_traits",
@@ -42,6 +43,17 @@ pub(super) fn detail(
         parts.push(ui_format("inventory_memory_morph", &[]));
     }
     parts.join("  ")
+}
+
+fn brew_steps(recipe: &RecipeDefinition) -> String {
+    ui_format(
+        "inventory_memory_brew_steps",
+        &[
+            ("heat", &recipe.required_heat.to_string()),
+            ("stirs", &recipe.required_stirs.to_string()),
+            ("timing", &recipe.required_timing),
+        ],
+    )
 }
 
 fn order(data: &GameData, recipe: &RecipeDefinition) -> String {

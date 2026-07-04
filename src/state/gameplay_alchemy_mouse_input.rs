@@ -2,8 +2,8 @@ use super::gameplay_alchemy_input_text as alchemy_input_text;
 use super::gameplay_alchemy_types::SLOT_COUNT;
 use super::GameplayState;
 use crate::alchemy_layout::{
-    alchemy_slot_rect, brew_rect, catalyst_rect, clear_rect, heat_down_rect, heat_up_rect,
-    material_row_rect, repeat_rect, sort_rect, stirs_rect, timing_rect,
+    alchemy_close_rect, alchemy_slot_rect, brew_rect, catalyst_rect, clear_rect, heat_down_rect,
+    heat_up_rect, material_row_rect, repeat_rect, sort_rect, stirs_rect, timing_rect,
 };
 use crate::audio::AudioAssets;
 use crate::data::{GameData, StationDefinition};
@@ -19,6 +19,11 @@ impl GameplayState {
     ) {
         let mouse = mouse_position_point();
 
+        if rect_contains_point(alchemy_close_rect(), mouse) {
+            self.clear_overlay();
+            self.runtime.status_text = alchemy_input_text::closed_alchemy();
+            return;
+        }
         if self.select_alchemy_material_row(items, mouse) {
             return;
         }

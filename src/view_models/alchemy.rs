@@ -2,6 +2,7 @@ pub(crate) struct AlchemyChromeView {
     pub(crate) title: &'static str,
     pub(crate) subtitle: String,
     pub(crate) footer_text: String,
+    pub(crate) close_label: String,
     pub(crate) action_buttons: AlchemyActionButtonsView,
 }
 

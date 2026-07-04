@@ -25,9 +25,9 @@ pub(crate) fn draw_action_button(rect: Rect, label: &str, label_offset_x: f32) {
         rect.h,
         1.5,
         if hovered {
-            Color::from_rgba(255, 238, 196, 112)
+            Color::from_rgba(255, 238, 196, 150)
         } else {
-            Color::from_rgba(160, 170, 190, 72)
+            Color::from_rgba(223, 184, 111, 96)
         },
     );
     let safe = truncate_text_to_width(label, rect.w - 20.0, 24.0);

@@ -89,7 +89,7 @@ pub(crate) fn draw_alchemy_slots_panel_view(view: &AlchemySlotsPanelView, x: f32
         catalyst.w,
         catalyst.h,
         1.5,
-        Color::from_rgba(160, 170, 190, 58),
+        Color::from_rgba(223, 184, 111, 78),
     );
     draw_ui_text(
         view.catalyst_label,

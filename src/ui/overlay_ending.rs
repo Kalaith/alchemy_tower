@@ -12,10 +12,14 @@ pub(crate) fn draw_ending_overlay_view(view: &EndingOverlayView) {
         screen_height(),
         Color::from_rgba(0, 0, 0, 180),
     );
-    let x = 170.0;
-    let y = 110.0;
-    let w = screen_width() - 340.0;
-    let h = screen_height() - 220.0;
+    let w = (screen_width() - 340.0)
+        .clamp(480.0, 900.0)
+        .min(screen_width() - 32.0);
+    let h = (screen_height() - 220.0)
+        .clamp(280.0, 620.0)
+        .min(screen_height() - 32.0);
+    let x = ((screen_width() - w) * 0.5).max(0.0);
+    let y = ((screen_height() - h) * 0.5).max(0.0);
     draw_panel(x, y, w, h, &view.title);
     draw_wrapped_text(
         &view.body,

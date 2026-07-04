@@ -1,10 +1,10 @@
 use super::GameplayState;
-use crate::alchemy_layout::alchemy_panel_rect;
+use crate::alchemy_layout::{alchemy_close_rect, alchemy_panel_rect};
 use crate::art::ArtAssets;
 use crate::data::GameData;
 use crate::ui::{
-    draw_alchemy_action_buttons, draw_brew_bubble_effect, draw_overlay_backdrop,
-    draw_overlay_footer, draw_overlay_subtitle, draw_panel,
+    draw_action_button, draw_alchemy_action_buttons, draw_brew_bubble_effect,
+    draw_overlay_backdrop, draw_overlay_footer, draw_overlay_subtitle, draw_panel,
 };
 
 impl GameplayState {
@@ -27,6 +27,7 @@ impl GameplayState {
         self.draw_alchemy_formulae_panel(data, x, y);
 
         draw_alchemy_action_buttons(&chrome.action_buttons, x, y);
+        draw_action_button(alchemy_close_rect(), &chrome.close_label, 0.0);
         draw_overlay_footer(x, y, w, h, &chrome.footer_text);
     }
 }

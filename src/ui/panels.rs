@@ -8,15 +8,16 @@ pub(crate) fn draw_panel(x: f32, y: f32, width: f32, height: f32, title: &str) {
     let style = macroquad_toolkit::ui::SurfaceStyle::new(dark::PANEL)
         .with_shadow(vec2(8.0, 10.0), Color::from_rgba(0, 0, 0, 96))
         .with_header(34.0, dark::PANEL_HEADER)
-        .with_border(1.5, Color::from_rgba(160, 170, 190, 68));
+        .with_border(1.5, Color::from_rgba(223, 184, 111, 120));
     macroquad_toolkit::ui::draw_surface(Rect::new(x, y, width, height), &style);
+    // Brass header underline to match the HUD's gold framing.
     draw_line(
         x + 14.0,
         y + 42.0,
         x + width - 14.0,
         y + 42.0,
         1.0,
-        Color::from_rgba(255, 255, 255, 28),
+        Color::from_rgba(240, 198, 122, 70),
     );
     draw_ui_text(
         &truncate_text_to_width(title, width - 24.0, 22.0),

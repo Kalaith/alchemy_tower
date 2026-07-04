@@ -8,7 +8,9 @@ use macroquad::prelude::*;
 mod hud_minimap_frame;
 
 pub(super) fn draw_time_panel(view: &HudView) {
-    let rect = Rect::new(screen_width() - 326.0, 22.0, 218.0, 94.0);
+    // Shifted left of the circular minimap (whose left edge sits at
+    // screen_width - 124) so the compass no longer overlaps the clock plaque.
+    let rect = Rect::new(screen_width() - 352.0, 22.0, 218.0, 94.0);
     draw_small_plaque_backplate(rect);
     draw_ornate_panel(rect, fill_slate(), 0.9);
     draw_panel_filigree(rect, 0.56);

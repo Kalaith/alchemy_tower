@@ -37,8 +37,22 @@ pub(super) fn draw_hotbar_slot(rect: Rect, slot: &HudPotionSlot, art: &ArtAssets
             bright_ink(),
         );
     } else {
-        hud_belt_slot_art::draw_glass_potion_bottle(rect, slot_glow(index), 0.34);
+        draw_empty_slot_marker(rect);
     }
+}
+
+/// A faint centered ring so an empty quick-slot reads as *empty* rather than
+/// showing a ghost potion bottle that made the belt look full when it was not.
+fn draw_empty_slot_marker(rect: Rect) {
+    let center = vec2(rect.x + rect.w * 0.5, rect.y + rect.h * 0.5 + 2.0);
+    draw_circle_lines(
+        center.x,
+        center.y,
+        13.0,
+        1.0,
+        Color::from_rgba(120, 108, 90, 70),
+    );
+    draw_circle(center.x, center.y, 2.0, Color::from_rgba(120, 108, 90, 60));
 }
 
 pub(super) fn draw_empty_hotbar_slot(rect: Rect, index: usize) {
@@ -79,5 +93,4 @@ pub(super) fn draw_empty_hotbar_slot(rect: Rect, index: usize) {
         Color::new(glow.r, glow.g, glow.b, 0.2),
     );
     hud_belt_slot_art::draw_slot_corner_dots(rect, glow);
-    hud_belt_slot_art::draw_glass_potion_bottle(rect, glow, 0.22);
 }

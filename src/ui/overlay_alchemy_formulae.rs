@@ -26,6 +26,6 @@ pub(crate) fn draw_alchemy_formulae_panel_view(view: &AlchemyFormulaePanelView, 
         ky += 32.0;
     }
     if view.rows.is_empty() {
-        draw_ui_text(&view.empty_text, x + 32.0, ky, 20.0, dark::TEXT_DIM);
+        draw_wrapped_text(&view.empty_text, x + 20.0, ky, 282.0, 18.0, 18.0, dark::TEXT_DIM);
     }
 }
