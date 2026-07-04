@@ -13,12 +13,6 @@ pub(crate) struct AlchemyActionButtonsView {
     pub(crate) brew_label: &'static str,
 }
 
-pub(crate) struct AlchemyControlsPanelView {
-    pub(crate) title: &'static str,
-    pub(crate) browse_heat_text: String,
-    pub(crate) action_text: String,
-}
-
 pub(crate) struct AlchemyFormulaePanelView {
     pub(crate) title: &'static str,
     pub(crate) empty_text: String,
@@ -27,9 +21,7 @@ pub(crate) struct AlchemyFormulaePanelView {
 
 pub(crate) struct AlchemyFormulaRowView {
     pub(crate) title: String,
-    pub(crate) meta: String,
     pub(crate) detail: String,
-    pub(crate) lore_note: String,
 }
 
 pub(crate) struct AlchemyMaterialsPanelView {
@@ -41,7 +33,6 @@ pub(crate) struct AlchemyMaterialsPanelView {
 
 pub(crate) struct AlchemyMaterialRowView {
     pub(crate) title: String,
-    pub(crate) detail: String,
     pub(crate) meta: String,
     pub(crate) selected: bool,
     pub(crate) enabled: bool,

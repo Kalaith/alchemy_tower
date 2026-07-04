@@ -4,6 +4,7 @@ use super::GameplayState;
 use crate::alchemy_layout::{
     alchemy_close_rect, alchemy_slot_rect, brew_rect, catalyst_rect, clear_rect, heat_down_rect,
     heat_up_rect, material_row_rect, repeat_rect, sort_rect, stirs_rect, timing_rect,
+    AL_MAT_VISIBLE_ROWS,
 };
 use crate::audio::AudioAssets;
 use crate::data::{GameData, StationDefinition};
@@ -51,9 +52,18 @@ impl GameplayState {
     }
 
     fn select_alchemy_material_row(&mut self, items: &[String], mouse: [f32; 2]) -> bool {
-        for (index, _) in items.iter().enumerate() {
-            if rect_contains_point(material_row_rect(index), mouse) {
-                self.alchemy.index = index;
+        // Rows render inside a scroll window (see the materials panel), so the
+        // visible row offset must be mapped back through the same window to the
+        // real item index.
+        let start = self
+            .alchemy
+            .index
+            .saturating_sub(AL_MAT_VISIBLE_ROWS - 1)
+            .min(items.len().saturating_sub(AL_MAT_VISIBLE_ROWS));
+        let visible = AL_MAT_VISIBLE_ROWS.min(items.len().saturating_sub(start));
+        for offset in 0..visible {
+            if rect_contains_point(material_row_rect(offset), mouse) {
+                self.alchemy.index = start + offset;
                 return true;
             }
         }

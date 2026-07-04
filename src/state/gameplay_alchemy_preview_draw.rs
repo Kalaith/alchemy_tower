@@ -4,7 +4,14 @@ use crate::data::GameData;
 use crate::view_models::alchemy::AlchemyPreviewPanelView;
 
 impl GameplayState {
-    pub(super) fn draw_alchemy_preview_panel(&self, data: &GameData, x: f32, y: f32, w: f32) {
+    pub(super) fn draw_alchemy_preview_panel(
+        &self,
+        data: &GameData,
+        x: f32,
+        y: f32,
+        w: f32,
+        h: f32,
+    ) {
         let selected = self.selected_items();
         let view = if selected.is_empty() {
             AlchemyPreviewPanelView::empty_selection()
@@ -37,6 +44,6 @@ impl GameplayState {
             AlchemyPreviewPanelView::no_station()
         };
 
-        crate::ui::draw_alchemy_preview_panel_view(&view, x, y, w);
+        crate::ui::draw_alchemy_preview_panel_view(&view, x, y, w, h);
     }
 }

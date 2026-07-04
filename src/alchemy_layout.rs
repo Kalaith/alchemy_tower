@@ -10,6 +10,38 @@ const ALCHEMY_MAX_W: f32 = 1200.0;
 const ALCHEMY_MAX_H: f32 = 780.0;
 const ALCHEMY_MARGIN: f32 = 24.0;
 
+// --- Internal layout grid (all offsets are relative to the panel origin) ------
+// Two columns: a left column (materials / controls / formulae) and a right
+// column (slots + process controls / actions / preview). Kept here as named
+// constants so rendering and mouse hit-testing share one source of truth.
+
+/// Left column x offset and width.
+pub(crate) const AL_LX: f32 = 20.0;
+pub(crate) const AL_LW: f32 = 300.0;
+/// Right column x offset; its width is `panel_w - AL_RW_MARGIN`.
+pub(crate) const AL_RX: f32 = 340.0;
+pub(crate) const AL_RW_MARGIN: f32 = 360.0;
+/// Gap kept between a bottom-anchored section box and the panel's bottom edge.
+pub(crate) const AL_BOX_BOTTOM_MARGIN: f32 = 56.0;
+
+// Left column bands.
+pub(crate) const AL_MAT_TITLE_Y: f32 = 112.0;
+pub(crate) const AL_MAT_BOX_Y: f32 = 120.0;
+pub(crate) const AL_MAT_BOX_H: f32 = 172.0;
+pub(crate) const AL_MAT_ROW_STEP: f32 = 42.0;
+pub(crate) const AL_MAT_ROW_H: f32 = 38.0;
+pub(crate) const AL_MAT_VISIBLE_ROWS: usize = 4;
+pub(crate) const AL_FORM_TITLE_Y: f32 = 318.0;
+pub(crate) const AL_FORM_BOX_Y: f32 = 326.0;
+
+// Right column bands.
+pub(crate) const AL_SLOT_TITLE_Y: f32 = 112.0;
+pub(crate) const AL_SLOT_BOX_Y: f32 = 120.0;
+pub(crate) const AL_SLOT_BOX_H: f32 = 164.0;
+pub(crate) const AL_PROC_READOUT_Y: f32 = 140.0;
+pub(crate) const AL_PREV_TITLE_Y: f32 = 348.0;
+pub(crate) const AL_PREV_BOX_Y: f32 = 356.0;
+
 /// Centered, clamped panel. Never shrinks below the space the controls need, so
 /// the layout stays coherent instead of overlapping when the window is small;
 /// caps its size on large monitors so the text stays readable.
@@ -30,13 +62,23 @@ fn panel_origin() -> (f32, f32) {
     (panel.x, panel.y)
 }
 
+/// Width of the right column for the current panel width.
+pub(crate) fn right_column_width(panel_w: f32) -> f32 {
+    panel_w - AL_RW_MARGIN
+}
+
 pub(crate) fn material_row_rect(index: usize) -> Rect {
     let (x, y) = panel_origin();
     material_row_rect_at(x, y, index)
 }
 
 pub(crate) fn material_row_rect_at(x: f32, y: f32, index: usize) -> Rect {
-    Rect::new(x + 18.0, y + 58.0 + index as f32 * 58.0, 286.0, 52.0)
+    Rect::new(
+        x + AL_LX,
+        y + AL_MAT_BOX_Y + 8.0 + index as f32 * AL_MAT_ROW_STEP,
+        AL_LW - 8.0,
+        AL_MAT_ROW_H,
+    )
 }
 
 pub(crate) fn alchemy_slot_rect(slot: usize) -> Rect {
@@ -45,7 +87,7 @@ pub(crate) fn alchemy_slot_rect(slot: usize) -> Rect {
 }
 
 pub(crate) fn alchemy_slot_rect_at(x: f32, y: f32, slot: usize) -> Rect {
-    Rect::new(x + 340.0 + slot as f32 * 140.0, y + 120.0, 120.0, 100.0)
+    Rect::new(x + AL_RX + 8.0 + slot as f32 * 126.0, y + 182.0, 118.0, 96.0)
 }
 
 pub(crate) fn catalyst_rect() -> Rect {
@@ -54,7 +96,7 @@ pub(crate) fn catalyst_rect() -> Rect {
 }
 
 pub(crate) fn catalyst_rect_at(x: f32, y: f32) -> Rect {
-    Rect::new(x + 760.0, y + 120.0, 160.0, 100.0)
+    Rect::new(x + AL_RX + 400.0, y + 182.0, 150.0, 96.0)
 }
 
 pub(crate) fn heat_down_rect() -> Rect {
@@ -63,7 +105,7 @@ pub(crate) fn heat_down_rect() -> Rect {
 }
 
 pub(crate) fn heat_down_rect_at(x: f32, y: f32) -> Rect {
-    Rect::new(x + 520.0, y + 88.0, 28.0, 24.0)
+    Rect::new(x + AL_RX + 8.0, y + 150.0, 42.0, 26.0)
 }
 
 pub(crate) fn heat_up_rect() -> Rect {
@@ -72,7 +114,7 @@ pub(crate) fn heat_up_rect() -> Rect {
 }
 
 pub(crate) fn heat_up_rect_at(x: f32, y: f32) -> Rect {
-    Rect::new(x + 552.0, y + 88.0, 28.0, 24.0)
+    Rect::new(x + AL_RX + 54.0, y + 150.0, 42.0, 26.0)
 }
 
 pub(crate) fn stirs_rect() -> Rect {
@@ -81,7 +123,7 @@ pub(crate) fn stirs_rect() -> Rect {
 }
 
 pub(crate) fn stirs_rect_at(x: f32, y: f32) -> Rect {
-    Rect::new(x + 612.0, y + 88.0, 92.0, 24.0)
+    Rect::new(x + AL_RX + 104.0, y + 150.0, 100.0, 26.0)
 }
 
 pub(crate) fn timing_rect() -> Rect {
@@ -90,7 +132,7 @@ pub(crate) fn timing_rect() -> Rect {
 }
 
 pub(crate) fn timing_rect_at(x: f32, y: f32) -> Rect {
-    Rect::new(x + 716.0, y + 88.0, 156.0, 24.0)
+    Rect::new(x + AL_RX + 212.0, y + 150.0, 156.0, 26.0)
 }
 
 pub(crate) fn sort_rect() -> Rect {
@@ -99,7 +141,7 @@ pub(crate) fn sort_rect() -> Rect {
 }
 
 pub(crate) fn sort_rect_at(x: f32, y: f32) -> Rect {
-    Rect::new(x + 20.0, y + 368.0, 82.0, 28.0)
+    Rect::new(x + AL_RX + 8.0, y + 292.0, 82.0, 28.0)
 }
 
 pub(crate) fn clear_rect() -> Rect {
@@ -108,7 +150,7 @@ pub(crate) fn clear_rect() -> Rect {
 }
 
 pub(crate) fn clear_rect_at(x: f32, y: f32) -> Rect {
-    Rect::new(x + 114.0, y + 368.0, 82.0, 28.0)
+    Rect::new(x + AL_RX + 98.0, y + 292.0, 82.0, 28.0)
 }
 
 pub(crate) fn repeat_rect() -> Rect {
@@ -117,7 +159,7 @@ pub(crate) fn repeat_rect() -> Rect {
 }
 
 pub(crate) fn repeat_rect_at(x: f32, y: f32) -> Rect {
-    Rect::new(x + 208.0, y + 368.0, 90.0, 28.0)
+    Rect::new(x + AL_RX + 188.0, y + 292.0, 92.0, 28.0)
 }
 
 pub(crate) fn brew_rect() -> Rect {
@@ -126,7 +168,7 @@ pub(crate) fn brew_rect() -> Rect {
 }
 
 pub(crate) fn brew_rect_at(x: f32, y: f32) -> Rect {
-    Rect::new(x + 310.0, y + 368.0, 90.0, 28.0)
+    Rect::new(x + AL_RX + 290.0, y + 292.0, 110.0, 28.0)
 }
 
 /// Explicit close control in the panel's top-right corner. The overlay also

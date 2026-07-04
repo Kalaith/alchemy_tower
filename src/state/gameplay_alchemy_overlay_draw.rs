@@ -21,10 +21,9 @@ impl GameplayState {
         draw_brew_bubble_effect(art, x, y, w);
 
         self.draw_alchemy_materials_panel(data, x, y);
-        self.draw_alchemy_controls_panel(x, y);
         self.draw_alchemy_slots_panel(data, x, y, w);
-        self.draw_alchemy_preview_panel(data, x, y, w);
-        self.draw_alchemy_formulae_panel(data, x, y);
+        self.draw_alchemy_preview_panel(data, x, y, w, h);
+        self.draw_alchemy_formulae_panel(data, x, y, h);
 
         draw_alchemy_action_buttons(&chrome.action_buttons, x, y);
         draw_action_button(alchemy_close_rect(), &chrome.close_label, 0.0);

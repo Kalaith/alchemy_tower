@@ -13,9 +13,7 @@ impl GameplayState {
                 .into_iter()
                 .map(|recipe| AlchemyFormulaRowView {
                     title: recipe.name.clone(),
-                    meta: self.recipe_memory_meta(data, recipe),
                     detail: self.recipe_memory_detail(data, recipe),
-                    lore_note: recipe.lore_note.clone(),
                 })
                 .collect(),
         }

@@ -1,6 +1,7 @@
 use macroquad::prelude::*;
 use macroquad_toolkit::colors::dark;
 
+use super::hud::{draw_beveled_rect, draw_beveled_rect_lines};
 use super::truncate_text_to_width;
 use crate::input::mouse_position_vec;
 use macroquad_toolkit::ui::{draw_ui_text, measure_ui_text};
@@ -13,30 +14,29 @@ pub(crate) use self::widgets_selection_card::draw_selection_card;
 pub(crate) fn draw_action_button(rect: Rect, label: &str, label_offset_x: f32) {
     let hovered = rect.contains(mouse_position_vec());
     let fill = if hovered {
-        Color::from_rgba(34, 40, 52, 220)
+        Color::from_rgba(58, 46, 30, 235)
     } else {
-        Color::from_rgba(18, 22, 30, 180)
+        Color::from_rgba(30, 26, 22, 210)
     };
-    draw_rectangle(rect.x, rect.y, rect.w, rect.h, fill);
-    draw_rectangle_lines(
-        rect.x,
-        rect.y,
-        rect.w,
-        rect.h,
+    let bevel = 5.0;
+    draw_beveled_rect(rect, bevel, fill);
+    draw_beveled_rect_lines(
+        rect,
+        bevel,
         1.5,
         if hovered {
-            Color::from_rgba(255, 238, 196, 150)
+            Color::from_rgba(255, 238, 196, 190)
         } else {
-            Color::from_rgba(223, 184, 111, 96)
+            Color::from_rgba(223, 184, 111, 130)
         },
     );
-    let safe = truncate_text_to_width(label, rect.w - 20.0, 24.0);
+    let safe = truncate_text_to_width(label, rect.w - 12.0, 24.0);
     let measured = measure_ui_text(&safe, None, 24, 1.0);
     let x = rect.x + ((rect.w - measured.width) * 0.5).max(label_offset_x.min(rect.w - 20.0));
     draw_ui_text(
         &safe,
         x,
-        rect.y + 29.0,
+        rect.y + (rect.h + 16.0) * 0.5,
         24.0,
         Color::from_rgba(240, 236, 228, 255),
     );

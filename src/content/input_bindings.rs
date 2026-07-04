@@ -49,10 +49,8 @@ pub(crate) struct MovementBindings {
 #[derive(Debug, Deserialize)]
 pub(crate) struct AlchemyBindings {
     pub(crate) open: String,
-    pub(crate) heat: String,
     pub(crate) heat_decrease: String,
     pub(crate) heat_increase: String,
-    pub(crate) fill_slots: String,
     pub(crate) fill_slot_keys: [String; 3],
     pub(crate) clear_slot_keys: [String; 3],
     pub(crate) stir: String,

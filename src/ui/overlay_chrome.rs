@@ -1,3 +1,4 @@
+use super::hud::{draw_beveled_rect, draw_beveled_rect_lines, draw_panel_texture, fill_slate};
 use macroquad::prelude::*;
 use macroquad_toolkit::colors::dark;
 use macroquad_toolkit::ui::{draw_ui_text, measure_ui_text};
@@ -13,11 +14,19 @@ pub(crate) fn draw_overlay_section_title(x: f32, y: f32, title: &str, meta: Opti
 }
 
 pub(crate) fn draw_overlay_section_box(x: f32, y: f32, w: f32, h: f32) {
-    draw_rectangle(x, y, w, h, Color::from_rgba(20, 18, 22, 168));
-    // Warm top sheen + brass border to match the HUD's gold framing rather than
-    // the old cold grey-blue outline.
-    draw_rectangle(x, y, w, 2.0, Color::from_rgba(240, 198, 122, 30));
-    draw_rectangle_lines(x, y, w, h, 1.5, Color::from_rgba(223, 184, 111, 96));
+    // Beveled, lightly textured recess with a brass edge — the same treatment as
+    // the HUD's inset sub-panels (goal note, status plaques).
+    let rect = Rect::new(x, y, w, h);
+    let bevel = 6.0;
+    draw_beveled_rect(rect, bevel, Color::from_rgba(18, 17, 22, 214));
+    draw_panel_texture(rect, bevel, fill_slate(), 0.4);
+    draw_beveled_rect_lines(rect, bevel, 1.5, Color::from_rgba(223, 184, 111, 120));
+    draw_beveled_rect_lines(
+        Rect::new(x + 3.0, y + 3.0, w - 6.0, h - 6.0),
+        (bevel - 2.0).max(3.0),
+        1.0,
+        Color::from_rgba(255, 239, 184, 42),
+    );
 }
 
 fn draw_section_diamond(cx: f32, cy: f32) {

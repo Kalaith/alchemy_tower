@@ -1,4 +1,7 @@
 use super::{draw_overlay_section_box, draw_overlay_section_title, draw_wrapped_text};
+use crate::alchemy_layout::{
+    right_column_width, AL_BOX_BOTTOM_MARGIN, AL_PREV_BOX_Y, AL_PREV_TITLE_Y, AL_RX,
+};
 use crate::view_models::alchemy::{
     AlchemyPreviewPanelState, AlchemyPreviewPanelView, AlchemyResolvedPreviewView,
 };
@@ -10,21 +13,24 @@ pub(crate) fn draw_alchemy_preview_panel_view(
     x: f32,
     y: f32,
     w: f32,
+    h: f32,
 ) {
-    draw_overlay_section_title(x + 340.0, y + 240.0, view.title, None);
-    draw_overlay_section_box(x + 340.0, y + 256.0, w - 360.0, 210.0);
+    let rw = right_column_width(w);
+    let box_h = (h - AL_BOX_BOTTOM_MARGIN - AL_PREV_BOX_Y).max(120.0);
+    draw_overlay_section_title(x + AL_RX, y + AL_PREV_TITLE_Y, view.title, None);
+    draw_overlay_section_box(x + AL_RX - 2.0, y + AL_PREV_BOX_Y, rw, box_h);
 
+    let content_x = x + AL_RX + 18.0;
+    let content_y = y + AL_PREV_BOX_Y + 30.0;
     match &view.state {
-        AlchemyPreviewPanelState::EmptySelection => draw_empty_selection(view.empty_text, x, y),
+        AlchemyPreviewPanelState::EmptySelection => {
+            draw_ui_text(view.empty_text, content_x, content_y + 8.0, 22.0, dark::TEXT_DIM);
+        }
         AlchemyPreviewPanelState::NoStation => {}
         AlchemyPreviewPanelState::Resolved(preview) => {
-            draw_resolved_brew_preview_view(preview, x + 360.0, y + 296.0, w - 392.0);
+            draw_resolved_brew_preview_view(preview, content_x, content_y, rw - 36.0);
         }
     }
-}
-
-fn draw_empty_selection(empty_text: &str, x: f32, y: f32) {
-    draw_ui_text(empty_text, x + 360.0, y + 296.0, 22.0, dark::TEXT_DIM);
 }
 
 fn draw_resolved_brew_preview_view(preview: &AlchemyResolvedPreviewView, x: f32, y: f32, w: f32) {

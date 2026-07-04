@@ -1,7 +1,7 @@
 use super::hud_primitives::*;
 use macroquad::prelude::*;
 
-pub(super) fn draw_ornate_divider(x: f32, y: f32, width: f32, opacity: f32) {
+pub(crate) fn draw_ornate_divider(x: f32, y: f32, width: f32, opacity: f32) {
     let color = Color::from_rgba(220, 182, 109, (132.0 * opacity) as u8);
     let center = x + width * 0.5;
     draw_line(x, y, center - 12.0, y, 1.0, color);
@@ -12,7 +12,7 @@ pub(super) fn draw_ornate_divider(x: f32, y: f32, width: f32, opacity: f32) {
     );
 }
 
-pub(super) fn draw_panel_filigree(rect: Rect, opacity: f32) {
+pub(crate) fn draw_panel_filigree(rect: Rect, opacity: f32) {
     let color = Color::from_rgba(242, 205, 126, (112.0 * opacity) as u8);
     let dark = Color::from_rgba(46, 30, 18, (120.0 * opacity) as u8);
     let corner_gap = 14.0;

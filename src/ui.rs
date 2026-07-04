@@ -2,7 +2,6 @@ mod hud;
 mod menu_background;
 mod menu_screen;
 mod overlay_alchemy_actions;
-mod overlay_alchemy_controls;
 mod overlay_alchemy_effects;
 mod overlay_alchemy_formulae;
 mod overlay_alchemy_preview;
@@ -45,9 +44,9 @@ mod world_scene;
 pub(crate) use hud::draw_hud_view;
 pub(crate) use menu_screen::draw_menu_screen;
 pub(crate) use overlay_exports::{
-    draw_alchemy_action_buttons, draw_alchemy_controls_panel_view,
-    draw_alchemy_formulae_panel_view, draw_alchemy_materials_panel_view,
-    draw_alchemy_preview_panel_view, draw_alchemy_slots_panel_view,
+    draw_alchemy_action_buttons, draw_alchemy_formulae_panel_view,
+    draw_alchemy_materials_panel_view, draw_alchemy_preview_panel_view,
+    draw_alchemy_slots_panel_view,
     draw_archive_disassembly_section_view, draw_archive_duplication_section_view,
     draw_archive_experiments_section_view, draw_archive_mastery_section_view,
     draw_archive_morphs_section_view, draw_archive_tabs, draw_archive_timeline_section_view,

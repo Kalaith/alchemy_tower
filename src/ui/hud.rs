@@ -72,6 +72,14 @@ use self::hud_side::*;
 use self::hud_status::*;
 use super::text::{draw_wrapped_text, truncate_text_to_width};
 
+// Ornate chrome primitives shared with the overlay panels so screens like the
+// alchemy bench match the HUD's beveled, gilded framing.
+pub(crate) use self::hud_chrome_filigree::draw_panel_filigree;
+pub(crate) use self::hud_palette::{brass_light, bright_ink, fill_slate};
+pub(crate) use self::hud_shapes::{
+    draw_beveled_rect, draw_beveled_rect_lines, draw_ornate_panel, draw_panel_texture,
+};
+
 pub(crate) fn draw_hud_view(view: &HudView, art: &ArtAssets) {
     draw_hud_vignette();
     draw_title_banner(view);

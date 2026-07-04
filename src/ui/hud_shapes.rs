@@ -1,7 +1,7 @@
 use super::hud_palette::*;
 use macroquad::prelude::*;
 
-pub(super) fn draw_ornate_panel(rect: Rect, fill: Color, opacity: f32) {
+pub(crate) fn draw_ornate_panel(rect: Rect, fill: Color, opacity: f32) {
     let bevel = rect.w.min(rect.h).min(18.0) * 0.45;
     draw_beveled_rect(
         Rect::new(rect.x + 6.0, rect.y + 8.0, rect.w, rect.h),
@@ -25,7 +25,7 @@ pub(super) fn draw_ornate_panel(rect: Rect, fill: Color, opacity: f32) {
     draw_corner_marks(rect, opacity);
 }
 
-pub(super) fn draw_panel_texture(rect: Rect, bevel: f32, fill: Color, opacity: f32) {
+pub(crate) fn draw_panel_texture(rect: Rect, bevel: f32, fill: Color, opacity: f32) {
     let warm_fill = fill.r > fill.b;
     let light = if warm_fill {
         Color::from_rgba(255, 222, 159, (24.0 * opacity) as u8)
@@ -75,7 +75,7 @@ pub(super) fn draw_corner_marks(rect: Rect, opacity: f32) {
     }
 }
 
-pub(super) fn draw_beveled_rect(rect: Rect, bevel: f32, color: Color) {
+pub(crate) fn draw_beveled_rect(rect: Rect, bevel: f32, color: Color) {
     let bevel = bevel.min(rect.w * 0.5).min(rect.h * 0.5);
     draw_rectangle(rect.x + bevel, rect.y, rect.w - bevel * 2.0, rect.h, color);
     draw_rectangle(rect.x, rect.y + bevel, rect.w, rect.h - bevel * 2.0, color);
@@ -110,7 +110,7 @@ pub(super) fn draw_beveled_rect(rect: Rect, bevel: f32, color: Color) {
     );
 }
 
-pub(super) fn draw_beveled_rect_lines(rect: Rect, bevel: f32, thickness: f32, color: Color) {
+pub(crate) fn draw_beveled_rect_lines(rect: Rect, bevel: f32, thickness: f32, color: Color) {
     let bevel = bevel.min(rect.w * 0.5).min(rect.h * 0.5);
     let points = [
         vec2(rect.x + bevel, rect.y),

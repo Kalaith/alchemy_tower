@@ -1,30 +1,33 @@
 use macroquad::prelude::*;
 use macroquad_toolkit::colors::dark;
 
+use super::hud::{
+    brass_light, bright_ink, draw_ornate_panel, draw_panel_filigree, fill_slate,
+};
 use super::{draw_wrapped_text, truncate_text_to_width};
 use macroquad_toolkit::ui::draw_ui_text;
 
 pub(crate) fn draw_panel(x: f32, y: f32, width: f32, height: f32, title: &str) {
-    let style = macroquad_toolkit::ui::SurfaceStyle::new(dark::PANEL)
-        .with_shadow(vec2(8.0, 10.0), Color::from_rgba(0, 0, 0, 96))
-        .with_header(34.0, dark::PANEL_HEADER)
-        .with_border(1.5, Color::from_rgba(223, 184, 111, 120));
-    macroquad_toolkit::ui::draw_surface(Rect::new(x, y, width, height), &style);
-    // Brass header underline to match the HUD's gold framing.
+    // Same beveled, textured, gilded framing the HUD uses, so overlays read as
+    // part of the same ornate UI rather than flat dialog boxes.
+    let rect = Rect::new(x, y, width, height);
+    draw_ornate_panel(rect, fill_slate(), 0.96);
+    draw_panel_filigree(rect, 0.7);
+    let underline = brass_light();
     draw_line(
-        x + 14.0,
+        x + 16.0,
         y + 42.0,
-        x + width - 14.0,
+        x + width - 16.0,
         y + 42.0,
         1.0,
-        Color::from_rgba(240, 198, 122, 70),
+        Color::new(underline.r, underline.g, underline.b, 0.5),
     );
     draw_ui_text(
-        &truncate_text_to_width(title, width - 24.0, 22.0),
-        x + 12.0,
-        y + 24.0,
+        &truncate_text_to_width(title, width - 28.0, 22.0),
+        x + 16.0,
+        y + 26.0,
         22.0,
-        dark::TEXT_BRIGHT,
+        bright_ink(),
     );
 }
 

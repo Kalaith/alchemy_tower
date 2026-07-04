@@ -1,9 +1,5 @@
 //! Core exploration and alchemy state.
 
-#[path = "gameplay_alchemy_controls_draw.rs"]
-mod gameplay_alchemy_controls_draw;
-#[path = "gameplay_alchemy_controls_view.rs"]
-mod gameplay_alchemy_controls_view;
 #[path = "gameplay_alchemy_formulae_draw.rs"]
 mod gameplay_alchemy_formulae_draw;
 #[path = "gameplay_alchemy_formulae_view.rs"]

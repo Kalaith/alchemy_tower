@@ -28,10 +28,6 @@ impl GameplayState {
                     );
                     AlchemyMaterialRowView {
                         title: data.item_name(&card.item_id).to_owned(),
-                        detail: data
-                            .item(&card.item_id)
-                            .map(|item| item.description.clone())
-                            .unwrap_or_default(),
                         meta: self.item_card_meta(data, &card.item_id, card.amount, &extra),
                         selected: card.selected,
                         enabled: card.ready > 0,

@@ -1,7 +1,9 @@
+use super::hud::{draw_beveled_rect, draw_beveled_rect_lines, draw_panel_texture, fill_slate};
 use super::{draw_action_button, draw_overlay_section_box, draw_overlay_section_title};
 use crate::alchemy_layout::{
-    alchemy_slot_rect_at, catalyst_rect_at, heat_down_rect_at, heat_up_rect_at, stirs_rect_at,
-    timing_rect_at,
+    alchemy_slot_rect_at, catalyst_rect_at, heat_down_rect_at, heat_up_rect_at, right_column_width,
+    stirs_rect_at, timing_rect_at, AL_PROC_READOUT_Y, AL_RX, AL_SLOT_BOX_H, AL_SLOT_BOX_Y,
+    AL_SLOT_TITLE_Y,
 };
 use crate::view_models::alchemy::AlchemySlotsPanelView;
 use macroquad::prelude::*;
@@ -9,107 +11,55 @@ use macroquad_toolkit::colors::dark;
 use macroquad_toolkit::ui::draw_ui_text;
 
 pub(crate) fn draw_alchemy_slots_panel_view(view: &AlchemySlotsPanelView, x: f32, y: f32, w: f32) {
-    draw_overlay_section_title(x + 340.0, y + 84.0, view.title, None);
-    draw_overlay_section_box(x + 340.0, y + 98.0, w - 360.0, 134.0);
+    let rw = right_column_width(w);
+    draw_overlay_section_title(x + AL_RX, y + AL_SLOT_TITLE_Y, view.title, None);
+    draw_overlay_section_box(x + AL_RX - 2.0, y + AL_SLOT_BOX_Y, rw, AL_SLOT_BOX_H);
+
+    // Process readout, then the adjustment buttons directly beneath it.
     draw_ui_text(
         &view.process_text,
-        x + 340.0,
-        y + 106.0,
-        20.0,
-        dark::TEXT_DIM,
+        x + AL_RX + 8.0,
+        y + AL_PROC_READOUT_Y,
+        18.0,
+        dark::TEXT_BRIGHT,
     );
     draw_action_button(heat_down_rect_at(x, y), "-", 0.0);
     draw_action_button(heat_up_rect_at(x, y), "+", 0.0);
     draw_action_button(stirs_rect_at(x, y), view.stir_label, 0.0);
     draw_action_button(timing_rect_at(x, y), view.timing_label, 0.0);
+
     for (slot, slot_view) in view.slots.iter().enumerate() {
-        let rect = alchemy_slot_rect_at(x, y, slot);
-        draw_rectangle(
-            rect.x,
-            rect.y,
-            rect.w,
-            rect.h,
-            Color::from_rgba(28, 32, 42, 255),
-        );
-        draw_rectangle(
-            rect.x,
-            rect.y,
-            4.0,
-            rect.h,
-            Color::from_rgba(176, 226, 255, 96),
-        );
-        draw_rectangle_lines(
-            rect.x,
-            rect.y,
-            rect.w,
-            rect.h,
-            1.5,
-            Color::from_rgba(160, 170, 190, 58),
-        );
-        draw_ui_text(
+        draw_slot_box(
+            alchemy_slot_rect_at(x, y, slot),
+            Color::from_rgba(176, 226, 255, 110),
             &slot_view.label,
-            rect.x + 16.0,
-            rect.y + 26.0,
-            22.0,
-            dark::TEXT_BRIGHT,
-        );
-        draw_ui_text(
             &slot_view.item_name,
-            rect.x + 12.0,
-            rect.y + 68.0,
-            20.0,
-            dark::TEXT,
-        );
-        draw_ui_text(
             slot_view.action_text,
-            rect.x + 12.0,
-            rect.y + 86.0,
-            16.0,
-            dark::TEXT_DIM,
         );
     }
-    let catalyst = catalyst_rect_at(x, y);
-    draw_rectangle(
-        catalyst.x,
-        catalyst.y,
-        catalyst.w,
-        catalyst.h,
-        Color::from_rgba(28, 32, 42, 255),
-    );
-    draw_rectangle(
-        catalyst.x,
-        catalyst.y,
-        4.0,
-        catalyst.h,
-        Color::from_rgba(255, 214, 132, 96),
-    );
-    draw_rectangle_lines(
-        catalyst.x,
-        catalyst.y,
-        catalyst.w,
-        catalyst.h,
-        1.5,
-        Color::from_rgba(223, 184, 111, 78),
-    );
-    draw_ui_text(
+
+    draw_slot_box(
+        catalyst_rect_at(x, y),
+        Color::from_rgba(255, 214, 132, 120),
         view.catalyst_label,
-        catalyst.x + 16.0,
-        catalyst.y + 26.0,
-        22.0,
-        dark::TEXT_BRIGHT,
-    );
-    draw_ui_text(
         &view.catalyst.item_name,
-        catalyst.x + 12.0,
-        catalyst.y + 68.0,
-        20.0,
-        dark::TEXT,
-    );
-    draw_ui_text(
         view.catalyst.action_text,
-        catalyst.x + 12.0,
-        catalyst.y + 86.0,
-        16.0,
+    );
+}
+
+fn draw_slot_box(rect: Rect, accent: Color, label: &str, item_name: &str, action_text: &str) {
+    let bevel = 5.0;
+    draw_beveled_rect(rect, bevel, Color::from_rgba(24, 26, 34, 236));
+    draw_panel_texture(rect, bevel, fill_slate(), 0.35);
+    draw_beveled_rect_lines(rect, bevel, 1.5, Color::from_rgba(223, 184, 111, 120));
+    draw_rectangle(rect.x + 2.0, rect.y + 9.0, 4.0, rect.h - 18.0, accent);
+    draw_ui_text(label, rect.x + 14.0, rect.y + 26.0, 20.0, dark::TEXT_BRIGHT);
+    draw_ui_text(item_name, rect.x + 12.0, rect.y + 60.0, 18.0, dark::TEXT);
+    draw_ui_text(
+        action_text,
+        rect.x + 12.0,
+        rect.y + 82.0,
+        15.0,
         dark::TEXT_DIM,
     );
 }
