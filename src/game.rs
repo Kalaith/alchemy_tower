@@ -12,6 +12,7 @@ mod game_transition;
 use crate::art::ArtAssets;
 use crate::audio::AudioAssets;
 use crate::data::GameData;
+use crate::state::GameplayState;
 
 use self::game_state::GameState;
 use self::game_transition::apply_transition;
@@ -47,5 +48,16 @@ impl Game {
             return;
         };
         state.draw(&self.data, &self.art);
+    }
+
+    /// Seed a specific scene for the screenshot harness.
+    pub(crate) fn begin_capture_scene(&mut self, scene: &str) {
+        self.state = Some(match scene {
+            "gameplay" => GameState::from_gameplay(GameplayState::new(&self.data)),
+            "paused" => GameState::pause(GameplayState::new(&self.data)),
+            // Default ("menu" or anything else): the boot flow already lands
+            // on the main menu, so this also covers unrecognized scene names.
+            _ => GameState::new_menu(),
+        });
     }
 }
