@@ -41,5 +41,11 @@ pub(crate) fn draw_dialogue_overlay_view(view: &DialogueOverlayView) {
         1.0,
         Color::from_rgba(223, 184, 111, 70),
     );
-    draw_ui_text(&view.footer, x + 20.0, footer_y + 14.0, 18.0, dark::TEXT_BRIGHT);
+    draw_ui_text(
+        &view.footer,
+        x + 20.0,
+        footer_y + 14.0,
+        18.0,
+        dark::TEXT_BRIGHT,
+    );
 }

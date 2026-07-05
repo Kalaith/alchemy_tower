@@ -1,7 +1,5 @@
 use super::{draw_overlay_section_box, draw_overlay_section_title, draw_wrapped_text};
-use crate::alchemy_layout::{
-    AL_BOX_BOTTOM_MARGIN, AL_FORM_BOX_Y, AL_FORM_TITLE_Y, AL_LW, AL_LX,
-};
+use crate::alchemy_layout::{AL_BOX_BOTTOM_MARGIN, AL_FORM_BOX_Y, AL_FORM_TITLE_Y, AL_LW, AL_LX};
 use crate::view_models::alchemy::AlchemyFormulaePanelView;
 use macroquad::prelude::Color;
 use macroquad_toolkit::colors::dark;
@@ -22,7 +20,15 @@ pub(crate) fn draw_alchemy_formulae_panel_view(
     let avail_w = AL_LW - 24.0;
 
     if view.rows.is_empty() {
-        draw_wrapped_text(&view.empty_text, text_x, box_top + 24.0, avail_w, 18.0, 18.0, dark::TEXT_DIM);
+        draw_wrapped_text(
+            &view.empty_text,
+            text_x,
+            box_top + 24.0,
+            avail_w,
+            18.0,
+            18.0,
+            dark::TEXT_DIM,
+        );
         return;
     }
 
@@ -91,6 +97,9 @@ fn wrap_lines(text: &str, max_w: f32, font: u16, max_lines: usize) -> Vec<String
 }
 
 fn text_has_more(text: &str, lines: &[String]) -> bool {
-    let shown: usize = lines.iter().map(|line| line.split_whitespace().count()).sum();
+    let shown: usize = lines
+        .iter()
+        .map(|line| line.split_whitespace().count())
+        .sum();
     text.split_whitespace().count() > shown
 }

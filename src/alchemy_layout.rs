@@ -88,7 +88,12 @@ pub(crate) fn alchemy_slot_rect(slot: usize) -> Rect {
 }
 
 pub(crate) fn alchemy_slot_rect_at(x: f32, y: f32, slot: usize) -> Rect {
-    Rect::new(x + AL_RX + 8.0 + slot as f32 * 126.0, y + 182.0, 118.0, 96.0)
+    Rect::new(
+        x + AL_RX + 8.0 + slot as f32 * 126.0,
+        y + 182.0,
+        118.0,
+        96.0,
+    )
 }
 
 pub(crate) fn catalyst_rect() -> Rect {

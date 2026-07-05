@@ -1,9 +1,7 @@
 use macroquad::prelude::*;
 use macroquad_toolkit::colors::dark;
 
-use super::hud::{
-    brass_light, bright_ink, draw_ornate_panel, draw_panel_filigree, fill_slate,
-};
+use super::hud::{brass_light, bright_ink, draw_ornate_panel, draw_panel_filigree, fill_slate};
 use super::{draw_wrapped_text, truncate_text_to_width};
 use macroquad_toolkit::ui::draw_ui_text;
 

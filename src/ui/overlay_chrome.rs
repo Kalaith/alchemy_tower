@@ -32,18 +32,8 @@ pub(crate) fn draw_overlay_section_box(x: f32, y: f32, w: f32, h: f32) {
 fn draw_section_diamond(cx: f32, cy: f32) {
     let color = Color::from_rgba(242, 205, 126, 235);
     let r = 4.0;
-    draw_triangle(
-        vec2(cx, cy - r),
-        vec2(cx + r, cy),
-        vec2(cx, cy + r),
-        color,
-    );
-    draw_triangle(
-        vec2(cx, cy - r),
-        vec2(cx - r, cy),
-        vec2(cx, cy + r),
-        color,
-    );
+    draw_triangle(vec2(cx, cy - r), vec2(cx + r, cy), vec2(cx, cy + r), color);
+    draw_triangle(vec2(cx, cy - r), vec2(cx - r, cy), vec2(cx, cy + r), color);
 }
 
 pub(crate) fn draw_overlay_tab(rect: Rect, label: &str, selected: bool) {

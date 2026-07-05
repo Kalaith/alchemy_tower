@@ -25,7 +25,13 @@ pub(crate) fn draw_alchemy_preview_panel_view(
     let content_y = y + AL_PREV_BOX_Y + 30.0;
     match &view.state {
         AlchemyPreviewPanelState::EmptySelection => {
-            draw_ui_text(view.empty_text, content_x, content_y + 8.0, 22.0, dark::TEXT_DIM);
+            draw_ui_text(
+                view.empty_text,
+                content_x,
+                content_y + 8.0,
+                22.0,
+                dark::TEXT_DIM,
+            );
         }
         AlchemyPreviewPanelState::NoStation => {}
         AlchemyPreviewPanelState::Resolved(preview) => {
@@ -41,7 +47,13 @@ fn draw_resolved_brew_preview_view(preview: &AlchemyResolvedPreviewView, x: f32,
     if let Some(quest_line) = &preview.quest_line {
         // Warm gold so the "who this is for" note reads as a story beat, not
         // another mechanical stat line.
-        draw_ui_text(quest_line, x, read_y, 18.0, Color::from_rgba(242, 205, 126, 255));
+        draw_ui_text(
+            quest_line,
+            x,
+            read_y,
+            18.0,
+            Color::from_rgba(242, 205, 126, 255),
+        );
         read_y += 24.0;
     }
     draw_ui_text(&preview.read_line, x, read_y, 18.0, dark::TEXT_DIM);
