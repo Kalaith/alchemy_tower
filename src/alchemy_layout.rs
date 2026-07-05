@@ -1,4 +1,5 @@
-use macroquad::prelude::{screen_height, screen_width, Rect};
+use crate::ui_scale::{ui_h, ui_w};
+use macroquad::prelude::Rect;
 
 /// The alchemy bench needs a fixed amount of room for its columns of controls.
 /// Rather than stretching the panel to the whole window (which scrambled and
@@ -46,12 +47,12 @@ pub(crate) const AL_PREV_BOX_Y: f32 = 356.0;
 /// the layout stays coherent instead of overlapping when the window is small;
 /// caps its size on large monitors so the text stays readable.
 pub(crate) fn alchemy_panel_rect() -> Rect {
-    let avail_w = screen_width() - ALCHEMY_MARGIN * 2.0;
-    let avail_h = screen_height() - ALCHEMY_MARGIN * 2.0;
+    let avail_w = ui_w() - ALCHEMY_MARGIN * 2.0;
+    let avail_h = ui_h() - ALCHEMY_MARGIN * 2.0;
     let w = avail_w.clamp(ALCHEMY_CONTENT_W, ALCHEMY_MAX_W);
     let h = avail_h.clamp(ALCHEMY_CONTENT_H, ALCHEMY_MAX_H);
-    let x = ((screen_width() - w) * 0.5).max(0.0);
-    let y = ((screen_height() - h) * 0.5).max(0.0);
+    let x = ((ui_w() - w) * 0.5).max(0.0);
+    let y = ((ui_h() - h) * 0.5).max(0.0);
     Rect::new(x, y, w, h)
 }
 

@@ -8,8 +8,8 @@ pub(crate) fn draw_journal_backdrop() {
     draw_rectangle(
         0.0,
         0.0,
-        screen_width(),
-        screen_height(),
+        crate::ui_scale::ui_w(),
+        crate::ui_scale::ui_h(),
         Color::from_rgba(0, 0, 0, 150),
     );
 }

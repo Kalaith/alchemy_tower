@@ -14,8 +14,8 @@ pub(super) fn draw_potion_belt(view: &HudView, art: &ArtAssets) {
     let width =
         40.0 + slot_size * slot_count as f32 + gap * slot_count.saturating_sub(1) as f32 + 40.0;
     let height = 96.0;
-    let x = screen_width() * 0.5 - width * 0.5;
-    let y = screen_height() - 108.0;
+    let x = super::hud_w() * 0.5 - width * 0.5;
+    let y = super::hud_h() - 108.0;
     let rect = Rect::new(x, y, width, height);
     draw_belt_backplate(rect);
     draw_ornate_panel(rect, Color::from_rgba(43, 35, 28, 224), 0.92);
@@ -76,9 +76,9 @@ pub(super) fn draw_status_strip(view: &HudView) {
         return;
     }
 
-    let width = (screen_width() - 320.0).min(560.0);
-    let x = screen_width() * 0.5 - width * 0.5;
-    let y = screen_height() - 148.0;
+    let width = (super::hud_w() - 320.0).min(560.0);
+    let x = super::hud_w() * 0.5 - width * 0.5;
+    let y = super::hud_h() - 148.0;
     let rect = Rect::new(x, y, width, 34.0);
     draw_ornate_panel(rect, Color::from_rgba(17, 17, 19, 168), 0.66);
     draw_ui_text(

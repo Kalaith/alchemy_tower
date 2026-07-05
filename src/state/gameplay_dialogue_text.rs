@@ -16,28 +16,10 @@ impl GameplayState {
             return self.append_npc_story_line(&npc.id, dialogue.complete.to_owned());
         }
         if !self.progression.started_quests.contains(&quest.id) {
-            if !self.quest_is_available(quest) {
-                return self.append_npc_story_line(
-                    &npc.id,
-                    ui_format(
-                        "quests_dialogue_with_context",
-                        &[
-                            ("dialogue", dialogue.start),
-                            ("context", &self.quest_unlock_summary(quest)),
-                        ],
-                    ),
-                );
-            }
-            return self.append_npc_story_line(
-                &npc.id,
-                ui_format(
-                    "quests_dialogue_with_context",
-                    &[
-                        ("dialogue", dialogue.start),
-                        ("context", &self.npc_context_line(data, npc)),
-                    ],
-                ),
-            );
+            // Whether or not the quest is available yet, the NPC just speaks in
+            // their own voice. Lock reasons and rewards belong in the footer, not
+            // dumped into the middle of the conversation.
+            return self.append_npc_story_line(&npc.id, dialogue.start.to_owned());
         }
 
         if self.quest_requirements_met(data, quest) {
@@ -47,23 +29,12 @@ impl GameplayState {
                     "quests_dialogue_smell",
                     &[
                         ("progress", dialogue.progress),
-                        ("context", &self.npc_context_line(data, npc)),
                         ("item", data.item_name(&quest.required_item_id)),
                     ],
                 ),
             )
         } else {
-            self.append_npc_story_line(
-                &npc.id,
-                ui_format(
-                    "quests_dialogue_requirements",
-                    &[
-                        ("progress", dialogue.progress),
-                        ("context", &self.npc_context_line(data, npc)),
-                        ("requirements", &self.quest_requirement_summary(data, quest)),
-                    ],
-                ),
-            )
+            self.append_npc_story_line(&npc.id, dialogue.progress.to_owned())
         }
     }
 

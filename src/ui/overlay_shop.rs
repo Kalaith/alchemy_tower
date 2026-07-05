@@ -10,8 +10,8 @@ pub(crate) fn draw_shop_overlay_view(view: &ShopOverlayView) {
     draw_overlay_backdrop();
     let x = 160.0;
     let y = 88.0;
-    let w = screen_width() - 320.0;
-    let h = screen_height() - 176.0;
+    let w = crate::ui_scale::ui_w() - 320.0;
+    let h = crate::ui_scale::ui_h() - 176.0;
     draw_panel(x, y, w, h, &view.station_name);
     draw_overlay_subtitle(x, y, &view.subtitle);
     draw_overlay_tab(

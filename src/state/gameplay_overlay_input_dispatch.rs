@@ -21,6 +21,9 @@ impl GameplayState {
             return false;
         };
 
+        // Overlay hit-testing reads the mouse in UI design space, so enable the
+        // scale transform for the duration of this dispatch.
+        crate::ui_scale::set_overlay_mouse(true);
         match overlay {
             OverlayScreen::Dialogue(_) => self.handle_dialogue_inputs(data),
             OverlayScreen::Shop => self.handle_shop_inputs(data),
@@ -35,6 +38,7 @@ impl GameplayState {
             OverlayScreen::Journal => self.handle_journal_overlay_inputs(),
             OverlayScreen::Alchemy => self.handle_alchemy_inputs(data, audio),
         }
+        crate::ui_scale::set_overlay_mouse(false);
 
         true
     }

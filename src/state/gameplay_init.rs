@@ -27,6 +27,34 @@ impl GameplayState {
         state
     }
 
+    /// Open a conversation with the given NPC. Used by the screenshot capture
+    /// harness to seed a dialogue scene.
+    pub(crate) fn open_dialogue_with(&mut self, npc_id: &str) {
+        self.set_overlay(super::gameplay_overlay_types::OverlayScreen::Dialogue(
+            npc_id.to_string(),
+        ));
+    }
+
+    /// Seed a filled cauldron and open the alchemy bench, so the capture harness
+    /// can render a resolved brew preview. Moves the avatar onto the cauldron so
+    /// the overlay survives the station-proximity check in `update`.
+    pub(crate) fn open_alchemy_sample_brew(&mut self, data: &GameData) {
+        if let Some(station) = data.stations.iter().find(|station| {
+            station.kind == crate::data::StationKind::Alchemy
+                && station.area_id == self.world.current_area_id
+        }) {
+            self.world.player.position =
+                macroquad::prelude::vec2(station.position[0], station.position[1]);
+        }
+        self.inventory.insert("sunleaf".to_string(), 3);
+        self.inventory.insert("whisper_moss".to_string(), 3);
+        self.alchemy.slots[0] = Some("sunleaf".to_string());
+        self.alchemy.slots[1] = Some("whisper_moss".to_string());
+        self.alchemy.heat = 1;
+        self.alchemy.stirs = 1;
+        self.set_overlay(super::gameplay_overlay_types::OverlayScreen::Alchemy);
+    }
+
     /// Reveal the recipes for stations that are usable from the very start so a
     /// new player can see how to brew the town's first potions instead of
     /// facing an empty formulae panel. Gated stations (greenhouse, rune bench,

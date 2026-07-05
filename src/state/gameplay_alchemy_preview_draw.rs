@@ -1,5 +1,6 @@
 use super::GameplayState;
 use crate::alchemy::resolve_brew;
+use crate::content::ui_format;
 use crate::data::GameData;
 use crate::view_models::alchemy::AlchemyPreviewPanelView;
 
@@ -32,6 +33,7 @@ impl GameplayState {
                 .unwrap_or(false);
             let preview_uncertain = known && self.preview_is_uncertain(&preview);
             let stable_preview = self.brew_is_stable(&preview);
+            let quest_line = self.brew_quest_motivation(data, &preview.output_item_id);
 
             AlchemyPreviewPanelView::resolved(
                 data,
@@ -39,11 +41,32 @@ impl GameplayState {
                 known,
                 stable_preview,
                 preview_uncertain,
+                quest_line,
             )
         } else {
             AlchemyPreviewPanelView::no_station()
         };
 
         crate::ui::draw_alchemy_preview_panel_view(&view, x, y, w, h);
+    }
+
+    /// If the projected brew output would satisfy an open errand, name the
+    /// townsperson waiting on it so the bench work stays tied to the story.
+    fn brew_quest_motivation(&self, data: &GameData, output_item_id: &str) -> Option<String> {
+        let quest = data.quests.iter().find(|quest| {
+            quest.required_item_id == output_item_id
+                && quest.giver_npc_id != "quest_board"
+                && !self.progression.completed_quests.contains(&quest.id)
+                && (self.progression.started_quests.contains(&quest.id)
+                    || self.quest_is_available(quest))
+        })?;
+        let npc_name = data
+            .npc(&quest.giver_npc_id)
+            .map(|npc| npc.name.as_str())
+            .unwrap_or_default();
+        Some(ui_format(
+            "overlay_alchemy_brew_for",
+            &[("npc", npc_name), ("quest", &quest.title)],
+        ))
     }
 }

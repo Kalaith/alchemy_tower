@@ -80,8 +80,23 @@ pub(crate) use self::hud_shapes::{
     draw_beveled_rect, draw_beveled_rect_lines, draw_ornate_panel, draw_panel_texture,
 };
 
+/// Layout width/height the HUD panels anchor to: the shared UI design size when
+/// the window is small enough to be scaled, otherwise the real window size.
+pub(super) fn hud_w() -> f32 {
+    crate::ui_scale::ui_w()
+}
+
+pub(super) fn hud_h() -> f32 {
+    crate::ui_scale::ui_h()
+}
+
 pub(crate) fn draw_hud_view(view: &HudView, art: &ArtAssets) {
+    // The vignette and world-anchored gather feedbacks stay in real screen space
+    // so they always cover the whole window; only the panels are scaled.
     draw_hud_vignette();
+    draw_hud_feedbacks(&view.feedbacks, art);
+
+    let scaled = crate::ui_scale::begin_ui_camera();
     draw_title_banner(view);
     draw_vitality_medallion(view);
     draw_coin_chip(view);
@@ -92,7 +107,7 @@ pub(crate) fn draw_hud_view(view: &HudView, art: &ArtAssets) {
     draw_control_tags(view);
     draw_potion_belt(view, art);
     draw_status_strip(view);
-    draw_hud_feedbacks(&view.feedbacks, art);
+    crate::ui_scale::end_ui_camera(scaled);
 }
 
 fn draw_hud_feedbacks(feedbacks: &[HudFeedbackView], art: &ArtAssets) {

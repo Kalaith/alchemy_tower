@@ -24,10 +24,12 @@ impl AlchemyPreviewPanelView {
         known: bool,
         stable_preview: bool,
         preview_uncertain: bool,
+        quest_line: Option<String>,
     ) -> Self {
         preview_panel_view(AlchemyPreviewPanelState::Resolved(
             AlchemyResolvedPreviewView {
                 title: preview_title(data, preview, known, stable_preview, preview_uncertain),
+                quest_line,
                 output_line: output_line(data, preview),
                 quality_line: quality_line(preview),
                 traits_line: traits_line(preview),

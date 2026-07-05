@@ -41,14 +41,14 @@ pub(crate) fn draw_overlay_backdrop() {
     draw_rectangle(
         0.0,
         0.0,
-        screen_width(),
-        screen_height(),
+        crate::ui_scale::ui_w(),
+        crate::ui_scale::ui_h(),
         Color::from_rgba(0, 0, 0, 150),
     );
 }
 
 pub(crate) fn draw_overlay_subtitle(x: f32, y: f32, text: &str) {
-    let width = screen_width() - x * 2.0 - 40.0;
+    let width = crate::ui_scale::ui_w() - x * 2.0 - 40.0;
     let surface = macroquad_toolkit::ui::SurfaceStyle::new(Color::from_rgba(16, 18, 26, 176))
         .with_border(1.0, Color::from_rgba(160, 170, 190, 52));
     macroquad_toolkit::ui::draw_surface(Rect::new(x + 16.0, y + 46.0, width, 36.0), &surface);

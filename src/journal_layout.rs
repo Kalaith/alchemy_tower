@@ -1,7 +1,8 @@
-use macroquad::prelude::{screen_height, screen_width, Rect};
+use crate::ui_scale::{ui_h, ui_w};
+use macroquad::prelude::Rect;
 
 pub(crate) fn journal_panel_rect() -> Rect {
-    Rect::new(120.0, 72.0, screen_width() - 240.0, screen_height() - 144.0)
+    Rect::new(120.0, 72.0, ui_w() - 240.0, ui_h() - 144.0)
 }
 
 pub(crate) fn journal_tab_rect(index: usize, tab_count: usize) -> Rect {

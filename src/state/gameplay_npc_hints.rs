@@ -82,26 +82,4 @@ impl GameplayState {
             })
             .unwrap_or_else(npc_hint_text::quest_location_fallback)
     }
-
-    pub(super) fn npc_context_line(&self, data: &GameData, npc: &NpcDefinition) -> String {
-        let relationship = self
-            .progression
-            .relationships
-            .get(&npc.id)
-            .copied()
-            .unwrap_or_default();
-        let role = if npc.role.is_empty() {
-            npc_hint_text::empty_rapport_role()
-        } else {
-            npc.role.as_str()
-        };
-        let base = npc_hint_text::context_line(
-            &self.npc_now_hint(data, npc),
-            &self.npc_later_hint(data, npc),
-            &self.npc_usual_hint(data, npc),
-            relationship,
-            role,
-        );
-        self.append_npc_story_line(&npc.id, base)
-    }
 }

@@ -5,21 +5,13 @@ use macroquad_toolkit::colors::dark;
 use macroquad_toolkit::ui::draw_ui_text;
 
 pub(crate) fn draw_ending_overlay_view(view: &EndingOverlayView) {
-    draw_rectangle(
-        0.0,
-        0.0,
-        screen_width(),
-        screen_height(),
-        Color::from_rgba(0, 0, 0, 180),
-    );
-    let w = (screen_width() - 340.0)
-        .clamp(480.0, 900.0)
-        .min(screen_width() - 32.0);
-    let h = (screen_height() - 220.0)
-        .clamp(280.0, 620.0)
-        .min(screen_height() - 32.0);
-    let x = ((screen_width() - w) * 0.5).max(0.0);
-    let y = ((screen_height() - h) * 0.5).max(0.0);
+    let sw = crate::ui_scale::ui_w();
+    let sh = crate::ui_scale::ui_h();
+    draw_rectangle(0.0, 0.0, sw, sh, Color::from_rgba(0, 0, 0, 180));
+    let w = (sw - 340.0).clamp(480.0, 900.0).min(sw - 32.0);
+    let h = (sh - 220.0).clamp(280.0, 620.0).min(sh - 32.0);
+    let x = ((sw - w) * 0.5).max(0.0);
+    let y = ((sh - h) * 0.5).max(0.0);
     draw_panel(x, y, w, h, &view.title);
     draw_wrapped_text(
         &view.body,

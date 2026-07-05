@@ -55,6 +55,19 @@ impl Game {
         self.state = Some(match scene {
             "gameplay" => GameState::from_gameplay(GameplayState::new(&self.data)),
             "paused" => GameState::pause(GameplayState::new(&self.data)),
+            // "dialogue" or "dialogue:<npc_id>" opens a conversation overlay.
+            other if other.starts_with("dialogue") => {
+                let npc_id = other.strip_prefix("dialogue:").unwrap_or("mira_apothecary");
+                let mut gameplay = GameplayState::new(&self.data);
+                gameplay.open_dialogue_with(npc_id);
+                GameState::from_gameplay(gameplay)
+            }
+            // "brew" opens the alchemy bench with a sample filled cauldron.
+            "brew" => {
+                let mut gameplay = GameplayState::new(&self.data);
+                gameplay.open_alchemy_sample_brew(&self.data);
+                GameState::from_gameplay(gameplay)
+            }
             // Default ("menu" or anything else): the boot flow already lands
             // on the main menu, so this also covers unrecognized scene names.
             _ => GameState::new_menu(),

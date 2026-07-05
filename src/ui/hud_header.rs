@@ -46,7 +46,7 @@ pub(super) fn draw_hud_vignette() {
 pub(super) fn draw_title_banner(view: &HudView) {
     let width = 500.0;
     let height = 62.0;
-    let x = screen_width() * 0.5 - width * 0.5;
+    let x = super::hud_w() * 0.5 - width * 0.5;
     let y = 12.0;
     let top_plaque = Rect::new(x + 130.0, y - 8.0, width - 260.0, 24.0);
     let main = Rect::new(x, y + 14.0, width, height);

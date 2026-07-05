@@ -52,6 +52,9 @@ pub(crate) struct AlchemyPreviewPanelView {
 
 pub(crate) struct AlchemyResolvedPreviewView {
     pub(crate) title: String,
+    /// Present when the projected output satisfies an open quest — connects the
+    /// brew at the bench to the townsperson who needs it.
+    pub(crate) quest_line: Option<String>,
     pub(crate) output_line: String,
     pub(crate) quality_line: String,
     pub(crate) traits_line: String,

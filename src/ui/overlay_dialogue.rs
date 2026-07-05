@@ -5,40 +5,28 @@ use macroquad_toolkit::colors::dark;
 use macroquad_toolkit::ui::draw_ui_text;
 
 pub(crate) fn draw_dialogue_overlay_view(view: &DialogueOverlayView) {
-    draw_rectangle(
-        0.0,
-        0.0,
-        screen_width(),
-        screen_height(),
-        Color::from_rgba(0, 0, 0, 130),
-    );
+    let sw = crate::ui_scale::ui_w();
+    let sh = crate::ui_scale::ui_h();
+    draw_rectangle(0.0, 0.0, sw, sh, Color::from_rgba(0, 0, 0, 130));
 
     // Bottom-anchored speech panel, centered and clamped so it never inverts its
     // width on a narrow window or slides off the top of a short one.
-    let h: f32 = 226.0;
-    let w = (screen_width() - 360.0).clamp(420.0, 960.0).min(screen_width() - 32.0);
-    let x = ((screen_width() - w) * 0.5).max(0.0);
-    let y = (screen_height() - h - 40.0).max(16.0);
+    let h: f32 = 216.0;
+    let w = (sw - 360.0).clamp(440.0, 980.0).min(sw - 32.0);
+    let x = ((sw - w) * 0.5).max(0.0);
+    let y = (sh - h - 40.0).max(16.0);
     draw_panel(x, y, w, h, &view.title);
 
-    draw_ui_text(&view.now_text, x + 20.0, y + 34.0, 18.0, dark::TEXT_DIM);
-    draw_ui_text(&view.later_text, x + 20.0, y + 54.0, 18.0, dark::TEXT_DIM);
-    draw_wrapped_text(
-        &view.usually_text,
-        x + 20.0,
-        y + 72.0,
-        w - 40.0,
-        16.0,
-        18.0,
-        dark::TEXT_DIM,
-    );
+    // Just the character's words — the old Now/Later/Usually schedule readout
+    // lived here and made every conversation read like a debug tracker. That
+    // routine info now lives in the Journal's rapport tab where it belongs.
     draw_wrapped_text(
         &view.body,
-        x + 20.0,
-        y + 104.0,
-        w - 40.0,
+        x + 22.0,
+        y + 58.0,
+        w - 44.0,
         20.0,
-        24.0,
+        26.0,
         dark::TEXT_BRIGHT,
     );
 

@@ -5,7 +5,7 @@ use macroquad::prelude::*;
 use macroquad_toolkit::ui::draw_ui_text;
 
 pub(super) fn draw_minimap_frame(view: &HudView) {
-    let center = vec2(screen_width() - 62.0, 82.0);
+    let center = vec2(super::super::hud_w() - 62.0, 82.0);
     let radius = 62.0;
     draw_compass_backplate(center, radius);
     draw_circle(center.x + 5.0, center.y + 8.0, radius, shadow());

@@ -8,7 +8,7 @@ use macroquad::prelude::*;
 use macroquad_toolkit::ui::draw_ui_text;
 
 pub(super) fn draw_side_status_panel(view: &HudView) {
-    let rect = Rect::new(screen_width() - 104.0, 214.0, 84.0, 238.0);
+    let rect = Rect::new(super::hud_w() - 104.0, 214.0, 84.0, 238.0);
     draw_vertical_plaque_backplate(rect);
     draw_ornate_panel(rect, Color::from_rgba(27, 25, 20, 218), 0.9);
     draw_panel_filigree(rect, 0.58);

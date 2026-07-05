@@ -5,6 +5,7 @@ use crate::alchemy_layout::{
 use crate::view_models::alchemy::{
     AlchemyPreviewPanelState, AlchemyPreviewPanelView, AlchemyResolvedPreviewView,
 };
+use macroquad::prelude::Color;
 use macroquad_toolkit::colors::dark;
 use macroquad_toolkit::ui::draw_ui_text;
 
@@ -36,9 +37,16 @@ pub(crate) fn draw_alchemy_preview_panel_view(
 fn draw_resolved_brew_preview_view(preview: &AlchemyResolvedPreviewView, x: f32, y: f32, w: f32) {
     draw_ui_text(&preview.title, x, y, 24.0, dark::TEXT_BRIGHT);
     draw_output_summary_view(preview, x, y + 30.0);
-    draw_ui_text(&preview.read_line, x, y + 96.0, 18.0, dark::TEXT_DIM);
+    let mut read_y = y + 96.0;
+    if let Some(quest_line) = &preview.quest_line {
+        // Warm gold so the "who this is for" note reads as a story beat, not
+        // another mechanical stat line.
+        draw_ui_text(quest_line, x, read_y, 18.0, Color::from_rgba(242, 205, 126, 255));
+        read_y += 24.0;
+    }
+    draw_ui_text(&preview.read_line, x, read_y, 18.0, dark::TEXT_DIM);
 
-    let process_y = draw_brew_process_diagnostics_view(preview, x, y + 120.0);
+    let process_y = draw_brew_process_diagnostics_view(preview, x, read_y + 24.0);
     let detail_y = if preview.has_recipe && !preview.failure_reason_lines.is_empty() {
         process_y + 8.0
     } else {

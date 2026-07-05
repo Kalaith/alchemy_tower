@@ -111,12 +111,14 @@ pub(crate) fn left_mouse_pressed() -> bool {
 }
 
 pub(crate) fn mouse_position_vec() -> Vec2 {
-    mouse_position().into()
+    mouse_position_point().into()
 }
 
 pub(crate) fn mouse_position_point() -> [f32; 2] {
     let (x, y) = mouse_position();
-    [x, y]
+    // Transformed into UI design space when a scaled overlay is being read;
+    // identity otherwise (normal window size, or menu/pause/world reads).
+    crate::ui_scale::transform_mouse([x, y])
 }
 
 pub(crate) fn rect_clicked(rect: Rect) -> bool {

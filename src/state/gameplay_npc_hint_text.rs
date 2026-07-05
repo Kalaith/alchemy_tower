@@ -8,10 +8,6 @@ pub(super) fn unknown() -> &'static str {
     ui_copy("npc_hint_unknown")
 }
 
-pub(super) fn empty_rapport_role() -> &'static str {
-    ui_copy("overlay_rapport_empty")
-}
-
 pub(super) fn travelling(area_name: &str, target_name: &str) -> String {
     ui_format(
         "npc_travelling",
@@ -50,23 +46,4 @@ pub(super) fn quest_location(now: &str, later: &str) -> String {
 
 pub(super) fn quest_location_fallback() -> String {
     ui_copy("npc_quest_location_fallback").to_owned()
-}
-
-pub(super) fn context_line(
-    now: &str,
-    later: &str,
-    usual: &str,
-    relationship: i32,
-    role: &str,
-) -> String {
-    ui_format(
-        "npc_context_line",
-        &[
-            ("now", now),
-            ("later", later),
-            ("usual", usual),
-            ("rapport", &relationship.to_string()),
-            ("role", role),
-        ],
-    )
 }

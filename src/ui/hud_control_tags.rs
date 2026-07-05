@@ -6,7 +6,7 @@ use macroquad_toolkit::ui::draw_ui_text;
 
 pub(super) fn draw_control_tags(view: &HudView) {
     let x = 22.0;
-    let y = screen_height() - 184.0;
+    let y = super::hud_h() - 184.0;
     for (index, tag) in view.control_tags.iter().enumerate() {
         draw_control_tag(
             Rect::new(x, y + index as f32 * 40.0, 158.0, 32.0),

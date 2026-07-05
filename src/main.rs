@@ -18,6 +18,7 @@ mod pause_layout;
 mod save;
 mod state;
 mod ui;
+mod ui_scale;
 mod view_models;
 
 use game::Game;

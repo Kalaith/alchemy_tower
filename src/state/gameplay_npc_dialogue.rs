@@ -90,7 +90,15 @@ impl GameplayState {
             selection.complete = phase1.post_help_relief.as_str();
         }
         if (quest_started || quest_available) && !phase1.active_request.is_empty() {
-            selection.start = phase1.active_request.as_str();
+            // Only collapse to the terse "active request" reminder once the
+            // player has actually accepted the quest. While it is merely
+            // available, the opener stays as the NPC's full pitch
+            // (`dialogue_start`), which is where the *reason* for the errand
+            // lives — otherwise the first conversation jumps straight to "make
+            // me X" with no motivation.
+            if quest_started {
+                selection.start = phase1.active_request.as_str();
+            }
             selection.progress = phase1.active_request.as_str();
         } else if self.phase1_first_brew_reached() && !phase1.pre_help_concern.is_empty() {
             selection.start = phase1.pre_help_concern.as_str();
