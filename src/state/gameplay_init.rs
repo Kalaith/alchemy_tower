@@ -55,25 +55,73 @@ impl GameplayState {
         self.set_overlay(super::gameplay_overlay_types::OverlayScreen::Alchemy);
     }
 
-    /// Reveal the recipes for stations that are usable from the very start so a
-    /// new player can see how to brew the town's first potions instead of
-    /// facing an empty formulae panel. Gated stations (greenhouse, rune bench,
-    /// containment, etc.) stay discovery-only.
-    fn seed_starter_recipes(&mut self, data: &GameData) {
-        let starter_stations: std::collections::HashSet<&str> = data
+    /// Seed a couple of learned herb memories and open the journal, so the
+    /// capture harness can render the herb-memory tab (including the new
+    /// "brews into" recipe usage line).
+    pub(crate) fn open_journal_sample(&mut self, _data: &GameData) {
+        for (item_id, route_id) in [
+            ("whisper_moss", "tower_ruin_edge"),
+            ("field_bloom", "plains_crossing"),
+        ] {
+            self.progression.herb_memories.insert(
+                item_id.to_owned(),
+                crate::data::HerbMemoryEntry {
+                    item_id: item_id.to_owned(),
+                    first_seen_day: 0,
+                    first_seen_route_id: route_id.to_owned(),
+                    seen: true,
+                    learned: true,
+                    learned_day: 1,
+                    learned_route_id: route_id.to_owned(),
+                    note: String::new(),
+                    best_quality: 28,
+                    best_quality_band: "Serviceable".to_owned(),
+                    variant_name: String::new(),
+                },
+            );
+        }
+        self.ui.journal_tab = 0;
+        self.set_overlay(super::gameplay_overlay_types::OverlayScreen::Journal);
+    }
+
+    /// Seed a ready-to-hand-in repeatable board request and open the quest
+    /// board, so the capture harness can render the delivery flow.
+    pub(crate) fn open_quest_board_sample(&mut self, data: &GameData) {
+        if let Some(station) = data
             .stations
             .iter()
-            .filter(|station| {
-                station.area_id == data.config.starting_area
-                    && station.required_completed_quest.is_empty()
-                    && station.required_total_brews == 0
-                    && station.required_journal_milestone.is_empty()
-            })
-            .map(|station| station.id.as_str())
-            .collect();
+            .find(|station| station.kind == crate::data::StationKind::QuestBoard)
+        {
+            self.world.current_area_id = station.area_id.clone();
+            self.world.player.position =
+                macroquad::prelude::vec2(station.position[0], station.position[1]);
+        }
+        self.progression.total_brews = 12;
+        self.progression
+            .started_quests
+            .insert("board_restorative_stash".to_owned());
+        self.inventory.insert("healing_draught".to_owned(), 1);
+        self.progression.crafted_item_profiles.insert(
+            "healing_draught".to_owned(),
+            crate::data::CraftedItemProfileEntry {
+                item_id: "healing_draught".to_owned(),
+                best_quality_score: 60,
+                best_quality_band: "Fine".to_owned(),
+                inherited_traits: vec!["restorative".to_owned()],
+                effect_kinds: vec!["restore".to_owned()],
+            },
+        );
+        self.set_overlay(super::gameplay_overlay_types::OverlayScreen::QuestBoard);
+    }
 
+    /// Log the handful of recipes flagged `starter_known` so a new player can
+    /// see how to brew the town's first potions instead of facing an empty
+    /// formulae panel. Every other formula in the catalogue — including the
+    /// wider entry-cauldron recipes — stays discovery-only and is learned by
+    /// experimenting at the bench. See [[starter-recipe-seeding]].
+    fn seed_starter_recipes(&mut self, data: &GameData) {
         for recipe in &data.recipes {
-            if starter_stations.contains(recipe.station_id.as_str()) {
+            if recipe.starter_known {
                 self.progression.known_recipes.insert(recipe.id.clone());
             }
         }

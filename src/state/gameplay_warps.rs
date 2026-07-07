@@ -12,7 +12,8 @@ impl GameplayState {
             || (warp.required_total_brews == 0
                 && warp.required_coins == 0
                 && warp.required_item_id.is_empty()
-                && warp.required_journal_milestone.is_empty())
+                && warp.required_journal_milestone.is_empty()
+                && warp.required_mastered_recipe.is_empty())
     }
 
     pub(super) fn can_unlock_warp(&self, warp: &WarpDefinition) -> bool {
@@ -27,6 +28,15 @@ impl GameplayState {
                     >= warp.required_item_amount)
             && (warp.required_journal_milestone.is_empty()
                 || self.has_journal_milestone(&warp.required_journal_milestone))
+            && self.mastery_requirement_met(warp)
+    }
+
+    /// True when the warp has no mastery gate, or the named recipe has reached
+    /// the mastered stage.
+    pub(super) fn mastery_requirement_met(&self, warp: &WarpDefinition) -> bool {
+        warp.required_mastered_recipe.is_empty()
+            || self.recipe_mastery_brews(&warp.required_mastered_recipe)
+                >= crate::alchemy::MASTERED_BREW_COUNT
     }
 
     pub(super) fn pay_warp_costs(&mut self, warp: &WarpDefinition) {
@@ -64,6 +74,7 @@ impl GameplayState {
             !warp.required_journal_milestone.is_empty()
                 && !self.has_journal_milestone(&warp.required_journal_milestone),
         );
+        let mastery_missing = u32::from(!self.mastery_requirement_met(warp));
 
         warp.required_total_brews
             .saturating_sub(self.progression.total_brews)
@@ -71,6 +82,7 @@ impl GameplayState {
             .saturating_add(warp.required_coins.saturating_sub(self.coins))
             .saturating_add(item_missing.saturating_mul(25))
             .saturating_add(milestone_missing.saturating_mul(150))
+            .saturating_add(mastery_missing.saturating_mul(150))
     }
 
     pub(super) fn warp_requirement_summary(
@@ -94,12 +106,50 @@ impl GameplayState {
             .unwrap_or_default();
         let missing_journal_milestone = !warp.required_journal_milestone.is_empty()
             && !self.has_journal_milestone(&warp.required_journal_milestone);
+        let mastered_recipe_brews = if warp.required_mastered_recipe.is_empty() {
+            0
+        } else {
+            self.recipe_mastery_brews(&warp.required_mastered_recipe)
+        };
 
         WarpRequirementProgress::new(
             self.progression.total_brews,
             self.coins,
             owned_required_item,
             missing_journal_milestone,
+            mastered_recipe_brews,
         )
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::GameplayState;
+
+    #[test]
+    fn mastery_gate_blocks_until_recipe_is_mastered() {
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let mut state = GameplayState::new(&data);
+
+        let warp = data
+            .areas
+            .iter()
+            .flat_map(|area| area.warps.iter())
+            .find(|warp| warp.id == "containment_to_rune_workshop")
+            .expect("rune workshop warp should exist")
+            .clone();
+        assert_eq!(warp.required_mastered_recipe, "glow_potion_recipe");
+
+        // Pay the coin cost but leave the recipe unmastered: still locked.
+        state.coins = warp.required_coins + 10;
+        assert!(!state.can_unlock_warp(&warp));
+        assert!(!state.warp_is_unlocked(&warp));
+
+        // Reaching the mastered threshold opens the gate.
+        state.progression.recipe_mastery.insert(
+            "glow_potion_recipe".to_owned(),
+            crate::alchemy::MASTERED_BREW_COUNT,
+        );
+        assert!(state.can_unlock_warp(&warp));
     }
 }

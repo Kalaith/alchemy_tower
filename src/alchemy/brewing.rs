@@ -28,6 +28,12 @@ pub(crate) struct BrewResolution<'a> {
     pub(crate) room_bonus_applied: bool,
     pub(crate) minimum_quality_met: bool,
     pub(crate) minimum_elements_met: bool,
+    /// Deterministic overcharge/volatility pressure (0 = calm). At or above
+    /// `INSTABILITY_LIMIT` the brew collapses; see `destabilized`.
+    pub(crate) instability: u32,
+    /// True when instability has crossed the collapse threshold, forcing the
+    /// unstable output even if the recipe/process/quality checks pass.
+    pub(crate) destabilized: bool,
     pub(crate) failure_reasons: Vec<String>,
     pub(crate) morph_hint: Option<String>,
 }
@@ -75,6 +81,8 @@ pub(crate) fn resolve_brew<'a>(
         room_bonus_applied: false,
         minimum_quality_met: false,
         minimum_elements_met: false,
+        instability: 0,
+        destabilized: false,
         failure_reasons: vec![ui_copy("brew_failure_no_recipe").to_owned()],
         morph_hint: None,
     }

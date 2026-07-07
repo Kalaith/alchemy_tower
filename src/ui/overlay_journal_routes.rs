@@ -70,6 +70,20 @@ pub(crate) fn draw_journal_routes_tab_view(
     }
 }
 
+/// Draw a wrapped herb-memory line and return the next y, advanced by the
+/// text's actual wrapped height so long summaries/conditions no longer overlap
+/// the line beneath them.
+fn draw_herb_wrapped_block(text: &str, x: f32, y: f32, text_width: f32) -> f32 {
+    const FONT: f32 = 16.0;
+    const LINE_HEIGHT: f32 = 18.0;
+    const BLOCK_GAP: f32 = 8.0;
+    draw_wrapped_text(text, x, y, text_width, FONT, LINE_HEIGHT, dark::TEXT_DIM);
+    let lines = super::text::wrapped_lines(text, text_width, FONT)
+        .len()
+        .max(1) as f32;
+    y + lines * LINE_HEIGHT + BLOCK_GAP
+}
+
 fn draw_journal_herb_memories_view(
     view: &JournalHerbMemoriesView,
     x: f32,
@@ -91,26 +105,11 @@ fn draw_journal_herb_memories_view(
         entry_y += 20.0;
         draw_ui_text(&entry.route_line, x, entry_y, 18.0, dark::TEXT_DIM);
         entry_y += 20.0;
-        draw_wrapped_text(
-            &entry.summary,
-            x,
-            entry_y,
-            text_width,
-            16.0,
-            18.0,
-            dark::TEXT_DIM,
-        );
-        entry_y += 40.0;
-        draw_wrapped_text(
-            &entry.conditions,
-            x,
-            entry_y,
-            text_width,
-            16.0,
-            18.0,
-            dark::TEXT_DIM,
-        );
-        entry_y += 28.0;
+        entry_y = draw_herb_wrapped_block(&entry.summary, x, entry_y, text_width);
+        entry_y = draw_herb_wrapped_block(&entry.conditions, x, entry_y, text_width);
+        if let Some(used_in_text) = &entry.used_in_text {
+            entry_y = draw_herb_wrapped_block(used_in_text, x, entry_y, text_width);
+        }
         if let Some(best_specimen_text) = &entry.best_specimen_text {
             draw_ui_text(best_specimen_text, x, entry_y, 18.0, dark::TEXT_DIM);
             entry_y += 20.0;
@@ -120,16 +119,7 @@ fn draw_journal_herb_memories_view(
             entry_y += 20.0;
         }
         if let Some(note_text) = &entry.note_text {
-            draw_wrapped_text(
-                note_text,
-                x,
-                entry_y,
-                text_width,
-                16.0,
-                18.0,
-                dark::TEXT_DIM,
-            );
-            entry_y += 30.0;
+            entry_y = draw_herb_wrapped_block(note_text, x, entry_y, text_width);
         }
         if entry_y > bottom_limit {
             break;

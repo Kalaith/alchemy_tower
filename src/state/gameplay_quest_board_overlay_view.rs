@@ -6,18 +6,29 @@ use crate::view_models::quest_board::{QuestBoardOverlayEntry, QuestBoardOverlayV
 impl GameplayState {
     pub(super) fn quest_board_overlay_view(&self, data: &GameData) -> QuestBoardOverlayView {
         let entries = self
-            .available_board_quests(data)
+            .board_actions(data)
             .iter()
             .enumerate()
-            .filter_map(|(index, quest_id)| {
-                data.quest(quest_id).map(|quest| QuestBoardOverlayEntry {
-                    title: quest.title.clone(),
-                    detail: self.quest_location_hint(data, quest),
-                    meta: ui_format(
+            .filter_map(|(index, action)| {
+                data.quest(&action.quest_id).map(|quest| {
+                    let reward = ui_format(
                         "overlay_reward",
                         &[("coins", &quest.reward_coins.to_string())],
-                    ),
-                    selected: self.quest_board_entry_selected(index),
+                    );
+                    QuestBoardOverlayEntry {
+                        title: if action.deliver {
+                            ui_format("overlay_quest_deliver_title", &[("title", &quest.title)])
+                        } else {
+                            quest.title.clone()
+                        },
+                        detail: if action.deliver {
+                            ui_copy("overlay_quest_deliver_detail").to_owned()
+                        } else {
+                            self.quest_location_hint(data, quest)
+                        },
+                        meta: reward,
+                        selected: self.quest_board_entry_selected(index),
+                    }
                 })
             })
             .collect();

@@ -19,6 +19,11 @@ pub(crate) fn quality_band(score: u32) -> &'static str {
     }
 }
 
+/// Successful brews at which a recipe reaches the "mastered" stage. Kept as a
+/// named constant so progression gates (`required_mastered_recipe`) and
+/// `mastery_stage` agree on the threshold.
+pub(crate) const MASTERED_BREW_COUNT: u32 = 7;
+
 pub(crate) fn mastery_stage(successful_brews: u32) -> &'static str {
     match successful_brews {
         0 => ui_copy("mastery_stage_unknown"),
@@ -51,17 +56,22 @@ pub(super) fn calculate_quality(
     score += preferred_trait_matches(recipe, ingredients, catalyst) as u32 * 4;
     score += mastery_brews.min(6) * 3;
 
-    if heat == recipe.required_heat {
+    // Heat and stirs at the target brew cleanly; overcharging past the target
+    // adds potency (see `volatility::overcharge_potency`) at the cost of
+    // instability; underfiring/understirring still degrades the brew.
+    if heat >= recipe.required_heat {
         score += 6;
     } else {
-        score = score.saturating_sub((heat - recipe.required_heat).unsigned_abs() * 4);
+        score = score.saturating_sub((recipe.required_heat - heat).unsigned_abs() * 4);
     }
 
-    if stirs == recipe.required_stirs {
+    if stirs >= recipe.required_stirs {
         score += 5;
     } else {
         score = score.saturating_sub(stirs.abs_diff(recipe.required_stirs) * 2);
     }
+
+    score += super::volatility::overcharge_potency(recipe, heat, stirs);
 
     if timing_match {
         score += 4;

@@ -19,6 +19,9 @@ pub(super) struct ProgressionState {
     pub(super) relationships: BTreeMap<String, i32>,
     pub(super) started_quests: HashSet<String>,
     pub(super) completed_quests: HashSet<String>,
+    /// Repeatable board request id -> the day index on/after which it may be
+    /// offered again. Absent means never delivered (or not repeatable).
+    pub(super) board_quest_cooldowns: BTreeMap<String, u32>,
     pub(super) herb_memories: BTreeMap<String, HerbMemoryEntry>,
     pub(super) potion_memories: BTreeMap<String, PotionMemoryEntry>,
 }
@@ -38,6 +41,7 @@ impl ProgressionState {
             relationships: BTreeMap::new(),
             started_quests: HashSet::new(),
             completed_quests: HashSet::new(),
+            board_quest_cooldowns: BTreeMap::new(),
             herb_memories: BTreeMap::new(),
             potion_memories: BTreeMap::new(),
         }

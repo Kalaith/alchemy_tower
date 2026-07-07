@@ -44,6 +44,17 @@ fn draw_resolved_brew_preview_view(preview: &AlchemyResolvedPreviewView, x: f32,
     draw_ui_text(&preview.title, x, y, 24.0, dark::TEXT_BRIGHT);
     draw_output_summary_view(preview, x, y + 30.0);
     let mut read_y = y + 96.0;
+    if let Some(instability_line) = &preview.instability_line {
+        // Warm amber for a live overcharge, red once it will collapse — so the
+        // risk of pushing reads at a glance without parsing the number.
+        let color = if preview.destabilized {
+            Color::from_rgba(224, 122, 108, 255)
+        } else {
+            Color::from_rgba(224, 176, 108, 255)
+        };
+        draw_ui_text(instability_line, x, read_y, 18.0, color);
+        read_y += 24.0;
+    }
     if let Some(quest_line) = &preview.quest_line {
         // Warm gold so the "who this is for" note reads as a story beat, not
         // another mechanical stat line.

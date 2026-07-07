@@ -9,6 +9,7 @@ impl GameplayState {
         resolution.process_match
             && resolution.minimum_quality_met
             && resolution.minimum_elements_met
+            && !resolution.destabilized
     }
 
     pub(super) fn inventory_sort_label(&self) -> &'static str {

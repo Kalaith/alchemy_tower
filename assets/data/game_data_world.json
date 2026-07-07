@@ -1930,10 +1930,8 @@
             150.0,
             340.0
           ],
-          "required_total_brews": 24,
-          "required_coins": 80,
-          "required_item_id": "lumen_dust",
-          "required_item_amount": 2,
+          "required_coins": 60,
+          "required_mastered_recipe": "glow_potion_recipe",
           "unlock_milestones": [
             {
               "id": "rune_workshop_restored",
@@ -1941,7 +1939,7 @@
               "text": "The rune benches hum again. Potions can now be reshaped after brewing instead of only before it."
             }
           ],
-          "locked_note": "The rune workshop remains shuttered until the tower trusts your handling of stranger forces."
+          "locked_note": "The rune workshop remains shuttered until you have truly mastered a base brew of your own."
         }
       ],
       "gather_nodes": []

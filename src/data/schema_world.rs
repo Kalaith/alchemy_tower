@@ -53,6 +53,11 @@ pub(crate) struct WarpDefinition {
     pub(crate) required_item_amount: u32,
     #[serde(default)]
     pub(crate) required_journal_milestone: String,
+    /// Recipe that must be brought to the "mastered" mastery stage before this
+    /// warp opens. A skill gate rather than a grind gate — see
+    /// `alchemy::MASTERED_BREW_COUNT`.
+    #[serde(default)]
+    pub(crate) required_mastered_recipe: String,
     #[serde(default)]
     pub(crate) required_journal_hint: String,
     #[serde(default)]
@@ -124,6 +129,15 @@ pub(crate) struct QuestDefinition {
     pub(crate) minimum_total_brews: u32,
     #[serde(default)]
     pub(crate) completion_milestones: Vec<JournalMilestoneEntry>,
+    /// Board requests only: when true, the request returns to the board after a
+    /// cooldown instead of being permanently completed, giving the mid-game a
+    /// recurring reason to brew and deliver.
+    #[serde(default)]
+    pub(crate) repeatable: bool,
+    /// Days after a repeatable request is delivered before it is offered again
+    /// (clamped to at least 1 day at delivery time).
+    #[serde(default)]
+    pub(crate) repeat_cooldown_days: u32,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]

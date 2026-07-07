@@ -6,6 +6,7 @@ pub(super) struct WarpRequirementProgress {
     coins: u32,
     owned_required_item: u32,
     missing_journal_milestone: bool,
+    mastered_recipe_brews: u32,
 }
 
 impl WarpRequirementProgress {
@@ -14,12 +15,14 @@ impl WarpRequirementProgress {
         coins: u32,
         owned_required_item: u32,
         missing_journal_milestone: bool,
+        mastered_recipe_brews: u32,
     ) -> Self {
         Self {
             total_brews,
             coins,
             owned_required_item,
             missing_journal_milestone,
+            mastered_recipe_brews,
         }
     }
 }
@@ -67,6 +70,24 @@ pub(super) fn warp_requirement_summary(
                         .saturating_sub(progress.owned_required_item)
                         .to_string(),
                 ),
+            ],
+        ));
+    }
+    if !warp.required_mastered_recipe.is_empty()
+        && progress.mastered_recipe_brews < crate::alchemy::MASTERED_BREW_COUNT
+    {
+        let recipe_name = data
+            .recipes
+            .iter()
+            .find(|recipe| recipe.id == warp.required_mastered_recipe)
+            .map(|recipe| recipe.name.as_str())
+            .unwrap_or_default();
+        parts.push(ui_format(
+            "gameplay_requirement_master_recipe",
+            &[
+                ("recipe", recipe_name),
+                ("have", &progress.mastered_recipe_brews.to_string()),
+                ("need", &crate::alchemy::MASTERED_BREW_COUNT.to_string()),
             ],
         ));
     }

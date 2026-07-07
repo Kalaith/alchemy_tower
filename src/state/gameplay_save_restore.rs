@@ -79,6 +79,11 @@ pub(super) fn apply_save_snapshot(
         .into_iter()
         .map(|entry| (entry.npc_id, entry.value))
         .collect();
+    state.progression.board_quest_cooldowns = save
+        .board_quest_cooldowns
+        .into_iter()
+        .map(|entry| (entry.quest_id, entry.available_day))
+        .collect();
     state.world.available_nodes.clear();
     state.ui = OverlayState::new_gameplay();
     state.alchemy = AlchemySession::default();

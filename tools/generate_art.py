@@ -211,6 +211,13 @@ def icon(item, size, world=False):
             "beastcalm_extract": "#bfe8dc", "splash_glow_potion": "#bdd4ff", "echo_healing_draught": "#b4f0be",
             "delayed_stamina_tonic": "#ffc08f", "stamina_tonic": "#ff9b62", "murky_concoction": "#7c7459",
             "dew_slime": "#c4f4ff",
+            "field_poultice": "#ded68c", "calmleaf_infusion": "#96d6b0", "verdant_restorative": "#7ed496",
+            "bloomrise_elixir": "#96eca8", "greenmend_salve": "#aae0c4", "lantern_draught": "#e0cc96",
+            "mothlight_brew": "#d6e0aa", "wardlight_solution": "#bacce0", "runemark_elixir": "#ced8ff",
+            "duskbell_tonic": "#d2bce0", "trailblaze_tonic": "#ffa868", "wildfire_draught": "#ff8456",
+            "sunwarden_tonic": "#ffc478", "briskstep_draught": "#bcd6ec", "purified_draught": "#c4e4d6",
+            "wellspring_elixir": "#aaecdc", "emberglass_tonic": "#eebe8c", "stargrove_elixir": "#dce0ff",
+            "celestine_elixir": "#eceeff", "moonmoth_salve": "#c6e0bc", "kindling_tonic": "#eeb27e",
         }.get(item, "#d2c1ff")
         d.rounded_rectangle((cx - 8, cy - 24, cx + 8, cy - 12), radius=3, fill=rgb("#d9dfe8", 220))
         d.rectangle((cx - 5, cy - 28, cx + 5, cy - 22), fill=rgb("#8b6a4d"))

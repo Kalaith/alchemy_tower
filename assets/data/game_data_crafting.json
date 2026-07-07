@@ -41,7 +41,8 @@
         "sunleaf",
         "whisper_moss"
       ],
-      "morph_targets": []
+      "morph_targets": [],
+      "starter_known": true
     },
     {
       "id": "glow_potion_recipe",
@@ -99,7 +100,8 @@
           ],
           "room_bonus_required": true
         }
-      ]
+      ],
+      "starter_known": true
     },
     {
       "id": "stamina_tonic_recipe",
@@ -143,7 +145,8 @@
         "ember_root",
         "mist_moth_wing"
       ],
-      "morph_targets": []
+      "morph_targets": [],
+      "starter_known": true
     },
     {
       "id": "beastcalm_extract_recipe",
@@ -187,6 +190,403 @@
         "luminous",
         "calm"
       ],
+      "morph_targets": []
+    },
+    {
+      "id": "field_poultice_recipe",
+      "name": "Field Poultice",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        { "item_id": "sunleaf", "amount": 1 },
+        { "item_id": "field_bloom", "amount": 1 }
+      ],
+      "output_item_id": "field_poultice",
+      "output_amount": 1,
+      "description": "A rough meadow salve for the scrapes a work crew earns in a day.",
+      "required_heat": 1,
+      "required_stirs": 1,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "Every apprentice starts here: warm leaf, bright bloom, low fire.",
+      "minimum_quality": 26,
+      "preferred_traits": ["healing", "restorative"],
+      "guaranteed_traits": ["restorative"],
+      "minimum_elements": { "vita": 2, "ember": 0, "mist": 0, "lux": 0 },
+      "required_timing": "steady",
+      "morph_targets": []
+    },
+    {
+      "id": "calmleaf_infusion_recipe",
+      "name": "Calmleaf Infusion",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        { "item_id": "reedflower", "amount": 1 },
+        { "item_id": "whisper_moss", "amount": 1 }
+      ],
+      "output_item_id": "calmleaf_infusion",
+      "output_amount": 1,
+      "description": "A quiet green infusion for people who have forgotten how to sleep.",
+      "required_heat": 1,
+      "required_stirs": 2,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "Reed and moss both like a slow, cool hand. Rush it and it turns bitter.",
+      "minimum_quality": 28,
+      "preferred_traits": ["calm", "healing"],
+      "guaranteed_traits": ["calm"],
+      "minimum_elements": { "vita": 2, "ember": 0, "mist": 0, "lux": 0 },
+      "required_timing": "late",
+      "morph_targets": []
+    },
+    {
+      "id": "verdant_restorative_recipe",
+      "name": "Verdant Restorative",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        { "item_id": "field_bloom", "amount": 1 },
+        { "item_id": "rain_orchid", "amount": 1 }
+      ],
+      "output_item_id": "verdant_restorative",
+      "output_amount": 1,
+      "description": "A deep-green tonic that coaxes vigor back into tired bodies and tired beds.",
+      "required_heat": 2,
+      "required_stirs": 2,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "Master the plains-and-jungle pairing and it wants to bloom into something greater.",
+      "minimum_quality": 34,
+      "preferred_traits": ["restorative", "luminous"],
+      "guaranteed_traits": ["restorative"],
+      "minimum_elements": { "vita": 2, "ember": 0, "mist": 0, "lux": 2 },
+      "required_timing": "",
+      "morph_targets": [
+        {
+          "output_item_id": "bloomrise_elixir",
+          "minimum_quality": 66,
+          "required_heat": 2,
+          "required_stirs": 2,
+          "required_timing": "late",
+          "room_bonus_required": true
+        }
+      ]
+    },
+    {
+      "id": "greenmend_salve_recipe",
+      "name": "Greenmend Salve",
+      "station_id": "greenhouse_still",
+      "ingredients": [
+        { "item_id": "reedflower", "amount": 1 },
+        { "item_id": "dew_slime", "amount": 1 }
+      ],
+      "output_item_id": "greenmend_salve",
+      "output_amount": 1,
+      "description": "A cool, clean salve tuned for wilted planter beds and delicate specimens.",
+      "required_heat": 2,
+      "required_stirs": 1,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "The glasshouse still rewards purity above force.",
+      "minimum_quality": 34,
+      "preferred_traits": ["pure", "calm"],
+      "guaranteed_traits": ["pure"],
+      "minimum_elements": { "vita": 1, "ember": 0, "mist": 3, "lux": 0 },
+      "required_timing": "steady",
+      "morph_targets": []
+    },
+    {
+      "id": "lantern_draught_recipe",
+      "name": "Lantern Draught",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        { "item_id": "arcane_dust", "amount": 1 },
+        { "item_id": "field_bloom", "amount": 1 }
+      ],
+      "output_item_id": "lantern_draught",
+      "output_amount": 1,
+      "description": "A humble glow brew that keeps a road lamp honest through the early dark.",
+      "required_heat": 2,
+      "required_stirs": 2,
+      "unstable_output_item_id": "lantern_leak",
+      "lore_note": "Not every light needs to be a spectacle. Some just need to last the walk home.",
+      "minimum_quality": 30,
+      "preferred_traits": ["luminous", "arcane"],
+      "guaranteed_traits": ["soft_glow"],
+      "minimum_elements": { "vita": 0, "ember": 0, "mist": 0, "lux": 4 },
+      "required_timing": "steady",
+      "morph_targets": []
+    },
+    {
+      "id": "mothlight_brew_recipe",
+      "name": "Mothlight Brew",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        { "item_id": "lumen_dust", "amount": 1 },
+        { "item_id": "moon_fern", "amount": 1 }
+      ],
+      "output_item_id": "mothlight_brew",
+      "output_amount": 1,
+      "description": "A soft, drifting glow gathered from settled moth dust, kind to night eyes.",
+      "required_heat": 2,
+      "required_stirs": 3,
+      "unstable_output_item_id": "lantern_leak",
+      "lore_note": "Wants patient stirring. Hurry it and the light goes harsh.",
+      "minimum_quality": 36,
+      "preferred_traits": ["luminous", "calm"],
+      "guaranteed_traits": ["soft_glow"],
+      "minimum_elements": { "vita": 0, "ember": 0, "mist": 0, "lux": 5 },
+      "required_timing": "late",
+      "morph_targets": []
+    },
+    {
+      "id": "wardlight_solution_recipe",
+      "name": "Wardlight Solution",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        { "item_id": "quarry_lichen", "amount": 1 },
+        { "item_id": "arcane_dust", "amount": 1 }
+      ],
+      "output_item_id": "wardlight_solution",
+      "output_amount": 1,
+      "description": "A cold arcane light meant to read faded wards and half-erased sigils.",
+      "required_heat": 2,
+      "required_stirs": 2,
+      "unstable_output_item_id": "lantern_leak",
+      "lore_note": "With a shard of starlight and a steady hand, it can be sharpened into true runelight.",
+      "minimum_quality": 34,
+      "preferred_traits": ["arcane", "luminous"],
+      "guaranteed_traits": ["arcane"],
+      "minimum_elements": { "vita": 0, "ember": 0, "mist": 0, "lux": 3 },
+      "required_timing": "",
+      "morph_targets": [
+        {
+          "output_item_id": "runemark_elixir",
+          "minimum_quality": 68,
+          "catalyst_tag": "starlight",
+          "required_heat": 2,
+          "required_stirs": 2,
+          "required_timing": "steady"
+        }
+      ]
+    },
+    {
+      "id": "duskbell_tonic_recipe",
+      "name": "Duskbell Tonic",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        { "item_id": "rain_orchid", "amount": 1 },
+        { "item_id": "moon_fern", "amount": 1 }
+      ],
+      "output_item_id": "duskbell_tonic",
+      "output_amount": 1,
+      "description": "A calm, dim glow brewed to keep dusk-shy creatures settled while they are handled.",
+      "required_heat": 1,
+      "required_stirs": 2,
+      "unstable_output_item_id": "lantern_leak",
+      "lore_note": "Low fire keeps the light gentle enough for nervous animals.",
+      "minimum_quality": 30,
+      "preferred_traits": ["calm", "luminous"],
+      "guaranteed_traits": ["calm"],
+      "minimum_elements": { "vita": 0, "ember": 0, "mist": 3, "lux": 3 },
+      "required_timing": "steady",
+      "morph_targets": []
+    },
+    {
+      "id": "trailblaze_tonic_recipe",
+      "name": "Trailblaze Tonic",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        { "item_id": "sunspike", "amount": 1 },
+        { "item_id": "ember_root", "amount": 1 }
+      ],
+      "output_item_id": "trailblaze_tonic",
+      "output_amount": 1,
+      "description": "A hot desert-and-ember tonic that keeps repair crews moving through a long shift.",
+      "required_heat": 3,
+      "required_stirs": 3,
+      "unstable_output_item_id": "rush_draught",
+      "lore_note": "Volatile by nature. Push the fire early and it can flare into something wilder.",
+      "minimum_quality": 38,
+      "preferred_traits": ["vigor", "volatile"],
+      "guaranteed_traits": ["quickstep"],
+      "minimum_elements": { "vita": 0, "ember": 5, "mist": 0, "lux": 0 },
+      "required_timing": "",
+      "morph_targets": [
+        {
+          "output_item_id": "wildfire_draught",
+          "minimum_quality": 64,
+          "required_heat": 3,
+          "required_stirs": 3,
+          "required_timing": "early"
+        }
+      ]
+    },
+    {
+      "id": "sunwarden_tonic_recipe",
+      "name": "Sunwarden Tonic",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        { "item_id": "sunspike", "amount": 1 },
+        { "item_id": "sunleaf", "amount": 1 }
+      ],
+      "output_item_id": "sunwarden_tonic",
+      "output_amount": 1,
+      "description": "A warming tonic that steadies the body against desert heat and long exposed roads.",
+      "required_heat": 2,
+      "required_stirs": 2,
+      "unstable_output_item_id": "rush_draught",
+      "lore_note": "Warmth without the volatility, if you keep the two suns balanced.",
+      "minimum_quality": 32,
+      "preferred_traits": ["warm", "vigor"],
+      "guaranteed_traits": ["warm"],
+      "minimum_elements": { "vita": 0, "ember": 2, "mist": 0, "lux": 0 },
+      "required_timing": "early",
+      "morph_targets": []
+    },
+    {
+      "id": "briskstep_draught_recipe",
+      "name": "Briskstep Draught",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        { "item_id": "mist_moth_wing", "amount": 1 },
+        { "item_id": "reedflower", "amount": 1 }
+      ],
+      "output_item_id": "briskstep_draught",
+      "output_amount": 1,
+      "description": "A gentle, well-mannered pick-me-up for elders and anyone who dislikes a jolt.",
+      "required_heat": 1,
+      "required_stirs": 2,
+      "unstable_output_item_id": "rush_draught",
+      "lore_note": "The reedflower's purity tames the moth wing's twitchiness. Balance over force.",
+      "minimum_quality": 30,
+      "preferred_traits": ["cold", "pure"],
+      "guaranteed_traits": ["quickstep"],
+      "minimum_elements": { "vita": 0, "ember": 0, "mist": 4, "lux": 0 },
+      "required_timing": "steady",
+      "morph_targets": []
+    },
+    {
+      "id": "purified_draught_recipe",
+      "name": "Purified Draught",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        { "item_id": "quarry_lichen", "amount": 1 },
+        { "item_id": "reedflower", "amount": 1 }
+      ],
+      "output_item_id": "purified_draught",
+      "output_amount": 1,
+      "description": "A clean, exacting restorative prized by buyers who pay for a flawless pour.",
+      "required_heat": 2,
+      "required_stirs": 3,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "Two pure reagents hold together under real pressure. Mastered, it reaches a wellspring.",
+      "minimum_quality": 36,
+      "preferred_traits": ["pure", "calm"],
+      "guaranteed_traits": ["pure"],
+      "minimum_elements": { "vita": 0, "ember": 0, "mist": 2, "lux": 0 },
+      "required_timing": "",
+      "morph_targets": [
+        {
+          "output_item_id": "wellspring_elixir",
+          "minimum_quality": 72,
+          "required_heat": 2,
+          "required_stirs": 3,
+          "required_timing": "steady",
+          "room_bonus_required": true
+        }
+      ]
+    },
+    {
+      "id": "emberglass_tonic_recipe",
+      "name": "Emberglass Tonic",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        { "item_id": "sunspike", "amount": 1 },
+        { "item_id": "quarry_lichen", "amount": 1 }
+      ],
+      "output_item_id": "emberglass_tonic",
+      "output_amount": 1,
+      "description": "A warm amber light hardened with quarry minerals, steady in wind and heat.",
+      "required_heat": 3,
+      "required_stirs": 2,
+      "unstable_output_item_id": "lantern_leak",
+      "lore_note": "High fire vitrifies the lichen into a glass that holds its glow.",
+      "minimum_quality": 34,
+      "preferred_traits": ["warm", "arcane"],
+      "guaranteed_traits": ["warm"],
+      "minimum_elements": { "vita": 0, "ember": 2, "mist": 0, "lux": 2 },
+      "required_timing": "steady",
+      "morph_targets": []
+    },
+    {
+      "id": "stargrove_elixir_recipe",
+      "name": "Stargrove Elixir",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        { "item_id": "arcane_dust", "amount": 1 },
+        { "item_id": "moon_fern", "amount": 1 },
+        { "item_id": "lumen_dust", "amount": 1 }
+      ],
+      "output_item_id": "stargrove_elixir",
+      "output_amount": 1,
+      "description": "A layered luminous elixir that blends grove-cool and arcane light into one clear beam.",
+      "required_heat": 2,
+      "required_stirs": 3,
+      "unstable_output_item_id": "lantern_leak",
+      "lore_note": "Three luminous reagents in balance. With true starlight it becomes the observatory's own light.",
+      "minimum_quality": 42,
+      "preferred_traits": ["luminous", "arcane"],
+      "guaranteed_traits": ["soft_glow"],
+      "minimum_elements": { "vita": 0, "ember": 0, "mist": 0, "lux": 7 },
+      "required_timing": "",
+      "morph_targets": [
+        {
+          "output_item_id": "celestine_elixir",
+          "minimum_quality": 70,
+          "catalyst_tag": "starlight",
+          "required_heat": 2,
+          "required_stirs": 3,
+          "required_timing": "late"
+        }
+      ]
+    },
+    {
+      "id": "moonmoth_salve_recipe",
+      "name": "Moonmoth Salve",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        { "item_id": "lumen_dust", "amount": 1 },
+        { "item_id": "whisper_moss", "amount": 1 }
+      ],
+      "output_item_id": "moonmoth_salve",
+      "output_amount": 1,
+      "description": "A restorative that leaves a faint moth-light halo, easy on frightened patients at night.",
+      "required_heat": 1,
+      "required_stirs": 2,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "Light and healing at once, if kept gentle.",
+      "minimum_quality": 30,
+      "preferred_traits": ["luminous", "healing"],
+      "guaranteed_traits": ["soft_glow"],
+      "minimum_elements": { "vita": 1, "ember": 0, "mist": 0, "lux": 2 },
+      "required_timing": "steady",
+      "morph_targets": []
+    },
+    {
+      "id": "kindling_tonic_recipe",
+      "name": "Kindling Tonic",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        { "item_id": "ember_root", "amount": 1 },
+        { "item_id": "sunleaf", "amount": 1 }
+      ],
+      "output_item_id": "kindling_tonic",
+      "output_amount": 1,
+      "description": "A warm hearth-tonic that puts heat back into cold hands on an autumn morning.",
+      "required_heat": 2,
+      "required_stirs": 2,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "Ember for the warmth, sunleaf to keep it kind.",
+      "minimum_quality": 28,
+      "preferred_traits": ["warm", "vigor"],
+      "guaranteed_traits": ["warm"],
+      "minimum_elements": { "vita": 0, "ember": 3, "mist": 0, "lux": 0 },
+      "required_timing": "early",
       "morph_targets": []
     }
   ],

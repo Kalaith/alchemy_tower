@@ -90,6 +90,9 @@ pub(crate) struct JournalHerbMemoryView {
     pub(crate) route_line: String,
     pub(crate) summary: String,
     pub(crate) conditions: String,
+    /// Which brews this ingredient feeds — names the recipes the player has
+    /// discovered and counts the ones still waiting to be found.
+    pub(crate) used_in_text: Option<String>,
     pub(crate) best_specimen_text: Option<String>,
     pub(crate) variant_text: Option<String>,
     pub(crate) note_text: Option<String>,

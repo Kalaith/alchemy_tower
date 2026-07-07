@@ -20,6 +20,13 @@ impl GameplayState {
             return;
         };
 
+        // A townsperson who now counts you a friend hands over their one-time
+        // gift before anything else, turning rapport into a felt payoff.
+        if self.try_grant_friendship_gift(data, npc) {
+            self.clear_overlay();
+            return;
+        }
+
         if npc.quest_id.is_empty() {
             self.clear_overlay();
             return;
@@ -78,7 +85,7 @@ impl GameplayState {
         }
     }
 
-    fn push_quest_completion_milestones(&mut self, quest: &QuestDefinition) {
+    pub(super) fn push_quest_completion_milestones(&mut self, quest: &QuestDefinition) {
         for milestone in &quest.completion_milestones {
             self.push_journal_milestone(&milestone.id, &milestone.title, &milestone.text);
         }

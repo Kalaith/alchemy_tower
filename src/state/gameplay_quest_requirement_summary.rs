@@ -95,6 +95,8 @@ mod tests {
             required_unlocked_warp: String::new(),
             minimum_total_brews: 0,
             completion_milestones: Vec::new(),
+            repeatable: false,
+            repeat_cooldown_days: 0,
         }
     }
 
