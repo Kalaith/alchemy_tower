@@ -105,7 +105,11 @@
             628.0
           ]
         }
-      ]
+      ],
+      "friendship_line": "You have carried more of this town's aches than you know. Take this - it caught the light in the archive fragments and made me think of your work. Friends share what they cannot use alone.",
+      "friendship_reward_coins": 20,
+      "friendship_reward_item_id": "starlight_shard",
+      "friendship_reward_amount": 1
     },
     {
       "id": "rowan_herbalist",
@@ -159,7 +163,11 @@
             552.0
           ]
         }
-      ]
+      ],
+      "friendship_line": "The walk home feels like mine again, thanks to you. Here - cuttings I have been saving. A friend should have the good stock, not the leftovers.",
+      "friendship_reward_coins": 15,
+      "friendship_reward_item_id": "moon_fern",
+      "friendship_reward_amount": 3
     },
     {
       "id": "mayor_elric",
@@ -213,7 +221,11 @@
             278.0
           ]
         }
-      ]
+      ],
+      "friendship_line": "The town argues less about the tower now and more about what to build next. That is your doing. Take this from the civic purse, and count yourself welcome at any table in the square.",
+      "friendship_reward_coins": 45,
+      "friendship_reward_item_id": "",
+      "friendship_reward_amount": 0
     },
     {
       "id": "ione_archivist",
@@ -267,7 +279,11 @@
             620.0
           ]
         }
-      ]
+      ],
+      "friendship_line": "I do not open these shelves to just anyone. But you mend things instead of hoarding them, and the archive knows its own. Take what it can spare.",
+      "friendship_reward_coins": 20,
+      "friendship_reward_item_id": "arcane_dust",
+      "friendship_reward_amount": 3
     },
     {
       "id": "brin_groundskeeper",
@@ -321,7 +337,11 @@
             720.0
           ]
         }
-      ]
+      ],
+      "friendship_line": "The beds answer you the way they used to answer me. That is not a small thing. Here, from the good soil - grow something worth the trouble.",
+      "friendship_reward_coins": 15,
+      "friendship_reward_item_id": "rain_orchid",
+      "friendship_reward_amount": 3
     },
     {
       "id": "lyra_keeper",
@@ -375,7 +395,11 @@
             450.0
           ]
         }
-      ]
+      ],
+      "friendship_line": "The small creatures settle when you are near now. They know a gentle hand. Take this from the habitats - you have earned their trust, and mine.",
+      "friendship_reward_coins": 20,
+      "friendship_reward_item_id": "lumen_dust",
+      "friendship_reward_amount": 2
     }
   ],
   "quests": [

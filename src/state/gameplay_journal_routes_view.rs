@@ -90,6 +90,7 @@ impl GameplayState {
                         } else {
                             ui_copy("journal_memory_conditions_unknown").to_owned()
                         },
+                        used_in_text: self.herb_used_in_text(data, &entry.item_id),
                         best_specimen_text: (entry.best_quality > 0).then(|| {
                             ui_format(
                                 "journal_memory_best_specimen",
@@ -111,5 +112,73 @@ impl GameplayState {
                 })
                 .collect(),
         }
+    }
+
+    /// Names the brews this ingredient feeds. Only recipes the player has
+    /// discovered are named; still-unknown uses are counted, not spoiled, so
+    /// the journal teaches what a gathered herb is *for* without giving away
+    /// the whole catalogue.
+    fn herb_used_in_text(&self, data: &GameData, item_id: &str) -> Option<String> {
+        let mut known = Vec::new();
+        let mut undiscovered = 0u32;
+        for recipe in &data.recipes {
+            if recipe
+                .ingredients
+                .iter()
+                .any(|ingredient| ingredient.item_id == item_id)
+            {
+                if self.recipe_is_known(&recipe.id) {
+                    known.push(recipe.name.clone());
+                } else {
+                    undiscovered += 1;
+                }
+            }
+        }
+
+        if known.is_empty() && undiscovered == 0 {
+            return None;
+        }
+        if known.is_empty() {
+            return Some(ui_copy("journal_memory_used_in_unknown").to_owned());
+        }
+
+        let recipes = known.join(", ");
+        Some(if undiscovered > 0 {
+            ui_format(
+                "journal_memory_used_in_more",
+                &[("recipes", &recipes), ("count", &undiscovered.to_string())],
+            )
+        } else {
+            ui_format("journal_memory_used_in", &[("recipes", &recipes)])
+        })
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::GameplayState;
+
+    #[test]
+    fn herb_usage_names_known_recipes_and_hides_undiscovered() {
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let state = GameplayState::new(&data);
+
+        // Whisper Moss feeds the starter Healing Draught (known at new game) plus
+        // other formulae that are still discovery-only.
+        let text = state
+            .herb_used_in_text(&data, "whisper_moss")
+            .expect("whisper moss is used in recipes");
+        assert!(text.contains("Healing Draught"), "got: {text}");
+        assert!(
+            text.contains("discover"),
+            "undiscovered uses hinted: {text}"
+        );
+
+        // Field Bloom is not in any starter recipe, so its uses read as
+        // undiscovered rather than naming a formula.
+        let field_bloom = state
+            .herb_used_in_text(&data, "field_bloom")
+            .expect("field bloom is used in recipes");
+        assert!(!field_bloom.contains("Brews into:"), "got: {field_bloom}");
     }
 }

@@ -74,6 +74,12 @@ impl Game {
                 gameplay.open_quest_board_sample(&self.data);
                 GameState::from_gameplay(gameplay)
             }
+            // "journal" opens the journal on the herb-memory tab.
+            "journal" => {
+                let mut gameplay = GameplayState::new(&self.data);
+                gameplay.open_journal_sample(&self.data);
+                GameState::from_gameplay(gameplay)
+            }
             // Default ("menu" or anything else): the boot flow already lands
             // on the main menu, so this also covers unrecognized scene names.
             _ => GameState::new_menu(),

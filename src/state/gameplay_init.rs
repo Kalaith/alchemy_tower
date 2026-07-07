@@ -55,6 +55,35 @@ impl GameplayState {
         self.set_overlay(super::gameplay_overlay_types::OverlayScreen::Alchemy);
     }
 
+    /// Seed a couple of learned herb memories and open the journal, so the
+    /// capture harness can render the herb-memory tab (including the new
+    /// "brews into" recipe usage line).
+    pub(crate) fn open_journal_sample(&mut self, _data: &GameData) {
+        for (item_id, route_id) in [
+            ("whisper_moss", "tower_ruin_edge"),
+            ("field_bloom", "plains_crossing"),
+        ] {
+            self.progression.herb_memories.insert(
+                item_id.to_owned(),
+                crate::data::HerbMemoryEntry {
+                    item_id: item_id.to_owned(),
+                    first_seen_day: 0,
+                    first_seen_route_id: route_id.to_owned(),
+                    seen: true,
+                    learned: true,
+                    learned_day: 1,
+                    learned_route_id: route_id.to_owned(),
+                    note: String::new(),
+                    best_quality: 28,
+                    best_quality_band: "Serviceable".to_owned(),
+                    variant_name: String::new(),
+                },
+            );
+        }
+        self.ui.journal_tab = 0;
+        self.set_overlay(super::gameplay_overlay_types::OverlayScreen::Journal);
+    }
+
     /// Seed a ready-to-hand-in repeatable board request and open the quest
     /// board, so the capture harness can render the delivery flow.
     pub(crate) fn open_quest_board_sample(&mut self, data: &GameData) {
