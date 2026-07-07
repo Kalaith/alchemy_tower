@@ -94,12 +94,20 @@ pub(crate) struct SaveData {
     pub(crate) relationships: Vec<RelationshipEntry>,
     #[serde(default)]
     pub(crate) habitat_states: Vec<HabitatStateEntry>,
+    #[serde(default)]
+    pub(crate) board_quest_cooldowns: Vec<BoardQuestCooldownEntry>,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub(crate) struct RelationshipEntry {
     pub(crate) npc_id: String,
     pub(crate) value: i32,
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize)]
+pub(crate) struct BoardQuestCooldownEntry {
+    pub(crate) quest_id: String,
+    pub(crate) available_day: u32,
 }
 
 fn default_vitality() -> f32 {

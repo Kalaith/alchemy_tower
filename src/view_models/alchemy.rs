@@ -57,6 +57,12 @@ pub(crate) struct AlchemyResolvedPreviewView {
     pub(crate) quest_line: Option<String>,
     pub(crate) output_line: String,
     pub(crate) quality_line: String,
+    /// Present when the setup is being overcharged or carries volatile
+    /// ingredients — shows the instability meter and a collapse warning.
+    pub(crate) instability_line: Option<String>,
+    /// True when the instability meter has crossed the collapse threshold, so
+    /// the meter can render as an alarm rather than a caution.
+    pub(crate) destabilized: bool,
     pub(crate) traits_line: String,
     pub(crate) read_line: String,
     pub(crate) requirements_line: Option<String>,

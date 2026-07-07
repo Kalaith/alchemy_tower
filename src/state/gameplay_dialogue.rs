@@ -78,7 +78,7 @@ impl GameplayState {
         }
     }
 
-    fn push_quest_completion_milestones(&mut self, quest: &QuestDefinition) {
+    pub(super) fn push_quest_completion_milestones(&mut self, quest: &QuestDefinition) {
         for milestone in &quest.completion_milestones {
             self.push_journal_milestone(&milestone.id, &milestone.title, &milestone.text);
         }

@@ -1107,6 +1107,459 @@
           "description": "A clinging magical residue that leaves you sluggish."
         }
       ]
+    },
+    {
+      "id": "field_poultice",
+      "name": "Field Poultice",
+      "category": "potion",
+      "base_value": 18,
+      "color": [
+        222,
+        214,
+        140,
+        255
+      ],
+      "description": "A rough sun-and-meadow salve that closes up the scrapes a work crew earns in a day.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 14.0,
+          "duration_seconds": 0.0,
+          "description": "Eases minor hurts and takes the sting out of tired hands."
+        }
+      ]
+    },
+    {
+      "id": "calmleaf_infusion",
+      "name": "Calmleaf Infusion",
+      "category": "potion",
+      "base_value": 20,
+      "color": [
+        150,
+        214,
+        176,
+        255
+      ],
+      "description": "A quiet green infusion brewed for people who have forgotten how to sleep.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 12.0,
+          "duration_seconds": 0.0,
+          "description": "Loosens a clenched jaw and lets a racing head settle."
+        }
+      ]
+    },
+    {
+      "id": "verdant_restorative",
+      "name": "Verdant Restorative",
+      "category": "potion",
+      "base_value": 30,
+      "color": [
+        126,
+        212,
+        150,
+        255
+      ],
+      "description": "A deep-green tonic that coaxes vigor back into tired bodies and tired beds alike.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 24.0,
+          "duration_seconds": 0.0,
+          "description": "Restores a solid measure of vitality and steadies growth."
+        }
+      ]
+    },
+    {
+      "id": "bloomrise_elixir",
+      "name": "Bloomrise Elixir",
+      "category": "potion",
+      "base_value": 54,
+      "color": [
+        150,
+        236,
+        168,
+        255
+      ],
+      "description": "A refined restorative that wakes dormant roots and thin bodies in one long green pulse.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 34.0,
+          "duration_seconds": 0.0,
+          "description": "Pours a lasting bloom of vitality into whatever drinks it."
+        }
+      ]
+    },
+    {
+      "id": "greenmend_salve",
+      "name": "Greenmend Salve",
+      "category": "potion",
+      "base_value": 26,
+      "color": [
+        170,
+        224,
+        196,
+        255
+      ],
+      "description": "A cool, clean salve tuned for wilted planter beds and delicate specimens.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 18.0,
+          "duration_seconds": 0.0,
+          "description": "Feeds tired roots and settles skittish growth."
+        }
+      ]
+    },
+    {
+      "id": "lantern_draught",
+      "name": "Lantern Draught",
+      "category": "potion",
+      "base_value": 22,
+      "color": [
+        224,
+        204,
+        150,
+        255
+      ],
+      "description": "A humble glow brew that keeps a road lamp honest through the early dark.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 60.0,
+          "description": "Holds a steady working light for a short while."
+        }
+      ]
+    },
+    {
+      "id": "mothlight_brew",
+      "name": "Mothlight Brew",
+      "category": "potion",
+      "base_value": 32,
+      "color": [
+        214,
+        224,
+        170,
+        255
+      ],
+      "description": "A soft, drifting glow gathered from settled moth dust, kind to night eyes.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 110.0,
+          "description": "Casts a gentle, long-carrying light for night gathering."
+        }
+      ]
+    },
+    {
+      "id": "wardlight_solution",
+      "name": "Wardlight Solution",
+      "category": "potion",
+      "base_value": 34,
+      "color": [
+        186,
+        204,
+        224,
+        255
+      ],
+      "description": "A cold arcane light meant to read faded wards and half-erased sigils.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 90.0,
+          "description": "Throws a clear, revealing light across worn magical stone."
+        }
+      ]
+    },
+    {
+      "id": "runemark_elixir",
+      "name": "Runemark Elixir",
+      "category": "potion",
+      "base_value": 56,
+      "color": [
+        206,
+        216,
+        255,
+        255
+      ],
+      "description": "A refined wardlight that makes old inscriptions surface as if freshly cut.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 150.0,
+          "description": "Sustains a bright revealing glow across faded runework."
+        }
+      ]
+    },
+    {
+      "id": "duskbell_tonic",
+      "name": "Duskbell Tonic",
+      "category": "potion",
+      "base_value": 30,
+      "color": [
+        210,
+        188,
+        224,
+        255
+      ],
+      "description": "A calm, dim glow brewed to keep dusk-shy creatures settled while they are handled.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 70.0,
+          "description": "Casts a soft halo that keeps nervous creatures calm."
+        }
+      ]
+    },
+    {
+      "id": "trailblaze_tonic",
+      "name": "Trailblaze Tonic",
+      "category": "potion",
+      "base_value": 32,
+      "color": [
+        255,
+        168,
+        104,
+        255
+      ],
+      "description": "A hot desert-and-ember tonic that keeps repair crews moving through a long shift.",
+      "effects": [
+        {
+          "kind": "speed",
+          "magnitude": 0.32,
+          "duration_seconds": 90.0,
+          "description": "Drives a strong, sustained push of energy."
+        }
+      ]
+    },
+    {
+      "id": "wildfire_draught",
+      "name": "Wildfire Draught",
+      "category": "potion",
+      "base_value": 58,
+      "color": [
+        255,
+        132,
+        86,
+        255
+      ],
+      "description": "A fierce overcharged stimulant that should be handed out with a warning.",
+      "effects": [
+        {
+          "kind": "speed",
+          "magnitude": 0.42,
+          "duration_seconds": 110.0,
+          "description": "Unleashes a hard, long-burning surge of speed."
+        }
+      ]
+    },
+    {
+      "id": "sunwarden_tonic",
+      "name": "Sunwarden Tonic",
+      "category": "potion",
+      "base_value": 30,
+      "color": [
+        255,
+        196,
+        120,
+        255
+      ],
+      "description": "A warming tonic that steadies the body against desert heat and long exposed roads.",
+      "effects": [
+        {
+          "kind": "speed",
+          "magnitude": 0.24,
+          "duration_seconds": 80.0,
+          "description": "Keeps footing sure and warm across hard ground."
+        }
+      ]
+    },
+    {
+      "id": "briskstep_draught",
+      "name": "Briskstep Draught",
+      "category": "potion",
+      "base_value": 26,
+      "color": [
+        188,
+        214,
+        236,
+        255
+      ],
+      "description": "A gentle, well-mannered pick-me-up for elders and anyone who dislikes a jolt.",
+      "effects": [
+        {
+          "kind": "speed",
+          "magnitude": 0.2,
+          "duration_seconds": 70.0,
+          "description": "Lends a light, even quickness with no rough edge."
+        }
+      ]
+    },
+    {
+      "id": "purified_draught",
+      "name": "Purified Draught",
+      "category": "potion",
+      "base_value": 34,
+      "color": [
+        196,
+        228,
+        214,
+        255
+      ],
+      "description": "A clean, exacting restorative prized by buyers who pay for a flawless pour.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 26.0,
+          "duration_seconds": 0.0,
+          "description": "Restores vitality with an unusually clean finish."
+        }
+      ]
+    },
+    {
+      "id": "wellspring_elixir",
+      "name": "Wellspring Elixir",
+      "category": "potion",
+      "base_value": 60,
+      "color": [
+        170,
+        236,
+        220,
+        255
+      ],
+      "description": "A masterwork-grade restorative, the sort of pour a town remembers.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 40.0,
+          "duration_seconds": 0.0,
+          "description": "Floods the body with clean, lasting vitality."
+        }
+      ]
+    },
+    {
+      "id": "emberglass_tonic",
+      "name": "Emberglass Tonic",
+      "category": "potion",
+      "base_value": 32,
+      "color": [
+        238,
+        190,
+        140,
+        255
+      ],
+      "description": "A warm amber light hardened with quarry minerals, steady in wind and heat.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 80.0,
+          "description": "Holds a warm, wind-resistant working light."
+        }
+      ]
+    },
+    {
+      "id": "stargrove_elixir",
+      "name": "Stargrove Elixir",
+      "category": "potion",
+      "base_value": 46,
+      "color": [
+        220,
+        224,
+        255,
+        255
+      ],
+      "description": "A layered luminous elixir that blends grove-cool and arcane light into one clear beam.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 140.0,
+          "description": "Sustains a strong, clear light for deep or dark spaces."
+        }
+      ]
+    },
+    {
+      "id": "celestine_elixir",
+      "name": "Celestine Elixir",
+      "category": "potion",
+      "base_value": 64,
+      "color": [
+        236,
+        238,
+        255,
+        255
+      ],
+      "description": "The observatory's own light: a crystalline glow that also sharpens the step beneath it.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 200.0,
+          "description": "Creates a long, brilliant, near-lossless lantern aura."
+        },
+        {
+          "kind": "speed",
+          "magnitude": 0.12,
+          "duration_seconds": 200.0,
+          "description": "Steadies and quickens movement through dark routes."
+        }
+      ]
+    },
+    {
+      "id": "moonmoth_salve",
+      "name": "Moonmoth Salve",
+      "category": "potion",
+      "base_value": 28,
+      "color": [
+        198,
+        224,
+        188,
+        255
+      ],
+      "description": "A restorative that leaves a faint moth-light halo, easy on frightened patients at night.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 16.0,
+          "duration_seconds": 0.0,
+          "description": "Restores vitality with a calming glow."
+        },
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 40.0,
+          "description": "Sheds a brief, soothing light."
+        }
+      ]
+    },
+    {
+      "id": "kindling_tonic",
+      "name": "Kindling Tonic",
+      "category": "potion",
+      "base_value": 22,
+      "color": [
+        238,
+        178,
+        126,
+        255
+      ],
+      "description": "A warm hearth-tonic that puts heat back into cold hands on an autumn morning.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 16.0,
+          "duration_seconds": 0.0,
+          "description": "Restores warmth and a little vigor against the cold."
+        }
+      ]
     }
   ]
 }

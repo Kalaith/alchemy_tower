@@ -1,6 +1,7 @@
 use super::gameplay_alchemy_preview_detail_text::{preview_detail, preview_title};
 use super::gameplay_alchemy_preview_text::{
-    output_line, process_flags_line, quality_line, read_line, requirements_line, traits_line,
+    instability_line, output_line, process_flags_line, quality_line, read_line, requirements_line,
+    traits_line,
 };
 use crate::alchemy::BrewResolution;
 use crate::content::{ui_copy, ui_format};
@@ -32,6 +33,8 @@ impl AlchemyPreviewPanelView {
                 quest_line,
                 output_line: output_line(data, preview),
                 quality_line: quality_line(preview),
+                instability_line: instability_line(preview),
+                destabilized: preview.destabilized,
                 traits_line: traits_line(preview),
                 read_line: read_line(preview, known, stable_preview),
                 requirements_line: requirements_line(preview),

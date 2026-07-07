@@ -491,7 +491,9 @@
         "healing_for_mira"
       ],
       "required_unlocked_warp": "entry_to_greenhouse",
-      "minimum_total_brews": 10
+      "minimum_total_brews": 10,
+      "repeatable": true,
+      "repeat_cooldown_days": 1
     },
     {
       "id": "board_restorative_stash",
@@ -506,7 +508,43 @@
       "required_effect_kind": "restore",
       "prerequisite_quests": [],
       "required_unlocked_warp": "",
-      "minimum_total_brews": 4
+      "minimum_total_brews": 4,
+      "repeatable": true,
+      "repeat_cooldown_days": 1
+    },
+    {
+      "id": "board_lantern_supply",
+      "title": "Board Order: Roadside Lanterns",
+      "description": "Keep 1 Lantern Draught on the board so the lamplighters can top up the footpath lights each night.",
+      "required_item_id": "lantern_draught",
+      "required_amount": 1,
+      "reward_coins": 24,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Serviceable",
+      "required_trait": "",
+      "required_effect_kind": "glow",
+      "prerequisite_quests": [],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 6,
+      "repeatable": true,
+      "repeat_cooldown_days": 1
+    },
+    {
+      "id": "board_field_poultice_run",
+      "title": "Board Order: Field Poultices",
+      "description": "Supply 1 Field Poultice for the repair crews patching the roads before the season turns.",
+      "required_item_id": "field_poultice",
+      "required_amount": 1,
+      "reward_coins": 22,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Serviceable",
+      "required_trait": "",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 6,
+      "repeatable": true,
+      "repeat_cooldown_days": 1
     },
     {
       "id": "containment_for_lyra",

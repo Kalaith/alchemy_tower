@@ -4,6 +4,7 @@ use super::super::matching::{selected_item_defs, sequence_matches, total_element
 use super::super::morphs::{morph_output, morph_trigger_hint};
 use super::super::quality::{calculate_quality, mastery_stage, quality_band, room_bonus_applies};
 use super::super::traits::inherited_traits;
+use super::super::volatility::{brew_instability, is_destabilized};
 use super::brewing_failures::brew_failure_reasons;
 use super::BrewResolution;
 
@@ -48,12 +49,25 @@ pub(super) fn resolve_known_recipe_brew<'a>(
         mastery_brews,
     );
     let minimum_quality_met = quality_score >= recipe.minimum_quality;
-    let process_match = recipe.required_heat == heat
-        && recipe.required_stirs == stirs
+    // Heat and stirs at or *above* the requirement satisfy the process — going
+    // over is a deliberate overcharge (more quality, more instability) rather
+    // than a mistake. Only underfiring/understirring breaks the process here.
+    let process_match = heat >= recipe.required_heat
+        && stirs >= recipe.required_stirs
         && timing_match
         && sequence_match
         && catalyst_match;
-    let stable = process_match && minimum_quality_met && minimum_elements_met;
+    let instability = brew_instability(
+        recipe,
+        &ingredient_items,
+        catalyst,
+        catalyst_match,
+        heat,
+        stirs,
+        mastery_brews,
+    );
+    let destabilized = is_destabilized(instability);
+    let stable = process_match && minimum_quality_met && minimum_elements_met && !destabilized;
     let inherited_traits = inherited_traits(recipe, &ingredient_items, catalyst);
     let morph_output_item_id = if stable {
         morph_output(
@@ -79,6 +93,7 @@ pub(super) fn resolve_known_recipe_brew<'a>(
         catalyst_match,
         minimum_quality_met,
         minimum_elements_met,
+        destabilized,
     );
     let morph_hint = if stable && morph_output_item_id.is_none() {
         morph_trigger_hint(
@@ -120,6 +135,8 @@ pub(super) fn resolve_known_recipe_brew<'a>(
         room_bonus_applied,
         minimum_quality_met,
         minimum_elements_met,
+        instability,
+        destabilized,
         failure_reasons,
         morph_hint,
     }

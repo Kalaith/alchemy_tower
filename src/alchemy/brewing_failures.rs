@@ -1,6 +1,7 @@
 use crate::content::ui_copy;
 use crate::data::RecipeDefinition;
 
+#[allow(clippy::too_many_arguments)]
 pub(super) fn brew_failure_reasons(
     recipe: &RecipeDefinition,
     heat: i32,
@@ -10,19 +11,23 @@ pub(super) fn brew_failure_reasons(
     catalyst_match: bool,
     minimum_quality_met: bool,
     minimum_elements_met: bool,
+    destabilized: bool,
 ) -> Vec<String> {
     let mut reasons = Vec::new();
 
+    // Overcharging (heat/stirs above the target) is a deliberate risk, not a
+    // fault, so only underfiring/understirring is reported here — the danger of
+    // pushing too far surfaces as the destabilization reason below.
     if heat < recipe.required_heat {
         reasons.push(ui_copy("brew_failure_heat_low").to_owned());
-    } else if heat > recipe.required_heat {
-        reasons.push(ui_copy("brew_failure_heat_high").to_owned());
     }
 
     if stirs < recipe.required_stirs {
         reasons.push(ui_copy("brew_failure_stirs_low").to_owned());
-    } else if stirs > recipe.required_stirs {
-        reasons.push(ui_copy("brew_failure_stirs_high").to_owned());
+    }
+
+    if destabilized {
+        reasons.push(ui_copy("brew_failure_overcharged").to_owned());
     }
 
     if !timing_match && !recipe.required_timing.is_empty() {

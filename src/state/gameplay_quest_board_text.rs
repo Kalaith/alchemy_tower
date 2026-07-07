@@ -20,6 +20,20 @@ pub(super) fn accepted_default() -> String {
     ui_format("quests_board_accepted_default", &[])
 }
 
+pub(super) fn delivered_toast(quest: &QuestDefinition) -> String {
+    ui_format("quests_board_delivered_toast", &[("title", &quest.title)])
+}
+
+pub(super) fn delivered_status(quest: &QuestDefinition) -> String {
+    ui_format(
+        "quests_board_delivered_status",
+        &[
+            ("title", &quest.title),
+            ("coins", &quest.reward_coins.to_string()),
+        ],
+    )
+}
+
 pub(super) fn locked_line(quest: &QuestDefinition, requirements: &str) -> String {
     ui_format(
         "overlay_quest_locked_line",

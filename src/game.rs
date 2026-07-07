@@ -68,6 +68,12 @@ impl Game {
                 gameplay.open_alchemy_sample_brew(&self.data);
                 GameState::from_gameplay(gameplay)
             }
+            // "board" opens the quest board with a ready-to-deliver request.
+            "board" => {
+                let mut gameplay = GameplayState::new(&self.data);
+                gameplay.open_quest_board_sample(&self.data);
+                GameState::from_gameplay(gameplay)
+            }
             // Default ("menu" or anything else): the boot flow already lands
             // on the main menu, so this also covers unrecognized scene names.
             _ => GameState::new_menu(),

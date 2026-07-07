@@ -23,6 +23,26 @@ pub(super) fn quality_line(preview: &BrewResolution<'_>) -> String {
     )
 }
 
+/// Instability meter, shown only once the brew actually carries risk (an
+/// overcharge or volatile ingredients). A calm on-spec brew stays uncluttered.
+pub(super) fn instability_line(preview: &BrewResolution<'_>) -> Option<String> {
+    if preview.recipe.is_none() || preview.instability == 0 {
+        return None;
+    }
+    let meter = ui_format(
+        "overlay_alchemy_instability",
+        &[("value", &preview.instability.to_string())],
+    );
+    if preview.destabilized {
+        Some(format!(
+            "{meter} {}",
+            ui_copy("overlay_alchemy_instability_break")
+        ))
+    } else {
+        Some(meter)
+    }
+}
+
 pub(super) fn traits_line(preview: &BrewResolution<'_>) -> String {
     ui_format(
         "overlay_alchemy_traits",

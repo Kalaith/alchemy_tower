@@ -6,7 +6,8 @@ mod matching;
 mod morphs;
 mod quality;
 mod traits;
+mod volatility;
 
 pub(crate) use brewing::{resolve_brew, BrewResolution};
 pub(crate) use matching::match_recipe;
-pub(crate) use quality::{mastery_stage, quality_band};
+pub(crate) use quality::{mastery_stage, quality_band, MASTERED_BREW_COUNT};
