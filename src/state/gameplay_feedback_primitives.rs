@@ -22,8 +22,12 @@ impl GameplayState {
     }
 
     pub(super) fn trigger_camera_shake(&mut self, seconds: f32, intensity: f32) {
-        self.runtime.camera_shake_seconds = self.runtime.camera_shake_seconds.max(seconds);
-        self.runtime.camera_shake_intensity = self.runtime.camera_shake_intensity.max(intensity);
+        self.runtime.camera_shake.max_offset = if self.runtime.camera_shake.is_active() {
+            self.runtime.camera_shake.max_offset.max(intensity)
+        } else {
+            intensity
+        };
+        self.runtime.camera_shake.shake(1.0, seconds);
     }
 
     pub(super) fn trigger_world_feedback(

@@ -4,6 +4,7 @@ use super::gameplay_alchemy_types::SavedAlchemySetup;
 use super::gameplay_feedback_types::{ActiveEffect, GatherFeedback, GatherToast};
 use super::gameplay_npc_types::NpcMotionTracker;
 use crate::data::GameData;
+use macroquad_toolkit::fx::ScreenShake;
 
 #[derive(Clone, Debug)]
 pub(super) struct RuntimeState {
@@ -11,8 +12,7 @@ pub(super) struct RuntimeState {
     pub(super) gather_toasts: Vec<GatherToast>,
     pub(super) gather_feedbacks: Vec<GatherFeedback>,
     pub(super) gather_pause_seconds: f32,
-    pub(super) camera_shake_seconds: f32,
-    pub(super) camera_shake_intensity: f32,
+    pub(super) camera_shake: ScreenShake,
     pub(super) sleep_flash_seconds: f32,
     pub(super) npc_motion_states: BTreeMap<String, NpcMotionTracker>,
     pub(super) status_text: String,
@@ -31,8 +31,7 @@ impl RuntimeState {
             gather_toasts: Vec::new(),
             gather_feedbacks: Vec::new(),
             gather_pause_seconds: 0.0,
-            camera_shake_seconds: 0.0,
-            camera_shake_intensity: 0.0,
+            camera_shake: ScreenShake::new(0.0),
             sleep_flash_seconds: 0.0,
             npc_motion_states: BTreeMap::new(),
             status_text: String::new(),

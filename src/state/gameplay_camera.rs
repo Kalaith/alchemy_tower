@@ -48,13 +48,7 @@ impl GameplayState {
             unclamped.x.clamp(min_x.min(CAMERA_PADDING), CAMERA_PADDING),
             unclamped.y.clamp(min_y.min(CAMERA_PADDING), CAMERA_PADDING),
         );
-        if self.runtime.camera_shake_seconds > 0.0 && self.runtime.camera_shake_intensity > 0.0 {
-            let t = get_time() as f32 * 45.0;
-            let shake = vec2(t.sin(), (t * 1.37).cos())
-                * self.runtime.camera_shake_intensity
-                * (self.runtime.camera_shake_seconds / 0.25).min(1.0);
-            offset += shake;
-        }
+        offset += self.runtime.camera_shake.offset();
         offset
     }
 

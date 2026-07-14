@@ -13,14 +13,10 @@ impl GameplayState {
     pub(super) fn update_gather_feedback(&mut self, frame_time: f32) {
         self.runtime.gather_pause_seconds =
             (self.runtime.gather_pause_seconds - frame_time).max(0.0);
-        self.runtime.camera_shake_seconds =
-            (self.runtime.camera_shake_seconds - frame_time).max(0.0);
+        self.runtime.camera_shake.update(frame_time);
         self.runtime.sleep_flash_seconds = (self.runtime.sleep_flash_seconds - frame_time).max(0.0);
         self.runtime.footstep_cooldown_seconds =
             (self.runtime.footstep_cooldown_seconds - frame_time).max(0.0);
-        if self.runtime.camera_shake_seconds <= 0.0 {
-            self.runtime.camera_shake_intensity = 0.0;
-        }
         for toast in &mut self.runtime.gather_toasts {
             toast.remaining_seconds -= frame_time;
         }
