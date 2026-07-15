@@ -5,11 +5,13 @@
 //! the window is at least that big everything uses real screen coordinates and
 //! this module is a no-op (so large/normal windows are unaffected). When the
 //! window is smaller, the UI is laid out at the design size and rendered into a
-//! centered, uniformly scaled viewport (letterbox) so its fixed-size panels stay
-//! readable and never overlap. Mouse input for overlays is transformed back
-//! through the same scale so clicks still land on the right controls.
+//! centered, uniformly scaled viewport (letterbox) — via the toolkit's
+//! [`VirtualUi`] mapper — so its fixed-size panels stay readable and never
+//! overlap. Mouse input for overlays is transformed back through the same scale
+//! so clicks still land on the right controls.
 
 use macroquad::prelude::*;
+use macroquad_toolkit::ui::VirtualUi;
 use std::cell::Cell;
 
 pub(crate) const UI_DESIGN_W: f32 = 1280.0;
@@ -22,28 +24,33 @@ thread_local! {
     static OVERLAY_MOUSE: Cell<bool> = const { Cell::new(false) };
 }
 
-/// `(offset_x, offset_y, scale)` of the centered letterbox viewport, or `None`
-/// when the window is at least design size and no scaling is applied.
-fn params() -> Option<(f32, f32, f32)> {
+/// The centered letterbox mapper, or `None` when the window is at least design
+/// size and no scaling is applied.
+fn virtual_ui() -> Option<VirtualUi> {
     let sw = screen_width();
     let sh = screen_height();
     if sw >= UI_DESIGN_W && sh >= UI_DESIGN_H {
         return None;
     }
-    let scale = (sw / UI_DESIGN_W).min(sh / UI_DESIGN_H).max(0.1);
-    let vw = UI_DESIGN_W * scale;
-    let vh = UI_DESIGN_H * scale;
-    Some(((sw - vw) * 0.5, (sh - vh) * 0.5, scale))
+    let mut ui = VirtualUi::new(UI_DESIGN_W, UI_DESIGN_H);
+    if ui.scale < 0.1 {
+        ui.scale = 0.1;
+        ui.offset = vec2(
+            (sw - UI_DESIGN_W * ui.scale) * 0.5,
+            (sh - UI_DESIGN_H * ui.scale) * 0.5,
+        );
+    }
+    Some(ui)
 }
 
 pub(crate) fn is_scaling() -> bool {
-    params().is_some()
+    virtual_ui().is_some()
 }
 
 /// Layout width the UI anchors to: the design width when scaling, else the real
 /// window width.
 pub(crate) fn ui_w() -> f32 {
-    if params().is_some() {
+    if virtual_ui().is_some() {
         UI_DESIGN_W
     } else {
         screen_width()
@@ -51,7 +58,7 @@ pub(crate) fn ui_w() -> f32 {
 }
 
 pub(crate) fn ui_h() -> f32 {
-    if params().is_some() {
+    if virtual_ui().is_some() {
         UI_DESIGN_H
     } else {
         screen_height()
@@ -61,21 +68,10 @@ pub(crate) fn ui_h() -> f32 {
 /// Install the scaled UI camera. Returns whether a camera was set (i.e. whether
 /// scaling is active); pass that value to [`end_ui_camera`].
 pub(crate) fn begin_ui_camera() -> bool {
-    let Some((ox, oy, scale)) = params() else {
+    let Some(ui) = virtual_ui() else {
         return false;
     };
-    let mut camera = Camera2D::from_display_rect(Rect::new(0.0, 0.0, UI_DESIGN_W, UI_DESIGN_H));
-    // `from_display_rect` orients for the default framebuffer; attaching a
-    // viewport makes macroquad treat it as an offscreen target, which flips Y.
-    // Undo that so the scaled UI keeps a top-left origin.
-    camera.zoom.y = -camera.zoom.y;
-    camera.viewport = Some((
-        ox as i32,
-        oy as i32,
-        (UI_DESIGN_W * scale) as i32,
-        (UI_DESIGN_H * scale) as i32,
-    ));
-    set_camera(&camera);
+    ui.begin();
     true
 }
 
@@ -97,8 +93,11 @@ pub(crate) fn transform_mouse(point: [f32; 2]) -> [f32; 2] {
     if !OVERLAY_MOUSE.with(|flag| flag.get()) {
         return point;
     }
-    match params() {
-        Some((ox, oy, scale)) => [(point[0] - ox) / scale, (point[1] - oy) / scale],
+    match virtual_ui() {
+        Some(ui) => {
+            let mapped = ui.screen_to_ui(vec2(point[0], point[1]));
+            [mapped.x, mapped.y]
+        }
         None => point,
     }
 }
