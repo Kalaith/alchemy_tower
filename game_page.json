@@ -1,0 +1,23 @@
+{
+  "title": "Alchemy Tower",
+  "status": { "text": "Playable", "class": "playable" },
+  "canvas_rendering": "pixelated",
+  "about": [
+    "Restore an abandoned alchemy tower, explore the nearby town and wilds, and gather ingredients for increasingly strange brews."
+  ],
+  "controls": [
+    { "key": "WASD", "desc": "Move" },
+    { "key": "E", "desc": "Interact" },
+    { "key": "Esc", "desc": "Pause" }
+  ],
+  "details": [
+    { "label": "Genre", "value": "Cozy Adventure Sim" },
+    { "label": "Engine", "value": "Macroquad" },
+    { "label": "Platform", "value": "Browser, Windows" }
+  ],
+  "download": {
+    "href": "alchemy_tower_windows.zip",
+    "label": "Windows Build"
+  },
+  "repository": "https://github.com/Kalaith/alchemy_tower"
+}
