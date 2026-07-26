@@ -1,19 +1,40 @@
 {
   "title": "Alchemy Tower",
-  "status": { "text": "Playable", "class": "playable" },
+  "status": {
+    "text": "Playable",
+    "class": "playable"
+  },
   "canvas_rendering": "pixelated",
   "about": [
-    "Restore an abandoned alchemy tower, explore the nearby town and wilds, and gather ingredients for increasingly strange brews."
+    "Restore a crumbling alchemy tower to its former glory. Wander the town and wilds, gather rare ingredients, and brew potions that get delightfully stranger."
   ],
   "controls": [
-    { "key": "WASD", "desc": "Move" },
-    { "key": "E", "desc": "Interact" },
-    { "key": "Esc", "desc": "Pause" }
+    {
+      "key": "WASD",
+      "desc": "Move"
+    },
+    {
+      "key": "E",
+      "desc": "Interact"
+    },
+    {
+      "key": "Esc",
+      "desc": "Pause"
+    }
   ],
   "details": [
-    { "label": "Genre", "value": "Cozy Adventure Sim" },
-    { "label": "Engine", "value": "Macroquad" },
-    { "label": "Platform", "value": "Browser, Windows" }
+    {
+      "label": "Genre",
+      "value": "Cozy Adventure Sim"
+    },
+    {
+      "label": "Engine",
+      "value": "Macroquad"
+    },
+    {
+      "label": "Platform",
+      "value": "Browser, Windows"
+    }
   ],
   "download": {
     "href": "alchemy_tower_windows.zip",
