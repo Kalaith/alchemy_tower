@@ -25,10 +25,7 @@ Turn the abandoned tower into a working magical home while learning the rhythms 
 ## Current Scope
 
 Playable exploration, gathering, brewing, requests, tower restoration, inventory flow, and save/load progression.
-# Practical Future Improvements
 
-- Add brew-resolution tests for ingredient quality, recipe discovery, town requests, and tower-floor unlock conditions.
-- Unify overlay navigation through a typed overlay state model so archive, journal, pause, dialogue, and alchemy screens cannot conflict.
-- Move recipe, herb, rapport, and request tuning into validated data tables with small fixtures for edge-case brews.
-- Extract repeated overlay widgets into toolkit-backed helpers shared by formula, preview, journal, and archive panels.
+## Design Reference
 
+`docs/alchemy_system_design.md` is the live specification for the brewing engine — element profiles, traits, quality bands, mastery, morph paths, and the instability fallback. Open work is tracked in `TODO.md`.
