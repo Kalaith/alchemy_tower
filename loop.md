@@ -957,6 +957,27 @@ Stop the loop and report if:
   this pass was pushing it. Split by bench, as the restore recipes already are: the archive reading
   bench's five moved out (511 / 243). Everything is under 700 lines again.
   **64 nodes, 132 items, 44 recipes, 85 tests — and no room left with one thing in it.**
+- **2026-08-01 — the ending did not know how the story ended.** The epilogue earns beats from
+  journal milestones, and it **never looked at 26 of the 32 that exist**. Worse than the count: the
+  panel shows only the three highest-order *earned* beats (`MAX_EPILOGUE_BEATS = 3`), and every
+  high-order beat was a mid-game restoration note. So a player who finished everything — the pass,
+  the unsigned orders, the first Masterwork request — got an ending that stopped at the greenhouse.
+  **The last twelve passes of story were structurally unable to appear.**
+  Three beats, ordered to sit *just under* the flowering-valley note rather than over it, so the
+  restoration payoff still leads: the **unsigned orders** (somebody found out what they came to find
+  out, and it was never yours to close), the **Masterwork ask** with Brin still writing the cost
+  under every notice, and the **pass** — eleven years the road went past this valley, now it stops.
+  *Sized against the panel, not guessed.* First draft put the fullest epilogue at **985 of a 1000
+  budget** — a budget itself calibrated from a real overflow at 1047. Fifteen characters of headroom
+  is not headroom. Trimmed to **933**, which is where the panel sat before this pass, and confirmed
+  by capture: 12 lines in a 13-line box.
+  ***No new guard, deliberately.*** The ending already has three tests — budget, empty case, and
+  monotonic growth to the cap — and epilogue milestone ids are already validated alongside the
+  reactions. Nothing here needed legislating; inventing a fourth test would have repeated the
+  mistake of iteration 36.
+  *Cleared while looking:* rapport is complete (every townsperson has both gift tiers; Elric pays in
+  coin at both, which is in character), and all eight NPCs carry the full `phase1_dialogue` key set.
+  **11 epilogue beats; the ending reaches the end of the story; 85 tests.**
 
 ## Deferred (needs a new system; not for this loop)
 

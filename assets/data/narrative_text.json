@@ -70,10 +70,31 @@
     },
     {
       "after_milestones": [
+        "unsigned_order_unanswered"
+      ],
+      "order": 98,
+      "line": "Three unsigned orders came, were filled, and were collected, and no fourth ever arrived. Somebody outside this valley wanted to know whether the tower was working again. They found out. That question stays open, and it was never yours to close."
+    },
+    {
+      "after_milestones": [
+        "asked_for_perfect_work"
+      ],
+      "order": 92,
+      "line": "The valley asks for the best thing you can make now rather than the quickest, and gets it. Brin still writes the cost under every notice — nine plants, ten years a hand's width — which is the only reason the asking stays honest."
+    },
+    {
+      "after_milestones": [
         "record_reconciled"
       ],
       "order": 90,
       "line": "The eleven months taken out of the logs are back in them, and they are working notes rather than a testament. Whoever sealed this place proved to themselves what it would do if left running, wrote it down, then removed the working so nobody could be persuaded by it. You put it back anyway."
+    },
+    {
+      "after_milestones": [
+        "pass_kept_open"
+      ],
+      "order": 88,
+      "line": "The southern pass is worked through the winter now and the waystation at the top of it is lit every night. For eleven years this was the valley the road went past. It is a place the road stops at."
     },
     {
       "after_milestones": [
