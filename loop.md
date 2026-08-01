@@ -580,6 +580,25 @@ Stop the loop and report if:
   drive — it renders frames, it does not press keys. Covered by test (coins, item, milestone,
   idempotence, and that it waits for the last beat) rather than by a screenshot, and said so rather
   than implied.*
+- **2026-08-01 — the opening (the one hour nobody had re-read).** Checked the tutorial hints, a system
+  never examined in twenty-three passes, and found the **first instruction in the game is
+  impossible**: it told the player to gather whisper moss and arcane dust *inside the tower*. The
+  entry lab has no ungated nodes at all — its only two are gated behind Brin's terraces, added in a
+  much later pass — and arcane dust is several areas away in the quarry. A second hint promised
+  potions could be applied to "a person, plant, animal, or blocked path", which is the
+  apply-to-target verb `TODO.md` lists as deferred and never built; potions are drunk by the player.
+  Both rewritten to describe the game that exists: go north to the plains, sunleaf in open light and
+  whisper moss on shaded stone, both morning work.
+  *The fix was the text, not the world.* Nothing grows in a laboratory; the entry lab being bare is
+  correct and the instruction was simply stale.
+  New test `the_opening_can_be_completed_from_a_new_game`: walks ungated warps out from
+  `config.starting_area`, collects what can be gathered or bought there without satisfying anything,
+  and asserts every prerequisite-free quest's item can actually be brewed from it at a reachable
+  bench. Two sabotage attempts failed to trip it — sunleaf is on the plains *and* the town commons
+  *and* the apothecary counter — which is worth knowing: the opening is genuinely redundant. It fails
+  correctly when the first recipe itself is made unreachable.
+  *Same verification caveat as the parting gift: tutorial hints are transient toasts the harness
+  cannot trigger, so the text change is verified by reading and the world claim by test.*
 
 ## Deferred (needs a new system; not for this loop)
 

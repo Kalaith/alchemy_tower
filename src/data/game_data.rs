@@ -488,6 +488,103 @@ mod tests {
         );
     }
 
+    /// Areas a new game can walk to before satisfying any gate at all.
+    fn areas_open_at_the_start(data: &super::GameData) -> std::collections::HashSet<String> {
+        let mut open = std::collections::HashSet::new();
+        let mut frontier = vec![data.config.starting_area.clone()];
+        while let Some(area_id) = frontier.pop() {
+            if !open.insert(area_id.clone()) {
+                continue;
+            }
+            let Some(area) = data.area(&area_id) else {
+                continue;
+            };
+            for warp in &area.warps {
+                let ungated = warp.required_total_brews == 0
+                    && warp.required_coins == 0
+                    && warp.required_item_id.is_empty()
+                    && warp.required_mastered_recipe.is_empty()
+                    && warp.required_journal_milestone.is_empty();
+                if ungated {
+                    frontier.push(warp.target_area.clone());
+                }
+            }
+        }
+        open
+    }
+
+    /// The first request a player can accept must be completable with what a
+    /// new game can actually reach. Twenty-three passes of content moved the
+    /// world around underneath the opening — the tower entry's only gatherables
+    /// ended up behind a late-game quest — and nothing would have said so.
+    #[test]
+    fn the_opening_can_be_completed_from_a_new_game() {
+        let data = load_embedded().expect("embedded game data should load");
+        let open_areas = areas_open_at_the_start(&data);
+
+        let mut available = std::collections::HashSet::new();
+        for area_id in &open_areas {
+            let Some(area) = data.area(area_id) else {
+                continue;
+            };
+            for node in &area.gather_nodes {
+                if node.required_completed_quest.is_empty() {
+                    available.insert(node.item_id.clone());
+                }
+            }
+            for station in data.stations.iter().filter(|s| &s.area_id == area_id) {
+                if station.required_completed_quest.is_empty()
+                    && station.required_journal_milestone.is_empty()
+                {
+                    available.extend(station.stock.iter().map(|s| s.item_id.clone()));
+                }
+            }
+        }
+
+        let opening_quests = data
+            .quests
+            .iter()
+            .filter(|quest| {
+                quest.prerequisite_quests.is_empty()
+                    && quest.required_unlocked_warp.is_empty()
+                    && quest.minimum_total_brews == 0
+                    && !quest.required_item_id.is_empty()
+            })
+            .collect::<Vec<_>>();
+        assert!(
+            !opening_quests.is_empty(),
+            "no quest is available at the very start"
+        );
+
+        let mut blocked = Vec::new();
+        for quest in opening_quests {
+            let brewable = data.recipes.iter().any(|recipe| {
+                recipe.output_item_id == quest.required_item_id
+                    && recipe
+                        .ingredients
+                        .iter()
+                        .all(|ingredient| available.contains(&ingredient.item_id))
+                    && data
+                        .stations
+                        .iter()
+                        .any(|s| s.id == recipe.station_id && open_areas.contains(&s.area_id))
+            });
+            if !brewable {
+                blocked.push(format!(
+                    "{} wants {}, which cannot be brewed from what a new game can reach",
+                    quest.id, quest.required_item_id
+                ));
+            }
+        }
+
+        assert!(
+            blocked.is_empty(),
+            "the opening is not completable:
+{blocked:#?}
+reachable areas: {open_areas:?}"
+        );
+    }
+
     #[test]
     fn quest_chains_and_gates_resolve() {
         let data = load_embedded().expect("embedded game data should load");
