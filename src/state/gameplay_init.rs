@@ -74,6 +74,10 @@ impl GameplayState {
                         .completed_quests
                         .insert(prerequisite.clone());
                 }
+                // Finishing a request in play records its journal beats, and the
+                // town's reactions are gated on those. Skipping them here would
+                // show a conversation the player can never actually have.
+                self.push_quest_completion_milestones(quest);
             }
         }
         self.progression.total_brews = 40;

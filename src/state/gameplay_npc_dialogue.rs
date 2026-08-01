@@ -1,5 +1,5 @@
 use super::GameplayState;
-use crate::content::narrative_text;
+use crate::content::{narrative_text, NarrativeReaction};
 use crate::data::{GameData, NpcDefinition, QuestDefinition};
 
 #[path = "gameplay_npc_dialogue_text.rs"]
@@ -146,41 +146,25 @@ impl GameplayState {
         selection
     }
 
-    pub(super) fn npc_phase1_followup_line(&self, npc_id: &str) -> Option<&str> {
-        let phase1 = &narrative_text().phase1;
-        if self.phase1_town_recovery_reached() {
-            return match npc_id {
-                "crow_guide" => Some(phase1.crow_after_greenhouse.as_str()),
-                "mayor_elric" => Some(phase1.elric_after_greenhouse.as_str()),
-                "mira_apothecary" => Some(phase1.mira_after_greenhouse.as_str()),
-                "rowan_herbalist" => Some(phase1.rowan_after_greenhouse.as_str()),
-                _ => None,
-            };
-        }
-        if self.progression.completed_quests.contains("glow_for_rowan") {
-            return match npc_id {
-                "crow_guide" => Some(phase1.crow_after_glow.as_str()),
-                "mayor_elric" => Some(phase1.elric_after_glow.as_str()),
-                "ione_archivist" => Some(phase1.ione_after_glow.as_str()),
-                _ => None,
-            };
-        }
-        if self
-            .progression
-            .completed_quests
-            .contains("healing_for_mira")
-        {
-            return match npc_id {
-                "crow_guide" => Some(phase1.crow_after_healing.as_str()),
-                "mayor_elric" => Some(phase1.elric_after_healing.as_str()),
-                "brin_groundskeeper" => Some(phase1.brin_after_healing.as_str()),
-                _ => None,
-            };
-        }
-        if npc_id == "crow_guide" {
-            return Some(phase1.crow_default.as_str());
-        }
-        None
+    pub(super) fn npc_phase1_followup_line(&self, npc_id: &str) -> Option<&'static str> {
+        narrative_text()
+            .reactions
+            .iter()
+            .filter(|reaction| reaction.npc_id == npc_id)
+            .filter(|reaction| self.reaction_is_earned(reaction))
+            .max_by_key(|reaction| reaction.order)
+            .map(|reaction| reaction.line.as_str())
+    }
+
+    fn reaction_is_earned(&self, reaction: &NarrativeReaction) -> bool {
+        let quest_done = reaction.after_quest.is_empty()
+            || self
+                .progression
+                .completed_quests
+                .contains(&reaction.after_quest);
+        let milestone_done = reaction.after_milestone.is_empty()
+            || self.has_journal_milestone(&reaction.after_milestone);
+        quest_done && milestone_done
     }
 
     pub(super) fn append_npc_story_line(&self, npc_id: &str, base: String) -> String {
@@ -232,6 +216,45 @@ mod tests {
             "a finished arc leaves nothing further to ask"
         );
         assert!(state.npc_has_been_helped(&rowan));
+    }
+
+    /// The town should be talking about the most recent thing that happened,
+    /// not the first. Walk Elric forward through his reactions and check each
+    /// new beat displaces the last.
+    #[test]
+    fn town_reactions_move_on_as_the_story_does() {
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let mut state = GameplayState::new(&data);
+        let npc_id = "mayor_elric";
+
+        assert_eq!(state.npc_phase1_followup_line(npc_id), None);
+
+        state
+            .progression
+            .completed_quests
+            .insert("healing_for_mira".to_owned());
+        let after_healing = state
+            .npc_phase1_followup_line(npc_id)
+            .expect("elric reacts to the first delivered draught");
+
+        state.push_journal_milestone("greenhouse_repaired", "Greenhouse", "");
+        let after_greenhouse = state
+            .npc_phase1_followup_line(npc_id)
+            .expect("elric reacts to the greenhouse");
+        assert_ne!(after_healing, after_greenhouse);
+
+        state.push_journal_milestone("harvest_beds_turned", "Bed Rows", "");
+        let after_harvest = state
+            .npc_phase1_followup_line(npc_id)
+            .expect("elric reacts to the square growing");
+        assert_ne!(after_greenhouse, after_harvest);
+
+        // An earlier beat arriving late must not drag the conversation back.
+        state
+            .progression
+            .completed_quests
+            .insert("glow_for_rowan".to_owned());
+        assert_eq!(state.npc_phase1_followup_line(npc_id), Some(after_harvest));
     }
 
     #[test]

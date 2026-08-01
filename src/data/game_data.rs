@@ -237,4 +237,54 @@ mod tests {
             "unresolved quest references:\n{missing:#?}"
         );
     }
+
+    /// A town reaction is prose gated on a condition. A quest or milestone id
+    /// that does not exist gives a line that is written, shipped, and never
+    /// spoken — the most expensive kind of typo in a content file.
+    #[test]
+    fn town_reactions_are_gated_on_real_beats() {
+        use crate::content::narrative_text;
+
+        let data = load_embedded().expect("embedded game data should load");
+        let narrative = narrative_text();
+
+        let mut known_milestones = std::collections::HashSet::new();
+        for milestone in narrative.milestones.all() {
+            known_milestones.insert(milestone.id.clone());
+        }
+        for quest in &data.quests {
+            known_milestones.extend(quest.completion_milestones.iter().map(|m| m.id.clone()));
+        }
+        for area in &data.areas {
+            for warp in &area.warps {
+                known_milestones.extend(warp.unlock_milestones.iter().map(|m| m.id.clone()));
+            }
+        }
+
+        let mut unreachable = Vec::new();
+        for reaction in &narrative.reactions {
+            if data.npc(&reaction.npc_id).is_none() {
+                unreachable.push(format!("{}: no such townsperson", reaction.npc_id));
+            }
+            if !reaction.after_quest.is_empty() && data.quest(&reaction.after_quest).is_none() {
+                unreachable.push(format!(
+                    "{} waits on quest {}, which does not exist",
+                    reaction.npc_id, reaction.after_quest
+                ));
+            }
+            if !reaction.after_milestone.is_empty()
+                && !known_milestones.contains(&reaction.after_milestone)
+            {
+                unreachable.push(format!(
+                    "{} waits on milestone {}, which nothing records",
+                    reaction.npc_id, reaction.after_milestone
+                ));
+            }
+        }
+
+        assert!(
+            unreachable.is_empty(),
+            "town reactions that can never be spoken:\n{unreachable:#?}"
+        );
+    }
 }

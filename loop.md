@@ -244,6 +244,23 @@ Stop the loop and report if:
   morph wanting an off-dial heat, an unknown timing, or a catalyst tag no item carries.*
   *Next: prose is the one axis never touched — `narrative_text.json` is still the smallest file in
   the game. Or the two empty tower routes, or the five one-shot townsfolk.*
+- **2026-08-01 — prose.** Prose had never grown because it was gated on code: town reactions were a
+  fixed 11-field `NarrativePhase1` struct read by a hardcoded `match`, so every new line meant a Rust
+  field and a match arm, and the last three iterations of story beats had gone completely unremarked
+  by the town. `narrative_text.json` now carries a `reactions` list — `{npc_id, after_quest,
+  after_milestone, order, line}` — and the highest-ordered earned line for that person is the one
+  they speak. Authored 35 reactions across all 7 townsfolk and 9 story beats (75 → 309 lines), each
+  in that character's own register, including the beats nobody had ever acknowledged: the harvest
+  fault being traced, the bed rows turning, the habitats holding, the archive resolving.
+  *Adding a reaction is now writing, not code — the point of the change.* New tests:
+  `town_reactions_are_gated_on_real_beats` (a typo'd quest or milestone id is prose that ships and is
+  never spoken) and `town_reactions_move_on_as_the_story_does` (a late-arriving early beat must not
+  drag the conversation backwards). Also fixed `open_dialogue_at_arc_beat` not recording the journal
+  milestones a completed quest would really push, which made the harness show conversations the
+  player could never have.
+  *Next: the two empty tower routes (`archive_stack`, `observatory_span`), the rune workshop still
+  being only a gate, or the five townsfolk still on one-shot requests — Mira, Brin, Elric, Ione and
+  Lyra could each take the arc treatment Rowan got.*
 
 ## Deferred (needs a new system; not for this loop)
 

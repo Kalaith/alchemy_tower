@@ -59,17 +59,251 @@
     "observatory_epilogue": "The restored tower resolves its own history through the lens above the clouds. The wizard did not vanish in failure. They chose distance over domination, leaving a machine of rooms that only remains safe when used with restraint. The tower is not yours to conquer. It is yours to tend.",
     "observatory_footer": "Enter or Esc to step back"
   },
-  "phase1": {
-    "crow_default": "Care first. Answers later.",
-    "crow_after_healing": "Good. Let the town breathe before you ask it to believe.",
-    "crow_after_glow": "A safer road is never only a road.",
-    "crow_after_greenhouse": "Yes. That is what this room was for. Keep going carefully.",
-    "elric_after_healing": "Mira says the draught held. Practical help changes public opinion faster than speeches.",
-    "elric_after_glow": "A safer route at dusk gives people back time, labor, and nerve. That is not minor.",
-    "elric_after_greenhouse": "Once the greenhouse starts producing, the tower stops being rumor and becomes infrastructure again.",
-    "brin_after_healing": "If Mira can keep folks on their feet, maybe we can keep enough hands in the soil to matter.",
-    "ione_after_glow": "A carried light that holds on the road is useful evidence. It suggests the tower's work used to travel.",
-    "mira_after_greenhouse": "Fresh greens and steadier medicine in the same week. I had almost forgotten what that felt like.",
-    "rowan_after_greenhouse": "Funny what a bit of living light does. People stop hurrying like something is behind them."
-  }
+  "reactions": [
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "",
+      "order": 10,
+      "line": "Care first. Answers later."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "healing_for_mira",
+      "after_milestone": "",
+      "order": 20,
+      "line": "Good. Let the town breathe before you ask it to believe."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "healing_for_mira",
+      "after_milestone": "",
+      "order": 20,
+      "line": "Mira says the draught held. Practical help changes public opinion faster than speeches."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "healing_for_mira",
+      "after_milestone": "",
+      "order": 20,
+      "line": "If Mira can keep folks on their feet, maybe we can keep enough hands in the soil to matter."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "healing_for_mira",
+      "after_milestone": "",
+      "order": 20,
+      "line": "I gave half of it out in an afternoon. That is not a complaint, but you should know how thin we were running."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "glow_for_rowan",
+      "after_milestone": "",
+      "order": 30,
+      "line": "A safer road is never only a road."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "glow_for_rowan",
+      "after_milestone": "",
+      "order": 30,
+      "line": "A safer route at dusk gives people back time, labor, and nerve. That is not minor."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "glow_for_rowan",
+      "after_milestone": "",
+      "order": 30,
+      "line": "A carried light that holds on the road is useful evidence. It suggests the tower's work used to travel."
+    },
+    {
+      "npc_id": "lyra_keeper",
+      "after_quest": "glow_for_rowan",
+      "after_milestone": "",
+      "order": 30,
+      "line": "The moths came back to the lane the week that light started moving along it. I do not think that is a coincidence, and I have not decided yet whether it is good."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "greenhouse_repaired",
+      "order": 40,
+      "line": "Yes. That is what this room was for. Keep going carefully."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "greenhouse_repaired",
+      "order": 40,
+      "line": "Once the greenhouse starts producing, the tower stops being rumor and becomes infrastructure again."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "greenhouse_repaired",
+      "order": 40,
+      "line": "Fresh greens and steadier medicine in the same week. I had almost forgotten what that felt like."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "greenhouse_repaired",
+      "order": 40,
+      "line": "Funny what a bit of living light does. People stop hurrying like something is behind them."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "greenhouse_repaired",
+      "order": 40,
+      "line": "Beds under glass, fed and watched. I spent eleven years being told that was a luxury the valley could not carry."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "containment_repaired",
+      "order": 50,
+      "line": "Kept, not caught. There is a difference and the tower knows it."
+    },
+    {
+      "npc_id": "lyra_keeper",
+      "after_quest": "",
+      "after_milestone": "containment_repaired",
+      "order": 50,
+      "line": "They are settling. Three days now without a ward drawing more than it gives back. I keep waiting to be proved wrong about that."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "containment_repaired",
+      "order": 50,
+      "line": "The habitat logs stop mid-sentence twenty years ago. Now there is something to compare them against, which is the first time that has been true."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "containment_repaired",
+      "order": 50,
+      "line": "Lantern dust I can actually count on. Do you know what I have been substituting for it?"
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "harvest_blight_traced",
+      "order": 60,
+      "line": "It was never the seed. Eleven years of us blaming ourselves for sowing wrong, and the ground had simply stopped being asked politely."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "harvest_blight_traced",
+      "order": 60,
+      "line": "Rowan told me what the trays came up as. I have turned that soil every spring of my working life. I would rather it had been me."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "harvest_blight_traced",
+      "order": 60,
+      "line": "If the fault is in the ground then it is a public matter, not a run of bad luck. That changes what I am allowed to spend on it."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "harvest_blight_traced",
+      "order": 60,
+      "line": "Now you have found the thing under the thing. Do not rush what comes next."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "rune_workshop_restored",
+      "order": 70,
+      "line": "Reworking a finished potion is a later method than anything in the entry lab. Whoever built that bench had already given up on getting it right the first time."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "rune_workshop_restored",
+      "order": 70,
+      "line": "Careful. That room lets you change your mind after the fact. It is a habit."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "rune_workshop_restored",
+      "order": 70,
+      "line": "Rune work. I will be honest, I do not follow it, but the road crews have started asking for things by name."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "harvest_beds_turned",
+      "order": 80,
+      "line": "There is moss on the north wall. Nobody put it there. I have caught myself walking the long way round the square twice this week just to check it is still coming."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "harvest_beds_turned",
+      "order": 80,
+      "line": "Bloom along the path edge, self-seeded. That is the valley doing it on its own, which is more than I ever managed for it."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "harvest_beds_turned",
+      "order": 80,
+      "line": "We grew something in the square. I have had four people tell me that today as though I had not seen it myself."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "harvest_beds_turned",
+      "order": 80,
+      "line": "Rowan brought me cuttings instead of a bill. I did not know what to do with my face."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "harvest_beds_turned",
+      "order": 80,
+      "line": "The ground answered. That took twenty years and one person asking properly."
+    },
+    {
+      "npc_id": "lyra_keeper",
+      "after_quest": "",
+      "after_milestone": "harvest_beds_turned",
+      "order": 80,
+      "line": "Even the habitats are steadier since the square started growing. Everything in this valley was always one system. We only ever measured it in pieces."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "archive_revelation",
+      "order": 90,
+      "line": "The timeline holds. They sealed the floors to stop the tower eating what it was bound to, and then they left so it could not be reopened by anyone who loved it less carefully. I have been calling that abandonment in my notes for nine years."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "archive_revelation",
+      "order": 90,
+      "line": "Now you know what they chose. The tower is not yours to conquer."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "archive_revelation",
+      "order": 90,
+      "line": "So the wizard did not run out on us. I would like that written somewhere the next mayor has to read it."
+    },
+    {
+      "npc_id": "lyra_keeper",
+      "after_quest": "",
+      "after_milestone": "archive_revelation",
+      "order": 90,
+      "line": "Restraint, then. Everything I have been doing to the wards by instinct, they wrote down twenty years ago and then walked away from."
+    }
+  ]
 }

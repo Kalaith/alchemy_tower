@@ -10,7 +10,7 @@ pub(crate) struct NarrativeText {
     pub(crate) milestones: NarrativeMilestones,
     pub(crate) statuses: NarrativeStatuses,
     pub(crate) overlays: NarrativeOverlays,
-    pub(crate) phase1: NarrativePhase1,
+    pub(crate) reactions: Vec<NarrativeReaction>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -21,6 +21,22 @@ pub(crate) struct NarrativeMilestones {
     pub(crate) containment_started: NarrativeMilestone,
     pub(crate) first_rune_imbuing: NarrativeMilestone,
     pub(crate) observatory_ending: NarrativeMilestone,
+}
+
+impl NarrativeMilestones {
+    /// Every milestone this file declares, for the content check that verifies
+    /// authored reactions are gated on beats something actually records.
+    #[cfg(test)]
+    pub(crate) fn all(&self) -> [&NarrativeMilestone; 6] {
+        [
+            &self.entry_lab_recovered,
+            &self.archive_revelation,
+            &self.first_true_brew,
+            &self.containment_started,
+            &self.first_rune_imbuing,
+            &self.observatory_ending,
+        ]
+    }
 }
 
 #[derive(Debug, Deserialize, Clone)]
@@ -57,19 +73,23 @@ pub(crate) struct NarrativeOverlays {
     pub(crate) observatory_footer: String,
 }
 
+/// What a townsperson says about how far the valley has come, over and above
+/// whatever request is currently between you. Authored as a list rather than a
+/// fixed set of fields so a new story beat only needs writing, not code: give
+/// the reaction a condition and an `order`, and the highest-ordered earned line
+/// for that person is the one they speak.
 #[derive(Debug, Deserialize)]
-pub(crate) struct NarrativePhase1 {
-    pub(crate) crow_default: String,
-    pub(crate) crow_after_healing: String,
-    pub(crate) crow_after_glow: String,
-    pub(crate) crow_after_greenhouse: String,
-    pub(crate) elric_after_healing: String,
-    pub(crate) elric_after_glow: String,
-    pub(crate) elric_after_greenhouse: String,
-    pub(crate) brin_after_healing: String,
-    pub(crate) ione_after_glow: String,
-    pub(crate) mira_after_greenhouse: String,
-    pub(crate) rowan_after_greenhouse: String,
+pub(crate) struct NarrativeReaction {
+    pub(crate) npc_id: String,
+    /// Earned once this quest is completed. Empty means no quest condition.
+    #[serde(default)]
+    pub(crate) after_quest: String,
+    /// Earned once this journal milestone is recorded. Empty means none.
+    #[serde(default)]
+    pub(crate) after_milestone: String,
+    /// Later beats carry a higher order and win over earlier ones.
+    pub(crate) order: u32,
+    pub(crate) line: String,
 }
 
 pub(crate) fn narrative_text() -> &'static NarrativeText {
