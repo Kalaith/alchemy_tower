@@ -11,7 +11,7 @@
         255,
         255
       ],
-      "description": "An unstable glow brew that still sheds useful light.",
+      "description": "A glow brew that would not hold its light in. It leaks steadily, which ruins it as a lantern and makes it oddly useful for anyone who only needs to see for a minute.",
       "effects": [
         {
           "kind": "glow",
@@ -32,7 +32,7 @@
         255,
         255
       ],
-      "description": "A shimmering draft that illuminates dark paths.",
+      "description": "The first light most brewers manage. It is uneven, it does not last the night, and there is not a household on the north road that has not been grateful for one at some point.",
       "effects": [
         {
           "kind": "glow",
@@ -53,7 +53,7 @@
         255,
         255
       ],
-      "description": "A refined luminous brew with long-lasting crystalline glow.",
+      "description": "Luminous work done properly: a crystalline light that holds its brightness the whole way down instead of guttering out in the last hour like a cheaper pour.",
       "effects": [
         {
           "kind": "glow",
@@ -101,7 +101,7 @@
         255,
         255
       ],
-      "description": "A glow potion rewritten to burst outward in a quick halo.",
+      "description": "A glow brew opened outward into a quick halo. It lights everything at once and then stops, which is exactly right for finding a dropped thing and useless for anything else.",
       "effects": [
         {
           "kind": "glow",

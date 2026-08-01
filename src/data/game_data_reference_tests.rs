@@ -391,6 +391,47 @@ mod tests {
     ///
     /// Worth pinning now because this pass introduced `Masterwork`, a band no
     /// quest had ever asked for, and a typo in it would have been invisible.
+    /// Not a quality bar — length does not make prose good, and this floor sits
+    /// far below anything the game ships. It catches one specific failure: an
+    /// item whose text nobody ever wrote properly.
+    ///
+    /// It checks the text the **journal will actually show**, which is not
+    /// simply `item.description`. A `journal_herb_summary_<id>` or
+    /// `journal_potion_recap_<id>` key in `ui_text.json` wins when present, and
+    /// 23 items have one. So an item can carry a flat one-line description and
+    /// read perfectly well in game, and — the direction that bites — a carefully
+    /// written description can be shadowed by an override and never be seen.
+    /// Measuring the field rather than the surface would report both wrongly.
+    #[test]
+    fn nothing_the_journal_shows_is_a_placeholder() {
+        use crate::content::ui_copy_optional;
+        use crate::data::ItemCategory;
+
+        /// Well under the shortest real text, so this only fires on a stub.
+        const PLACEHOLDER_FLOOR: usize = 60;
+
+        let data = load_embedded().expect("embedded game data should load");
+        let thin = data
+            .items
+            .iter()
+            .filter_map(|item| {
+                let key = if item.category == ItemCategory::Potion {
+                    format!("journal_potion_recap_{}", item.id)
+                } else {
+                    format!("journal_herb_summary_{}", item.id)
+                };
+                let shown = ui_copy_optional(&key).unwrap_or(item.description.as_str());
+                (shown.chars().count() < PLACEHOLDER_FLOOR)
+                    .then(|| format!("{}: {} chars shown", item.id, shown.chars().count()))
+            })
+            .collect::<Vec<_>>();
+
+        assert!(
+            thin.is_empty(),
+            "items the journal describes with a placeholder: {thin:#?}"
+        );
+    }
+
     #[test]
     fn every_quest_asks_for_a_quality_band_the_game_knows() {
         use crate::content::ui_copy;

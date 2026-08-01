@@ -11,7 +11,7 @@
         104,
         255
       ],
-      "description": "A rough stimulant salvaged from aggressive ingredients.",
+      "description": "What comes out when the ingredients were too eager and the brewer agreed with them. All kick, no length, and the road crews have strong opinions about being handed one.",
       "effects": [
         {
           "kind": "speed",
@@ -32,7 +32,7 @@
         136,
         255
       ],
-      "description": "A stamina tonic held in reserve before it surges through the body.",
+      "description": "Held in reserve and released later, so a crew can take it at the start of a shift and feel it at the end, which is when the walking back actually happens.",
       "effects": [
         {
           "kind": "speed",
@@ -53,7 +53,7 @@
         100,
         255
       ],
-      "description": "A sharp tonic that steadies breath and motion.",
+      "description": "Sharp enough to make you cough, and then the next hour of walking is simply easier. The road crews drink it, complain about it, and buy it again the following week.",
       "effects": [
         {
           "kind": "speed",

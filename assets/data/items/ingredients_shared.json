@@ -11,7 +11,7 @@
         150,
         255
       ],
-      "description": "Soft moss that carries faint magical resonance.",
+      "description": "Soft grey-green moss off the north faces of old stone. Held close it carries a faint hum you feel in the teeth rather than hear, which is why the first thing anyone brews with it is something to help them sleep.",
       "quality": 24,
       "rarity": 1,
       "elements": {
@@ -65,7 +65,7 @@
         74,
         255
       ],
-      "description": "A hot-blooded root used in energizing mixtures.",
+      "description": "It comes out of the ground warm and stays warm for about a day. Nobody has satisfactorily explained that, and the valley long ago stopped asking and started simply digging it up in the cold months.",
       "quality": 28,
       "rarity": 2,
       "elements": {
@@ -119,7 +119,7 @@
         255,
         255
       ],
-      "description": "A cool, powdery wing scale suited to volatile brews.",
+      "description": "Scales off a wing, gathered rather than taken — the moths shed them and the habitat floor collects them. Cold and powdery, and they take a violent reaction and make it merely a fast one.",
       "quality": 26,
       "rarity": 2,
       "elements": {
@@ -173,7 +173,7 @@
         174,
         255
       ],
-      "description": "Soft dust collected from a settled glow moth habitat.",
+      "description": "What settles on the floor of a moth habitat that has been left properly alone. Lyra will tell you at length that a habitat which yields well is one nobody has been visiting, and she is right and it is still annoying.",
       "quality": 32,
       "rarity": 3,
       "elements": {
@@ -204,7 +204,7 @@
         240,
         255
       ],
-      "description": "Clear, cool slime gathered from a well-kept dew slug habitat.",
+      "description": "Clear, cool, and slower than water. The slugs leave it on the habitat glass overnight and it holds a reaction steady for far longer than anything that had to be brewed to do the same job.",
       "quality": 28,
       "rarity": 2,
       "elements": {

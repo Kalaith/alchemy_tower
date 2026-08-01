@@ -11,7 +11,7 @@
         146,
         255
       ],
-      "description": "A docile lantern moth prized for the dust it sheds in calm habitats.",
+      "description": "A slow lantern moth that will sit on a hand for as long as the hand is still. Prized for the dust it sheds, and Lyra is firm that the ones which shed best are the ones nobody has been admiring.",
       "quality": 34,
       "rarity": 3,
       "elements": {
@@ -44,7 +44,7 @@
         238,
         255
       ],
-      "description": "A placid moisture-feeding slug that leaves behind a clear stabilizing slime.",
+      "description": "Placid to the point of comedy, and it feeds on the damp off cold glass. Left alone in a settled habitat it produces a clear slime that steadies a brew better than anything the valley grows.",
       "quality": 30,
       "rarity": 2,
       "elements": {
@@ -77,7 +77,7 @@
         255,
         255
       ],
-      "description": "A polished splinter that stabilizes luminous reactions.",
+      "description": "A cold splinter that steadies any luminous reaction it is dropped into. The counter in the square has sold them for years and will not say where they come from, and asking twice gets you a shorter answer than asking once.",
       "quality": 62,
       "rarity": 3,
       "elements": {
@@ -112,7 +112,7 @@
         255,
         255
       ],
-      "description": "Turns a potion outward into a quick burst.",
+      "description": "Turns a potion outward instead of inward — one wide fast release rather than a held one. The mark is cut, not written, and the workshop has a drawer of failed attempts to prove how fine the difference is.",
       "quality": 40,
       "rarity": 3,
       "elements": {
@@ -143,7 +143,7 @@
         255,
         255
       ],
-      "description": "Coils a potion into a repeating aftereffect.",
+      "description": "Coils a potion so it happens, pauses, and happens again a little softer. Ione's note says the second pass is the honest one, because it is the effect without any of the brewer's enthusiasm left in it.",
       "quality": 44,
       "rarity": 3,
       "elements": {
@@ -174,7 +174,7 @@
         126,
         255
       ],
-      "description": "Makes a potion wait a beat before releasing its effect.",
+      "description": "Makes a potion wait. Not weaker, not slower once it starts — simply held, until whatever the brewer was afraid of has had time to arrive. The most-copied mark in the workshop's drawer, by a wide margin.",
       "quality": 42,
       "rarity": 3,
       "elements": {

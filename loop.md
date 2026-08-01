@@ -912,6 +912,26 @@ Stop the loop and report if:
   realistic slip — it named the quest), and a behaviour test pinning that Excellent ranks strictly
   below Masterwork and that an unknown string outranks nothing.
   **42 quests; first Masterwork requests; 83 tests.**
+- **2026-08-01 — the flattest prose in the game was the first prose anyone reads.** Description
+  census: 26 items under 70 characters, and the shortest were the **starter** herbs and brews —
+  "Soft moss that carries faint magical resonance", "A warming herb favored by local healers". Every
+  item this loop authored got 150–250 characters with a voice; the openers never got revisited. A
+  player would feel that gradient backwards.
+  Rewrote all 26 to the standard the rest of the game reached.
+  ***Then the capture disagreed with the data and the finding turned out to be half wrong.*** The
+  journal showed text for Arcane Dust that was **neither** the old description nor my new one.
+  `journal_herb_summary_<id>` / `journal_potion_recap_<id>` keys in `ui_text.json` win over
+  `item.description`, and **23 items have one** — so `item.description` is *only* a fallback, used
+  nowhere else in the game. **17 of my 26 rewrites are shadowed and currently invisible.** The real
+  player-facing gain is the other 9, plus better fallbacks for the rest.
+  *My first census said "zero overrides" and was wrong* — `ui_text.json` nests everything under
+  `copy`, and I read the top level. The grep that found the real string is what corrected it.
+  **Read the surface, not the field.**
+  *Guard, verified two ways:* `nothing_the_journal_shows_is_a_placeholder` measures the **effective**
+  text — override if present, description otherwise. A stub on an overridden item passes (nobody
+  sees it); a stub on a non-overridden item fails. Checking `item.description` directly would have
+  reported both backwards.
+  **129 items, none described by a stub; 84 tests.**
 
 ## Deferred (needs a new system; not for this loop)
 
