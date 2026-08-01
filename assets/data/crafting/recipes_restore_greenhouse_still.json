@@ -303,6 +303,54 @@
         "vigor"
       ],
       "morph_targets": []
+    },
+    {
+      "id": "underglass_tonic_recipe",
+      "name": "Underglass Tonic",
+      "station_id": "greenhouse_still",
+      "ingredients": [
+        {
+          "item_id": "leanaway_thrift",
+          "amount": 2
+        },
+        {
+          "item_id": "thinair_bell",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "underglass_tonic",
+      "output_amount": 1,
+      "description": "The cushion that survives the wind by lying under it and the bell that will not open in valley air, in the same pot for the first time. Neither of them has any business being available in quantity.",
+      "required_heat": 1,
+      "required_stirs": 3,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "The salve made of thrift alone keeps a walker going. This keeps a walker going and lets them see where they are putting their feet, which up there is the half that matters.",
+      "minimum_quality": 52,
+      "preferred_traits": [
+        "restorative",
+        "calm"
+      ],
+      "guaranteed_traits": [
+        "restorative"
+      ],
+      "minimum_elements": {
+        "vita": 4,
+        "ember": 0,
+        "mist": 2,
+        "lux": 3
+      },
+      "required_timing": "steady",
+      "required_sequence": [
+        "vigor",
+        "luminous"
+      ],
+      "discovery_milestones": [
+        {
+          "id": "the_pass_came_indoors",
+          "title": "The Pass, Under Glass",
+          "text": "Every reagent in it grows an hour's climb above the valley and nowhere in it, and all of it came off a frame at the top of the tower. Rowan spent four years trying to carry the bell downhill and open it. The answer was that it was never a question of carrying it down."
+        }
+      ]
     }
   ]
 }

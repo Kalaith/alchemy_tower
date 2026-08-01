@@ -359,6 +359,15 @@
         64
       ],
       "prompt": "A plain flask of pale clear restorative with no colour to speak of, clinical rather than magical, readable potion icon."
+    },
+    {
+      "id": "underglass_tonic",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A flask of pale blue-green restorative with a faint white bloom in it, cold-grown and clean, readable potion icon."
     }
   ]
 }

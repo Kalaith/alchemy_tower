@@ -368,6 +368,27 @@
           "description": "Restores steadily and sits safely on top of an earlier dose."
         }
       ]
+    },
+    {
+      "id": "underglass_tonic",
+      "name": "Underglass Tonic",
+      "category": "potion",
+      "base_value": 104,
+      "color": [
+        214,
+        228,
+        232,
+        255
+      ],
+      "description": "Two plants that will not grow in this valley, grown in this valley, four flights up and under glass. Rowan has taken to describing the bottle rather than what it does, which for her is a symptom.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 44.0,
+          "duration_seconds": 0.0,
+          "description": "Restores deeply and leaves the legs steady on a slope."
+        }
+      ]
     }
   ]
 }

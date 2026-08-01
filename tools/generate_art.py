@@ -131,6 +131,14 @@ def station(kind, size):
             d.ellipse(box(cx + ox, cy - 7, 5, 5), fill=rgb("#e6f4fa"))
         for ox in [-28, 0, 26]:
             d.line((cx + ox, cy - 8, cx + ox + 3, cy - 16), fill=rgb("#eef8ff"), width=2)
+    elif "cloud_frame" in kind:
+        d.rounded_rectangle((cx - 34, cy - 8, cx + 34, cy + 22), radius=4, fill=rgb("#8d9099"))
+        d.rounded_rectangle((cx - 28, cy - 2, cx + 28, cy + 16), radius=3, fill=rgb("#6a6f60"))
+        for ox in [-18, -4, 10, 22]:
+            d.line((cx + ox, cy + 12, cx + ox, cy - 2), fill=rgb("#9cb494"), width=2)
+            d.ellipse(box(cx + ox, cy - 5, 5, 6), fill=rgb("#e4ecf6"))
+        d.rounded_rectangle((cx - 34, cy - 16, cx + 34, cy + 4), radius=4,
+                            fill=rgb("#d8e6f2", 90), outline=rgb("#b0c4d6", 170))
     elif "planter_bloom" in kind:
         d.rounded_rectangle((cx - 34, cy - 6, cx + 34, cy + 22), radius=8, fill=rgb("#8a7a68"))
         d.rounded_rectangle((cx - 28, cy, cx + 28, cy + 16), radius=6, fill=rgb("#5a4030"))
@@ -454,6 +462,7 @@ def icon(item, size, world=False):
             "hardwinter_draught": "#e8c8aa", "sluicewater_tonic": "#a6c6ca", "openfield_draught": "#ccd69e", "longhold_cordial": "#c6b0d6",
             "keptwarm_tonic": "#d6c8b2", "southmarket_salve": "#c49e76", "farcarried_tonic": "#d8d2a8",
             "blankwater": "#dceef2", "twicegiven_tonic": "#cfe4ea", "handmark_solution": "#b8c2e4",
+            "underglass_tonic": "#c2dcd6",
         }.get(item, "#d2c1ff")
         d.rounded_rectangle((cx - 8, cy - 24, cx + 8, cy - 12), radius=3, fill=rgb("#d9dfe8", 220))
         d.rectangle((cx - 5, cy - 28, cx + 5, cy - 22), fill=rgb("#8b6a4d"))

@@ -69,6 +69,13 @@
       "after_milestone": "crews_kept_working",
       "order": 80,
       "line": "The crews used to work the pass until the weather beat them and then stop until spring. They work it through now. I have watched three winters close this road and I would like to see what a fourth one does against a crew that has what it needs."
+    },
+    {
+      "npc_id": "tarn_wayfarer",
+      "after_quest": "",
+      "after_milestone": "the_pass_came_indoors",
+      "order": 106,
+      "line": "So the pass grows in your tower now. I have carried past a hundred places that wanted something off the high ground and not one of them ever thought to build the high ground. You understand that if this works, the reason anybody comes up my road stops being the road."
     }
   ]
 }

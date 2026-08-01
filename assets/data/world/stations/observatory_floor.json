@@ -31,6 +31,47 @@
           128.0
         ]
       }
+    },
+    {
+      "id": "observatory_cloud_frame",
+      "name": "Cloud Frame",
+      "kind": "planter",
+      "area_id": "observatory_floor",
+      "position": [
+        560.0,
+        440.0
+      ],
+      "interaction_radius": 52.0,
+      "color": [
+        206,
+        214,
+        232,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 0,
+        "favored_traits": [],
+        "favored_categories": [],
+        "description": ""
+      },
+      "planter_harvest_days": 4,
+      "planter_seed_ids": [
+        "thinair_bell",
+        "leanaway_thrift",
+        "driftseed"
+      ],
+      "planter_yield_bonus": 1,
+      "habitat_creature_ids": [],
+      "habitat_output_item_id": "",
+      "habitat_harvest_days": 0,
+      "required_journal_milestone": "discovered_two_flights_down",
+      "render": {
+        "sprite_size": [
+          128.0,
+          128.0
+        ]
+      }
     }
   ]
 }

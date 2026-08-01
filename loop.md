@@ -1204,6 +1204,44 @@ Stop the loop and report if:
   reverted tree.** Caught by counting ids immediately afterwards rather than by a test.
   **147 items, 5 creatures, 5 habitats, 51 recipes, 69 gather nodes; 93 tests.**
 
+- **2026-08-02 — the answer was never to carry it down.** Cultivation had gone **thirty-one passes**
+  untouched and it showed: **22 of 44 ingredients cannot be planted**, and all five beds are inside
+  the tower's first two floors. Most of the 22 are correctly not plants — frost, shards, ash, dust,
+  slime, panes, beads, imports — but three are unmistakably plants and all three are **on the
+  southern pass**, which the last seven passes built and never gave anywhere to grow.
+  The hook was already written and I only had to notice it. Rowan's own item text says she spent
+  **four years** failing to carry the thinair bell downhill and make it open, and can tell you the
+  exact number; and the cloudglass note says the observatory's outer mirror **is above the weather**.
+  So the **Cloud Frame** goes on the observatory shutter ring — the one flat ground in the valley at
+  the bell's air — and takes the three pass plants (bell, leanaway thrift, driftseed). Four days a
+  crop, the second-slowest bed in the game.
+  ***It is gated on a journal beat rather than a quest, and that is the whole design.*** The
+  precondition is `discovered_two_flights_down` — iteration 50's discovery that mirror frost survives
+  exactly the stairs between the lens and the reading room, *so the distance is the instruction*.
+  Ione read that as a fact about mirrors. Rowan reads it as a fact about air and does not sleep. A
+  prose beat from two passes ago is now the thing that unlocks a mechanic.
+  *Payoff without inventing supply:* `leanaway_salve` already wanted **2** thrift and
+  `farcarried_tonic` already wanted **2** driftseed, so the frame is a supply line for recipes that
+  were already short. One new formula (**Underglass Tonic**, thrift ×2 + bell ×1 at the still, which
+  competes with the salve for the same two thrift) and three mutations, 22 → 25.
+  *Two exclusions on purpose, and they are content:* **coldiron lichen** covers a hand's width per
+  decade and Brin has twice said to take only what you need, and **ruinbell** only takes in mortar
+  nobody has maintained — a tended bed is the one place it will not grow. Chasing 44/44 would mean
+  pretending.
+  ***Guard for a hole this pass walked straight into.*** Station and node **quest** gates have been
+  checked since the first arc; **journal-milestone** gates never were, and four things already used
+  one — the reading bench, the channel forge, the astral lens, the archive warp. A typo there does
+  not fail to load and does not read as broken: the bench is simply never available.
+  `every_milestone_gate_points_at_something_that_happens`, verified by dropping one character off the
+  frame's gate. It also caught that this file's milestone set had **three near-identical copies**,
+  only one of which knew recipes write to the journal — now one helper.
+  *Split:* `game_data_progression_tests.rs` (692) into playability and
+  `game_data_narrative_tests.rs` — can the game be finished, versus does it say anything about it.
+  *Method note: this pass authored **one** new item. Both hooks were sentences earlier passes had
+  already written and left unanswered. At this size the valley is large enough to be read for
+  questions rather than mined for gaps.*
+  **5 beds, 25 mutations, 148 items; 94 tests; largest test file 697 lines.**
+
 ## Deferred (needs a new system; not for this loop)
 
 - Apply-potion-to-target flow (wilted plant, frightened creature, blocked path) — `TODO.md` calls it

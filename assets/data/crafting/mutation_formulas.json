@@ -175,6 +175,30 @@
       "yield_bonus": 1,
       "growth_bonus_days": 0,
       "mutation_note": "pale-veined"
+    },
+    {
+      "id": "thinair_bell_glow_mutation",
+      "seed_item_id": "thinair_bell",
+      "required_effect_kind": "glow",
+      "yield_bonus": 1,
+      "growth_bonus_days": 0,
+      "mutation_note": "cloud-opened"
+    },
+    {
+      "id": "leanaway_thrift_restore_mutation",
+      "seed_item_id": "leanaway_thrift",
+      "required_effect_kind": "restore",
+      "yield_bonus": 2,
+      "growth_bonus_days": 1,
+      "mutation_note": "deep-cushioned"
+    },
+    {
+      "id": "driftseed_speed_mutation",
+      "seed_item_id": "driftseed",
+      "required_effect_kind": "speed",
+      "yield_bonus": 1,
+      "growth_bonus_days": 1,
+      "mutation_note": "far-thrown"
     }
   ]
 }

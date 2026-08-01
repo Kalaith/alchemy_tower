@@ -206,6 +206,15 @@
         128
       ],
       "prompt": "A shallow glazed case of stacked old book boards seen from above, dark wood frame and dim interior, readable as a creature habitat kept deliberately undisturbed."
+    },
+    {
+      "id": "observatory_cloud_frame",
+      "type": "world_station",
+      "image_size_px": [
+        128,
+        128
+      ],
+      "prompt": "A low glazed cold frame on an open observatory ring seen from above, thin pale glass over a shallow gravel tray, a few small bell flowers, readable as a planter kept deliberately in the cold."
     }
   ]
 }

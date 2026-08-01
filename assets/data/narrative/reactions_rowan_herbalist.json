@@ -90,6 +90,20 @@
       "after_milestone": "discovered_the_revival",
       "order": 98,
       "line": "You worked it out at a bench. Not found in a book, not handed down — worked out, from a cutting and a guess, for a plant this valley had finished burying. I have grown things my whole life and I have never once brought one back."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "discovered_two_flights_down",
+      "order": 104,
+      "line": "Ione told me about the frost on the stairs and I have not slept since. She thinks it is a fact about mirrors. It is a fact about air. Four years I carried that bell down and put it under every glass in the greenhouse and it never opened once, and the whole time the answer was that I was walking the wrong way with it. Put a frame at the top of the tower."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "the_pass_came_indoors",
+      "order": 112,
+      "line": "It opened on the fourth morning and I sat with it for an hour. I have eleven pages of notes on why it could not be done and I am keeping every one of them, because the notes were all correct. They were just answering a question about the valley floor."
     }
   ]
 }
