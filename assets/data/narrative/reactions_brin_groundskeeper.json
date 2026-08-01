@@ -1,0 +1,137 @@
+{
+  "reactions": [
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "healing_for_mira",
+      "after_milestone": "",
+      "order": 20,
+      "line": "If Mira can keep folks on their feet, maybe we can keep enough hands in the soil to matter."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "greenhouse_repaired",
+      "order": 40,
+      "line": "Beds under glass, fed and watched. I spent eleven years being told that was a luxury the valley could not carry."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "harvest_blight_traced",
+      "order": 60,
+      "line": "Rowan told me what the trays came up as. I have turned that soil every spring of my working life. I would rather it had been me."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "harvest_beds_turned",
+      "order": 80,
+      "line": "Bloom along the path edge, self-seeded. That is the valley doing it on its own, which is more than I ever managed for it."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "pollinator_count_taken",
+      "order": 65,
+      "line": "Lyra showed me her count. I have been turning beds for a valley that had already stopped being pollinated, which explains a decade of wondering what I was doing wrong."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "pollinators_returned",
+      "order": 95,
+      "line": "The whole valley flowered in the same four days. I walked the long field road on the last of them and I am not ashamed to say I had to stop halfway."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "greenhouse_expanded",
+      "order": 45,
+      "line": "Four beds under glass and every one of them taking something different. I spent thirty years being told a greenhouse was for keeping one crop alive, not for finding out what a crop could be talked into."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "town_water_cleared",
+      "order": 85,
+      "line": "Whole row treated in an afternoon. Mira did not ask anyone for permission either, which I have decided to admire."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "terraces_still_alive",
+      "order": 68,
+      "line": "Bed structure. Drainage. Root stock. Under two feet of mortar I have walked past twice a day for thirty years while telling myself it was rubble because that was easier than getting a fork out."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "terraces_worked_again",
+      "order": 92,
+      "line": "I followed their bed lines instead of laying my own. Felt strange for about a week and then felt like the only sensible thing anybody has done up here."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "terraces_still_alive",
+      "order": 69,
+      "line": "The burn feeds this town one quarter of every year. I have never once heard anybody thank it, and I include myself in that."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "first_town_relief",
+      "order": 22,
+      "line": "If it has been raining, go up to the quarry. Everywhere else in the valley you wait for the wet to pass. Up there the wet is the whole point — the cut faces only show their seam while they are running, and the sump only grows anything while it is holding water."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "pass_road_open",
+      "order": 100,
+      "line": "There is lichen up there that takes ten years to cover a hand's width. Take what you need and no more. I will not say it twice, but I have now said it twice."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "rune_workshop_restored",
+      "order": 72,
+      "line": "Tried the forge tonic. Tastes like a smithy and works like one. I will be having another."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "pass_kept_open",
+      "order": 76,
+      "line": "So there is a use for the lichen now. I would rather there wasn't. Ten years to cover a hand's width, and a standing order does not have a number on it — that is how a thing goes from rare to gone, and everyone involved is only ever taking a little."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "pass_animals_settled",
+      "order": 88,
+      "line": "Animals arriving in better condition than they set out. I have kept beasts my whole life and I would have told you that was not a thing that happened on a mountain road. I would have been telling you what everyone told me."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "the_previous_hand",
+      "order": 96,
+      "line": "So the man knew. That is the part. Not that it went wrong — things go wrong — but that he sat down, wrote out exactly how, and then pulled the pages so nobody could argue with him about it later. There is a word for that and it is not caution."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "first_rune_imbuing",
+      "order": 84,
+      "line": "So the ruined ones are worth something now. Twenty years of this valley throwing out whatever did not come right the first time, and it turns out the answer was to stop asking it to be what it was not."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "greenhouse_expanded",
+      "order": 92,
+      "line": "The ruinbell will not come. I put four in the good soil and every one of them sulked. It wants a wall nobody has looked after in twenty years, and the whole point of this last year has been that there are no walls like that here any more. An insult with petals, right to the end."
+    }
+  ]
+}

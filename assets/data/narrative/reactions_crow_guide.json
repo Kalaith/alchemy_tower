@@ -1,0 +1,109 @@
+{
+  "reactions": [
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "",
+      "order": 10,
+      "line": "Care first. Answers later."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "healing_for_mira",
+      "after_milestone": "",
+      "order": 20,
+      "line": "Good. Let the town breathe before you ask it to believe."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "glow_for_rowan",
+      "after_milestone": "",
+      "order": 30,
+      "line": "A safer road is never only a road."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "greenhouse_repaired",
+      "order": 40,
+      "line": "Yes. That is what this room was for. Keep going carefully."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "containment_repaired",
+      "order": 50,
+      "line": "Kept, not caught. There is a difference and the tower knows it."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "harvest_blight_traced",
+      "order": 60,
+      "line": "Now you have found the thing under the thing. Do not rush what comes next."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "rune_workshop_restored",
+      "order": 70,
+      "line": "Careful. That room lets you change your mind after the fact. It is a habit."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "harvest_beds_turned",
+      "order": 80,
+      "line": "The ground answered. That took twenty years and one person asking properly."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "archive_revelation",
+      "order": 90,
+      "line": "Now you know what they chose. The tower is not yours to conquer."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "pollinators_returned",
+      "order": 95,
+      "line": "They came back because it was worth the trip. That is the only reason anything ever comes back."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "town_charter_signed",
+      "order": 98,
+      "line": "They wrote you down. That is how a place stops needing the person who fixed it."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "record_reconciled",
+      "order": 97,
+      "line": "'Not yet, then.' Four times, in the margin. They kept deciding not to, and kept writing down why. That is the part worth having."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "unsigned_order_read",
+      "order": 100,
+      "line": "Somebody else has been reading. That was always going to happen. What matters is that they found the tower working rather than open."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "eleven_months_restored",
+      "order": 96,
+      "line": "The record does not say the valley failed. It says the wards drew more than they returned for eleven months and somebody watched that happen and kept writing. Those are different stories and only one of them has a person in it."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "archive_revelation",
+      "order": 92,
+      "line": "It kept working. No one asked it to and no one watched it, and every clear night for twenty years it held a star steady and marked the ring. Whatever you decide the wizard was, the machine he left behind has been patient in a way he was not."
+    }
+  ]
+}

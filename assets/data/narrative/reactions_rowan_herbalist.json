@@ -1,0 +1,88 @@
+{
+  "reactions": [
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "greenhouse_repaired",
+      "order": 40,
+      "line": "Funny what a bit of living light does. People stop hurrying like something is behind them."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "harvest_blight_traced",
+      "order": 60,
+      "line": "It was never the seed. Eleven years of us blaming ourselves for sowing wrong, and the ground had simply stopped being asked politely."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "harvest_beds_turned",
+      "order": 80,
+      "line": "There is moss on the north wall. Nobody put it there. I have caught myself walking the long way round the square twice this week just to check it is still coming."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "pollinators_returned",
+      "order": 95,
+      "line": "My beds set fruit this year without me doing one thing differently. Turns out I was never the missing part."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "archive_revelation",
+      "order": 99,
+      "line": "Ione brought a hollowroot cutting down to the stall to show me. I have been growing in this valley my whole life and I did not know that was ever a thing that grew here."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "terraces_worked_again",
+      "order": 92,
+      "line": "Brin has started saying 'the previous groundskeeper' in the tone he normally saves for weather that behaves itself. From him that is practically a monument."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "greenhouse_repaired",
+      "order": 43,
+      "line": "If you are gathering in winter, go to the burn. Everything else in the valley shuts and the hollow opens, because nothing has grown a canopy back over it and it is the only floor still getting light. We have been treating the worst thing that ever happened to that forest as our winter larder for two decades."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "",
+      "order": 12,
+      "line": "One thing before you go up there. On a windy day, walk the plains. The clover only shows when the grass goes over, and the driftseed only piles up while it is still blowing. Everyone born here knows it and nobody thinks to say it, which is how I lost my first two seasons."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "town_charter_signed",
+      "order": 99,
+      "line": "The trader sells a resin I have failed to grow four times. I buy it. I am going to keep failing to grow it, and I would rather you did not raise the subject."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "pass_road_open",
+      "order": 100,
+      "line": "It grows on the switchback. In quantity. An hour's climb from a hedgerow I have been picking seed out of for nine years, and every head on it pointing downhill. I have been asking the wrong question in the wrong direction the entire time."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "eleven_months_restored",
+      "order": 96,
+      "line": "Eleven months of falling yields, written down as they happened by somebody who could see it happening. I have had nine bad seasons and no way to tell whether they were a pattern. Now I have somebody else's nine and they rhyme."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "greenhouse_expanded",
+      "order": 97,
+      "line": "The driftseed is in the beds. Nine years of pulling those heads out of a hedgerow and saying I did not know what they came from, and now I have a row of the parent plant and I know exactly. I have also tried the myrrh again. Fifth time. Do not ask me about it."
+    }
+  ]
+}

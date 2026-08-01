@@ -1,0 +1,46 @@
+{
+  "reactions": [
+    {
+      "npc_id": "tarn_wayfarer",
+      "after_quest": "",
+      "after_milestone": "waystation_relit",
+      "order": 30,
+      "line": "Four carts turned off yesterday. Four. I used to go a week."
+    },
+    {
+      "npc_id": "tarn_wayfarer",
+      "after_quest": "",
+      "after_milestone": "pass_kept_open",
+      "order": 95,
+      "line": "A full winter worked. Your valley has not been cut off from anywhere this year, and half of you did not notice, which I have decided is the point rather than an insult."
+    },
+    {
+      "npc_id": "tarn_wayfarer",
+      "after_quest": "",
+      "after_milestone": "unsigned_order_read",
+      "order": 100,
+      "line": "Notes on a board, paid over the odds, collected the same night. That is not a local. I would have seen a local. Whoever it was came up the road or came down it, and I did not see them either, which I do not much care for."
+    },
+    {
+      "npc_id": "tarn_wayfarer",
+      "after_quest": "",
+      "after_milestone": "pass_kept_open",
+      "order": 78,
+      "line": "Eleven years I have gone past that flower and it may as well have been snow on a rock. You put it in a bottle and now the crews ask me to carry it. I do not know what to do with being wrong that long about something I saw every winter."
+    },
+    {
+      "npc_id": "tarn_wayfarer",
+      "after_quest": "",
+      "after_milestone": "pass_animals_settled",
+      "order": 84,
+      "line": "Carters do not thank you. They come back, which is the same thing said quieter. Three of them have started asking for the crossing on purpose instead of taking it because it is there, and I have had to think about what that makes the waystation."
+    },
+    {
+      "npc_id": "tarn_wayfarer",
+      "after_quest": "",
+      "after_milestone": "unsigned_order_unanswered",
+      "order": 102,
+      "line": "No fourth order. I have watched that road for eleven years and I know what it means when somebody stops asking: they got what they came for. Whether that is good news depends entirely on what they wanted it for, and the road does not tell you that part."
+    }
+  ]
+}

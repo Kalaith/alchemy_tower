@@ -111,6 +111,45 @@ pub(crate) struct NarrativeReaction {
     pub(crate) line: String,
 }
 
+/// One file per speaker. The single reactions file passed 800 lines and each
+/// townsperson's voice is the obvious seam — "what does Brin say" is now a
+/// question you answer by opening one small file rather than scrolling a list
+/// of everyone. Adding a speaker means adding a line here.
+const REACTION_SOURCES: &[(&str, &str)] = &[
+    (
+        "narrative/reactions_brin_groundskeeper",
+        include_str!("../../assets/data/narrative/reactions_brin_groundskeeper.json"),
+    ),
+    (
+        "narrative/reactions_crow_guide",
+        include_str!("../../assets/data/narrative/reactions_crow_guide.json"),
+    ),
+    (
+        "narrative/reactions_ione_archivist",
+        include_str!("../../assets/data/narrative/reactions_ione_archivist.json"),
+    ),
+    (
+        "narrative/reactions_lyra_keeper",
+        include_str!("../../assets/data/narrative/reactions_lyra_keeper.json"),
+    ),
+    (
+        "narrative/reactions_mayor_elric",
+        include_str!("../../assets/data/narrative/reactions_mayor_elric.json"),
+    ),
+    (
+        "narrative/reactions_mira_apothecary",
+        include_str!("../../assets/data/narrative/reactions_mira_apothecary.json"),
+    ),
+    (
+        "narrative/reactions_rowan_herbalist",
+        include_str!("../../assets/data/narrative/reactions_rowan_herbalist.json"),
+    ),
+    (
+        "narrative/reactions_tarn_wayfarer",
+        include_str!("../../assets/data/narrative/reactions_tarn_wayfarer.json"),
+    ),
+];
+
 /// The reactions file on its own. Only exists so the split file can be parsed
 /// and folded into [`NarrativeText`].
 #[derive(Debug, Deserialize)]
@@ -125,11 +164,13 @@ pub(crate) fn narrative_text() -> &'static NarrativeText {
             include_str!("../../assets/data/narrative_text.json"),
             "narrative_text.json",
         );
-        let spoken: NarrativeReactions = parse_required_json(
-            include_str!("../../assets/data/narrative_reactions.json"),
-            "narrative_reactions.json",
-        );
-        text.reactions = spoken.reactions;
+        text.reactions = REACTION_SOURCES
+            .iter()
+            .flat_map(|(label, source)| {
+                let spoken: NarrativeReactions = parse_required_json(source, label);
+                spoken.reactions
+            })
+            .collect();
         text
     })
 }

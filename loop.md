@@ -856,6 +856,36 @@ Stop the loop and report if:
   house style rather than the truncation point, because a row that only just fits stops fitting the
   next time the font or panel width moves.
   **13 rune reworks; 81 tests; 80 potions.**
+- **2026-08-01 — the greenhouse never learned anything the valley found.** Cross-checked plantable
+  seeds against the ingredient list: **19 ingredients cannot be sown anywhere**, and every plant
+  added by this loop in nine passes was among them. The beds were still growing exactly what they
+  grew before the loop started.
+  *Most of that 19 is correct, though.* Cloudglass is mirror frost, lowstar ash is a scorch on a
+  ring, rune ash and wardglass frost are residues — none are seeds. And three are refused **on
+  purpose**, which is content: `ruinbell` only takes mortar nobody has maintained (Brin: "an insult
+  with petals"), `coldiron_lichen` needs a decade per hand's width, and `southmarket_myrrh` is the
+  tree Rowan has failed to grow four times and will not discuss. Sowing any of those would have
+  erased the thing that made it interesting.
+  So three, each with a reason: **lieflat clover** in the west bed, **driftbloom** in the bloom bed
+  — which finally answers `driftseed`'s "nobody in the valley grows the plant they come from" — and
+  **rimeflower** in the ward-cooled cold bed, out of season and two floors underground, which Lyra
+  is openly unsure counts as saving it. Plus six mutation formulas, three of them for seeds
+  (`sunspike`, `bloomwing_pollen`, `mist_moth_wing`) that had been sowable since before this loop
+  and could never be steered.
+  ***A guard I wrote and then removed.*** I added
+  `every_seed_the_beds_accept_can_mutate` and verified it against a break — it named exactly the
+  three. Then I read the neighbouring test and found `every_mutation_formula_has_a_bed_that_grows_its_seed`,
+  whose comment says outright that a seed without a formula "can be grown but never steered, **which
+  is fine**." My rule contradicted a stance the codebase had already considered and written down.
+  Removed it; the six formulas stand as content without needing to be law. **Check whether the
+  codebase already has an opinion before legislating one.**
+  *Split done:* `narrative_reactions.json` hit **802**, split **one file per speaker** into
+  `narrative/reactions_<npc>.json` (6–20 entries each) with a `REACTION_SOURCES` table. "What does
+  Brin say" is now one small file. Guarded: a speaker missing from the table compiles fine and just
+  goes mute, so `every_recorded_moment_gets_remarked_on_by_somebody` now fails on any townsperson
+  with zero reactions — verified by dropping Tarn's entry, which named him.
+  *Next split candidate:* `crafting/recipes_glow.json` (704).
+  **114 reactions in 8 files; 22 mutation formulas; 81 tests.**
 
 ## Deferred (needs a new system; not for this loop)
 

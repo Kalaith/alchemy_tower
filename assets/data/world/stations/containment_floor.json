@@ -182,7 +182,8 @@
         "frostcrack_seed",
         "ashcap",
         "quietbloom_spore",
-        "moon_fern"
+        "moon_fern",
+        "rimeflower"
       ],
       "planter_yield_bonus": 2,
       "required_completed_quest": "containment_for_lyra",

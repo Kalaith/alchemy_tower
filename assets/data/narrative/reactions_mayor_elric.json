@@ -1,0 +1,130 @@
+{
+  "reactions": [
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "healing_for_mira",
+      "after_milestone": "",
+      "order": 20,
+      "line": "Mira says the draught held. Practical help changes public opinion faster than speeches."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "glow_for_rowan",
+      "after_milestone": "",
+      "order": 30,
+      "line": "A safer route at dusk gives people back time, labor, and nerve. That is not minor."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "greenhouse_repaired",
+      "order": 40,
+      "line": "Once the greenhouse starts producing, the tower stops being rumor and becomes infrastructure again."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "harvest_blight_traced",
+      "order": 60,
+      "line": "If the fault is in the ground then it is a public matter, not a run of bad luck. That changes what I am allowed to spend on it."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "rune_workshop_restored",
+      "order": 70,
+      "line": "Rune work. I will be honest, I do not follow it, but the road crews have started asking for things by name."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "harvest_beds_turned",
+      "order": 80,
+      "line": "We grew something in the square. I have had four people tell me that today as though I had not seen it myself."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "archive_revelation",
+      "order": 90,
+      "line": "So the wizard did not run out on us. I would like that written somewhere the next mayor has to read it."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "pollinators_returned",
+      "order": 95,
+      "line": "The valley flowered at once and I did not have to call a single meeting about it. I intend to enjoy that for exactly one season before somebody asks me to budget for it."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "water_source_identified",
+      "order": 62,
+      "line": "A well. Not a season, not a mood, a well. I have been managing a health crisis with speeches when I could have been managing it with a bucket."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "crews_kept_working",
+      "order": 55,
+      "line": "A week's repairs in four days. The council did not vote to trust the tower. They just found it awkward to keep calling it a hazard while standing on a road it helped rebuild."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "tower_entered_the_ledger",
+      "order": 76,
+      "line": "You are a line in the ledger now, which sounds small and is not. Anecdotes leave with the mayor who told them. Lines survive."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "town_charter_signed",
+      "order": 98,
+      "line": "Goods move after dark. That is the whole of it, and it is everything. We trade on our own hours now instead of somebody else's, and the board carries the town's business rather than its emergencies."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "record_reconciled",
+      "order": 97,
+      "line": "Ione has asked to enter eleven months of recovered record into the town archive. I said yes before she finished the sentence, which she has told me was procedurally improper and I have decided not to mind."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "crews_kept_working",
+      "order": 56,
+      "line": "The crews have started calling a windy morning a gathering day rather than a nuisance. Small thing. It means somebody has been paying attention to the fields for the first time in years."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "town_charter_signed",
+      "order": 99,
+      "line": "There is a stall in the square that was not there last season, run by somebody who came up the coast road because the coast road is now worth coming up. I did not plan that. I only made it possible, which I am reliably told is the job."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "pass_kept_open",
+      "order": 100,
+      "line": "The pass held through winter. Do you understand that we have never once budgeted for a twelve-month year? I have had to invent an entire column."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "unsigned_order_taken",
+      "order": 78,
+      "line": "An unsigned order, paid over the odds, on a board I hold the key to. I have asked everyone in the square and got seven honest noes. I would like it to be somebody's idea of a joke and it is not shaped like one."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "the_previous_hand",
+      "order": 104,
+      "line": "He wrote it all down and then took it out himself. I have spent nine years telling this valley the tower failed us and being quietly proud of how fair I was being about it. He did not fail us. He decided something, alone, and then removed the working so no one could check it. I would have preferred the failure."
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "reactions": [
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "healing_for_mira",
+      "after_milestone": "",
+      "order": 20,
+      "line": "I gave half of it out in an afternoon. That is not a complaint, but you should know how thin we were running."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "greenhouse_repaired",
+      "order": 40,
+      "line": "Fresh greens and steadier medicine in the same week. I had almost forgotten what that felt like."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "containment_repaired",
+      "order": 50,
+      "line": "Lantern dust I can actually count on. Do you know what I have been substituting for it?"
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "harvest_beds_turned",
+      "order": 80,
+      "line": "Rowan brought me cuttings instead of a bill. I did not know what to do with my face."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "pollinators_returned",
+      "order": 95,
+      "line": "I am buying wild-gathered stock again. Not tower-grown, not traded up the road. Gathered, out there, by people who found it growing."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "water_source_identified",
+      "order": 62,
+      "line": "Two years. I wrote 'strain' on every one of those and filed it. The pattern was in my own handwriting the entire time and I did not look at it until somebody made me curious enough to."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "town_water_cleared",
+      "order": 85,
+      "line": "The counter was quiet on Thursday. Not slow. Quiet. I stood in it for a while before I worked out what was missing."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "town_charter_signed",
+      "order": 98,
+      "line": "Standing orders. I get resupplied on a schedule instead of chasing whoever last promised me something. Do you know how long I have wanted to be bored by my own stockroom?"
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "containment_stable",
+      "order": 84,
+      "line": "Lyra brought me a jar of habitat-gathered and stood there while I looked at it. Twenty years of nobody in this valley being able to say where a thing came from, and now I have a name, a floor and a date on the label."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "the_previous_hand",
+      "order": 96,
+      "line": "People came into the shop for years with theories about what he did. Not one of them guessed he wrote it down first. I do not know what to do with a villain who kept notes."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "unsigned_order_unanswered",
+      "order": 97,
+      "line": "Three orders, paid over the odds, collected the same night, and then nothing. I have run a shop for twenty years. Customers who are satisfied come back. Customers who were checking something do not."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "archive_revelation",
+      "order": 88,
+      "line": "The counter in the square has sold starlight shards the whole time and never once said where they came from. I always assumed a supplier. There is no supplier. There is a lens at the top of your tower that has been making them unattended for twenty years, and somebody in this town has been going up there."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "first_rune_imbuing",
+      "order": 92,
+      "line": "Four weak tonics that are all the same beats one good one I cannot make twice. I know that is not what you want to hear from someone selling your work. It is still what the infirmary orders."
+    }
+  ]
+}

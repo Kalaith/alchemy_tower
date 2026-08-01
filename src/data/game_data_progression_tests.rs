@@ -444,7 +444,27 @@ reachable areas: {open_areas:?}"
 
         assert!(
             !narrative.reactions.is_empty(),
-            "no reactions loaded at all — the split reactions file is not reaching the game"
+            "no reactions loaded at all — the split reactions files are not reaching the game"
+        );
+
+        // Reactions are one file per speaker, so a table entry left out of
+        // `REACTION_SOURCES` does not fail to compile — it just makes that
+        // townsperson mute. Forgetting exactly this kind of registration has
+        // broken four tests at once before; here it would break none.
+        let mute = data
+            .npcs
+            .iter()
+            .filter(|npc| {
+                !narrative
+                    .reactions
+                    .iter()
+                    .any(|reaction| reaction.npc_id == npc.id)
+            })
+            .map(|npc| npc.id.clone())
+            .collect::<Vec<_>>();
+        assert!(
+            mute.is_empty(),
+            "townsfolk with no reactions loaded — a speaker file is likely unregistered: {mute:?}"
         );
 
         let spoken_for = narrative

@@ -76,7 +76,8 @@
         "mist_moth_wing",
         "sunleaf",
         "quarry_lichen",
-        "field_bloom"
+        "field_bloom",
+        "lieflat_clover"
       ],
       "planter_yield_bonus": 1
     },
@@ -175,7 +176,8 @@
         "scorchvine_resin",
         "sunspike",
         "bloomwing_pollen",
-        "hollowroot"
+        "hollowroot",
+        "driftbloom"
       ],
       "planter_yield_bonus": 3,
       "required_completed_quest": "pollinator_return_for_lyra",

@@ -127,6 +127,54 @@
       "yield_bonus": 1,
       "growth_bonus_days": 1,
       "mutation_note": "larkfed"
+    },
+    {
+      "id": "lieflat_clover_restore_mutation",
+      "seed_item_id": "lieflat_clover",
+      "required_effect_kind": "restore",
+      "yield_bonus": 2,
+      "growth_bonus_days": 0,
+      "mutation_note": "wind-laid"
+    },
+    {
+      "id": "driftbloom_speed_mutation",
+      "seed_item_id": "driftbloom",
+      "required_effect_kind": "speed",
+      "yield_bonus": 1,
+      "growth_bonus_days": 1,
+      "mutation_note": "downhill-headed"
+    },
+    {
+      "id": "rimeflower_restore_mutation",
+      "seed_item_id": "rimeflower",
+      "required_effect_kind": "restore",
+      "yield_bonus": 1,
+      "growth_bonus_days": 1,
+      "mutation_note": "long-thaw"
+    },
+    {
+      "id": "sunspike_glow_mutation",
+      "seed_item_id": "sunspike",
+      "required_effect_kind": "glow",
+      "yield_bonus": 1,
+      "growth_bonus_days": 0,
+      "mutation_note": "high-crowned"
+    },
+    {
+      "id": "bloomwing_pollen_restore_mutation",
+      "seed_item_id": "bloomwing_pollen",
+      "required_effect_kind": "restore",
+      "yield_bonus": 2,
+      "growth_bonus_days": 1,
+      "mutation_note": "twice-worked"
+    },
+    {
+      "id": "mist_moth_wing_glow_mutation",
+      "seed_item_id": "mist_moth_wing",
+      "required_effect_kind": "glow",
+      "yield_bonus": 1,
+      "growth_bonus_days": 0,
+      "mutation_note": "pale-veined"
     }
   ]
 }

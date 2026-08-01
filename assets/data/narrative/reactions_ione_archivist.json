@@ -1,0 +1,144 @@
+{
+  "reactions": [
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "glow_for_rowan",
+      "after_milestone": "",
+      "order": 30,
+      "line": "A carried light that holds on the road is useful evidence. It suggests the tower's work used to travel."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "containment_repaired",
+      "order": 50,
+      "line": "The habitat logs stop mid-sentence twenty years ago. Now there is something to compare them against, which is the first time that has been true."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "rune_workshop_restored",
+      "order": 70,
+      "line": "Reworking a finished potion is a later method than anything in the entry lab. Whoever built that bench had already given up on getting it right the first time."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "archive_revelation",
+      "order": 90,
+      "line": "The timeline holds. They sealed the floors to stop the tower eating what it was bound to, and then they left so it could not be reopened by anyone who loved it less carefully. I have been calling that abandonment in my notes for nine years."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "pollinators_returned",
+      "order": 95,
+      "line": "The old floor logs describe bloom years as routine. I had them filed under exaggeration. I have moved the folder."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "first_rune_imbuing",
+      "order": 72,
+      "line": "You changed a potion that was already finished. Every method in the entry lab assumes you get one attempt and it is the brewing. Whoever cut those benches had stopped believing that, and did not write down when."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "tower_entered_the_ledger",
+      "order": 76,
+      "line": "The tower was struck from the town record nineteen years ago in a single line. I have watched it be written back in. I would like that noted somewhere, and I am aware I am the person who notes things."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "pollinators_returned",
+      "order": 96,
+      "line": "There are pressed cuttings in those logs of plants I have never seen alive. I catalogued them as illustrations. It has not previously occurred to me that they were specimens, or that a specimen is a thing you could still do something with."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "archive_revelation",
+      "order": 99,
+      "line": "They sealed the floors so the tower could not eat what it was bound to, and then left so nobody who loved it less carefully could unseal them. I have called that abandonment in nine years of notes. The correction will take me a fortnight and I intend to enjoy every page of it."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "erased_notes_raised",
+      "order": 93,
+      "line": "It is a working note. Not a confession, not a warning — somebody sitting with a problem for eleven months and being honest with themselves in private about what they were finding. I have read a great many last words. I have never read anybody's thinking."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "record_reconciled",
+      "order": 97,
+      "line": "It matched. Nine years of notes with a foot in something outside themselves at last, which is the whole difference between an archive and a collection of opinions, and I have been on the wrong side of it the entire time."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "pass_road_open",
+      "order": 100,
+      "line": "Every map in the archive stops at the pass. Not at the valley edge — at the pass, precisely, as though the far side were somebody else's business. I would like to know who decided that and I suspect I already do."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "pass_kept_open",
+      "order": 100,
+      "line": "There is a flower on the high stone that opens in the coldest weeks and closes by the thaw, and it has been doing that unwatched for as long as there has been a pass. We were not there. That is all. We were simply never there."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "unsigned_order_method",
+      "order": 88,
+      "line": "Customers ask for outcomes. Only practitioners ask for method. Whoever wrote that note knows which bench favours which work, and there are four benches in this tower and none of them are marked."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "unsigned_order_read",
+      "order": 100,
+      "line": "Read them in order and they stop being purchases. A clean pour, the correct bench, a plant that was gone. Somebody was checking whether this tower works, item by item, and they knew the list before we did. I have spent nine years wanting evidence that anyone else was paying attention. I did not specify that I would enjoy it."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "first_rune_imbuing",
+      "order": 74,
+      "line": "The workshop benches are channelled the whole length and they hold heat. That is not a side effect of imbuing, that is a second use somebody designed in — and in twenty years of notes on that floor nobody, including me, wrote down that it was a place you could also brew."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "pass_kept_open",
+      "order": 84,
+      "line": "Two plants that grow an hour above us, and this tower kept records for a century without one line on either. Not lost — never written. Whoever was up there keeping the road was not somebody the keeper thought to ask."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "the_previous_hand",
+      "order": 104,
+      "line": "An archivist's whole argument is that the record is the thing. And the man who kept this one took eleven months out of it deliberately, after writing them, which means he believed the record was the thing too. He was not hiding a decision. He was stopping the next person reaching a different one."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "first_rune_imbuing",
+      "order": 82,
+      "line": "The archive is directly under the observatory. I have filed in that room for nine years and read that as convenience — stairs are stairs. It is not convenience. Mirror frost will not survive being carried warm, and it survives exactly two flights. He built the reading room the right distance below the lens and left no note saying so."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "first_rune_imbuing",
+      "order": 86,
+      "line": "I have started asking you for the failures. A rune does not repair a brew — it decides what the brew's fault is going to be used for, which is a different sentence and a much more interesting one. Twenty years of notes upstairs and not one line on reworking a spoiled bottle. He only ever wrote down the things that worked."
+    }
+  ]
+}
