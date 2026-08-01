@@ -257,17 +257,28 @@ mod tests {
         assert_eq!(state.npc_phase1_followup_line(npc_id), Some(after_harvest));
     }
 
+    /// `quest_ids` is the arc; `quest_id` is the older single-request field that
+    /// givers without an arc still use. Test the fallback on a stripped clone
+    /// rather than on whichever townsperson happens not to have an arc yet —
+    /// that list shrinks every time this loop writes one.
     #[test]
     fn single_quest_givers_still_resolve_without_a_chain() {
         let data = crate::data::load_embedded().expect("embedded game data should load");
         let state = GameplayState::new(&data);
-        let mira = data.npc("mira_apothecary").expect("mira should exist");
-        assert!(mira.quest_ids.is_empty(), "mira is a one-shot giver");
+        let mut npc = data
+            .npcs
+            .iter()
+            .find(|npc| !npc.quest_id.is_empty())
+            .expect("some townsperson still carries a plain quest_id")
+            .clone();
+        npc.quest_ids.clear();
+
+        assert_eq!(npc.quest_chain(), std::slice::from_ref(&npc.quest_id));
         assert_eq!(
             state
-                .npc_active_quest(&data, mira)
+                .npc_active_quest(&data, &npc)
                 .map(|quest| quest.id.as_str()),
-            Some(mira.quest_id.as_str())
+            Some(npc.quest_id.as_str())
         );
     }
 

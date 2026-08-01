@@ -304,6 +304,28 @@ Stop the loop and report if:
   bed that grows its seed.*
   *Next: `archive_stack` and `observatory_span` remain the only empty routes, or arcs for Mira, Brin,
   Elric and Ione.*
+- **2026-08-01 — NPC arcs.** Mira and Elric, chosen over Brin and Ione because their registers
+  (medicine, and civic trust) do not repeat the ecology chains Rowan and Lyra already carry. Mira:
+  the headaches were never stress, they were the same street drinking from the same well for two
+  years, and the fix is something that treats a street rather than a patient — which routes the
+  player through the rune workshop for a Fieldwide Poultice. Elric: the council does not doubt you
+  can do it, it doubts you can do it twice, so two matched Excellent draughts put the tower in the
+  ledger, and two Nightwatch Lanterns take the last dark mile. Payoffs differ deliberately from
+  earlier chains — Mira unlocks a **bulk shelf** (a second gated shop station), Elric unlocks
+  **standing orders** (higher-value repeatable board requests). Ten town reactions. **No new items:**
+  both arcs consume potions earlier passes already added, which is what a mature content set should
+  let you do.
+  *Three findings. A stale test asserted Mira was a one-shot giver — rewritten to test the
+  `quest_ids`/`quest_id` fallback on a stripped clone, so it cannot go stale as arcs are written.
+  New check `every_quest_asks_for_something_obtainable` plus its wider sibling over all items caught
+  `bloomwing`: iteration 6 added the creature and the habitat that houses it but no way to ever meet
+  one — it now works the plains verge and the canopy, gated on the same chain. `murky_concoction`
+  surfaced as a false positive and led to `SALVAGE_OUTPUT_ITEM_IDS`, since salvage outputs are picked
+  in code and are no recipe's declared output.*
+  *Constraint worth knowing: a giver line plus an appended town reaction wraps to five lines and that
+  is the dialogue panel's practical ceiling. Do not author a sixth line's worth.*
+  *Next: `archive_stack` and `observatory_span` are still the only empty routes; Brin and Ione are
+  the last two one-shot givers.*
 
 ## Deferred (needs a new system; not for this loop)
 

@@ -109,7 +109,12 @@
       "friendship_line": "You have carried more of this town's aches than you know. Take this - it caught the light in the archive fragments and made me think of your work. Friends share what they cannot use alone.",
       "friendship_reward_coins": 20,
       "friendship_reward_item_id": "starlight_shard",
-      "friendship_reward_amount": 1
+      "friendship_reward_amount": 1,
+      "quest_ids": [
+        "healing_for_mira",
+        "water_baseline_for_mira",
+        "wellside_relief_for_mira"
+      ]
     },
     {
       "id": "rowan_herbalist",
@@ -230,7 +235,12 @@
       "friendship_line": "The town argues less about the tower now and more about what to build next. That is your doing. Take this from the civic purse, and count yourself welcome at any table in the square.",
       "friendship_reward_coins": 45,
       "friendship_reward_item_id": "",
-      "friendship_reward_amount": 0
+      "friendship_reward_amount": 0,
+      "quest_ids": [
+        "stamina_for_elric",
+        "ledger_proof_for_elric",
+        "nightwatch_for_elric"
+      ]
     },
     {
       "id": "ione_archivist",

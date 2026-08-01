@@ -280,6 +280,39 @@
       "render": {
         "sprite_id": "field_bloom_plains"
       }
+    },
+    {
+      "id": "plains_bloomwing_01",
+      "name": "Bloomwing",
+      "item_id": "bloomwing",
+      "color": [
+        244,
+        186,
+        172,
+        255
+      ],
+      "position": [
+        604.0,
+        452.0
+      ],
+      "radius": 16.0,
+      "route_id": "plains_crossing",
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "weathers": [
+        "clear"
+      ],
+      "time_windows": [
+        "day"
+      ],
+      "spawn_chance": 70,
+      "required_completed_quest": "pollinator_return_for_lyra",
+      "note": "They work the verge in the middle of the day and are entirely uninterested in being watched doing it. Take one gently or not at all.",
+      "render": {
+        "sprite_id": "bloomwing"
+      }
     }
   ]
 }

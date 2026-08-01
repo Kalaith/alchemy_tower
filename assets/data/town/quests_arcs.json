@@ -20,7 +20,9 @@
           "title": "First Town Relief",
           "text": "Mira's first delivered draught changed the conversation in the square. The tower is no longer just a ruin above town. It has begun helping again."
         }
-      ]
+      ],
+      "giver_intro_line": "If you really mean to work that tower, help me first. Half the square comes to me tired, aching, and pretending they are not worn thin. One proper healing draught. Something I can hand over without a speech about managing expectations.",
+      "giver_active_line": "Steady enough for real sleep. I do not need it pretty. I have three people waiting who will not sit down."
     },
     {
       "id": "glow_for_rowan",
@@ -80,7 +82,16 @@
         "cultivation_for_brin"
       ],
       "required_unlocked_warp": "entry_to_greenhouse",
-      "minimum_total_brews": 14
+      "minimum_total_brews": 14,
+      "giver_intro_line": "What worries me is not one bad season, it is the pattern. Thinner beds, shorter tempers, crews tiring at noon. Make me one disciplined stamina tonic and I will have something to put in front of a council that has spent nine years calling your tower a hazard.",
+      "giver_active_line": "Disciplined, mind. If it is wild I will be defending it rather than presenting it.",
+      "completion_milestones": [
+        {
+          "id": "crews_kept_working",
+          "title": "The Crews Kept Working",
+          "text": "Elric put one tonic in front of the council and the repair crews finished a week's work in four days. Nobody voted on anything. It simply became harder to say the tower was a hazard while standing on a road it had helped rebuild."
+        }
+      ]
     },
     {
       "id": "star_elixir_for_ione",
@@ -226,6 +237,110 @@
           "id": "pollinators_returned",
           "title": "The Valley Flowers At Once",
           "text": "Every bloom row in the valley opened inside four days. By the end of the week Lyra had stopped counting visitors and started counting broods. The habitats have a third occupant now, and the wild rows have more bloom than anyone alive has walked through."
+        }
+      ]
+    },
+    {
+      "id": "water_baseline_for_mira",
+      "title": "Too Many, Too Alike",
+      "description": "Deliver 1 Excellent Mirrorsalt Draught to Mira. She needs something provably clean to test the town's water against.",
+      "required_item_id": "mirrorsalt_draught",
+      "required_amount": 1,
+      "reward_coins": 58,
+      "giver_npc_id": "mira_apothecary",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "pure",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [
+        "healing_for_mira"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 12,
+      "giver_intro_line": "I have been treating these headaches for two years and calling it strain. Then I wrote out who came in, and when, and it is the same street, the same week, the same complaint. That is not strain. That is a source. I need something I know is clean to measure the water against, and mirrorsalt is the cleanest thing anyone brews.",
+      "giver_active_line": "Excellent or it is worthless to me. I am not comparing the well against something that might itself be off.",
+      "completion_milestones": [
+        {
+          "id": "water_source_identified",
+          "title": "The Same Street, The Same Week",
+          "text": "Mira measured the square's water against a mirrorsalt pour and stopped writing halfway through. The headaches are not stress and never were. Everybody who came to her counter drank from the same well."
+        }
+      ]
+    },
+    {
+      "id": "wellside_relief_for_mira",
+      "title": "Everyone Who Drank From It",
+      "description": "Deliver 2 Fine-or-better Fieldwide Poultices to Mira so she can treat the whole affected street at once instead of one patient at a time.",
+      "required_item_id": "fieldwide_poultice",
+      "required_amount": 2,
+      "reward_coins": 120,
+      "giver_npc_id": "mira_apothecary",
+      "minimum_quality_band": "Fine",
+      "required_trait": "",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [
+        "water_baseline_for_mira"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 24,
+      "giver_intro_line": "It is the well, and it has been the well for two years, and I have been handing out single draughts to people who go home and drink from it again. I need something that treats a street. Not a patient. A street. Two of the wide poultices, and I will walk the row myself.",
+      "giver_active_line": "Two. I am not choosing which half of the street gets treated and then explaining that choice at this counter for the rest of my life.",
+      "completion_milestones": [
+        {
+          "id": "town_water_cleared",
+          "title": "The Well Row Treated",
+          "text": "Mira walked the well row in one afternoon and treated every house on it. Within a week her counter had gone quiet for the first time since she took it over, and she has started stocking for a town that plans rather than one that copes."
+        }
+      ]
+    },
+    {
+      "id": "ledger_proof_for_elric",
+      "title": "Twice, The Same",
+      "description": "Deliver 2 Excellent Purified Draughts to Mayor Elric. The council will not sign for work that might have been luck.",
+      "required_item_id": "purified_draught",
+      "required_amount": 2,
+      "reward_coins": 96,
+      "giver_npc_id": "mayor_elric",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "pure",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [
+        "stamina_for_elric"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 20,
+      "giver_intro_line": "The council does not doubt that you can do it. They doubt that you can do it twice. Bring me two purified draughts of the same grade, brewed apart, and I can argue that the tower is a supply rather than a series of favours. A town cannot budget for favours.",
+      "giver_active_line": "Two, both excellent. One excellent and one merely good makes their argument for them, and they will enjoy making it.",
+      "completion_milestones": [
+        {
+          "id": "tower_entered_the_ledger",
+          "title": "Entered In The Ledger",
+          "text": "Two draughts of matched grade went in front of the council and the tower stopped being an anecdote. It has a line in the town ledger now, which Elric says is the only kind of trust that survives a change of mayor."
+        }
+      ]
+    },
+    {
+      "id": "nightwatch_for_elric",
+      "title": "The Last Dark Mile",
+      "description": "Deliver 2 Excellent Nightwatch Lanterns to Mayor Elric so the watch can hold the outer road after dark.",
+      "required_item_id": "nightwatch_lantern",
+      "required_amount": 2,
+      "reward_coins": 165,
+      "giver_npc_id": "mayor_elric",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "",
+      "required_effect_kind": "glow",
+      "prerequisite_quests": [
+        "ledger_proof_for_elric"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 30,
+      "giver_intro_line": "One thing left. The outer road goes dark a mile before the last house and the watch will not stand it, which means nobody moves goods after dusk, which means the whole valley trades on somebody else's timetable. A lantern that lights when a man stops walking and holds all night. Two of them. Then we are done being a town that closes at sundown.",
+      "giver_active_line": "Two, and they must be excellent. A watchman does not get to relight anything at the far end of a dark mile.",
+      "completion_milestones": [
+        {
+          "id": "town_charter_signed",
+          "title": "A Town That Does Not Close At Sundown",
+          "text": "The watch took the outer road and held it, and the council put the tower's supply into standing orders rather than one-off requests. The board in the square carries the town's business now, not its emergencies."
         }
       ]
     }

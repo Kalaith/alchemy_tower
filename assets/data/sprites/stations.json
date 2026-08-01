@@ -134,6 +134,15 @@
         128
       ],
       "prompt": "A pollinated greenhouse bed seen from above, open flowering trough with bloomwings working it, warm pink and gold blossom, readable as a planter."
+    },
+    {
+      "id": "apothecary_wellstock",
+      "type": "world_station",
+      "image_size_px": [
+        96,
+        96
+      ],
+      "prompt": "A bulk apothecary shelf seen from above, crates and stoppered jars of common herbs in quantity, readable as a market stall."
     }
   ]
 }

@@ -105,6 +105,44 @@
       "minimum_total_brews": 20,
       "repeatable": true,
       "repeat_cooldown_days": 3
+    },
+    {
+      "id": "board_standing_road_supply",
+      "title": "Standing Order: Outer Road Lanterns",
+      "description": "The watch's monthly draw. Leave 2 Excellent Nightwatch Lanterns on the board and the town pays the contracted rate without anyone having to ask.",
+      "required_item_id": "nightwatch_lantern",
+      "required_amount": 2,
+      "reward_coins": 210,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "",
+      "required_effect_kind": "glow",
+      "prerequisite_quests": [
+        "nightwatch_for_elric"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 30,
+      "repeatable": true,
+      "repeat_cooldown_days": 4
+    },
+    {
+      "id": "board_standing_infirmary_draw",
+      "title": "Standing Order: Infirmary Draw",
+      "description": "Mira's contracted resupply. Leave 2 Excellent Purified Draughts on the board and the counter stays stocked for a month without her chasing anybody.",
+      "required_item_id": "purified_draught",
+      "required_amount": 2,
+      "reward_coins": 150,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "pure",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [
+        "wellside_relief_for_mira"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 28,
+      "repeatable": true,
+      "repeat_cooldown_days": 3
     }
   ]
 }

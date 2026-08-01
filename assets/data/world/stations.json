@@ -556,6 +556,64 @@
           128.0
         ]
       }
+    },
+    {
+      "id": "apothecary_wellstock",
+      "name": "Apothecary Bulk Shelf",
+      "kind": "shop",
+      "area_id": "town_square",
+      "position": [
+        408.0,
+        236.0
+      ],
+      "interaction_radius": 50.0,
+      "color": [
+        206,
+        172,
+        148,
+        255
+      ],
+      "stock": [
+        {
+          "item_id": "whisper_moss",
+          "price": 6
+        },
+        {
+          "item_id": "reedflower",
+          "price": 9
+        },
+        {
+          "item_id": "field_bloom",
+          "price": 9
+        },
+        {
+          "item_id": "lumen_dust",
+          "price": 26
+        },
+        {
+          "item_id": "dew_slime",
+          "price": 20
+        }
+      ],
+      "room_bonus": {
+        "quality_bonus": 0,
+        "favored_traits": [],
+        "favored_categories": [],
+        "description": ""
+      },
+      "planter_harvest_days": 0,
+      "planter_seed_ids": [],
+      "planter_yield_bonus": 0,
+      "required_completed_quest": "wellside_relief_for_mira",
+      "habitat_creature_ids": [],
+      "habitat_output_item_id": "",
+      "habitat_harvest_days": 0,
+      "render": {
+        "sprite_size": [
+          96.0,
+          96.0
+        ]
+      }
     }
   ]
 }

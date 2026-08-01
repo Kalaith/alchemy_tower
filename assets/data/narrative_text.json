@@ -381,6 +381,76 @@
       "after_milestone": "greenhouse_expanded",
       "order": 45,
       "line": "Four beds under glass and every one of them taking something different. I spent thirty years being told a greenhouse was for keeping one crop alive, not for finding out what a crop could be talked into."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "water_source_identified",
+      "order": 62,
+      "line": "Two years. I wrote 'strain' on every one of those and filed it. The pattern was in my own handwriting the entire time and I did not look at it until somebody made me curious enough to."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "water_source_identified",
+      "order": 62,
+      "line": "A well. Not a season, not a mood, a well. I have been managing a health crisis with speeches when I could have been managing it with a bucket."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "town_water_cleared",
+      "order": 85,
+      "line": "The counter was quiet on Thursday. Not slow. Quiet. I stood in it for a while before I worked out what was missing."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "town_water_cleared",
+      "order": 85,
+      "line": "Whole row treated in an afternoon. Mira did not ask anyone for permission either, which I have decided to admire."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "crews_kept_working",
+      "order": 55,
+      "line": "A week's repairs in four days. The council did not vote to trust the tower. They just found it awkward to keep calling it a hazard while standing on a road it helped rebuild."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "tower_entered_the_ledger",
+      "order": 76,
+      "line": "You are a line in the ledger now, which sounds small and is not. Anecdotes leave with the mayor who told them. Lines survive."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "tower_entered_the_ledger",
+      "order": 76,
+      "line": "The tower was struck from the town record nineteen years ago in a single line. I have watched it be written back in. I would like that noted somewhere, and I am aware I am the person who notes things."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "town_charter_signed",
+      "order": 98,
+      "line": "Goods move after dark. That is the whole of it, and it is everything. We trade on our own hours now instead of somebody else's, and the board carries the town's business rather than its emergencies."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "town_charter_signed",
+      "order": 98,
+      "line": "Standing orders. I get resupplied on a schedule instead of chasing whoever last promised me something. Do you know how long I have wanted to be bored by my own stockroom?"
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "town_charter_signed",
+      "order": 98,
+      "line": "They wrote you down. That is how a place stops needing the person who fixed it."
     }
   ]
 }

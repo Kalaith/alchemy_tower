@@ -269,6 +269,37 @@
       "render": {
         "sprite_id": "rain_orchid_rainforest"
       }
+    },
+    {
+      "id": "rainforest_bloomwing_01",
+      "name": "Bloomwing",
+      "item_id": "bloomwing",
+      "color": [
+        244,
+        186,
+        172,
+        255
+      ],
+      "position": [
+        420.0,
+        604.0
+      ],
+      "radius": 16.0,
+      "route_id": "rainmist_canopy",
+      "seasons": [],
+      "weathers": [
+        "mist"
+      ],
+      "time_windows": [
+        "morning",
+        "day"
+      ],
+      "spawn_chance": 66,
+      "required_completed_quest": "pollinator_return_for_lyra",
+      "note": "The canopy pair are twice the size of the plains ones and Lyra will not be drawn on whether that means anything.",
+      "render": {
+        "sprite_id": "bloomwing"
+      }
     }
   ]
 }

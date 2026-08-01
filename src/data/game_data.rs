@@ -193,6 +193,94 @@ mod tests {
         );
     }
 
+    /// Every route by which an item can end up in the player's bag. A quest that
+    /// asks for something outside this set is an errand that cannot be run.
+    fn obtainable_item_ids(data: &super::GameData) -> std::collections::HashSet<String> {
+        let mut obtainable = std::collections::HashSet::new();
+        for area in &data.areas {
+            obtainable.extend(area.gather_nodes.iter().map(|node| node.item_id.clone()));
+        }
+        for station in &data.stations {
+            obtainable.extend(station.stock.iter().map(|stocked| stocked.item_id.clone()));
+            if !station.habitat_output_item_id.is_empty() {
+                obtainable.insert(station.habitat_output_item_id.clone());
+            }
+        }
+        for recipe in &data.recipes {
+            obtainable.insert(recipe.output_item_id.clone());
+            obtainable.insert(recipe.unstable_output_item_id.clone());
+            obtainable.extend(
+                recipe
+                    .morph_targets
+                    .iter()
+                    .map(|morph| morph.output_item_id.clone()),
+            );
+        }
+        obtainable.extend(
+            data.rune_recipes
+                .iter()
+                .map(|recipe| recipe.output_item_id.clone()),
+        );
+        // Salvage outputs are chosen in code when a mixture matches nothing, so
+        // they never appear as any recipe's declared output.
+        obtainable.extend(
+            crate::alchemy::SALVAGE_OUTPUT_ITEM_IDS
+                .iter()
+                .map(|id| (*id).to_owned()),
+        );
+        obtainable
+    }
+
+    #[test]
+    fn every_quest_asks_for_something_obtainable() {
+        let data = load_embedded().expect("embedded game data should load");
+        let obtainable = obtainable_item_ids(&data);
+
+        let impossible = data
+            .quests
+            .iter()
+            .filter(|quest| !quest.required_item_id.is_empty())
+            .filter(|quest| !obtainable.contains(&quest.required_item_id))
+            .map(|quest| format!("{} wants {}", quest.id, quest.required_item_id))
+            .collect::<Vec<_>>();
+
+        assert!(
+            impossible.is_empty(),
+            "quests asking for items nothing produces:\n{impossible:#?}"
+        );
+    }
+
+    /// The same rule one step further out: an item nothing produces and nothing
+    /// asks for is dead weight in the data.
+    #[test]
+    fn every_item_is_either_obtainable_or_an_ingredient_of_something() {
+        let data = load_embedded().expect("embedded game data should load");
+        let obtainable = obtainable_item_ids(&data);
+        let mut used = std::collections::HashSet::new();
+        for recipe in &data.recipes {
+            used.extend(recipe.ingredients.iter().map(|i| i.item_id.clone()));
+        }
+        for recipe in &data.rune_recipes {
+            used.insert(recipe.input_item_id.clone());
+            used.insert(recipe.rune_item_id.clone());
+        }
+        for station in &data.stations {
+            used.extend(station.planter_seed_ids.iter().cloned());
+        }
+
+        let stranded = data
+            .items
+            .iter()
+            .filter(|item| !obtainable.contains(&item.id) && !used.contains(&item.id))
+            .map(|item| item.id.clone())
+            .collect::<Vec<_>>();
+
+        assert!(
+            stranded.is_empty(),
+            "items nothing produces and nothing wants:\n{stranded:#?}"
+        );
+    }
+
     #[test]
     fn quest_chains_and_gates_resolve() {
         let data = load_embedded().expect("embedded game data should load");

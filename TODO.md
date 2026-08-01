@@ -18,7 +18,7 @@
 
 - Write the story bible locking the wizard's backstory, the failed intervention, the ecosystem model, and the act-by-act reveal order.
 - Both named chains are done: failing-harvest ends with Rowan's bed rows turned, pollinator-collapse ends with Lyra's valley flowering at once. Any further chain is new design, not backlog.
-- Give each NPC a three-beat arc (setup → complication → payoff) tied to rapport. Rowan and Lyra have one; Mira, Brin, Elric and Ione still carry a single one-shot request each.
+- Give each NPC a three-beat arc (setup → complication → payoff) tied to rapport. Rowan, Lyra, Mira and Elric have one; Brin and Ione still carry a single one-shot request each.
 - Make rapport pay off mechanically: a recipe hint, a discount, or a personal side quest.
 - Add repeatable town-board requests to sustain the mid-game between story beats.
 - Add more visible town-state changes after a chain completes — a reopened stall, fuller greenhouse beds, lit streets. (The mechanism exists: a gather node can name a `required_completed_quest`, which is how the town square starts growing once Rowan's row is turned.)
