@@ -1338,6 +1338,38 @@ Stop the loop and report if:
   *Next thinnest by the same measure: `tropical_rainforest`, 6 nodes and 1 exclusive, one route, no
   signature — the last wild biome at the floor.*
 
+- **2026-08-02 — four schedule marks each, and six of nine never left the room.** The schedule
+  system has a guard forcing all four time windows, and content had been satisfying it by naming the
+  **same area four times**: Mira, Elric, Brin and Wren stood in the town square all day, the Crow
+  never left the entry hall, Tarn never came off the pass. Only three of the nine moved at all. A
+  guard that demands four marks got four marks; what it got was an address, not a schedule.
+  *It was visible, too.* The journal's rapport tab prints **now**, **later** and **usually** for each
+  townsperson, and for six of them all three lines said the same thing.
+  Seven marks moved, each to somewhere the content already says that person goes. **Mira takes the
+  lake reading in the evening** — she and Lyra keep water numbers and compare them, which is last
+  pass's line paying itself off, and the capture has her standing on the shore beside the downwash
+  bloom. **Brin checks the greenhouse beds** in the warm part of the day, since he reset those wards.
+  **Elric comes up to the tower at dusk** now that it is something the council is answerable for.
+  **Wren collects her own stock** rather than waiting for it, and keeps her night mark in town
+  because the infirmary does not close. **Tarn walks down for the evening** — eleven years of passing
+  the top of this valley, and there is a reason now. And the **Crow moves through three areas**,
+  because a guide that is only ever in one hall is a fixture.
+  ***Guard: `a_schedule_is_not_an_address`.*** Every townsperson's marks must name at least two
+  areas. Verified by putting Tarn back on the pass all day, which names him exactly. It is a narrow
+  rule and a fair one: the game prints three lines per person about where they will be, and a
+  fourteen-area valley where nobody goes anywhere is a valley where the world is scenery.
+  *Cleanup:* `npc_context_line` in `ui_text.json` had **no reader** — the rapport tab builds those
+  rows from `overlay_now`/`overlay_later`/`overlay_usually`. Second dead-string find in three passes;
+  deleted.
+  ***Split, and it turned up a real mess.*** `game_data_reference_tests.rs` had reached **731**, so
+  the walk-the-map checks moved to `game_data_world_tests.rs` — references resolving versus content
+  being where it says it is. Doing it exposed **two doc paragraphs detached from their tests**: a
+  one-liner left behind when `recordable_milestone_ids` moved out two passes ago, and the whole
+  ingredient-demand rationale sitting four hundred lines above the test it describes, which had no
+  doc at all. Both reattached. *A blind line-range split would have carried them to the wrong file —
+  check what the doc comments above a test are actually describing before moving it.*
+  **558 + 184 lines; largest file in the project now 646 (data) and 558 (code); 96 tests.**
+
 ## Deferred (needs a new system; not for this loop)
 
 - Apply-potion-to-target flow (wilted plant, frightened creature, blocked path) — `TODO.md` calls it

@@ -9,6 +9,8 @@ mod game_data_narrative_tests;
 mod game_data_progression_tests;
 #[cfg(test)]
 mod game_data_reference_tests;
+#[cfg(test)]
+mod game_data_world_tests;
 mod loader;
 mod save_models;
 mod schema;

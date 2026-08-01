@@ -37,10 +37,10 @@
         },
         {
           "time_window": "day",
-          "area_id": "tower_entry",
+          "area_id": "north_plains",
           "position": [
-            542.0,
-            214.0
+            620.0,
+            350.0
           ]
         },
         {
@@ -53,10 +53,10 @@
         },
         {
           "time_window": "night",
-          "area_id": "tower_entry",
+          "area_id": "moonlit_forest",
           "position": [
-            470.0,
-            300.0
+            1180.0,
+            620.0
           ]
         }
       ]
@@ -107,10 +107,10 @@
         },
         {
           "time_window": "evening",
-          "area_id": "town_square",
+          "area_id": "lake_shore",
           "position": [
-            690.0,
-            628.0
+            900.0,
+            470.0
           ]
         },
         {
@@ -257,9 +257,9 @@
         },
         {
           "time_window": "evening",
-          "area_id": "town_square",
+          "area_id": "tower_entry",
           "position": [
-            876.0,
+            700.0,
             330.0
           ]
         },
@@ -399,10 +399,10 @@
         },
         {
           "time_window": "day",
-          "area_id": "town_square",
+          "area_id": "greenhouse_floor",
           "position": [
-            562.0,
-            704.0
+            700.0,
+            380.0
           ]
         },
         {
@@ -554,10 +554,10 @@
         },
         {
           "time_window": "evening",
-          "area_id": "southern_pass",
+          "area_id": "town_square",
           "position": [
-            524.0,
-            268.0
+            800.0,
+            640.0
           ]
         },
         {
@@ -623,10 +623,10 @@
         },
         {
           "time_window": "day",
-          "area_id": "town_square",
+          "area_id": "tower_entry",
           "position": [
-            352.0,
-            662.0
+            250.0,
+            330.0
           ]
         },
         {
