@@ -699,6 +699,48 @@
         "restorative"
       ],
       "morph_targets": []
+    },
+    {
+      "id": "openfield_draught_recipe",
+      "name": "Openfield Draught",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        {
+          "item_id": "lieflat_clover",
+          "amount": 1
+        },
+        {
+          "item_id": "driftseed",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "openfield_draught",
+      "output_amount": 1,
+      "description": "The first brew most people manage from things they found rather than things they were told about, because both halves are lying in the plains waiting for one windy morning.",
+      "required_heat": 2,
+      "required_stirs": 2,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "Rowan's view is that if the valley wanted people to notice the weather it could not have arranged it more plainly.",
+      "minimum_quality": 34,
+      "preferred_traits": [
+        "vigor",
+        "healing"
+      ],
+      "guaranteed_traits": [
+        "restorative"
+      ],
+      "minimum_elements": {
+        "vita": 5,
+        "ember": 0,
+        "mist": 1,
+        "lux": 2
+      },
+      "required_timing": "steady",
+      "required_sequence": [
+        "vigor",
+        "healing"
+      ],
+      "morph_targets": []
     }
   ]
 }

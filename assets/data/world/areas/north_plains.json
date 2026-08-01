@@ -313,6 +313,71 @@
       "render": {
         "sprite_id": "bloomwing"
       }
+    },
+    {
+      "id": "plains_driftseed_01",
+      "name": "Driftseed",
+      "item_id": "driftseed",
+      "color": [
+        226,
+        216,
+        176,
+        255
+      ],
+      "position": [
+        1064.0,
+        646.0
+      ],
+      "radius": 16.0,
+      "route_id": "hedgerow_line",
+      "seasons": [],
+      "weathers": [
+        "windy"
+      ],
+      "time_windows": [
+        "morning",
+        "day",
+        "evening"
+      ],
+      "spawn_chance": 88,
+      "note": "They pile against the leeward side of the hedge while it blows and are gone by the next still morning, which suggests they carry on somewhere else.",
+      "render": {
+        "sprite_id": "driftseed_plains"
+      }
+    },
+    {
+      "id": "plains_lieflat_01",
+      "name": "Lieflat Clover",
+      "item_id": "lieflat_clover",
+      "color": [
+        150,
+        196,
+        128,
+        255
+      ],
+      "position": [
+        352.0,
+        786.0
+      ],
+      "radius": 16.0,
+      "route_id": "hedgerow_line",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "weathers": [
+        "windy"
+      ],
+      "time_windows": [
+        "morning",
+        "day"
+      ],
+      "spawn_chance": 90,
+      "note": "In still air this is an ordinary meadow. Wait for the grass to go over and there is a second crop underneath it that has been there the whole time.",
+      "render": {
+        "sprite_id": "lieflat_clover_plains"
+      }
     }
   ]
 }

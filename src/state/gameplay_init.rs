@@ -69,10 +69,13 @@ impl GameplayState {
         self.refresh_available_nodes(data);
         // Stand where the content is. Centring the room instead means anything
         // authored in a corner is simply off-camera, which has twice made a
-        // capture look like nothing had been added.
+        // capture look like nothing had been added. The *last* available node,
+        // because content is appended: the newest thing in a room is the thing
+        // most likely to be worth looking at.
         let focus = area
             .gather_nodes
             .iter()
+            .rev()
             .find(|node| self.world.available_nodes.contains(&node.id))
             .map(|node| node.position)
             .unwrap_or([area.size[0] * 0.5, area.size[1] * 0.5]);

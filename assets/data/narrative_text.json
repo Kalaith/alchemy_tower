@@ -556,6 +556,20 @@
       "after_milestone": "containment_repaired",
       "order": 52,
       "line": "There is a bed at the cold end that holds a hard frost all year. A frostcrack case will open in it out of season, which took me a while to be comfortable with — the whole point of that seed is that it waits. It still waits. It just waits here instead, and it takes five days about it."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "",
+      "order": 12,
+      "line": "One thing before you go up there. On a windy day, walk the plains. The clover only shows when the grass goes over, and the driftseed only piles up while it is still blowing. Everyone born here knows it and nobody thinks to say it, which is how I lost my first two seasons."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "crews_kept_working",
+      "order": 56,
+      "line": "The crews have started calling a windy morning a gathering day rather than a nuisance. Small thing. It means somebody has been paying attention to the fields for the first time in years."
     }
   ],
   "epilogue_beats": [

@@ -605,6 +605,27 @@
           "description": "Restores well and settles the grit out of a working day."
         }
       ]
+    },
+    {
+      "id": "openfield_draught",
+      "name": "Openfield Draught",
+      "category": "potion",
+      "base_value": 38,
+      "color": [
+        204,
+        214,
+        158,
+        255
+      ],
+      "description": "Green, grassy and unremarkable, and the first thing a great many alchemists in this valley ever brewed that actually worked.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 26.0,
+          "duration_seconds": 0.0,
+          "description": "Restores steadily, with none of the heaviness of a stronger draught."
+        }
+      ]
     }
   ]
 }

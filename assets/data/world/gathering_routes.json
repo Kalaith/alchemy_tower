@@ -101,6 +101,12 @@
       "name": "Quarry Sump",
       "area_id": "rock_fields",
       "description": "The bottom of the workings, where the cut faces and the standing water are. Worth nothing at all in a dry week and worth the walk the morning after rain."
+    },
+    {
+      "id": "hedgerow_line",
+      "name": "Hedgerow Line",
+      "area_id": "north_plains",
+      "description": "The field boundary and the open meadow beside it. Both only give anything up while the wind is blowing, which is the one thing about the plains nobody thinks to tell a newcomer."
     }
   ]
 }

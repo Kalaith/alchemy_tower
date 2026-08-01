@@ -199,4 +199,36 @@ mod tests {
             SEASONS.iter().zip(counts.iter()).collect::<Vec<_>>()
         );
     }
+
+    /// The same floor for weather. Wind sat at 23 nodes against clear's 40
+    /// before the plains were given a reason to be walked in it — a whole
+    /// condition a player could ignore for a whole game. Leanness is fine; an
+    /// axis nothing uses is not.
+    #[test]
+    fn no_weather_is_starved_of_gatherable_ground() {
+        const WEATHERS: [&str; 4] = ["clear", "mist", "rain", "windy"];
+        const FLOOR: f32 = 0.5;
+
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let counts = WEATHERS.map(|weather| {
+            data.areas
+                .iter()
+                .flat_map(|area| area.gather_nodes.iter())
+                .filter(|node| {
+                    node.weathers.is_empty() || node.weathers.iter().any(|w| w == weather)
+                })
+                .count()
+        });
+
+        let best = *counts.iter().max().expect("four weathers");
+        let worst = *counts.iter().min().expect("four weathers");
+        let ratio = worst as f32 / best as f32;
+
+        assert!(
+            ratio >= FLOOR,
+            "the leanest weather has only {worst} nodes against {best} in the richest \
+             ({ratio:.2} of it); per weather: {:?}",
+            WEATHERS.iter().zip(counts.iter()).collect::<Vec<_>>()
+        );
+    }
 }

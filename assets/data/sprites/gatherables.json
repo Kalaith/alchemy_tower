@@ -699,6 +699,50 @@
         64
       ],
       "prompt": "Sumpflower variant staged in the flooded sump at the quarry bottom."
+    },
+    {
+      "id": "driftseed",
+      "type": "icon_and_world_node",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "Pale feathered seed heads caught against a hedge in the wind, readable from above."
+    },
+    {
+      "id": "lieflat_clover",
+      "type": "icon_and_world_node",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A low spread of green clover revealed under flattened meadow grass, readable from above."
+    },
+    {
+      "id": "driftseed_plains",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "Driftseed variant staged along an open plains hedgerow."
+    },
+    {
+      "id": "lieflat_clover_plains",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "Lieflat clover variant staged in flattened open meadow grass."
     }
   ]
 }

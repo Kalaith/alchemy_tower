@@ -507,6 +507,23 @@ Stop the loop and report if:
   Split `world/stations.json` (749) into `world/stations/<area_id>.json`, matching the areas.
   *The bed's first position put it under the belt HUD — the same framing mistake as the cold bench in
   the benches pass. Stations near a room's bottom edge need checking in a capture, not on paper.*
+- **2026-08-01 — biome signature hook (north plains).** Two measurements agreed. The plains — the
+  **first biome a player ever walks** — had five nodes and **not one exclusive to it**; and wind was
+  the thinnest weather at 23 nodes against clear's 40. So the plains become the wind, which completes
+  the set: the desert is time of day, the hollow is season, the quarry is rain. `driftseed` piles
+  against the leeward hedge only while it is still blowing; `lieflat_clover` is invisible in still
+  air and shows its whole crop when the wind lays the grass over. Both are **ungated and early**, and
+  Rowan says so unprompted at order 12 — so the weather system is taught in the first hour by the
+  place the player is already standing in.
+  *Checked the other outstanding item and dropped it: the six fixed `narrative_text` milestones are
+  **not** stale. They describe first-time moments (first floor usable, first brew, first relief),
+  not world state, so nineteen passes of content did not date them. Hypothesis was wrong; the text
+  was left alone.*
+  New test `no_weather_is_starved_of_gatherable_ground`, the counterpart to the season floor — same
+  0.5 floor, same framing: leanness is fine, an axis nothing uses is not.
+  *Harness: `preview_area` focused the **first** available node, which is always the oldest content
+  in the file, so a capture framed the wrong thing twice running. It focuses the last one now —
+  content is appended, so the newest thing in a room is the thing worth looking at.*
 
 ## Deferred (needs a new system; not for this loop)
 

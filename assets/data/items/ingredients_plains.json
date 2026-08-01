@@ -107,6 +107,114 @@
       ],
       "synthesis_weight": 2,
       "synthesis_value": 2
+    },
+    {
+      "id": "driftseed",
+      "name": "Driftseed",
+      "category": "ingredient",
+      "base_value": 9,
+      "color": [
+        226,
+        216,
+        176,
+        255
+      ],
+      "description": "Seed heads that arrive on the wind and catch in the hedgerow. Nobody in the valley grows the plant they come from, and Rowan has stopped pretending she knows what it is.",
+      "quality": 30,
+      "rarity": 2,
+      "elements": {
+        "vita": 2,
+        "ember": 0,
+        "mist": 0,
+        "lux": 2
+      },
+      "traits": [
+        "vigor",
+        "pure"
+      ],
+      "source_conditions": [
+        "any season the wind is up",
+        "windy days, and only while it is still blowing",
+        "the leeward side of the hedgerows"
+      ],
+      "wild_variants": [
+        {
+          "id": "driftseed_farcarried",
+          "name": "Far-Carried Driftseed",
+          "required_conditions": [
+            "windy",
+            "spring"
+          ],
+          "bonus_traits": [
+            "arcane"
+          ],
+          "quality_bonus": 10,
+          "elements": {
+            "vita": 0,
+            "ember": 0,
+            "mist": 0,
+            "lux": 2
+          },
+          "synthesis_weight_bonus": 0,
+          "synthesis_value_bonus": 3
+        }
+      ],
+      "synthesis_weight": 1,
+      "synthesis_value": 3
+    },
+    {
+      "id": "lieflat_clover",
+      "name": "Lieflat Clover",
+      "category": "ingredient",
+      "base_value": 8,
+      "color": [
+        150,
+        196,
+        128,
+        255
+      ],
+      "description": "It grows low enough that in still weather the meadow hides it completely. When the wind lays the grass over you can see the whole crop at once, and you have about as long as the wind lasts to take it.",
+      "quality": 28,
+      "rarity": 1,
+      "elements": {
+        "vita": 3,
+        "ember": 0,
+        "mist": 1,
+        "lux": 0
+      },
+      "traits": [
+        "healing",
+        "restorative"
+      ],
+      "source_conditions": [
+        "spring through autumn",
+        "windy, and clear enough to see the ground",
+        "under the standing grass, never above it"
+      ],
+      "wild_variants": [
+        {
+          "id": "lieflat_clover_fourleaf",
+          "name": "Fourleaf Lieflat",
+          "required_conditions": [
+            "windy",
+            "summer"
+          ],
+          "bonus_traits": [
+            "pure"
+          ],
+          "quality_bonus": 8,
+          "elements": {
+            "vita": 1,
+            "ember": 0,
+            "mist": 0,
+            "lux": 0
+          },
+          "synthesis_weight_bonus": 1,
+          "synthesis_value_bonus": 2
+        }
+      ],
+      "synthesis_weight": 2,
+      "synthesis_value": 2
     }
   ]
 }
