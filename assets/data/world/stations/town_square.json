@@ -125,6 +125,10 @@
         {
           "item_id": "dew_slime",
           "price": 20
+        },
+        {
+          "item_id": "stillwater_pearl",
+          "price": 52
         }
       ],
       "room_bonus": {

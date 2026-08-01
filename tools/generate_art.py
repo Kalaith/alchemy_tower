@@ -329,10 +329,12 @@ def icon(item, size, world=False):
                            (cx + px + 10, cy + py + 4), (cx + px, cy + py + 8)],
                           fill=rgb("#f2fbff"), outline=rgb("#a9c8d4"))
     elif base_item in {"arcane_dust", "lumen_dust", "starlight_shard", "kiln_geode",
-                       "stillwater_pearl", "washvein_crystal", "saltroad_amber"}:
+                       "stillwater_pearl", "washvein_crystal", "saltroad_amber",
+                       "channel_slag"}:
         c = {"arcane_dust": "#a781ff", "lumen_dust": "#f1e7a3", "starlight_shard": "#dbe5ff",
              "kiln_geode": "#f4985a", "stillwater_pearl": "#bae2e2",
-             "washvein_crystal": "#b2cae2", "saltroad_amber": "#e8a854"}[base_item]
+             "washvein_crystal": "#b2cae2", "saltroad_amber": "#e8a854",
+             "channel_slag": "#b07a58"}[base_item]
         for ox, oy in [(-10, 8), (0, 0), (12, 10)]:
             d.polygon([(cx + ox, cy + oy - 10), (cx + ox - 8, cy + oy), (cx + ox, cy + oy + 10), (cx + ox + 8, cy + oy)], fill=rgb(c))
     elif base_item == "foxed_leaf":

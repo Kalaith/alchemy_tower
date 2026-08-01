@@ -1146,6 +1146,29 @@ Stop the loop and report if:
   gap. *Do not re-litigate a decision the suite already records.*
   *Next split candidate:* `items/potions_glow.json` (718).
   **12 epilogue beats, 136 reactions; 91 tests.**
+- **2026-08-02 — five morph branches hung on one node that shows twelve days in a hundred.**
+  Catalyst supply against morph demand came out **inverted**: `starlight` has the highest demand (8)
+  and three sources including two shops, while **`kilnfire` gated 5 morphs behind a single quarry
+  node available 12 days in 100 and purchasable nowhere**. `stillwater` was second-worst — one node,
+  15 days, first appearance day 21.
+  **Channel slag** answers it in fiction rather than by tuning a number: twenty years of imbuing
+  left a glassy crust in the bottom of the channels and nobody ever swept them, *because nobody was
+  ever coming back*. Found by residual glow, so it wants the room cold and dark. It also gives the
+  **leanest tower room its third node**, off the 2-node floor.
+  ***I over-corrected and caught it by re-measuring.*** First cut put kilnfire at **88 node-days of
+  100** — from tightest catalyst to loosest in one move. Seasonal gating brought it to 48, which
+  sits fairly against starlight's 17-plus-shops and stillwater's 15. **Fixing a bottleneck is not
+  the same as removing the constraint.**
+  *Guard is about **routes, not rates**:* `no_morph_branch_hangs_on_a_single_gather_node` — each
+  catalyst tag needs a second carrier **or** a counter that sells it. Counting days would mean
+  inventing a threshold; a shop line is a real answer to scarcity even when the wild source stays
+  rare. Stillwater got a wellstock line at 52 so the rule holds honestly rather than being written
+  loose enough to excuse it. Verified by removing both — it named both original bottlenecks.
+  *Five axes measured and found healthy, which is worth recording after 48 passes:* quest pacing
+  (no gap over 4 brews across 0–40), the opening (5 quests at ≤6 brews, 8 ungated areas), wild
+  variants (surfaced on pickup **and** in the journal), the coin economy, and epilogue coverage.
+  *Next split candidate:* `items/potions_glow.json` (718).
+  **141 items, 92 tests; no morph branch resting on a single node.**
 
 ## Deferred (needs a new system; not for this loop)
 

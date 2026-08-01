@@ -152,6 +152,15 @@
         64
       ],
       "prompt": "A pale blue-white bell flower, delicate and open."
+    },
+    {
+      "id": "channel_slag",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A lump of glassy orange-brown vitrified slag with a dull sheen."
     }
   ]
 }

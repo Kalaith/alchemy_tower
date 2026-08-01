@@ -543,6 +543,53 @@ mod tests {
     /// archive was reachable through a door marked "Archives" from one floor
     /// and "Tower Archives" from another. Nothing broke; the player was just
     /// told two different names for one room.
+    /// A morph is the precision reward at the end of a recipe, and every one of
+    /// them is gated on a catalyst tag. If the only thing carrying that tag
+    /// comes from a single gather node, the whole branch inherits that node's
+    /// weather: `kilnfire` gated **five** morphs behind one quarry node that
+    /// appears twelve days in a hundred and cannot be bought.
+    ///
+    /// So each tag needs either a second source or a counter that sells it. The
+    /// rule is deliberately about **routes, not rates** — counting days would
+    /// mean picking a threshold, and a shop line is a real answer to scarcity
+    /// even when the wild source stays rare.
+    #[test]
+    fn no_morph_branch_hangs_on_a_single_gather_node() {
+        let data = load_embedded().expect("embedded game data should load");
+
+        let wanted = data
+            .recipes
+            .iter()
+            .flat_map(|recipe| recipe.morph_targets.iter())
+            .filter(|morph| !morph.catalyst_tag.is_empty())
+            .map(|morph| morph.catalyst_tag.clone())
+            .collect::<std::collections::BTreeSet<_>>();
+
+        let mut fragile = Vec::new();
+        for tag in &wanted {
+            let carriers = data
+                .items
+                .iter()
+                .filter(|item| item.catalyst_tags.iter().any(|owned| owned == tag))
+                .map(|item| item.id.as_str())
+                .collect::<Vec<_>>();
+            let purchasable = data.stations.iter().any(|station| {
+                station
+                    .stock
+                    .iter()
+                    .any(|line| carriers.contains(&line.item_id.as_str()))
+            });
+            if carriers.len() < 2 && !purchasable {
+                fragile.push(format!("{tag}: only {carriers:?}, and nowhere sells it"));
+            }
+        }
+
+        assert!(
+            fragile.is_empty(),
+            "morph branches resting on one gather node: {fragile:#?}"
+        );
+    }
+
     #[test]
     fn every_door_is_signed_with_the_name_of_the_room_behind_it() {
         let data = load_embedded().expect("embedded game data should load");

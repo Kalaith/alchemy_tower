@@ -133,6 +133,37 @@
       "render": {
         "sprite_id": "ward_rune"
       }
+    },
+    {
+      "id": "rune_channel_slag_01",
+      "name": "Channel Slag",
+      "item_id": "channel_slag",
+      "color": [
+        176,
+        122,
+        88,
+        255
+      ],
+      "position": [
+        660.0,
+        470.0
+      ],
+      "radius": 16.0,
+      "route_id": "rune_bench_row",
+      "seasons": [
+        "autumn",
+        "winter"
+      ],
+      "weathers": [],
+      "time_windows": [
+        "evening",
+        "night"
+      ],
+      "spawn_chance": 78,
+      "note": "The low end of a channel run, still faintly warm to the back of a hand. In the cold months the glow shows against the dark; the rest of the year it is just a stain.",
+      "render": {
+        "sprite_id": "channel_slag_rune"
+      }
     }
   ]
 }

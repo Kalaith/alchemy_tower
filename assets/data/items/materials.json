@@ -397,6 +397,63 @@
       "wild_variants": [],
       "synthesis_weight": 1,
       "synthesis_value": 6
+    },
+    {
+      "id": "channel_slag",
+      "name": "Channel Slag",
+      "category": "catalyst",
+      "base_value": 34,
+      "color": [
+        176,
+        122,
+        88,
+        255
+      ],
+      "description": "Twenty years of imbuing left a glassy crust in the bottom of the channels, and nobody ever swept them because nobody was ever coming back. It holds a reaction open the way the bench holds heat: not fiercely, just for longer than seems reasonable.",
+      "quality": 52,
+      "rarity": 4,
+      "elements": {
+        "vita": 0,
+        "ember": 4,
+        "mist": 0,
+        "lux": 1
+      },
+      "traits": [
+        "warm",
+        "volatile"
+      ],
+      "catalyst_tags": [
+        "kilnfire"
+      ],
+      "source_conditions": [
+        "autumn and winter, when the cold makes the residual glow visible",
+        "evening and night, when the residual glow makes it findable at all",
+        "the low end of a channel run, where the melt collected before it cooled"
+      ],
+      "wild_variants": [
+        {
+          "id": "channel_slag_deep",
+          "name": "Deepchannel Slag",
+          "required_conditions": [
+            "winter",
+            "night"
+          ],
+          "bonus_traits": [
+            "vigor"
+          ],
+          "quality_bonus": 11,
+          "elements": {
+            "vita": 0,
+            "ember": 2,
+            "mist": 0,
+            "lux": 0
+          },
+          "synthesis_weight_bonus": 0,
+          "synthesis_value_bonus": 5
+        }
+      ],
+      "synthesis_weight": 1,
+      "synthesis_value": 7
     }
   ]
 }

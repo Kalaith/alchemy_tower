@@ -386,6 +386,15 @@
         64
       ],
       "prompt": "Small pale blue-white bell flowers open on high stone above a floor of cloud."
+    },
+    {
+      "id": "channel_slag_rune",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "Glassy orange-brown slag cooled in the bottom of a metal channel, faintly warm."
     }
   ]
 }
