@@ -183,6 +183,8 @@ def icon(item, size, world=False):
         "resonance_shard",
         "bloomwing_pollen",
         "rune_ash",
+        "pressed_specimen",
+        "hollowroot",
     } or base_item in {
         "whisper_moss",
         "sunleaf",
@@ -201,6 +203,8 @@ def icon(item, size, world=False):
         "resonance_shard",
         "bloomwing_pollen",
         "rune_ash",
+        "pressed_specimen",
+        "hollowroot",
     }:
         colors = {
             "whisper_moss": "#74d59f",
@@ -220,6 +224,8 @@ def icon(item, size, world=False):
             "resonance_shard": "#b2a8f4",
             "bloomwing_pollen": "#f8ce80",
             "rune_ash": "#aca2ba",
+            "pressed_specimen": "#b2a080",
+            "hollowroot": "#9484c4",
         }
         for ox, oy in [(-10, 2), (2, -4), (12, 4), (-2, 10)]:
             d.ellipse(box(cx + ox, cy + oy, 9, 12), fill=rgb(colors[base_item]))
@@ -303,6 +309,7 @@ def icon(item, size, world=False):
             "fieldwide_poultice": "#d6ce8c", "second_spring_tonic": "#8ac492",
             "hearthward_infusion": "#cedec4", "relay_draught": "#b0ceec",
             "benchlight_solution": "#c8c2d6",
+            "hollowroot_cordial": "#a292ce", "hollowroot_reliquary": "#cec6f0",
         }.get(item, "#d2c1ff")
         d.rounded_rectangle((cx - 8, cy - 24, cx + 8, cy - 12), radius=3, fill=rgb("#d9dfe8", 220))
         d.rectangle((cx - 5, cy - 28, cx + 5, cy - 22), fill=rgb("#8b6a4d"))

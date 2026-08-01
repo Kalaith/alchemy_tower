@@ -326,6 +326,26 @@ Stop the loop and report if:
   is the dialogue panel's practical ceiling. Do not author a sixth line's worth.*
   *Next: `archive_stack` and `observatory_span` are still the only empty routes; Brin and Ione are
   the last two one-shot givers.*
+- **2026-08-01 — tower floors (the last two empty routes).** Rather than a third pass of "this floor
+  sheds a luminous thing", the archive got the one gatherable only an archive could have: **pressed
+  specimens**, cuttings flattened into the sealed floor logs twenty years ago. They are deliberately
+  poor as reagents (quality 16) because they are dead. Brewed with **bloomwing pollen** they come
+  back as `hollowroot` — a plant the valley lost precisely because nothing was left to carry pollen
+  between its flowers, so the revival is impossible until Lyra's chain has flown. Hollowroot is then
+  plantable in the Pollinated Bed and brews a cordial that morphs on starlight. Archive → revive →
+  cultivate, threading through three earlier passes. The observatory got **one** node and no more:
+  starlight shards left on the focus ring, clear nights only, after Ione's elixir — the counter still
+  sells them and still will not say where theirs come from.
+  *Design change worth flagging: the archive reconstruction — the game's ending — still demanded what
+  it demanded nine passes ago. It now also requires `harvest_beds_turned` and `pollinators_returned`,
+  because the revelation is about the tower's ecosystem model and should land on the two ecological
+  chains. The civic chains (Mira, Elric) stay optional on purpose. New test
+  `the_ending_can_still_be_reached` resolves every ending requirement against the quests and beats
+  that exist — verified against a deliberately broken config, since this is the one content mistake
+  that makes the game uncompletable rather than merely poorer.*
+  *A recipe can output an ingredient, not just a potion — the brew path handles it and skips the
+  potion-memory bookkeeping. That is how the revival works.*
+  *Next: Brin and Ione are the last one-shot givers. Every route now has something on it.*
 
 ## Deferred (needs a new system; not for this loop)
 

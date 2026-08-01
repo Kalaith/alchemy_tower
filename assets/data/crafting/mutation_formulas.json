@@ -87,6 +87,14 @@
       "yield_bonus": 2,
       "growth_bonus_days": 1,
       "mutation_note": "kilnfed"
+    },
+    {
+      "id": "hollowroot_restore_mutation",
+      "seed_item_id": "hollowroot",
+      "required_effect_kind": "restore",
+      "yield_bonus": 2,
+      "growth_bonus_days": 1,
+      "mutation_note": "re-established"
     }
   ]
 }

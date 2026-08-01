@@ -12,7 +12,7 @@
 
 - Give two or three biomes a signature gathering hook (night-only bloom, weather-triggered spawn, rare combination variant) rather than spreading effort across all thirteen. (The Sunscar has one: night bloom, noon resin, post-rain salt pan. The containment floor has one: the tower's own ward cycle.)
 - Make biome-native ingredients recipe anchors so each biome is the supply line for specific potions.
-- Convert at least one floor gate from a brew-count/coin threshold to a mastery check — deliver a Masterwork, discover a morph, satisfy a multi-trait request.
+- Convert at least one floor gate from a brew-count/coin threshold to a mastery check — deliver a Masterwork, discover a morph, satisfy a multi-trait request. (Done: containment→rune workshop needs the Glow Potion mastered. The archive reconstruction now also requires the two ecological chain payoffs.)
 
 ## Story, NPCs & world state
 

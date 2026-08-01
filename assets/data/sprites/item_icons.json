@@ -512,6 +512,24 @@
         64
       ],
       "prompt": "A chalk-grey working-light bottle with fine pale sediment."
+    },
+    {
+      "id": "hollowroot_cordial",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A pale violet cordial bottle with faint dust suspended in it."
+    },
+    {
+      "id": "hollowroot_reliquary",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A luminous silver-violet reliquary bottle holding a brew that will not settle."
     }
   ]
 }

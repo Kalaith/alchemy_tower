@@ -572,6 +572,37 @@
         64
       ],
       "prompt": "A pale bone-gold rune tile worked loose from a bench frame, inward-turning sigil, readable from above."
+    },
+    {
+      "id": "pressed_specimen",
+      "type": "icon_and_world_node",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A flattened dried herb cutting pressed between log pages, brittle and brown-grey, readable from above."
+    },
+    {
+      "id": "hollowroot",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A pale violet root with hollow channels running through it, revived extinct herb, restorative reagent icon."
+    },
+    {
+      "id": "starlight_shard",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "Starlight shard resting on an observatory focus ring under a clear night sky."
     }
   ]
 }

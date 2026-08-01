@@ -281,6 +281,55 @@ mod tests {
         );
     }
 
+    /// Every journal beat the game can ever record, from any source.
+    fn recordable_milestone_ids(data: &super::GameData) -> std::collections::HashSet<String> {
+        use crate::content::narrative_text;
+
+        let mut recordable = std::collections::HashSet::new();
+        for milestone in narrative_text().milestones.all() {
+            recordable.insert(milestone.id.clone());
+        }
+        for quest in &data.quests {
+            recordable.extend(quest.completion_milestones.iter().map(|m| m.id.clone()));
+        }
+        for area in &data.areas {
+            for warp in &area.warps {
+                recordable.extend(warp.unlock_milestones.iter().map(|m| m.id.clone()));
+            }
+        }
+        recordable
+    }
+
+    /// The archive reconstruction is the game's ending. A requirement pointing at
+    /// a quest or a journal beat that nothing can produce does not make the
+    /// ending hard, it makes it impossible, and nothing else would catch it.
+    #[test]
+    fn the_ending_can_still_be_reached() {
+        let data = load_embedded().expect("embedded game data should load");
+        let recordable = recordable_milestone_ids(&data);
+        let mut blocked = Vec::new();
+
+        for quest_id in &data.config.archive_required_completed_quests {
+            if data.quest(quest_id).is_none() {
+                blocked.push(format!(
+                    "ending needs quest {quest_id}, which does not exist"
+                ));
+            }
+        }
+        for milestone_id in &data.config.archive_required_journal_milestones {
+            if !recordable.contains(milestone_id) {
+                blocked.push(format!(
+                    "ending needs milestone {milestone_id}, which nothing records"
+                ));
+            }
+        }
+
+        assert!(
+            blocked.is_empty(),
+            "the ending is unreachable:\n{blocked:#?}"
+        );
+    }
+
     #[test]
     fn quest_chains_and_gates_resolve() {
         let data = load_embedded().expect("embedded game data should load");

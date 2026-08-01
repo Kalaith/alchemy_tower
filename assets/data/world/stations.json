@@ -543,7 +543,8 @@
         "nightglass_bloom",
         "scorchvine_resin",
         "sunspike",
-        "bloomwing_pollen"
+        "bloomwing_pollen",
+        "hollowroot"
       ],
       "planter_yield_bonus": 3,
       "required_completed_quest": "pollinator_return_for_lyra",

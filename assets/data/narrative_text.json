@@ -451,6 +451,27 @@
       "after_milestone": "town_charter_signed",
       "order": 98,
       "line": "They wrote you down. That is how a place stops needing the person who fixed it."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "pollinators_returned",
+      "order": 96,
+      "line": "There are pressed cuttings in those logs of plants I have never seen alive. I catalogued them as illustrations. It has not previously occurred to me that they were specimens, or that a specimen is a thing you could still do something with."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "archive_revelation",
+      "order": 99,
+      "line": "They sealed the floors so the tower could not eat what it was bound to, and then left so nobody who loved it less carefully could unseal them. I have called that abandonment in nine years of notes. The correction will take me a fortnight and I intend to enjoy every page of it."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "archive_revelation",
+      "order": 99,
+      "line": "Ione brought a hollowroot cutting down to the stall to show me. I have been growing in this valley my whole life and I did not know that was ever a thing that grew here."
     }
   ]
 }

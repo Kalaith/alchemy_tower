@@ -244,6 +244,69 @@
       ],
       "synthesis_weight": 1,
       "synthesis_value": 3
+    },
+    {
+      "id": "pressed_specimen",
+      "name": "Pressed Specimen",
+      "category": "ingredient",
+      "base_value": 6,
+      "color": [
+        178,
+        160,
+        128,
+        255
+      ],
+      "description": "A cutting flattened into a floor log two decades ago and forgotten there. Dry, brittle, and entirely inert — but whole, which is more than can be said for it anywhere else in the valley.",
+      "quality": 16,
+      "rarity": 3,
+      "elements": {
+        "vita": 0,
+        "ember": 0,
+        "mist": 0,
+        "lux": 1
+      },
+      "traits": [
+        "arcane"
+      ],
+      "source_conditions": [
+        "between the pages of the sealed floor logs",
+        "the quiet hours, when the stacks are not being read"
+      ],
+      "wild_variants": [],
+      "synthesis_weight": 1,
+      "synthesis_value": 1
+    },
+    {
+      "id": "hollowroot",
+      "name": "Hollowroot",
+      "category": "ingredient",
+      "base_value": 30,
+      "color": [
+        148,
+        132,
+        196,
+        255
+      ],
+      "description": "The valley used to grow this. It stopped, because nothing was left to carry pollen between the flowers, and it was gone before anyone thought to write down that it had been common.",
+      "quality": 46,
+      "rarity": 3,
+      "elements": {
+        "vita": 3,
+        "ember": 0,
+        "mist": 2,
+        "lux": 2
+      },
+      "traits": [
+        "restorative",
+        "arcane"
+      ],
+      "source_conditions": [
+        "brought back from a pressed specimen",
+        "grows again only where something is flying"
+      ],
+      "wild_variants": [],
+      "synthesis_weight": 2,
+      "synthesis_value": 6
     }
   ]
 }

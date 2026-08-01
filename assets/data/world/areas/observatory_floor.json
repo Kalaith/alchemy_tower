@@ -55,5 +55,36 @@
       ]
     }
   ],
-  "gather_nodes": []
+  "gather_nodes": [
+    {
+      "id": "observatory_starlight_01",
+      "name": "Starlight Shard",
+      "item_id": "starlight_shard",
+      "color": [
+        235,
+        225,
+        255,
+        255
+      ],
+      "position": [
+        640.0,
+        300.0
+      ],
+      "radius": 15.0,
+      "route_id": "observatory_span",
+      "seasons": [],
+      "weathers": [
+        "clear"
+      ],
+      "time_windows": [
+        "night"
+      ],
+      "spawn_chance": 58,
+      "required_completed_quest": "star_elixir_for_ione",
+      "note": "The lens leaves them on the focus ring on clear nights. The counter in the square will still sell you one, and will not explain where theirs come from.",
+      "render": {
+        "sprite_id": "starlight_shard"
+      }
+    }
+  ]
 }

@@ -73,5 +73,34 @@
       "locked_note": "The observatory gate does not respond until the archive timeline is complete."
     }
   ],
-  "gather_nodes": []
+  "gather_nodes": [
+    {
+      "id": "archive_specimen_01",
+      "name": "Pressed Specimen",
+      "item_id": "pressed_specimen",
+      "color": [
+        178,
+        160,
+        128,
+        255
+      ],
+      "position": [
+        316.0,
+        452.0
+      ],
+      "radius": 15.0,
+      "route_id": "archive_stack",
+      "seasons": [],
+      "weathers": [],
+      "time_windows": [
+        "evening",
+        "night"
+      ],
+      "spawn_chance": 78,
+      "note": "Ione has asked that you take them from the shelf ends only, and that you tell her which log each one came out of. She has been very clear that this is not a small request.",
+      "render": {
+        "sprite_id": "pressed_specimen"
+      }
+    }
+  ]
 }

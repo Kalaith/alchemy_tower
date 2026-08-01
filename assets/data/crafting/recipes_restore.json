@@ -429,6 +429,89 @@
           "required_timing": "late"
         }
       ]
+    },
+    {
+      "id": "hollowroot_revival_recipe",
+      "name": "Hollowroot Revival",
+      "station_id": "greenhouse_still",
+      "ingredients": [
+        {
+          "item_id": "pressed_specimen",
+          "amount": 1
+        },
+        {
+          "item_id": "bloomwing_pollen",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "hollowroot",
+      "output_amount": 1,
+      "description": "A dead cutting and living pollen. The still does not brew this so much as ask the specimen whether it would like to try again.",
+      "required_heat": 1,
+      "required_stirs": 2,
+      "unstable_output_item_id": "murky_concoction",
+      "lore_note": "It cannot be done without pollen from a bloomwing, which is exactly why the plant died: nothing was carrying for it.",
+      "minimum_quality": 30,
+      "preferred_traits": [
+        "restorative",
+        "arcane"
+      ],
+      "guaranteed_traits": [],
+      "minimum_elements": {
+        "vita": 2,
+        "ember": 0,
+        "mist": 0,
+        "lux": 1
+      },
+      "required_timing": "steady",
+      "morph_targets": []
+    },
+    {
+      "id": "hollowroot_cordial_recipe",
+      "name": "Hollowroot Cordial",
+      "station_id": "greenhouse_still",
+      "ingredients": [
+        {
+          "item_id": "hollowroot",
+          "amount": 1
+        },
+        {
+          "item_id": "quietbloom_spore",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "hollowroot_cordial",
+      "output_amount": 1,
+      "description": "The first thing brewed from a plant the valley had already finished losing.",
+      "required_heat": 2,
+      "required_stirs": 3,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "Mira asked what it tasted like. Ione said 'like a page' and would not be drawn further.",
+      "minimum_quality": 52,
+      "preferred_traits": [
+        "restorative",
+        "healing"
+      ],
+      "guaranteed_traits": [
+        "restorative"
+      ],
+      "minimum_elements": {
+        "vita": 5,
+        "ember": 0,
+        "mist": 2,
+        "lux": 2
+      },
+      "required_timing": "late",
+      "morph_targets": [
+        {
+          "output_item_id": "hollowroot_reliquary",
+          "minimum_quality": 74,
+          "catalyst_tag": "starlight",
+          "required_heat": 2,
+          "required_stirs": 3,
+          "required_timing": "late"
+        }
+      ]
     }
   ]
 }

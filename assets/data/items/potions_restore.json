@@ -452,6 +452,54 @@
           "description": "Settles and restores the drinker alone, without spending anything on the air."
         }
       ]
+    },
+    {
+      "id": "hollowroot_cordial",
+      "name": "Hollowroot Cordial",
+      "category": "potion",
+      "base_value": 88,
+      "color": [
+        162,
+        146,
+        206,
+        255
+      ],
+      "description": "Pale violet and slightly dusty, and the only bottle in the valley whose ingredient list includes something that had stopped existing.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 54.0,
+          "duration_seconds": 0.0,
+          "description": "Restores completely, with a depth nothing currently growing in the valley can match."
+        }
+      ]
+    },
+    {
+      "id": "hollowroot_reliquary",
+      "name": "Hollowroot Reliquary",
+      "category": "potion",
+      "base_value": 140,
+      "color": [
+        206,
+        198,
+        240,
+        255
+      ],
+      "description": "Starlight holds the cordial at the moment it finishes. Ione has one on a shelf and has not written a label for it, which for her is an enormous statement.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 64.0,
+          "duration_seconds": 0.0,
+          "description": "Restores completely and does not fade the way a brew is supposed to."
+        },
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 150.0,
+          "description": "Carries a faint violet reading-light of its own."
+        }
+      ]
     }
   ]
 }

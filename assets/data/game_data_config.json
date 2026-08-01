@@ -16,7 +16,9 @@
     "archive_required_journal_milestones": [
       "greenhouse_repaired",
       "containment_repaired",
-      "rune_workshop_restored"
+      "rune_workshop_restored",
+      "harvest_beds_turned",
+      "pollinators_returned"
     ]
   }
 }
