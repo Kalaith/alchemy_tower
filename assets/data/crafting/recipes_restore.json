@@ -365,6 +365,44 @@
       },
       "required_timing": "steady",
       "morph_targets": []
+    },
+    {
+      "id": "wardfrost_tonic_recipe",
+      "name": "Wardfrost Tonic",
+      "station_id": "greenhouse_still",
+      "ingredients": [
+        {
+          "item_id": "wardglass_frost",
+          "amount": 1
+        },
+        {
+          "item_id": "quietbloom_spore",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "wardfrost_tonic",
+      "output_amount": 1,
+      "description": "The first brew the tower can supply end to end: frost off its own glass, fungus from under its own cells.",
+      "required_heat": 1,
+      "required_stirs": 2,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "Nothing in this one came from the valley. The keeper seems to have wanted at least one recipe that owed the town nothing.",
+      "minimum_quality": 40,
+      "preferred_traits": [
+        "cold",
+        "healing"
+      ],
+      "guaranteed_traits": [
+        "restorative"
+      ],
+      "minimum_elements": {
+        "vita": 2,
+        "ember": 0,
+        "mist": 3,
+        "lux": 0
+      },
+      "required_timing": "steady",
+      "morph_targets": []
     }
   ]
 }

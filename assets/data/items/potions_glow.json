@@ -1,0 +1,337 @@
+{
+  "items": [
+    {
+      "id": "lantern_leak",
+      "name": "Lantern Leak",
+      "category": "potion",
+      "base_value": 12,
+      "color": [
+        188,
+        179,
+        255,
+        255
+      ],
+      "description": "An unstable glow brew that still sheds useful light.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 45.0,
+          "description": "Casts a short-lived lantern aura."
+        }
+      ]
+    },
+    {
+      "id": "glow_potion",
+      "name": "Glow Potion",
+      "category": "potion",
+      "base_value": 26,
+      "color": [
+        202,
+        187,
+        255,
+        255
+      ],
+      "description": "A shimmering draft that illuminates dark paths.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 90.0,
+          "description": "Bathes the drinker in a pale lantern aura."
+        }
+      ]
+    },
+    {
+      "id": "star_lantern_elixir",
+      "name": "Star Lantern Elixir",
+      "category": "potion",
+      "base_value": 52,
+      "color": [
+        238,
+        235,
+        255,
+        255
+      ],
+      "description": "A refined luminous brew with long-lasting crystalline glow.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 160.0,
+          "description": "Creates a steadier lantern aura with little loss."
+        },
+        {
+          "kind": "speed",
+          "magnitude": 0.12,
+          "duration_seconds": 160.0,
+          "description": "Sharpens movement through dark routes."
+        }
+      ]
+    },
+    {
+      "id": "beastcalm_extract",
+      "name": "Beastcalm Extract",
+      "category": "potion",
+      "base_value": 38,
+      "color": [
+        188,
+        228,
+        214,
+        255
+      ],
+      "description": "A quieting extract used to settle tower creatures and skittish magical fauna.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 60.0,
+          "description": "Gives a soft halo that keeps habitats calm."
+        }
+      ]
+    },
+    {
+      "id": "splash_glow_potion",
+      "name": "Splash Glow Potion",
+      "category": "potion",
+      "base_value": 44,
+      "color": [
+        184,
+        206,
+        255,
+        255
+      ],
+      "description": "A glow potion rewritten to burst outward in a quick halo.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 120.0,
+          "description": "Releases a wider lantern bloom on use."
+        }
+      ]
+    },
+    {
+      "id": "lantern_draught",
+      "name": "Lantern Draught",
+      "category": "potion",
+      "base_value": 22,
+      "color": [
+        224,
+        204,
+        150,
+        255
+      ],
+      "description": "A humble glow brew that keeps a road lamp honest through the early dark.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 60.0,
+          "description": "Holds a steady working light for a short while."
+        }
+      ]
+    },
+    {
+      "id": "mothlight_brew",
+      "name": "Mothlight Brew",
+      "category": "potion",
+      "base_value": 32,
+      "color": [
+        214,
+        224,
+        170,
+        255
+      ],
+      "description": "A soft, drifting glow gathered from settled moth dust, kind to night eyes.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 110.0,
+          "description": "Casts a gentle, long-carrying light for night gathering."
+        }
+      ]
+    },
+    {
+      "id": "wardlight_solution",
+      "name": "Wardlight Solution",
+      "category": "potion",
+      "base_value": 34,
+      "color": [
+        186,
+        204,
+        224,
+        255
+      ],
+      "description": "A cold arcane light meant to read faded wards and half-erased sigils.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 90.0,
+          "description": "Throws a clear, revealing light across worn magical stone."
+        }
+      ]
+    },
+    {
+      "id": "runemark_elixir",
+      "name": "Runemark Elixir",
+      "category": "potion",
+      "base_value": 56,
+      "color": [
+        206,
+        216,
+        255,
+        255
+      ],
+      "description": "A refined wardlight that makes old inscriptions surface as if freshly cut.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 150.0,
+          "description": "Sustains a bright revealing glow across faded runework."
+        }
+      ]
+    },
+    {
+      "id": "duskbell_tonic",
+      "name": "Duskbell Tonic",
+      "category": "potion",
+      "base_value": 30,
+      "color": [
+        210,
+        188,
+        224,
+        255
+      ],
+      "description": "A calm, dim glow brewed to keep dusk-shy creatures settled while they are handled.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 70.0,
+          "description": "Casts a soft halo that keeps nervous creatures calm."
+        }
+      ]
+    },
+    {
+      "id": "emberglass_tonic",
+      "name": "Emberglass Tonic",
+      "category": "potion",
+      "base_value": 32,
+      "color": [
+        238,
+        190,
+        140,
+        255
+      ],
+      "description": "A warm amber light hardened with quarry minerals, steady in wind and heat.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 80.0,
+          "description": "Holds a warm, wind-resistant working light."
+        }
+      ]
+    },
+    {
+      "id": "stargrove_elixir",
+      "name": "Stargrove Elixir",
+      "category": "potion",
+      "base_value": 46,
+      "color": [
+        220,
+        224,
+        255,
+        255
+      ],
+      "description": "A layered luminous elixir that blends grove-cool and arcane light into one clear beam.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 140.0,
+          "description": "Sustains a strong, clear light for deep or dark spaces."
+        }
+      ]
+    },
+    {
+      "id": "celestine_elixir",
+      "name": "Celestine Elixir",
+      "category": "potion",
+      "base_value": 64,
+      "color": [
+        236,
+        238,
+        255,
+        255
+      ],
+      "description": "The observatory's own light: a crystalline glow that also sharpens the step beneath it.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 200.0,
+          "description": "Creates a long, brilliant, near-lossless lantern aura."
+        },
+        {
+          "kind": "speed",
+          "magnitude": 0.12,
+          "duration_seconds": 200.0,
+          "description": "Steadies and quickens movement through dark routes."
+        }
+      ]
+    },
+    {
+      "id": "sunscar_glass_elixir",
+      "name": "Sunscar Glass Elixir",
+      "category": "potion",
+      "base_value": 44,
+      "color": [
+        246,
+        214,
+        168,
+        255
+      ],
+      "description": "Night bloom and noon resin held in one bottle: a light that carries desert heat without burning down.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 160.0,
+          "description": "Throws a wide, warm light that shrugs off wind and cold alike."
+        }
+      ]
+    },
+    {
+      "id": "resonance_draught",
+      "name": "Resonance Draught",
+      "category": "potion",
+      "base_value": 58,
+      "color": [
+        206,
+        200,
+        250,
+        255
+      ],
+      "description": "Ward shard held in lantern dust. The light does not flicker, because the wards it came from do not either.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 220.0,
+          "description": "Holds an even, unwavering light that will not gutter in wind or damp."
+        },
+        {
+          "kind": "speed",
+          "magnitude": 0.1,
+          "duration_seconds": 220.0,
+          "description": "Steadies the footing of whoever carries it."
+        }
+      ]
+    }
+  ]
+}

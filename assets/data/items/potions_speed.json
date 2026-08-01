@@ -1,0 +1,151 @@
+{
+  "items": [
+    {
+      "id": "rush_draught",
+      "name": "Rush Draught",
+      "category": "potion",
+      "base_value": 14,
+      "color": [
+        255,
+        145,
+        104,
+        255
+      ],
+      "description": "A rough stimulant salvaged from aggressive ingredients.",
+      "effects": [
+        {
+          "kind": "speed",
+          "magnitude": 0.18,
+          "duration_seconds": 40.0,
+          "description": "Adds a brief burst of hurried motion."
+        }
+      ]
+    },
+    {
+      "id": "delayed_stamina_tonic",
+      "name": "Delayed Stamina Tonic",
+      "category": "potion",
+      "base_value": 48,
+      "color": [
+        255,
+        178,
+        136,
+        255
+      ],
+      "description": "A stamina tonic held in reserve before it surges through the body.",
+      "effects": [
+        {
+          "kind": "speed",
+          "magnitude": 0.36,
+          "duration_seconds": 100.0,
+          "description": "Builds into a longer, steadier rush."
+        }
+      ]
+    },
+    {
+      "id": "stamina_tonic",
+      "name": "Stamina Tonic",
+      "category": "potion",
+      "base_value": 30,
+      "color": [
+        255,
+        154,
+        100,
+        255
+      ],
+      "description": "A sharp tonic that steadies breath and motion.",
+      "effects": [
+        {
+          "kind": "speed",
+          "magnitude": 0.3,
+          "duration_seconds": 75.0,
+          "description": "Quickens movement and lightens the body."
+        }
+      ]
+    },
+    {
+      "id": "trailblaze_tonic",
+      "name": "Trailblaze Tonic",
+      "category": "potion",
+      "base_value": 32,
+      "color": [
+        255,
+        168,
+        104,
+        255
+      ],
+      "description": "A hot desert-and-ember tonic that keeps repair crews moving through a long shift.",
+      "effects": [
+        {
+          "kind": "speed",
+          "magnitude": 0.32,
+          "duration_seconds": 90.0,
+          "description": "Drives a strong, sustained push of energy."
+        }
+      ]
+    },
+    {
+      "id": "wildfire_draught",
+      "name": "Wildfire Draught",
+      "category": "potion",
+      "base_value": 58,
+      "color": [
+        255,
+        132,
+        86,
+        255
+      ],
+      "description": "A fierce overcharged stimulant that should be handed out with a warning.",
+      "effects": [
+        {
+          "kind": "speed",
+          "magnitude": 0.42,
+          "duration_seconds": 110.0,
+          "description": "Unleashes a hard, long-burning surge of speed."
+        }
+      ]
+    },
+    {
+      "id": "sunwarden_tonic",
+      "name": "Sunwarden Tonic",
+      "category": "potion",
+      "base_value": 30,
+      "color": [
+        255,
+        196,
+        120,
+        255
+      ],
+      "description": "A warming tonic that steadies the body against desert heat and long exposed roads.",
+      "effects": [
+        {
+          "kind": "speed",
+          "magnitude": 0.24,
+          "duration_seconds": 80.0,
+          "description": "Keeps footing sure and warm across hard ground."
+        }
+      ]
+    },
+    {
+      "id": "briskstep_draught",
+      "name": "Briskstep Draught",
+      "category": "potion",
+      "base_value": 26,
+      "color": [
+        188,
+        214,
+        236,
+        255
+      ],
+      "description": "A gentle, well-mannered pick-me-up for elders and anyone who dislikes a jolt.",
+      "effects": [
+        {
+          "kind": "speed",
+          "magnitude": 0.2,
+          "duration_seconds": 70.0,
+          "description": "Lends a light, even quickness with no rough edge."
+        }
+      ]
+    }
+  ]
+}

@@ -35,6 +35,30 @@ impl GameplayState {
         ));
     }
 
+    /// Stand in a named room with every gate already satisfied, so the capture
+    /// harness can look at a floor or biome that was just authored. Nodes whose
+    /// season, weather or hour do not match the current moment still stay
+    /// absent — that is the honest view of the room right now.
+    pub(crate) fn preview_area(&mut self, data: &GameData, area_id: &str, day_index: u32) {
+        let Some(area) = data.area(area_id) else {
+            return;
+        };
+        self.world.day_index = day_index;
+        for quest in &data.quests {
+            self.progression.completed_quests.insert(quest.id.clone());
+        }
+        for other in &data.areas {
+            for warp in &other.warps {
+                self.progression.unlocked_warps.insert(warp.id.clone());
+            }
+        }
+        self.progression.total_brews = 40;
+        self.world.current_area_id = area_id.to_owned();
+        self.world.player.position =
+            macroquad::prelude::vec2(area.size[0] * 0.5, area.size[1] * 0.5);
+        self.refresh_available_nodes(data);
+    }
+
     /// Advance a townsperson's arc past its earlier beats and open the
     /// conversation, so the capture harness can see a mid-arc beat rather than
     /// only the opening request every time.

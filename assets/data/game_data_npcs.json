@@ -669,6 +669,25 @@
           "text": "Rowan worked the restorative into the bed rows behind the square and had the whole row turned before evening. Within days there was moss on the north wall again and bloom along the path. The town square grows its own for the first time in a decade."
         }
       ]
+    },
+    {
+      "id": "board_steady_light_order",
+      "title": "Board Order: A Light That Does Not Flicker",
+      "description": "Leave 1 Excellent-or-better Resonance Draught on the board. The well crew works below the water table and will not go down behind a lamp that gutters.",
+      "required_item_id": "resonance_draught",
+      "required_amount": 1,
+      "reward_coins": 72,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "",
+      "required_effect_kind": "glow",
+      "prerequisite_quests": [
+        "containment_for_lyra"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 20,
+      "repeatable": true,
+      "repeat_cooldown_days": 3
     }
   ]
 }

@@ -72,6 +72,19 @@ impl Game {
                 }
                 GameState::from_gameplay(gameplay)
             }
+            // "area:<area_id>" or "area:<area_id>:<day>" stands in a room with
+            // every gate satisfied. The day picks the season, weather and daily
+            // roll, which is what decides who is actually growing there.
+            other if other.starts_with("area:") => {
+                let target = other.strip_prefix("area:").unwrap_or_default();
+                let (area_id, day) = match target.split_once(':') {
+                    Some((area_id, day)) => (area_id, day.parse::<u32>().unwrap_or(0)),
+                    None => (target, 0),
+                };
+                let mut gameplay = GameplayState::new(&self.data);
+                gameplay.preview_area(&self.data, area_id, day);
+                GameState::from_gameplay(gameplay)
+            }
             // "brew" opens the alchemy bench with a sample filled cauldron.
             "brew" => {
                 let mut gameplay = GameplayState::new(&self.data);

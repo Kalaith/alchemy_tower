@@ -121,3 +121,51 @@ impl GameplayState {
             .any(|entry| entry.id == id)
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::GameplayState;
+
+    /// Season, weather and hour are three independent gates and a daily roll is
+    /// a fourth. It is easy to author a node whose conditions can never all be
+    /// true at once, and such a node is invisible content: it costs art, data
+    /// and a route entry, and never appears. Walk a full cycle of every gate and
+    /// insist each node turns up at least once.
+    #[test]
+    fn every_gather_node_can_actually_spawn() {
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let mut state = GameplayState::new(&data);
+        for quest in &data.quests {
+            state.progression.completed_quests.insert(quest.id.clone());
+        }
+
+        // Season advances every 5 days and weather every 4, so a 20-day sweep
+        // covers every pairing; the extra days vary the per-node daily roll.
+        let day_length = state.world.day_length_seconds;
+        let never_spawns = data
+            .areas
+            .iter()
+            .flat_map(|area| area.gather_nodes.iter().map(move |node| (area, node)))
+            .filter(|(area, node)| {
+                state.world.current_area_id = area.id.clone();
+                for day in 0..60u32 {
+                    for fraction in [0.3, 0.5, 0.75, 0.95] {
+                        state.world.day_index = day;
+                        state.world.day_clock_seconds = day_length * fraction;
+                        state.refresh_available_nodes(&data);
+                        if state.world.available_nodes.contains(&node.id) {
+                            return false;
+                        }
+                    }
+                }
+                true
+            })
+            .map(|(area, node)| format!("{} in {}", node.id, area.id))
+            .collect::<Vec<_>>();
+
+        assert!(
+            never_spawns.is_empty(),
+            "gather nodes that can never appear:\n{never_spawns:#?}"
+        );
+    }
+}

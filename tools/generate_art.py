@@ -166,6 +166,9 @@ def icon(item, size, world=False):
         "nightglass_bloom",
         "scorchvine_resin",
         "saltmirror_flake",
+        "wardglass_frost",
+        "quietbloom_spore",
+        "resonance_shard",
     } or base_item in {
         "whisper_moss",
         "sunleaf",
@@ -179,6 +182,9 @@ def icon(item, size, world=False):
         "nightglass_bloom",
         "scorchvine_resin",
         "saltmirror_flake",
+        "wardglass_frost",
+        "quietbloom_spore",
+        "resonance_shard",
     }:
         colors = {
             "whisper_moss": "#74d59f",
@@ -193,6 +199,9 @@ def icon(item, size, world=False):
             "nightglass_bloom": "#cee2ff",
             "scorchvine_resin": "#e88a3e",
             "saltmirror_flake": "#def0f6",
+            "wardglass_frost": "#bcdcec",
+            "quietbloom_spore": "#ced6ba",
+            "resonance_shard": "#b2a8f4",
         }
         for ox, oy in [(-10, 2), (2, -4), (12, 4), (-2, 10)]:
             d.ellipse(box(cx + ox, cy + oy, 9, 12), fill=rgb(colors[base_item]))
@@ -215,6 +224,19 @@ def icon(item, size, world=False):
             d.line((cx - 16, cy + 18, cx + 14, cy - 14), fill=rgb("#6b4327"), width=3)
             for bx, by in [(-6, 2), (4, -4), (10, 6)]:
                 d.ellipse(box(cx + bx, cy + by, 6, 8), fill=rgb("#ffc46a"))
+        elif base_item == "wardglass_frost":
+            for ax in [-14, -2, 10]:
+                d.line((cx + ax, cy + 16, cx + ax + 4, cy - 16), fill=rgb("#eaf7ff"), width=2)
+                d.line((cx + ax - 6, cy + 2, cx + ax + 10, cy - 4), fill=rgb("#eaf7ff"), width=2)
+        elif base_item == "quietbloom_spore":
+            for mx, my, r in [(-9, 4, 9), (5, -2, 11), (10, 10, 7)]:
+                d.ellipse(box(cx + mx, cy + my, r, r * 0.7), fill=rgb("#e6ecd6"))
+                d.rectangle((cx + mx - 2, cy + my, cx + mx + 2, cy + my + 10), fill=rgb("#cbd2b6"))
+        elif base_item == "resonance_shard":
+            for sx, sy, h in [(-11, 4, 14), (2, -6, 18), (12, 6, 12)]:
+                d.polygon([(cx + sx, cy + sy - h), (cx + sx - 6, cy + sy),
+                           (cx + sx, cy + sy + h * 0.5), (cx + sx + 6, cy + sy)],
+                          fill=rgb("#cbc0ff"), outline=rgb("#8f7fe0"))
         elif base_item == "saltmirror_flake":
             for px, py in [(-8, 6), (6, 0), (0, 12)]:
                 d.polygon([(cx + px - 10, cy + py + 4), (cx + px, cy + py - 6),
@@ -251,7 +273,8 @@ def icon(item, size, world=False):
             "wellspring_elixir": "#aaecdc", "emberglass_tonic": "#eebe8c", "stargrove_elixir": "#dce0ff",
             "celestine_elixir": "#eceeff", "moonmoth_salve": "#c6e0bc", "kindling_tonic": "#eeb27e",
             "sunscar_glass_elixir": "#f6d6a8", "nightglass_lantern": "#e0ecff",
-            "mirrorsalt_draught": "#cee8ec",
+            "mirrorsalt_draught": "#cee8ec", "wardfrost_tonic": "#c6e0e8",
+            "resonance_draught": "#cec8fa",
         }.get(item, "#d2c1ff")
         d.rounded_rectangle((cx - 8, cy - 24, cx + 8, cy - 12), radius=3, fill=rgb("#d9dfe8", 220))
         d.rectangle((cx - 5, cy - 28, cx + 5, cy - 22), fill=rgb("#8b6a4d"))

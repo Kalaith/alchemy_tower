@@ -80,5 +80,93 @@
       "locked_note": "The rune workshop remains shuttered until you have truly mastered a base brew of your own."
     }
   ],
-  "gather_nodes": []
+  "gather_nodes": [
+    {
+      "id": "containment_wardglass_01",
+      "name": "Wardglass Frost",
+      "item_id": "wardglass_frost",
+      "color": [
+        188,
+        220,
+        236,
+        255
+      ],
+      "position": [
+        186.0,
+        322.0
+      ],
+      "radius": 15.0,
+      "route_id": "containment_ring",
+      "seasons": [],
+      "weathers": [],
+      "time_windows": [
+        "evening",
+        "night",
+        "morning"
+      ],
+      "spawn_chance": 92,
+      "note": "The wards run cold once the lamps drop, and by first light the inner glass has grown a rind of frost that is worth scraping.",
+      "render": {
+        "sprite_id": "wardglass_frost"
+      }
+    },
+    {
+      "id": "containment_quietbloom_01",
+      "name": "Quietbloom Spore",
+      "item_id": "quietbloom_spore",
+      "color": [
+        206,
+        214,
+        186,
+        255
+      ],
+      "position": [
+        474.0,
+        612.0
+      ],
+      "radius": 16.0,
+      "route_id": "containment_ring",
+      "seasons": [],
+      "weathers": [],
+      "time_windows": [
+        "evening",
+        "night"
+      ],
+      "spawn_chance": 88,
+      "note": "It fruits under the cells where nobody has swept in twenty years. Whatever the tower was doing to this floor, the fungus approved of it.",
+      "render": {
+        "sprite_id": "quietbloom_spore"
+      }
+    },
+    {
+      "id": "containment_resonance_01",
+      "name": "Resonance Shard",
+      "item_id": "resonance_shard",
+      "color": [
+        178,
+        168,
+        244,
+        255
+      ],
+      "position": [
+        762.0,
+        402.0
+      ],
+      "radius": 15.0,
+      "route_id": "containment_ring",
+      "seasons": [],
+      "weathers": [],
+      "time_windows": [
+        "morning",
+        "day",
+        "evening"
+      ],
+      "spawn_chance": 80,
+      "required_completed_quest": "containment_for_lyra",
+      "note": "A settled ward frame sheds a little of itself, the way a tuned string sheds sound. Before Lyra balanced them there was nothing here but dust.",
+      "render": {
+        "sprite_id": "resonance_shard"
+      }
+    }
+  ]
 }

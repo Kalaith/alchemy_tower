@@ -1,0 +1,165 @@
+{
+  "items": [
+    {
+      "id": "wardglass_frost",
+      "name": "Wardglass Frost",
+      "category": "ingredient",
+      "color": [
+        188,
+        220,
+        236,
+        255
+      ],
+      "base_value": 13,
+      "description": "Frost that forms on the inside of the containment glass while the wards run their cold cycle overnight.",
+      "quality": 36,
+      "rarity": 3,
+      "elements": {
+        "vita": 0,
+        "ember": 0,
+        "mist": 3,
+        "lux": 1
+      },
+      "traits": [
+        "cold",
+        "pure"
+      ],
+      "source_conditions": [
+        "any season, the tower keeps its own weather",
+        "the ward cold cycle, from dusk until the morning warms",
+        "the inner face of the containment glass"
+      ],
+      "wild_variants": [
+        {
+          "id": "wardglass_frost_deepcycle",
+          "name": "Deepcycle Wardglass",
+          "required_conditions": [
+            "winter",
+            "night"
+          ],
+          "bonus_traits": [
+            "arcane"
+          ],
+          "quality_bonus": 12,
+          "elements": {
+            "vita": 0,
+            "ember": 0,
+            "mist": 1,
+            "lux": 1
+          },
+          "synthesis_weight_bonus": 0,
+          "synthesis_value_bonus": 4
+        }
+      ],
+      "synthesis_weight": 1,
+      "synthesis_value": 4
+    },
+    {
+      "id": "quietbloom_spore",
+      "name": "Quietbloom Spore",
+      "category": "ingredient",
+      "color": [
+        206,
+        214,
+        186,
+        255
+      ],
+      "base_value": 12,
+      "description": "A pale fungus that fruits in the dark under the cells, in the one part of the tower nothing has disturbed in twenty years.",
+      "quality": 34,
+      "rarity": 3,
+      "elements": {
+        "vita": 3,
+        "ember": 0,
+        "mist": 1,
+        "lux": 0
+      },
+      "traits": [
+        "healing",
+        "calm"
+      ],
+      "source_conditions": [
+        "any season, sheltered from the valley entirely",
+        "after the lamps drop, evening through night",
+        "the undersides of the containment cells"
+      ],
+      "wild_variants": [
+        {
+          "id": "quietbloom_spore_undisturbed",
+          "name": "Undisturbed Quietbloom",
+          "required_conditions": [
+            "night"
+          ],
+          "bonus_traits": [
+            "pure"
+          ],
+          "quality_bonus": 9,
+          "elements": {
+            "vita": 1,
+            "ember": 0,
+            "mist": 0,
+            "lux": 0
+          },
+          "synthesis_weight_bonus": 1,
+          "synthesis_value_bonus": 2
+        }
+      ],
+      "synthesis_weight": 2,
+      "synthesis_value": 4
+    },
+    {
+      "id": "resonance_shard",
+      "name": "Resonance Shard",
+      "category": "ingredient",
+      "color": [
+        178,
+        168,
+        244,
+        255
+      ],
+      "base_value": 18,
+      "description": "Chips that shed from the ward frames themselves once the field holds steady. A tower that is failing produces none.",
+      "quality": 40,
+      "rarity": 3,
+      "elements": {
+        "vita": 0,
+        "ember": 0,
+        "mist": 1,
+        "lux": 4
+      },
+      "traits": [
+        "arcane",
+        "pure"
+      ],
+      "source_conditions": [
+        "only while the habitat wards are tuned",
+        "the working hours, morning through evening",
+        "the ward frames along the containment ring"
+      ],
+      "wild_variants": [
+        {
+          "id": "resonance_shard_harmonic",
+          "name": "Harmonic Resonance Shard",
+          "required_conditions": [
+            "spring",
+            "day"
+          ],
+          "bonus_traits": [
+            "luminous"
+          ],
+          "quality_bonus": 11,
+          "elements": {
+            "vita": 0,
+            "ember": 0,
+            "mist": 0,
+            "lux": 2
+          },
+          "synthesis_weight_bonus": 0,
+          "synthesis_value_bonus": 5
+        }
+      ],
+      "synthesis_weight": 1,
+      "synthesis_value": 6
+    }
+  ]
+}

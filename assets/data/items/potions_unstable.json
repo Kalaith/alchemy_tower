@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "id": "murky_concoction",
+      "name": "Murky Concoction",
+      "category": "potion",
+      "base_value": 2,
+      "color": [
+        118,
+        112,
+        90,
+        255
+      ],
+      "description": "The sort of result that explains why labels matter.",
+      "effects": [
+        {
+          "kind": "misfire",
+          "magnitude": 1.0,
+          "duration_seconds": 25.0,
+          "description": "A clinging magical residue that leaves you sluggish."
+        }
+      ]
+    }
+  ]
+}

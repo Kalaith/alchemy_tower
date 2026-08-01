@@ -142,7 +142,7 @@ Data files follow the same ~800-line rule as `.rs` files. `src/data/loader_embed
 | Gathering routes | `assets/data/world/gathering_routes.json` |
 | Stations | `assets/data/world/stations.json` |
 | Ingredients | `assets/data/items/ingredients_<biome>.json` — filed under the biome that anchors the herb; `ingredients_shared.json` for herbs found in 3+ areas or produced rather than gathered |
-| Potions | `assets/data/items/potions.json` — split by effect kind when it crosses 800 lines |
+| Potions | `assets/data/items/potions_<effect>.json` — filed under the effect kind the potion leads with; `potions_unstable.json` for salvage outputs |
 | Creatures, catalysts, runes | `assets/data/items/materials.json` |
 | Recipes and their morph targets | `assets/data/crafting/recipes_<effect>.json` — filed under the effect kind the output potion leads with (`restore`, `glow`, `speed`) |
 | Rune recipes, mutation formulas | `assets/data/crafting/rune_recipes.json`, `crafting/mutation_formulas.json` |
@@ -215,6 +215,21 @@ Stop the loop and report if:
   *Next: five townsfolk still have single one-shot requests — Mira, Brin, Elric, Ione and Lyra all
   want arcs, and the pollinator-collapse chain is still unwritten. Or rotate to the tower floors,
   which remain gates rather than places.*
+- **2026-08-01 — tower floors.** `containment_ring`, `archive_stack` and `observatory_span` were
+  routes with nothing on them; the containment floor now fills the first. Three tower-native
+  gatherables that exist nowhere in the valley — `wardglass_frost` (the ward cold cycle, dusk to
+  first light), `quietbloom_spore` (under the cells, after the lamps drop), `resonance_shard` (shed
+  by tuned ward frames, gated on `containment_for_lyra`) — all rarity 3 and high quality, so the
+  climb pays. Two recipes at the underused `greenhouse_still` (`wardfrost_tonic` is the first brew
+  the tower supplies end to end; `resonance_draught` ties ward shard to habitat lantern dust) and a
+  repeatable Excellent-band board order. Split `items/potions.json` (832) by effect kind. Capture
+  harness gained `area:<area_id>[:<day>]` — the first way to look at a room at all.
+  *Gotcha found: a node's `spawn_chance` interacts with the per-day roll, so 64 meant the floor was
+  bare several days running. Raised to 80–92; a floor you climb to deliberately should not be empty.
+  New test `every_gather_node_can_actually_spawn` sweeps 60 days × 4 windows and fails any node whose
+  conditions can never all be true.*
+  *Next: `archive_stack` and `observatory_span` are still empty routes, the rune workshop is still a
+  gate, and five townsfolk still have one-shot requests.*
 
 ## Deferred (needs a new system; not for this loop)
 

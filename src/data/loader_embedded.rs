@@ -96,12 +96,28 @@ const ITEM_SOURCES: &[(&str, &str)] = &[
         include_str!("../../assets/data/items/ingredients_rainforest.json"),
     ),
     (
+        "items/ingredients_containment",
+        include_str!("../../assets/data/items/ingredients_containment.json"),
+    ),
+    (
         "items/materials",
         include_str!("../../assets/data/items/materials.json"),
     ),
     (
-        "items/potions",
-        include_str!("../../assets/data/items/potions.json"),
+        "items/potions_restore",
+        include_str!("../../assets/data/items/potions_restore.json"),
+    ),
+    (
+        "items/potions_glow",
+        include_str!("../../assets/data/items/potions_glow.json"),
+    ),
+    (
+        "items/potions_speed",
+        include_str!("../../assets/data/items/potions_speed.json"),
+    ),
+    (
+        "items/potions_unstable",
+        include_str!("../../assets/data/items/potions_unstable.json"),
     ),
 ];
 

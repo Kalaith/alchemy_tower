@@ -377,6 +377,24 @@
         64
       ],
       "prompt": "A pale mirror-clear restorative bottle with faint salt crystals settling at the base."
+    },
+    {
+      "id": "wardfrost_tonic",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A pale ice-blue restorative bottle with frost creeping up the inside of the glass."
+    },
+    {
+      "id": "resonance_draught",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A violet-white lantern potion bottle holding a perfectly steady, unflickering light."
     }
   ]
 }

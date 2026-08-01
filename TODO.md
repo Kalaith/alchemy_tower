@@ -10,7 +10,7 @@
 
 ## Gathering & progression
 
-- Give two or three biomes a signature gathering hook (night-only bloom, weather-triggered spawn, rare combination variant) rather than spreading effort across all thirteen. (The Sunscar has one: night bloom, noon resin, post-rain salt pan.)
+- Give two or three biomes a signature gathering hook (night-only bloom, weather-triggered spawn, rare combination variant) rather than spreading effort across all thirteen. (The Sunscar has one: night bloom, noon resin, post-rain salt pan. The containment floor has one: the tower's own ward cycle.)
 - Make biome-native ingredients recipe anchors so each biome is the supply line for specific potions.
 - Convert at least one floor gate from a brew-count/coin threshold to a mastery check — deliver a Masterwork, discover a morph, satisfy a multi-trait request.
 
