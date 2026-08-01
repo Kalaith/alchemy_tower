@@ -616,6 +616,25 @@ Stop the loop and report if:
   New test `every_footstep_set_is_actually_walked_on` — a set that is synthesised, shipped and
   assigned to no area is dead weight, which is exactly what the wrong hypothesis accused `dirt_path`
   of being.
+- **2026-08-01 — save/load. A correctness pass, not a content one; saying so plainly.** The save
+  system had **no test of any kind** — not in `save.rs`, the codec, the snapshot, the restore or the
+  migrations — while twenty-five passes added roughly twenty fields to the progression state. A
+  field present in both the state and the save file but not carried by snapshot/restore loses a
+  player's run silently, which is the worst way to lose one.
+  Wrote a round trip that sets **every** tracked field to something distinctive (so a dropped one
+  cannot pass by matching a fresh game's default), saves, loads into a new state and compares. **The
+  save system is sound** — nothing is lost. Verified the test bites by dropping `total_brews` from
+  the snapshot; it fails on exactly that field and passes again when restored.
+  *One surprise worth writing down: restoring produces **more** potion memories than were saved.*
+  `rebuild_memory_state` deliberately reconstructs them from inventory, the experiment log, known
+  recipes and crafted profiles, so a loaded save can hold more than the one written. The first
+  assertion was too strict and the code was right — it now checks the saved entry survives intact and
+  that nothing is ever dropped.
+  *Also closed the last open question from the schema sweep: `minimum_effect_matches` is the one
+  field no content sets, and it turns out it **cannot** bite. `effect_kinds` is read straight off the
+  item definition and `required_item_id` is mandatory, so "at least N of these effects" on a named
+  item is always trivially true or trivially false. It is unused because it is unusable, not because
+  content missed it — do not contrive a use for it.*
 
 ## Deferred (needs a new system; not for this loop)
 
