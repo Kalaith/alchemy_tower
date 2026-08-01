@@ -406,5 +406,6 @@
         "sprite_id": "emberbark_curl"
       }
     }
-  ]
+  ],
+  "footstep_sound_set": "leaf"
 }

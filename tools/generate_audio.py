@@ -187,10 +187,61 @@ def brew_collapse(seed: int) -> list[float]:
     return normalize(buffer, 0.68)
 
 
+def footstep_sand(seed: int) -> list[float]:
+    """Dune sand: no transient at all, just a long filtered hiss that gives."""
+    rng = random.Random(seed)
+    duration = 0.17 + rng.uniform(0.0, 0.04)
+    buffer = [0.0] * int(SAMPLE_RATE * duration)
+    add_lowpass_noise(buffer, rng, 0.16, 0.02, 0.30, 0.05)
+    add_noise(buffer, rng, 0.05, 0.015, 0.20, highpass_strength=0.08)
+    add_sine(buffer, 74 + rng.uniform(-8, 8), 0.05, 0.02, 0.22)
+    return normalize(buffer, 0.44)
+
+
+def footstep_shore(seed: int) -> list[float]:
+    """Wet ground at the water's edge: a damp thud with a thin splash over it."""
+    rng = random.Random(seed)
+    duration = 0.15 + rng.uniform(0.0, 0.03)
+    buffer = [0.0] * int(SAMPLE_RATE * duration)
+    add_impulse(buffer, 0.0, duration * 0.55, 70 + rng.uniform(-6, 6), 0.30)
+    add_noise(buffer, rng, 0.06, 0.004, 0.07, highpass_strength=0.75)
+    add_lowpass_noise(buffer, rng, 0.09, 0.01, 0.22, 0.07)
+    add_sine(buffer, 210 + rng.uniform(-20, 20), 0.04, 0.006, 0.12)
+    return normalize(buffer, 0.52)
+
+
+def footstep_gravel(seed: int) -> list[float]:
+    """Quarry spoil: loose stone, so several small impacts rather than one."""
+    rng = random.Random(seed)
+    duration = 0.14 + rng.uniform(0.0, 0.03)
+    buffer = [0.0] * int(SAMPLE_RATE * duration)
+    add_impulse(buffer, 0.0, duration * 0.5, 96 + rng.uniform(-10, 10), 0.34)
+    for _ in range(3):
+        add_impulse(buffer, rng.uniform(0.01, 0.06), 0.03, 240 + rng.uniform(-60, 90), 0.10)
+    add_noise(buffer, rng, 0.05, 0.003, 0.10, highpass_strength=0.55)
+    add_lowpass_noise(buffer, rng, 0.06, 0.006, 0.16, 0.09)
+    return normalize(buffer, 0.56)
+
+
+def footstep_leaf(seed: int) -> list[float]:
+    """Dry litter under a canopy: crush first, thud second, gone quickly."""
+    rng = random.Random(seed)
+    duration = 0.12 + rng.uniform(0.0, 0.03)
+    buffer = [0.0] * int(SAMPLE_RATE * duration)
+    add_noise(buffer, rng, 0.11, 0.002, 0.06, highpass_strength=0.85)
+    add_impulse(buffer, 0.015, duration * 0.6, 78 + rng.uniform(-8, 8), 0.20)
+    add_lowpass_noise(buffer, rng, 0.05, 0.008, 0.18, 0.08)
+    return normalize(buffer, 0.48)
+
+
 ASSETS = {
     "footstep_stone": (6, footstep_stone),
     "footstep_dirt_path": (6, footstep_dirt),
     "footstep_greenhouse": (5, footstep_greenhouse),
+    "footstep_sand": (5, footstep_sand),
+    "footstep_shore": (5, footstep_shore),
+    "footstep_gravel": (5, footstep_gravel),
+    "footstep_leaf": (5, footstep_leaf),
     "gather_herb_pickup": (5, gather_pickup),
     "alchemy_station_open": (2, alchemy_open),
     "alchemy_stir": (4, alchemy_stir),

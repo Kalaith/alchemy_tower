@@ -14,6 +14,10 @@ const REQUIRED_VARIATION_SETS: &[(&str, usize)] = &[
     ("footstep_stone", 6),
     ("footstep_dirt_path", 6),
     ("footstep_greenhouse", 5),
+    ("footstep_sand", 5),
+    ("footstep_shore", 5),
+    ("footstep_gravel", 5),
+    ("footstep_leaf", 5),
     ("gather_herb_pickup", 5),
     ("alchemy_station_open", 2),
     ("alchemy_stir", 4),
@@ -25,6 +29,10 @@ pub(crate) struct AudioAssets {
     footstep_stone: Vec<Sound>,
     footstep_dirt_path: Vec<Sound>,
     footstep_greenhouse: Vec<Sound>,
+    footstep_sand: Vec<Sound>,
+    footstep_shore: Vec<Sound>,
+    footstep_gravel: Vec<Sound>,
+    footstep_leaf: Vec<Sound>,
     gather_pickup: Vec<Sound>,
     alchemy_open: Vec<Sound>,
     alchemy_stir: Vec<Sound>,
@@ -48,6 +56,10 @@ impl AudioAssets {
             footstep_stone: load_variations("footstep_stone", 6, asset_pack.as_ref()).await?,
             footstep_dirt_path: load_variations("footstep_dirt_path", 6, asset_pack.as_ref())
                 .await?,
+            footstep_sand: load_variations("footstep_sand", 5, asset_pack.as_ref()).await?,
+            footstep_shore: load_variations("footstep_shore", 5, asset_pack.as_ref()).await?,
+            footstep_gravel: load_variations("footstep_gravel", 5, asset_pack.as_ref()).await?,
+            footstep_leaf: load_variations("footstep_leaf", 5, asset_pack.as_ref()).await?,
             footstep_greenhouse: load_variations("footstep_greenhouse", 5, asset_pack.as_ref())
                 .await?,
             gather_pickup: load_variations("gather_herb_pickup", 5, asset_pack.as_ref()).await?,
@@ -62,6 +74,12 @@ impl AudioAssets {
         match area.footstep_sound_set.as_str() {
             "stone" => play_random(&self.footstep_stone, 0.34),
             "greenhouse" => play_random(&self.footstep_greenhouse, 0.30),
+            "sand" => play_random(&self.footstep_sand, 0.28),
+            "shore" => play_random(&self.footstep_shore, 0.32),
+            "gravel" => play_random(&self.footstep_gravel, 0.34),
+            "leaf" => play_random(&self.footstep_leaf, 0.30),
+            // Field roads and the worn town square are what dirt_path is for,
+            // and it stays the default for anything that names nothing.
             _ => play_random(&self.footstep_dirt_path, 0.32),
         }
     }
@@ -117,7 +135,15 @@ mod tests {
     #[test]
     fn area_footstep_sound_sets_are_known() {
         let data = crate::data::load_embedded().expect("embedded game data should load");
-        let known_sets = ["dirt_path", "greenhouse", "stone"];
+        let known_sets = [
+            "dirt_path",
+            "gravel",
+            "greenhouse",
+            "leaf",
+            "sand",
+            "shore",
+            "stone",
+        ];
         let unknown = data
             .areas
             .iter()
@@ -129,6 +155,32 @@ mod tests {
             unknown.is_empty(),
             "unknown area footstep sound set(s):\n{}",
             unknown.join("\n")
+        );
+    }
+
+    /// A footstep set that is synthesised, shipped and then assigned to no area
+    /// is dead weight in the asset pack. This nearly happened in reverse: the
+    /// outdoor set looked unused because seven areas name no set at all, and it
+    /// took reading the schema default to find they were using it all along.
+    #[test]
+    fn every_footstep_set_is_actually_walked_on() {
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let mut used = std::collections::HashSet::new();
+        for area in &data.areas {
+            used.insert(area.footstep_sound_set.clone());
+        }
+
+        let unused = REQUIRED_VARIATION_SETS
+            .iter()
+            .map(|(name, _)| *name)
+            .filter(|name| name.starts_with("footstep_"))
+            .map(|name| name.trim_start_matches("footstep_"))
+            .filter(|set| !used.contains(*set))
+            .collect::<Vec<_>>();
+
+        assert!(
+            unused.is_empty(),
+            "footstep sets nothing walks on: {unused:?} (areas use {used:?})"
         );
     }
 }

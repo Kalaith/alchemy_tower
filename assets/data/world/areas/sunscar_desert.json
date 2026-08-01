@@ -294,5 +294,6 @@
         "sprite_id": "saltmirror_flake_desert"
       }
     }
-  ]
+  ],
+  "footstep_sound_set": "sand"
 }

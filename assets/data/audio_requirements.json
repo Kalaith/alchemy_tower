@@ -56,6 +56,34 @@
         "priority": "low",
         "variations": 5,
         "prompt": "Damp greenhouse footstep set with soft stone, condensation, and faint leaf-brush detail."
+      },
+      {
+        "id": "footstep_sand",
+        "type": "foley_oneshot_set",
+        "priority": "medium",
+        "variations": 5,
+        "prompt": "Deep dune sand underfoot: no hard transient, a long soft collapse, dry and warm."
+      },
+      {
+        "id": "footstep_shore",
+        "type": "foley_oneshot_set",
+        "priority": "medium",
+        "variations": 5,
+        "prompt": "Wet shingle and mud at a lake edge: damp thud with a thin splash over the top."
+      },
+      {
+        "id": "footstep_gravel",
+        "type": "foley_oneshot_set",
+        "priority": "medium",
+        "variations": 5,
+        "prompt": "Loose quarry spoil: one impact followed by several small stones shifting."
+      },
+      {
+        "id": "footstep_leaf",
+        "type": "foley_oneshot_set",
+        "priority": "medium",
+        "variations": 5,
+        "prompt": "Dry leaf litter under a forest canopy: crush first, muffled ground second, short decay."
       }
     ],
     "gathering_and_collection": [

@@ -306,5 +306,6 @@
         "sprite_id": "stillwater_pearl_lake"
       }
     }
-  ]
+  ],
+  "footstep_sound_set": "shore"
 }

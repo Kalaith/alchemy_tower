@@ -599,6 +599,23 @@ Stop the loop and report if:
   correctly when the first recipe itself is made unreachable.
   *Same verification caveat as the parting gift: tutorial hints are transient toasts the harness
   cannot trigger, so the text change is verified by reading and the world claim by test.*
+- **2026-08-01 — audio (never once examined in twenty-four passes).** Started from a wrong
+  hypothesis and checked it: seven areas name no `footstep_sound_set`, which looked like silent
+  outdoors, but the schema defaults to `dirt_path` and they had it all along. **Second time this loop
+  a "stale content" hunch turned out to be working content** — read the schema before believing a
+  count.
+  The real gap was underneath it: three sets for thirteen areas, so **the desert, the lake shore, the
+  quarry and the burnt hollow all sounded like a garden path.** Four sets added to
+  `tools/generate_audio.py`: `sand` (no transient at all, a long soft collapse), `shore` (damp thud
+  with a thin splash over it), `gravel` (one impact then several small stones shifting), `leaf`
+  (crush first, muffled ground second, short decay). North plains and the town square deliberately
+  keep `dirt_path` — field roads and a worn square are what it was made for.
+  *Verified without being able to listen:* every generated file was checked for length, RMS and peak,
+  and the profiles match the intent — sand longest and softest, gravel highest peak, leaf shortest
+  and driest. A synth that emitted silence or four identical files would have shown up.
+  New test `every_footstep_set_is_actually_walked_on` — a set that is synthesised, shipped and
+  assigned to no area is dead weight, which is exactly what the wrong hypothesis accused `dirt_path`
+  of being.
 
 ## Deferred (needs a new system; not for this loop)
 

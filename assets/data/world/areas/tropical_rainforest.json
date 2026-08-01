@@ -301,5 +301,6 @@
         "sprite_id": "bloomwing"
       }
     }
-  ]
+  ],
+  "footstep_sound_set": "leaf"
 }

@@ -297,5 +297,6 @@
         "sprite_id": "sumpflower_quarry"
       }
     }
-  ]
+  ],
+  "footstep_sound_set": "gravel"
 }
