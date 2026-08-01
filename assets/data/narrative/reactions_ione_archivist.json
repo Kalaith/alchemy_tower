@@ -167,6 +167,13 @@
       "after_milestone": "two_hands_on_one_page",
       "order": 110,
       "line": "I have handled that log more than any object in my life and I would have told you, under oath, that it was one hand throughout. It is not, and the second hand is careful — it is imitating the first. Whoever wrote it wanted the record to hold together for exactly as long as nobody brought a light to it."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "observatory_ending",
+      "order": 120,
+      "line": "The record is whole and I am, for the first time since I took this post, not looking for anything. It is a strange feeling and I do not entirely like it. So I have started a new set of logs, dated from this year, in my own hand, with nothing removed. Somebody should be keeping them while the valley is going well."
     }
   ]
 }

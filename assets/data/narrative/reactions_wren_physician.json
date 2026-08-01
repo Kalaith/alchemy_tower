@@ -62,6 +62,20 @@
       "after_milestone": "eleven_months_restored",
       "order": 90,
       "line": "The records say the wards drew more than they gave for eleven months. I had two bad winters in that same stretch and wrote them down as bad winters. It never occurred to me that the tower and the infirmary were keeping notes on the same thing."
+    },
+    {
+      "npc_id": "wren_physician",
+      "after_quest": "",
+      "after_milestone": "containment_started",
+      "order": 46,
+      "line": "A containment floor. So there was something worth containing, which nobody in this valley has said out loud in my working life. If anything up there can get out, I would like to know before it does rather than after."
+    },
+    {
+      "npc_id": "wren_physician",
+      "after_quest": "",
+      "after_milestone": "observatory_ending",
+      "order": 120,
+      "line": "Everyone is going to tell this as a story about one person and a tower, and in ten years the interesting part will be gone. The interesting part is that I can write a dose on a shelf card and it will mean the same thing next month. Keep it dull. Dull is the achievement."
     }
   ]
 }

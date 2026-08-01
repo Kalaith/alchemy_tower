@@ -118,6 +118,27 @@
       "after_milestone": "the_previous_hand",
       "order": 104,
       "line": "He was careful. He was not careful enough, and the difference is a hundred sheets of paper he did not think to look at. That is usually how it goes with people who are certain."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "containment_started",
+      "order": 46,
+      "line": "Doors that lock from outside. Ask who was worried, and about what."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "observatory_ending",
+      "order": 120,
+      "line": "He was certain and alone. You were neither, and here we are. Do not get certain now."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "first_true_brew",
+      "order": 28,
+      "line": "One that worked. Now find out why, before you like it too much."
     }
   ]
 }

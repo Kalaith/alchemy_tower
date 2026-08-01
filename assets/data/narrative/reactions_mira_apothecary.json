@@ -97,6 +97,20 @@
       "after_milestone": "infirmary_ward_quieted",
       "order": 78,
       "line": "Wren came in and bought nothing. Just stood a while and said the second room slept through. Twenty years I have sold her the almost-right thing and apologised for it, and she has never once made me feel it was my fault. I would have preferred she shouted."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "observatory_ending",
+      "order": 120,
+      "line": "Here is what changed for me, and it is not the revelation. I stopped ordering against a rumour. The tower is a place that will be there next season, so I can keep a thin shelf and trust it, and a thin shelf that refills is worth four of a full one that does not."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "first_true_brew",
+      "order": 28,
+      "line": "One that came out right. I have been sold a great deal of hopeful green water over nine years and I can tell the difference across a counter. Bring me the second one and I will start believing in the first."
     }
   ]
 }

@@ -136,11 +136,33 @@ pub(crate) mod tests {
             .map(|reaction| reaction.after_milestone.clone())
             .collect::<std::collections::HashSet<_>>();
 
+        // `entry_lab_recovered` is handed out by `initial_journal_milestones`
+        // before the player has done anything, so it is the game's starting
+        // condition rather than a moment: a reaction on it would fire in the
+        // very first conversation, which is what `phase1_dialogue.intro` is
+        // for. Everything else here is earned.
+        const RECORDED_AT_NEW_GAME: [&str; 1] = ["entry_lab_recovered"];
+
+        // Quest beats and the fixed narrative spine both. The check used to
+        // cover quests alone, and the consequence was exactly what you would
+        // expect: every pass wired its *new* content into the reactions list
+        // while the spine went unremarked. `containment_started` and
+        // `observatory_ending` had nobody at all — the second of those being
+        // the last beat in the game. An ending nine townsfolk have no opinion
+        // about does not read as finished; it reads as stopped.
         let silent = data
             .quests
             .iter()
             .flat_map(|quest| quest.completion_milestones.iter())
             .map(|milestone| milestone.id.clone())
+            .chain(
+                narrative
+                    .milestones
+                    .all()
+                    .into_iter()
+                    .map(|milestone| milestone.id.clone()),
+            )
+            .filter(|id| !RECORDED_AT_NEW_GAME.contains(&id.as_str()))
             .filter(|id| !spoken_for.contains(id))
             .collect::<std::collections::BTreeSet<_>>();
 

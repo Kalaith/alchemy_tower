@@ -125,6 +125,20 @@
       "after_milestone": "the_previous_hand",
       "order": 104,
       "line": "He wrote it all down and then took it out himself. I have spent nine years telling this valley the tower failed us and being quietly proud of how fair I was being about it. He did not fail us. He decided something, alone, and then removed the working so no one could check it. I would have preferred the failure."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "observatory_ending",
+      "order": 120,
+      "line": "The council will want a clean version. One sentence that says the tower failed and has been put right, and everyone can stop thinking about it. I am not giving them one. It goes in the charter with the part where he decided alone, because that is the part a council is supposed to read."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "first_true_brew",
+      "order": 28,
+      "line": "The tower produced something usable. That is a fact, it is dated, and I can put it in front of a council that has spent nine years hearing me call the place a hazard. Do not make a liar of me too quickly."
     }
   ]
 }

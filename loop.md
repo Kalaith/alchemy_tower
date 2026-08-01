@@ -1242,6 +1242,41 @@ Stop the loop and report if:
   questions rather than mined for gaps.*
   **5 beds, 25 mutations, 148 items; 94 tests; largest test file 697 lines.**
 
+- **2026-08-02 — nine townsfolk and not one of them had heard the game end.** Counted reactions
+  against the **fixed narrative spine** rather than against the content each pass had just added,
+  which is the measurement nobody had run: the reactions list has 131 lines and covers arcs, board
+  beats and discoveries thoroughly — and **`observatory_ending` had zero.** The player finishes the
+  tower's whole story, the epilogue runs, and every person in the valley says exactly what they said
+  the day before. `containment_started` had zero as well.
+  ***The reason is structural and it was in the guard.*** `every_recorded_moment_gets_remarked_on_by_somebody`
+  only ever checked **quest** completion milestones, so each pass wired its own new content in and
+  the spine went unwatched. Extended to the fixed milestones; verified by stripping all nine ending
+  lines, which names `observatory_ending` exactly.
+  **Nine last words, one per townsperson, at the highest order in the game** — so after the epilogue
+  every conversation in the valley has changed, which is the *post-ending content* `TODO.md` asks
+  for, delivered as voice rather than errands. They deliberately disagree: Elric will not give the
+  council a clean sentence, Lyra objects to the word restored, Wren wants the whole thing to become
+  dull, Brin points out the rows still want turning in the same week, Tarn says the road does not
+  forget a place twice. Ione has stopped looking for anything and has started a new set of logs in
+  her own hand. Plus three on `containment_started`, the floor built to lock from the outside.
+  ***A wrong assumption, caught by an existing test within a minute.*** I also authored six lines on
+  `entry_lab_recovered`, on the theory that the game's first achievement was unremarked too. It is
+  not an achievement: `initial_journal_milestones()` hands it out at **new game**, so those lines
+  fired before the player had done anything, and `town_reactions_move_on_as_the_story_does` failed
+  on exactly that. Retargeted to `first_true_brew` — a beat that *is* earned and had one speaker —
+  and the guard now excludes the starting condition by name, with the reason written down.
+  *Cleanup found on the way:* `narrative_text.json` declared **three milestones the struct does not
+  read** — byte-identical copies of beats the quests already record. Nothing broke, which is the
+  problem: rewriting one would have changed nothing and looked like it should have, which is
+  iteration 38's bug exactly. Deleted, and `NarrativeMilestones` now carries
+  `#[serde(deny_unknown_fields)]` so a stray entry is a load failure rather than prose that goes
+  nowhere.
+  *Harness:* new scene `afterword:<npc_id>` — the whole story recorded, then a conversation. The
+  `ending` scene shows the epilogue panel and nothing after it, so nine authored lines had no route
+  to a screenshot short of finishing the game by hand. Ione's renders at **six lines, which is the
+  documented ceiling**, and fits.
+  **158 reactions across 9 speakers; 94 tests; no data file over 664 lines.**
+
 ## Deferred (needs a new system; not for this loop)
 
 - Apply-potion-to-target flow (wilted plant, frightened creature, blocked path) — `TODO.md` calls it

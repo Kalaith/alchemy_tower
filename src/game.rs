@@ -55,6 +55,15 @@ impl Game {
         self.state = Some(match scene {
             "gameplay" => GameState::from_gameplay(GameplayState::new(&self.data)),
             "paused" => GameState::pause(GameplayState::new(&self.data)),
+            // "afterword:<npc_id>" opens a conversation with the whole story
+            // already behind it — the only way to look at what the valley says
+            // once the epilogue has run.
+            other if other.starts_with("afterword:") => {
+                let npc_id = other.strip_prefix("afterword:").unwrap_or("crow_guide");
+                let mut gameplay = GameplayState::new(&self.data);
+                gameplay.open_dialogue_after_everything(&self.data, npc_id);
+                GameState::from_gameplay(gameplay)
+            }
             // "dialogue", "dialogue:<npc_id>", or "dialogue:<npc_id>:<beat>"
             // opens a conversation overlay; the beat index skips past that many
             // finished steps of the townsperson's arc.

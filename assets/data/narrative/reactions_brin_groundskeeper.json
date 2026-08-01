@@ -139,6 +139,20 @@
       "after_milestone": "asked_for_perfect_work",
       "order": 98,
       "line": "Nine plants. I wrote it under the notice and I would write it again, and I would still have handed you the cutting myself. Both of those are true and I have stopped trying to make them agree."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "observatory_ending",
+      "order": 120,
+      "line": "So now we know. The rows still want turning in the same week they wanted turning before, and the terraces will go back under mortar in thirty years if nobody does it. Knowing why a thing broke is a good day's work. It is not the work."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "first_true_brew",
+      "order": 28,
+      "line": "One good bottle is not a supply, and I say that as somebody who has been handed one good apple off a dying tree. Do it again next week off the same rows and I will have something to say about it."
     }
   ]
 }

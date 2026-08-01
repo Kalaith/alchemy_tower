@@ -10,25 +10,10 @@
       "title": "Archive Revelation",
       "text": "The archive timeline resolves: the wizard sealed each floor not to hoard power, but to keep the tower from consuming every living system bound into it. Leaving was the final act of restraint."
     },
-    "greenhouse_expanded": {
-      "id": "greenhouse_expanded",
-      "title": "Greenhouse Expanded",
-      "text": "Brin reset the old planter wards. A new moon bed is active on the north side of the greenhouse, and the town finally has reason to believe the valley can recover in more than scraps."
-    },
     "first_true_brew": {
       "id": "first_true_brew",
       "title": "First Useful Brew",
       "text": "The first successful brew was not important because it proved the tower still worked. It mattered because someone in town could actually use it."
-    },
-    "first_town_relief": {
-      "id": "first_town_relief",
-      "title": "First Town Relief",
-      "text": "Mira's first delivered draught changed the conversation in the square. The tower is no longer just a ruin above town. It has begun helping again."
-    },
-    "containment_stable": {
-      "id": "containment_stable",
-      "title": "Habitats Stabilized",
-      "text": "Lyra tuned the habitat wards. Gentle collection from tower creatures can now support regular alchemical work."
     },
     "containment_started": {
       "id": "containment_started",

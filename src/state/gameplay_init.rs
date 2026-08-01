@@ -35,6 +35,32 @@ impl GameplayState {
         ));
     }
 
+    /// Open a conversation with the whole story already behind it — every quest
+    /// finished and every journal beat recorded, which is the state the valley
+    /// is in once the epilogue has run.
+    ///
+    /// The `ending` scene shows the epilogue panel; it does not show what
+    /// anybody says afterwards, and until now nothing could. Nine townsfolk
+    /// have a last word keyed to `observatory_ending` and the only route to any
+    /// of them was to finish the game by hand.
+    pub(crate) fn open_dialogue_after_everything(&mut self, data: &GameData, npc_id: &str) {
+        for quest in &data.quests {
+            self.progression.completed_quests.insert(quest.id.clone());
+            for milestone in &quest.completion_milestones {
+                self.push_journal_milestone(&milestone.id, &milestone.title, &milestone.text);
+            }
+        }
+        for recipe in &data.recipes {
+            for milestone in &recipe.discovery_milestones {
+                self.push_journal_milestone(&milestone.id, &milestone.title, &milestone.text);
+            }
+        }
+        for milestone in crate::content::narrative_text().milestones.all() {
+            self.push_journal_milestone(&milestone.id, &milestone.title, &milestone.text);
+        }
+        self.open_dialogue_with(npc_id);
+    }
+
     /// Open the epilogue with every journal beat it can respond to recorded, so
     /// the fullest version of the ending can be looked at. It is the one screen
     /// with no other route to it short of finishing the game.

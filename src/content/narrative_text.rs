@@ -32,7 +32,13 @@ pub(crate) struct NarrativeEpilogueBeat {
     pub(crate) line: String,
 }
 
+/// `deny_unknown_fields` because three entries had accumulated in this block
+/// that the struct does not read — byte-identical copies of milestones the
+/// quests already record. Nothing broke, which is the problem: rewriting one of
+/// them would have changed nothing in the game and looked like it should have.
+/// A stray entry is now a load failure rather than prose that goes nowhere.
 #[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct NarrativeMilestones {
     pub(crate) entry_lab_recovered: NarrativeMilestone,
     pub(crate) archive_revelation: NarrativeMilestone,
@@ -43,9 +49,10 @@ pub(crate) struct NarrativeMilestones {
 }
 
 impl NarrativeMilestones {
-    /// Every milestone this file declares, for the content check that verifies
-    /// authored reactions are gated on beats something actually records.
-    #[cfg(test)]
+    /// Every milestone this file declares. Used by the content check that
+    /// verifies authored reactions are gated on beats something actually
+    /// records, and by the capture harness, which needs the whole spine
+    /// recorded to photograph a conversation held after the epilogue.
     pub(crate) fn all(&self) -> [&NarrativeMilestone; 6] {
         [
             &self.entry_lab_recovered,

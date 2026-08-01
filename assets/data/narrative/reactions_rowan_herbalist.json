@@ -104,6 +104,13 @@
       "after_milestone": "the_pass_came_indoors",
       "order": 112,
       "line": "It opened on the fourth morning and I sat with it for an hour. I have eleven pages of notes on why it could not be done and I am keeping every one of them, because the notes were all correct. They were just answering a question about the valley floor."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "observatory_ending",
+      "order": 120,
+      "line": "I have his notes on the bench beside eleven pages of my own, and we were both wrong, in opposite directions, about the same plants. He thought the valley could be corrected. I thought it could not be argued with. It turns out you can put a question to it, as long as you are prepared to be told no for four years."
     }
   ]
 }

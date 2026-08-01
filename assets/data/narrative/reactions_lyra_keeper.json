@@ -90,6 +90,27 @@
       "after_milestone": "containment_stable",
       "order": 102,
       "line": "Five things housed on that floor now, and three of them are up there because we decided they should be rather than because something had to be shut in. A tankful of shrimp that hatched out of dust, and a case of the creatures the archive has been quietly feeding for twenty years. The room was built to keep things away from the valley. It is the first time it has been used the other way round."
+    },
+    {
+      "npc_id": "lyra_keeper",
+      "after_quest": "",
+      "after_milestone": "containment_started",
+      "order": 46,
+      "line": "That floor was built to keep things away from the valley and I have never once been let onto it. Whatever is still alive up there has been alive up there alone for twenty years. Go slowly, and do not name anything until you have watched it for a week."
+    },
+    {
+      "npc_id": "lyra_keeper",
+      "after_quest": "",
+      "after_milestone": "observatory_ending",
+      "order": 120,
+      "line": "I want to be careful about the word restored. Nothing here is finished; it is being kept, and it will need keeping every year by somebody who is paying attention. That is not a lesser outcome. It is the only kind there was ever going to be."
+    },
+    {
+      "npc_id": "lyra_keeper",
+      "after_quest": "",
+      "after_milestone": "first_true_brew",
+      "order": 28,
+      "line": "Congratulations, and one thing. Whatever came off that bench that was not the bottle went somewhere. It went down the hill into the lane where I count moths. I am not asking you to stop. I am asking you to tell me what it was."
     }
   ]
 }
