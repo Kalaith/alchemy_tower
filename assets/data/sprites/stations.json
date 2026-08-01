@@ -143,6 +143,24 @@
         96
       ],
       "prompt": "A bulk apothecary shelf seen from above, crates and stoppered jars of common herbs in quantity, readable as a market stall."
+    },
+    {
+      "id": "containment_cold_bench",
+      "type": "world_station",
+      "image_size_px": [
+        112,
+        112
+      ],
+      "prompt": "A ward-chilled alchemy bench seen from above, frost on the stone surface, pale blue apparatus, readable as a brewing station."
+    },
+    {
+      "id": "archive_reading_bench",
+      "type": "world_station",
+      "image_size_px": [
+        112,
+        112
+      ],
+      "prompt": "An archive reading bench seen from above, open logs and a small still among stacked notes, warm parchment tones, readable as a brewing station."
     }
   ]
 }

@@ -422,6 +422,48 @@
           "description": "A flat grey-white light that shows detail rather than distance."
         }
       ]
+    },
+    {
+      "id": "annotated_light",
+      "name": "Annotated Light",
+      "category": "potion",
+      "base_value": 62,
+      "color": [
+        222,
+        206,
+        158,
+        255
+      ],
+      "description": "A close, warm reading light that makes ink stand off a page. Useless outdoors and indispensable at a desk.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 190.0,
+          "description": "A tight working light that shows writing rather than distance."
+        }
+      ]
+    },
+    {
+      "id": "marginalia_lantern",
+      "name": "Marginalia Lantern",
+      "category": "potion",
+      "base_value": 118,
+      "color": [
+        238,
+        228,
+        190,
+        255
+      ],
+      "description": "Under it, the notes somebody pencilled in a margin twenty years ago and then erased come back faintly. Ione has asked that this not be sold outside the tower.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 230.0,
+          "description": "Raises writing that is no longer strictly on the page."
+        }
+      ]
     }
   ]
 }

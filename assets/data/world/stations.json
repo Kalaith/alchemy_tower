@@ -615,6 +615,91 @@
           96.0
         ]
       }
+    },
+    {
+      "id": "containment_cold_bench",
+      "name": "Ward-Cooled Bench",
+      "kind": "alchemy",
+      "area_id": "containment_floor",
+      "position": [
+        196.0,
+        528.0
+      ],
+      "interaction_radius": 52.0,
+      "color": [
+        166,
+        196,
+        214,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 12,
+        "favored_traits": [
+          "cold",
+          "calm",
+          "pure"
+        ],
+        "favored_categories": [
+          "creature"
+        ],
+        "description": "The habitat wards hold this whole end of the floor a few degrees under. Nothing brewed here is ever in a hurry, and settled work comes out cleaner for it."
+      },
+      "planter_harvest_days": 0,
+      "planter_seed_ids": [],
+      "planter_yield_bonus": 0,
+      "required_completed_quest": "containment_for_lyra",
+      "habitat_creature_ids": [],
+      "habitat_output_item_id": "",
+      "habitat_harvest_days": 0,
+      "render": {
+        "sprite_size": [
+          112.0,
+          112.0
+        ]
+      }
+    },
+    {
+      "id": "archive_reading_bench",
+      "name": "Reading Bench",
+      "kind": "alchemy",
+      "area_id": "archive_floor",
+      "position": [
+        830.0,
+        470.0
+      ],
+      "interaction_radius": 52.0,
+      "color": [
+        204,
+        186,
+        146,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 14,
+        "favored_traits": [
+          "arcane",
+          "luminous"
+        ],
+        "favored_categories": [
+          "catalyst"
+        ],
+        "description": "Every note the tower ever wrote about a reagent is within arm's reach of this bench, which turns out to matter more than any apparatus on it."
+      },
+      "planter_harvest_days": 0,
+      "planter_seed_ids": [],
+      "planter_yield_bonus": 0,
+      "required_journal_milestone": "rune_workshop_restored",
+      "habitat_creature_ids": [],
+      "habitat_output_item_id": "",
+      "habitat_harvest_days": 0,
+      "render": {
+        "sprite_size": [
+          112.0,
+          112.0
+        ]
+      }
     }
   ]
 }

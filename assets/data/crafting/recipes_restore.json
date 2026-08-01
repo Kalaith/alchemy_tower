@@ -386,7 +386,7 @@
     {
       "id": "wardfrost_tonic_recipe",
       "name": "Wardfrost Tonic",
-      "station_id": "greenhouse_still",
+      "station_id": "containment_cold_bench",
       "ingredients": [
         {
           "item_id": "wardglass_frost",
@@ -510,6 +510,59 @@
           "required_heat": 2,
           "required_stirs": 3,
           "required_timing": "late"
+        }
+      ]
+    },
+    {
+      "id": "stillkeeper_tonic_recipe",
+      "name": "Stillkeeper Tonic",
+      "station_id": "containment_cold_bench",
+      "ingredients": [
+        {
+          "item_id": "dew_slime",
+          "amount": 1
+        },
+        {
+          "item_id": "wardglass_frost",
+          "amount": 1
+        },
+        {
+          "item_id": "reedflower",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "stillkeeper_tonic",
+      "output_amount": 1,
+      "description": "Three cold, settled things and nothing to hurry them. Lyra uses it on creatures that have been frightened badly enough to stop eating.",
+      "required_heat": 1,
+      "required_stirs": 2,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "It cannot be rushed and it cannot be brewed warm, which is the whole of the method.",
+      "minimum_quality": 44,
+      "preferred_traits": [
+        "calm",
+        "cold",
+        "pure"
+      ],
+      "guaranteed_traits": [
+        "calm"
+      ],
+      "minimum_elements": {
+        "vita": 2,
+        "ember": 0,
+        "mist": 5,
+        "lux": 1
+      },
+      "required_timing": "steady",
+      "morph_targets": [
+        {
+          "output_item_id": "deepkeeper_draught",
+          "minimum_quality": 68,
+          "catalyst_tag": "stillwater",
+          "required_heat": 1,
+          "required_stirs": 2,
+          "required_timing": "steady",
+          "room_bonus_required": true
         }
       ]
     }

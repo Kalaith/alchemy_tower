@@ -99,6 +99,18 @@ def station(kind, size):
         d.polygon([(cx - 26, cy - 4), (cx + 6, cy + 14), (cx - 18, cy + 14)], fill=rgb("#7a8fb7"))
         d.line((cx - 34, cy - 18, cx - 34, cy + 18), fill=rgb("#5d412b"), width=4)
         d.line((cx + 34, cy - 18, cx + 34, cy + 18), fill=rgb("#5d412b"), width=4)
+    elif "cold_bench" in kind:
+        d.rounded_rectangle((cx - 32, cy - 4, cx + 32, cy + 24), radius=8, fill=rgb("#6b7d88"))
+        d.rounded_rectangle((cx - 26, cy - 10, cx + 26, cy + 10), radius=6, fill=rgb("#c4dde6"))
+        for ox in [-14, 2, 16]:
+            d.line((cx + ox, cy + 6, cx + ox + 3, cy - 12), fill=rgb("#eef8ff"), width=2)
+    elif "reading_bench" in kind:
+        d.rounded_rectangle((cx - 34, cy - 2, cx + 34, cy + 24), radius=8, fill=rgb("#7d6a4c"))
+        d.polygon([(cx - 22, cy - 4), (cx + 2, cy - 14), (cx + 2, cy + 6), (cx - 22, cy + 12)],
+                  fill=rgb("#e9dcbc"))
+        d.polygon([(cx + 2, cy - 14), (cx + 26, cy - 4), (cx + 26, cy + 12), (cx + 2, cy + 6)],
+                  fill=rgb("#f2e8cd"))
+        d.ellipse(box(cx + 22, cy - 16, 6, 8), fill=rgb("#cfe0f2"))
     elif "still" in kind:
         d.rounded_rectangle((cx - 28, cy + 8, cx + 28, cy + 34), radius=10, fill=rgb("#4f6c57"))
         d.ellipse(box(cx - 14, cy - 10, 14, 18), fill=rgb("#dceff3"))
@@ -310,6 +322,8 @@ def icon(item, size, world=False):
             "hearthward_infusion": "#cedec4", "relay_draught": "#b0ceec",
             "benchlight_solution": "#c8c2d6",
             "hollowroot_cordial": "#a292ce", "hollowroot_reliquary": "#cec6f0",
+            "stillkeeper_tonic": "#b4d2d6", "deepkeeper_draught": "#9cc0c8",
+            "annotated_light": "#dece9e", "marginalia_lantern": "#eee4be",
         }.get(item, "#d2c1ff")
         d.rounded_rectangle((cx - 8, cy - 24, cx + 8, cy - 12), radius=3, fill=rgb("#d9dfe8", 220))
         d.rectangle((cx - 5, cy - 28, cx + 5, cy - 22), fill=rgb("#8b6a4d"))

@@ -500,6 +500,48 @@
           "description": "Carries a faint violet reading-light of its own."
         }
       ]
+    },
+    {
+      "id": "stillkeeper_tonic",
+      "name": "Stillkeeper Tonic",
+      "category": "potion",
+      "base_value": 56,
+      "color": [
+        180,
+        210,
+        214,
+        255
+      ],
+      "description": "Cold, clear and entirely unhurried. It settles whatever takes it rather than mending anything, which for a frightened animal is the same thing.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 32.0,
+          "duration_seconds": 0.0,
+          "description": "Restores slowly and completely, and takes the panic out of the taker."
+        }
+      ]
+    },
+    {
+      "id": "deepkeeper_draught",
+      "name": "Deepkeeper Draught",
+      "category": "potion",
+      "base_value": 96,
+      "color": [
+        156,
+        192,
+        200,
+        255
+      ],
+      "description": "Stillwater held at ward temperature until the whole mixture forgets it was ever stirred. Only the cold bench can hold it long enough.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 50.0,
+          "duration_seconds": 0.0,
+          "description": "Restores fully and leaves the taker steady for the rest of the day."
+        }
+      ]
     }
   ]
 }

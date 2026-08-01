@@ -346,6 +346,26 @@ Stop the loop and report if:
   *A recipe can output an ingredient, not just a potion — the brew path handles it and skips the
   potion-memory bookkeeping. That is how the revival works.*
   *Next: Brin and Ione are the last one-shot givers. Every route now has something on it.*
+- **2026-08-01 — recipes / rooms.** The room-bonus system is fully built — a station can favour
+  traits and categories, grant a quality bonus, and gate a morph branch on having earned it — and it
+  was nearly unused for one structural reason: **there were only two alchemy stations in the game.**
+  Five restored floors and you carried everything back down to the entry cauldron or the greenhouse
+  still. Two benches added: a **ward-cooled bench** on the containment floor (favours `cold`, `calm`,
+  `pure` and the creature category) and a **reading bench** in the archives (favours `arcane`,
+  `luminous`, catalysts). Three recipes made of upper-floor materials moved to the rooms they belong
+  in — they were at the greenhouse still only because nothing else existed above the entry floor.
+  One new formula per bench, each with a `room_bonus_required` branch, so *where* you brew is finally
+  a decision rather than a formality.
+  *New check `room_gated_morphs_can_earn_their_room_bonus`: a branch needing a room bonus must sit at
+  a station that grants one **and** whose favoured list something in the brew can actually match.
+  Worth noting the first version of this test was wrong — it flagged the pre-existing
+  `wellspring_elixir` because no reagent hits entry_cauldron's favoured traits, missing that the
+  station favours the **catalyst category** and the player fills that slot freely. The data was fine;
+  the check was too strict. Corrected before trusting it.*
+  *The art-manifest test earned its keep again: four new potions, four missing icons, caught
+  immediately.*
+  *Next: Brin and Ione are the last one-shot givers, and `required_sequence` is used by only 4 of 28
+  recipes — the ingredient-order mechanic is the next nearly-unused system.*
 
 ## Deferred (needs a new system; not for this loop)
 

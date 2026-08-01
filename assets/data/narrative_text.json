@@ -472,6 +472,13 @@
       "after_milestone": "archive_revelation",
       "order": 99,
       "line": "Ione brought a hollowroot cutting down to the stall to show me. I have been growing in this valley my whole life and I did not know that was ever a thing that grew here."
+    },
+    {
+      "npc_id": "lyra_keeper",
+      "after_quest": "",
+      "after_milestone": "containment_repaired",
+      "order": 51,
+      "line": "There is a bench at the cold end of the floor that has been sitting there the whole time. I assumed it was for the wards. It is for brewing, and everything made on it comes out steadier than the same recipe made downstairs. The tower had opinions about where work should happen."
     }
   ]
 }

@@ -412,7 +412,7 @@
     {
       "id": "resonance_draught_recipe",
       "name": "Resonance Draught",
-      "station_id": "greenhouse_still",
+      "station_id": "containment_cold_bench",
       "ingredients": [
         {
           "item_id": "resonance_shard",
@@ -450,7 +450,7 @@
     {
       "id": "benchlight_solution_recipe",
       "name": "Benchlight Solution",
-      "station_id": "greenhouse_still",
+      "station_id": "archive_reading_bench",
       "ingredients": [
         {
           "item_id": "rune_ash",
@@ -484,6 +484,58 @@
       },
       "required_timing": "steady",
       "morph_targets": []
+    },
+    {
+      "id": "annotated_light_recipe",
+      "name": "Annotated Light",
+      "station_id": "archive_reading_bench",
+      "ingredients": [
+        {
+          "item_id": "pressed_specimen",
+          "amount": 1
+        },
+        {
+          "item_id": "arcane_dust",
+          "amount": 1
+        },
+        {
+          "item_id": "rune_ash",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "annotated_light",
+      "output_amount": 1,
+      "description": "A light that picks out handwriting. Ione claims she can read the water damage on a page by it, and has so far been right twice.",
+      "required_heat": 2,
+      "required_stirs": 3,
+      "unstable_output_item_id": "lantern_leak",
+      "lore_note": "It only comes out right at this bench, which nobody has satisfactorily explained and Ione has stopped asking about.",
+      "minimum_quality": 46,
+      "preferred_traits": [
+        "arcane",
+        "luminous"
+      ],
+      "guaranteed_traits": [
+        "soft_glow"
+      ],
+      "minimum_elements": {
+        "vita": 0,
+        "ember": 0,
+        "mist": 1,
+        "lux": 4
+      },
+      "required_timing": "late",
+      "morph_targets": [
+        {
+          "output_item_id": "marginalia_lantern",
+          "minimum_quality": 70,
+          "catalyst_tag": "starlight",
+          "required_heat": 2,
+          "required_stirs": 3,
+          "required_timing": "late",
+          "room_bonus_required": true
+        }
+      ]
     }
   ]
 }
