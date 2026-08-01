@@ -623,6 +623,27 @@
           "description": "A close working light for looking at what went wrong."
         }
       ]
+    },
+    {
+      "id": "ghostline_solution",
+      "name": "Ghostline Solution",
+      "category": "potion",
+      "base_value": 96,
+      "color": [
+        162,
+        172,
+        206,
+        255
+      ],
+      "description": "A thin blue-grey light that ignores ink entirely and shows only pressure — where a nib pushed, where a page was leaned on, where something was written and then taken away. It cannot read. It can only point at the fact that there was something to read.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 190.0,
+          "description": "A raking light that finds the impression rather than the mark."
+        }
+      ]
     }
   ]
 }

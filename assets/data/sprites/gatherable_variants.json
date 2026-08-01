@@ -350,6 +350,24 @@
         64
       ],
       "prompt": "A fine warm cream-gold scorch mark on a dark metal ring, star-shaped. Staged on the observatory floor beside the focus ring."
+    },
+    {
+      "id": "foxed_leaf_archive",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A pale sheet of old paper with rust-coloured age-spotting, lying on a shelf edge."
+    },
+    {
+      "id": "inkgall_bead_archive",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "Small dark blue-black hardened ink beads scattered under a bookshelf."
     }
   ]
 }

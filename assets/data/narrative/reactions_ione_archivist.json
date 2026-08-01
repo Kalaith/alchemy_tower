@@ -146,6 +146,13 @@
       "after_milestone": "asked_for_perfect_work",
       "order": 96,
       "line": "In every one of the recovered years there is not a single order that names the top band. Not one. Either nobody dared ask him, or he never got good enough to be asked, and I find I do not want to know which."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "the_previous_hand",
+      "order": 106,
+      "line": "It does not read them. I want to be exact about that, because I have been exact about everything else and this would be a poor time to stop. It shows where the nib pressed. Eleven months of pages he took out, and the leaf under each one still holds the shape of what he wrote. He scraped the sentence and left the handwriting."
     }
   ]
 }

@@ -932,6 +932,31 @@ Stop the loop and report if:
   sees it); a stub on a non-overridden item fails. Checking `item.description` directly would have
   reported both backwards.
   **129 items, none described by a stub; 84 tests.**
+- **2026-08-01 — the last room with one thing in it.** Nodes per area: the **archive floor had a
+  single gather node** in a 960×720 room, the last survivor of a shape iteration 33 fixed for the
+  observatory and explicitly left for later. It is also the room the story's largest revelation
+  happens in, which made it the worst possible place to leave as a corridor with a stop sign.
+  Two gatherables that could only exist in an archive: **foxed leaf**, rust blooming that comes up
+  through old paper in wet weather — Ione permits it only from leaves already past saving, and she
+  decides what that means — and **inkgall bead**, iron-gall ink that weeps out of warm bindings in
+  summer and hardens on the shelf below overnight. Every bead is a sentence that has left its page.
+  They brew at the reading bench into **Ghostline Solution**, which ignores ink entirely and shows
+  only *pressure*: where a nib pushed. It cannot read. It can only point at the fact that there was
+  something to read — which is the answer to `the_previous_hand`, because he scraped the sentences
+  and left the handwriting. The Crow: *he was careful; he was not careful enough.*
+  *Three axes measured and cleared before landing here:* warp topology (a clean bidirectional graph,
+  no one-way links, no orphans), warp gate vocabulary (**all seven gate kinds used at least once**,
+  including `required_mastered_recipe`), and route density (19 routes, none empty). None was a hole.
+  *Guard, verified against a break:* `no_room_is_worth_only_one_stop` — stripping the archive back to
+  its single node named it exactly. Floor of 2, set at the leanest rooms that ship (entry lab and
+  rune workshop, which are mostly benches on purpose).
+  *A capture that lied by omission, caught by arithmetic:* the first archive capture used day 2 and
+  showed nothing new, because the foxing node's daily roll failed that day. Computing per-day
+  availability found day 6 evening carries both, and that capture shows the room with two.
+  *Split done proactively:* `recipes_glow.json` reached **750** — the flagged next candidate, and
+  this pass was pushing it. Split by bench, as the restore recipes already are: the archive reading
+  bench's five moved out (511 / 243). Everything is under 700 lines again.
+  **64 nodes, 132 items, 44 recipes, 85 tests — and no room left with one thing in it.**
 
 ## Deferred (needs a new system; not for this loop)
 

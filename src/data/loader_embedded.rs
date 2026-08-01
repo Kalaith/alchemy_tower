@@ -112,6 +112,10 @@ const ITEM_SOURCES: &[(&str, &str)] = &[
         include_str!("../../assets/data/items/ingredients_observatory.json"),
     ),
     (
+        "items/ingredients_archive",
+        include_str!("../../assets/data/items/ingredients_archive.json"),
+    ),
+    (
         "items/materials",
         include_str!("../../assets/data/items/materials.json"),
     ),
@@ -253,6 +257,10 @@ const RECIPE_SOURCES: &[(&str, &str)] = &[
     (
         "crafting/recipes_glow",
         include_str!("../../assets/data/crafting/recipes_glow.json"),
+    ),
+    (
+        "crafting/recipes_glow_archive_reading_bench",
+        include_str!("../../assets/data/crafting/recipes_glow_archive_reading_bench.json"),
     ),
     (
         "crafting/recipes_speed",

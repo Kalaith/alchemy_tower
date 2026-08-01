@@ -486,6 +486,34 @@ mod tests {
         );
     }
 
+    /// A room the player has to walk to should hold more than one thing. Two
+    /// did not: the observatory, which the game *ends* in, and the archive,
+    /// which holds the story's largest revelation — both a single node in a
+    /// 960x720 floor. A room with one pickup in it is a corridor with a stop
+    /// sign, and it reads as unfinished however good the writing on the walls.
+    ///
+    /// Two is a floor, not a target, and it is set at the leanest room that
+    /// ships (the entry lab and the rune workshop, which are mostly benches and
+    /// are meant to be).
+    #[test]
+    fn no_room_is_worth_only_one_stop() {
+        const MINIMUM_NODES: usize = 2;
+
+        let data = load_embedded().expect("embedded game data should load");
+        let sparse = data
+            .areas
+            .iter()
+            .filter(|area| !area.gather_nodes.is_empty())
+            .filter(|area| area.gather_nodes.len() < MINIMUM_NODES)
+            .map(|area| format!("{}: {} node", area.id, area.gather_nodes.len()))
+            .collect::<Vec<_>>();
+
+        assert!(
+            sparse.is_empty(),
+            "rooms holding a single thing to find: {sparse:#?}"
+        );
+    }
+
     #[test]
     fn every_gatherable_ingredient_is_wanted_by_some_recipe() {
         use crate::data::ItemCategory;

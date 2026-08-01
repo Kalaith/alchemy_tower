@@ -1,0 +1,70 @@
+{
+  "items": [
+    {
+      "id": "foxed_leaf",
+      "name": "Foxed Leaf",
+      "category": "ingredient",
+      "base_value": 20,
+      "color": [
+        196,
+        168,
+        130,
+        255
+      ],
+      "description": "Rust-coloured blooming that comes up through old paper in wet weather. Ione will let you take it only from leaves already past saving, and she decides what past saving means, and she has never once been quick about deciding.",
+      "quality": 44,
+      "rarity": 3,
+      "elements": {
+        "vita": 1,
+        "ember": 0,
+        "mist": 3,
+        "lux": 1
+      },
+      "traits": [
+        "arcane",
+        "calm"
+      ],
+      "source_conditions": [
+        "rain and mist, when the floor takes up damp faster than the wards dry it",
+        "day and evening — you have to be able to see what you are tearing",
+        "leaves Ione has already written off, and no others"
+      ],
+      "wild_variants": [],
+      "synthesis_weight": 1,
+      "synthesis_value": 5
+    },
+    {
+      "id": "inkgall_bead",
+      "name": "Inkgall Bead",
+      "category": "ingredient",
+      "base_value": 28,
+      "color": [
+        96,
+        104,
+        138,
+        255
+      ],
+      "description": "Old iron-gall ink weeps out of a binding in the warm months and hardens on the shelf underneath in beads the size of a seed. Every one of them is a sentence that has left its page, which Ione says out loud roughly once a week.",
+      "quality": 50,
+      "rarity": 4,
+      "elements": {
+        "vita": 0,
+        "ember": 1,
+        "mist": 1,
+        "lux": 4
+      },
+      "traits": [
+        "arcane",
+        "luminous"
+      ],
+      "source_conditions": [
+        "summer and autumn, while the bindings are warm enough to weep",
+        "night, after the reading lamps are out and the shelf has cooled",
+        "the shelf below the binding, never the binding"
+      ],
+      "wild_variants": [],
+      "synthesis_weight": 1,
+      "synthesis_value": 7
+    }
+  ]
+}

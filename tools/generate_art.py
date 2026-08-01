@@ -186,7 +186,7 @@ def icon(item, size, world=False):
     style_suffix = None
     base_item = item
     for suffix in ["plains", "quarry", "forest", "lake", "desert", "rainforest", "pass",
-                   "observatory"]:
+                   "observatory", "archive"]:
         token = f"_{suffix}"
         if item.endswith(token):
             base_item = item[: -len(token)]
@@ -335,6 +335,17 @@ def icon(item, size, world=False):
              "washvein_crystal": "#b2cae2", "saltroad_amber": "#e8a854"}[base_item]
         for ox, oy in [(-10, 8), (0, 0), (12, 10)]:
             d.polygon([(cx + ox, cy + oy - 10), (cx + ox - 8, cy + oy), (cx + ox, cy + oy + 10), (cx + ox + 8, cy + oy)], fill=rgb(c))
+    elif base_item == "foxed_leaf":
+        d.polygon([(cx - 16, cy - 18), (cx + 16, cy - 14), (cx + 14, cy + 18), (cx - 18, cy + 14)],
+                  fill=rgb("#e6dcc4"), outline=rgb("#b3a07e"))
+        for sx, sy, r in [(-7, -6, 3), (5, 2, 4), (-2, 9, 2), (9, -9, 2)]:
+            d.ellipse(box(cx + sx, cy + sy, r, r), fill=rgb("#b47a4e", 200))
+    elif base_item == "inkgall_bead":
+        d.ellipse(box(cx, cy + 12, 18, 5), fill=(10, 12, 18, 60))
+        for bx, by, r in [(-9, 3, 6), (2, -3, 8), (11, 6, 5)]:
+            d.ellipse(box(cx + bx, cy + by, r, r), fill=rgb("#4a5170"))
+            d.ellipse(box(cx + bx - r * 0.3, cy + by - r * 0.35, r * 0.3, r * 0.3),
+                      fill=rgb("#9aa4c8"))
     elif base_item == "cloudglass":
         for px, py in [(-10, 6), (2, -2), (12, 8)]:
             d.polygon([(cx + px - 9, cy + py + 10), (cx + px - 5, cy + py - 10),
@@ -389,6 +400,7 @@ def icon(item, size, world=False):
             "second_reading": "#babeb0", "longstride_draught": "#d6a882",
             "coldread_solution": "#d6e6f2", "lowstar_lantern": "#f0dcb2",
             "heldstar_lantern": "#faecc6",
+            "ghostline_solution": "#a2acce",
             "coldiron_tincture": "#a6baac", "rimeflower_cordial": "#deeaf4",
             "lastthaw_cordial": "#ece2d2",
             "pollenwind_draught": "#f8d48c",
@@ -421,6 +433,8 @@ def icon(item, size, world=False):
             d.arc((cx - 20, cy + 4, cx + 20, cy + 26), 200, 340, fill=rgb("#ffe4a6", 150), width=3)
         elif style_suffix == "rainforest":
             d.line((cx - 18, cy + 20, cx + 12, cy - 10), fill=rgb("#d4ffe6", 140), width=3)
+        elif style_suffix == "archive":
+            d.line((cx - 24, cy + 16, cx + 24, cy + 16), fill=rgb("#9c8a6a", 160), width=3)
         elif style_suffix == "observatory":
             d.arc((cx - 24, cy - 4, cx + 24, cy + 28), 200, 340, fill=rgb("#c8bfe8", 150), width=3)
         elif style_suffix == "pass":

@@ -101,6 +101,67 @@
       "render": {
         "sprite_id": "pressed_specimen"
       }
+    },
+    {
+      "id": "archive_foxing_01",
+      "name": "Foxed Leaf",
+      "item_id": "foxed_leaf",
+      "color": [
+        196,
+        168,
+        130,
+        255
+      ],
+      "position": [
+        500.0,
+        252.0
+      ],
+      "radius": 15.0,
+      "route_id": "archive_stack",
+      "seasons": [],
+      "weathers": [
+        "rain",
+        "mist"
+      ],
+      "time_windows": [
+        "day",
+        "evening"
+      ],
+      "spawn_chance": 74,
+      "note": "The damp brings it up through the paper within a day. Ione keeps a shelf of leaves she has already given up on, separate from the rest, which is its own kind of filing.",
+      "render": {
+        "sprite_id": "foxed_leaf_archive"
+      }
+    },
+    {
+      "id": "archive_inkgall_01",
+      "name": "Inkgall Bead",
+      "item_id": "inkgall_bead",
+      "color": [
+        96,
+        104,
+        138,
+        255
+      ],
+      "position": [
+        764.0,
+        388.0
+      ],
+      "radius": 15.0,
+      "route_id": "archive_stack",
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "weathers": [],
+      "time_windows": [
+        "night"
+      ],
+      "spawn_chance": 80,
+      "note": "Beads of it under the warm shelves, cooled hard overnight. A hundred years of somebody else's sentences, on the floor, in the dark, where nobody was going to look.",
+      "render": {
+        "sprite_id": "inkgall_bead_archive"
+      }
     }
   ]
 }

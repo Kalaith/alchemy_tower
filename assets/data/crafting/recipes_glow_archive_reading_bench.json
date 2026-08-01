@@ -1,0 +1,243 @@
+{
+  "recipes": [
+    {
+      "id": "benchlight_solution_recipe",
+      "name": "Benchlight Solution",
+      "station_id": "archive_reading_bench",
+      "ingredients": [
+        {
+          "item_id": "rune_ash",
+          "amount": 2
+        },
+        {
+          "item_id": "resonance_shard",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "benchlight_solution",
+      "output_amount": 1,
+      "description": "Spent rune ash suspended against a live ward shard. The ash remembers a shape for about a day, and this is how you ask it what shape.",
+      "required_heat": 2,
+      "required_stirs": 2,
+      "unstable_output_item_id": "lantern_leak",
+      "lore_note": "Ione has asked twice whether this counts as reading the workshop's notes. Nobody has given her a straight answer.",
+      "minimum_quality": 42,
+      "preferred_traits": [
+        "arcane",
+        "luminous"
+      ],
+      "guaranteed_traits": [
+        "soft_glow"
+      ],
+      "minimum_elements": {
+        "vita": 0,
+        "ember": 1,
+        "mist": 1,
+        "lux": 6
+      },
+      "required_timing": "steady",
+      "morph_targets": []
+    },
+    {
+      "id": "annotated_light_recipe",
+      "name": "Annotated Light",
+      "station_id": "archive_reading_bench",
+      "ingredients": [
+        {
+          "item_id": "pressed_specimen",
+          "amount": 1
+        },
+        {
+          "item_id": "arcane_dust",
+          "amount": 1
+        },
+        {
+          "item_id": "rune_ash",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "annotated_light",
+      "output_amount": 1,
+      "description": "A light that picks out handwriting. Ione claims she can read the water damage on a page by it, and has so far been right twice.",
+      "required_heat": 2,
+      "required_stirs": 3,
+      "unstable_output_item_id": "lantern_leak",
+      "lore_note": "It only comes out right at this bench, which nobody has satisfactorily explained and Ione has stopped asking about.",
+      "minimum_quality": 46,
+      "preferred_traits": [
+        "arcane",
+        "luminous"
+      ],
+      "guaranteed_traits": [
+        "soft_glow"
+      ],
+      "minimum_elements": {
+        "vita": 0,
+        "ember": 0,
+        "mist": 1,
+        "lux": 4
+      },
+      "required_timing": "late",
+      "morph_targets": [
+        {
+          "output_item_id": "marginalia_lantern",
+          "minimum_quality": 70,
+          "catalyst_tag": "starlight",
+          "required_heat": 2,
+          "required_stirs": 3,
+          "required_timing": "late",
+          "room_bonus_required": true
+        }
+      ],
+      "required_sequence": [
+        "volatile",
+        "luminous",
+        "arcane"
+      ]
+    },
+    {
+      "id": "coldread_solution_recipe",
+      "name": "Coldread Solution",
+      "station_id": "archive_reading_bench",
+      "ingredients": [
+        {
+          "item_id": "cloudglass",
+          "amount": 1
+        },
+        {
+          "item_id": "lumen_dust",
+          "amount": 2
+        }
+      ],
+      "output_item_id": "coldread_solution",
+      "output_amount": 2,
+      "description": "Mirror frost carried down two floors before it can think about melting, and put into dust. The light off it is flat and cold and shows a page exactly as it is.",
+      "required_heat": 1,
+      "required_stirs": 3,
+      "unstable_output_item_id": "lantern_leak",
+      "lore_note": "The stairs between the lens and this bench are the reason it works. Ione has pointed out that the wizard put the archive directly under the observatory and that this is unlikely to be a coincidence twice over.",
+      "minimum_quality": 46,
+      "preferred_traits": [
+        "pure",
+        "luminous"
+      ],
+      "guaranteed_traits": [
+        "soft_glow"
+      ],
+      "minimum_elements": {
+        "vita": 0,
+        "ember": 0,
+        "mist": 3,
+        "lux": 6
+      },
+      "required_timing": "early",
+      "required_sequence": [
+        "pure",
+        "luminous"
+      ],
+      "morph_targets": []
+    },
+    {
+      "id": "lowstar_lantern_recipe",
+      "name": "Lowstar Lantern",
+      "station_id": "archive_reading_bench",
+      "ingredients": [
+        {
+          "item_id": "lowstar_ash",
+          "amount": 1
+        },
+        {
+          "item_id": "mirrorbead",
+          "amount": 1
+        },
+        {
+          "item_id": "arcane_dust",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "lowstar_lantern",
+      "output_amount": 1,
+      "description": "Four hours of held starlight, scraped off a ring and given back a little at a time. It is the slowest ingredient in the tower and it makes the longest light.",
+      "required_heat": 2,
+      "required_stirs": 4,
+      "unstable_output_item_id": "lantern_leak",
+      "lore_note": "Whatever the lens was built to do, it has spent twenty unattended years doing this instead, and doing it well enough to be worth collecting.",
+      "minimum_quality": 56,
+      "preferred_traits": [
+        "arcane",
+        "luminous"
+      ],
+      "guaranteed_traits": [
+        "soft_glow"
+      ],
+      "minimum_elements": {
+        "vita": 0,
+        "ember": 1,
+        "mist": 4,
+        "lux": 8
+      },
+      "required_timing": "late",
+      "required_sequence": [
+        "arcane",
+        "luminous"
+      ],
+      "morph_targets": [
+        {
+          "output_item_id": "heldstar_lantern",
+          "minimum_quality": 74,
+          "catalyst_tag": "starlight",
+          "required_heat": 2,
+          "required_stirs": 4,
+          "required_timing": "late",
+          "room_bonus_required": true
+        }
+      ]
+    },
+    {
+      "id": "ghostline_solution_recipe",
+      "name": "Ghostline Solution",
+      "station_id": "archive_reading_bench",
+      "ingredients": [
+        {
+          "item_id": "foxed_leaf",
+          "amount": 1
+        },
+        {
+          "item_id": "inkgall_bead",
+          "amount": 1
+        },
+        {
+          "item_id": "pressed_specimen",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "ghostline_solution",
+      "output_amount": 1,
+      "description": "Ink that left its page, blooming that ate one, and a specimen pressed flat between two others. Together they light the dent a word leaves behind after the word is gone.",
+      "required_heat": 1,
+      "required_stirs": 3,
+      "unstable_output_item_id": "lantern_leak",
+      "lore_note": "Ione asked for this in fewer words than she has ever used. She has eleven months of pages that were removed rather than lost, and scraping does not take the pressure of the nib out of the leaf underneath.",
+      "minimum_quality": 50,
+      "preferred_traits": [
+        "arcane",
+        "luminous"
+      ],
+      "guaranteed_traits": [
+        "soft_glow"
+      ],
+      "minimum_elements": {
+        "vita": 1,
+        "ember": 1,
+        "mist": 4,
+        "lux": 5
+      },
+      "required_timing": "steady",
+      "required_sequence": [
+        "arcane",
+        "calm"
+      ],
+      "morph_targets": []
+    }
+  ]
+}
