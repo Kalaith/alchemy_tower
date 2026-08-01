@@ -1,6 +1,6 @@
 use super::GameplayState;
 use crate::content::narrative_text;
-use crate::data::{GameData, NpcDefinition};
+use crate::data::{GameData, NpcDefinition, QuestDefinition};
 
 #[path = "gameplay_npc_dialogue_text.rs"]
 mod npc_dialogue_text;
@@ -12,6 +12,29 @@ pub(super) struct NpcDialogueSelection<'a> {
 }
 
 impl GameplayState {
+    /// The one step of this townsperson's arc that is currently live: the first
+    /// request they have not finished. `None` once the whole chain is done,
+    /// which every caller already treats as "nothing left to ask of them".
+    pub(super) fn npc_active_quest<'a>(
+        &self,
+        data: &'a GameData,
+        npc: &NpcDefinition,
+    ) -> Option<&'a QuestDefinition> {
+        npc.quest_chain()
+            .iter()
+            .filter_map(|quest_id| data.quest(quest_id))
+            .find(|quest| !self.progression.completed_quests.contains(&quest.id))
+    }
+
+    /// Whether the player has finished anything at all for this townsperson.
+    /// Drives the warmer "you already helped me" lines, which must survive the
+    /// arc moving on to its next beat.
+    pub(super) fn npc_has_been_helped(&self, npc: &NpcDefinition) -> bool {
+        npc.quest_chain()
+            .iter()
+            .any(|quest_id| self.progression.completed_quests.contains(quest_id))
+    }
+
     pub(super) fn phase1_town_recovery_reached(&self) -> bool {
         self.has_journal_milestone("greenhouse_repaired")
             || self
@@ -34,7 +57,7 @@ impl GameplayState {
 
     pub(super) fn npc_dialogue_selection<'a>(
         &'a self,
-        data: &GameData,
+        data: &'a GameData,
         npc: &'a NpcDefinition,
     ) -> NpcDialogueSelection<'a> {
         let mut selection = NpcDialogueSelection {
@@ -67,18 +90,30 @@ impl GameplayState {
         }
 
         let phase1 = &npc.phase1_dialogue;
-        let quest = (!npc.quest_id.is_empty())
-            .then(|| data.quest(&npc.quest_id))
-            .flatten();
+        let quest = self.npc_active_quest(data, npc);
         let quest_started = quest
             .map(|quest| self.progression.started_quests.contains(&quest.id))
             .unwrap_or(false);
-        let quest_completed = quest
-            .map(|quest| self.progression.completed_quests.contains(&quest.id))
-            .unwrap_or(false);
+        let quest_completed = self.npc_has_been_helped(npc);
         let quest_available = quest
             .map(|quest| self.quest_is_available(quest))
             .unwrap_or(false);
+
+        // A line authored on the live step of an arc is the most specific thing
+        // this NPC has to say, so it wins over every broader phase line. Without
+        // this, later beats are drowned out by the town-recovery observation.
+        if let Some(quest) = quest.filter(|_| quest_started || quest_available) {
+            let beat = if quest_started {
+                quest.giver_active_line.as_str()
+            } else {
+                quest.giver_intro_line.as_str()
+            };
+            if !beat.is_empty() {
+                selection.start = beat;
+                selection.progress = beat;
+                return selection;
+            }
+        }
 
         if self.phase1_town_recovery_reached() && !phase1.town_recovery_observation.is_empty() {
             selection.start = phase1.town_recovery_observation.as_str();
@@ -159,5 +194,97 @@ impl GameplayState {
         }
 
         npc_dialogue_text::with_followup(&base, extra)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::GameplayState;
+
+    #[test]
+    fn npc_arc_offers_one_beat_at_a_time() {
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let mut state = GameplayState::new(&data);
+        let rowan = data
+            .npc("rowan_herbalist")
+            .expect("rowan should exist")
+            .clone();
+        let chain = rowan.quest_chain().to_vec();
+        assert!(chain.len() >= 3, "rowan should carry a multi-beat arc");
+
+        for (index, quest_id) in chain.iter().enumerate() {
+            let active = state
+                .npc_active_quest(&data, &rowan)
+                .expect("an unfinished arc always has a live step");
+            assert_eq!(
+                &active.id, quest_id,
+                "beat {index} should be the live step before it is completed"
+            );
+            assert!(
+                !active.giver_intro_line.is_empty(),
+                "{quest_id} should speak in Rowan's voice while on offer"
+            );
+            state.progression.completed_quests.insert(quest_id.clone());
+        }
+
+        assert!(
+            state.npc_active_quest(&data, &rowan).is_none(),
+            "a finished arc leaves nothing further to ask"
+        );
+        assert!(state.npc_has_been_helped(&rowan));
+    }
+
+    #[test]
+    fn single_quest_givers_still_resolve_without_a_chain() {
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let state = GameplayState::new(&data);
+        let mira = data.npc("mira_apothecary").expect("mira should exist");
+        assert!(mira.quest_ids.is_empty(), "mira is a one-shot giver");
+        assert_eq!(
+            state
+                .npc_active_quest(&data, mira)
+                .map(|quest| quest.id.as_str()),
+            Some(mira.quest_id.as_str())
+        );
+    }
+
+    #[test]
+    fn quest_gated_nodes_stay_bare_until_their_beat_is_done() {
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let mut state = GameplayState::new(&data);
+        let town = data.area("town_square").expect("town square should exist");
+        let gated = town
+            .gather_nodes
+            .iter()
+            .find(|node| !node.required_completed_quest.is_empty())
+            .expect("the turned bed rows should be quest-gated");
+        let quest_id = gated.required_completed_quest.clone();
+        let node_id = gated.id.clone();
+
+        state.world.current_area_id = "town_square".to_owned();
+        // Walk a full season/weather/time cycle so the node's own conditions are
+        // never the reason it is absent.
+        let mut seen_before = false;
+        for day in 0..20 {
+            state.world.day_index = day;
+            state.refresh_available_nodes(&data);
+            seen_before |= state.world.available_nodes.contains(&node_id);
+        }
+        assert!(
+            !seen_before,
+            "gated ground should stay bare before its beat"
+        );
+
+        state.progression.completed_quests.insert(quest_id);
+        let mut seen_after = false;
+        for day in 0..20 {
+            state.world.day_index = day;
+            state.refresh_available_nodes(&data);
+            seen_after |= state.world.available_nodes.contains(&node_id);
+        }
+        assert!(
+            seen_after,
+            "the turned row should grow once the beat is done"
+        );
     }
 }

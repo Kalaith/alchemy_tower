@@ -140,7 +140,7 @@ impl GameplayState {
             .filter(|quest| !self.progression.completed_quests.contains(&quest.id))
             .filter(|quest| !self.quest_is_available(quest))
             .map(|quest| {
-                let requirements = self.locked_state_text(&self.quest_unlock_summary(quest));
+                let requirements = self.locked_state_text(&self.quest_unlock_summary(data, quest));
                 quest_board_text::locked_line(quest, &requirements)
             })
             .collect()

@@ -5,10 +5,7 @@ use crate::data::{GameData, NpcDefinition};
 impl GameplayState {
     pub(super) fn current_dialogue_text(&self, data: &GameData, npc: &NpcDefinition) -> String {
         let dialogue = self.npc_dialogue_selection(data, npc);
-        let Some(quest) = (!npc.quest_id.is_empty())
-            .then(|| data.quest(&npc.quest_id))
-            .flatten()
-        else {
+        let Some(quest) = self.npc_active_quest(data, npc) else {
             return self.append_npc_story_line(&npc.id, dialogue.complete.to_owned());
         };
 
@@ -39,10 +36,7 @@ impl GameplayState {
     }
 
     pub(super) fn current_dialogue_footer(&self, data: &GameData, npc: &NpcDefinition) -> String {
-        let Some(quest) = (!npc.quest_id.is_empty())
-            .then(|| data.quest(&npc.quest_id))
-            .flatten()
-        else {
+        let Some(quest) = self.npc_active_quest(data, npc) else {
             return dialogue_footer_text("quests_dialogue_footer_default", &[]);
         };
 
@@ -51,7 +45,7 @@ impl GameplayState {
         }
         if !self.progression.started_quests.contains(&quest.id) {
             if !self.quest_is_available(quest) {
-                return self.locked_state_text(&self.quest_unlock_summary(quest));
+                return self.locked_state_text(&self.quest_unlock_summary(data, quest));
             }
             return dialogue_footer_text(
                 "quests_dialogue_footer_reward",

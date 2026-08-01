@@ -38,6 +38,16 @@ impl GameplayState {
         };
 
         for node in &area.gather_nodes {
+            // Ground that a finished story beat brought back to life stays bare
+            // until that beat is actually finished.
+            if !node.required_completed_quest.is_empty()
+                && !self
+                    .progression
+                    .completed_quests
+                    .contains(&node.required_completed_quest)
+            {
+                continue;
+            }
             let season_ok = node.seasons.is_empty()
                 || node
                     .seasons

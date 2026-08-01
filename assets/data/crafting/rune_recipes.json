@@ -1,0 +1,28 @@
+{
+  "rune_recipes": [
+    {
+      "id": "splash_glow_recipe",
+      "station_id": "rune_workbench",
+      "input_item_id": "glow_potion",
+      "rune_item_id": "splash_rune",
+      "output_item_id": "splash_glow_potion",
+      "description": "Reworks a glow brew into a wider, faster lantern discharge."
+    },
+    {
+      "id": "echo_healing_recipe",
+      "station_id": "rune_workbench",
+      "input_item_id": "healing_draught",
+      "rune_item_id": "echo_rune",
+      "output_item_id": "echo_healing_draught",
+      "description": "Threads a second restorative pulse through the draught."
+    },
+    {
+      "id": "delay_stamina_recipe",
+      "station_id": "rune_workbench",
+      "input_item_id": "stamina_tonic",
+      "rune_item_id": "delay_rune",
+      "output_item_id": "delayed_stamina_tonic",
+      "description": "Converts a sharp stimulant into a steadier delayed release."
+    }
+  ]
+}

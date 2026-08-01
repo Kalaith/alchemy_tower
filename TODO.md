@@ -10,18 +10,18 @@
 
 ## Gathering & progression
 
-- Give two or three biomes a signature gathering hook (night-only bloom, weather-triggered spawn, rare combination variant) rather than spreading effort across all thirteen.
+- Give two or three biomes a signature gathering hook (night-only bloom, weather-triggered spawn, rare combination variant) rather than spreading effort across all thirteen. (The Sunscar has one: night bloom, noon resin, post-rain salt pan.)
 - Make biome-native ingredients recipe anchors so each biome is the supply line for specific potions.
 - Convert at least one floor gate from a brew-count/coin threshold to a mastery check — deliver a Masterwork, discover a morph, satisfy a multi-trait request.
 
 ## Story, NPCs & world state
 
 - Write the story bible locking the wizard's backstory, the failed intervention, the ecosystem model, and the act-by-act reveal order.
-- Build the failing-harvest and pollinator-collapse quest chains.
-- Give each NPC a three-beat arc (setup → complication → payoff) tied to rapport.
+- Build the pollinator-collapse quest chain. (The failing-harvest chain is done: Rowan's three beats end with the town bed rows turned.)
+- Give each NPC a three-beat arc (setup → complication → payoff) tied to rapport. Rowan has one; Mira, Brin, Elric, Ione and Lyra still carry a single one-shot request each.
 - Make rapport pay off mechanically: a recipe hint, a discount, or a personal side quest.
 - Add repeatable town-board requests to sustain the mid-game between story beats.
-- Add visible town-state changes after a chain completes — a reopened stall, fuller greenhouse beds, lit streets.
+- Add more visible town-state changes after a chain completes — a reopened stall, fuller greenhouse beds, lit streets. (The mechanism exists: a gather node can name a `required_completed_quest`, which is how the town square starts growing once Rowan's row is turned.)
 
 ## Applied alchemy
 

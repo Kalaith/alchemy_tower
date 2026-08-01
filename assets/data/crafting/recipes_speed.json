@@ -1,0 +1,171 @@
+{
+  "recipes": [
+    {
+      "id": "stamina_tonic_recipe",
+      "name": "Stamina Tonic",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        {
+          "item_id": "ember_root",
+          "amount": 1
+        },
+        {
+          "item_id": "mist_moth_wing",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "stamina_tonic",
+      "output_amount": 1,
+      "description": "Strong enough to feel illegal, but technically herbal.",
+      "required_heat": 3,
+      "required_stirs": 3,
+      "unstable_output_item_id": "rush_draught",
+      "lore_note": "The formula trades elegance for force and should not be taken before sleep.",
+      "minimum_quality": 38,
+      "preferred_traits": [
+        "vigor",
+        "volatile"
+      ],
+      "guaranteed_traits": [
+        "quickstep"
+      ],
+      "minimum_elements": {
+        "vita": 0,
+        "ember": 4,
+        "mist": 2,
+        "lux": 0
+      },
+      "catalyst_tag": "",
+      "catalyst_quality_bonus": 0,
+      "required_timing": "early",
+      "required_sequence": [
+        "ember_root",
+        "mist_moth_wing"
+      ],
+      "morph_targets": [],
+      "starter_known": true
+    },
+    {
+      "id": "trailblaze_tonic_recipe",
+      "name": "Trailblaze Tonic",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        {
+          "item_id": "sunspike",
+          "amount": 1
+        },
+        {
+          "item_id": "ember_root",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "trailblaze_tonic",
+      "output_amount": 1,
+      "description": "A hot desert-and-ember tonic that keeps repair crews moving through a long shift.",
+      "required_heat": 3,
+      "required_stirs": 3,
+      "unstable_output_item_id": "rush_draught",
+      "lore_note": "Volatile by nature. Push the fire early and it can flare into something wilder.",
+      "minimum_quality": 38,
+      "preferred_traits": [
+        "vigor",
+        "volatile"
+      ],
+      "guaranteed_traits": [
+        "quickstep"
+      ],
+      "minimum_elements": {
+        "vita": 0,
+        "ember": 5,
+        "mist": 0,
+        "lux": 0
+      },
+      "required_timing": "",
+      "morph_targets": [
+        {
+          "output_item_id": "wildfire_draught",
+          "minimum_quality": 64,
+          "required_heat": 3,
+          "required_stirs": 3,
+          "required_timing": "early"
+        }
+      ]
+    },
+    {
+      "id": "sunwarden_tonic_recipe",
+      "name": "Sunwarden Tonic",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        {
+          "item_id": "sunspike",
+          "amount": 1
+        },
+        {
+          "item_id": "sunleaf",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "sunwarden_tonic",
+      "output_amount": 1,
+      "description": "A warming tonic that steadies the body against desert heat and long exposed roads.",
+      "required_heat": 2,
+      "required_stirs": 2,
+      "unstable_output_item_id": "rush_draught",
+      "lore_note": "Warmth without the volatility, if you keep the two suns balanced.",
+      "minimum_quality": 32,
+      "preferred_traits": [
+        "warm",
+        "vigor"
+      ],
+      "guaranteed_traits": [
+        "warm"
+      ],
+      "minimum_elements": {
+        "vita": 0,
+        "ember": 2,
+        "mist": 0,
+        "lux": 0
+      },
+      "required_timing": "early",
+      "morph_targets": []
+    },
+    {
+      "id": "briskstep_draught_recipe",
+      "name": "Briskstep Draught",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        {
+          "item_id": "mist_moth_wing",
+          "amount": 1
+        },
+        {
+          "item_id": "reedflower",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "briskstep_draught",
+      "output_amount": 1,
+      "description": "A gentle, well-mannered pick-me-up for elders and anyone who dislikes a jolt.",
+      "required_heat": 1,
+      "required_stirs": 2,
+      "unstable_output_item_id": "rush_draught",
+      "lore_note": "The reedflower's purity tames the moth wing's twitchiness. Balance over force.",
+      "minimum_quality": 30,
+      "preferred_traits": [
+        "cold",
+        "pure"
+      ],
+      "guaranteed_traits": [
+        "quickstep"
+      ],
+      "minimum_elements": {
+        "vita": 0,
+        "ember": 0,
+        "mist": 4,
+        "lux": 0
+      },
+      "required_timing": "steady",
+      "morph_targets": []
+    }
+  ]
+}

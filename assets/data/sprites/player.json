@@ -1,0 +1,17 @@
+{
+  "entries": [
+    {
+      "id": "player_tower_alchemist",
+      "type": "character_spritesheet",
+      "image_size_px": [
+        320,
+        256
+      ],
+      "frame_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A young village alchemist seen from a top-down game view, practical travel cloak, satchel of ingredients, small glass vials at the belt, not heroic armor, readable hair and shoulder silhouette, curious but capable mood, palette that stands out from NPCs, designed for 4-direction walk and idle animation in a magical tower exploration game."
+    }
+  ]
+}

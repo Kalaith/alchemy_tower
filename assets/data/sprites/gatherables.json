@@ -1,0 +1,446 @@
+{
+  "entries": [
+    {
+      "id": "whisper_moss",
+      "type": "icon_and_world_node",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "Soft glowing green moss clinging to old stone, gentle magical herb cluster, readable from above, suitable both as a gather node and inventory icon."
+    },
+    {
+      "id": "arcane_dust",
+      "type": "icon_and_world_node",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A small pile of violet arcane dust with faint sparkle and crystalline residue, readable from above, suitable as both gather node and icon."
+    },
+    {
+      "id": "sunleaf",
+      "type": "icon_and_world_node",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "Bright golden medicinal leaves in a sunny herb cluster, cheerful readable silhouette, top-down view, suitable as gather node and icon."
+    },
+    {
+      "id": "moon_fern",
+      "type": "icon_and_world_node",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "Pale moonlit fern fronds with subtle silver-green glow, mystical but botanical, readable top-down silhouette, suitable as gather node and icon."
+    },
+    {
+      "id": "ember_root",
+      "type": "icon_and_world_node",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "Warm orange-red root cluster with ember heat in the cracks, rugged and earthy, readable from above, suitable as gather node and icon."
+    },
+    {
+      "id": "mist_moth_wing",
+      "type": "icon_and_world_node",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A delicate blue-silver moth wing with misty shimmer, soft airy silhouette, readable from above, suitable as gather node and icon."
+    },
+    {
+      "id": "glow_moth",
+      "type": "icon_and_world_node",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A living lantern moth, pale gold glowing body and broad luminous wings, magical creature readable from above, suitable as world node and icon."
+    },
+    {
+      "id": "dew_slug",
+      "type": "icon_and_world_node",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A plump translucent dew slug with pale blue moisture sheen, gentle magical creature, readable from above, suitable as world node and icon."
+    },
+    {
+      "id": "field_bloom",
+      "type": "icon_and_world_node",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A sunny roadside meadow flower cluster with pale gold petals and a light airy silhouette, readable from above, suitable as gather node and icon."
+    },
+    {
+      "id": "quarry_lichen",
+      "type": "icon_and_world_node",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "Mineral-fed quarry lichen clinging to broken stone, muted sage and dust tones, readable top-down silhouette, suitable as gather node and icon."
+    },
+    {
+      "id": "reedflower",
+      "type": "icon_and_world_node",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A pale reed bed blossom with slender stems and cool lake petals, readable top-down silhouette, suitable as gather node and icon."
+    },
+    {
+      "id": "sunspike",
+      "type": "icon_and_world_node",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A hardy desert herb with bright heat-gold spikes and resinous core, readable from above, suitable as gather node and icon."
+    },
+    {
+      "id": "rain_orchid",
+      "type": "icon_and_world_node",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A humid jungle orchid with broad pink petals and wet green leaves, readable from above, suitable as gather node and icon."
+    },
+    {
+      "id": "sunleaf_plains",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A plains-specific sunleaf world node with meadow markers and wind-laid grass around it, readable from above."
+    },
+    {
+      "id": "field_bloom_plains",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A plains field bloom node with open roadside framing and soft field-light accents, readable from above."
+    },
+    {
+      "id": "whisper_moss_plains",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A plains whisper moss node growing around low standing stones and roadside shade, readable from above."
+    },
+    {
+      "id": "arcane_dust_quarry",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "An arcane dust node settled into quarry cracks with stone shelf debris, readable from above."
+    },
+    {
+      "id": "quarry_lichen_quarry",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A quarry lichen node spread across a chipped slate ledge with mineral flakes, readable from above."
+    },
+    {
+      "id": "ember_root_quarry",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "An ember root node surfacing through a hot quarry seam with broken stone around it, readable from above."
+    },
+    {
+      "id": "moon_fern_forest",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A moon fern node framed by dense forest groundcover and cool moonlit shade, readable from above."
+    },
+    {
+      "id": "mist_moth_wing_forest",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A mist moth wing node caught on forest bark and ferns, readable from above."
+    },
+    {
+      "id": "glow_moth_forest",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A glow moth node hovering in a forest glade with soft moonlit halo, readable from above."
+    },
+    {
+      "id": "whisper_moss_forest",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A forest whisper moss node gathered at a shaded trunk base, readable from above."
+    },
+    {
+      "id": "ember_root_forest",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "An ember root node emerging from a charred hollow in the forest floor, readable from above."
+    },
+    {
+      "id": "reedflower_lake",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A lake reedflower node standing in shallow reeds with water-edge highlights, readable from above."
+    },
+    {
+      "id": "dew_slug_lake",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A dew slug node on wet lakeshore stones with reeds around it, readable from above."
+    },
+    {
+      "id": "mist_moth_wing_lake",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A mist moth wing node gathered from lake reeds and damp bark, readable from above."
+    },
+    {
+      "id": "moon_fern_lake",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A moon fern node rooted in a shaded lakeside cove, readable from above."
+    },
+    {
+      "id": "whisper_moss_lake",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A whisper moss node clinging to cool shoreline stones, readable from above."
+    },
+    {
+      "id": "ember_root_desert",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "An ember root node surfacing from a sun-baked desert scar with drifting sand, readable from above."
+    },
+    {
+      "id": "sunspike_desert",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A sunspike node in exposed dunes with heat-bright sand ridges, readable from above."
+    },
+    {
+      "id": "arcane_dust_desert",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "An arcane dust node trapped in desert stone cracks and dry wind lines, readable from above."
+    },
+    {
+      "id": "whisper_moss_rainforest",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A rainforest whisper moss node climbing wet roots and broad leaves, readable from above."
+    },
+    {
+      "id": "rain_orchid_rainforest",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A rainforest orchid node with humid broad-leaf framing and soft mist bloom, readable from above."
+    },
+    {
+      "id": "mist_moth_wing_rainforest",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A mist moth wing node caught on glossy jungle leaves, readable from above."
+    },
+    {
+      "id": "dew_slug_rainforest",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A dew slug node on soaked rainforest roots and puddled clearings, readable from above."
+    },
+    {
+      "id": "nightglass_bloom",
+      "type": "icon_and_world_node",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A pale blue-white desert flower with glassy petals open wide under starlight, cold luminous herb, readable from above."
+    },
+    {
+      "id": "scorchvine_resin",
+      "type": "icon_and_world_node",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "Beads of hot amber resin welling from a dark dune vine, warm volatile reagent, readable from above."
+    },
+    {
+      "id": "saltmirror_flake",
+      "type": "icon_and_world_node",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "Thin mirror-bright plates of salt lying on cracked pan clay, pure reflective reagent, readable from above."
+    },
+    {
+      "id": "nightglass_bloom_desert",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "Nightglass bloom variant staged on open desert sand for the Sunscar salt pan route."
+    },
+    {
+      "id": "scorchvine_resin_desert",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "Scorchvine resin variant staged on open desert sand for the Sunscar dune route."
+    },
+    {
+      "id": "saltmirror_flake_desert",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "Saltmirror flake variant staged on cracked pan clay for the Sunscar salt pan route."
+    }
+  ]
+}

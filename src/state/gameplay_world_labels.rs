@@ -84,9 +84,7 @@ impl GameplayState {
         data: &GameData,
         npc: &NpcDefinition,
     ) -> Option<(String, WorldLabelTone)> {
-        let quest = (!npc.quest_id.is_empty())
-            .then(|| data.quest(&npc.quest_id))
-            .flatten()?;
+        let quest = self.npc_active_quest(data, npc)?;
         if self.progression.completed_quests.contains(&quest.id) {
             return None;
         }

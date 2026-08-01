@@ -1,0 +1,28 @@
+{
+  "mutation_formulas": [
+    {
+      "id": "moon_fern_glow_mutation",
+      "seed_item_id": "moon_fern",
+      "required_effect_kind": "glow",
+      "yield_bonus": 1,
+      "growth_bonus_days": 1,
+      "mutation_note": "moonlit"
+    },
+    {
+      "id": "ember_root_speed_mutation",
+      "seed_item_id": "ember_root",
+      "required_effect_kind": "speed",
+      "yield_bonus": 1,
+      "growth_bonus_days": 1,
+      "mutation_note": "quickfire"
+    },
+    {
+      "id": "arcane_dust_glow_mutation",
+      "seed_item_id": "arcane_dust",
+      "required_effect_kind": "glow",
+      "yield_bonus": 1,
+      "growth_bonus_days": 0,
+      "mutation_note": "radiant"
+    }
+  ]
+}

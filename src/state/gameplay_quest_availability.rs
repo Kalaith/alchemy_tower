@@ -1,5 +1,5 @@
 use super::GameplayState;
-use crate::data::QuestDefinition;
+use crate::data::{GameData, QuestDefinition};
 
 #[path = "gameplay_quest_unlock_text.rs"]
 mod quest_unlock_text;
@@ -20,12 +20,18 @@ impl GameplayState {
             && self.progression.total_brews >= quest.minimum_total_brews
     }
 
-    pub(super) fn quest_unlock_summary(&self, quest: &QuestDefinition) -> String {
+    pub(super) fn quest_unlock_summary(&self, data: &GameData, quest: &QuestDefinition) -> String {
+        // Name the blocking request the way the player saw it. Raw quest ids
+        // used to leak straight into this line, and a chain multiplies them.
         let missing_prereqs = quest
             .prerequisite_quests
             .iter()
             .filter(|quest_id| !self.progression.completed_quests.contains(*quest_id))
-            .cloned()
+            .map(|quest_id| {
+                data.quest(quest_id)
+                    .map(|blocking| blocking.title.clone())
+                    .unwrap_or_else(|| quest_id.clone())
+            })
             .collect::<Vec<_>>();
         let missing_warp = !quest.required_unlocked_warp.is_empty()
             && !self

@@ -192,4 +192,49 @@ mod tests {
             "quests want unknown items:\n{missing:#?}"
         );
     }
+
+    #[test]
+    fn quest_chains_and_gates_resolve() {
+        let data = load_embedded().expect("embedded game data should load");
+        let mut missing = Vec::new();
+
+        for npc in &data.npcs {
+            for quest_id in npc.quest_chain() {
+                match data.quest(quest_id) {
+                    None => missing.push(format!("{} -> quest {}", npc.id, quest_id)),
+                    Some(quest) if quest.giver_npc_id != npc.id => missing.push(format!(
+                        "{} carries {} but it is given by {}",
+                        npc.id, quest.id, quest.giver_npc_id
+                    )),
+                    Some(_) => {}
+                }
+            }
+        }
+
+        for quest in &data.quests {
+            for prerequisite in &quest.prerequisite_quests {
+                if data.quest(prerequisite).is_none() {
+                    missing.push(format!("{} -> prerequisite {}", quest.id, prerequisite));
+                }
+            }
+        }
+
+        for area in &data.areas {
+            for node in &area.gather_nodes {
+                if !node.required_completed_quest.is_empty()
+                    && data.quest(&node.required_completed_quest).is_none()
+                {
+                    missing.push(format!(
+                        "{} -> gate quest {}",
+                        node.id, node.required_completed_quest
+                    ));
+                }
+            }
+        }
+
+        assert!(
+            missing.is_empty(),
+            "unresolved quest references:\n{missing:#?}"
+        );
+    }
 }

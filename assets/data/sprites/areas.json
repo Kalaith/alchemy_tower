@@ -1,0 +1,121 @@
+{
+  "entries": [
+    {
+      "id": "tower_entry",
+      "type": "background_plate",
+      "image_size_px": [
+        1920,
+        1080
+      ],
+      "prompt": "Top-down magical tower entry laboratory, old stone, copper fixtures, restored cauldron corner, worn research surfaces, mysterious but welcoming first playable space."
+    },
+    {
+      "id": "north_plains",
+      "type": "background_plate",
+      "image_size_px": [
+        1920,
+        1080
+      ],
+      "prompt": "Top-down spring plains between an old alchemy tower and the town, open field roads, low grass obstacles, marker posts, and bright meadow pockets, readable authored crossroads atmosphere."
+    },
+    {
+      "id": "town_square",
+      "type": "background_plate",
+      "image_size_px": [
+        1920,
+        1080
+      ],
+      "prompt": "Top-down village square, warm market paths, apothecary frontage, request board area, bright readable social hub with soft fantasy atmosphere."
+    },
+    {
+      "id": "rock_fields",
+      "type": "background_plate",
+      "image_size_px": [
+        1920,
+        1080
+      ],
+      "prompt": "Top-down broken quarry west of the plains, authored stone lanes, choke points, mineral shelves, and dust seams, rugged gathering zone with strong readable rock shapes."
+    },
+    {
+      "id": "moonlit_forest",
+      "type": "background_plate",
+      "image_size_px": [
+        1920,
+        1080
+      ],
+      "prompt": "Top-down moonlit forest east of the plains, winding tree paths, damp glades, denser canopy pockets, and a charred hollow branch, magical but grounded woodland gathering area."
+    },
+    {
+      "id": "lake_shore",
+      "type": "background_plate",
+      "image_size_px": [
+        1920,
+        1080
+      ],
+      "prompt": "Top-down lakeside west of town, authored shoreline curves, reed beds, shallow-water edges, and cool stone coves, readable shoreline exploration space."
+    },
+    {
+      "id": "sunscar_desert",
+      "type": "background_plate",
+      "image_size_px": [
+        1920,
+        1080
+      ],
+      "prompt": "Top-down southern desert with authored dune lanes, exposed stone scars, sparse shelter pockets, and hard sunlit travel lines, readable harsh but explorable environment."
+    },
+    {
+      "id": "tropical_rainforest",
+      "type": "background_plate",
+      "image_size_px": [
+        1920,
+        1080
+      ],
+      "prompt": "Top-down tropical rainforest east of town, layered jungle paths, root arches, broad-leaf growth, and wet clearings under dense canopy, readable jungle pathways."
+    },
+    {
+      "id": "greenhouse_floor",
+      "type": "background_plate",
+      "image_size_px": [
+        1920,
+        1080
+      ],
+      "prompt": "Top-down restored tower greenhouse, glass ribs, planter beds, warm moisture, cultivated magical growth, hopeful reclaimed space."
+    },
+    {
+      "id": "containment_floor",
+      "type": "background_plate",
+      "image_size_px": [
+        1920,
+        1080
+      ],
+      "prompt": "Top-down magical creature containment floor, calm habitat rings, secure but humane research atmosphere, cooler blue palette."
+    },
+    {
+      "id": "rune_workshop_floor",
+      "type": "background_plate",
+      "image_size_px": [
+        1920,
+        1080
+      ],
+      "prompt": "Top-down rune workshop, engraved benches, dust, glyph tools, arcane craft atmosphere, violet and brass highlights."
+    },
+    {
+      "id": "archive_floor",
+      "type": "background_plate",
+      "image_size_px": [
+        1920,
+        1080
+      ],
+      "prompt": "Top-down tower archives, heavy stacks, brass mechanisms, parchment drawers, reconstructed timeline machinery, scholarly mystery."
+    },
+    {
+      "id": "observatory_floor",
+      "type": "background_plate",
+      "image_size_px": [
+        1920,
+        1080
+      ],
+      "prompt": "Top-down portal observatory, astral lens, deep night palette, brass circles, restrained final-act wonder, solemn magical climax space."
+    }
+  ]
+}

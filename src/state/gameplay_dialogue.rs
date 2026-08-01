@@ -27,24 +27,16 @@ impl GameplayState {
             return;
         }
 
-        if npc.quest_id.is_empty() {
-            self.clear_overlay();
-            return;
-        }
-
-        let Some(quest) = data.quest(&npc.quest_id) else {
+        // Only the live step of this townsperson's arc is on the table; once
+        // every step is done there is nothing left to accept or hand over.
+        let Some(quest) = self.npc_active_quest(data, npc) else {
             self.clear_overlay();
             return;
         };
 
-        if self.progression.completed_quests.contains(&quest.id) {
-            self.clear_overlay();
-            return;
-        }
-
         if !self.progression.started_quests.contains(&quest.id) {
             if !self.quest_is_available(quest) {
-                self.runtime.status_text = self.quest_unlock_summary(quest);
+                self.runtime.status_text = self.quest_unlock_summary(data, quest);
                 return;
             }
             self.progression.started_quests.insert(quest.id.clone());

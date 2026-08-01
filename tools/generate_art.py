@@ -7,8 +7,18 @@ from pathlib import Path
 from PIL import Image, ImageColor, ImageDraw, ImageFilter
 
 ROOT = Path(__file__).resolve().parents[1]
-REQ = json.loads((ROOT / "assets/data/sprite_requirements.json").read_text(encoding="utf-8"))
+SPRITES = ROOT / "assets/data/sprites"
 OUT = ROOT / "assets/generated"
+
+
+def sprite_section(name):
+    """One requirements file per sprite section, so no single manifest grows
+    past the size the rest of the content data is held to."""
+    return json.loads((SPRITES / f"{name}.json").read_text(encoding="utf-8"))["entries"]
+
+
+REQ = {name: sprite_section(name) for name in
+       ["player", "npcs", "stations", "gatherables", "item_icons", "areas", "ui_and_effects"]}
 JOURNAL = ["routes", "notes", "brews", "greenhouse", "rapport"]
 TOASTS = ["journal_note", "recipe_logged", "quest_accepted", "quest_complete", "route_restored", "best_quality"]
 
@@ -374,24 +384,24 @@ def main():
         "brin_groundskeeper": ["#6b5a43", "#7d9c63", "#5c4738", "#ddc4a6", "#d6b083"],
         "lyra_keeper": ["#8aa7c4", "#dfe9ff", "#6a5446", "#ebd8c8", "#bde6e8"],
     }
-    for req in REQ["sprite_requirements"]["player"] + REQ["sprite_requirements"]["npcs"]:
+    for req in REQ["player"] + REQ["npcs"]:
         save(sheet(char_palettes[req["id"]]), Path("characters") / f'{req["id"]}.png')
     save(crow_sheet(), Path("characters/crow_guide.png"))
-    for req in REQ["sprite_requirements"]["stations"]:
+    for req in REQ["stations"]:
         save(station(req["id"], req["image_size_px"]), Path("stations") / f'{req["id"]}.png')
-    for req in REQ["sprite_requirements"]["items_and_gatherables"]:
+    for req in REQ["gatherables"] + REQ["item_icons"]:
         if req["type"] in {"icon_and_world_node", "inventory_icon"}:
             size = req.get("icon_size_px") or req.get("world_sprite_px")
             save(icon(req["id"], size), Path("items/icons") / f'{req["id"]}.png')
         if req["type"] in {"icon_and_world_node", "world_node_variant"}:
             save(icon(req["id"], req["world_sprite_px"], True), Path("items/world") / f'{req["id"]}.png')
-    for req in REQ["sprite_requirements"]["areas"]:
+    for req in REQ["areas"]:
         save(area(req["id"]), Path("areas") / f'{req["id"]}.png')
     for name in JOURNAL:
         save(ui_icon(name), Path("ui/journal_tabs") / f"{name}.png")
     for name in TOASTS:
         save(ui_icon(name), Path("ui/toasts") / f"{name}.png")
-    for req in REQ["sprite_requirements"]["ui_and_effects"]:
+    for req in REQ["ui_and_effects"]:
         if req["type"] == "effect_sprite":
             save(fx(req["id"]), Path("effects") / f'{req["id"]}.png')
 

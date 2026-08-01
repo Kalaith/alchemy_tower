@@ -1,0 +1,382 @@
+{
+  "entries": [
+    {
+      "id": "lumen_dust",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A small jar or pinch of luminous golden powder harvested from magical creatures, cleaner and brighter than arcane dust, readable icon."
+    },
+    {
+      "id": "dew_slime",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A vial of glossy pale blue dew slime, viscous but clean, moisture-rich magical reagent, readable icon."
+    },
+    {
+      "id": "starlight_shard",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A faceted crystal shard carrying cold starlight, white-silver glow with subtle blue edge, catalyst icon, premium magical readability."
+    },
+    {
+      "id": "splash_rune",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A carved splash rune tablet, cool blue magical symbol, readable arcane icon from above."
+    },
+    {
+      "id": "echo_rune",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A carved echo rune tablet, pale violet symbol suggesting repetition and resonance, readable arcane icon."
+    },
+    {
+      "id": "delay_rune",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A carved delay rune tablet, warm amber-orange symbol suggesting held release and timing, readable arcane icon."
+    },
+    {
+      "id": "soothing_tonic",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A small green restorative bottle, humble and stable, weak tonic silhouette, readable potion icon."
+    },
+    {
+      "id": "lantern_leak",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A slightly unstable purple glow potion bottle, leaking light at the cork, readable potion icon."
+    },
+    {
+      "id": "rush_draught",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A rough orange stimulant vial, energetic but unstable, readable potion icon."
+    },
+    {
+      "id": "healing_draught",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A dependable green healing draught in a clear bottle, balanced village medicine silhouette, readable potion icon."
+    },
+    {
+      "id": "glow_potion",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A refined glow potion, soft lavender liquid with steady pale light, readable potion icon."
+    },
+    {
+      "id": "star_lantern_elixir",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A premium starlit elixir bottle, silver-white crystalline glow, elegant rare potion silhouette, readable icon."
+    },
+    {
+      "id": "beastcalm_extract",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A calm pale aqua extract bottle used for magical creature habitats, gentle and controlled potion silhouette, readable icon."
+    },
+    {
+      "id": "splash_glow_potion",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A glow potion modified with splash rune energy, brighter outward halo motif, readable potion icon."
+    },
+    {
+      "id": "echo_healing_draught",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A healing draught with echo rune influence, layered green pulses in the bottle, readable potion icon."
+    },
+    {
+      "id": "delayed_stamina_tonic",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A stamina tonic modified for delayed release, orange bottle with contained coil-like energy, readable potion icon."
+    },
+    {
+      "id": "stamina_tonic",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A strong orange stamina tonic, clean energetic silhouette, readable potion icon."
+    },
+    {
+      "id": "murky_concoction",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A failed muddy potion with unpleasant sludge tone and unstable residue, still readable and distinct as a bad result icon."
+    },
+    {
+      "id": "field_poultice",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A rough tan meadow-salve bottle, humble restorative silhouette, readable potion icon."
+    },
+    {
+      "id": "calmleaf_infusion",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A soft green calming infusion bottle, quiet sleep-aid silhouette, readable potion icon."
+    },
+    {
+      "id": "verdant_restorative",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A deep green restorative bottle, vigorous growth silhouette, readable potion icon."
+    },
+    {
+      "id": "bloomrise_elixir",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A luminous spring-green elixir bottle, refined blooming silhouette, readable potion icon."
+    },
+    {
+      "id": "greenmend_salve",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A cool pale-green salve bottle for plants, gentle mend silhouette, readable potion icon."
+    },
+    {
+      "id": "lantern_draught",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A warm amber glow draught bottle, humble road-lamp silhouette, readable potion icon."
+    },
+    {
+      "id": "mothlight_brew",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A soft yellow-green drifting glow bottle, gentle moth-light silhouette, readable potion icon."
+    },
+    {
+      "id": "wardlight_solution",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A cold blue-white arcane light bottle, ward-reading silhouette, readable potion icon."
+    },
+    {
+      "id": "runemark_elixir",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A bright blue-white refined runelight elixir bottle, crisp arcane silhouette, readable potion icon."
+    },
+    {
+      "id": "duskbell_tonic",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A dim lavender calming glow bottle, dusk creature-handling silhouette, readable potion icon."
+    },
+    {
+      "id": "trailblaze_tonic",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A hot orange stimulant bottle, driving energy silhouette, readable potion icon."
+    },
+    {
+      "id": "wildfire_draught",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A fierce red-orange overcharged stimulant bottle, volatile burning silhouette, readable potion icon."
+    },
+    {
+      "id": "sunwarden_tonic",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A warm golden protective tonic bottle, steady desert-warmth silhouette, readable potion icon."
+    },
+    {
+      "id": "briskstep_draught",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A gentle pale-blue quickstep bottle, mild mobility silhouette, readable potion icon."
+    },
+    {
+      "id": "purified_draught",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A clean pale mint restorative bottle, flawless-pour silhouette, readable potion icon."
+    },
+    {
+      "id": "wellspring_elixir",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A brilliant teal masterwork restorative bottle, premium silhouette, readable potion icon."
+    },
+    {
+      "id": "emberglass_tonic",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A warm amber glass-hardened glow bottle, wind-steady light silhouette, readable potion icon."
+    },
+    {
+      "id": "stargrove_elixir",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A layered blue-white luminous elixir bottle, clear-beam silhouette, readable potion icon."
+    },
+    {
+      "id": "celestine_elixir",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A crystalline near-white observatory elixir bottle, brilliant silhouette, readable potion icon."
+    },
+    {
+      "id": "moonmoth_salve",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A pale green restorative bottle with faint halo, night-patient silhouette, readable potion icon."
+    },
+    {
+      "id": "kindling_tonic",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A warm orange hearth-tonic bottle, cozy warmth silhouette, readable potion icon."
+    },
+    {
+      "id": "sunscar_glass_elixir",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A warm amber-gold elixir bottle with a faint glassy shimmer, desert lantern potion icon."
+    },
+    {
+      "id": "nightglass_lantern",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A cold silver-blue lantern potion bottle holding a steady starlit flame, high-tier morph potion icon."
+    },
+    {
+      "id": "mirrorsalt_draught",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A pale mirror-clear restorative bottle with faint salt crystals settling at the base."
+    }
+  ]
+}

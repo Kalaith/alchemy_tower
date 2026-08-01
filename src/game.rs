@@ -55,11 +55,21 @@ impl Game {
         self.state = Some(match scene {
             "gameplay" => GameState::from_gameplay(GameplayState::new(&self.data)),
             "paused" => GameState::pause(GameplayState::new(&self.data)),
-            // "dialogue" or "dialogue:<npc_id>" opens a conversation overlay.
+            // "dialogue", "dialogue:<npc_id>", or "dialogue:<npc_id>:<beat>"
+            // opens a conversation overlay; the beat index skips past that many
+            // finished steps of the townsperson's arc.
             other if other.starts_with("dialogue") => {
-                let npc_id = other.strip_prefix("dialogue:").unwrap_or("mira_apothecary");
+                let target = other.strip_prefix("dialogue:").unwrap_or("mira_apothecary");
+                let (npc_id, beat) = match target.split_once(':') {
+                    Some((npc_id, beat)) => (npc_id, beat.parse::<usize>().unwrap_or(0)),
+                    None => (target, 0),
+                };
                 let mut gameplay = GameplayState::new(&self.data);
-                gameplay.open_dialogue_with(npc_id);
+                if beat > 0 {
+                    gameplay.open_dialogue_at_arc_beat(&self.data, npc_id, beat);
+                } else {
+                    gameplay.open_dialogue_with(npc_id);
+                }
                 GameState::from_gameplay(gameplay)
             }
             // "brew" opens the alchemy bench with a sample filled cauldron.

@@ -13,6 +13,12 @@ pub(crate) struct NpcDefinition {
     pub(crate) dialogue_complete: String,
     #[serde(default)]
     pub(crate) quest_id: String,
+    /// An ordered arc of requests from this townsperson: setup, complication,
+    /// payoff. Only the first unfinished step is ever offered, so a chain reads
+    /// as one relationship rather than a pile of simultaneous errands. Takes
+    /// precedence over the single `quest_id`, which stays for one-shot givers.
+    #[serde(default)]
+    pub(crate) quest_ids: Vec<String>,
     #[serde(default)]
     pub(crate) role: String,
     #[serde(default)]
@@ -32,6 +38,20 @@ pub(crate) struct NpcDefinition {
     pub(crate) friendship_reward_item_id: String,
     #[serde(default)]
     pub(crate) friendship_reward_amount: u32,
+}
+
+impl NpcDefinition {
+    /// This townsperson's requests in story order. Falls back to the single
+    /// `quest_id` so one-shot givers need no extra authoring.
+    pub(crate) fn quest_chain(&self) -> &[String] {
+        if !self.quest_ids.is_empty() {
+            &self.quest_ids
+        } else if !self.quest_id.is_empty() {
+            std::slice::from_ref(&self.quest_id)
+        } else {
+            &[]
+        }
+    }
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]

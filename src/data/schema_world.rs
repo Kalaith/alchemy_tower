@@ -86,6 +86,11 @@ pub(crate) struct GatherNodeDefinition {
     pub(crate) spawn_chance: u32,
     #[serde(default)]
     pub(crate) note: String,
+    /// Ground that only starts growing once a quest has been finished, so a
+    /// completed story beat leaves a visible change in the world instead of
+    /// only a journal entry.
+    #[serde(default)]
+    pub(crate) required_completed_quest: String,
     #[serde(default)]
     pub(crate) render: GatherNodeRenderDefinition,
 }
@@ -129,6 +134,13 @@ pub(crate) struct QuestDefinition {
     pub(crate) minimum_total_brews: u32,
     #[serde(default)]
     pub(crate) completion_milestones: Vec<JournalMilestoneEntry>,
+    /// What the giver says while this step is on offer, and once it is accepted.
+    /// A quest chain needs its own voice per beat — without these every step of
+    /// an arc reads as the same conversation.
+    #[serde(default)]
+    pub(crate) giver_intro_line: String,
+    #[serde(default)]
+    pub(crate) giver_active_line: String,
     /// Board requests only: when true, the request returns to the board after a
     /// cooldown instead of being permanently completed, giving the mid-game a
     /// recurring reason to brew and deliver.

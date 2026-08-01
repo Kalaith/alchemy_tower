@@ -1,0 +1,51 @@
+{
+  "entries": [
+    {
+      "id": "journal_tab_icons",
+      "type": "ui_icon_set",
+      "image_size_px": [
+        32,
+        32
+      ],
+      "count": 5,
+      "prompt": "A matching icon set for journal tabs: routes, notes, brews, greenhouse, rapport. Clean readable line-and-fill fantasy UI icons."
+    },
+    {
+      "id": "toast_event_icons",
+      "type": "ui_icon_set",
+      "image_size_px": [
+        32,
+        32
+      ],
+      "count": 6,
+      "prompt": "Small readable event icons for journal note, recipe logged, quest accepted, quest complete, route restored, best quality improved."
+    },
+    {
+      "id": "gather_feedback_sparkle",
+      "type": "effect_sprite",
+      "image_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A small magical sparkle burst for gathering feedback, radial but soft, usable for rare finds and quality celebrations."
+    },
+    {
+      "id": "brew_bubble_effect",
+      "type": "effect_sprite",
+      "image_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A cauldron bubble and vapor effect sprite for brewing feedback, readable and loop-friendly."
+    },
+    {
+      "id": "warp_glow_effect",
+      "type": "effect_sprite",
+      "image_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A magical doorway shimmer effect for restored warps, readable from top-down and suitable for soft pulsing."
+    }
+  ]
+}

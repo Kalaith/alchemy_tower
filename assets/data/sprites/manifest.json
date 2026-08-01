@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "project": "alchemy_tower",
+  "art_direction": {
+    "style": "Hand-painted fantasy pixel-art hybrid for a top-down alchemy exploration game. Soft magical atmosphere, readable silhouettes, slightly storybook, grounded materials, warm village life against old tower mystery.",
+    "camera": "Top-down with slight angle bias. Sprites must read clearly from above and keep strong shape language.",
+    "lighting": "Readable local contrast with soft bloom-ready highlights on magical materials. No pure black shadows. Favor teal, amber, moss, moonlight silver, and archive brass.",
+    "rendering_rules": [
+      "Transparent background for all sprites and icons unless the requirement explicitly says background plate.",
+      "Keep silhouettes bold and readable at gameplay scale.",
+      "Avoid noisy sub-pixel detail that muddies at small sizes.",
+      "Characters should fit the established village-fantasy tone rather than high armor fantasy.",
+      "Stations and gather nodes need stronger shape distinction than the prototype circles and rectangles.",
+      "Potions, catalysts, runes, and creature harvests should be instantly recognizable by outline first and color second."
+    ]
+  },
+  "size_guide": {
+    "character_frame_px": [
+      64,
+      64
+    ],
+    "character_sheet_layout": "4 directions x 4 walk frames plus 1 idle frame per direction",
+    "character_sheet_px": [
+      320,
+      256
+    ],
+    "station_sprite_px": [
+      96,
+      96
+    ],
+    "large_station_sprite_px": [
+      128,
+      128
+    ],
+    "gather_node_sprite_px": [
+      64,
+      64
+    ],
+    "item_icon_px": [
+      64,
+      64
+    ],
+    "ui_icon_px": [
+      32,
+      32
+    ],
+    "effect_sprite_px": [
+      64,
+      64
+    ],
+    "background_plate_px": [
+      1920,
+      1080
+    ]
+  }
+}

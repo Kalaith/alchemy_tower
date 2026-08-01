@@ -167,7 +167,12 @@
       "friendship_line": "The walk home feels like mine again, thanks to you. Here - cuttings I have been saving. A friend should have the good stock, not the leftovers.",
       "friendship_reward_coins": 15,
       "friendship_reward_item_id": "moon_fern",
-      "friendship_reward_amount": 3
+      "friendship_reward_amount": 3,
+      "quest_ids": [
+        "glow_for_rowan",
+        "harvest_blight_for_rowan",
+        "harvest_recovery_for_rowan"
+      ]
     },
     {
       "id": "mayor_elric",
@@ -440,7 +445,9 @@
         "healing_for_mira"
       ],
       "required_unlocked_warp": "",
-      "minimum_total_brews": 4
+      "minimum_total_brews": 4,
+      "giver_intro_line": "I work the cuttings after dark now. The beds do better when nothing is watching them, which is a stupid thing for a herbalist to say out loud. Bring me a light I can carry between the rows and I will stop saying it.",
+      "giver_active_line": "Any light yet? I have been counting the rows by touch and I keep getting a different number."
     },
     {
       "id": "cultivation_for_brin",
@@ -610,6 +617,58 @@
       "minimum_total_brews": 8,
       "repeatable": true,
       "repeat_cooldown_days": 2
+    },
+    {
+      "id": "harvest_blight_for_rowan",
+      "title": "The Beds That Will Not Take",
+      "description": "Deliver 1 Fine-or-better Purified Draught to Rowan so she can flush the seed trays and find out whether the fault is in the seed or in the ground under it.",
+      "required_item_id": "purified_draught",
+      "required_amount": 1,
+      "reward_coins": 42,
+      "giver_npc_id": "rowan_herbalist",
+      "minimum_quality_band": "Fine",
+      "required_trait": "pure",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [
+        "glow_for_rowan"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 10,
+      "giver_intro_line": "Now that I can see them, I wish I could not. Four trays sown the same week and not one of them has taken. I need something clean enough to flush the trays without leaving its own residue behind — then at least I will know whether to blame the seed or the ground.",
+      "giver_active_line": "The trays are waiting. Nothing clever, mind. Clean. Whatever you bring me becomes part of the answer, so it had better not be part of the question.",
+      "completion_milestones": [
+        {
+          "id": "harvest_blight_traced",
+          "title": "The Fault Is In The Ground",
+          "text": "Rowan's flushed trays came up as empty as the sown ones. The seed is sound. Whatever is failing in the valley is failing underneath it, in ground the town has worked the same way for four generations."
+        }
+      ]
+    },
+    {
+      "id": "harvest_recovery_for_rowan",
+      "title": "What The Valley Used To Grow",
+      "description": "Deliver 2 Fine-or-better Verdant Restoratives to Rowan so the bed rows behind the square can be turned and fed properly for the first time in years.",
+      "required_item_id": "verdant_restorative",
+      "required_amount": 2,
+      "reward_coins": 95,
+      "giver_npc_id": "rowan_herbalist",
+      "minimum_quality_band": "Fine",
+      "required_trait": "restorative",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [
+        "harvest_blight_for_rowan"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 16,
+      "giver_intro_line": "The ground, then. It has been asked for a harvest every year and offered nothing back since before my mother had the stall. Two restoratives, properly made, and I will turn the whole bed row myself. If it works we stop buying our own herbs from the road traders.",
+      "giver_active_line": "Two of them, and neither one thin. I only get to turn those beds once this season — if the second is weaker than the first I will have wasted the row and the year with it.",
+      "completion_milestones": [
+        {
+          "id": "harvest_beds_turned",
+          "title": "The Bed Rows Turned",
+          "text": "Rowan worked the restorative into the bed rows behind the square and had the whole row turned before evening. Within days there was moss on the north wall again and bloom along the path. The town square grows its own for the first time in a decade."
+        }
+      ]
     }
   ]
 }

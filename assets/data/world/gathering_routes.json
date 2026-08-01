@@ -83,6 +83,12 @@
       "name": "Sunscar Salt Pan",
       "area_id": "sunscar_desert",
       "description": "The cracked pan below the dunes, worth nothing at noon and worth the whole trip after dark or after rain."
+    },
+    {
+      "id": "town_bed_rows",
+      "name": "Town Bed Rows",
+      "area_id": "town_square",
+      "description": "The strips of worked ground behind the square. Bare for a decade, and worth walking again once Rowan has the row turned."
     }
   ]
 }

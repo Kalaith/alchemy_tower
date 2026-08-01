@@ -1,0 +1,121 @@
+{
+  "entries": [
+    {
+      "id": "entry_cauldron",
+      "type": "world_station",
+      "image_size_px": [
+        128,
+        128
+      ],
+      "prompt": "A restored entry-lab alchemy cauldron for a top-down game, sturdy iron basin, luminous teal simmer, copper pipes, arcane ward marks, old but cared-for magical workstation, instantly readable as brewing equipment."
+    },
+    {
+      "id": "entry_rest_bed",
+      "type": "world_station",
+      "image_size_px": [
+        128,
+        128
+      ],
+      "prompt": "A top-down camp bed tucked into an alchemy tower entry room, sturdy wooden frame, folded blanket, practical pillow, warm safe resting place for a tired tower alchemist, readable as a sleep station."
+    },
+    {
+      "id": "greenhouse_still",
+      "type": "world_station",
+      "image_size_px": [
+        128,
+        128
+      ],
+      "prompt": "A greenhouse still seen from above, glass coils, warm condensation, sunlit brass, plant-fed alchemy apparatus, softer and greener than the main cauldron, instantly readable as a refined brewing station."
+    },
+    {
+      "id": "greenhouse_planter_west",
+      "type": "world_station",
+      "image_size_px": [
+        96,
+        96
+      ],
+      "prompt": "A west planter bed for a top-down magical greenhouse, rectangular soil tray, carved stone rim, small sprouts and irrigation charm details, readable as a growable planter."
+    },
+    {
+      "id": "greenhouse_planter_east",
+      "type": "world_station",
+      "image_size_px": [
+        96,
+        96
+      ],
+      "prompt": "An east planter bed for a top-down magical greenhouse, same family as the west planter but with slightly different trim and arrangement to avoid copy-paste repetition, readable as a growable planter."
+    },
+    {
+      "id": "greenhouse_planter_north",
+      "type": "world_station",
+      "image_size_px": [
+        96,
+        96
+      ],
+      "prompt": "An expanded moon planter bed for a top-down magical greenhouse, more ornate stone rim, moonlit herb emphasis, subtly upgraded silhouette compared with the base planter beds."
+    },
+    {
+      "id": "town_request_board",
+      "type": "world_station",
+      "image_size_px": [
+        96,
+        96
+      ],
+      "prompt": "A top-down village request board, timber frame, pinned papers, wax seals, fluttering notes, instantly readable as the quest board."
+    },
+    {
+      "id": "containment_habitat_moth",
+      "type": "world_station",
+      "image_size_px": [
+        128,
+        128
+      ],
+      "prompt": "A magical lantern moth habitat seen from above, gentle enclosure with glowing perches, safe open habitat not a cage, warm golden moth-light, readable as a creature habitat."
+    },
+    {
+      "id": "containment_habitat_slug",
+      "type": "world_station",
+      "image_size_px": [
+        128,
+        128
+      ],
+      "prompt": "A mist slug habitat seen from above, damp stone basin, glass humidity panels, pale blue moisture glow, safe and calm enclosure, readable as a creature habitat."
+    },
+    {
+      "id": "rune_workbench",
+      "type": "world_station",
+      "image_size_px": [
+        128,
+        128
+      ],
+      "prompt": "A rune workbench for a top-down alchemy game, carved arcane slab, engraving tools, rune dust, brass clamps, violet-white glyph shimmer, instantly readable as rune modification equipment."
+    },
+    {
+      "id": "archive_console",
+      "type": "world_station",
+      "image_size_px": [
+        128,
+        128
+      ],
+      "prompt": "A restored archive console seen from above, old brass terminals, parchment drawers, timeline projector glow, scholarly magical machinery, readable as archive reconstruction equipment."
+    },
+    {
+      "id": "observatory_focus",
+      "type": "world_station",
+      "image_size_px": [
+        128,
+        128
+      ],
+      "prompt": "A top-down astral lens at the observatory, circular brass housing, starlight core, ancient instrument silhouette, solemn final-story atmosphere, readable as a climax interaction point."
+    },
+    {
+      "id": "apothecary_counter",
+      "type": "world_station",
+      "image_size_px": [
+        128,
+        128
+      ],
+      "prompt": "A top-down village apothecary counter, shelves, jars, scales, warm lantern light, merchant station silhouette, instantly readable as a shop."
+    }
+  ]
+}

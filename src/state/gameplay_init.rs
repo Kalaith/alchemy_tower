@@ -35,6 +35,27 @@ impl GameplayState {
         ));
     }
 
+    /// Advance a townsperson's arc past its earlier beats and open the
+    /// conversation, so the capture harness can see a mid-arc beat rather than
+    /// only the opening request every time.
+    pub(crate) fn open_dialogue_at_arc_beat(&mut self, data: &GameData, npc_id: &str, beat: usize) {
+        let Some(npc) = data.npc(npc_id) else {
+            return;
+        };
+        for quest_id in npc.quest_chain().iter().take(beat) {
+            self.progression.completed_quests.insert(quest_id.clone());
+            if let Some(quest) = data.quest(quest_id) {
+                for prerequisite in &quest.prerequisite_quests {
+                    self.progression
+                        .completed_quests
+                        .insert(prerequisite.clone());
+                }
+            }
+        }
+        self.progression.total_brews = 40;
+        self.open_dialogue_with(npc_id);
+    }
+
     /// Seed a filled cauldron and open the alchemy bench, so the capture harness
     /// can render a resolved brew preview. Moves the avatar onto the cauldron so
     /// the overlay survives the station-proximity check in `update`.

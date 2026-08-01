@@ -144,8 +144,10 @@ Data files follow the same ~800-line rule as `.rs` files. `src/data/loader_embed
 | Ingredients | `assets/data/items/ingredients_<biome>.json` — filed under the biome that anchors the herb; `ingredients_shared.json` for herbs found in 3+ areas or produced rather than gathered |
 | Potions | `assets/data/items/potions.json` — split by effect kind when it crosses 800 lines |
 | Creatures, catalysts, runes | `assets/data/items/materials.json` |
-| Recipes, morphs, rune recipes | `assets/data/game_data_crafting.json` |
+| Recipes and their morph targets | `assets/data/crafting/recipes_<effect>.json` — filed under the effect kind the output potion leads with (`restore`, `glow`, `speed`) |
+| Rune recipes, mutation formulas | `assets/data/crafting/rune_recipes.json`, `crafting/mutation_formulas.json` |
 | NPCs and quests | `assets/data/game_data_npcs.json` — split npcs/quests apart when it crosses 800 lines |
+| Art requirements | `assets/data/sprites/<section>.json` (`gatherables`, `item_icons`, `npcs`, `stations`, `areas`, `ui_and_effects`), read by `tools/generate_art.py` |
 
 When you split a file: move entries, add the new source to the right table in
 `loader_embedded.rs`, and confirm the counts survive (`cargo test` covers the references).
@@ -153,8 +155,9 @@ When you split a file: move entries, add the new source to the right table in
 ## Hard constraints (violating these breaks the build)
 
 - **New item id ⇒ new icon, or the art manifest test fails.** Add the id to
-  `assets/data/sprite_requirements.json` → `items_and_gatherables`, add a themed hex to the colour
-  dict in `tools/generate_art.py` `icon()`, then run `python tools/generate_art.py`.
+  `assets/data/sprites/gatherables.json` (herbs and world nodes) or `sprites/item_icons.json`
+  (potions), add a themed hex to the colour dict in `tools/generate_art.py` `icon()`, then run
+  `python tools/generate_art.py`.
   Same idea for a new area (`assets/generated/areas/<id>.png`) or NPC
   (`assets/generated/characters/<id>.png`). `art::asset_manifest::tests` is the gate.
 - **Recipe ingredient multisets must be unique per station** — the matcher keys on exact
@@ -199,6 +202,19 @@ Stop the loop and report if:
   morph, `mirrorsalt_draught` pulling desert+lake), and a repeatable board request. Added four
   content-integrity tests to `game_data.rs` — they now guard every later iteration.
   *Next: don't touch the desert or ingredients; rotate to NPCs, quests or the tower floors.*
+- **2026-08-01 — quests / NPCs.** Built the failing-harvest chain as Rowan's three-beat arc
+  (`glow_for_rowan` → `harvest_blight_for_rowan` → `harvest_recovery_for_rowan`), which needed four
+  optional schema fields: `NpcDefinition.quest_ids` (an ordered arc; only the first unfinished step
+  is ever offered), `QuestDefinition.giver_intro_line`/`giver_active_line` (per-beat voice), and
+  `GatherNodeDefinition.required_completed_quest`. That last one buys the visible town-state change
+  `TODO.md` asked for: finishing the arc turns the bed rows behind the square, and `town_square`
+  grows whisper moss and field bloom for the first time (it had zero gather nodes). Also split
+  `game_data_crafting.json` (989) into `crafting/recipes_<effect>.json` and `sprite_requirements.json`
+  (1262) into `sprites/<section>.json`; fixed raw quest ids leaking into the locked-request line.
+  Capture harness gained `dialogue:<npc>:<beat>` for seeing mid-arc conversations.
+  *Next: five townsfolk still have single one-shot requests — Mira, Brin, Elric, Ione and Lyra all
+  want arcs, and the pollinator-collapse chain is still unwritten. Or rotate to the tower floors,
+  which remain gates rather than places.*
 
 ## Deferred (needs a new system; not for this loop)
 

@@ -1,0 +1,82 @@
+{
+  "entries": [
+    {
+      "id": "mira_apothecary",
+      "type": "character_spritesheet",
+      "image_size_px": [
+        320,
+        256
+      ],
+      "frame_size_px": [
+        64,
+        64
+      ],
+      "prompt": "Top-down fantasy shopkeeper apothecary, practical apron, warm salmon and honey palette, tidy sleeves, confident merchant posture, village herbal trade silhouette, readable from above, designed for 4-direction walk and idle animation."
+    },
+    {
+      "id": "rowan_herbalist",
+      "type": "character_spritesheet",
+      "image_size_px": [
+        320,
+        256
+      ],
+      "frame_size_px": [
+        64,
+        64
+      ],
+      "prompt": "Top-down herbalist rival, green travel layers, clipped gathering tools, field-worn boots, slightly competitive stance, more outdoorsy than the shopkeeper, readable from above, designed for 4-direction walk and idle animation."
+    },
+    {
+      "id": "mayor_elric",
+      "type": "character_spritesheet",
+      "image_size_px": [
+        320,
+        256
+      ],
+      "frame_size_px": [
+        64,
+        64
+      ],
+      "prompt": "Top-down village mayor, modest formal coat, brass trim, civic sash or chain, practical authority rather than royalty, warm gold and brown palette, readable from above, designed for 4-direction walk and idle animation."
+    },
+    {
+      "id": "ione_archivist",
+      "type": "character_spritesheet",
+      "image_size_px": [
+        320,
+        256
+      ],
+      "frame_size_px": [
+        64,
+        64
+      ],
+      "prompt": "Top-down archivist researcher, cool blue and parchment palette, carrying rolled notes and a satchel, scholarly silhouette, precise and observant mood, readable from above, designed for 4-direction walk and idle animation."
+    },
+    {
+      "id": "brin_groundskeeper",
+      "type": "character_spritesheet",
+      "image_size_px": [
+        320,
+        256
+      ],
+      "frame_size_px": [
+        64,
+        64
+      ],
+      "prompt": "Top-down greenhouse groundskeeper, worn work gloves, soil-stained apron, sturdy boots, practical gardener silhouette, earth-toned palette with greenhouse greens, readable from above, designed for 4-direction walk and idle animation."
+    },
+    {
+      "id": "lyra_keeper",
+      "type": "character_spritesheet",
+      "image_size_px": [
+        320,
+        256
+      ],
+      "frame_size_px": [
+        64,
+        64
+      ],
+      "prompt": "Top-down creature keeper, calm posture, layered pale blue utility coat, habitat tools and feed pouch, gentle magical-naturalist silhouette, readable from above, designed for 4-direction walk and idle animation."
+    }
+  ]
+}

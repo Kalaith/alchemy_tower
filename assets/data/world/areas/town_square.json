@@ -126,5 +126,73 @@
       ]
     }
   ],
-  "gather_nodes": []
+  "gather_nodes": [
+    {
+      "id": "town_bedrow_moss_01",
+      "name": "Whisper Moss",
+      "item_id": "whisper_moss",
+      "color": [
+        96,
+        214,
+        150,
+        255
+      ],
+      "position": [
+        214.0,
+        176.0
+      ],
+      "radius": 15.0,
+      "route_id": "town_bed_rows",
+      "seasons": [],
+      "weathers": [
+        "clear",
+        "mist",
+        "rain"
+      ],
+      "time_windows": [
+        "morning",
+        "day",
+        "evening"
+      ],
+      "spawn_chance": 86,
+      "required_completed_quest": "harvest_recovery_for_rowan",
+      "note": "Moss came back to the north wall within days of the row being turned, as if it had only been waiting to be asked.",
+      "render": {
+        "sprite_id": "whisper_moss"
+      }
+    },
+    {
+      "id": "town_bedrow_bloom_01",
+      "name": "Field Bloom",
+      "item_id": "field_bloom",
+      "color": [
+        244,
+        214,
+        132,
+        255
+      ],
+      "position": [
+        648.0,
+        512.0
+      ],
+      "radius": 15.0,
+      "route_id": "town_bed_rows",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "weathers": [],
+      "time_windows": [
+        "morning",
+        "day"
+      ],
+      "spawn_chance": 74,
+      "required_completed_quest": "harvest_recovery_for_rowan",
+      "note": "Bloom along the path edge, self-seeded from Rowan's turned row. Nobody planted this one.",
+      "render": {
+        "sprite_id": "field_bloom"
+      }
+    }
+  ]
 }

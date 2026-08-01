@@ -136,13 +136,39 @@ struct EmbeddedItemData {
 }
 
 #[derive(Debug, Deserialize)]
-struct EmbeddedCraftingData {
+struct EmbeddedRecipeData {
+    #[serde(default)]
     recipes: Vec<RecipeDefinition>,
+}
+
+#[derive(Debug, Deserialize)]
+struct EmbeddedRuneRecipeData {
     #[serde(default)]
     rune_recipes: Vec<RuneRecipeDefinition>,
+}
+
+#[derive(Debug, Deserialize)]
+struct EmbeddedMutationData {
     #[serde(default)]
     mutation_formulas: Vec<MutationFormulaDefinition>,
 }
+
+/// Recipes are filed under the effect kind their output potion leads with, so
+/// a formula's home is decided by what it does rather than when it was added.
+const RECIPE_SOURCES: &[(&str, &str)] = &[
+    (
+        "crafting/recipes_restore",
+        include_str!("../../assets/data/crafting/recipes_restore.json"),
+    ),
+    (
+        "crafting/recipes_glow",
+        include_str!("../../assets/data/crafting/recipes_glow.json"),
+    ),
+    (
+        "crafting/recipes_speed",
+        include_str!("../../assets/data/crafting/recipes_speed.json"),
+    ),
+];
 
 fn load_areas() -> Result<Vec<AreaDefinition>, String> {
     AREA_SOURCES
@@ -158,6 +184,15 @@ fn load_items() -> Result<Vec<ItemDefinition>, String> {
         items.extend(part.items);
     }
     Ok(items)
+}
+
+fn load_recipes() -> Result<Vec<RecipeDefinition>, String> {
+    let mut recipes = Vec::new();
+    for &(label, source) in RECIPE_SOURCES {
+        let part: EmbeddedRecipeData = load_labeled_json(label, source)?;
+        recipes.extend(part.recipes);
+    }
+    Ok(recipes)
 }
 
 pub(super) fn load_embedded_parts() -> Result<GameDataParts, String> {
@@ -177,9 +212,13 @@ pub(super) fn load_embedded_parts() -> Result<GameDataParts, String> {
         "game_data_npcs",
         include_str!("../../assets/data/game_data_npcs.json"),
     )?;
-    let crafting: EmbeddedCraftingData = load_labeled_json(
-        "game_data_crafting",
-        include_str!("../../assets/data/game_data_crafting.json"),
+    let runes: EmbeddedRuneRecipeData = load_labeled_json(
+        "crafting/rune_recipes",
+        include_str!("../../assets/data/crafting/rune_recipes.json"),
+    )?;
+    let mutations: EmbeddedMutationData = load_labeled_json(
+        "crafting/mutation_formulas",
+        include_str!("../../assets/data/crafting/mutation_formulas.json"),
     )?;
 
     Ok(GameDataParts {
@@ -189,9 +228,9 @@ pub(super) fn load_embedded_parts() -> Result<GameDataParts, String> {
         npcs: npc.npcs,
         quests: npc.quests,
         items: load_items()?,
-        recipes: crafting.recipes,
-        rune_recipes: crafting.rune_recipes,
-        mutation_formulas: crafting.mutation_formulas,
+        recipes: load_recipes()?,
+        rune_recipes: runes.rune_recipes,
+        mutation_formulas: mutations.mutation_formulas,
         stations: stations.stations,
     })
 }

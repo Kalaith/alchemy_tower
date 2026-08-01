@@ -1,0 +1,370 @@
+{
+  "recipes": [
+    {
+      "id": "healing_draught_recipe",
+      "name": "Healing Draught",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        {
+          "item_id": "sunleaf",
+          "amount": 1
+        },
+        {
+          "item_id": "whisper_moss",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "healing_draught",
+      "output_amount": 1,
+      "description": "Simple and dependable. The town would gladly buy it.",
+      "required_heat": 1,
+      "required_stirs": 1,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "The missing wizard marked this one as the baseline for all restorative work.",
+      "minimum_quality": 24,
+      "preferred_traits": [
+        "healing"
+      ],
+      "guaranteed_traits": [
+        "restorative"
+      ],
+      "minimum_elements": {
+        "vita": 3,
+        "ember": 0,
+        "mist": 0,
+        "lux": 0
+      },
+      "catalyst_tag": "",
+      "catalyst_quality_bonus": 0,
+      "required_timing": "steady",
+      "required_sequence": [
+        "sunleaf",
+        "whisper_moss"
+      ],
+      "morph_targets": [],
+      "starter_known": true
+    },
+    {
+      "id": "field_poultice_recipe",
+      "name": "Field Poultice",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        {
+          "item_id": "sunleaf",
+          "amount": 1
+        },
+        {
+          "item_id": "field_bloom",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "field_poultice",
+      "output_amount": 1,
+      "description": "A rough meadow salve for the scrapes a work crew earns in a day.",
+      "required_heat": 1,
+      "required_stirs": 1,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "Every apprentice starts here: warm leaf, bright bloom, low fire.",
+      "minimum_quality": 26,
+      "preferred_traits": [
+        "healing",
+        "restorative"
+      ],
+      "guaranteed_traits": [
+        "restorative"
+      ],
+      "minimum_elements": {
+        "vita": 2,
+        "ember": 0,
+        "mist": 0,
+        "lux": 0
+      },
+      "required_timing": "steady",
+      "morph_targets": []
+    },
+    {
+      "id": "calmleaf_infusion_recipe",
+      "name": "Calmleaf Infusion",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        {
+          "item_id": "reedflower",
+          "amount": 1
+        },
+        {
+          "item_id": "whisper_moss",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "calmleaf_infusion",
+      "output_amount": 1,
+      "description": "A quiet green infusion for people who have forgotten how to sleep.",
+      "required_heat": 1,
+      "required_stirs": 2,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "Reed and moss both like a slow, cool hand. Rush it and it turns bitter.",
+      "minimum_quality": 28,
+      "preferred_traits": [
+        "calm",
+        "healing"
+      ],
+      "guaranteed_traits": [
+        "calm"
+      ],
+      "minimum_elements": {
+        "vita": 2,
+        "ember": 0,
+        "mist": 0,
+        "lux": 0
+      },
+      "required_timing": "late",
+      "morph_targets": []
+    },
+    {
+      "id": "verdant_restorative_recipe",
+      "name": "Verdant Restorative",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        {
+          "item_id": "field_bloom",
+          "amount": 1
+        },
+        {
+          "item_id": "rain_orchid",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "verdant_restorative",
+      "output_amount": 1,
+      "description": "A deep-green tonic that coaxes vigor back into tired bodies and tired beds.",
+      "required_heat": 2,
+      "required_stirs": 2,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "Master the plains-and-jungle pairing and it wants to bloom into something greater.",
+      "minimum_quality": 34,
+      "preferred_traits": [
+        "restorative",
+        "luminous"
+      ],
+      "guaranteed_traits": [
+        "restorative"
+      ],
+      "minimum_elements": {
+        "vita": 2,
+        "ember": 0,
+        "mist": 0,
+        "lux": 2
+      },
+      "required_timing": "",
+      "morph_targets": [
+        {
+          "output_item_id": "bloomrise_elixir",
+          "minimum_quality": 66,
+          "required_heat": 2,
+          "required_stirs": 2,
+          "required_timing": "late",
+          "room_bonus_required": true
+        }
+      ]
+    },
+    {
+      "id": "greenmend_salve_recipe",
+      "name": "Greenmend Salve",
+      "station_id": "greenhouse_still",
+      "ingredients": [
+        {
+          "item_id": "reedflower",
+          "amount": 1
+        },
+        {
+          "item_id": "dew_slime",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "greenmend_salve",
+      "output_amount": 1,
+      "description": "A cool, clean salve tuned for wilted planter beds and delicate specimens.",
+      "required_heat": 2,
+      "required_stirs": 1,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "The glasshouse still rewards purity above force.",
+      "minimum_quality": 34,
+      "preferred_traits": [
+        "pure",
+        "calm"
+      ],
+      "guaranteed_traits": [
+        "pure"
+      ],
+      "minimum_elements": {
+        "vita": 1,
+        "ember": 0,
+        "mist": 3,
+        "lux": 0
+      },
+      "required_timing": "steady",
+      "morph_targets": []
+    },
+    {
+      "id": "purified_draught_recipe",
+      "name": "Purified Draught",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        {
+          "item_id": "quarry_lichen",
+          "amount": 1
+        },
+        {
+          "item_id": "reedflower",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "purified_draught",
+      "output_amount": 1,
+      "description": "A clean, exacting restorative prized by buyers who pay for a flawless pour.",
+      "required_heat": 2,
+      "required_stirs": 3,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "Two pure reagents hold together under real pressure. Mastered, it reaches a wellspring.",
+      "minimum_quality": 36,
+      "preferred_traits": [
+        "pure",
+        "calm"
+      ],
+      "guaranteed_traits": [
+        "pure"
+      ],
+      "minimum_elements": {
+        "vita": 0,
+        "ember": 0,
+        "mist": 2,
+        "lux": 0
+      },
+      "required_timing": "",
+      "morph_targets": [
+        {
+          "output_item_id": "wellspring_elixir",
+          "minimum_quality": 72,
+          "required_heat": 2,
+          "required_stirs": 3,
+          "required_timing": "steady",
+          "room_bonus_required": true
+        }
+      ]
+    },
+    {
+      "id": "moonmoth_salve_recipe",
+      "name": "Moonmoth Salve",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        {
+          "item_id": "lumen_dust",
+          "amount": 1
+        },
+        {
+          "item_id": "whisper_moss",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "moonmoth_salve",
+      "output_amount": 1,
+      "description": "A restorative that leaves a faint moth-light halo, easy on frightened patients at night.",
+      "required_heat": 1,
+      "required_stirs": 2,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "Light and healing at once, if kept gentle.",
+      "minimum_quality": 30,
+      "preferred_traits": [
+        "luminous",
+        "healing"
+      ],
+      "guaranteed_traits": [
+        "soft_glow"
+      ],
+      "minimum_elements": {
+        "vita": 1,
+        "ember": 0,
+        "mist": 0,
+        "lux": 2
+      },
+      "required_timing": "steady",
+      "morph_targets": []
+    },
+    {
+      "id": "kindling_tonic_recipe",
+      "name": "Kindling Tonic",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        {
+          "item_id": "ember_root",
+          "amount": 1
+        },
+        {
+          "item_id": "sunleaf",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "kindling_tonic",
+      "output_amount": 1,
+      "description": "A warm hearth-tonic that puts heat back into cold hands on an autumn morning.",
+      "required_heat": 2,
+      "required_stirs": 2,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "Ember for the warmth, sunleaf to keep it kind.",
+      "minimum_quality": 28,
+      "preferred_traits": [
+        "warm",
+        "vigor"
+      ],
+      "guaranteed_traits": [
+        "warm"
+      ],
+      "minimum_elements": {
+        "vita": 0,
+        "ember": 3,
+        "mist": 0,
+        "lux": 0
+      },
+      "required_timing": "early",
+      "morph_targets": []
+    },
+    {
+      "id": "mirrorsalt_draught_recipe",
+      "name": "Mirrorsalt Draught",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        {
+          "item_id": "saltmirror_flake",
+          "amount": 1
+        },
+        {
+          "item_id": "reedflower",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "mirrorsalt_draught",
+      "output_amount": 1,
+      "description": "Salt-pan flake and lake reedflower: the driest ground in the valley cut with the wettest.",
+      "required_heat": 1,
+      "required_stirs": 3,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "The old keeper's note reads only: opposite waters, one clean pour.",
+      "minimum_quality": 34,
+      "preferred_traits": [
+        "pure",
+        "calm"
+      ],
+      "guaranteed_traits": [
+        "restorative"
+      ],
+      "minimum_elements": {
+        "vita": 1,
+        "ember": 0,
+        "mist": 3,
+        "lux": 1
+      },
+      "required_timing": "steady",
+      "morph_targets": []
+    }
+  ]
+}
