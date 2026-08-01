@@ -162,6 +162,33 @@
       "render": {
         "sprite_id": "inkgall_bead_archive"
       }
+    },
+    {
+      "id": "archive_silverfish_01",
+      "name": "Shelf Silverfish",
+      "item_id": "shelf_silverfish",
+      "color": [
+        198,
+        204,
+        214,
+        255
+      ],
+      "position": [
+        700.0,
+        560.0
+      ],
+      "radius": 16.0,
+      "route_id": "archive_stack",
+      "seasons": [],
+      "weathers": [],
+      "time_windows": [
+        "night"
+      ],
+      "spawn_chance": 82,
+      "note": "They run from the lamp and settle again the moment it moves on. Ione will not have them killed and can tell you which bay is worst, which is the same thing as telling you which bay nobody has opened.",
+      "render": {
+        "sprite_id": "shelf_silverfish"
+      }
     }
   ]
 }

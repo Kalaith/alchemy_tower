@@ -297,6 +297,42 @@
       "render": {
         "sprite_id": "sumpflower_quarry"
       }
+    },
+    {
+      "id": "quarry_dustwake_01",
+      "name": "Dustwake Shrimp",
+      "item_id": "dustwake_shrimp",
+      "color": [
+        222,
+        212,
+        192,
+        255
+      ],
+      "position": [
+        520.0,
+        786.0
+      ],
+      "radius": 16.0,
+      "route_id": "quarry_sump",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "weathers": [
+        "rain",
+        "mist"
+      ],
+      "time_windows": [
+        "morning",
+        "day",
+        "evening"
+      ],
+      "spawn_chance": 74,
+      "note": "The sump fills and within a few hours the water is moving with them. Nothing carried them up here and nothing has stocked the pool: the eggs were already in the dust, waiting out however many dry years it took.",
+      "render": {
+        "sprite_id": "dustwake_shrimp"
+      }
     }
   ],
   "footstep_sound_set": "gravel"

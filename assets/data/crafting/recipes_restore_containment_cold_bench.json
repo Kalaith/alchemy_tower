@@ -214,6 +214,47 @@
           "text": "It can only be made in the weeks the flower is open, which is the first formula in the book that the calendar can close. Worth planning a winter around, which is not a sentence anyone in this valley has had cause to write before."
         }
       ]
+    },
+    {
+      "id": "twicegiven_tonic_recipe",
+      "name": "Twicegiven Tonic",
+      "station_id": "containment_cold_bench",
+      "ingredients": [
+        {
+          "item_id": "dustwake_shrimp",
+          "amount": 1
+        },
+        {
+          "item_id": "blankwater",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "twicegiven_tonic",
+      "output_amount": 1,
+      "description": "The creature that empties the water, brewed back into the water it emptied. There is nothing else in it, and that is the entire specification.",
+      "required_heat": 1,
+      "required_stirs": 2,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "Wren wrote the brief in one line: something she can give a patient who has already been given something, without having to know what.",
+      "minimum_quality": 44,
+      "preferred_traits": [
+        "pure",
+        "calm"
+      ],
+      "guaranteed_traits": [
+        "restorative"
+      ],
+      "minimum_elements": {
+        "vita": 1,
+        "ember": 0,
+        "mist": 6,
+        "lux": 0
+      },
+      "required_timing": "steady",
+      "required_sequence": [
+        "vigor",
+        "calm"
+      ]
     }
   ]
 }

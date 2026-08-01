@@ -83,6 +83,13 @@
       "after_milestone": "asked_for_perfect_work",
       "order": 100,
       "line": "Six years I have told this valley that wanting the best of something is how you end up with none of it. Then I wanted one. I am not going to pretend that was a different kind of asking because it was mine."
+    },
+    {
+      "npc_id": "lyra_keeper",
+      "after_quest": "",
+      "after_milestone": "containment_stable",
+      "order": 102,
+      "line": "Five things housed on that floor now, and three of them are up there because we decided they should be rather than because something had to be shut in. A tankful of shrimp that hatched out of dust, and a case of the creatures the archive has been quietly feeding for twenty years. The room was built to keep things away from the valley. It is the first time it has been used the other way round."
     }
   ]
 }

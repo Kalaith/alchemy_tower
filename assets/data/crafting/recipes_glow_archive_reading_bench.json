@@ -252,6 +252,58 @@
           "text": "The solution came out and it does not read ink at all. It finds the dent a nib leaves. Everything scraped off a page in this tower is still in the page, and the method for seeing it took a bloom, a bead of spilled ink and an afternoon."
         }
       ]
+    },
+    {
+      "id": "handmark_solution_recipe",
+      "name": "Handmark Solution",
+      "station_id": "archive_reading_bench",
+      "ingredients": [
+        {
+          "item_id": "etched_leaf",
+          "amount": 1
+        },
+        {
+          "item_id": "inkgall_bead",
+          "amount": 1
+        },
+        {
+          "item_id": "lumen_dust",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "handmark_solution",
+      "output_amount": 1,
+      "description": "A page reduced to the ink somebody put on it, and a bead of the same ink that left a different page a century later. The light knows the difference.",
+      "required_heat": 1,
+      "required_stirs": 3,
+      "unstable_output_item_id": "lantern_leak",
+      "lore_note": "Two hands on one page is ordinary in an archive — a scribe and a corrector, a clerk and a successor. It stops being ordinary on a floor log that is supposed to have been kept by one person for thirty years.",
+      "minimum_quality": 52,
+      "preferred_traits": [
+        "arcane",
+        "luminous"
+      ],
+      "guaranteed_traits": [
+        "soft_glow"
+      ],
+      "minimum_elements": {
+        "vita": 0,
+        "ember": 0,
+        "mist": 1,
+        "lux": 8
+      },
+      "required_timing": "late",
+      "required_sequence": [
+        "arcane",
+        "luminous"
+      ],
+      "discovery_milestones": [
+        {
+          "id": "two_hands_on_one_page",
+          "title": "Two Hands, One Page",
+          "text": "The light sorts a page into who wrote what, and the first log it was held over came apart into two hands where it should have held one. He did not only take eleven months out of the record. He wrote some of what was left, in a hand that was not his, and left it to be read."
+        }
+      ]
     }
   ]
 }

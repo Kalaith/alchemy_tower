@@ -328,6 +328,70 @@
       "wild_variants": [],
       "synthesis_weight": 2,
       "synthesis_value": 6
+    },
+    {
+      "id": "blankwater",
+      "name": "Blankwater",
+      "category": "ingredient",
+      "base_value": 14,
+      "color": [
+        226,
+        236,
+        240,
+        255
+      ],
+      "description": "Tank water the shrimp have been through. They take out everything there is to take, and what is left has no character at all — which turns out to be the rarest thing on the shelf, since every other jar in this room insists on something.",
+      "quality": 40,
+      "rarity": 3,
+      "elements": {
+        "vita": 0,
+        "ember": 0,
+        "mist": 4,
+        "lux": 0
+      },
+      "traits": [
+        "pure",
+        "calm"
+      ],
+      "source_conditions": [
+        "the sump tank, once the shrimp have worked it",
+        "drawn off clear, never stirred"
+      ],
+      "wild_variants": [],
+      "synthesis_weight": 1,
+      "synthesis_value": 5
+    },
+    {
+      "id": "etched_leaf",
+      "name": "Etched Leaf",
+      "category": "ingredient",
+      "base_value": 26,
+      "color": [
+        230,
+        224,
+        206,
+        255
+      ],
+      "description": "A blank sheet left in the case overnight comes out as nothing at all. A written one comes out with the writing standing proud of where the page used to be, because they will not touch iron-gall ink and never have.",
+      "quality": 48,
+      "rarity": 4,
+      "elements": {
+        "vita": 0,
+        "ember": 0,
+        "mist": 1,
+        "lux": 4
+      },
+      "traits": [
+        "arcane",
+        "luminous"
+      ],
+      "source_conditions": [
+        "the shelf case, one sheet at a time",
+        "whatever was written is what survives"
+      ],
+      "wild_variants": [],
+      "synthesis_weight": 1,
+      "synthesis_value": 6
     }
   ]
 }

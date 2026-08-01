@@ -347,6 +347,27 @@
           "description": "Slow, deep warming that does not shock the body."
         }
       ]
+    },
+    {
+      "id": "twicegiven_tonic",
+      "name": "Twicegiven Tonic",
+      "category": "potion",
+      "base_value": 88,
+      "color": [
+        232,
+        240,
+        244,
+        255
+      ],
+      "description": "Blankwater and the creature that made it, and nothing else in the bottle to argue with whatever the patient was given first. Wren has wanted one of these for twenty years and calls it, with feeling, boring.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 40.0,
+          "duration_seconds": 0.0,
+          "description": "Restores steadily and sits safely on top of an earlier dose."
+        }
+      ]
     }
   ]
 }

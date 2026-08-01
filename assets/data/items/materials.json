@@ -454,6 +454,72 @@
       ],
       "synthesis_weight": 1,
       "synthesis_value": 7
+    },
+    {
+      "id": "dustwake_shrimp",
+      "name": "Dustwake Shrimp",
+      "category": "creature",
+      "base_value": 18,
+      "color": [
+        222,
+        212,
+        192,
+        255
+      ],
+      "description": "Thumbnail-sized and nearly transparent, hatched out of floor dust that has been bone dry for years. The eggs wait out every drought the quarry has and back the sump to fill again, which Brin says is the only opinion on this site he has never known to be wrong.",
+      "quality": 42,
+      "rarity": 3,
+      "elements": {
+        "vita": 2,
+        "ember": 0,
+        "mist": 3,
+        "lux": 0
+      },
+      "traits": [
+        "pure",
+        "vigor"
+      ],
+      "source_conditions": [
+        "the quarry sump, in the hours after it fills",
+        "rain or mist only",
+        "gone again by the time the floor dries"
+      ],
+      "wild_variants": [],
+      "synthesis_weight": 1,
+      "synthesis_value": 4
+    },
+    {
+      "id": "shelf_silverfish",
+      "name": "Shelf Silverfish",
+      "category": "creature",
+      "base_value": 16,
+      "color": [
+        198,
+        204,
+        214,
+        255
+      ],
+      "description": "It eats the size out of old bindings and nothing else, so it only lives where a shelf has been left alone. Ione has never had one killed. Where they are thickest is where nobody has looked in twenty years, which she says is the most honest index in the building.",
+      "quality": 44,
+      "rarity": 3,
+      "elements": {
+        "vita": 0,
+        "ember": 0,
+        "mist": 2,
+        "lux": 2
+      },
+      "traits": [
+        "arcane",
+        "calm"
+      ],
+      "source_conditions": [
+        "the archive stacks, after dark",
+        "undisturbed shelves only",
+        "taken from the boards, never from a page"
+      ],
+      "wild_variants": [],
+      "synthesis_weight": 1,
+      "synthesis_value": 5
     }
   ]
 }

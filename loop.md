@@ -1170,10 +1170,45 @@ Stop the loop and report if:
   *Next split candidate:* `items/potions_glow.json` (718).
   **141 items, 92 tests; no morph branch resting on a single node.**
 
+- **2026-08-02 — three creatures, forty-four herbs, and a bench that favours creatures.** Item census
+  by category: **44 ingredients, 89 potions, and 5 catalysts against 3 creatures** — and the last
+  creature added was the bloomwing, **forty-five passes ago**. The containment cold bench favours the
+  **creature category** in its room bonus and there were three creatures in the entire game to feed
+  it; six of the areas built since have no living thing on them at all.
+  Both new creatures were written into fiction earlier passes had already laid down. The quarry sump
+  note has said since iteration 21 that *"the sump has been flooding and drying since before anybody
+  stopped cutting here — nothing else in the valley grows on that schedule"*, which is a description
+  of fairy shrimp with the shrimp left out: **dustwake shrimp** hatch out of dust that has been dry
+  for years, in the hours after the sump fills. And the archive's shelves are undisturbed by
+  definition, so **shelf silverfish** live in the bindings; Ione has never had one killed, and where
+  they are thickest is where nobody has looked in twenty years.
+  ***The second one turned into a plot instrument rather than a reagent.*** The case yields an
+  **etched leaf** — a page eaten down to the ink, because they will not touch iron-gall — and the
+  light brewed from it **sorts one hand from another**. The first floor log it is held over comes
+  apart into two hands where it should hold one: he did not only remove eleven months, he wrote some
+  of what was left. Discovery beat plus Ione's reply. The shrimp side is deliberately plain — they
+  strip the tank water of everything, and **blankwater** brews the one restorative with nothing in it
+  to argue with an earlier dose, which is the brief Wren has been writing for twenty years.
+  *Guard, verified against the real failure:* `every_habitat_creature_can_be_met` — a habitat whose
+  creature can be neither gathered nor bought is furniture that can be built, gated, drawn and never
+  stocked. That has shipped once already (the bloomwing habitat preceded any way to meet a bloomwing,
+  and was caught by hand). Removing the quarry node made it name `dustwake_shrimp` exactly.
+  *Split:* `items/potions_glow.json` (718) into the carried lanterns and `potions_glow_reading.json`
+  — the six lights that show a surface rather than a distance, which is the cut the archive's recipe
+  file already took.
+  ***The mistake is the note worth keeping.*** After sabotaging one area file to prove the new guard
+  bites, I restored it with `git checkout --` and **re-ran the whole authoring script**, which
+  appended a second copy of everything into six files that had never been reverted. Iteration 47
+  wrote down that these scripts are not idempotent and that a failed run needs a revert; I did the
+  reverse. **Revert every file the script touched, or dedupe — never re-run a script over a partially
+  reverted tree.** Caught by counting ids immediately afterwards rather than by a test.
+  **147 items, 5 creatures, 5 habitats, 51 recipes, 69 gather nodes; 93 tests.**
+
 ## Deferred (needs a new system; not for this loop)
 
 - Apply-potion-to-target flow (wilted plant, frightened creature, blocked path) — `TODO.md` calls it
   out as the unexpressed premise, but it is a new verb, not content.
 - World/character art pass and hand-authored ambient audio.
-- Typed overlay state model unifying archive/journal/pause/dialogue/alchemy.
-- Post-ending sandbox, if the scope question resolves toward a long tail.
+- Post-ending sandbox. **The scope question resolved (2026-08-02): long tail, 20-25 hours for a
+  finished product — see `TODO.md`. So this is in scope as content, but it still needs somewhere for
+  the game to go after the epilogue, which nothing currently provides.**

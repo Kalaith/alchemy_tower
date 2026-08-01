@@ -597,4 +597,50 @@ reachable areas: {open_areas:?}"
             "narrative gated on beats that never happen:\n{unreachable:#?}"
         );
     }
+
+    /// A habitat only does anything once a creature is put in it, so a habitat
+    /// whose creature exists nowhere in the valley is furniture: it can be
+    /// built, gated, drawn and walked past, and never stocked. That has already
+    /// shipped once — the bloomwing habitat went in a whole pass before there
+    /// was any way to meet a bloomwing — and it was found by hand rather than
+    /// by the suite, which is the argument for spending a test on it.
+    ///
+    /// Buying counts. The valley's counters sell things nobody will say where
+    /// they got, and a habitat stocked from a shop is stocked.
+    #[test]
+    fn every_habitat_creature_can_be_met() {
+        let data = load_embedded().expect("embedded game data should load");
+        let mut sources = std::collections::HashSet::new();
+        for area in &data.areas {
+            for node in &area.gather_nodes {
+                sources.insert(node.item_id.as_str());
+            }
+        }
+        for station in &data.stations {
+            for stocked in &station.stock {
+                sources.insert(stocked.item_id.as_str());
+            }
+        }
+
+        let mut housed = 0usize;
+        let mut orphans = Vec::new();
+        for station in &data.stations {
+            for creature_id in &station.habitat_creature_ids {
+                housed += 1;
+                if !sources.contains(creature_id.as_str()) {
+                    orphans.push(format!(
+                        "{} houses {creature_id}, which cannot be gathered or bought anywhere",
+                        station.id
+                    ));
+                }
+            }
+        }
+
+        // Zero habitats would pass the loop above without asserting anything.
+        assert!(housed > 0, "no habitat houses anything at all");
+        assert!(
+            orphans.is_empty(),
+            "habitats waiting on creatures that cannot be met:\n{orphans:#?}"
+        );
+    }
 }

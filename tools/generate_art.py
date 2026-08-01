@@ -160,6 +160,18 @@ def station(kind, size):
         for ox in [-22, -7, 8, 22]:
             d.line((cx + ox, cy + 8, cx + ox, cy - 14), fill=rgb("#8fb173"), width=2)
             d.ellipse(box(cx + ox, cy - 16, 7, 7), fill=rgb("#f4bab0"))
+    elif "habitat_shrimp" in kind:
+        d.rounded_rectangle((cx - 34, cy - 10, cx + 34, cy + 22), radius=6, fill=rgb("#6e7a80"))
+        d.rounded_rectangle((cx - 28, cy - 4, cx + 28, cy + 16), radius=4, fill=rgb("#b8d8de"))
+        d.rectangle((cx - 28, cy + 10, cx + 28, cy + 16), fill=rgb("#8d8272"))
+        for ox, oy in [(-16, 2), (-2, 8), (12, 0), (20, 9)]:
+            d.ellipse(box(cx + ox, cy + oy, 3, 2), fill=rgb("#f0e6d2"))
+    elif "habitat_silverfish" in kind:
+        d.rounded_rectangle((cx - 34, cy - 12, cx + 34, cy + 22), radius=6, fill=rgb("#5f5344"))
+        d.rounded_rectangle((cx - 28, cy - 6, cx + 28, cy + 16), radius=4, fill=rgb("#3a332a"))
+        for oy in [-2, 5, 12]:
+            d.line((cx - 24, cy + oy, cx + 24, cy + oy), fill=rgb("#9c8c70"), width=3)
+        d.line((cx - 10, cy + 2, cx + 4, cy + 3), fill=rgb("#cdd4dc"), width=2)
     elif "rune" in kind:
         d.rounded_rectangle((cx - 30, cy - 10, cx + 30, cy + 24), radius=10, fill=rgb("#544a60"))
         d.line((cx - 20, cy + 6, cx + 20, cy + 6), fill=rgb("#e2d4ff"), width=3)
@@ -372,6 +384,28 @@ def icon(item, size, world=False):
     elif base_item == "dew_slug":
         d.ellipse(box(cx, cy + 6, 18, 12), fill=rgb("#b5e8ff"))
         d.line((cx - 18, cy + 4, cx - 24, cy - 6), fill=rgb("#e3fbff"), width=2)
+    elif base_item == "dustwake_shrimp":
+        d.arc((cx - 18, cy - 12, cx + 16, cy + 18), 200, 20, fill=rgb("#e4d8bc"), width=6)
+        d.ellipse(box(cx + 12, cy - 6, 6, 5), fill=rgb("#efe6d0"))
+        d.ellipse(box(cx + 14, cy - 8, 2, 2), fill=rgb("#3c3a34"))
+        for ox in range(-12, 10, 5):
+            d.line((cx + ox, cy + 8, cx + ox - 2, cy + 15), fill=rgb("#cbbfa4"), width=1)
+        d.polygon([(cx - 18, cy + 4), (cx - 26, cy - 2), (cx - 26, cy + 12)], fill=rgb("#d8ccb0"))
+    elif base_item == "shelf_silverfish":
+        d.polygon([(cx - 16, cy - 5), (cx + 12, cy - 8), (cx + 16, cy), (cx + 12, cy + 8),
+                   (cx - 16, cy + 5)], fill=rgb("#c2cad4"), outline=rgb("#8d97a4"))
+        for ox in [-8, 0, 8]:
+            d.line((cx + ox, cy - 6, cx + ox, cy + 6), fill=rgb("#9aa4b0"), width=1)
+        d.line((cx + 16, cy - 1, cx + 26, cy - 8), fill=rgb("#aab4c0"), width=2)
+        d.line((cx + 16, cy + 1, cx + 26, cy + 8), fill=rgb("#aab4c0"), width=2)
+        for oy in [-6, 0, 6]:
+            d.line((cx - 16, cy + oy * 0.6, cx - 26, cy + oy), fill=rgb("#aab4c0"), width=2)
+    elif base_item == "etched_leaf":
+        d.polygon([(cx - 16, cy - 18), (cx + 16, cy - 15), (cx + 14, cy + 18), (cx - 18, cy + 15)],
+                  fill=rgb("#efe8d6", 90), outline=rgb("#c8bfa6", 160))
+        for oy in [-10, -3, 4, 11]:
+            d.line((cx - 11, cy + oy, cx + 9, cy + oy - 1), fill=rgb("#4a4438"), width=2)
+        d.line((cx - 11, cy + 15, cx - 1, cy + 14), fill=rgb("#4a4438"), width=2)
     elif base_item in {"splash_rune", "echo_rune", "delay_rune", "ward_rune"}:
         c = {"splash_rune": "#7dc0ff", "echo_rune": "#c7b4ff", "delay_rune": "#ffc189",
              "ward_rune": "#d6c696"}[base_item]
@@ -419,6 +453,7 @@ def icon(item, size, world=False):
             "hollow_hearth_tonic": "#cc9870", "firstthaw_draught": "#d6e4ee",
             "hardwinter_draught": "#e8c8aa", "sluicewater_tonic": "#a6c6ca", "openfield_draught": "#ccd69e", "longhold_cordial": "#c6b0d6",
             "keptwarm_tonic": "#d6c8b2", "southmarket_salve": "#c49e76", "farcarried_tonic": "#d8d2a8",
+            "blankwater": "#dceef2", "twicegiven_tonic": "#cfe4ea", "handmark_solution": "#b8c2e4",
         }.get(item, "#d2c1ff")
         d.rounded_rectangle((cx - 8, cy - 24, cx + 8, cy - 12), radius=3, fill=rgb("#d9dfe8", 220))
         d.rectangle((cx - 5, cy - 28, cx + 5, cy - 22), fill=rgb("#8b6a4d"))

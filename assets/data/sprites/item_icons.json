@@ -161,6 +161,24 @@
         64
       ],
       "prompt": "A lump of glassy orange-brown vitrified slag with a dull sheen."
+    },
+    {
+      "id": "blankwater",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A stoppered vial of completely clear water with nothing suspended in it, faint blue-white cast, deliberately featureless reagent, readable icon."
+    },
+    {
+      "id": "etched_leaf",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A pale sheet of paper eaten away everywhere except the writing, dark ink lines standing free where the page used to be, readable icon."
     }
   ]
 }

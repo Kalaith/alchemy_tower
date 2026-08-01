@@ -287,6 +287,15 @@
         64
       ],
       "prompt": "A pale blue-white lantern bottle with a flat undisturbing light."
+    },
+    {
+      "id": "handmark_solution",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A flask of cold blue-violet reading light, close and precise rather than far-throwing, readable potion icon."
     }
   ]
 }

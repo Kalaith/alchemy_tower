@@ -131,6 +131,13 @@ const ITEM_SOURCES: &[(&str, &str)] = &[
         "items/potions_glow",
         include_str!("../../assets/data/items/potions_glow.json"),
     ),
+    // The archive's lights are a family of their own: they show a surface
+    // rather than a distance, and they are brewed at the reading bench, which
+    // already has its own recipe file.
+    (
+        "items/potions_glow_reading",
+        include_str!("../../assets/data/items/potions_glow_reading.json"),
+    ),
     (
         "items/potions_speed",
         include_str!("../../assets/data/items/potions_speed.json"),

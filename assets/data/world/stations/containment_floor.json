@@ -196,6 +196,80 @@
           128.0
         ]
       }
+    },
+    {
+      "id": "containment_habitat_shrimp",
+      "name": "Sump Tank",
+      "kind": "habitat",
+      "area_id": "containment_floor",
+      "position": [
+        330.0,
+        396.0
+      ],
+      "interaction_radius": 54.0,
+      "color": [
+        206,
+        220,
+        226,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 0,
+        "favored_traits": [],
+        "favored_categories": [],
+        "description": ""
+      },
+      "planter_harvest_days": 0,
+      "habitat_creature_ids": [
+        "dustwake_shrimp"
+      ],
+      "habitat_output_item_id": "blankwater",
+      "habitat_harvest_days": 3,
+      "required_total_brews": 34,
+      "render": {
+        "sprite_size": [
+          128.0,
+          128.0
+        ]
+      }
+    },
+    {
+      "id": "containment_habitat_silverfish",
+      "name": "Shelf Case",
+      "kind": "habitat",
+      "area_id": "containment_floor",
+      "position": [
+        706.0,
+        556.0
+      ],
+      "interaction_radius": 54.0,
+      "color": [
+        214,
+        210,
+        196,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 0,
+        "favored_traits": [],
+        "favored_categories": [],
+        "description": ""
+      },
+      "planter_harvest_days": 0,
+      "habitat_creature_ids": [
+        "shelf_silverfish"
+      ],
+      "habitat_output_item_id": "etched_leaf",
+      "habitat_harvest_days": 2,
+      "required_completed_quest": "restored_record_for_ione",
+      "render": {
+        "sprite_size": [
+          128.0,
+          128.0
+        ]
+      }
     }
   ]
 }

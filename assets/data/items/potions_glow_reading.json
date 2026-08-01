@@ -1,0 +1,151 @@
+{
+  "items": [
+    {
+      "id": "benchlight_solution",
+      "name": "Benchlight Solution",
+      "category": "potion",
+      "base_value": 50,
+      "color": [
+        200,
+        194,
+        214,
+        255
+      ],
+      "description": "A working light the colour of old chalk. It picks out cut channels and worn inlay far better than it lights a road.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 180.0,
+          "description": "A flat grey-white light that shows detail rather than distance."
+        }
+      ]
+    },
+    {
+      "id": "annotated_light",
+      "name": "Annotated Light",
+      "category": "potion",
+      "base_value": 62,
+      "color": [
+        222,
+        206,
+        158,
+        255
+      ],
+      "description": "A close, warm reading light that makes ink stand off a page. Useless outdoors and indispensable at a desk.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 190.0,
+          "description": "A tight working light that shows writing rather than distance."
+        }
+      ]
+    },
+    {
+      "id": "marginalia_lantern",
+      "name": "Marginalia Lantern",
+      "category": "potion",
+      "base_value": 118,
+      "color": [
+        238,
+        228,
+        190,
+        255
+      ],
+      "description": "Under it, the notes somebody pencilled in a margin twenty years ago and then erased come back faintly. Ione has asked that this not be sold outside the tower.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 230.0,
+          "description": "Raises writing that is no longer strictly on the page."
+        }
+      ]
+    },
+    {
+      "id": "coldread_solution",
+      "name": "Coldread Solution",
+      "category": "potion",
+      "base_value": 52,
+      "color": [
+        214,
+        230,
+        242,
+        255
+      ],
+      "description": "A flat white light with no warmth in it. It flatters nothing and hides nothing, which is the entire requirement when the page you are reading has been lied about.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 230.0,
+          "description": "Cold even light that shows a surface exactly as it is."
+        }
+      ]
+    },
+    {
+      "id": "second_reading",
+      "name": "Second Reading",
+      "category": "potion",
+      "base_value": 26,
+      "color": [
+        186,
+        190,
+        176,
+        255
+      ],
+      "description": "A dull, patient little light that shows the inside of a bottle rather than the room. Ione has started asking for the failures instead of the successes and will not explain.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 150.0,
+          "description": "A close working light for looking at what went wrong."
+        }
+      ]
+    },
+    {
+      "id": "ghostline_solution",
+      "name": "Ghostline Solution",
+      "category": "potion",
+      "base_value": 96,
+      "color": [
+        162,
+        172,
+        206,
+        255
+      ],
+      "description": "A thin blue-grey light that ignores ink entirely and shows only pressure — where a nib pushed, where a page was leaned on, where something was written and then taken away. It cannot read. It can only point at the fact that there was something to read.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 190.0,
+          "description": "A raking light that finds the impression rather than the mark."
+        }
+      ]
+    },
+    {
+      "id": "handmark_solution",
+      "name": "Handmark Solution",
+      "category": "potion",
+      "base_value": 96,
+      "color": [
+        206,
+        214,
+        236,
+        255
+      ],
+      "description": "Held over a page it sorts the hands: everything one person wrote goes cold and everything the next wrote stays warm. The archive holds a great many pages with two hands on them and has never had a way of saying so.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 200.0,
+          "description": "A close reading light that separates one hand from another."
+        }
+      ]
+    }
+  ]
+}

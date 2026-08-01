@@ -188,6 +188,24 @@
         112
       ],
       "prompt": "A channelled forge bench seen from above, hot glowing runnels cut along its length, dark iron and ember orange, readable as a brewing station."
+    },
+    {
+      "id": "containment_habitat_shrimp",
+      "type": "world_station",
+      "image_size_px": [
+        128,
+        128
+      ],
+      "prompt": "A low glass sump tank seen from above, shallow clear water over quarry grit, faint moving specks, readable as a creature habitat rather than a brewing station."
+    },
+    {
+      "id": "containment_habitat_silverfish",
+      "type": "world_station",
+      "image_size_px": [
+        128,
+        128
+      ],
+      "prompt": "A shallow glazed case of stacked old book boards seen from above, dark wood frame and dim interior, readable as a creature habitat kept deliberately undisturbed."
     }
   ]
 }
