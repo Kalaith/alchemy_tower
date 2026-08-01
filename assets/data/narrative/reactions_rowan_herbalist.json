@@ -83,6 +83,13 @@
       "after_milestone": "greenhouse_expanded",
       "order": 97,
       "line": "The driftseed is in the beds. Nine years of pulling those heads out of a hedgerow and saying I did not know what they came from, and now I have a row of the parent plant and I know exactly. I have also tried the myrrh again. Fifth time. Do not ask me about it."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "discovered_the_revival",
+      "order": 98,
+      "line": "You worked it out at a bench. Not found in a book, not handed down — worked out, from a cutting and a guess, for a plant this valley had finished burying. I have grown things my whole life and I have never once brought one back."
     }
   ]
 }

@@ -206,6 +206,13 @@
           "required_timing": "late",
           "room_bonus_required": true
         }
+      ],
+      "discovery_milestones": [
+        {
+          "id": "discovered_the_fortnight",
+          "title": "A Fortnight Wide",
+          "text": "It can only be made in the weeks the flower is open, which is the first formula in the book that the calendar can close. Worth planning a winter around, which is not a sentence anyone in this valley has had cause to write before."
+        }
       ]
     }
   ]

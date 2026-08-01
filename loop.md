@@ -1058,6 +1058,30 @@ Stop the loop and report if:
   sorted **alphabetically by recipe name** — not file order, not loader order, both of which I tried
   first. **Check how a list is sorted before indexing into it.**
   **47 recipes, 50 quests; every bench between 5 and 23; all files under 700 lines.**
+- **2026-08-02 — the journal remembered every delivery and nothing the player worked out.**
+  **44 of 47 recipes are discovery-only**, and quests have written to the journal since the
+  beginning while discoveries never have. The game's own memory held every errand run for somebody
+  else and not one thing figured out at a bench. This is on the standing themes list — *"journal
+  beats that celebrate a discovery instead of silently logging it"* — and it was still true.
+  One `#[serde(default)]` field, `discovery_milestones`, mirroring quests' `completion_milestones`,
+  pushed where the discovery toast already fires. **Five beats, only for turning points**: the
+  raking light that shows pressure rather than ink; a plant the valley finished burying, brought
+  back from a cutting and a guess; the imbuing channels turning out to be usable; mirror frost
+  surviving *exactly* the stairs between lens and reading room, so **the distance is the
+  instruction**; and the fortnight-wide window the calendar can close. Rowan and Ione react.
+  *Two things measured and cleared first:* season/weather/hour balance (0.73 / 0.63 / 0.45 — night
+  is leaner **on purpose**, same reasoning as winter), and the 23 recipes nothing points at, which
+  is discovery working as designed rather than a hole. **Not every asymmetry is a bug.**
+  ***Guard for a risk this pass created:*** recipes are now a **third writer** into a flat journal
+  id space, and `push_journal_milestone` silently no-ops on a duplicate — so a clashing id means the
+  later beat never appears and quietly inherits the earlier one's title and text.
+  `no_two_journal_beats_share_an_id` names both owners; verified by pointing a discovery beat at
+  `the_previous_hand`.
+  *And the wiring is tested, not eyeballed:* `working_out_a_formula_is_written_into_the_journal`
+  resolves a real brew, hands it to the real outcome code, and checks the beat lands once and only
+  once. Extending `known_milestones` in the reactions test was a **correctness fix**, not a
+  workaround — recipe beats are real journal entries now.
+  **89 tests; the journal records what you worked out.**
 
 ## Deferred (needs a new system; not for this loop)
 

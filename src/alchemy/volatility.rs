@@ -121,6 +121,7 @@ mod tests {
             required_heat,
             required_stirs,
             unstable_output_item_id: "murky_concoction".to_owned(),
+            discovery_milestones: Vec::new(),
             lore_note: String::new(),
             minimum_quality: 0,
             preferred_traits: Vec::new(),

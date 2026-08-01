@@ -505,6 +505,13 @@
           "required_timing": "early",
           "room_bonus_required": true
         }
+      ],
+      "discovery_milestones": [
+        {
+          "id": "discovered_the_channels_hold",
+          "title": "The Channels Hold Heat",
+          "text": "The imbuing benches run hot the whole length, and it turns out that is usable. First thing brewed on the rune floor rather than merely reworked on it, twenty years after somebody cut the channels that made it possible."
+        }
       ]
     },
     {

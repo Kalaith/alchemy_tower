@@ -1,4 +1,4 @@
-use super::ElementProfile;
+use super::{ElementProfile, JournalMilestoneEntry};
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
@@ -73,6 +73,13 @@ pub(crate) struct RecipeDefinition {
     pub(crate) required_sequence: Vec<String>,
     #[serde(default)]
     pub(crate) morph_targets: Vec<MorphDefinition>,
+    /// Journal beats recorded the first time this formula is worked out at a
+    /// bench. Quests have written to the journal since the beginning and
+    /// discoveries never have, so the game's own memory held every delivery the
+    /// player made and not one thing they figured out. Left empty for the bulk
+    /// of the catalogue — only the discoveries that are turning points.
+    #[serde(default)]
+    pub(crate) discovery_milestones: Vec<JournalMilestoneEntry>,
     /// When true, this recipe is logged as known at the start of a new game.
     /// Left false for the wider catalogue so those formulae are discovered by
     /// experimentation at the bench. See `seed_starter_recipes`.

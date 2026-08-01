@@ -135,7 +135,14 @@
         "pure",
         "luminous"
       ],
-      "morph_targets": []
+      "morph_targets": [],
+      "discovery_milestones": [
+        {
+          "id": "discovered_two_flights_down",
+          "title": "Exactly Two Flights",
+          "text": "Mirror frost will not survive being carried warm, and it survives exactly the stairs between the lens and the reading room. The archive is the distance below the observatory that the work requires. Nobody wrote that down; the bench proved it."
+        }
+      ]
     },
     {
       "id": "lowstar_lantern_recipe",
@@ -237,7 +244,14 @@
         "arcane",
         "calm"
       ],
-      "morph_targets": []
+      "morph_targets": [],
+      "discovery_milestones": [
+        {
+          "id": "discovered_the_raking_light",
+          "title": "It Only Shows Pressure",
+          "text": "The solution came out and it does not read ink at all. It finds the dent a nib leaves. Everything scraped off a page in this tower is still in the page, and the method for seeing it took a bloom, a bead of spilled ink and an afternoon."
+        }
+      ]
     }
   ]
 }

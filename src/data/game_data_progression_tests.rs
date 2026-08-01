@@ -435,6 +435,55 @@ reachable areas: {open_areas:?}"
     /// so it can be filled from `narrative_reactions.json` after parsing, which
     /// means a broken include or a renamed key would leave the valley mute and
     /// still deserialize cleanly. Every assertion below reads zero as failure.
+    /// Journal milestones live in one flat id space, and `push_journal_milestone`
+    /// silently does nothing if the id is already recorded. Three different
+    /// kinds of content now write into it — quests on completion, recipes on
+    /// discovery, and the fixed narrative beats — so a duplicated id does not
+    /// error anywhere: the second beat simply never appears, and its title and
+    /// text are quietly replaced by the first one's.
+    #[test]
+    fn no_two_journal_beats_share_an_id() {
+        use crate::content::narrative_text;
+
+        let data = load_embedded().expect("embedded game data should load");
+        let mut seen = std::collections::HashMap::<String, String>::new();
+        let mut clashes = Vec::new();
+
+        let mut claim = |id: &str, owner: String, clashes: &mut Vec<String>| {
+            if let Some(first) = seen.insert(id.to_owned(), owner.clone()) {
+                clashes.push(format!("{id}: {first} and {owner}"));
+            }
+        };
+
+        for milestone in narrative_text().milestones.all() {
+            claim(&milestone.id, "narrative".to_owned(), &mut clashes);
+        }
+        for quest in &data.quests {
+            for milestone in &quest.completion_milestones {
+                claim(&milestone.id, format!("quest {}", quest.id), &mut clashes);
+            }
+        }
+        for recipe in &data.recipes {
+            for milestone in &recipe.discovery_milestones {
+                claim(&milestone.id, format!("recipe {}", recipe.id), &mut clashes);
+            }
+        }
+        for area in &data.areas {
+            for warp in &area.warps {
+                for milestone in &warp.unlock_milestones {
+                    claim(&milestone.id, format!("warp {}", warp.id), &mut clashes);
+                }
+            }
+        }
+        clashes.sort();
+
+        assert!(
+            clashes.is_empty(),
+            "journal beats sharing an id, so the later one never appears:
+{clashes:#?}"
+        );
+    }
+
     #[test]
     fn every_recorded_moment_gets_remarked_on_by_somebody() {
         use crate::content::narrative_text;
@@ -500,6 +549,9 @@ reachable areas: {open_areas:?}"
         }
         for quest in &data.quests {
             known_milestones.extend(quest.completion_milestones.iter().map(|m| m.id.clone()));
+        }
+        for recipe in &data.recipes {
+            known_milestones.extend(recipe.discovery_milestones.iter().map(|m| m.id.clone()));
         }
         for area in &data.areas {
             for warp in &area.warps {

@@ -72,7 +72,14 @@
         "lux": 1
       },
       "required_timing": "steady",
-      "morph_targets": []
+      "morph_targets": [],
+      "discovery_milestones": [
+        {
+          "id": "discovered_the_revival",
+          "title": "It Came Back",
+          "text": "A plant the valley finished losing twenty years ago, growing out of a cutting and a guess. Rowan asked to be shown the bench three times and then stopped asking and just came up."
+        }
+      ]
     },
     {
       "id": "hollowroot_cordial_recipe",
