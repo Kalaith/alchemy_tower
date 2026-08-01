@@ -4,7 +4,7 @@
       "id": "tower_ruin_edge",
       "name": "Tower Ruin Edge",
       "area_id": "tower_entry",
-      "description": "A short route around the old tower walls between the interior lab and the open plains."
+      "description": "The strip between the tower's own wall and the open plains, where the fallen stone stops and the grass starts. Everything here grows in the seam: too rough for the beds, too sheltered for the crossing."
     },
     {
       "id": "plains_crossing",
@@ -22,13 +22,13 @@
       "id": "creekside_meadow",
       "name": "Creekside Meadow",
       "area_id": "town_square",
-      "description": "The town’s inner footpaths and verge, now serving more as a crossroads than a gathering lane."
+      "description": "The verge and the inner footpaths, used as a crossroads rather than a gathering lane. What comes up is whatever survives being walked past four hundred times a day."
     },
     {
       "id": "moonlit_grove",
       "name": "Moonlit Grove",
       "area_id": "moonlit_forest",
-      "description": "The first winding forest path from the plains, with glades and canopy breaks that favor dusk gathering."
+      "description": "The first winding path in from the plains, with breaks in the canopy that let a little sky down. Everything worth taking here waits for those gaps."
     },
     {
       "id": "charred_hollow",
@@ -52,37 +52,37 @@
       "id": "rainmist_canopy",
       "name": "Rainmist Canopy",
       "area_id": "tropical_rainforest",
-      "description": "A layered jungle path with root arches, wet clearings, and persistent mist beneath a heavy canopy."
+      "description": "Root arches, standing clearings and a canopy that holds the rain long after it has stopped falling. The mist under it is not weather, it is the ceiling draining, and it keeps going on days the sky is clear."
     },
     {
       "id": "greenhouse_walk",
       "name": "Greenhouse Walk",
       "area_id": "greenhouse_floor",
-      "description": "A tiny cultivated loop that preserves a few reliable herbs inside the tower."
+      "description": "A short cultivated loop under glass, laid out by somebody who expected to be back. Close enough to work in one pass, far enough apart that nothing shades anything else."
     },
     {
       "id": "containment_ring",
       "name": "Containment Ring",
       "area_id": "containment_floor",
-      "description": "Quiet habitat cells fitted for harmless magical specimens and renewable harvests."
+      "description": "The cell walk, habitat frames on both sides and the floor kept deliberately dull. The point of the room is that nothing in it is interested in you."
     },
     {
       "id": "archive_stack",
       "name": "Archive Stack",
       "area_id": "archive_floor",
-      "description": "A sealed record hall where journals, floor logs, and theory notes can be reconstructed into one timeline."
+      "description": "Shelf ends and the run of bindings along the north wall. Ione permits gathering on exactly her terms, and what the room gives up is what it was losing anyway."
     },
     {
       "id": "observatory_span",
       "name": "Observatory Span",
       "area_id": "observatory_floor",
-      "description": "A high lens chamber that turns the tower's history into a final view rather than a weapon."
+      "description": "The rim walk around the great lens, above the weather. On a clear night the mirror gives its heat to the sky and takes nothing back, so what is collected here was left rather than grown."
     },
     {
       "id": "sunscar_saltpan",
       "name": "Sunscar Salt Pan",
       "area_id": "sunscar_desert",
-      "description": "The cracked pan below the dunes, worth nothing at noon and worth the whole trip after dark or after rain."
+      "description": "The cracked pan below the dunes. Worth nothing at all at noon and worth the whole trip after dark or after rain, which is the one lesson the desert teaches everybody exactly once."
     },
     {
       "id": "town_bed_rows",

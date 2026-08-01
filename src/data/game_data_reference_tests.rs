@@ -402,6 +402,48 @@ mod tests {
     /// read perfectly well in game, and — the direction that bites — a carefully
     /// written description can be shadowed by an override and never be seen.
     /// Measuring the field rather than the surface would report both wrongly.
+    /// The same placeholder floor the items have, for the other prose the
+    /// journal renders. Routes drifted the same way item descriptions did:
+    /// the ones written early stayed at catalogue length while everything
+    /// authored later ran three times longer, and two of them had gone stale
+    /// as well — the observatory's route still described a room with nothing in
+    /// it but a lens, six passes after it stopped being one.
+    ///
+    /// The floor is well below the shortest real description, so it only fires
+    /// on a stub. The **ceiling** is the more interesting half: the pane draws
+    /// the description with a wrapped block whose *start* is bounds-checked and
+    /// whose height is not, so a long enough route runs down into the Tower
+    /// Access panel underneath it. Measured off a capture — 197 characters
+    /// wrapped to four lines in the 380px column, and there is room for about
+    /// five before the collision. The ceiling is set at the longest description
+    /// that already shipped and is known to render, not at the collision point.
+    #[test]
+    fn every_route_description_fits_the_pane_and_is_not_a_stub() {
+        const PLACEHOLDER_FLOOR: usize = 100;
+        const PANE_CEILING: usize = 215;
+
+        let data = load_embedded().expect("embedded game data should load");
+        let wrong = data
+            .gathering_routes
+            .iter()
+            .filter_map(|route| {
+                let len = route.description.chars().count();
+                if len < PLACEHOLDER_FLOOR {
+                    Some(format!("{}: {len} chars, a stub", route.id))
+                } else if len > PANE_CEILING {
+                    Some(format!("{}: {len} chars, overruns the pane", route.id))
+                } else {
+                    None
+                }
+            })
+            .collect::<Vec<_>>();
+
+        assert!(
+            wrong.is_empty(),
+            "route descriptions outside what the journal pane can show: {wrong:#?}"
+        );
+    }
+
     #[test]
     fn nothing_the_journal_shows_is_a_placeholder() {
         use crate::content::ui_copy_optional;

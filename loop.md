@@ -1082,6 +1082,28 @@ Stop the loop and report if:
   once. Extending `known_milestones` in the reactions test was a **correctness fix**, not a
   workaround — recipe beats are real journal entries now.
   **89 tests; the journal records what you worked out.**
+- **2026-08-02 — two route descriptions were describing rooms that no longer exist.** The same drift
+  as the item prose in iteration 38: routes written early sat at catalogue length (76–90 chars)
+  while everything authored later ran two to three times longer. Worse than thin, **two were
+  stale** — `observatory_span` still described a room with nothing in it but a lens, six passes
+  after it stopped being one, and `archive_stack` described a sealed hall with nothing to pick up.
+  Nine rewritten.
+  ***And the rewrite immediately created the opposite bug.*** The pane draws the description as a
+  wrapped block whose **start** is bounds-checked and whose **height is not**, so it grows down into
+  the Tower Access panel underneath. Four of my nine came out at 236–262 characters against room
+  for about five lines. Trimmed to the longest description that already ships — 215, the one I can
+  see rendering — rather than to the collision point.
+  *Guard pins **both** ends,* verified in one run: a stub at 76 and a padded 348 named separately.
+  A floor alone would have let this pass do exactly the damage it nearly did.
+  ***A bug I went looking for and did not find.*** One route used a curly apostrophe (U+2019) where
+  every other string in the dataset uses ASCII — **one occurrence in 132 files**. Rather than
+  "fixing" it I put a probe glyph in the route the journal actually selects and captured it: the
+  font renders U+2019 **and** U+2014 correctly. Not a defect. **The one-off was the smell; the
+  render was the evidence.**
+  *Cleared first:* disassembly (generic over recipe data, nothing to author) and audio — 34 of 40
+  declared sounds are neither generated nor played, but hand-authored ambient audio is on the
+  **Deferred** list and event feedback is polish, not world depth.
+  **90 tests; route prose 110–215 chars and none of it stale.**
 
 ## Deferred (needs a new system; not for this loop)
 
