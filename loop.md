@@ -422,6 +422,23 @@ Stop the loop and report if:
   against a deliberately impossible sequence.*
   *Next: prose, four wild biomes without a signature, board-request variety. No system remains
   meaningfully built-but-unused.*
+- **2026-08-01 — prose (the ending).** The game now has six three-beat arcs, a revived extinct plant,
+  a returned pollinator population and a town charter — and the epilogue was **one fixed paragraph,
+  identical however much of the valley you had put back.** The last thing the game said was the only
+  thing it said that the player had no hand in. `narrative_text.json` now carries `epilogue_beats`
+  (`{after_milestones, order, line}`, same shape as the reactions list), and the ending composes the
+  fixed paragraph plus the earned beats. Eight authored; **the panel shows the three heaviest.**
+  *That cap is a design choice, not a truncation: an epilogue that listed everything would be a
+  checklist. `order` is narrative weight, so the ecological restorations outrank the civic ones.*
+  *The measurement was wrong and the capture caught it.* The char budget was estimated at 85 chars
+  per line; the real figure is about 78, and the first fully-earned epilogue rendered fourteen lines
+  and ran the last one through the footer. Beats trimmed, budget recalibrated to 1000 **from the
+  observed overflow rather than from arithmetic**, and the comment says so.
+  Three tests: the fullest epilogue fits, an untouched valley gets only the fixed paragraph, and the
+  epilogue never loses a beat it earned nor shows more than the cap. New capture scene `ending` —
+  the one screen with no other route to it short of finishing the game.
+  *Next: four wild biomes without a signature hook, board-request variety, or the six fixed
+  `narrative_text` milestones, which are the last prose nobody has revisited.*
 
 ## Deferred (needs a new system; not for this loop)
 

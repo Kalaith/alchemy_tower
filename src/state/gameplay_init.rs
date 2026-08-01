@@ -35,6 +35,18 @@ impl GameplayState {
         ));
     }
 
+    /// Open the epilogue with every journal beat it can respond to recorded, so
+    /// the fullest version of the ending can be looked at. It is the one screen
+    /// with no other route to it short of finishing the game.
+    pub(crate) fn open_full_ending(&mut self) {
+        for beat in &crate::content::narrative_text().epilogue_beats {
+            for milestone_id in &beat.after_milestones {
+                self.push_journal_milestone(milestone_id, milestone_id, "");
+            }
+        }
+        self.set_overlay(super::gameplay_overlay_types::OverlayScreen::Ending);
+    }
+
     /// Stand in a named room with every gate already satisfied, so the capture
     /// harness can look at a floor or biome that was just authored. Nodes whose
     /// season, weather or hour do not match the current moment still stay

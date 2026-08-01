@@ -11,6 +11,21 @@ pub(crate) struct NarrativeText {
     pub(crate) statuses: NarrativeStatuses,
     pub(crate) overlays: NarrativeOverlays,
     pub(crate) reactions: Vec<NarrativeReaction>,
+    pub(crate) epilogue_beats: Vec<NarrativeEpilogueBeat>,
+}
+
+/// A closing line the epilogue earns. The ending used to be one fixed paragraph
+/// however much of the valley had been put back, which made the last thing the
+/// game says the only thing it says that the player had no hand in.
+#[derive(Debug, Deserialize)]
+pub(crate) struct NarrativeEpilogueBeat {
+    /// Every one of these must be recorded. Empty means always earned.
+    #[serde(default)]
+    pub(crate) after_milestones: Vec<String>,
+    /// Narrative weight, not chronology. The panel has room for a few beats, so
+    /// the heaviest earned ones are the ones it finds room for.
+    pub(crate) order: u32,
+    pub(crate) line: String,
 }
 
 #[derive(Debug, Deserialize)]

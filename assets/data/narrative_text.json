@@ -543,5 +543,66 @@
       "order": 69,
       "line": "The burn feeds this town one quarter of every year. I have never once heard anybody thank it, and I include myself in that."
     }
+  ],
+  "epilogue_beats": [
+    {
+      "after_milestones": [
+        "pollinators_returned",
+        "harvest_beds_turned"
+      ],
+      "order": 100,
+      "line": "Below the lens the whole valley is flowering at once and the bed rows behind the square are carrying. Neither was restored to the tower. They were restored to the ground."
+    },
+    {
+      "after_milestones": [
+        "record_reconciled"
+      ],
+      "order": 90,
+      "line": "The eleven months taken out of the logs are back in them, and they are working notes rather than a testament. Whoever sealed this place proved to themselves what it would do if left running, wrote it down, then removed the working so nobody could be persuaded by it. You put it back anyway."
+    },
+    {
+      "after_milestones": [
+        "pollinators_returned"
+      ],
+      "order": 80,
+      "line": "There are bloomwings in the habitat and in the wild rows, and a plant the valley had finished losing is growing in a bed upstairs. It needed somebody to notice that eleven was not ninety."
+    },
+    {
+      "after_milestones": [
+        "harvest_beds_turned",
+        "terraces_worked_again"
+      ],
+      "order": 70,
+      "line": "The square grows its own and the tower's terraces are cut back into work along the lines somebody laid down twenty years ago. Two people who spent a decade blaming themselves for the ground are, this season, simply gardening."
+    },
+    {
+      "after_milestones": [
+        "town_charter_signed"
+      ],
+      "order": 60,
+      "line": "Goods move on the outer road after dark and the board in the square carries standing orders rather than emergencies. The tower is a line in a ledger now, which is the only kind of trust that survives the people who extended it."
+    },
+    {
+      "after_milestones": [
+        "town_water_cleared"
+      ],
+      "order": 50,
+      "line": "The well row has been quiet since it was treated. Two years of headaches that everyone including the apothecary had written down as strain, and the answer was a bucket and somebody willing to read their own handwriting."
+    },
+    {
+      "after_milestones": [
+        "terraces_worked_again"
+      ],
+      "order": 40,
+      "line": "The slope under the wall is terraced and planted again. Brin followed the original bed lines rather than laying his own, which is the closest thing to a monument anyone in this valley builds."
+    },
+    {
+      "after_milestones": [
+        "rune_workshop_restored",
+        "containment_repaired"
+      ],
+      "order": 30,
+      "line": "The habitats hold, the rune benches hum, and every floor that was sealed is being used for the work it was cut for. Restraint turned out not to mean leaving them shut."
+    }
   ]
 }

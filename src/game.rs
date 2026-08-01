@@ -85,6 +85,12 @@ impl Game {
                 gameplay.preview_area(&self.data, area_id, day);
                 GameState::from_gameplay(gameplay)
             }
+            // "ending" opens the epilogue with every beat it can react to.
+            "ending" => {
+                let mut gameplay = GameplayState::new(&self.data);
+                gameplay.open_full_ending();
+                GameState::from_gameplay(gameplay)
+            }
             // "brew" opens the alchemy bench with a sample filled cauldron.
             "brew" => {
                 let mut gameplay = GameplayState::new(&self.data);

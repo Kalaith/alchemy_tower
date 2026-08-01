@@ -495,9 +495,21 @@ mod tests {
             }
         }
 
+        // The epilogue is gated the same way, and a beat that can never be
+        // earned is the one piece of prose nobody would ever notice missing.
+        for beat in &narrative.epilogue_beats {
+            for milestone_id in &beat.after_milestones {
+                if !known_milestones.contains(milestone_id) {
+                    unreachable.push(format!(
+                        "epilogue beat waits on milestone {milestone_id}, which nothing records"
+                    ));
+                }
+            }
+        }
+
         assert!(
             unreachable.is_empty(),
-            "town reactions that can never be spoken:\n{unreachable:#?}"
+            "narrative gated on beats that never happen:\n{unreachable:#?}"
         );
     }
 }
