@@ -111,6 +111,13 @@
       "after_milestone": "first_true_brew",
       "order": 28,
       "line": "Congratulations, and one thing. Whatever came off that bench that was not the bottle went somewhere. It went down the hill into the lane where I count moths. I am not asking you to stop. I am asking you to tell me what it was."
+    },
+    {
+      "npc_id": "lyra_keeper",
+      "after_quest": "",
+      "after_milestone": "town_water_cleared",
+      "order": 92,
+      "line": "I asked you on your first good brew to tell me what goes down the hill. You did, and here is what that bought: we know when the bloom on the east shore started, we know it started with us, and it is the richest thing growing there. I am not going to ask you to stop picking it. I am asking you to keep the dates."
     }
   ]
 }

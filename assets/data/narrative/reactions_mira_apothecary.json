@@ -111,6 +111,13 @@
       "after_milestone": "first_true_brew",
       "order": 28,
       "line": "One that came out right. I have been sold a great deal of hopeful green water over nine years and I can tell the difference across a counter. Bring me the second one and I will start believing in the first."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "town_water_cleared",
+      "order": 92,
+      "line": "Nine years I was told the well tasted the way wells taste. Now there is a number for it, taken twice a season, and the lake has one too. Lyra keeps hers and I keep mine and we compare them, which is the least romantic thing this valley has ever done and I would not give it up."
     }
   ]
 }

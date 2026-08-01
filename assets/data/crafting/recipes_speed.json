@@ -361,6 +361,47 @@
         "vigor"
       ],
       "morph_targets": []
+    },
+    {
+      "id": "downwash_draught_recipe",
+      "name": "Downwash Draught",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        {
+          "item_id": "downwash_bloom",
+          "amount": 1
+        },
+        {
+          "item_id": "whisper_moss",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "downwash_draught",
+      "output_amount": 2,
+      "description": "Two to a batch, which is the tell. Nothing on this shore should yield like that off one handful.",
+      "required_heat": 2,
+      "required_stirs": 2,
+      "unstable_output_item_id": "rush_draught",
+      "lore_note": "Lyra's position is that a reagent this generous is a measurement, and that the thing being measured is us. She still helps you pick it.",
+      "minimum_quality": 42,
+      "preferred_traits": [
+        "vigor",
+        "volatile"
+      ],
+      "guaranteed_traits": [
+        "vigor"
+      ],
+      "minimum_elements": {
+        "vita": 4,
+        "ember": 1,
+        "mist": 0,
+        "lux": 0
+      },
+      "required_timing": "early",
+      "required_sequence": [
+        "vigor",
+        "calm"
+      ]
     }
   ]
 }

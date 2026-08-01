@@ -351,6 +351,47 @@
           "text": "Every reagent in it grows an hour's climb above the valley and nowhere in it, and all of it came off a frame at the top of the tower. Rowan spent four years trying to carry the bell downhill and open it. The answer was that it was never a question of carrying it down."
         }
       ]
+    },
+    {
+      "id": "strandline_tonic_recipe",
+      "name": "Strandline Tonic",
+      "station_id": "greenhouse_still",
+      "ingredients": [
+        {
+          "item_id": "nightwrack",
+          "amount": 1
+        },
+        {
+          "item_id": "tumbled_glass",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "strandline_tonic",
+      "output_amount": 1,
+      "description": "The whole shore in one bottle: something the water brought down, held in something the tower threw out.",
+      "required_heat": 1,
+      "required_stirs": 2,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "The glass is the interesting half. It came off these benches, so it takes a reaction the way the room expects one to be taken, which is why a shard off a window will not do.",
+      "minimum_quality": 40,
+      "preferred_traits": [
+        "restorative",
+        "pure"
+      ],
+      "guaranteed_traits": [
+        "restorative"
+      ],
+      "minimum_elements": {
+        "vita": 2,
+        "ember": 0,
+        "mist": 4,
+        "lux": 1
+      },
+      "required_timing": "steady",
+      "required_sequence": [
+        "restorative",
+        "arcane"
+      ]
     }
   ]
 }

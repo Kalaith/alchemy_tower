@@ -113,6 +113,12 @@
       "name": "Pass Switchback",
       "area_id": "southern_pass",
       "description": "The cut road climbing out of the valley, above the cloud line more often than not, and the only ground in reach that belongs to somewhere else."
+    },
+    {
+      "id": "lake_strandline",
+      "name": "Lake Strandline",
+      "area_id": "lake_shore",
+      "description": "The bare line the water leaves overnight, walked before the sun reaches it. Weed off the inflow, glass off the tower, a bloom that is new. Nothing on this line grew where you are standing."
     }
   ]
 }

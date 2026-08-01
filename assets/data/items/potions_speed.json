@@ -326,6 +326,27 @@
           "description": "A steady working lift that lasts the whole shift."
         }
       ]
+    },
+    {
+      "id": "downwash_draught",
+      "name": "Downwash Draught",
+      "category": "potion",
+      "base_value": 58,
+      "color": [
+        150,
+        186,
+        104,
+        255
+      ],
+      "description": "Quick, cheap and better than it has any business being, because the vigour in it was not grown so much as collected. Wren will use it and has written a note in the margin of her own shelf card about where it comes from.",
+      "effects": [
+        {
+          "kind": "speed",
+          "magnitude": 0.2,
+          "duration_seconds": 140.0,
+          "description": "A hard, cheap turn of speed that does not last."
+        }
+      ]
     }
   ]
 }

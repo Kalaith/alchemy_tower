@@ -1305,6 +1305,39 @@ Stop the loop and report if:
   now has the best thing to do.*
   **17 rune patterns, 94 potions, 28 board orders; 95 tests.**
 
+- **2026-08-02 — six nodes on the lake and one thing that was actually its own.** Counted
+  **exclusive** gatherables per area rather than node counts, which is the measurement that says
+  whether a place is a *source* or a corridor. The lake shore is the second-largest wild biome by
+  nodes and had **one** item found nowhere else — against 5 on the pass, 5 in the quarry, 4 in the
+  desert and forest. Six of its nine reagents were shared herbs you could pick closer to home, on a
+  single route, and it is one of only two wild biomes with no signature.
+  The hook is the one thing a lake does that nothing else here does: **it collects what the valley
+  loses.** A second route, the **strandline**, walked before the sun reaches it. `nightwrack` grew
+  somewhere up the inflow and let go. `tumbled_glass` is the tower's **own broken glassware**, swept
+  out of a door twenty years ago and rolled smooth ever since — and it still takes a reaction the
+  way the vessel it used to be did, which is why a shard off a window will not do. And at the warm
+  end where the hill drains, `downwash_bloom`: the richest thing on that shore, which was not there
+  before, gated on Mira's water-baseline chain **because that is the only reason anybody can date
+  it**. Lyra asked on your first good brew to be told what goes down the hill; this is the answer,
+  and she is explicit that she is not asking you to stop picking it.
+  *Two recipes so all three are wanted, and both of them say it:* the tonic brews something the
+  water brought down inside something the tower threw out, and the draught **batches two off one
+  handful**, which is the tell.
+  *Deliberately plugged into the system new content keeps skipping* — iteration 46's finding was that
+  the newest biomes never got wild variants. All three carry one, and
+  `every_wild_variant_can_actually_be_found` checked them without being asked.
+  ***A guard idea measured and discarded before writing it.*** "Every route must carry something of
+  its own" sounds right and is wrong: `creekside_meadow`, `plains_crossing`, `greenhouse_walk` and
+  `town_bed_rows` have zero exclusives **on purpose** — shared starter ground within walking distance
+  is what they were built for. Encoding that rule would have made four correct decisions look like
+  bugs. No new guard this pass; nothing here established a rule the suite did not already hold.
+  *Iteration 46's pane guard caught the route description at **347 characters** against its 215
+  ceiling and would have run it through the Tower Access panel. Trimmed to 188.*
+  **Lake: 6 → 9 nodes, 1 → 2 routes, 1 → 4 exclusives. 157 items, 72 nodes, 20 routes, 40 wild
+  variants; 95 tests.**
+  *Next thinnest by the same measure: `tropical_rainforest`, 6 nodes and 1 exclusive, one route, no
+  signature — the last wild biome at the floor.*
+
 ## Deferred (needs a new system; not for this loop)
 
 - Apply-potion-to-target flow (wilted plant, frightened creature, blocked path) — `TODO.md` calls it

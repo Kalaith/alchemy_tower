@@ -245,6 +245,8 @@ def icon(item, size, world=False):
         "driftbloom",
         "coldiron_lichen",
         "rimeflower",
+        "nightwrack",
+        "downwash_bloom",
     } or base_item in {
         "whisper_moss",
         "sunleaf",
@@ -276,6 +278,8 @@ def icon(item, size, world=False):
         "driftbloom",
         "coldiron_lichen",
         "rimeflower",
+        "nightwrack",
+        "downwash_bloom",
     }:
         colors = {
             "whisper_moss": "#74d59f",
@@ -308,6 +312,8 @@ def icon(item, size, world=False):
             "driftbloom": "#d6ce9e",
             "coldiron_lichen": "#94a89c",
             "rimeflower": "#d6e4f0",
+            "nightwrack": "#6c8468",
+            "downwash_bloom": "#8ec254",
         }
         for ox, oy in [(-10, 2), (2, -4), (12, 4), (-2, 10)]:
             d.ellipse(box(cx + ox, cy + oy, 9, 12), fill=rgb(colors[base_item]))
@@ -368,6 +374,12 @@ def icon(item, size, world=False):
             d.ellipse(box(cx + bx, cy + by, r, r), fill=rgb("#4a5170"))
             d.ellipse(box(cx + bx - r * 0.3, cy + by - r * 0.35, r * 0.3, r * 0.3),
                       fill=rgb("#9aa4c8"))
+    elif base_item == "tumbled_glass":
+        for px, py, r in [(-11, 6, 9), (3, -2, 11), (13, 8, 8)]:
+            d.ellipse(box(cx + px, cy + py, r, r * 0.78), fill=rgb("#c2d6da", 225),
+                      outline=rgb("#8fa8ae"))
+            d.arc((cx + px - r * 0.6, cy + py - r * 0.6, cx + px + r * 0.2, cy + py + r * 0.2),
+                  160, 300, fill=rgb("#eef6f8"), width=2)
     elif base_item == "cloudglass":
         for px, py in [(-10, 6), (2, -2), (12, 8)]:
             d.polygon([(cx + px - 9, cy + py + 10), (cx + px - 5, cy + py - 10),
@@ -463,6 +475,7 @@ def icon(item, size, world=False):
             "keptwarm_tonic": "#d6c8b2", "southmarket_salve": "#c49e76", "farcarried_tonic": "#d8d2a8",
             "blankwater": "#dceef2", "twicegiven_tonic": "#cfe4ea", "handmark_solution": "#b8c2e4",
             "underglass_tonic": "#c2dcd6",
+            "strandline_tonic": "#a8c4ba", "downwash_draught": "#96ba68",
             "heldstar_vigil": "#e8c88c", "tablewide_reading": "#aab6dc",
             "standing_dose": "#dcecf0", "keptback_draught": "#6e9aa8",
         }.get(item, "#d2c1ff")

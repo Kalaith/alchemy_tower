@@ -431,6 +431,27 @@
           "description": "Holds itself back and comes up when it is needed rather than when it is taken."
         }
       ]
+    },
+    {
+      "id": "strandline_tonic",
+      "name": "Strandline Tonic",
+      "category": "potion",
+      "base_value": 64,
+      "color": [
+        168,
+        196,
+        186,
+        255
+      ],
+      "description": "Weed that let go somewhere upstream, brewed in glass that used to be a beaker in this tower. Neither ingredient started where it was found and the tonic does not appear to mind.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 34.0,
+          "duration_seconds": 0.0,
+          "description": "Restores steadily, cool going down."
+        }
+      ]
     }
   ]
 }

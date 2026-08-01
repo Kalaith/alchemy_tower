@@ -305,6 +305,102 @@
       "render": {
         "sprite_id": "stillwater_pearl_lake"
       }
+    },
+    {
+      "id": "lake_nightwrack_01",
+      "name": "Nightwrack",
+      "item_id": "nightwrack",
+      "color": [
+        104,
+        126,
+        108,
+        255
+      ],
+      "position": [
+        168.0,
+        742.0
+      ],
+      "radius": 16.0,
+      "route_id": "lake_strandline",
+      "seasons": [],
+      "weathers": [
+        "mist",
+        "rain"
+      ],
+      "time_windows": [
+        "morning"
+      ],
+      "spawn_chance": 84,
+      "note": "A dark line of it along the water's edge, laid down overnight and lifted again by afternoon. Whatever the lake was carrying, this is where it put it down.",
+      "render": {
+        "sprite_id": "nightwrack"
+      }
+    },
+    {
+      "id": "lake_tumbled_glass_01",
+      "name": "Tumbled Glass",
+      "item_id": "tumbled_glass",
+      "color": [
+        176,
+        200,
+        204,
+        255
+      ],
+      "position": [
+        596.0,
+        806.0
+      ],
+      "radius": 16.0,
+      "route_id": "lake_strandline",
+      "seasons": [],
+      "weathers": [
+        "clear",
+        "mist"
+      ],
+      "time_windows": [
+        "morning",
+        "day"
+      ],
+      "spawn_chance": 78,
+      "note": "Rounded pieces of laboratory glass in among the shore stones, worn to the point of being pretty. Somebody swept a great deal of broken work off a bench and out of a door twenty years ago, and the lake has been finishing the job.",
+      "render": {
+        "sprite_id": "tumbled_glass"
+      }
+    },
+    {
+      "id": "lake_downwash_01",
+      "name": "Downwash Bloom",
+      "item_id": "downwash_bloom",
+      "color": [
+        142,
+        178,
+        96,
+        255
+      ],
+      "position": [
+        1004.0,
+        486.0
+      ],
+      "radius": 16.0,
+      "route_id": "lake_strandline",
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "weathers": [
+        "clear",
+        "rain"
+      ],
+      "time_windows": [
+        "day",
+        "evening"
+      ],
+      "spawn_chance": 74,
+      "required_completed_quest": "wellside_relief_for_mira",
+      "note": "It grows where the hill drains and nowhere else on the shore, and it grows well. Mira's baseline is the only reason anybody can say when it started.",
+      "render": {
+        "sprite_id": "downwash_bloom"
+      }
     }
   ],
   "footstep_sound_set": "shore"

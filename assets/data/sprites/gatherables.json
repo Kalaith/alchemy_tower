@@ -493,6 +493,45 @@
         64
       ],
       "prompt": "A slim tapered silverfish on old book boards, metallic grey scales, long antennae and three tail filaments, readable as a small library creature from above."
+    },
+    {
+      "id": "nightwrack",
+      "type": "icon_and_world_node",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A dark green tangle of lake weed laid along a waterline, wet and flat, readable from above as a gatherable."
+    },
+    {
+      "id": "tumbled_glass",
+      "type": "icon_and_world_node",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "Rounded pieces of pale laboratory glass worn smooth by water, among shore stones, readable from above as a gatherable."
+    },
+    {
+      "id": "downwash_bloom",
+      "type": "icon_and_world_node",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A thick bright green algal bloom on a warm shoreline, richer than everything around it, readable from above as a gatherable."
     }
   ]
 }

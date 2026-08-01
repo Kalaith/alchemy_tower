@@ -53,6 +53,167 @@
       ],
       "synthesis_weight": 2,
       "synthesis_value": 2
+    },
+    {
+      "id": "nightwrack",
+      "name": "Nightwrack",
+      "category": "ingredient",
+      "base_value": 13,
+      "color": [
+        104,
+        126,
+        108,
+        255
+      ],
+      "description": "Weed the lake lays along the waterline between dusk and morning and takes back by afternoon. None of it grew on this shore. It grew somewhere up the inflow and let go, and the shore is only where it stopped.",
+      "quality": 38,
+      "rarity": 2,
+      "elements": {
+        "vita": 2,
+        "ember": 0,
+        "mist": 3,
+        "lux": 0
+      },
+      "traits": [
+        "restorative",
+        "cold"
+      ],
+      "source_conditions": [
+        "the strandline, before the sun is on it",
+        "mist or rain overnight",
+        "gone by afternoon, every time"
+      ],
+      "wild_variants": [
+        {
+          "id": "nightwrack_deepline",
+          "name": "Deep-Line Nightwrack",
+          "required_conditions": [
+            "mist",
+            "morning"
+          ],
+          "bonus_traits": [
+            "pure"
+          ],
+          "quality_bonus": 8,
+          "elements": {
+            "vita": 1,
+            "ember": 0,
+            "mist": 2,
+            "lux": 0
+          },
+          "synthesis_weight_bonus": 0,
+          "synthesis_value_bonus": 2
+        }
+      ],
+      "synthesis_weight": 2,
+      "synthesis_value": 3
+    },
+    {
+      "id": "tumbled_glass",
+      "name": "Tumbled Glass",
+      "category": "ingredient",
+      "base_value": 22,
+      "color": [
+        176,
+        200,
+        204,
+        255
+      ],
+      "description": "Glassware off the tower's own benches, broken twenty years ago and rolled smooth by this lake ever since. It still holds a reaction the way the vessel it used to be did. Ione has asked, twice, not to be shown any more of it.",
+      "quality": 44,
+      "rarity": 3,
+      "elements": {
+        "vita": 0,
+        "ember": 0,
+        "mist": 2,
+        "lux": 2
+      },
+      "traits": [
+        "arcane",
+        "pure"
+      ],
+      "source_conditions": [
+        "the strandline, in flat light",
+        "it has been arriving for twenty years"
+      ],
+      "wild_variants": [
+        {
+          "id": "tumbled_glass_unclouded",
+          "name": "Unclouded Tumbled Glass",
+          "required_conditions": [
+            "clear",
+            "day"
+          ],
+          "bonus_traits": [
+            "luminous"
+          ],
+          "quality_bonus": 9,
+          "elements": {
+            "vita": 0,
+            "ember": 0,
+            "mist": 0,
+            "lux": 3
+          },
+          "synthesis_weight_bonus": 0,
+          "synthesis_value_bonus": 3
+        }
+      ],
+      "synthesis_weight": 1,
+      "synthesis_value": 5
+    },
+    {
+      "id": "downwash_bloom",
+      "name": "Downwash Bloom",
+      "category": "ingredient",
+      "base_value": 24,
+      "color": [
+        142,
+        178,
+        96,
+        255
+      ],
+      "description": "A thick green bloom on the warm side of the strandline, exactly where the hill drains. It is the richest thing growing on this shore and it did not used to be here. Lyra dated its arrival to the season the tower's benches went back into use and has never once said this to you unkindly.",
+      "quality": 46,
+      "rarity": 3,
+      "elements": {
+        "vita": 4,
+        "ember": 1,
+        "mist": 1,
+        "lux": 0
+      },
+      "traits": [
+        "vigor",
+        "volatile"
+      ],
+      "source_conditions": [
+        "the warm end of the strandline, where the hill drains",
+        "summer and autumn, once the water has been measured",
+        "thickest after rain"
+      ],
+      "wild_variants": [
+        {
+          "id": "downwash_bloom_thick",
+          "name": "Thickened Downwash Bloom",
+          "required_conditions": [
+            "rain",
+            "day"
+          ],
+          "bonus_traits": [
+            "restorative"
+          ],
+          "quality_bonus": 10,
+          "elements": {
+            "vita": 3,
+            "ember": 0,
+            "mist": 1,
+            "lux": 0
+          },
+          "synthesis_weight_bonus": 1,
+          "synthesis_value_bonus": 3
+        }
+      ],
+      "synthesis_weight": 2,
+      "synthesis_value": 4
     }
   ]
 }
