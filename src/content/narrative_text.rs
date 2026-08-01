@@ -148,6 +148,10 @@ const REACTION_SOURCES: &[(&str, &str)] = &[
         "narrative/reactions_tarn_wayfarer",
         include_str!("../../assets/data/narrative/reactions_tarn_wayfarer.json"),
     ),
+    (
+        "narrative/reactions_wren_physician",
+        include_str!("../../assets/data/narrative/reactions_wren_physician.json"),
+    ),
 ];
 
 /// The reactions file on its own. Only exists so the split file can be parsed

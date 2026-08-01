@@ -539,6 +539,82 @@
           "text": "The switchback was worked through a full winter for the first time in living memory. The valley spent no part of this year cut off from anywhere, and the only people who found that unremarkable were the ones who had never known it any other way."
         }
       ]
+    },
+    {
+      "id": "shelf_stock_for_wren",
+      "title": "Three Of The Same",
+      "description": "Deliver 3 Serviceable-or-better Healing Draughts so Wren can stock the infirmary shelf with bottles that behave identically.",
+      "required_item_id": "healing_draught",
+      "required_amount": 3,
+      "reward_coins": 52,
+      "giver_npc_id": "wren_physician",
+      "minimum_quality_band": "Serviceable",
+      "required_trait": "",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 6,
+      "giver_intro_line": "Three healing draughts. Serviceable is fine — I would rather have three serviceable than one excellent and a shrug. When somebody comes in frightened I need to hand them a thing I have handed somebody before and watched work.",
+      "giver_active_line": "Three. Not two and a promise. The third one is the one that makes the first two mean something.",
+      "completion_milestones": [
+        {
+          "id": "infirmary_shelf_stocked",
+          "title": "Three Of The Same",
+          "text": "Wren has three identical draughts on the infirmary shelf, which is the first time in nine years the row has held more than one of anything. She said the word 'stock' out loud twice and then apologised for it."
+        }
+      ]
+    },
+    {
+      "id": "quiet_ward_for_wren",
+      "title": "The Ones Who Cannot Sleep",
+      "description": "Deliver 2 Fine-or-better Calmleaf Infusions for the patients Wren cannot treat with anything stronger.",
+      "required_item_id": "calmleaf_infusion",
+      "required_amount": 2,
+      "reward_coins": 78,
+      "giver_npc_id": "wren_physician",
+      "minimum_quality_band": "Fine",
+      "required_trait": "",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [
+        "shelf_stock_for_wren"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 16,
+      "giver_intro_line": "Two calmleaf infusions, and Fine this time, because the people they are for have already been given the cheap version by somebody who meant well. Half of what walks into that corridor is exhaustion wearing something else's coat.",
+      "giver_active_line": "Two. There are two of them and they are both in the second room, and neither has slept properly since the spring.",
+      "completion_milestones": [
+        {
+          "id": "infirmary_ward_quieted",
+          "title": "The Second Room",
+          "text": "Both patients in the infirmary's second room slept through. Wren logged it in one line and underlined the date, which for her is an outburst."
+        }
+      ]
+    },
+    {
+      "id": "worst_case_shelf_for_wren",
+      "title": "The Shelf She Stopped Keeping",
+      "description": "Deliver 1 Excellent Purified Draught with the pure trait — the last bottle Wren needs before she can clear out the shelf she has kept for twenty years of worst cases.",
+      "required_item_id": "purified_draught",
+      "required_amount": 1,
+      "reward_coins": 190,
+      "giver_npc_id": "wren_physician",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "pure",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [
+        "quiet_ward_for_wren"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 30,
+      "giver_intro_line": "There is a shelf at the back I have never explained to anybody. It is what I keep for the cases I cannot fix, so that I have something to do with my hands while somebody dies. One excellent purified draught and I can take it down, because I will not need to do that any more.",
+      "giver_active_line": "The back shelf. I have not touched it in four months, which is the longest since I started keeping it, and I would like to stop counting.",
+      "completion_milestones": [
+        {
+          "id": "worst_case_shelf_cleared",
+          "title": "The Shelf At The Back",
+          "text": "Wren cleared the shelf she kept for the cases she could not fix. She did not make a speech about it. She moved the bottles, wiped the board, and wrote the day's stock on it instead, which is a different kind of record entirely."
+        }
+      ]
     }
   ]
 }

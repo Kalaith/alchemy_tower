@@ -1,0 +1,32 @@
+{
+  "reactions": [
+    {
+      "npc_id": "wren_physician",
+      "after_quest": "",
+      "after_milestone": "first_town_relief",
+      "order": 40,
+      "line": "One bottle I did not have to argue for. I am not going to pretend that is a small thing just because it is one bottle."
+    },
+    {
+      "npc_id": "wren_physician",
+      "after_quest": "",
+      "after_milestone": "infirmary_shelf_stocked",
+      "order": 70,
+      "line": "Three the same. I have spent nine years telling people I would do what I could, which is what you say when you cannot say what you will do. This week I said what I would do."
+    },
+    {
+      "npc_id": "wren_physician",
+      "after_quest": "",
+      "after_milestone": "asked_for_perfect_work",
+      "order": 96,
+      "line": "I named the band. I have argued against naming the band my whole working life and then I wrote it down myself, for one child, on the north road. I would do it again and I would still be wrong to, and I have stopped trying to hold both of those apart."
+    },
+    {
+      "npc_id": "wren_physician",
+      "after_quest": "",
+      "after_milestone": "worst_case_shelf_cleared",
+      "order": 102,
+      "line": "People ask what the tower did for the valley and get told about the greenhouse. What it did was make it possible for me to be specific. Nine years of 'we will see' and now I can say a number out loud and be held to it. Nobody is going to write that part down."
+    }
+  ]
+}

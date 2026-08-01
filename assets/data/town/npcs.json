@@ -584,6 +584,81 @@
       "trusted_reward_coins": 120,
       "trusted_reward_item_id": "saltroad_amber",
       "trusted_reward_amount": 1
+    },
+    {
+      "id": "wren_physician",
+      "name": "Wren",
+      "area_id": "town_square",
+      "position": [
+        300.0,
+        690.0
+      ],
+      "interaction_radius": 56.0,
+      "color": [
+        214,
+        226,
+        220,
+        255
+      ],
+      "dialogue_start": "You are the tower. Good. I have been ordering from you through a board for a year and I would rather order from a person. Understand first that I do not want your best work. I want your most repeatable work, and those are not the same request.",
+      "dialogue_progress": "Same again, and the same as the last one. I know how that sounds coming from somebody asking a craftsman for a favour. A shelf I can predict is worth more to the people on it than any single bottle you are proud of.",
+      "dialogue_complete": "The shelf holds. I can tell somebody what will happen to them now instead of what I hope will. That is the whole job and I have not been able to do it in nine years.",
+      "quest_id": "shelf_stock_for_wren",
+      "role": "infirmary keeper",
+      "phase1_dialogue": {
+        "intro": "Infirmary. Two rooms and a corridor, and the corridor counts. I have been running it on whatever the valley could spare, which for most of the last decade has been whatever the valley could not sell.",
+        "pre_help_concern": "Everyone else here will tell you what the valley used to be. I will tell you what is on my shelf this morning, because that is the only part of it I can do anything about.",
+        "active_request": "Three healing draughts, and I do mean three of the same. Not one good one and two you were still learning on.",
+        "post_help_relief": "Three, matching. I put them in a row and looked at them for longer than I will admit to. Do you know how long it has been since I could plan past tomorrow?",
+        "town_recovery_observation": "Fewer people come in and the ones who do come in earlier. Both of those are the same fact and it is the only measurement I trust."
+      },
+      "schedule": [
+        {
+          "time_window": "morning",
+          "area_id": "town_square",
+          "position": [
+            300.0,
+            690.0
+          ]
+        },
+        {
+          "time_window": "day",
+          "area_id": "town_square",
+          "position": [
+            352.0,
+            662.0
+          ]
+        },
+        {
+          "time_window": "evening",
+          "area_id": "town_square",
+          "position": [
+            272.0,
+            714.0
+          ]
+        },
+        {
+          "time_window": "night",
+          "area_id": "town_square",
+          "position": [
+            330.0,
+            726.0
+          ]
+        }
+      ],
+      "friendship_line": "You have never once given me a bottle you were pleased with instead of the bottle I asked for. That is rarer in a craftsman than you would like to hear. Take these.",
+      "friendship_reward_coins": 25,
+      "friendship_reward_item_id": "reedflower",
+      "friendship_reward_amount": 3,
+      "trusted_line": "I keep one of these for a mixture that must not move once it is made. You will get more use out of it than a drawer will, and I have stopped pretending otherwise.",
+      "trusted_reward_coins": 85,
+      "trusted_reward_item_id": "stillwater_pearl",
+      "trusted_reward_amount": 1,
+      "quest_ids": [
+        "shelf_stock_for_wren",
+        "quiet_ward_for_wren",
+        "worst_case_shelf_for_wren"
+      ]
     }
   ]
 }

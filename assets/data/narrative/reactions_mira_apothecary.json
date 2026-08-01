@@ -90,6 +90,13 @@
       "after_milestone": "first_rune_imbuing",
       "order": 92,
       "line": "Four weak tonics that are all the same beats one good one I cannot make twice. I know that is not what you want to hear from someone selling your work. It is still what the infirmary orders."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "infirmary_ward_quieted",
+      "order": 78,
+      "line": "Wren came in and bought nothing. Just stood a while and said the second room slept through. Twenty years I have sold her the almost-right thing and apologised for it, and she has never once made me feel it was my fault. I would have preferred she shouted."
     }
   ]
 }

@@ -996,6 +996,27 @@ Stop the loop and report if:
   *Plus a payoff test:* reachability proves the conditions *can* align; `a_clear_winter_morning_opens_the_rimeflower`
   proves the reward actually resolves through the same call the game makes.
   **34 wild variants; 87 tests; every project file under 700 lines.**
+- **2026-08-01 — the biggest thread in the game was delivered to a noticeboard.** Quest census by
+  effect: **25 of 42 want a restore potion**, and **14 of those come from the anonymous board** —
+  more than all eight named characters put together. The **infirmary** is named in four board
+  orders, in a rune recipe, in a potion description and in Mira's lines, and had **no person**.
+  **Wren**, ninth of the cast and the first whose want runs against everyone else's. The valley
+  wants the tower to be exceptional; she wants it to be **boring and repeatable**, and says so in
+  her first sentence. Her arc is three of the same healing draught ("not two and a promise"), two
+  Fine calmleaf infusions for the second room, and then the payoff — **the shelf at the back she has
+  kept for twenty years of cases she could not fix**, which she clears and writes the day's stock on
+  instead. It also makes iteration 37's Masterwork order land harder: she is the one who named the
+  band, and she has a line about having argued against naming the band her whole working life.
+  *Cleared before landing here:* catalyst tags (4 supplied, 4 wanted, none orphaned either way) and
+  the archive console — which is a **view of the player's own data**, not authored content, so it
+  cannot be thin.
+  ***Two guards from earlier passes caught this pass's own mistakes.*** The reaction guard
+  (iteration 32) failed on `infirmary_ward_quieted` — I had written a milestone nobody remarked on,
+  which is the exact hole that guard exists for. And the schedule guard (iteration 34) forced all
+  four time windows, which is why Wren has a night mark at all: the infirmary does not close, so
+  neither does she. **The tests are now catching me faster than I catch myself.**
+  *No new guard — nothing here established a rule the suite did not already hold.*
+  **9 townsfolk, 45 quests, 125 reactions in 9 files; 87 tests.**
 
 ## Deferred (needs a new system; not for this loop)
 

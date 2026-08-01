@@ -556,6 +556,8 @@ def main():
         "lyra_keeper": ["#8aa7c4", "#dfe9ff", "#6a5446", "#ebd8c8", "#bde6e8"],
         # Road dust rather than valley green: the first character from outside.
         "tarn_wayfarer": ["#8c7a62", "#c8b393", "#4c4038", "#dcc4a8", "#a8bcc8"],
+        # Bleached linen and a dark apron. Nothing about her is decorative.
+        "wren_physician": ["#5e6b68", "#dfe7e2", "#4a4038", "#e6d4c2", "#bcd6cc"],
     }
     for req in REQ["player"] + REQ["npcs"]:
         save(sheet(char_palettes[req["id"]]), Path("characters") / f'{req["id"]}.png')
