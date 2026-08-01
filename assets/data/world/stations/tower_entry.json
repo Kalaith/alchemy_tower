@@ -1,0 +1,79 @@
+{
+  "stations": [
+    {
+      "id": "entry_cauldron",
+      "name": "Entry Cauldron",
+      "kind": "alchemy",
+      "area_id": "tower_entry",
+      "position": [
+        466.0,
+        258.0
+      ],
+      "interaction_radius": 54.0,
+      "color": [
+        118,
+        255,
+        214,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 6,
+        "favored_traits": [
+          "healing",
+          "luminous"
+        ],
+        "favored_categories": [
+          "catalyst"
+        ],
+        "description": "The entry lab still holds enough old wards to steady restorative and luminous brews."
+      },
+      "render": {
+        "sprite_size": [
+          128.0,
+          128.0
+        ],
+        "overlay_effect_id": "brew_bubble_effect",
+        "overlay_effect_offset": [
+          0.0,
+          -10.0
+        ],
+        "overlay_effect_size": [
+          52.0,
+          52.0
+        ]
+      }
+    },
+    {
+      "id": "entry_rest_bed",
+      "name": "Camp Bed",
+      "kind": "rest_bed",
+      "area_id": "tower_entry",
+      "position": [
+        176.0,
+        606.0
+      ],
+      "interaction_radius": 52.0,
+      "color": [
+        214,
+        196,
+        148,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 0,
+        "favored_traits": [],
+        "favored_categories": [],
+        "description": ""
+      },
+      "planter_harvest_days": 0,
+      "render": {
+        "sprite_size": [
+          128.0,
+          128.0
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,200 @@
+{
+  "stations": [
+    {
+      "id": "containment_habitat_moth",
+      "name": "Lantern Habitat",
+      "kind": "habitat",
+      "area_id": "containment_floor",
+      "position": [
+        328.0,
+        298.0
+      ],
+      "interaction_radius": 54.0,
+      "color": [
+        231,
+        224,
+        170,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 0,
+        "favored_traits": [],
+        "favored_categories": [],
+        "description": ""
+      },
+      "planter_harvest_days": 0,
+      "habitat_creature_ids": [
+        "glow_moth"
+      ],
+      "habitat_output_item_id": "lumen_dust",
+      "habitat_harvest_days": 1,
+      "required_total_brews": 18,
+      "render": {
+        "sprite_size": [
+          128.0,
+          128.0
+        ]
+      }
+    },
+    {
+      "id": "containment_habitat_slug",
+      "name": "Mist Habitat",
+      "kind": "habitat",
+      "area_id": "containment_floor",
+      "position": [
+        622.0,
+        298.0
+      ],
+      "interaction_radius": 54.0,
+      "color": [
+        170,
+        220,
+        240,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 0,
+        "favored_traits": [],
+        "favored_categories": [],
+        "description": ""
+      },
+      "planter_harvest_days": 0,
+      "habitat_creature_ids": [
+        "dew_slug"
+      ],
+      "habitat_output_item_id": "dew_slime",
+      "habitat_harvest_days": 1,
+      "required_total_brews": 18,
+      "render": {
+        "sprite_size": [
+          128.0,
+          128.0
+        ]
+      }
+    },
+    {
+      "id": "containment_habitat_bloomwing",
+      "name": "Bloom Habitat",
+      "kind": "habitat",
+      "area_id": "containment_floor",
+      "position": [
+        476.0,
+        218.0
+      ],
+      "interaction_radius": 54.0,
+      "color": [
+        244,
+        186,
+        172,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 0,
+        "favored_traits": [],
+        "favored_categories": [],
+        "description": ""
+      },
+      "planter_harvest_days": 0,
+      "habitat_creature_ids": [
+        "bloomwing"
+      ],
+      "habitat_output_item_id": "bloomwing_pollen",
+      "habitat_harvest_days": 2,
+      "required_completed_quest": "pollinator_return_for_lyra",
+      "render": {
+        "sprite_size": [
+          128.0,
+          128.0
+        ]
+      }
+    },
+    {
+      "id": "containment_cold_bench",
+      "name": "Ward-Cooled Bench",
+      "kind": "alchemy",
+      "area_id": "containment_floor",
+      "position": [
+        196.0,
+        528.0
+      ],
+      "interaction_radius": 52.0,
+      "color": [
+        166,
+        196,
+        214,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 12,
+        "favored_traits": [
+          "cold",
+          "calm",
+          "pure"
+        ],
+        "favored_categories": [
+          "creature"
+        ],
+        "description": "The habitat wards hold this whole end of the floor a few degrees under. Nothing brewed here is ever in a hurry, and settled work comes out cleaner for it."
+      },
+      "planter_harvest_days": 0,
+      "planter_seed_ids": [],
+      "planter_yield_bonus": 0,
+      "required_completed_quest": "containment_for_lyra",
+      "habitat_creature_ids": [],
+      "habitat_output_item_id": "",
+      "habitat_harvest_days": 0,
+      "render": {
+        "sprite_size": [
+          112.0,
+          112.0
+        ]
+      }
+    },
+    {
+      "id": "containment_cold_bed",
+      "name": "Ward-Cooled Bed",
+      "kind": "planter",
+      "area_id": "containment_floor",
+      "position": [
+        124.0,
+        438.0
+      ],
+      "interaction_radius": 52.0,
+      "color": [
+        180,
+        206,
+        220,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 0,
+        "favored_traits": [],
+        "favored_categories": [],
+        "description": ""
+      },
+      "planter_harvest_days": 5,
+      "planter_seed_ids": [
+        "frostcrack_seed",
+        "ashcap",
+        "quietbloom_spore",
+        "moon_fern"
+      ],
+      "planter_yield_bonus": 2,
+      "required_completed_quest": "containment_for_lyra",
+      "habitat_creature_ids": [],
+      "habitat_output_item_id": "",
+      "habitat_harvest_days": 0,
+      "render": {
+        "sprite_size": [
+          128.0,
+          128.0
+        ]
+      }
+    }
+  ]
+}

@@ -161,6 +161,15 @@
         112
       ],
       "prompt": "An archive reading bench seen from above, open logs and a small still among stacked notes, warm parchment tones, readable as a brewing station."
+    },
+    {
+      "id": "containment_cold_bed",
+      "type": "world_station",
+      "image_size_px": [
+        128,
+        128
+      ],
+      "prompt": "A ward-chilled planting bed seen from above, frost on the soil and rime along the frame, pale blue-white, readable as a planter."
     }
   ]
 }

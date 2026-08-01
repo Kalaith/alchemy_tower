@@ -1,0 +1,36 @@
+{
+  "stations": [
+    {
+      "id": "rune_workbench",
+      "name": "Rune Workbench",
+      "kind": "rune_workshop",
+      "area_id": "rune_workshop_floor",
+      "position": [
+        470.0,
+        250.0
+      ],
+      "interaction_radius": 56.0,
+      "color": [
+        216,
+        182,
+        255,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 0,
+        "favored_traits": [],
+        "favored_categories": [],
+        "description": ""
+      },
+      "planter_harvest_days": 0,
+      "required_total_brews": 24,
+      "render": {
+        "sprite_size": [
+          128.0,
+          128.0
+        ]
+      }
+    }
+  ]
+}

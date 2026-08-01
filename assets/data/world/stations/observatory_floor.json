@@ -1,0 +1,36 @@
+{
+  "stations": [
+    {
+      "id": "observatory_focus",
+      "name": "Astral Lens",
+      "kind": "ending_focus",
+      "area_id": "observatory_floor",
+      "position": [
+        474.0,
+        242.0
+      ],
+      "interaction_radius": 58.0,
+      "color": [
+        176,
+        206,
+        255,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 0,
+        "favored_traits": [],
+        "favored_categories": [],
+        "description": ""
+      },
+      "planter_harvest_days": 0,
+      "required_journal_milestone": "archive_revelation",
+      "render": {
+        "sprite_size": [
+          128.0,
+          128.0
+        ]
+      }
+    }
+  ]
+}

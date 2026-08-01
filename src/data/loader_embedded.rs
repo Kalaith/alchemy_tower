@@ -138,6 +138,39 @@ struct EmbeddedStationData {
     stations: Vec<StationDefinition>,
 }
 
+/// One file per room, like the areas themselves. A room's benches, beds,
+/// habitats and counters are read together and belong together.
+const STATION_SOURCES: &[(&str, &str)] = &[
+    (
+        "world/stations/tower_entry",
+        include_str!("../../assets/data/world/stations/tower_entry.json"),
+    ),
+    (
+        "world/stations/greenhouse_floor",
+        include_str!("../../assets/data/world/stations/greenhouse_floor.json"),
+    ),
+    (
+        "world/stations/town_square",
+        include_str!("../../assets/data/world/stations/town_square.json"),
+    ),
+    (
+        "world/stations/containment_floor",
+        include_str!("../../assets/data/world/stations/containment_floor.json"),
+    ),
+    (
+        "world/stations/rune_workshop_floor",
+        include_str!("../../assets/data/world/stations/rune_workshop_floor.json"),
+    ),
+    (
+        "world/stations/archive_floor",
+        include_str!("../../assets/data/world/stations/archive_floor.json"),
+    ),
+    (
+        "world/stations/observatory_floor",
+        include_str!("../../assets/data/world/stations/observatory_floor.json"),
+    ),
+];
+
 #[derive(Debug, Deserialize)]
 struct EmbeddedNpcData {
     #[serde(default)]
@@ -219,6 +252,15 @@ fn load_items() -> Result<Vec<ItemDefinition>, String> {
     Ok(items)
 }
 
+fn load_stations() -> Result<Vec<StationDefinition>, String> {
+    let mut stations = Vec::new();
+    for &(label, source) in STATION_SOURCES {
+        let part: EmbeddedStationData = load_labeled_json(label, source)?;
+        stations.extend(part.stations);
+    }
+    Ok(stations)
+}
+
 fn load_quests() -> Result<Vec<QuestDefinition>, String> {
     let mut quests = Vec::new();
     for &(label, source) in QUEST_SOURCES {
@@ -246,10 +288,6 @@ pub(super) fn load_embedded_parts() -> Result<GameDataParts, String> {
         "world/gathering_routes",
         include_str!("../../assets/data/world/gathering_routes.json"),
     )?;
-    let stations: EmbeddedStationData = load_labeled_json(
-        "world/stations",
-        include_str!("../../assets/data/world/stations.json"),
-    )?;
     let npc: EmbeddedNpcData = load_labeled_json(
         "town/npcs",
         include_str!("../../assets/data/town/npcs.json"),
@@ -273,6 +311,6 @@ pub(super) fn load_embedded_parts() -> Result<GameDataParts, String> {
         recipes: load_recipes()?,
         rune_recipes: runes.rune_recipes,
         mutation_formulas: mutations.mutation_formulas,
-        stations: stations.stations,
+        stations: load_stations()?,
     })
 }

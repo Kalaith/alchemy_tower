@@ -1,0 +1,151 @@
+{
+  "stations": [
+    {
+      "id": "town_request_board",
+      "name": "Request Board",
+      "kind": "quest_board",
+      "area_id": "town_square",
+      "position": [
+        610.0,
+        196.0
+      ],
+      "interaction_radius": 52.0,
+      "color": [
+        240,
+        220,
+        170,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 0,
+        "favored_traits": [],
+        "favored_categories": [],
+        "description": ""
+      },
+      "planter_harvest_days": 0
+    },
+    {
+      "id": "apothecary_counter",
+      "name": "Town Apothecary",
+      "kind": "shop",
+      "area_id": "town_square",
+      "position": [
+        288.0,
+        384.0
+      ],
+      "interaction_radius": 60.0,
+      "color": [
+        255,
+        214,
+        132,
+        255
+      ],
+      "stock": [
+        {
+          "item_id": "sunleaf",
+          "price": 8
+        },
+        {
+          "item_id": "whisper_moss",
+          "price": 7
+        },
+        {
+          "item_id": "arcane_dust",
+          "price": 12
+        },
+        {
+          "item_id": "moon_fern",
+          "price": 18
+        },
+        {
+          "item_id": "starlight_shard",
+          "price": 28
+        },
+        {
+          "item_id": "splash_rune",
+          "price": 34
+        },
+        {
+          "item_id": "echo_rune",
+          "price": 38
+        },
+        {
+          "item_id": "delay_rune",
+          "price": 36
+        }
+      ],
+      "room_bonus": {
+        "quality_bonus": 0,
+        "favored_traits": [],
+        "favored_categories": [],
+        "description": ""
+      },
+      "planter_harvest_days": 0,
+      "render": {
+        "sprite_size": [
+          128.0,
+          128.0
+        ]
+      }
+    },
+    {
+      "id": "apothecary_wellstock",
+      "name": "Apothecary Bulk Shelf",
+      "kind": "shop",
+      "area_id": "town_square",
+      "position": [
+        408.0,
+        236.0
+      ],
+      "interaction_radius": 50.0,
+      "color": [
+        206,
+        172,
+        148,
+        255
+      ],
+      "stock": [
+        {
+          "item_id": "whisper_moss",
+          "price": 6
+        },
+        {
+          "item_id": "reedflower",
+          "price": 9
+        },
+        {
+          "item_id": "field_bloom",
+          "price": 9
+        },
+        {
+          "item_id": "lumen_dust",
+          "price": 26
+        },
+        {
+          "item_id": "dew_slime",
+          "price": 20
+        }
+      ],
+      "room_bonus": {
+        "quality_bonus": 0,
+        "favored_traits": [],
+        "favored_categories": [],
+        "description": ""
+      },
+      "planter_harvest_days": 0,
+      "planter_seed_ids": [],
+      "planter_yield_bonus": 0,
+      "required_completed_quest": "wellside_relief_for_mira",
+      "habitat_creature_ids": [],
+      "habitat_output_item_id": "",
+      "habitat_harvest_days": 0,
+      "render": {
+        "sprite_size": [
+          96.0,
+          96.0
+        ]
+      }
+    }
+  ]
+}

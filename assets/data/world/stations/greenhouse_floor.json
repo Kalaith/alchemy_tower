@@ -1,0 +1,193 @@
+{
+  "stations": [
+    {
+      "id": "greenhouse_still",
+      "name": "Greenhouse Still",
+      "kind": "alchemy",
+      "area_id": "greenhouse_floor",
+      "position": [
+        470.0,
+        210.0
+      ],
+      "interaction_radius": 54.0,
+      "color": [
+        180,
+        255,
+        180,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 10,
+        "favored_traits": [
+          "healing",
+          "pure",
+          "restorative"
+        ],
+        "favored_categories": [
+          "ingredient",
+          "catalyst"
+        ],
+        "description": "Sun-warmed glass and irrigation sigils make careful restorative work easier here."
+      },
+      "planter_harvest_days": 0,
+      "render": {
+        "sprite_size": [
+          128.0,
+          128.0
+        ],
+        "overlay_effect_id": "brew_bubble_effect",
+        "overlay_effect_offset": [
+          0.0,
+          -10.0
+        ],
+        "overlay_effect_size": [
+          52.0,
+          52.0
+        ]
+      }
+    },
+    {
+      "id": "greenhouse_planter_west",
+      "name": "West Planter Bed",
+      "kind": "planter",
+      "area_id": "greenhouse_floor",
+      "position": [
+        286.0,
+        470.0
+      ],
+      "interaction_radius": 48.0,
+      "color": [
+        196,
+        248,
+        184,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 0,
+        "favored_traits": [],
+        "favored_categories": [],
+        "description": ""
+      },
+      "planter_harvest_days": 2,
+      "planter_seed_ids": [
+        "ember_root",
+        "mist_moth_wing",
+        "sunleaf",
+        "quarry_lichen",
+        "field_bloom"
+      ],
+      "planter_yield_bonus": 1
+    },
+    {
+      "id": "greenhouse_planter_east",
+      "name": "East Planter Bed",
+      "kind": "planter",
+      "area_id": "greenhouse_floor",
+      "position": [
+        650.0,
+        470.0
+      ],
+      "interaction_radius": 48.0,
+      "color": [
+        196,
+        248,
+        184,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 0,
+        "favored_traits": [],
+        "favored_categories": [],
+        "description": ""
+      },
+      "planter_harvest_days": 2,
+      "planter_seed_ids": [
+        "moon_fern",
+        "arcane_dust",
+        "whisper_moss",
+        "reedflower",
+        "sumpflower"
+      ],
+      "planter_yield_bonus": 1
+    },
+    {
+      "id": "greenhouse_planter_north",
+      "name": "Expanded Moon Bed",
+      "kind": "planter",
+      "area_id": "greenhouse_floor",
+      "position": [
+        472.0,
+        570.0
+      ],
+      "interaction_radius": 48.0,
+      "color": [
+        220,
+        255,
+        220,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 0,
+        "favored_traits": [],
+        "favored_categories": [],
+        "description": ""
+      },
+      "planter_harvest_days": 1,
+      "planter_seed_ids": [
+        "moon_fern",
+        "quietbloom_spore",
+        "rain_orchid"
+      ],
+      "planter_yield_bonus": 2,
+      "required_completed_quest": "cultivation_for_brin",
+      "required_total_brews": 12
+    },
+    {
+      "id": "greenhouse_planter_bloom",
+      "name": "Pollinated Bed",
+      "kind": "planter",
+      "area_id": "greenhouse_floor",
+      "position": [
+        742.0,
+        470.0
+      ],
+      "interaction_radius": 52.0,
+      "color": [
+        232,
+        186,
+        158,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 0,
+        "favored_traits": [],
+        "favored_categories": [],
+        "description": ""
+      },
+      "planter_harvest_days": 3,
+      "planter_seed_ids": [
+        "nightglass_bloom",
+        "scorchvine_resin",
+        "sunspike",
+        "bloomwing_pollen",
+        "hollowroot"
+      ],
+      "planter_yield_bonus": 3,
+      "required_completed_quest": "pollinator_return_for_lyra",
+      "habitat_creature_ids": [],
+      "habitat_output_item_id": "",
+      "habitat_harvest_days": 0,
+      "render": {
+        "sprite_size": [
+          128.0,
+          128.0
+        ]
+      }
+    }
+  ]
+}

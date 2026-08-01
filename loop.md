@@ -140,7 +140,7 @@ Data files follow the same ~800-line rule as `.rs` files. `src/data/loader_embed
 |---|---|
 | An area's blockers, warps, gather nodes | `assets/data/world/areas/<area_id>.json` (one area per file) |
 | Gathering routes | `assets/data/world/gathering_routes.json` |
-| Stations | `assets/data/world/stations.json` |
+| Stations | `assets/data/world/stations/<area_id>.json` (one file per room, like the areas) |
 | Ingredients | `assets/data/items/ingredients_<biome>.json` — filed under the biome that anchors the herb; `ingredients_shared.json` for herbs found in 3+ areas or produced rather than gathered |
 | Potions | `assets/data/items/potions_<effect>.json` — filed under the effect kind the potion leads with; `potions_unstable.json` for salvage outputs |
 | Creatures, catalysts, runes | `assets/data/items/materials.json` |
@@ -493,6 +493,20 @@ Stop the loop and report if:
   specimens that should not be. The genuinely plantable omissions are ashcap, sumpflower, ruinbell,
   field_bloom and frostcrack_seed — a winter-only seed in a warm bed is an interesting question for a
   cultivation pass.*
+- **2026-08-01 — cultivation (answering the winter-seed question).** All four beds were in one room,
+  so cultivation had no geography. There is a **ward-cooled bed** on the containment floor now, beside
+  the cold bench, gated on Lyra's first request — and it is the answer to the question the last pass
+  left: a frostcrack case *will* open out of season, but only there, and it takes **five days**, the
+  slowest bed in the game. The seed still waits; it just waits somewhere else. That gives the
+  `hardwinter_draught` morph a second, slower rival rather than remaining the only way to argue with
+  the calendar.
+  Plantable ingredients went 15 → 19 (ashcap, frostcrack seed, sumpflower, field bloom), mutations
+  20 → 24. **The remaining ten are deliberately not plantable** — slime, cured bark, dust, ward
+  shards, salt flakes, rune ash, a pressed specimen, and ruinbell, which only takes in old wall
+  mortar. Chasing the number to 29 would have meant pretending those are plants.
+  Split `world/stations.json` (749) into `world/stations/<area_id>.json`, matching the areas.
+  *The bed's first position put it under the belt HUD — the same framing mistake as the cold bench in
+  the benches pass. Stations near a room's bottom edge need checking in a capture, not on paper.*
 
 ## Deferred (needs a new system; not for this loop)
 
