@@ -1,40 +1,62 @@
 # TODO — Alchemy Tower
 
+## Scope — decided
+
+**Long tail. A finished product is 20–25 hours of play.** Everything below is
+measured against that target; anything not listed here is considered done.
+
+Where the content currently stands: 14 areas, 49 recipes across 6 benches, 9
+townsfolk, 24 story-arc requests, 26 repeatable board orders, 11 biome
+ingredient tables, plus an epilogue. That is the mid-game; the remaining work is
+what makes it a 20–25 hour game rather than a well-furnished 8-hour one.
+
+## Applied alchemy — the largest open gap
+
+- Implement the apply-potion-to-target flow (wilted route plant, frightened
+  creature, blocked path) on top of the existing `EffectKind` system. Delivery
+  is still just handing a bottle to an NPC; blockers are collision and art only
+  (`data/schema_render.rs`, `art/props.rs`), never something a brew can act on.
+  Until this exists the game's stated premise is unexpressed.
+- Once targets exist, gate two or three route/floor openings behind applying a
+  potion rather than delivering one, so the mechanic is on the critical path.
+
 ## Core loop & alchemy
 
-- Author 15–25 recipes with overlapping ingredients and more morph paths, so the quality/trait engine drives real brew decisions instead of a lookup. (26 recipes, 12 morph branches across three catalyst tags; the starter recipe now morphs, so the layer teaches itself.)
-- Add risk/reward to heat, stir and timing so pushing a quality band is a gamble. (Overcharge/instability does this for heat and stirs. Ingredient order is now a third axis: 13 recipes carry a trait-ordered method.)
-- Turn the unlogged-brew salvage fallback into a discovery event: journal and celebrate a combination that resolves to a new stable formula.
-- Move recipe, herb, rapport and request tuning into validated data tables with fixtures for edge-case brews.
-- Add brew-resolution tests covering ingredient quality, recipe discovery, town requests, and tower-floor unlock conditions.
+- Turn the unlogged-brew salvage into a discovery event. Salvage currently lands
+  on fixed outputs (`alchemy/fallback.rs`) that the rune bench re-reads; a
+  repeated combination that resolves stably should journal and celebrate itself
+  as a formula the player found without a recipe. This is the one place the
+  engine can still surprise someone who is not following instructions.
+- Move the last tuning constants out of Rust into data: the rapport tiers
+  (`FRIEND`/`CONFIDANT`/`KIN` in `state/gameplay_rapport.rs`) and the salvage
+  quality curve in `alchemy/fallback.rs` are the remaining hardcoded balance.
 
-## Gathering & progression
+## Long tail content
 
-- Give two or three biomes a signature gathering hook (night-only bloom, weather-triggered spawn, rare combination variant) rather than spreading effort across all thirteen. (The Sunscar has one: night bloom, noon resin, post-rain salt pan. The containment floor has one: the tower's own ward cycle. The moonlit forest's charred hollow has one: it is the valley's winter ground. The rock fields have one: the quarry is the only ground rain improves. The north plains have one: they are the wind. That is four, past the two or three this asked for.)
-- Make biome-native ingredients recipe anchors so each biome is the supply line for specific potions.
-- Convert at least one floor gate from a brew-count/coin threshold to a mastery check — deliver a Masterwork, discover a morph, satisfy a multi-trait request. (Done: containment→rune workshop needs the Glow Potion mastered. The archive reconstruction now also requires the two ecological chain payoffs.)
+- Decide what the last third is *for* and build it: the ending overlay is
+  dismissible and board orders continue, but nothing new opens after the
+  epilogue. Standing contracts that escalate, a late-game coin/material sink, or
+  a reason to keep restoring past the final gate.
+- Late-game recipe tier — the current 49 recipes bottom out well before 20 hours
+  of brewing decisions. New ones should extend the trait/morph lattice rather
+  than add flat variants.
 
-## Story, NPCs & world state
+## Story & world state
 
-- Write the story bible locking the wizard's backstory, the failed intervention, the ecosystem model, and the act-by-act reveal order.
-- Both named chains are done: failing-harvest ends with Rowan's bed rows turned, pollinator-collapse ends with Lyra's valley flowering at once. Any further chain is new design, not backlog.
-- All six townsfolk have a three-beat arc (setup → complication → payoff). Rapport payoff (friendship gift) is separate and already in.
-- Make rapport pay off mechanically: a recipe hint, a discount, or a personal side quest.
-- Add repeatable town-board requests to sustain the mid-game between story beats.
-- Add more visible town-state changes after a chain completes — a reopened stall, fuller greenhouse beds, lit streets. (The mechanism exists: a gather node can name a `required_completed_quest`, which is how the town square starts growing once Rowan's row is turned.)
-
-## Applied alchemy
-
-- Implement the apply-potion-to-target flow (wilted route plant, frightened creature, blocked path) on top of the existing effect-kind system. Delivery is currently just handing an item to an NPC, which leaves the game's stated premise unexpressed.
+- Write the story bible locking the wizard's backstory, the failed intervention,
+  the ecosystem model, and the act-by-act reveal order. The arcs were written
+  ahead of it, and nine townsfolk now depend on staying consistent.
+- Extend visible town-state change past the four hardcoded cases.
+  `draw_phase1_story_flourishes_view` matches on area id in Rust for two areas;
+  the gating data (`required_completed_quest`) is already used in twelve files,
+  so the flourishes should be data-driven and cover every completed chain — a
+  reopened stall, fuller beds, lit streets.
 
 ## Presentation
 
-- World and character art pass: the ornate HUD currently frames a placeholder world, and that inversion is the weakest first impression.
+- World and character art pass. The art is procedurally generated
+  (`tools/generate_art.py`) and the ornate HUD frames a placeholder world; that
+  inversion is still the weakest first impression.
 - Offer a quieter HUD option so the world reads as the visual star.
-- Replace the procedural placeholder one-shots with hand-authored ambient audio and music.
-- Unify overlay navigation through a typed overlay state model so archive, journal, pause, dialogue and alchemy screens cannot conflict.
-- Extract repeated overlay widgets into toolkit-backed helpers shared by the formula, preview, journal and archive panels.
-
-## Scope
-
-- Decide deliberately whether this is a tight three-to-four-hour experience or needs a long tail; if the latter, add a post-ending sandbox with continued town requests. (The valley has grown to 14 areas and 6 completed arcs; repeatable board orders and standing contracts already carry the mid-game, so the long tail is the direction it has taken in practice.)
+- Replace the procedural one-shots (`tools/generate_audio.py`) with
+  hand-authored ambient audio and music.
