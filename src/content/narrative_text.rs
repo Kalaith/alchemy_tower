@@ -10,6 +10,10 @@ pub(crate) struct NarrativeText {
     pub(crate) milestones: NarrativeMilestones,
     pub(crate) statuses: NarrativeStatuses,
     pub(crate) overlays: NarrativeOverlays,
+    /// Filled from `narrative_reactions.json` after parsing rather than read
+    /// from this file: the townsfolk's lines outgrew the rest of the narrative
+    /// text several times over and were split out at 860 lines.
+    #[serde(default)]
     pub(crate) reactions: Vec<NarrativeReaction>,
     pub(crate) epilogue_beats: Vec<NarrativeEpilogueBeat>,
 }
@@ -107,12 +111,25 @@ pub(crate) struct NarrativeReaction {
     pub(crate) line: String,
 }
 
+/// The reactions file on its own. Only exists so the split file can be parsed
+/// and folded into [`NarrativeText`].
+#[derive(Debug, Deserialize)]
+struct NarrativeReactions {
+    reactions: Vec<NarrativeReaction>,
+}
+
 pub(crate) fn narrative_text() -> &'static NarrativeText {
     static TEXT: OnceLock<NarrativeText> = OnceLock::new();
     TEXT.get_or_init(|| {
-        parse_required_json(
+        let mut text: NarrativeText = parse_required_json(
             include_str!("../../assets/data/narrative_text.json"),
             "narrative_text.json",
-        )
+        );
+        let spoken: NarrativeReactions = parse_required_json(
+            include_str!("../../assets/data/narrative_reactions.json"),
+            "narrative_reactions.json",
+        );
+        text.reactions = spoken.reactions;
+        text
     })
 }

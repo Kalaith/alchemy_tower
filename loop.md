@@ -746,6 +746,30 @@ Stop the loop and report if:
   recipe files already use — the bench that brews them. 21 valley-cauldron, 15 tower-bench.
   *Next split candidates:* `narrative_text.json` (769) and `sprites/item_icons.json` (751).
   **41 recipes, 74 tests, 39 quests.**
+- **2026-08-01 — the valley's biggest revelation landed in silence.** Measured the reverse of the
+  usual check: not "does every line have a beat" but **"does every beat have a line"**. Five
+  recorded moments had nobody in town remark on them — including `the_previous_hand`, the discovery
+  that the wizard removed eleven months of records *after writing them*, which is the sharpest thing
+  the story has to say and which the game recorded in the journal and then dropped.
+  13 reactions, weighted at the thin voices: **Tarn had 4 lines to Elric and Ione's 17**. Elric gets
+  the hardest one — nine years of being publicly fair about a failure that was actually a decision
+  taken alone and then hidden. New lines were placed *below* each character's existing closer unless
+  the beat genuinely is their last word, so nobody's ending got steamrolled by a mid-game remark.
+  ***The bug the content exposed is the bigger result.*** A conversation's body is a beat **plus the
+  earned reaction appended** — up to **659 characters** — and the dialogue panel was a fixed 216
+  tall, which is four lines, about 360 characters. **The back third of every arc has been running
+  its closing sentences through the footer and off the panel**, on the most-read surface in the
+  game. The panel now sizes to its wrapped line count. Verified by temporarily lengthening a
+  reaction that does fire in a capture scene, photographing the grown panel, and reverting.
+  *Two guards, both verified against deliberate breaks:*
+  `every_recorded_moment_gets_remarked_on_by_somebody` (also asserts reactions load at all, since
+  `#[serde(default)]` would let a broken include leave the valley mute and still deserialize), and
+  `the_longest_thing_a_townsperson_can_say_still_fits_the_panel`, which named all eight townsfolk
+  when the budget was pinched back to the old fixed height.
+  *Split done:* `narrative_text.json` hit **860 lines**, so the 105 `reactions` moved to
+  `narrative_reactions.json` and are folded back in after parsing. 123 / 739.
+  *Next split candidate:* `sprites/item_icons.json` (751).
+  **105 reactions, 76 tests.**
 
 ## Deferred (needs a new system; not for this loop)
 

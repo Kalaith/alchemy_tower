@@ -425,6 +425,48 @@ reachable areas: {open_areas:?}"
     /// A town reaction is prose gated on a condition. A quest or milestone id
     /// that does not exist gives a line that is written, shipped, and never
     /// spoken — the most expensive kind of typo in a content file.
+    /// The reverse of `town_reactions_are_gated_on_real_beats`: that check asks
+    /// whether every line has a beat, this one asks whether every beat has a
+    /// line. Five recorded moments had nobody in the valley remark on them,
+    /// including the discovery that the wizard removed eleven months of records
+    /// deliberately — the game's largest revelation, landing in silence.
+    ///
+    /// Also the split guard. `NarrativeText::reactions` is `#[serde(default)]`
+    /// so it can be filled from `narrative_reactions.json` after parsing, which
+    /// means a broken include or a renamed key would leave the valley mute and
+    /// still deserialize cleanly. Every assertion below reads zero as failure.
+    #[test]
+    fn every_recorded_moment_gets_remarked_on_by_somebody() {
+        use crate::content::narrative_text;
+
+        let data = load_embedded().expect("embedded game data should load");
+        let narrative = narrative_text();
+
+        assert!(
+            !narrative.reactions.is_empty(),
+            "no reactions loaded at all — the split reactions file is not reaching the game"
+        );
+
+        let spoken_for = narrative
+            .reactions
+            .iter()
+            .map(|reaction| reaction.after_milestone.clone())
+            .collect::<std::collections::HashSet<_>>();
+
+        let silent = data
+            .quests
+            .iter()
+            .flat_map(|quest| quest.completion_milestones.iter())
+            .map(|milestone| milestone.id.clone())
+            .filter(|id| !spoken_for.contains(id))
+            .collect::<std::collections::BTreeSet<_>>();
+
+        assert!(
+            silent.is_empty(),
+            "moments the journal records that nobody in town says a word about: {silent:?}"
+        );
+    }
+
     #[test]
     fn town_reactions_are_gated_on_real_beats() {
         use crate::content::narrative_text;

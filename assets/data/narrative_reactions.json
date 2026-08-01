@@ -1,0 +1,739 @@
+{
+  "reactions": [
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "",
+      "order": 10,
+      "line": "Care first. Answers later."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "healing_for_mira",
+      "after_milestone": "",
+      "order": 20,
+      "line": "Good. Let the town breathe before you ask it to believe."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "healing_for_mira",
+      "after_milestone": "",
+      "order": 20,
+      "line": "Mira says the draught held. Practical help changes public opinion faster than speeches."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "healing_for_mira",
+      "after_milestone": "",
+      "order": 20,
+      "line": "If Mira can keep folks on their feet, maybe we can keep enough hands in the soil to matter."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "healing_for_mira",
+      "after_milestone": "",
+      "order": 20,
+      "line": "I gave half of it out in an afternoon. That is not a complaint, but you should know how thin we were running."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "glow_for_rowan",
+      "after_milestone": "",
+      "order": 30,
+      "line": "A safer road is never only a road."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "glow_for_rowan",
+      "after_milestone": "",
+      "order": 30,
+      "line": "A safer route at dusk gives people back time, labor, and nerve. That is not minor."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "glow_for_rowan",
+      "after_milestone": "",
+      "order": 30,
+      "line": "A carried light that holds on the road is useful evidence. It suggests the tower's work used to travel."
+    },
+    {
+      "npc_id": "lyra_keeper",
+      "after_quest": "glow_for_rowan",
+      "after_milestone": "",
+      "order": 30,
+      "line": "The moths came back to the lane the week that light started moving along it. I do not think that is a coincidence, and I have not decided yet whether it is good."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "greenhouse_repaired",
+      "order": 40,
+      "line": "Yes. That is what this room was for. Keep going carefully."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "greenhouse_repaired",
+      "order": 40,
+      "line": "Once the greenhouse starts producing, the tower stops being rumor and becomes infrastructure again."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "greenhouse_repaired",
+      "order": 40,
+      "line": "Fresh greens and steadier medicine in the same week. I had almost forgotten what that felt like."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "greenhouse_repaired",
+      "order": 40,
+      "line": "Funny what a bit of living light does. People stop hurrying like something is behind them."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "greenhouse_repaired",
+      "order": 40,
+      "line": "Beds under glass, fed and watched. I spent eleven years being told that was a luxury the valley could not carry."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "containment_repaired",
+      "order": 50,
+      "line": "Kept, not caught. There is a difference and the tower knows it."
+    },
+    {
+      "npc_id": "lyra_keeper",
+      "after_quest": "",
+      "after_milestone": "containment_repaired",
+      "order": 50,
+      "line": "They are settling. Three days now without a ward drawing more than it gives back. I keep waiting to be proved wrong about that."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "containment_repaired",
+      "order": 50,
+      "line": "The habitat logs stop mid-sentence twenty years ago. Now there is something to compare them against, which is the first time that has been true."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "containment_repaired",
+      "order": 50,
+      "line": "Lantern dust I can actually count on. Do you know what I have been substituting for it?"
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "harvest_blight_traced",
+      "order": 60,
+      "line": "It was never the seed. Eleven years of us blaming ourselves for sowing wrong, and the ground had simply stopped being asked politely."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "harvest_blight_traced",
+      "order": 60,
+      "line": "Rowan told me what the trays came up as. I have turned that soil every spring of my working life. I would rather it had been me."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "harvest_blight_traced",
+      "order": 60,
+      "line": "If the fault is in the ground then it is a public matter, not a run of bad luck. That changes what I am allowed to spend on it."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "harvest_blight_traced",
+      "order": 60,
+      "line": "Now you have found the thing under the thing. Do not rush what comes next."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "rune_workshop_restored",
+      "order": 70,
+      "line": "Reworking a finished potion is a later method than anything in the entry lab. Whoever built that bench had already given up on getting it right the first time."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "rune_workshop_restored",
+      "order": 70,
+      "line": "Careful. That room lets you change your mind after the fact. It is a habit."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "rune_workshop_restored",
+      "order": 70,
+      "line": "Rune work. I will be honest, I do not follow it, but the road crews have started asking for things by name."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "harvest_beds_turned",
+      "order": 80,
+      "line": "There is moss on the north wall. Nobody put it there. I have caught myself walking the long way round the square twice this week just to check it is still coming."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "harvest_beds_turned",
+      "order": 80,
+      "line": "Bloom along the path edge, self-seeded. That is the valley doing it on its own, which is more than I ever managed for it."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "harvest_beds_turned",
+      "order": 80,
+      "line": "We grew something in the square. I have had four people tell me that today as though I had not seen it myself."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "harvest_beds_turned",
+      "order": 80,
+      "line": "Rowan brought me cuttings instead of a bill. I did not know what to do with my face."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "harvest_beds_turned",
+      "order": 80,
+      "line": "The ground answered. That took twenty years and one person asking properly."
+    },
+    {
+      "npc_id": "lyra_keeper",
+      "after_quest": "",
+      "after_milestone": "harvest_beds_turned",
+      "order": 80,
+      "line": "Even the habitats are steadier since the square started growing. Everything in this valley was always one system. We only ever measured it in pieces."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "archive_revelation",
+      "order": 90,
+      "line": "The timeline holds. They sealed the floors to stop the tower eating what it was bound to, and then they left so it could not be reopened by anyone who loved it less carefully. I have been calling that abandonment in my notes for nine years."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "archive_revelation",
+      "order": 90,
+      "line": "Now you know what they chose. The tower is not yours to conquer."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "archive_revelation",
+      "order": 90,
+      "line": "So the wizard did not run out on us. I would like that written somewhere the next mayor has to read it."
+    },
+    {
+      "npc_id": "lyra_keeper",
+      "after_quest": "",
+      "after_milestone": "archive_revelation",
+      "order": 90,
+      "line": "Restraint, then. Everything I have been doing to the wards by instinct, they wrote down twenty years ago and then walked away from."
+    },
+    {
+      "npc_id": "lyra_keeper",
+      "after_quest": "",
+      "after_milestone": "pollinator_count_taken",
+      "order": 65,
+      "line": "Eleven. My predecessor logged ninety on the same two rows and did not think it worth remarking on. I have read that page four times looking for the qualifier and there is not one."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "pollinator_count_taken",
+      "order": 65,
+      "line": "Lyra showed me her count. I have been turning beds for a valley that had already stopped being pollinated, which explains a decade of wondering what I was doing wrong."
+    },
+    {
+      "npc_id": "lyra_keeper",
+      "after_quest": "",
+      "after_milestone": "pollinators_returned",
+      "order": 95,
+      "line": "Three broods in the habitats and I have stopped counting the wild rows because I cannot keep up. They did not need saving. They needed a reason, and we had spent twenty years not giving them one."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "pollinators_returned",
+      "order": 95,
+      "line": "The whole valley flowered in the same four days. I walked the long field road on the last of them and I am not ashamed to say I had to stop halfway."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "pollinators_returned",
+      "order": 95,
+      "line": "My beds set fruit this year without me doing one thing differently. Turns out I was never the missing part."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "pollinators_returned",
+      "order": 95,
+      "line": "The valley flowered at once and I did not have to call a single meeting about it. I intend to enjoy that for exactly one season before somebody asks me to budget for it."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "pollinators_returned",
+      "order": 95,
+      "line": "The old floor logs describe bloom years as routine. I had them filed under exaggeration. I have moved the folder."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "pollinators_returned",
+      "order": 95,
+      "line": "I am buying wild-gathered stock again. Not tower-grown, not traded up the road. Gathered, out there, by people who found it growing."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "pollinators_returned",
+      "order": 95,
+      "line": "They came back because it was worth the trip. That is the only reason anything ever comes back."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "first_rune_imbuing",
+      "order": 72,
+      "line": "You changed a potion that was already finished. Every method in the entry lab assumes you get one attempt and it is the brewing. Whoever cut those benches had stopped believing that, and did not write down when."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "greenhouse_expanded",
+      "order": 45,
+      "line": "Four beds under glass and every one of them taking something different. I spent thirty years being told a greenhouse was for keeping one crop alive, not for finding out what a crop could be talked into."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "water_source_identified",
+      "order": 62,
+      "line": "Two years. I wrote 'strain' on every one of those and filed it. The pattern was in my own handwriting the entire time and I did not look at it until somebody made me curious enough to."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "water_source_identified",
+      "order": 62,
+      "line": "A well. Not a season, not a mood, a well. I have been managing a health crisis with speeches when I could have been managing it with a bucket."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "town_water_cleared",
+      "order": 85,
+      "line": "The counter was quiet on Thursday. Not slow. Quiet. I stood in it for a while before I worked out what was missing."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "town_water_cleared",
+      "order": 85,
+      "line": "Whole row treated in an afternoon. Mira did not ask anyone for permission either, which I have decided to admire."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "crews_kept_working",
+      "order": 55,
+      "line": "A week's repairs in four days. The council did not vote to trust the tower. They just found it awkward to keep calling it a hazard while standing on a road it helped rebuild."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "tower_entered_the_ledger",
+      "order": 76,
+      "line": "You are a line in the ledger now, which sounds small and is not. Anecdotes leave with the mayor who told them. Lines survive."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "tower_entered_the_ledger",
+      "order": 76,
+      "line": "The tower was struck from the town record nineteen years ago in a single line. I have watched it be written back in. I would like that noted somewhere, and I am aware I am the person who notes things."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "town_charter_signed",
+      "order": 98,
+      "line": "Goods move after dark. That is the whole of it, and it is everything. We trade on our own hours now instead of somebody else's, and the board carries the town's business rather than its emergencies."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "town_charter_signed",
+      "order": 98,
+      "line": "Standing orders. I get resupplied on a schedule instead of chasing whoever last promised me something. Do you know how long I have wanted to be bored by my own stockroom?"
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "town_charter_signed",
+      "order": 98,
+      "line": "They wrote you down. That is how a place stops needing the person who fixed it."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "pollinators_returned",
+      "order": 96,
+      "line": "There are pressed cuttings in those logs of plants I have never seen alive. I catalogued them as illustrations. It has not previously occurred to me that they were specimens, or that a specimen is a thing you could still do something with."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "archive_revelation",
+      "order": 99,
+      "line": "They sealed the floors so the tower could not eat what it was bound to, and then left so nobody who loved it less carefully could unseal them. I have called that abandonment in nine years of notes. The correction will take me a fortnight and I intend to enjoy every page of it."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "archive_revelation",
+      "order": 99,
+      "line": "Ione brought a hollowroot cutting down to the stall to show me. I have been growing in this valley my whole life and I did not know that was ever a thing that grew here."
+    },
+    {
+      "npc_id": "lyra_keeper",
+      "after_quest": "",
+      "after_milestone": "containment_repaired",
+      "order": 51,
+      "line": "There is a bench at the cold end of the floor that has been sitting there the whole time. I assumed it was for the wards. It is for brewing, and everything made on it comes out steadier than the same recipe made downstairs. The tower had opinions about where work should happen."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "terraces_still_alive",
+      "order": 68,
+      "line": "Bed structure. Drainage. Root stock. Under two feet of mortar I have walked past twice a day for thirty years while telling myself it was rubble because that was easier than getting a fork out."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "terraces_worked_again",
+      "order": 92,
+      "line": "I followed their bed lines instead of laying my own. Felt strange for about a week and then felt like the only sensible thing anybody has done up here."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "terraces_worked_again",
+      "order": 92,
+      "line": "Brin has started saying 'the previous groundskeeper' in the tone he normally saves for weather that behaves itself. From him that is practically a monument."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "erased_notes_raised",
+      "order": 93,
+      "line": "It is a working note. Not a confession, not a warning — somebody sitting with a problem for eleven months and being honest with themselves in private about what they were finding. I have read a great many last words. I have never read anybody's thinking."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "record_reconciled",
+      "order": 97,
+      "line": "It matched. Nine years of notes with a foot in something outside themselves at last, which is the whole difference between an archive and a collection of opinions, and I have been on the wrong side of it the entire time."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "record_reconciled",
+      "order": 97,
+      "line": "'Not yet, then.' Four times, in the margin. They kept deciding not to, and kept writing down why. That is the part worth having."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "record_reconciled",
+      "order": 97,
+      "line": "Ione has asked to enter eleven months of recovered record into the town archive. I said yes before she finished the sentence, which she has told me was procedurally improper and I have decided not to mind."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "greenhouse_repaired",
+      "order": 43,
+      "line": "If you are gathering in winter, go to the burn. Everything else in the valley shuts and the hollow opens, because nothing has grown a canopy back over it and it is the only floor still getting light. We have been treating the worst thing that ever happened to that forest as our winter larder for two decades."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "terraces_still_alive",
+      "order": 69,
+      "line": "The burn feeds this town one quarter of every year. I have never once heard anybody thank it, and I include myself in that."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "first_town_relief",
+      "order": 22,
+      "line": "If it has been raining, go up to the quarry. Everywhere else in the valley you wait for the wet to pass. Up there the wet is the whole point — the cut faces only show their seam while they are running, and the sump only grows anything while it is holding water."
+    },
+    {
+      "npc_id": "lyra_keeper",
+      "after_quest": "",
+      "after_milestone": "containment_repaired",
+      "order": 52,
+      "line": "There is a bed at the cold end that holds a hard frost all year. A frostcrack case will open in it out of season, which took me a while to be comfortable with — the whole point of that seed is that it waits. It still waits. It just waits here instead, and it takes five days about it."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "",
+      "order": 12,
+      "line": "One thing before you go up there. On a windy day, walk the plains. The clover only shows when the grass goes over, and the driftseed only piles up while it is still blowing. Everyone born here knows it and nobody thinks to say it, which is how I lost my first two seasons."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "crews_kept_working",
+      "order": 56,
+      "line": "The crews have started calling a windy morning a gathering day rather than a nuisance. Small thing. It means somebody has been paying attention to the fields for the first time in years."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "town_charter_signed",
+      "order": 99,
+      "line": "There is a stall in the square that was not there last season, run by somebody who came up the coast road because the coast road is now worth coming up. I did not plan that. I only made it possible, which I am reliably told is the job."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "town_charter_signed",
+      "order": 99,
+      "line": "The trader sells a resin I have failed to grow four times. I buy it. I am going to keep failing to grow it, and I would rather you did not raise the subject."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "pass_road_open",
+      "order": 100,
+      "line": "It grows on the switchback. In quantity. An hour's climb from a hedgerow I have been picking seed out of for nine years, and every head on it pointing downhill. I have been asking the wrong question in the wrong direction the entire time."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "pass_road_open",
+      "order": 100,
+      "line": "There is lichen up there that takes ten years to cover a hand's width. Take what you need and no more. I will not say it twice, but I have now said it twice."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "pass_road_open",
+      "order": 100,
+      "line": "Every map in the archive stops at the pass. Not at the valley edge — at the pass, precisely, as though the far side were somebody else's business. I would like to know who decided that and I suspect I already do."
+    },
+    {
+      "npc_id": "tarn_wayfarer",
+      "after_quest": "",
+      "after_milestone": "waystation_relit",
+      "order": 30,
+      "line": "Four carts turned off yesterday. Four. I used to go a week."
+    },
+    {
+      "npc_id": "tarn_wayfarer",
+      "after_quest": "",
+      "after_milestone": "pass_kept_open",
+      "order": 95,
+      "line": "A full winter worked. Your valley has not been cut off from anywhere this year, and half of you did not notice, which I have decided is the point rather than an insult."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "pass_kept_open",
+      "order": 100,
+      "line": "The pass held through winter. Do you understand that we have never once budgeted for a twelve-month year? I have had to invent an entire column."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "pass_kept_open",
+      "order": 100,
+      "line": "There is a flower on the high stone that opens in the coldest weeks and closes by the thaw, and it has been doing that unwatched for as long as there has been a pass. We were not there. That is all. We were simply never there."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "unsigned_order_taken",
+      "order": 78,
+      "line": "An unsigned order, paid over the odds, on a board I hold the key to. I have asked everyone in the square and got seven honest noes. I would like it to be somebody's idea of a joke and it is not shaped like one."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "unsigned_order_method",
+      "order": 88,
+      "line": "Customers ask for outcomes. Only practitioners ask for method. Whoever wrote that note knows which bench favours which work, and there are four benches in this tower and none of them are marked."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "unsigned_order_read",
+      "order": 100,
+      "line": "Read them in order and they stop being purchases. A clean pour, the correct bench, a plant that was gone. Somebody was checking whether this tower works, item by item, and they knew the list before we did. I have spent nine years wanting evidence that anyone else was paying attention. I did not specify that I would enjoy it."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "unsigned_order_read",
+      "order": 100,
+      "line": "Somebody else has been reading. That was always going to happen. What matters is that they found the tower working rather than open."
+    },
+    {
+      "npc_id": "tarn_wayfarer",
+      "after_quest": "",
+      "after_milestone": "unsigned_order_read",
+      "order": 100,
+      "line": "Notes on a board, paid over the odds, collected the same night. That is not a local. I would have seen a local. Whoever it was came up the road or came down it, and I did not see them either, which I do not much care for."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "first_rune_imbuing",
+      "order": 74,
+      "line": "The workshop benches are channelled the whole length and they hold heat. That is not a side effect of imbuing, that is a second use somebody designed in — and in twenty years of notes on that floor nobody, including me, wrote down that it was a place you could also brew."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "rune_workshop_restored",
+      "order": 72,
+      "line": "Tried the forge tonic. Tastes like a smithy and works like one. I will be having another."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "pass_kept_open",
+      "order": 76,
+      "line": "So there is a use for the lichen now. I would rather there wasn't. Ten years to cover a hand's width, and a standing order does not have a number on it — that is how a thing goes from rare to gone, and everyone involved is only ever taking a little."
+    },
+    {
+      "npc_id": "tarn_wayfarer",
+      "after_quest": "",
+      "after_milestone": "pass_kept_open",
+      "order": 78,
+      "line": "Eleven years I have gone past that flower and it may as well have been snow on a rock. You put it in a bottle and now the crews ask me to carry it. I do not know what to do with being wrong that long about something I saw every winter."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "pass_kept_open",
+      "order": 84,
+      "line": "Two plants that grow an hour above us, and this tower kept records for a century without one line on either. Not lost — never written. Whoever was up there keeping the road was not somebody the keeper thought to ask."
+    },
+    {
+      "npc_id": "lyra_keeper",
+      "after_quest": "",
+      "after_milestone": "containment_stable",
+      "order": 86,
+      "line": "The wards hold on their own now. I have spent so long checking them hourly that I keep walking down there out of habit and finding nothing to do. That is what stable means and I am finding it harder to sit with than the emergency was."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "containment_stable",
+      "order": 84,
+      "line": "Lyra brought me a jar of habitat-gathered and stood there while I looked at it. Twenty years of nobody in this valley being able to say where a thing came from, and now I have a name, a floor and a date on the label."
+    },
+    {
+      "npc_id": "tarn_wayfarer",
+      "after_quest": "",
+      "after_milestone": "pass_animals_settled",
+      "order": 84,
+      "line": "Carters do not thank you. They come back, which is the same thing said quieter. Three of them have started asking for the crossing on purpose instead of taking it because it is there, and I have had to think about what that makes the waystation."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "pass_animals_settled",
+      "order": 88,
+      "line": "Animals arriving in better condition than they set out. I have kept beasts my whole life and I would have told you that was not a thing that happened on a mountain road. I would have been telling you what everyone told me."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "eleven_months_restored",
+      "order": 96,
+      "line": "Eleven months of falling yields, written down as they happened by somebody who could see it happening. I have had nine bad seasons and no way to tell whether they were a pattern. Now I have somebody else's nine and they rhyme."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "eleven_months_restored",
+      "order": 96,
+      "line": "The record does not say the valley failed. It says the wards drew more than they returned for eleven months and somebody watched that happen and kept writing. Those are different stories and only one of them has a person in it."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "the_previous_hand",
+      "order": 104,
+      "line": "He wrote it all down and then took it out himself. I have spent nine years telling this valley the tower failed us and being quietly proud of how fair I was being about it. He did not fail us. He decided something, alone, and then removed the working so no one could check it. I would have preferred the failure."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "the_previous_hand",
+      "order": 104,
+      "line": "An archivist's whole argument is that the record is the thing. And the man who kept this one took eleven months out of it deliberately, after writing them, which means he believed the record was the thing too. He was not hiding a decision. He was stopping the next person reaching a different one."
+    },
+    {
+      "npc_id": "lyra_keeper",
+      "after_quest": "",
+      "after_milestone": "the_previous_hand",
+      "order": 98,
+      "line": "Restraint written down twenty years ago and then the pages pulled. He knew what the wards needed and he did not trust anyone after him to hold to it, so he made sure there was nothing to hold to. I have been reinventing his caution by instinct for six years because he took it away."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "the_previous_hand",
+      "order": 96,
+      "line": "So the man knew. That is the part. Not that it went wrong — things go wrong — but that he sat down, wrote out exactly how, and then pulled the pages so nobody could argue with him about it later. There is a word for that and it is not caution."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "the_previous_hand",
+      "order": 96,
+      "line": "People came into the shop for years with theories about what he did. Not one of them guessed he wrote it down first. I do not know what to do with a villain who kept notes."
+    },
+    {
+      "npc_id": "tarn_wayfarer",
+      "after_quest": "",
+      "after_milestone": "unsigned_order_unanswered",
+      "order": 102,
+      "line": "No fourth order. I have watched that road for eleven years and I know what it means when somebody stops asking: they got what they came for. Whether that is good news depends entirely on what they wanted it for, and the road does not tell you that part."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "unsigned_order_unanswered",
+      "order": 97,
+      "line": "Three orders, paid over the odds, collected the same night, and then nothing. I have run a shop for twenty years. Customers who are satisfied come back. Customers who were checking something do not."
+    }
+  ]
+}
