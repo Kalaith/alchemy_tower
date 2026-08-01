@@ -216,6 +216,7 @@ def icon(item, size, world=False):
         "southmarket_myrrh",
         "driftbloom",
         "coldiron_lichen",
+        "rimeflower",
     } or base_item in {
         "whisper_moss",
         "sunleaf",
@@ -246,6 +247,7 @@ def icon(item, size, world=False):
         "southmarket_myrrh",
         "driftbloom",
         "coldiron_lichen",
+        "rimeflower",
     }:
         colors = {
             "whisper_moss": "#74d59f",
@@ -277,6 +279,7 @@ def icon(item, size, world=False):
             "southmarket_myrrh": "#ba8e60",
             "driftbloom": "#d6ce9e",
             "coldiron_lichen": "#94a89c",
+            "rimeflower": "#d6e4f0",
         }
         for ox, oy in [(-10, 2), (2, -4), (12, 4), (-2, 10)]:
             d.ellipse(box(cx + ox, cy + oy, 9, 12), fill=rgb(colors[base_item]))
@@ -503,6 +506,8 @@ def main():
         "ione_archivist": ["#617ea2", "#d5d7cf", "#58453a", "#e4d0bc", "#b0cfff"],
         "brin_groundskeeper": ["#6b5a43", "#7d9c63", "#5c4738", "#ddc4a6", "#d6b083"],
         "lyra_keeper": ["#8aa7c4", "#dfe9ff", "#6a5446", "#ebd8c8", "#bde6e8"],
+        # Road dust rather than valley green: the first character from outside.
+        "tarn_wayfarer": ["#8c7a62", "#c8b393", "#4c4038", "#dcc4a8", "#a8bcc8"],
     }
     for req in REQ["player"] + REQ["npcs"]:
         save(sheet(char_palettes[req["id"]]), Path("characters") / f'{req["id"]}.png')

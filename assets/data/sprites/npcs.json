@@ -77,6 +77,15 @@
         64
       ],
       "prompt": "Top-down creature keeper, calm posture, layered pale blue utility coat, habitat tools and feed pouch, gentle magical-naturalist silhouette, readable from above, designed for 4-direction walk and idle animation."
+    },
+    {
+      "id": "tarn_wayfarer",
+      "type": "character_sheet",
+      "sheet_size_px": [
+        320,
+        256
+      ],
+      "prompt": "A weathered road warden in a heavy travelling coat and hood, dust-coloured and practical, four-direction walk sheet."
     }
   ]
 }

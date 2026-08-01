@@ -159,6 +159,40 @@
       "render": {
         "sprite_id": "coldiron_lichen_pass"
       }
+    },
+    {
+      "id": "pass_rimeflower_01",
+      "name": "Rimeflower",
+      "item_id": "rimeflower",
+      "color": [
+        214,
+        228,
+        240,
+        255
+      ],
+      "position": [
+        844.0,
+        168.0
+      ],
+      "radius": 16.0,
+      "route_id": "pass_switchback",
+      "seasons": [
+        "winter"
+      ],
+      "weathers": [
+        "clear",
+        "windy"
+      ],
+      "time_windows": [
+        "morning",
+        "day"
+      ],
+      "spawn_chance": 86,
+      "required_completed_quest": "winter_crossing_for_tarn",
+      "note": "It only opens on the high stone in deep winter, so until the pass was worked through a winter nobody in the valley had ever seen one.",
+      "render": {
+        "sprite_id": "rimeflower_pass"
+      }
     }
   ]
 }

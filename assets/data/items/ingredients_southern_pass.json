@@ -86,6 +86,39 @@
       "wild_variants": [],
       "synthesis_weight": 1,
       "synthesis_value": 5
+    },
+    {
+      "id": "rimeflower",
+      "name": "Rimeflower",
+      "category": "ingredient",
+      "base_value": 26,
+      "color": [
+        214,
+        228,
+        240,
+        255
+      ],
+      "description": "A white flower that opens on bare high stone in the coldest weeks and closes again by the thaw. It has presumably been doing this every winter for as long as the pass has existed, unwatched.",
+      "quality": 48,
+      "rarity": 3,
+      "elements": {
+        "vita": 2,
+        "ember": 0,
+        "mist": 3,
+        "lux": 2
+      },
+      "traits": [
+        "pure",
+        "cold"
+      ],
+      "source_conditions": [
+        "deep winter only, on the high stone",
+        "clear or windy; it will not open in weather",
+        "seen by nobody at all until the pass was kept open"
+      ],
+      "wild_variants": [],
+      "synthesis_weight": 1,
+      "synthesis_value": 7
     }
   ]
 }

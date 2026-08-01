@@ -605,6 +605,34 @@
       "after_milestone": "pass_road_open",
       "order": 100,
       "line": "Every map in the archive stops at the pass. Not at the valley edge — at the pass, precisely, as though the far side were somebody else's business. I would like to know who decided that and I suspect I already do."
+    },
+    {
+      "npc_id": "tarn_wayfarer",
+      "after_quest": "",
+      "after_milestone": "waystation_relit",
+      "order": 30,
+      "line": "Four carts turned off yesterday. Four. I used to go a week."
+    },
+    {
+      "npc_id": "tarn_wayfarer",
+      "after_quest": "",
+      "after_milestone": "pass_kept_open",
+      "order": 95,
+      "line": "A full winter worked. Your valley has not been cut off from anywhere this year, and half of you did not notice, which I have decided is the point rather than an insult."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "pass_kept_open",
+      "order": 100,
+      "line": "The pass held through winter. Do you understand that we have never once budgeted for a twelve-month year? I have had to invent an entire column."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "pass_kept_open",
+      "order": 100,
+      "line": "There is a flower on the high stone that opens in the coldest weeks and closes by the thaw, and it has been doing that unwatched for as long as there has been a pass. We were not there. That is all. We were simply never there."
     }
   ],
   "epilogue_beats": [

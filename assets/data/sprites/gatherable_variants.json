@@ -314,6 +314,15 @@
         64
       ],
       "prompt": "Coldiron lichen variant staged on north-facing pass rock."
+    },
+    {
+      "id": "rimeflower_pass",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "Rimeflower variant staged on frozen high pass stone."
     }
   ]
 }

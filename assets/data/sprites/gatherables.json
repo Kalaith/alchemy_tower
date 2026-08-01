@@ -454,6 +454,19 @@
         64
       ],
       "prompt": "Grey-green lichen crust spreading across cold exposed rock, readable from above."
+    },
+    {
+      "id": "rimeflower",
+      "type": "icon_and_world_node",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A small white six-petalled flower open on frost-covered bare rock, readable from above."
     }
   ]
 }

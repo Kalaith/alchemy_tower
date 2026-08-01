@@ -454,6 +454,72 @@
       "trusted_reward_coins": 70,
       "trusted_reward_item_id": "bloomwing_pollen",
       "trusted_reward_amount": 3
+    },
+    {
+      "id": "tarn_wayfarer",
+      "name": "Tarn",
+      "area_id": "southern_pass",
+      "position": [
+        560.0,
+        300.0
+      ],
+      "interaction_radius": 56.0,
+      "color": [
+        196,
+        162,
+        122,
+        255
+      ],
+      "dialogue_start": "You are from down there. I have carried past this valley for eleven years and I have never once had a reason to walk down into it. That is not an insult. It is just what the road thought of you.",
+      "dialogue_progress": "The waystation is a wall and a roof and a dead lamp. It has been that since before I took the route.",
+      "dialogue_complete": "Carters are stopping here again. Do you know what that does to a valley's name? More than any of you shouting up the road ever would.",
+      "quest_ids": [
+        "waystation_light_for_tarn",
+        "mule_relief_for_tarn",
+        "winter_crossing_for_tarn"
+      ],
+      "role": "waystation keeper",
+      "schedule": [
+        {
+          "time_window": "morning",
+          "area_id": "southern_pass",
+          "position": [
+            560.0,
+            300.0
+          ]
+        },
+        {
+          "time_window": "day",
+          "area_id": "southern_pass",
+          "position": [
+            612.0,
+            352.0
+          ]
+        },
+        {
+          "time_window": "evening",
+          "area_id": "southern_pass",
+          "position": [
+            524.0,
+            268.0
+          ]
+        }
+      ],
+      "phase1_dialogue": {
+        "intro": "Waystation keeper. It is less than it sounds. Mostly I tell people the pass is closed and watch them find out I was right.",
+        "pre_help_concern": "Eleven years I have watched carts go past the top of your valley without turning down it. You are the first person from down there to come up and ask me anything.",
+        "active_request": "The lamp. Everything else on this road can wait, but a station nobody can see at dusk is a wall with a roof.",
+        "post_help_relief": "Two carters stopped last night. They will tell the next two. That is how a road works and it is the only way it works.",
+        "town_recovery_observation": "Something has changed down there. I can tell from up here by how many carts turn off. Whatever you have all been doing, the road has noticed."
+      },
+      "friendship_line": "You keep coming up. Nobody comes up. Take this — it came over the pass with a carter who could not pay, and I have no use for it and you will.",
+      "friendship_reward_coins": 55,
+      "friendship_reward_item_id": "southmarket_myrrh",
+      "friendship_reward_amount": 1,
+      "trusted_line": "Eleven years I called this the valley with the dead tower, because that is what the road called it and I never thought to check. I have started saying the name instead. Take the amber. Do not tell me what it is worth; I know what it is worth, and I am giving it to you anyway.",
+      "trusted_reward_coins": 120,
+      "trusted_reward_item_id": "saltroad_amber",
+      "trusted_reward_amount": 1
     }
   ]
 }

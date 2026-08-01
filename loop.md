@@ -656,6 +656,26 @@ Stop the loop and report if:
   own art and the staged copies of it per biome are different jobs — and moved four stray bag-only
   icons into `item_icons` where they belonged.
   **The valley is now 14 areas, 19 routes, 112 items.**
+- **2026-08-01 — an eighth townsperson, and the first who is not one.** The brief asked for more
+  NPCs and the cast had been **seven since before this loop started** — deepened repeatedly, never
+  added to. And the pass built last pass had nobody on it.
+  **Tarn** keeps the waystation at the top of the switchback and has carried past this valley for
+  eleven years without once having a reason to walk down into it. Every other character here is a
+  native looking inward; he is the valley seen from outside, and he is blunt that the road's opinion
+  of the place was "the one with the dead tower" and that he never thought to check.
+  *His three beats are built entirely from three earlier passes' outputs, in three different
+  systems:* a **Nightwatch Lantern** (rune workshop) for a station nobody can see at dusk, two
+  **Stillkeeper Tonics** (the ward-cooled bench) for animals that arrive too spent to eat — he is
+  explicit that the carters chose this and the mules did not — and two **Hardwinter Draughts** (the
+  kiln-forced frostcrack seed) to work the pass through a winter, because if a seed can be argued
+  with so can a road.
+  The payoff is a thing nobody in the valley had ever seen: `rimeflower` opens on the high stone in
+  the coldest weeks and closes by the thaw, and has been doing that unwatched for as long as there
+  has been a pass. Ione's line about it is the one I would keep if I kept one.
+  *Nothing needed extending to add him — `quest_ids`, the friendship and parting gifts, schedules,
+  reactions and the sprite pipeline all took an eighth entry without a schema change, which is the
+  first time this loop has added something and touched no Rust at all.*
+  **Cast is 8; arc quests 21.**
 
 ## Deferred (needs a new system; not for this loop)
 

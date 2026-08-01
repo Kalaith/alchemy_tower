@@ -461,6 +461,84 @@
           "text": "Somebody removed those eleven months deliberately, and it was the wizard, and they did it after writing them. Ione's reading is that the pages were taken out not to hide the decision but to stop anyone finding the working that led to it and being persuaded by it."
         }
       ]
+    },
+    {
+      "id": "waystation_light_for_tarn",
+      "title": "A Station Nobody Can See",
+      "description": "Deliver 1 Excellent Nightwatch Lantern to Tarn so the waystation at the top of the pass can be seen from the road at dusk.",
+      "required_item_id": "nightwatch_lantern",
+      "required_amount": 1,
+      "reward_coins": 130,
+      "giver_npc_id": "tarn_wayfarer",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "",
+      "required_effect_kind": "glow",
+      "prerequisite_quests": [
+        "nightwatch_for_elric"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 30,
+      "giver_intro_line": "The lamp here died before I took the route and nobody has been up to relight it since, because why would they. A carter coming over at dusk sees nothing, so a carter coming over at dusk does not stop. One lantern that holds all night once a man stops walking, and this becomes a station again instead of a wall.",
+      "giver_active_line": "Excellent grade or do not bother. It is going up a pole in the wind at the top of a pass and nobody is going to be relighting it.",
+      "completion_milestones": [
+        {
+          "id": "waystation_relit",
+          "title": "The Waystation Relit",
+          "text": "The lamp at the top of the switchback is burning again for the first time in over a decade. Two carters stopped the first night. Tarn says that is how a road works and the only way it works."
+        }
+      ]
+    },
+    {
+      "id": "mule_relief_for_tarn",
+      "title": "The Animals Come Over Worse",
+      "description": "Deliver 2 Fine-or-better Stillkeeper Tonics to Tarn for the animals that come over the pass too spent to eat.",
+      "required_item_id": "stillkeeper_tonic",
+      "required_amount": 2,
+      "reward_coins": 150,
+      "giver_npc_id": "tarn_wayfarer",
+      "minimum_quality_band": "Fine",
+      "required_trait": "calm",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [
+        "waystation_light_for_tarn"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 34,
+      "giver_intro_line": "Everyone worries about the carters. The carters are fine; they chose this. It is the animals that come over the top shaking and off their feed, and a mule that will not eat at the waystation is a mule that does not make the next one. Something settling. Two, because they do not come over one at a time.",
+      "giver_active_line": "Calm, not strong. I am not trying to make them work harder. I am trying to get them to put their head in a bucket.",
+      "completion_milestones": [
+        {
+          "id": "pass_animals_settled",
+          "title": "Heads In The Bucket",
+          "text": "Tarn has started keeping a settling tonic at the waystation as standard. The carters have noticed their animals arrive at the far side in better condition than they leave the valley, which is not something anyone can remember being true."
+        }
+      ]
+    },
+    {
+      "id": "winter_crossing_for_tarn",
+      "title": "The Four Months Nobody Crosses",
+      "description": "Deliver 2 Excellent Hardwinter Draughts to Tarn so the pass can be worked through the winter instead of closing behind the valley.",
+      "required_item_id": "hardwinter_draught",
+      "required_amount": 2,
+      "reward_coins": 260,
+      "giver_npc_id": "tarn_wayfarer",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "",
+      "required_effect_kind": "speed",
+      "prerequisite_quests": [
+        "mule_relief_for_tarn"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 40,
+      "giver_intro_line": "Here is the thing nobody down there says out loud. The pass shuts for four months and your valley spends a third of every year on the wrong side of it, and you have all arranged your lives around that as though it were weather rather than a decision. I am told you can force a frostcrack seed open out of season. If a seed can be argued with, so can a road.",
+      "giver_active_line": "Two, and both excellent. One gets a crossing started. Two gets it finished, which is the half that matters.",
+      "completion_milestones": [
+        {
+          "id": "pass_kept_open",
+          "title": "The Pass Kept Open",
+          "text": "The switchback was worked through a full winter for the first time in living memory. The valley spent no part of this year cut off from anywhere, and the only people who found that unremarkable were the ones who had never known it any other way."
+        }
+      ]
     }
   ]
 }
