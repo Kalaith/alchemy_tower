@@ -542,6 +542,32 @@
         64
       ],
       "prompt": "A small heap of warm gold pollen combed from a habitat perch, restorative reagent icon."
+    },
+    {
+      "id": "rune_ash",
+      "type": "icon_and_world_node",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A drift of pale grey rune ash collected in a cut bench channel, faintly luminous, readable from above."
+    },
+    {
+      "id": "ward_rune",
+      "type": "icon_and_world_node",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A pale bone-gold rune tile worked loose from a bench frame, inward-turning sigil, readable from above."
     }
   ]
 }

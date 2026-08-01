@@ -359,6 +359,69 @@
           "description": "Takes the cold out of whoever is carrying it."
         }
       ]
+    },
+    {
+      "id": "beacon_burst",
+      "name": "Beacon Burst",
+      "category": "potion",
+      "base_value": 52,
+      "color": [
+        226,
+        216,
+        160,
+        255
+      ],
+      "description": "A lantern draught opened outward all at once. One bottle lights an entire crossroads for as long as it takes to decide which way you are going.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 45.0,
+          "description": "Floods a wide area with light briefly rather than lighting your own step for long."
+        }
+      ]
+    },
+    {
+      "id": "nightwatch_lantern",
+      "name": "Nightwatch Lantern",
+      "category": "potion",
+      "base_value": 66,
+      "color": [
+        232,
+        190,
+        146,
+        255
+      ],
+      "description": "Emberglass held back by a delay rune. It does nothing at all until you have stopped moving, and then it lights and keeps lighting.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 260.0,
+          "description": "Comes up slowly and then holds far longer than an unworked lantern would."
+        }
+      ]
+    },
+    {
+      "id": "benchlight_solution",
+      "name": "Benchlight Solution",
+      "category": "potion",
+      "base_value": 50,
+      "color": [
+        200,
+        194,
+        214,
+        255
+      ],
+      "description": "A working light the colour of old chalk. It picks out cut channels and worn inlay far better than it lights a road.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 180.0,
+          "description": "A flat grey-white light that shows detail rather than distance."
+        }
+      ]
     }
   ]
 }

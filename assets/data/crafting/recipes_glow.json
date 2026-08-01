@@ -446,6 +446,44 @@
       },
       "required_timing": "late",
       "morph_targets": []
+    },
+    {
+      "id": "benchlight_solution_recipe",
+      "name": "Benchlight Solution",
+      "station_id": "greenhouse_still",
+      "ingredients": [
+        {
+          "item_id": "rune_ash",
+          "amount": 2
+        },
+        {
+          "item_id": "resonance_shard",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "benchlight_solution",
+      "output_amount": 1,
+      "description": "Spent rune ash suspended against a live ward shard. The ash remembers a shape for about a day, and this is how you ask it what shape.",
+      "required_heat": 2,
+      "required_stirs": 2,
+      "unstable_output_item_id": "lantern_leak",
+      "lore_note": "Ione has asked twice whether this counts as reading the workshop's notes. Nobody has given her a straight answer.",
+      "minimum_quality": 42,
+      "preferred_traits": [
+        "arcane",
+        "luminous"
+      ],
+      "guaranteed_traits": [
+        "soft_glow"
+      ],
+      "minimum_elements": {
+        "vita": 0,
+        "ember": 1,
+        "mist": 1,
+        "lux": 6
+      },
+      "required_timing": "steady",
+      "morph_targets": []
     }
   ]
 }

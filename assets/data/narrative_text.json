@@ -367,6 +367,13 @@
       "after_milestone": "pollinators_returned",
       "order": 95,
       "line": "They came back because it was worth the trip. That is the only reason anything ever comes back."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "first_rune_imbuing",
+      "order": 72,
+      "line": "You changed a potion that was already finished. Every method in the entry lab assumes you get one attempt and it is the brewing. Whoever cut those benches had stopped believing that, and did not write down when."
     }
   ]
 }

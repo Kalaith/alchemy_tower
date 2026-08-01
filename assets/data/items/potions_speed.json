@@ -194,6 +194,27 @@
           "description": "Takes the ache out of a long walking day."
         }
       ]
+    },
+    {
+      "id": "relay_draught",
+      "name": "Relay Draught",
+      "category": "potion",
+      "base_value": 64,
+      "color": [
+        176,
+        206,
+        236,
+        255
+      ],
+      "description": "Briskstep threaded through an echo rune. The lift fades, and then some minutes later it comes back, which is either a gift or a nuisance depending where you are standing.",
+      "effects": [
+        {
+          "kind": "speed",
+          "magnitude": 0.2,
+          "duration_seconds": 240.0,
+          "description": "A moderate lift that drops away and returns before it finishes."
+        }
+      ]
     }
   ]
 }

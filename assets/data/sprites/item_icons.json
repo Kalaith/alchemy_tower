@@ -449,6 +449,69 @@
         64
       ],
       "prompt": "A warm gold speed draught bottle with pollen drifting inside it."
+    },
+    {
+      "id": "beacon_burst",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A bright pale-gold bottle mid-flare, wide burst lantern potion icon."
+    },
+    {
+      "id": "nightwatch_lantern",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A warm amber lantern bottle with the light only just coming up, delayed-release icon."
+    },
+    {
+      "id": "fieldwide_poultice",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A broad flat olive-gold bottle meant to be thrown rather than poured."
+    },
+    {
+      "id": "second_spring_tonic",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A deep green tonic bottle with two distinct layers settled in it."
+    },
+    {
+      "id": "hearthward_infusion",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A soft sage-green infusion bottle with a warded seal at the neck."
+    },
+    {
+      "id": "relay_draught",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A pale blue speed draught bottle with the liquid divided into two pulses."
+    },
+    {
+      "id": "benchlight_solution",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A chalk-grey working-light bottle with fine pale sediment."
     }
   ]
 }

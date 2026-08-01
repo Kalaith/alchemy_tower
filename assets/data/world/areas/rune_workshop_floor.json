@@ -75,5 +75,64 @@
       "locked_note": "The archive vault remains sealed until you can prove the tower's higher work is stable."
     }
   ],
-  "gather_nodes": []
+  "gather_nodes": [
+    {
+      "id": "rune_ash_channel_01",
+      "name": "Rune Ash",
+      "item_id": "rune_ash",
+      "color": [
+        172,
+        162,
+        186,
+        255
+      ],
+      "position": [
+        296.0,
+        470.0
+      ],
+      "radius": 15.0,
+      "route_id": "rune_bench_row",
+      "seasons": [],
+      "weathers": [],
+      "time_windows": [
+        "morning",
+        "day",
+        "evening",
+        "night"
+      ],
+      "spawn_chance": 86,
+      "note": "It collects in the channels whether or not anyone has been working. Nobody has satisfactorily explained that to Ione.",
+      "render": {
+        "sprite_id": "rune_ash"
+      }
+    },
+    {
+      "id": "rune_ward_inlay_01",
+      "name": "Ward Rune",
+      "item_id": "ward_rune",
+      "color": [
+        214,
+        198,
+        150,
+        255
+      ],
+      "position": [
+        706.0,
+        322.0
+      ],
+      "radius": 15.0,
+      "route_id": "rune_bench_row",
+      "seasons": [],
+      "weathers": [],
+      "time_windows": [
+        "evening",
+        "night"
+      ],
+      "spawn_chance": 44,
+      "note": "One works loose from a frame every so often, always at the quiet end of the day. Take the ones that have already let go; the others are still holding something up.",
+      "render": {
+        "sprite_id": "ward_rune"
+      }
+    }
+  ]
 }

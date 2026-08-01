@@ -416,8 +416,7 @@
     "journal_potion_recap_echo_healing_draught": "A restorative with a second pulse folded into it. The first drink helps; the echo convinces.",
     "journal_potion_recap_delayed_stamina_tonic": "The same sharp force as the tonic, but taught to wait. Useful when timing matters more than impact.",
     "journal_potion_recap_stamina_tonic": "A forceful motion brew with very little patience. Reliable when the body needs to move before the mind catches up.",
-    "journal_potion_recap_murky_concoction": "The catchall memory for mixtures that had ingredients but never found a point. Useful mostly because failure still leaves a pattern."
-    ,
+    "journal_potion_recap_murky_concoction": "The catchall memory for mixtures that had ingredients but never found a point. Useful mostly because failure still leaves a pattern.",
     "overlay_materials": "Materials",
     "overlay_slots": "Slots",
     "overlay_slot_label": "Slot {slot}",
@@ -502,8 +501,7 @@
     "goal_keep_working": "Keep gathering, brewing, and filling the archive.",
     "journal_active_summary": "{title}  |  {requirements}  |  {location}",
     "rune_imbued_status": "Imbued {input} with {rune} to create {output}.",
-    "observatory_locked": "The observatory remains dark. The archives are not complete."
-    ,
+    "observatory_locked": "The observatory remains dark. The archives are not complete.",
     "overlay_shop_buy_tab": "Buy",
     "overlay_shop_sell_tab": "Sell",
     "overlay_shop_stock": "Stock",
@@ -513,6 +511,7 @@
     "overlay_shop_footer": "{switch} switch tab  |  {select} select  |  {sort} sort  |  {confirm} confirm  |  {close} close",
     "overlay_rune_title": "Rune Workshop",
     "overlay_rune_drafts": "Rune Drafts",
+    "overlay_rune_range": "showing {first}-{last} of {total}",
     "overlay_rune_empty": "Bring a potion and a matching rune here.",
     "overlay_rune_footer": "{select} select  |  {confirm} confirm  |  {close} close",
     "overlay_quest_board_footer": "{select} select  |  {confirm} confirm  |  {close} close",

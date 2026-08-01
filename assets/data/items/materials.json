@@ -298,6 +298,38 @@
       "wild_variants": [],
       "synthesis_weight": 1,
       "synthesis_value": 3
+    },
+    {
+      "id": "ward_rune",
+      "name": "Ward Rune",
+      "category": "rune",
+      "base_value": 44,
+      "color": [
+        214,
+        198,
+        150,
+        255
+      ],
+      "description": "Turns a potion inward instead of outward, holding its effect on the drinker rather than letting it spend itself on the air. The counter in town has never stocked one.",
+      "quality": 52,
+      "rarity": 3,
+      "elements": {
+        "vita": 1,
+        "ember": 0,
+        "mist": 1,
+        "lux": 2
+      },
+      "traits": [
+        "arcane",
+        "pure"
+      ],
+      "source_conditions": [
+        "cut into the workshop benches themselves",
+        "prised loose only where the frame has already given up the piece"
+      ],
+      "wild_variants": [],
+      "synthesis_weight": 1,
+      "synthesis_value": 5
     }
   ]
 }

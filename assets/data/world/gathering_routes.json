@@ -89,6 +89,12 @@
       "name": "Town Bed Rows",
       "area_id": "town_square",
       "description": "The strips of worked ground behind the square. Bare for a decade, and worth walking again once Rowan has the row turned."
+    },
+    {
+      "id": "rune_bench_row",
+      "name": "Rune Bench Row",
+      "area_id": "rune_workshop_floor",
+      "description": "The working length of the workshop: channelled benches, spent chalk, and frames that have been shedding their own inlay since long before anyone came back."
     }
   ]
 }

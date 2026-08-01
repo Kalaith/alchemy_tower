@@ -192,6 +192,58 @@
       "wild_variants": [],
       "synthesis_weight": 1,
       "synthesis_value": 4
+    },
+    {
+      "id": "rune_ash",
+      "name": "Rune Ash",
+      "category": "ingredient",
+      "base_value": 11,
+      "color": [
+        172,
+        162,
+        186,
+        255
+      ],
+      "description": "The grey powder left in the channels after an imbuing. It remembers the shape it was part of for about a day, which is exactly long enough to be useful.",
+      "quality": 33,
+      "rarity": 2,
+      "elements": {
+        "vita": 0,
+        "ember": 1,
+        "mist": 1,
+        "lux": 2
+      },
+      "traits": [
+        "arcane",
+        "volatile"
+      ],
+      "source_conditions": [
+        "swept from the bench channels after the workshop has been working",
+        "the day after, never the same day"
+      ],
+      "wild_variants": [
+        {
+          "id": "rune_ash_unspent",
+          "name": "Unspent Rune Ash",
+          "required_conditions": [
+            "night"
+          ],
+          "bonus_traits": [
+            "luminous"
+          ],
+          "quality_bonus": 8,
+          "elements": {
+            "vita": 0,
+            "ember": 0,
+            "mist": 0,
+            "lux": 2
+          },
+          "synthesis_weight_bonus": 0,
+          "synthesis_value_bonus": 3
+        }
+      ],
+      "synthesis_weight": 1,
+      "synthesis_value": 3
     }
   ]
 }

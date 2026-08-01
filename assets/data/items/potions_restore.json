@@ -389,6 +389,69 @@
           "description": "Restores completely and leaves the drinker unnervingly calm."
         }
       ]
+    },
+    {
+      "id": "fieldwide_poultice",
+      "name": "Fieldwide Poultice",
+      "category": "potion",
+      "base_value": 46,
+      "color": [
+        214,
+        206,
+        140,
+        255
+      ],
+      "description": "A poultice thrown wide instead of applied. Weaker on any one person and far better across a work crew that all came off the same field.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 18.0,
+          "duration_seconds": 0.0,
+          "description": "Treats broadly rather than deeply."
+        }
+      ]
+    },
+    {
+      "id": "second_spring_tonic",
+      "name": "Second Spring Tonic",
+      "category": "potion",
+      "base_value": 72,
+      "color": [
+        138,
+        196,
+        146,
+        255
+      ],
+      "description": "A restorative coiled into itself by an echo rune, so the bed it is worked into answers once now and once again a fortnight later.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 30.0,
+          "duration_seconds": 0.0,
+          "description": "Restores, and then restores again once the first has worn through."
+        }
+      ]
+    },
+    {
+      "id": "hearthward_infusion",
+      "name": "Hearthward Infusion",
+      "category": "potion",
+      "base_value": 58,
+      "color": [
+        206,
+        222,
+        196,
+        255
+      ],
+      "description": "Calmleaf turned inward by a ward rune. It settles the drinker rather than the room, which is the harder of the two and the one people actually ask for.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 26.0,
+          "duration_seconds": 0.0,
+          "description": "Settles and restores the drinker alone, without spending anything on the air."
+        }
+      ]
     }
   ]
 }

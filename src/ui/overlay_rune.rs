@@ -14,7 +14,12 @@ pub(crate) fn draw_rune_overlay_view(view: &RuneOverlayView) {
     let h = panel.h;
     draw_panel(x, y, w, h, &view.station_name);
     draw_overlay_subtitle(x, y, &view.subtitle);
-    draw_overlay_section_title(x + 20.0, y + 124.0, &view.drafts_title, None);
+    draw_overlay_section_title(
+        x + 20.0,
+        y + 124.0,
+        &view.drafts_title,
+        view.range_text.as_deref(),
+    );
     draw_overlay_section_box(x + 20.0, y + 138.0, w - 40.0, h - 200.0);
     let mut row_y = y + 172.0;
     if view.entries.is_empty() {

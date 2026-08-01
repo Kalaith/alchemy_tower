@@ -175,6 +175,7 @@ def icon(item, size, world=False):
         "quietbloom_spore",
         "resonance_shard",
         "bloomwing_pollen",
+        "rune_ash",
     } or base_item in {
         "whisper_moss",
         "sunleaf",
@@ -192,6 +193,7 @@ def icon(item, size, world=False):
         "quietbloom_spore",
         "resonance_shard",
         "bloomwing_pollen",
+        "rune_ash",
     }:
         colors = {
             "whisper_moss": "#74d59f",
@@ -210,6 +212,7 @@ def icon(item, size, world=False):
             "quietbloom_spore": "#ced6ba",
             "resonance_shard": "#b2a8f4",
             "bloomwing_pollen": "#f8ce80",
+            "rune_ash": "#aca2ba",
         }
         for ox, oy in [(-10, 2), (2, -4), (12, 4), (-2, 10)]:
             d.ellipse(box(cx + ox, cy + oy, 9, 12), fill=rgb(colors[base_item]))
@@ -264,8 +267,9 @@ def icon(item, size, world=False):
     elif base_item == "dew_slug":
         d.ellipse(box(cx, cy + 6, 18, 12), fill=rgb("#b5e8ff"))
         d.line((cx - 18, cy + 4, cx - 24, cy - 6), fill=rgb("#e3fbff"), width=2)
-    elif base_item in {"splash_rune", "echo_rune", "delay_rune"}:
-        c = {"splash_rune": "#7dc0ff", "echo_rune": "#c7b4ff", "delay_rune": "#ffc189"}[base_item]
+    elif base_item in {"splash_rune", "echo_rune", "delay_rune", "ward_rune"}:
+        c = {"splash_rune": "#7dc0ff", "echo_rune": "#c7b4ff", "delay_rune": "#ffc189",
+             "ward_rune": "#d6c696"}[base_item]
         d.rounded_rectangle((cx - 18, cy - 18, cx + 18, cy + 18), radius=8, fill=rgb("#8a877f"))
         d.arc((cx - 12, cy - 10, cx + 12, cy + 12), 210, 330, fill=rgb(c), width=4)
     else:
@@ -288,6 +292,10 @@ def icon(item, size, world=False):
             "deeproot_tonic": "#7aa87c", "hushwater_draught": "#c4d8e4",
             "forgelight_lantern": "#f8b060", "quickfire_draught": "#ff925c",
             "pollenwind_draught": "#f8d48c",
+            "beacon_burst": "#e2d8a0", "nightwatch_lantern": "#e8be92",
+            "fieldwide_poultice": "#d6ce8c", "second_spring_tonic": "#8ac492",
+            "hearthward_infusion": "#cedec4", "relay_draught": "#b0ceec",
+            "benchlight_solution": "#c8c2d6",
         }.get(item, "#d2c1ff")
         d.rounded_rectangle((cx - 8, cy - 24, cx + 8, cy - 12), radius=3, fill=rgb("#d9dfe8", 220))
         d.rectangle((cx - 5, cy - 28, cx + 5, cy - 22), fill=rgb("#8b6a4d"))

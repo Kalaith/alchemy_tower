@@ -23,6 +23,54 @@
       "rune_item_id": "delay_rune",
       "output_item_id": "delayed_stamina_tonic",
       "description": "Converts a sharp stimulant into a steadier delayed release."
+    },
+    {
+      "id": "splash_lantern_recipe",
+      "station_id": "rune_workbench",
+      "input_item_id": "lantern_draught",
+      "rune_item_id": "splash_rune",
+      "output_item_id": "beacon_burst",
+      "description": "Opens a carried lantern outward into a single wide flare."
+    },
+    {
+      "id": "splash_poultice_recipe",
+      "station_id": "rune_workbench",
+      "input_item_id": "field_poultice",
+      "rune_item_id": "splash_rune",
+      "output_item_id": "fieldwide_poultice",
+      "description": "Spreads one poultice thinly across a whole crew instead of thickly across one back."
+    },
+    {
+      "id": "echo_verdant_recipe",
+      "station_id": "rune_workbench",
+      "input_item_id": "verdant_restorative",
+      "rune_item_id": "echo_rune",
+      "output_item_id": "second_spring_tonic",
+      "description": "Coils a restorative so the ground answers it twice, a fortnight apart."
+    },
+    {
+      "id": "echo_briskstep_recipe",
+      "station_id": "rune_workbench",
+      "input_item_id": "briskstep_draught",
+      "rune_item_id": "echo_rune",
+      "output_item_id": "relay_draught",
+      "description": "Splits one lift into two, with an unhelpfully long gap in the middle."
+    },
+    {
+      "id": "delay_emberglass_recipe",
+      "station_id": "rune_workbench",
+      "input_item_id": "emberglass_tonic",
+      "rune_item_id": "delay_rune",
+      "output_item_id": "nightwatch_lantern",
+      "description": "Holds a lantern back until the carrier has stopped, then lets it run long."
+    },
+    {
+      "id": "ward_calmleaf_recipe",
+      "station_id": "rune_workbench",
+      "input_item_id": "calmleaf_infusion",
+      "rune_item_id": "ward_rune",
+      "output_item_id": "hearthward_infusion",
+      "description": "Turns a calming infusion inward so it settles the drinker rather than the room."
     }
   ]
 }

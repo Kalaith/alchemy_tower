@@ -275,6 +275,20 @@ Stop the loop and report if:
   Split `game_data_npcs.json` (752) into `town/npcs.json` + `quests_arcs`/`quests_board`, and
   extended the integrity test to station gates, habitat creatures, harvests and shop stock.
   *Next: the two empty tower routes, the rune workshop, or arcs for Mira, Brin, Elric and Ione.*
+- **2026-08-01 — tower floors / runes.** The rune workshop was a gate with a bench in it and no
+  route at all. It has one now (`rune_bench_row`) with two things on it: `rune_ash`, which collects
+  in the bench channels whether or not anyone has been working, and `ward_rune` — a **fourth rune
+  that cannot be bought**, only prised from frames that have already let go, evening and night only.
+  The rune layer went 3 → 9 patterns (splash widens, echo repeats, delay holds back, ward turns the
+  effect inward onto the drinker), all on potions a player at that tier actually carries.
+  *Bug this was one recipe away from: the drafts list drew every entry at 64px with no scroll or cap
+  inside a fixed box — at 3 patterns it never overflowed, at 9 it would have run over the footer.
+  Now windowed 5 at a time via `visible_window_start`, which is a pure function tested exhaustively
+  over every (total, selected) pair up to 40, because clamping to the first five instead would have
+  made later patterns silently unreachable.* Rune recipes are now integrity-checked too — station,
+  input, output, and that the rune slot holds something whose category is actually `rune`.
+  *Next: `archive_stack` and `observatory_span` are the last two empty routes, or arcs for Mira,
+  Brin, Elric and Ione.*
 
 ## Deferred (needs a new system; not for this loop)
 

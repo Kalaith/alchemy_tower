@@ -232,6 +232,29 @@ mod tests {
             }
         }
 
+        for recipe in &data.rune_recipes {
+            if !data.stations.iter().any(|s| s.id == recipe.station_id) {
+                missing.push(format!("{} -> station {}", recipe.id, recipe.station_id));
+            }
+            for (label, item_id) in [
+                ("input", &recipe.input_item_id),
+                ("rune", &recipe.rune_item_id),
+                ("output", &recipe.output_item_id),
+            ] {
+                match data.item(item_id) {
+                    None => missing.push(format!("{} -> {label} {item_id}", recipe.id)),
+                    // Handing the bench something that is not a rune would leave
+                    // a pattern that can be listed but never assembled.
+                    Some(item)
+                        if label == "rune" && item.category != crate::data::ItemCategory::Rune =>
+                    {
+                        missing.push(format!("{} -> {item_id} is not a rune", recipe.id))
+                    }
+                    Some(_) => {}
+                }
+            }
+        }
+
         for station in &data.stations {
             if !station.required_completed_quest.is_empty()
                 && data.quest(&station.required_completed_quest).is_none()
