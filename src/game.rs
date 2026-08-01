@@ -77,12 +77,16 @@ impl Game {
             // roll, which is what decides who is actually growing there.
             other if other.starts_with("area:") => {
                 let target = other.strip_prefix("area:").unwrap_or_default();
-                let (area_id, day) = match target.split_once(':') {
-                    Some((area_id, day)) => (area_id, day.parse::<u32>().unwrap_or(0)),
-                    None => (target, 0),
+                let (area_id, rest) = match target.split_once(':') {
+                    Some((area_id, rest)) => (area_id, rest),
+                    None => (target, ""),
+                };
+                let (day, time_window) = match rest.split_once(':') {
+                    Some((day, window)) => (day.parse::<u32>().unwrap_or(0), window),
+                    None => (rest.parse::<u32>().unwrap_or(0), "morning"),
                 };
                 let mut gameplay = GameplayState::new(&self.data);
-                gameplay.preview_area(&self.data, area_id, day);
+                gameplay.preview_area(&self.data, area_id, day, time_window);
                 GameState::from_gameplay(gameplay)
             }
             // "archive:<tab>:<index>" opens the archive console on a tab with a

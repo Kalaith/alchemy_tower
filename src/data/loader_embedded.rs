@@ -108,6 +108,10 @@ const ITEM_SOURCES: &[(&str, &str)] = &[
         include_str!("../../assets/data/items/ingredients_southern_pass.json"),
     ),
     (
+        "items/ingredients_observatory",
+        include_str!("../../assets/data/items/ingredients_observatory.json"),
+    ),
+    (
         "items/materials",
         include_str!("../../assets/data/items/materials.json"),
     ),

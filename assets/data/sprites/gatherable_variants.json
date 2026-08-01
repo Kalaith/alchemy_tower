@@ -323,6 +323,33 @@
         64
       ],
       "prompt": "Rimeflower variant staged on frozen high pass stone."
+    },
+    {
+      "id": "cloudglass_observatory",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "Flat pale panes of frozen condensation standing on end around a mirror rim, cold blue-white. Staged on the observatory floor beside the focus ring."
+    },
+    {
+      "id": "mirrorbead_observatory",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "Small silver-grey beads of mist standing on polished silver without wetting it. Staged on the observatory floor beside the focus ring."
+    },
+    {
+      "id": "lowstar_ash_observatory",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A fine warm cream-gold scorch mark on a dark metal ring, star-shaped. Staged on the observatory floor beside the focus ring."
     }
   ]
 }

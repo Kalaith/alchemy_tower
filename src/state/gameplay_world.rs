@@ -169,6 +169,76 @@ mod tests {
         );
     }
 
+    /// `every_gather_node_can_actually_spawn` only asks whether a node appears
+    /// at all. That is a low bar: a node can clear it and still make the player
+    /// wait weeks. This measures the two things they actually feel — how long
+    /// until it first turns up, and how often it turns up after that.
+    ///
+    /// The per-node daily roll is `day * 31` mixed with the node id, which is a
+    /// linear sequence rather than noise, and season and weather cycle every 20
+    /// days. Those periods interact: the lake's stillwater pearl qualifies on
+    /// five days of the first cycle and its roll is too high on every one of
+    /// them, so the only source of a catalyst three morphs need is absent until
+    /// day 21. That is the behaviour this pins — the floors are precedent, set
+    /// just outside the worst node that already ships, not an ambition.
+    #[test]
+    fn every_gather_node_turns_up_soon_enough_and_often_enough() {
+        const SWEEP_DAYS: u32 = 100;
+        const LATEST_FIRST_APPEARANCE: u32 = 28;
+        const MINIMUM_DAYS_IN_SWEEP: usize = 6;
+
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let mut state = GameplayState::new(&data);
+        for quest in &data.quests {
+            state.progression.completed_quests.insert(quest.id.clone());
+        }
+
+        let day_length = state.world.day_length_seconds;
+        let mut complaints = Vec::new();
+        for area in &data.areas {
+            for node in &area.gather_nodes {
+                state.world.current_area_id = area.id.clone();
+                let mut first = None;
+                let mut seen = 0usize;
+                for day in 0..SWEEP_DAYS {
+                    // Any hour of that day counts: the player can wait for dusk.
+                    let available = [0.15, 0.35, 0.6, 0.85, 0.97].iter().any(|fraction| {
+                        state.world.day_index = day;
+                        state.world.day_clock_seconds = day_length * fraction;
+                        state.refresh_available_nodes(&data);
+                        state.world.available_nodes.contains(&node.id)
+                    });
+                    if available {
+                        seen += 1;
+                        first.get_or_insert(day);
+                    }
+                }
+
+                match first {
+                    None => complaints.push(format!("{} in {}: never", node.id, area.id)),
+                    Some(day) if day > LATEST_FIRST_APPEARANCE => complaints.push(format!(
+                        "{} in {}: first appears on day {day}",
+                        node.id, area.id
+                    )),
+                    _ => {}
+                }
+                if seen < MINIMUM_DAYS_IN_SWEEP {
+                    complaints.push(format!(
+                        "{} in {}: only {seen} of {SWEEP_DAYS} days",
+                        node.id, area.id
+                    ));
+                }
+            }
+        }
+        complaints.sort();
+
+        assert!(
+            complaints.is_empty(),
+            "gather nodes the player cannot reasonably find:
+{complaints:#?}"
+        );
+    }
+
     /// Seasons are deliberately unequal — winter should be leaner than spring,
     /// and the charred hollow exists to give that leanness a destination rather
     /// than erase it. This is a floor, not a balance target: it catches a pass

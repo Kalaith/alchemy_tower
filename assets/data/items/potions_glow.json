@@ -512,6 +512,75 @@
           "description": "Keeps the cold out of whoever is working beside it."
         }
       ]
+    },
+    {
+      "id": "coldread_solution",
+      "name": "Coldread Solution",
+      "category": "potion",
+      "base_value": 52,
+      "color": [
+        214,
+        230,
+        242,
+        255
+      ],
+      "description": "A flat white light with no warmth in it. It flatters nothing and hides nothing, which is the entire requirement when the page you are reading has been lied about.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 230.0,
+          "description": "Cold even light that shows a surface exactly as it is."
+        }
+      ]
+    },
+    {
+      "id": "lowstar_lantern",
+      "name": "Lowstar Lantern",
+      "category": "potion",
+      "base_value": 118,
+      "color": [
+        240,
+        220,
+        178,
+        255
+      ],
+      "description": "Warm and unhurried, and it lasts far past the point where a light has any right to. Four hours went into the ash and the lantern gives them back slowly.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 340.0,
+          "description": "A patient warm light that outlasts anything else the tower makes."
+        }
+      ]
+    },
+    {
+      "id": "heldstar_lantern",
+      "name": "Heldstar Lantern",
+      "category": "potion",
+      "base_value": 210,
+      "color": [
+        250,
+        236,
+        198,
+        255
+      ],
+      "description": "Lens ash and a shard off the same ring, brewed on the floor directly beneath them. It does not flicker at all. Ione has described looking at it as being looked back at, and then declined to expand on that.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 420.0,
+          "description": "A still, unflickering light that lasts most of a working night."
+        },
+        {
+          "kind": "restore",
+          "magnitude": 24.0,
+          "duration_seconds": 0.0,
+          "description": "Steadying to sit beside, for reasons nobody has written down."
+        }
+      ]
     }
   ]
 }

@@ -67,11 +67,37 @@ impl GameplayState {
     /// harness can look at a floor or biome that was just authored. Nodes whose
     /// season, weather or hour do not match the current moment still stay
     /// absent — that is the honest view of the room right now.
-    pub(crate) fn preview_area(&mut self, data: &GameData, area_id: &str, day_index: u32) {
+    ///
+    /// `time_window` picks the hour. The clock used to be left wherever a new
+    /// game starts it, which is morning, so every night-gated node in the game
+    /// was invisible to every area capture — and the observatory, whose whole
+    /// premise is that the lens only works after dark, photographed as an empty
+    /// room. Season and weather were already selectable through the day index;
+    /// the hour was the one gate the harness could not reach.
+    pub(crate) fn preview_area(
+        &mut self,
+        data: &GameData,
+        area_id: &str,
+        day_index: u32,
+        time_window: &str,
+    ) {
         let Some(area) = data.area(area_id) else {
             return;
         };
         self.world.day_index = day_index;
+        // Mid-window in each case, so a capture never lands on a boundary
+        // minute and disagrees with the label it was asked for. Night is 22:00
+        // rather than the small hours on purpose: `handle_sleep_pressure` drags
+        // the player home between 01:00 and 02:00, so a capture aimed at 01:00
+        // photographs the entry lab and a faint-home banner instead of the room
+        // it asked for.
+        let minutes = match time_window {
+            "night" => 1320.0,
+            "evening" => 1140.0,
+            "day" => 840.0,
+            _ => 480.0,
+        };
+        self.set_clock_minutes(minutes);
         for quest in &data.quests {
             self.progression.completed_quests.insert(quest.id.clone());
         }

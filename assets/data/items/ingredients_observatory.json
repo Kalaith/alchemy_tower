@@ -1,0 +1,103 @@
+{
+  "items": [
+    {
+      "id": "cloudglass",
+      "name": "Cloudglass",
+      "category": "ingredient",
+      "base_value": 24,
+      "color": [
+        206,
+        224,
+        238,
+        255
+      ],
+      "description": "The outer mirror is above the weather, so on a clear night it gives its heat to the sky and nothing gives it back. What condenses freezes flat and comes off the rim in panes you can lift with two fingers.",
+      "quality": 46,
+      "rarity": 3,
+      "elements": {
+        "vita": 0,
+        "ember": 0,
+        "mist": 3,
+        "lux": 4
+      },
+      "traits": [
+        "pure",
+        "luminous"
+      ],
+      "source_conditions": [
+        "clear nights only — cloud keeps the mirror warm and there is nothing to lift",
+        "the outer rim, not the focus ring",
+        "gone by an hour after sunrise, every time"
+      ],
+      "wild_variants": [],
+      "synthesis_weight": 1,
+      "synthesis_value": 6
+    },
+    {
+      "id": "mirrorbead",
+      "name": "Mirrorbead",
+      "category": "ingredient",
+      "base_value": 22,
+      "color": [
+        190,
+        200,
+        214,
+        255
+      ],
+      "description": "In mist the mirror beads instead of frosting, and the beads sit on the silver without wetting it. Ione's note says they are the only thing in the tower that touches the lens and leaves no mark, and that she does not know why that unsettles her.",
+      "quality": 44,
+      "rarity": 3,
+      "elements": {
+        "vita": 0,
+        "ember": 0,
+        "mist": 5,
+        "lux": 2
+      },
+      "traits": [
+        "calm",
+        "pure"
+      ],
+      "source_conditions": [
+        "mist nights, when the cloud comes up to the lens rather than under it",
+        "the silver itself, gathered with a dry cloth",
+        "they will not survive being carried warm"
+      ],
+      "wild_variants": [],
+      "synthesis_weight": 1,
+      "synthesis_value": 6
+    },
+    {
+      "id": "lowstar_ash",
+      "name": "Lowstar Ash",
+      "category": "ingredient",
+      "base_value": 40,
+      "color": [
+        230,
+        206,
+        168,
+        255
+      ],
+      "description": "Late in the year the stars that matter sit low enough for the lens to hold one steady for hours, and where it holds, the focus ring scorches. The mark is a fine warm ash and it is the only thing in this tower made by patience rather than by work.",
+      "quality": 54,
+      "rarity": 4,
+      "elements": {
+        "vita": 0,
+        "ember": 2,
+        "mist": 0,
+        "lux": 6
+      },
+      "traits": [
+        "arcane",
+        "luminous"
+      ],
+      "source_conditions": [
+        "autumn and winter, when the good stars run low",
+        "clear nights only, and the lens must have had hours",
+        "scraped off the focus ring, which is why nobody does it twice a night"
+      ],
+      "wild_variants": [],
+      "synthesis_weight": 1,
+      "synthesis_value": 9
+    }
+  ]
+}

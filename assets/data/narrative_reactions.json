@@ -734,6 +734,27 @@
       "after_milestone": "unsigned_order_unanswered",
       "order": 97,
       "line": "Three orders, paid over the odds, collected the same night, and then nothing. I have run a shop for twenty years. Customers who are satisfied come back. Customers who were checking something do not."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "first_rune_imbuing",
+      "order": 82,
+      "line": "The archive is directly under the observatory. I have filed in that room for nine years and read that as convenience — stairs are stairs. It is not convenience. Mirror frost will not survive being carried warm, and it survives exactly two flights. He built the reading room the right distance below the lens and left no note saying so."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "archive_revelation",
+      "order": 88,
+      "line": "The counter in the square has sold starlight shards the whole time and never once said where they came from. I always assumed a supplier. There is no supplier. There is a lens at the top of your tower that has been making them unattended for twenty years, and somebody in this town has been going up there."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "archive_revelation",
+      "order": 92,
+      "line": "It kept working. No one asked it to and no one watched it, and every clear night for twenty years it held a star steady and marked the ring. Whatever you decide the wizard was, the machine he left behind has been patient in a way he was not."
     }
   ]
 }

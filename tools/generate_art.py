@@ -19,6 +19,7 @@ def sprite_section(name):
 
 REQ = {name: sprite_section(name) for name in
        ["player", "npcs", "stations", "gatherables", "gatherable_variants", "item_icons",
+        "item_icons_glow", "item_icons_restore", "item_icons_speed",
         "areas", "ui_and_effects"]}
 JOURNAL = ["routes", "notes", "brews", "greenhouse", "rapport"]
 TOASTS = ["journal_note", "recipe_logged", "quest_accepted", "quest_complete", "route_restored", "best_quality"]
@@ -184,7 +185,8 @@ def icon(item, size, world=False):
     cx, cy = w / 2, h / 2 + (4 if world else 0)
     style_suffix = None
     base_item = item
-    for suffix in ["plains", "quarry", "forest", "lake", "desert", "rainforest", "pass"]:
+    for suffix in ["plains", "quarry", "forest", "lake", "desert", "rainforest", "pass",
+                   "observatory"]:
         token = f"_{suffix}"
         if item.endswith(token):
             base_item = item[: -len(token)]
@@ -333,6 +335,22 @@ def icon(item, size, world=False):
              "washvein_crystal": "#b2cae2", "saltroad_amber": "#e8a854"}[base_item]
         for ox, oy in [(-10, 8), (0, 0), (12, 10)]:
             d.polygon([(cx + ox, cy + oy - 10), (cx + ox - 8, cy + oy), (cx + ox, cy + oy + 10), (cx + ox + 8, cy + oy)], fill=rgb(c))
+    elif base_item == "cloudglass":
+        for px, py in [(-10, 6), (2, -2), (12, 8)]:
+            d.polygon([(cx + px - 9, cy + py + 10), (cx + px - 5, cy + py - 10),
+                       (cx + px + 9, cy + py - 8), (cx + px + 5, cy + py + 12)],
+                      fill=rgb("#cee0ee", 235), outline=rgb("#8fb4cc"))
+    elif base_item == "mirrorbead":
+        d.ellipse(box(cx, cy + 8, 20, 6), fill=rgb("#7c8794", 150))
+        for bx, by, r in [(-9, 2, 7), (3, -4, 9), (11, 6, 6)]:
+            d.ellipse(box(cx + bx, cy + by, r, r), fill=rgb("#bec8d6"))
+            d.ellipse(box(cx + bx - r * 0.3, cy + by - r * 0.3, r * 0.35, r * 0.35),
+                      fill=rgb("#eef4fb"))
+    elif base_item == "lowstar_ash":
+        d.ellipse(box(cx, cy + 10, 20, 7), fill=rgb("#4a4038", 170))
+        d.polygon([(cx, cy - 16), (cx + 5, cy - 4), (cx + 17, cy - 1), (cx + 6, cy + 6),
+                   (cx + 9, cy + 17), (cx, cy + 10), (cx - 9, cy + 17), (cx - 6, cy + 6),
+                   (cx - 17, cy - 1), (cx - 5, cy - 4)], fill=rgb("#e6cea8"))
     elif base_item in {"mist_moth_wing", "glow_moth", "bloomwing"}:
         c = {"mist_moth_wing": "#b8d7ff", "glow_moth": "#f2e49a", "bloomwing": "#f4bab0"}[base_item]
         d.ellipse(box(cx - 12, cy + 2, 12, 16), fill=rgb(c))
@@ -367,6 +385,8 @@ def icon(item, size, world=False):
             "forgelight_lantern": "#f8b060", "quickfire_draught": "#ff925c",
             "channelfire_lantern": "#ee9e60", "hearthchannel_lantern": "#faba78",
             "forgestep_tonic": "#e89258",
+            "coldread_solution": "#d6e6f2", "lowstar_lantern": "#f0dcb2",
+            "heldstar_lantern": "#faecc6",
             "coldiron_tincture": "#a6baac", "rimeflower_cordial": "#deeaf4",
             "lastthaw_cordial": "#ece2d2",
             "pollenwind_draught": "#f8d48c",
@@ -399,6 +419,8 @@ def icon(item, size, world=False):
             d.arc((cx - 20, cy + 4, cx + 20, cy + 26), 200, 340, fill=rgb("#ffe4a6", 150), width=3)
         elif style_suffix == "rainforest":
             d.line((cx - 18, cy + 20, cx + 12, cy - 10), fill=rgb("#d4ffe6", 140), width=3)
+        elif style_suffix == "observatory":
+            d.arc((cx - 24, cy - 4, cx + 24, cy + 28), 200, 340, fill=rgb("#c8bfe8", 150), width=3)
         elif style_suffix == "pass":
             d.line((cx - 22, cy + 16, cx + 4, cy + 6), fill=rgb("#c8d0dc", 150), width=3)
             d.line((cx + 4, cy + 6, cx + 22, cy + 14), fill=rgb("#c8d0dc", 150), width=3)
@@ -524,7 +546,9 @@ def main():
     save(crow_sheet(), Path("characters/crow_guide.png"))
     for req in REQ["stations"]:
         save(station(req["id"], req["image_size_px"]), Path("stations") / f'{req["id"]}.png')
-    for req in REQ["gatherables"] + REQ["gatherable_variants"] + REQ["item_icons"]:
+    icon_sections = (REQ["item_icons"] + REQ["item_icons_glow"]
+                     + REQ["item_icons_restore"] + REQ["item_icons_speed"])
+    for req in REQ["gatherables"] + REQ["gatherable_variants"] + icon_sections:
         if req["type"] in {"icon_and_world_node", "inventory_icon"}:
             size = req.get("icon_size_px") or req.get("world_sprite_px")
             save(icon(req["id"], size), Path("items/icons") / f'{req["id"]}.png')

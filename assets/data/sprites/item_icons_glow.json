@@ -1,0 +1,238 @@
+{
+  "entries": [
+    {
+      "id": "lantern_leak",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A slightly unstable purple glow potion bottle, leaking light at the cork, readable potion icon."
+    },
+    {
+      "id": "glow_potion",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A refined glow potion, soft lavender liquid with steady pale light, readable potion icon."
+    },
+    {
+      "id": "star_lantern_elixir",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A premium starlit elixir bottle, silver-white crystalline glow, elegant rare potion silhouette, readable icon."
+    },
+    {
+      "id": "beastcalm_extract",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A calm pale aqua extract bottle used for magical creature habitats, gentle and controlled potion silhouette, readable icon."
+    },
+    {
+      "id": "splash_glow_potion",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A glow potion modified with splash rune energy, brighter outward halo motif, readable potion icon."
+    },
+    {
+      "id": "lantern_draught",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A warm amber glow draught bottle, humble road-lamp silhouette, readable potion icon."
+    },
+    {
+      "id": "mothlight_brew",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A soft yellow-green drifting glow bottle, gentle moth-light silhouette, readable potion icon."
+    },
+    {
+      "id": "wardlight_solution",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A cold blue-white arcane light bottle, ward-reading silhouette, readable potion icon."
+    },
+    {
+      "id": "runemark_elixir",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A bright blue-white refined runelight elixir bottle, crisp arcane silhouette, readable potion icon."
+    },
+    {
+      "id": "duskbell_tonic",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A dim lavender calming glow bottle, dusk creature-handling silhouette, readable potion icon."
+    },
+    {
+      "id": "emberglass_tonic",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A warm amber glass-hardened glow bottle, wind-steady light silhouette, readable potion icon."
+    },
+    {
+      "id": "stargrove_elixir",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A layered blue-white luminous elixir bottle, clear-beam silhouette, readable potion icon."
+    },
+    {
+      "id": "celestine_elixir",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A crystalline near-white observatory elixir bottle, brilliant silhouette, readable potion icon."
+    },
+    {
+      "id": "sunscar_glass_elixir",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A warm amber-gold elixir bottle with a faint glassy shimmer, desert lantern potion icon."
+    },
+    {
+      "id": "resonance_draught",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A violet-white lantern potion bottle holding a perfectly steady, unflickering light."
+    },
+    {
+      "id": "forgelight_lantern",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A hot orange lantern potion bottle glowing like a banked forge, high-tier morph icon."
+    },
+    {
+      "id": "beacon_burst",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A bright pale-gold bottle mid-flare, wide burst lantern potion icon."
+    },
+    {
+      "id": "nightwatch_lantern",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A warm amber lantern bottle with the light only just coming up, delayed-release icon."
+    },
+    {
+      "id": "benchlight_solution",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A chalk-grey working-light bottle with fine pale sediment."
+    },
+    {
+      "id": "annotated_light",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A warm parchment-gold reading-light bottle, close working light icon."
+    },
+    {
+      "id": "marginalia_lantern",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A cream-gold lantern bottle with faint script visible in the glass, high-tier archive morph icon."
+    },
+    {
+      "id": "channelfire_lantern",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A hard orange lantern bottle with visible heat shimmer, unflattering working light."
+    },
+    {
+      "id": "hearthchannel_lantern",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A deep forge-orange lantern bottle glowing like banked coals, high-tier morph icon."
+    },
+    {
+      "id": "coldread_solution",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A flat white lantern bottle with no warmth in the light, clinical and clear."
+    },
+    {
+      "id": "lowstar_lantern",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A warm cream-gold lantern bottle with a slow steady glow."
+    },
+    {
+      "id": "heldstar_lantern",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A pale gold lantern bottle with a perfectly still bright core, high-tier morph icon."
+    }
+  ]
+}

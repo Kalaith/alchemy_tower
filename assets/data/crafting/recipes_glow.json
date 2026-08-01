@@ -601,6 +601,104 @@
           "room_bonus_required": true
         }
       ]
+    },
+    {
+      "id": "coldread_solution_recipe",
+      "name": "Coldread Solution",
+      "station_id": "archive_reading_bench",
+      "ingredients": [
+        {
+          "item_id": "cloudglass",
+          "amount": 1
+        },
+        {
+          "item_id": "lumen_dust",
+          "amount": 2
+        }
+      ],
+      "output_item_id": "coldread_solution",
+      "output_amount": 2,
+      "description": "Mirror frost carried down two floors before it can think about melting, and put into dust. The light off it is flat and cold and shows a page exactly as it is.",
+      "required_heat": 1,
+      "required_stirs": 3,
+      "unstable_output_item_id": "lantern_leak",
+      "lore_note": "The stairs between the lens and this bench are the reason it works. Ione has pointed out that the wizard put the archive directly under the observatory and that this is unlikely to be a coincidence twice over.",
+      "minimum_quality": 46,
+      "preferred_traits": [
+        "pure",
+        "luminous"
+      ],
+      "guaranteed_traits": [
+        "soft_glow"
+      ],
+      "minimum_elements": {
+        "vita": 0,
+        "ember": 0,
+        "mist": 3,
+        "lux": 6
+      },
+      "required_timing": "early",
+      "required_sequence": [
+        "pure",
+        "luminous"
+      ],
+      "morph_targets": []
+    },
+    {
+      "id": "lowstar_lantern_recipe",
+      "name": "Lowstar Lantern",
+      "station_id": "archive_reading_bench",
+      "ingredients": [
+        {
+          "item_id": "lowstar_ash",
+          "amount": 1
+        },
+        {
+          "item_id": "mirrorbead",
+          "amount": 1
+        },
+        {
+          "item_id": "arcane_dust",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "lowstar_lantern",
+      "output_amount": 1,
+      "description": "Four hours of held starlight, scraped off a ring and given back a little at a time. It is the slowest ingredient in the tower and it makes the longest light.",
+      "required_heat": 2,
+      "required_stirs": 4,
+      "unstable_output_item_id": "lantern_leak",
+      "lore_note": "Whatever the lens was built to do, it has spent twenty unattended years doing this instead, and doing it well enough to be worth collecting.",
+      "minimum_quality": 56,
+      "preferred_traits": [
+        "arcane",
+        "luminous"
+      ],
+      "guaranteed_traits": [
+        "soft_glow"
+      ],
+      "minimum_elements": {
+        "vita": 0,
+        "ember": 1,
+        "mist": 4,
+        "lux": 8
+      },
+      "required_timing": "late",
+      "required_sequence": [
+        "arcane",
+        "luminous"
+      ],
+      "morph_targets": [
+        {
+          "output_item_id": "heldstar_lantern",
+          "minimum_quality": 74,
+          "catalyst_tag": "starlight",
+          "required_heat": 2,
+          "required_stirs": 4,
+          "required_timing": "late",
+          "room_bonus_required": true
+        }
+      ]
     }
   ]
 }

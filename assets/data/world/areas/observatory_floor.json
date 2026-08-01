@@ -85,6 +85,96 @@
       "render": {
         "sprite_id": "starlight_shard"
       }
+    },
+    {
+      "id": "observatory_cloudglass_01",
+      "name": "Cloudglass",
+      "item_id": "cloudglass",
+      "color": [
+        206,
+        224,
+        238,
+        255
+      ],
+      "position": [
+        286.0,
+        404.0
+      ],
+      "radius": 16.0,
+      "route_id": "observatory_span",
+      "seasons": [],
+      "weathers": [
+        "clear"
+      ],
+      "time_windows": [
+        "night"
+      ],
+      "spawn_chance": 72,
+      "note": "Panes of it stood around the outer rim like something set out to dry. Nobody set them out. The sky took the heat and this is what was left behind.",
+      "render": {
+        "sprite_id": "cloudglass_observatory"
+      }
+    },
+    {
+      "id": "observatory_mirrorbead_01",
+      "name": "Mirrorbead",
+      "item_id": "mirrorbead",
+      "color": [
+        190,
+        200,
+        214,
+        255
+      ],
+      "position": [
+        672.0,
+        428.0
+      ],
+      "radius": 16.0,
+      "route_id": "observatory_span",
+      "seasons": [],
+      "weathers": [
+        "mist"
+      ],
+      "time_windows": [
+        "night"
+      ],
+      "spawn_chance": 68,
+      "note": "On a mist night the cloud is not below the tower, it is in the room. The beads stand on the silver without wetting it and go when the air moves.",
+      "render": {
+        "sprite_id": "mirrorbead_observatory"
+      }
+    },
+    {
+      "id": "observatory_lowstar_01",
+      "name": "Lowstar Ash",
+      "item_id": "lowstar_ash",
+      "color": [
+        230,
+        206,
+        168,
+        255
+      ],
+      "position": [
+        478.0,
+        268.0
+      ],
+      "radius": 16.0,
+      "route_id": "observatory_span",
+      "seasons": [
+        "autumn",
+        "winter"
+      ],
+      "weathers": [
+        "clear"
+      ],
+      "time_windows": [
+        "night"
+      ],
+      "spawn_chance": 85,
+      "note": "A scorch on the focus ring in the shape of a star held still for four hours. The lens did that unattended, over and over, for twenty years, with nobody up here to see it.",
+      "render": {
+        "sprite_id": "lowstar_ash_observatory"
+      }
     }
   ]
 }

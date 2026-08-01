@@ -770,6 +770,38 @@ Stop the loop and report if:
   `narrative_reactions.json` and are folded back in after parsing. 123 / 739.
   *Next split candidate:* `sprites/item_icons.json` (751).
   **105 reactions, 76 tests.**
+- **2026-08-01 — the room the game ends in had one thing in it.** Per-area content counts:
+  **observatory 1 node, 1 station in a 960×720 room** — the thinnest place in the game and the one
+  the story finishes in. Only **2 gather nodes in all 14 areas were night-*only*** (18 more list night among other
+  hours), in a game with a working hour system and a room whose whole premise is a lens.
+  *A new area was the obvious read and it was wrong.* `saltroad_amber` says outright it is "three
+  weeks of carriage from here" and that **no bed, seam or ward in this valley will ever produce
+  one**; `southmarket_myrrh` is "from beyond the pass, sold in pinches". The world is deliberately
+  bounded at the pass, and a coast map would have contradicted two items' worth of established
+  lore. **Fifth time this loop a first instinct did not survive measurement.**
+  So the lens instead: **cloudglass** off the outer mirror on clear nights, **mirrorbead** that
+  stands on the silver in mist without wetting it, and **lowstar ash** scorched onto the focus ring
+  in autumn and winter when the good stars run low — the tightest gate in the game, in the one room
+  where "only when the sky allows" is the point. They brew at the **archive reading bench** one floor
+  down (2 recipes → 4), and Ione's line is that mirror frost survives exactly two flights of stairs,
+  so the wizard put the reading room the right distance below the lens and never wrote that down.
+  ***Two harness gaps, both found by the capture disagreeing with the data.*** The area preview
+  never set the clock, so it always rendered at ~07:00 and **every night-gated node in the game was
+  invisible to every capture** — the observatory photographed as an empty floor. Scenes now take an
+  hour (`area:<id>:<day>:<night>`). First attempt used 01:00 and `handle_sleep_pressure` dragged the
+  player home to the entry lab mid-capture; night is 22:00 for that reason, written down in the code.
+  *Guard, verified against an over-tightened gate:*
+  `every_gather_node_turns_up_soon_enough_and_often_enough`. My first version measured a single
+  20-day cycle and flagged the lake's stillwater pearl at 0/20 — **the frame was wrong, not the
+  node**: the daily roll is `day * 31` mixed with the node id, a linear sequence with period 100,
+  not noise. The pearl is genuinely absent for the **first 21 days** though, and it is the only
+  source of a catalyst three morphs need. The test now sweeps 100 days and pins both first
+  appearance and long-run frequency, with floors set just outside the worst node that already ships.
+  *Split done:* `sprites/item_icons.json` crossed to **805**, split to mirror the potion item files
+  (13 reagents / 36 restore / 26 glow / 14 speed). Rust derives icon paths from item data and never
+  reads these manifests, so only `generate_art.py` needed teaching. All 89 entries verified present.
+  *Next split candidates:* `narrative_reactions.json` (760), `crafting/recipes_glow.json` (704).
+  **62 gather nodes across 14 areas; 43 recipes; night-only nodes 2 → 5; 77 tests.**
 
 ## Deferred (needs a new system; not for this loop)
 
