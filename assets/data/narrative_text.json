@@ -528,6 +528,20 @@
       "after_milestone": "record_reconciled",
       "order": 97,
       "line": "Ione has asked to enter eleven months of recovered record into the town archive. I said yes before she finished the sentence, which she has told me was procedurally improper and I have decided not to mind."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "greenhouse_repaired",
+      "order": 43,
+      "line": "If you are gathering in winter, go to the burn. Everything else in the valley shuts and the hollow opens, because nothing has grown a canopy back over it and it is the only floor still getting light. We have been treating the worst thing that ever happened to that forest as our winter larder for two decades."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "terraces_still_alive",
+      "order": 69,
+      "line": "The burn feeds this town one quarter of every year. I have never once heard anybody thank it, and I include myself in that."
     }
   ]
 }

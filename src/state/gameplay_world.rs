@@ -168,4 +168,35 @@ mod tests {
             "gather nodes that can never appear:\n{never_spawns:#?}"
         );
     }
+
+    /// Seasons are deliberately unequal — winter should be leaner than spring,
+    /// and the charred hollow exists to give that leanness a destination rather
+    /// than erase it. This is a floor, not a balance target: it catches a pass
+    /// that starves a quarter of the year without noticing, which is exactly how
+    /// winter got down to 62% of spring before anyone counted.
+    #[test]
+    fn no_season_is_starved_of_gatherable_ground() {
+        const SEASONS: [&str; 4] = ["spring", "summer", "autumn", "winter"];
+        const FLOOR: f32 = 0.5;
+
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let counts = SEASONS.map(|season| {
+            data.areas
+                .iter()
+                .flat_map(|area| area.gather_nodes.iter())
+                .filter(|node| node.seasons.is_empty() || node.seasons.iter().any(|s| s == season))
+                .count()
+        });
+
+        let best = *counts.iter().max().expect("four seasons");
+        let worst = *counts.iter().min().expect("four seasons");
+        let ratio = worst as f32 / best as f32;
+
+        assert!(
+            ratio >= FLOOR,
+            "the leanest season has only {worst} nodes against {best} in the richest \
+             ({ratio:.2} of it); per season: {:?}",
+            SEASONS.iter().zip(counts.iter()).collect::<Vec<_>>()
+        );
+    }
 }

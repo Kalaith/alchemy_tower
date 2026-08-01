@@ -387,6 +387,24 @@ Stop the loop and report if:
   *Next: no backlog item is outstanding. `required_sequence` (4 of 29 recipes) is the last
   nearly-unused system; otherwise the open axes are prose, biome signature hooks for the five wild
   areas that still lack one, and board-request variety.*
+- **2026-08-01 — biome signature hook (measured first).** Counted before authoring: winter had 26
+  available nodes against spring's 42, the starter plains collapsed to **1** in winter, and
+  `charred_hollow` — a route named after a burn — had exactly one node on it. So the hook was already
+  implied: **the burn is the one floor in the valley that still gets light in winter**, because
+  nothing has closed the canopy back over it in twenty years. Three fire-follower reagents (`ashcap`
+  on the fallen trunks, `emberbark_curl` cured on cold ground, and `frostcrack_seed`, whose cases
+  open for one hard frost and no other condition — **winter-exclusive**), two recipes, a morph that
+  uses kiln heat to argue with the calendar, and a repeatable seasonal board order.
+  *Winter is 26 → 29 and still the leanest quarter, which is correct — the hook gives winter a
+  destination rather than erasing the difference. New test `no_season_is_starved_of_gatherable_ground`
+  is a **floor, not a balance target**: it fails if the leanest season drops below half the richest,
+  which is how winter reached 62% without anyone counting.*
+  *Harness fix: `preview_area` centred the room, so anything authored in a corner was off-camera and
+  a capture looked like nothing had been added — that happened twice. It now stands the player on the
+  first available node, and the very next capture showed all three hollow nodes with the gather
+  prompt live.*
+  *Next: `required_sequence` (4 of 30 recipes), prose, four wild biomes still without a signature,
+  board-request variety.*
 
 ## Deferred (needs a new system; not for this loop)
 

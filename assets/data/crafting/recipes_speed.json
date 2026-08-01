@@ -213,6 +213,53 @@
       },
       "required_timing": "early",
       "morph_targets": []
+    },
+    {
+      "id": "firstthaw_draught_recipe",
+      "name": "Firstthaw Draught",
+      "station_id": "greenhouse_still",
+      "ingredients": [
+        {
+          "item_id": "frostcrack_seed",
+          "amount": 1
+        },
+        {
+          "item_id": "whisper_moss",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "firstthaw_draught",
+      "output_amount": 1,
+      "description": "Made from a seed that will not open without a hard frost. It carries some of that: nothing happens for a while, and then it all does.",
+      "required_heat": 2,
+      "required_stirs": 2,
+      "unstable_output_item_id": "rush_draught",
+      "lore_note": "It cannot be brewed outside winter, because the seed cannot be had outside winter. The still does not care. The calendar does.",
+      "minimum_quality": 44,
+      "preferred_traits": [
+        "vigor",
+        "pure"
+      ],
+      "guaranteed_traits": [
+        "quickstep"
+      ],
+      "minimum_elements": {
+        "vita": 5,
+        "ember": 0,
+        "mist": 1,
+        "lux": 1
+      },
+      "required_timing": "late",
+      "morph_targets": [
+        {
+          "output_item_id": "hardwinter_draught",
+          "minimum_quality": 70,
+          "catalyst_tag": "kilnfire",
+          "required_heat": 2,
+          "required_stirs": 2,
+          "required_timing": "late"
+        }
+      ]
     }
   ]
 }

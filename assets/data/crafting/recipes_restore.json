@@ -603,6 +603,44 @@
       },
       "required_timing": "steady",
       "morph_targets": []
+    },
+    {
+      "id": "hollow_hearth_tonic_recipe",
+      "name": "Hollow Hearth Tonic",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        {
+          "item_id": "ashcap",
+          "amount": 1
+        },
+        {
+          "item_id": "emberbark_curl",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "hollow_hearth_tonic",
+      "output_amount": 1,
+      "description": "Everything in it came off dead wood, and all of it was gathered in the quarter when nothing else in the valley is giving anything.",
+      "required_heat": 3,
+      "required_stirs": 2,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "The burn feeds the town for one season a year. Nobody has decided yet whether that is a mercy or an accusation.",
+      "minimum_quality": 38,
+      "preferred_traits": [
+        "warm",
+        "restorative"
+      ],
+      "guaranteed_traits": [
+        "warm"
+      ],
+      "minimum_elements": {
+        "vita": 2,
+        "ember": 4,
+        "mist": 0,
+        "lux": 0
+      },
+      "required_timing": "early",
+      "morph_targets": []
     }
   ]
 }

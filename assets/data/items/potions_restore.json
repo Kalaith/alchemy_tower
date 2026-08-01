@@ -563,6 +563,27 @@
           "description": "Restores steadily and keeps holding, in soil or in people."
         }
       ]
+    },
+    {
+      "id": "hollow_hearth_tonic",
+      "name": "Hollow Hearth Tonic",
+      "category": "potion",
+      "base_value": 50,
+      "color": [
+        204,
+        152,
+        112,
+        255
+      ],
+      "description": "Dark, smoky and unreasonably warming. The kind of thing you hand somebody who has been outside since before it was light.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 30.0,
+          "duration_seconds": 0.0,
+          "description": "Restores solidly and puts heat back into whoever takes it."
+        }
+      ]
     }
   ]
 }

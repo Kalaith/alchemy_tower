@@ -215,6 +215,54 @@
           "description": "A moderate lift that drops away and returns before it finishes."
         }
       ]
+    },
+    {
+      "id": "firstthaw_draught",
+      "name": "Firstthaw Draught",
+      "category": "potion",
+      "base_value": 66,
+      "color": [
+        214,
+        228,
+        238,
+        255
+      ],
+      "description": "Pale and slow to start. It does nothing for a good while and then arrives all at once, exactly like the thing it is made of.",
+      "effects": [
+        {
+          "kind": "speed",
+          "magnitude": 0.3,
+          "duration_seconds": 150.0,
+          "description": "Nothing, and then a hard sustained lift for the rest of its run."
+        }
+      ]
+    },
+    {
+      "id": "hardwinter_draught",
+      "name": "Hardwinter Draught",
+      "category": "potion",
+      "base_value": 112,
+      "color": [
+        232,
+        200,
+        170,
+        255
+      ],
+      "description": "A frostcrack seed opened by kiln heat instead of by weather. It is the only way anyone has found to argue with the calendar, and it is expensive.",
+      "effects": [
+        {
+          "kind": "speed",
+          "magnitude": 0.36,
+          "duration_seconds": 220.0,
+          "description": "A long hard lift that does not taper the way a draught should."
+        },
+        {
+          "kind": "restore",
+          "magnitude": 18.0,
+          "duration_seconds": 0.0,
+          "description": "Keeps the cold out for as long as it runs."
+        }
+      ]
     }
   ]
 }

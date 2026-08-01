@@ -616,6 +616,45 @@
         64
       ],
       "prompt": "A small pale violet bell-flower growing out of old wall mortar, readable from above."
+    },
+    {
+      "id": "ashcap",
+      "type": "icon_and_world_node",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "Broad grey fungus caps fruiting from a burnt fallen trunk, readable from above."
+    },
+    {
+      "id": "frostcrack_seed",
+      "type": "icon_and_world_node",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "Split pale seed cases lying open on frozen burnt ground, cold winter reagent, readable from above."
+    },
+    {
+      "id": "emberbark_curl",
+      "type": "icon_and_world_node",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "Curls of scorched orange-brown bark cured on cold ground, warm volatile reagent, readable from above."
     }
   ]
 }

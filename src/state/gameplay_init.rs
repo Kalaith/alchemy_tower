@@ -54,9 +54,17 @@ impl GameplayState {
         }
         self.progression.total_brews = 40;
         self.world.current_area_id = area_id.to_owned();
-        self.world.player.position =
-            macroquad::prelude::vec2(area.size[0] * 0.5, area.size[1] * 0.5);
         self.refresh_available_nodes(data);
+        // Stand where the content is. Centring the room instead means anything
+        // authored in a corner is simply off-camera, which has twice made a
+        // capture look like nothing had been added.
+        let focus = area
+            .gather_nodes
+            .iter()
+            .find(|node| self.world.available_nodes.contains(&node.id))
+            .map(|node| node.position)
+            .unwrap_or([area.size[0] * 0.5, area.size[1] * 0.5]);
+        self.world.player.position = macroquad::prelude::vec2(focus[0], focus[1]);
     }
 
     /// Advance a townsperson's arc past its earlier beats and open the

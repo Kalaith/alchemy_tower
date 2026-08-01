@@ -53,6 +53,146 @@
       ],
       "synthesis_weight": 3,
       "synthesis_value": 4
+    },
+    {
+      "id": "ashcap",
+      "name": "Ashcap",
+      "category": "ingredient",
+      "base_value": 11,
+      "color": [
+        186,
+        172,
+        158,
+        255
+      ],
+      "description": "A broad grey fungus that fruits straight out of burnt wood. It will not grow on anything living, which took the valley a while to accept as a feature.",
+      "quality": 32,
+      "rarity": 2,
+      "elements": {
+        "vita": 2,
+        "ember": 1,
+        "mist": 1,
+        "lux": 0
+      },
+      "traits": [
+        "restorative",
+        "warm"
+      ],
+      "source_conditions": [
+        "autumn and winter, once the wood has gone properly cold",
+        "any weather; the hollow has no canopy left to shelter it",
+        "fallen burnt trunks"
+      ],
+      "wild_variants": [
+        {
+          "id": "ashcap_hardfrost",
+          "name": "Hardfrost Ashcap",
+          "required_conditions": [
+            "winter",
+            "night"
+          ],
+          "bonus_traits": [
+            "pure"
+          ],
+          "quality_bonus": 10,
+          "elements": {
+            "vita": 1,
+            "ember": 0,
+            "mist": 1,
+            "lux": 0
+          },
+          "synthesis_weight_bonus": 1,
+          "synthesis_value_bonus": 3
+        }
+      ],
+      "synthesis_weight": 2,
+      "synthesis_value": 3
+    },
+    {
+      "id": "frostcrack_seed",
+      "name": "Frostcrack Seed",
+      "category": "ingredient",
+      "base_value": 17,
+      "color": [
+        212,
+        222,
+        234,
+        255
+      ],
+      "description": "The burnt seed cases do not open for warmth, or for water, or for time. They open for one hard frost, and then only for the winter that provides it.",
+      "quality": 36,
+      "rarity": 3,
+      "elements": {
+        "vita": 3,
+        "ember": 0,
+        "mist": 0,
+        "lux": 1
+      },
+      "traits": [
+        "vigor",
+        "pure"
+      ],
+      "source_conditions": [
+        "winter only, and no part of any other season",
+        "clear or windy cold, never damp",
+        "the open floor of the burn"
+      ],
+      "wild_variants": [
+        {
+          "id": "frostcrack_seed_deepwinter",
+          "name": "Deepwinter Frostcrack",
+          "required_conditions": [
+            "winter",
+            "clear"
+          ],
+          "bonus_traits": [
+            "restorative"
+          ],
+          "quality_bonus": 12,
+          "elements": {
+            "vita": 2,
+            "ember": 0,
+            "mist": 0,
+            "lux": 0
+          },
+          "synthesis_weight_bonus": 0,
+          "synthesis_value_bonus": 4
+        }
+      ],
+      "synthesis_weight": 1,
+      "synthesis_value": 5
+    },
+    {
+      "id": "emberbark_curl",
+      "name": "Emberbark Curl",
+      "category": "ingredient",
+      "base_value": 10,
+      "color": [
+        206,
+        130,
+        88,
+        255
+      ],
+      "description": "Bark that came off the trunks in the fire and has been curing on the ground ever since. It has kept its heat the way a banked fire keeps it, which is to say entirely and without showing any of it.",
+      "quality": 30,
+      "rarity": 2,
+      "elements": {
+        "vita": 0,
+        "ember": 3,
+        "mist": 0,
+        "lux": 1
+      },
+      "traits": [
+        "warm",
+        "volatile"
+      ],
+      "source_conditions": [
+        "autumn and winter, after the wet has gone out of it",
+        "the standing dead at the hollow's edge"
+      ],
+      "wild_variants": [],
+      "synthesis_weight": 2,
+      "synthesis_value": 3
     }
   ]
 }

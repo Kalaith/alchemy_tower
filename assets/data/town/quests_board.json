@@ -143,6 +143,23 @@
       "minimum_total_brews": 28,
       "repeatable": true,
       "repeat_cooldown_days": 3
+    },
+    {
+      "id": "board_winter_laying_in",
+      "title": "Seasonal Order: Laying In",
+      "description": "The square's winter stock. Leave 2 Fine-or-better Hollow Hearth Tonics on the board and the town has something to hand the crews who are out before light.",
+      "required_item_id": "hollow_hearth_tonic",
+      "required_amount": 2,
+      "reward_coins": 96,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Fine",
+      "required_trait": "warm",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 16,
+      "repeatable": true,
+      "repeat_cooldown_days": 3
     }
   ]
 }

@@ -304,6 +304,107 @@
       "render": {
         "sprite_id": "moon_fern_forest"
       }
+    },
+    {
+      "id": "hollow_ashcap_01",
+      "name": "Ashcap",
+      "item_id": "ashcap",
+      "color": [
+        186,
+        172,
+        158,
+        255
+      ],
+      "position": [
+        268.0,
+        214.0
+      ],
+      "radius": 16.0,
+      "route_id": "charred_hollow",
+      "seasons": [
+        "autumn",
+        "winter"
+      ],
+      "weathers": [],
+      "time_windows": [
+        "evening",
+        "night",
+        "morning"
+      ],
+      "spawn_chance": 86,
+      "note": "They come up along the fallen trunks in rows, following whatever the fire left underneath. Rowan says you can read where the worst of the burn ran by where they are thickest.",
+      "render": {
+        "sprite_id": "ashcap"
+      }
+    },
+    {
+      "id": "hollow_frostcrack_01",
+      "name": "Frostcrack Seed",
+      "item_id": "frostcrack_seed",
+      "color": [
+        212,
+        222,
+        234,
+        255
+      ],
+      "position": [
+        472.0,
+        158.0
+      ],
+      "radius": 16.0,
+      "route_id": "charred_hollow",
+      "seasons": [
+        "winter"
+      ],
+      "weathers": [
+        "clear",
+        "windy"
+      ],
+      "time_windows": [
+        "morning",
+        "day"
+      ],
+      "spawn_chance": 88,
+      "note": "The cases split audibly on the coldest mornings. Stand in the hollow at first light in deep winter and the whole burn is quietly going off around you.",
+      "render": {
+        "sprite_id": "frostcrack_seed"
+      }
+    },
+    {
+      "id": "hollow_emberbark_01",
+      "name": "Emberbark Curl",
+      "item_id": "emberbark_curl",
+      "color": [
+        206,
+        130,
+        88,
+        255
+      ],
+      "position": [
+        186.0,
+        352.0
+      ],
+      "radius": 15.0,
+      "route_id": "charred_hollow",
+      "seasons": [
+        "autumn",
+        "winter"
+      ],
+      "weathers": [
+        "clear",
+        "windy",
+        "mist"
+      ],
+      "time_windows": [
+        "morning",
+        "day",
+        "evening"
+      ],
+      "spawn_chance": 84,
+      "note": "Twenty years of curing on cold ground. It has not rotted and nobody can tell you why, which is roughly the standard of explanation available for anything in this hollow.",
+      "render": {
+        "sprite_id": "emberbark_curl"
+      }
     }
   ]
 }
