@@ -439,6 +439,28 @@ Stop the loop and report if:
   the one screen with no other route to it short of finishing the game.
   *Next: four wild biomes without a signature hook, board-request variety, or the six fixed
   `narrative_text` milestones, which are the last prose nobody has revisited.*
+- **2026-08-01 — board-request variety.** **Correction: last pass claimed "no system remains
+  meaningfully built-but-unused" and that was wrong again.** `required_traits` +
+  `minimum_trait_matches` and `required_effect_kinds` + `minimum_effect_matches` had never been used
+  by a single quest — every one of the 9 board requests was the same shape: deliver N of a named
+  item, repeatable. The board now specifies **how a thing must be brewed, not just what**: an
+  exacting all-traits commission (and the first non-repeatable board post), a two-of-three partial
+  spec, a dual-effect order, a bulk run, and a rush order paying four times a common bottle's worth
+  for a perfect one. Open commissions (empty `required_item_id`) are *not* supported — the item id is
+  load-bearing — so this authors into the system rather than extending it.
+  *Two real defects found.* The new check `every_quest_spec_can_actually_be_brewed` asks the **real**
+  `inherited_traits` rule what a brew ends up carrying, and immediately caught `ruin_survey_for_brin`
+  from iteration 12: it demands `restorative` from a Greenmend Salve, whose recipe guarantees `pure`
+  and can only ever carry `pure`/`calm`. **Brin's arc has been uncompletable for two iterations**, and
+  with it the terraces payoff. Fixed to `pure`; the salve's character was right and the spec was wrong.
+  *And the board overlay overflowed the moment it held 14 requests — the available box holds three
+  64px cards and drew a fourth over the "Locked Requests" heading, while the 54px locked box was
+  rendering every locked summary straight through the two sections beneath it.* Both windowed;
+  `visible_window_start` moved out of the rune view into shared `gameplay_overlay_window.rs` so there
+  is one implementation. Both caps were **measured from captures, not assumed** — two locked summaries
+  still spilled, so it shows one plus a count.
+  *Next: four wild biomes without a signature hook, the six fixed `narrative_text` milestones. Before
+  claiming a system is fully used, grep for its fields.*
 
 ## Deferred (needs a new system; not for this loop)
 

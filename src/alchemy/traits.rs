@@ -2,7 +2,7 @@ use std::collections::BTreeMap;
 
 use crate::data::{ItemDefinition, RecipeDefinition};
 
-pub(super) fn inherited_traits(
+pub(crate) fn inherited_traits(
     recipe: &RecipeDefinition,
     ingredients: &[&ItemDefinition],
     catalyst: Option<&ItemDefinition>,

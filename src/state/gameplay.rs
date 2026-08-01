@@ -214,6 +214,8 @@ mod gameplay_overlay_state;
 mod gameplay_overlay_status;
 #[path = "gameplay_overlay_types.rs"]
 mod gameplay_overlay_types;
+#[path = "gameplay_overlay_window.rs"]
+mod gameplay_overlay_window;
 #[path = "gameplay_path_geometry.rs"]
 mod gameplay_path_geometry;
 #[path = "gameplay_persistence.rs"]

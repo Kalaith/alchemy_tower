@@ -357,7 +357,7 @@
       "reward_coins": 74,
       "giver_npc_id": "brin_groundskeeper",
       "minimum_quality_band": "Fine",
-      "required_trait": "restorative",
+      "required_trait": "pure",
       "required_effect_kind": "restore",
       "prerequisite_quests": [
         "cultivation_for_brin"

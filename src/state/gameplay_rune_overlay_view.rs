@@ -1,3 +1,4 @@
+use super::gameplay_overlay_window::visible_window_start;
 use super::GameplayState;
 use crate::content::{input_bindings, ui_copy, ui_format, ui_text};
 use crate::data::GameData;
@@ -63,43 +64,4 @@ fn rune_footer_text() -> String {
         .replace("{select}", &input_bindings().navigation.select)
         .replace("{confirm}", &input_bindings().global.confirm)
         .replace("{close}", &input_bindings().global.cancel)
-}
-
-/// First row of the window that keeps `selected` visible. Clamping to the first
-/// `window` entries instead would silently make every later pattern unreachable,
-/// which is the failure this list was one recipe away from having.
-fn visible_window_start(selected: usize, total: usize, window: usize) -> usize {
-    if total <= window {
-        return 0;
-    }
-    selected.saturating_sub(window - 1).min(total - window)
-}
-
-#[cfg(test)]
-mod tests {
-    use super::visible_window_start;
-
-    #[test]
-    fn the_selected_draft_is_always_inside_the_window() {
-        let window = 5;
-        for total in 1..40usize {
-            for selected in 0..total {
-                let start = visible_window_start(selected, total, window);
-                assert!(
-                    selected >= start && selected < start + window,
-                    "selection {selected} of {total} fell outside window at {start}"
-                );
-                assert!(
-                    start + window <= total.max(window),
-                    "window ran past the list"
-                );
-            }
-        }
-    }
-
-    #[test]
-    fn a_short_list_never_scrolls() {
-        assert_eq!(visible_window_start(0, 3, 5), 0);
-        assert_eq!(visible_window_start(2, 3, 5), 0);
-    }
 }

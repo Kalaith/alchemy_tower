@@ -580,6 +580,8 @@
     "overlay_quest_available": "Available Requests",
     "overlay_quest_none_available": "No new board requests.",
     "overlay_quest_locked": "Locked Requests",
+    "overlay_board_range": "showing {first}-{last} of {total}",
+    "overlay_board_more_locked": "(+{count} more locked)",
     "overlay_quest_locked_line": "{title}: {requirements}",
     "overlay_quest_active": "Active Orders",
     "overlay_quest_deliver_title": "{title} (ready to hand in)",

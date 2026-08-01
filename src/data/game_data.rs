@@ -354,6 +354,110 @@ mod tests {
         );
     }
 
+    /// A brew keeps about two traits, chosen by the recipe's guaranteed and
+    /// preferred lists and by what its reagents have most of. A request naming
+    /// traits the delivered bottle can never carry looks perfectly reasonable in
+    /// the data and can never be handed in, so ask the real rule rather than
+    /// guessing at it.
+    #[test]
+    fn every_quest_spec_can_actually_be_brewed() {
+        let data = load_embedded().expect("embedded game data should load");
+        let mut impossible = Vec::new();
+
+        for quest in &data.quests {
+            let required_traits = quest
+                .required_traits
+                .iter()
+                .chain((!quest.required_trait.is_empty()).then_some(&quest.required_trait))
+                .collect::<std::collections::BTreeSet<_>>();
+            let required_effects = quest
+                .required_effect_kinds
+                .iter()
+                .chain(
+                    (!quest.required_effect_kind.is_empty()).then_some(&quest.required_effect_kind),
+                )
+                .collect::<std::collections::BTreeSet<_>>();
+            if required_traits.is_empty() && required_effects.is_empty() {
+                continue;
+            }
+
+            let trait_target = if quest.minimum_trait_matches == 0 {
+                required_traits.len()
+            } else {
+                (quest.minimum_trait_matches as usize).min(required_traits.len())
+            };
+            let effect_target = if quest.minimum_effect_matches == 0 {
+                required_effects.len()
+            } else {
+                (quest.minimum_effect_matches as usize).min(required_effects.len())
+            };
+
+            if let Some(item) = data.item(&quest.required_item_id) {
+                let carried = item
+                    .effects
+                    .iter()
+                    .map(|effect| effect.kind.as_str())
+                    .collect::<std::collections::BTreeSet<_>>();
+                let hits = required_effects
+                    .iter()
+                    .filter(|kind| carried.contains(kind.as_str()))
+                    .count();
+                if hits < effect_target {
+                    impossible.push(format!(
+                        "{}: {} only does {:?}, short of {:?}",
+                        quest.id, quest.required_item_id, carried, required_effects
+                    ));
+                }
+            }
+
+            if trait_target == 0 {
+                continue;
+            }
+            let reachable = reachable_traits(&data, &quest.required_item_id);
+            let hits = required_traits
+                .iter()
+                .filter(|wanted| reachable.contains(wanted.as_str()))
+                .count();
+            if hits < trait_target {
+                impossible.push(format!(
+                    "{}: {} can carry {:?}, so it cannot meet {} of {:?}",
+                    quest.id, quest.required_item_id, reachable, trait_target, required_traits
+                ));
+            }
+        }
+
+        assert!(
+            impossible.is_empty(),
+            "quest specs no brew can satisfy:\n{impossible:#?}"
+        );
+    }
+
+    /// What a plain brew of this item ends up carrying, taken from the real
+    /// inheritance rule. A catalyst can add more, so this is the honest floor.
+    fn reachable_traits(
+        data: &super::GameData,
+        item_id: &str,
+    ) -> std::collections::BTreeSet<String> {
+        let mut reachable = std::collections::BTreeSet::new();
+        for recipe in &data.recipes {
+            let produces = recipe.output_item_id == item_id
+                || recipe
+                    .morph_targets
+                    .iter()
+                    .any(|morph| morph.output_item_id == item_id);
+            if !produces {
+                continue;
+            }
+            let ingredients = recipe
+                .ingredients
+                .iter()
+                .filter_map(|ingredient| data.item(&ingredient.item_id))
+                .collect::<Vec<_>>();
+            reachable.extend(crate::alchemy::inherited_traits(recipe, &ingredients, None));
+        }
+        reachable
+    }
+
     #[test]
     fn quest_chains_and_gates_resolve() {
         let data = load_embedded().expect("embedded game data should load");

@@ -16,7 +16,12 @@ pub(crate) fn draw_quest_board_overlay_view(view: &QuestBoardOverlayView) {
     let h = panel.h;
     draw_panel(x, y, w, h, &view.title);
     draw_overlay_subtitle(x, y, &view.subtitle);
-    draw_overlay_section_title(x + 20.0, y + 122.0, &view.available_title, None);
+    draw_overlay_section_title(
+        x + 20.0,
+        y + 122.0,
+        &view.available_title,
+        view.range_text.as_deref(),
+    );
     draw_overlay_section_box(x + 20.0, y + 136.0, w - 40.0, 232.0);
     let mut row_y = y + 168.0;
     if view.entries.is_empty() {

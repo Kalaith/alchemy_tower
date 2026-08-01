@@ -13,3 +13,5 @@ pub(crate) use brewing::{resolve_brew, BrewResolution};
 pub(crate) use fallback::SALVAGE_OUTPUT_ITEM_IDS;
 pub(crate) use matching::match_recipe;
 pub(crate) use quality::{mastery_stage, quality_band, MASTERED_BREW_COUNT};
+#[cfg(test)]
+pub(crate) use traits::inherited_traits;
