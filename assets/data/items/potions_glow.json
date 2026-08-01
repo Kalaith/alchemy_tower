@@ -332,6 +332,33 @@
           "description": "Steadies the footing of whoever carries it."
         }
       ]
+    },
+    {
+      "id": "forgelight_lantern",
+      "name": "Forgelight Lantern",
+      "category": "potion",
+      "base_value": 68,
+      "color": [
+        248,
+        176,
+        96,
+        255
+      ],
+      "description": "Emberglass driven with a kiln geode until the light stops being light and starts being heat you can see by.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 200.0,
+          "description": "Casts a hot orange working light that holds in wind, rain and cold."
+        },
+        {
+          "kind": "restore",
+          "magnitude": 12.0,
+          "duration_seconds": 0.0,
+          "description": "Takes the cold out of whoever is carrying it."
+        }
+      ]
     }
   ]
 }

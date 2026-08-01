@@ -165,7 +165,16 @@
         "lux": 0
       },
       "required_timing": "steady",
-      "morph_targets": []
+      "morph_targets": [
+        {
+          "output_item_id": "quickfire_draught",
+          "minimum_quality": 64,
+          "catalyst_tag": "kilnfire",
+          "required_heat": 3,
+          "required_stirs": 2,
+          "required_timing": "early"
+        }
+      ]
     }
   ]
 }

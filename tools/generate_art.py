@@ -242,8 +242,10 @@ def icon(item, size, world=False):
                 d.polygon([(cx + px - 10, cy + py + 4), (cx + px, cy + py - 6),
                            (cx + px + 10, cy + py + 4), (cx + px, cy + py + 8)],
                           fill=rgb("#f2fbff"), outline=rgb("#a9c8d4"))
-    elif base_item in {"arcane_dust", "lumen_dust", "starlight_shard"}:
-        c = {"arcane_dust": "#a781ff", "lumen_dust": "#f1e7a3", "starlight_shard": "#dbe5ff"}[base_item]
+    elif base_item in {"arcane_dust", "lumen_dust", "starlight_shard", "kiln_geode",
+                       "stillwater_pearl"}:
+        c = {"arcane_dust": "#a781ff", "lumen_dust": "#f1e7a3", "starlight_shard": "#dbe5ff",
+             "kiln_geode": "#f4985a", "stillwater_pearl": "#bae2e2"}[base_item]
         for ox, oy in [(-10, 8), (0, 0), (12, 10)]:
             d.polygon([(cx + ox, cy + oy - 10), (cx + ox - 8, cy + oy), (cx + ox, cy + oy + 10), (cx + ox + 8, cy + oy)], fill=rgb(c))
     elif base_item in {"mist_moth_wing", "glow_moth"}:
@@ -274,7 +276,9 @@ def icon(item, size, world=False):
             "celestine_elixir": "#eceeff", "moonmoth_salve": "#c6e0bc", "kindling_tonic": "#eeb27e",
             "sunscar_glass_elixir": "#f6d6a8", "nightglass_lantern": "#e0ecff",
             "mirrorsalt_draught": "#cee8ec", "wardfrost_tonic": "#c6e0e8",
-            "resonance_draught": "#cec8fa",
+            "resonance_draught": "#cec8fa", "clearspring_draught": "#b0e2d6",
+            "deeproot_tonic": "#7aa87c", "hushwater_draught": "#c4d8e4",
+            "forgelight_lantern": "#f8b060", "quickfire_draught": "#ff925c",
         }.get(item, "#d2c1ff")
         d.rounded_rectangle((cx - 8, cy - 24, cx + 8, cy - 12), radius=3, fill=rgb("#d9dfe8", 220))
         d.rectangle((cx - 5, cy - 28, cx + 5, cy - 22), fill=rgb("#8b6a4d"))

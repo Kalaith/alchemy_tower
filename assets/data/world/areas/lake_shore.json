@@ -271,6 +271,40 @@
       "render": {
         "sprite_id": "whisper_moss_lake"
       }
+    },
+    {
+      "id": "lake_stillwater_pearl_01",
+      "name": "Stillwater Pearl",
+      "item_id": "stillwater_pearl",
+      "color": [
+        186,
+        226,
+        226,
+        255
+      ],
+      "position": [
+        268.0,
+        604.0
+      ],
+      "radius": 15.0,
+      "route_id": "lake_shallows",
+      "seasons": [
+        "spring",
+        "autumn"
+      ],
+      "weathers": [
+        "mist",
+        "rain"
+      ],
+      "time_windows": [
+        "morning",
+        "evening"
+      ],
+      "spawn_chance": 66,
+      "note": "Behind the reed bar the water simply stops. Whatever forms there takes its time about it, and takes badly to being hurried.",
+      "render": {
+        "sprite_id": "stillwater_pearl_lake"
+      }
     }
   ]
 }

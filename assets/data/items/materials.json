@@ -193,6 +193,78 @@
       "wild_variants": [],
       "synthesis_weight": 1,
       "synthesis_value": 3
+    },
+    {
+      "id": "kiln_geode",
+      "name": "Kiln Geode",
+      "category": "catalyst",
+      "base_value": 34,
+      "color": [
+        244,
+        152,
+        84,
+        255
+      ],
+      "description": "A quarry geode that never finished cooling. Cracked open it still throws heat, and it drives a reaction hotter than it has any right to.",
+      "quality": 58,
+      "rarity": 3,
+      "elements": {
+        "vita": 0,
+        "ember": 3,
+        "mist": 0,
+        "lux": 1
+      },
+      "traits": [
+        "warm",
+        "volatile"
+      ],
+      "source_conditions": [
+        "summer and autumn",
+        "clear or windy days",
+        "deep in the quarry cuts, where the stone was worked hardest"
+      ],
+      "wild_variants": [],
+      "synthesis_weight": 1,
+      "synthesis_value": 5,
+      "catalyst_tags": [
+        "kilnfire"
+      ]
+    },
+    {
+      "id": "stillwater_pearl",
+      "name": "Stillwater Pearl",
+      "category": "catalyst",
+      "base_value": 38,
+      "color": [
+        186,
+        226,
+        226,
+        255
+      ],
+      "description": "Formed in the one part of the shallows the current never reaches. It settles a mixture the way deep water settles silt.",
+      "quality": 56,
+      "rarity": 3,
+      "elements": {
+        "vita": 1,
+        "ember": 0,
+        "mist": 3,
+        "lux": 0
+      },
+      "traits": [
+        "calm",
+        "pure"
+      ],
+      "source_conditions": [
+        "spring and autumn",
+        "mist or rain, when the surface stops moving",
+        "the dead water behind the reed bar"
+      ],
+      "wild_variants": [],
+      "synthesis_weight": 1,
+      "synthesis_value": 5,
+      "catalyst_tags": [
+        "stillwater"
+      ]
     }
   ]
 }

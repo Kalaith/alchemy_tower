@@ -41,7 +41,16 @@
         "sunleaf",
         "whisper_moss"
       ],
-      "morph_targets": [],
+      "morph_targets": [
+        {
+          "output_item_id": "clearspring_draught",
+          "minimum_quality": 62,
+          "catalyst_tag": "starlight",
+          "required_heat": 2,
+          "required_stirs": 3,
+          "required_timing": "steady"
+        }
+      ],
       "starter_known": true
     },
     {
@@ -164,6 +173,14 @@
           "required_stirs": 2,
           "required_timing": "late",
           "room_bonus_required": true
+        },
+        {
+          "output_item_id": "deeproot_tonic",
+          "minimum_quality": 68,
+          "catalyst_tag": "stillwater",
+          "required_heat": 1,
+          "required_stirs": 4,
+          "required_timing": "steady"
         }
       ]
     },
@@ -402,7 +419,16 @@
         "lux": 0
       },
       "required_timing": "steady",
-      "morph_targets": []
+      "morph_targets": [
+        {
+          "output_item_id": "hushwater_draught",
+          "minimum_quality": 70,
+          "catalyst_tag": "stillwater",
+          "required_heat": 1,
+          "required_stirs": 3,
+          "required_timing": "late"
+        }
+      ]
     }
   ]
 }

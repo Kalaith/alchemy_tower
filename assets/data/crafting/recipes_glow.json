@@ -300,7 +300,16 @@
         "lux": 2
       },
       "required_timing": "steady",
-      "morph_targets": []
+      "morph_targets": [
+        {
+          "output_item_id": "forgelight_lantern",
+          "minimum_quality": 66,
+          "catalyst_tag": "kilnfire",
+          "required_heat": 3,
+          "required_stirs": 2,
+          "required_timing": "late"
+        }
+      ]
     },
     {
       "id": "stargrove_elixir_recipe",

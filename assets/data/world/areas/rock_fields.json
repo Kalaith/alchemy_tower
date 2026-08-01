@@ -197,6 +197,39 @@
       "render": {
         "sprite_id": "ember_root_quarry"
       }
+    },
+    {
+      "id": "quarry_kiln_geode_01",
+      "name": "Kiln Geode",
+      "item_id": "kiln_geode",
+      "color": [
+        244,
+        152,
+        84,
+        255
+      ],
+      "position": [
+        880.0,
+        236.0
+      ],
+      "radius": 15.0,
+      "route_id": "stone_quarry",
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "weathers": [
+        "clear",
+        "windy"
+      ],
+      "time_windows": [
+        "day"
+      ],
+      "spawn_chance": 62,
+      "note": "They surface where the quarry was cut deepest, and only when the sun has been on the rock all morning. Most days there is nothing here but rubble.",
+      "render": {
+        "sprite_id": "kiln_geode_quarry"
+      }
     }
   ]
 }

@@ -395,6 +395,51 @@
         64
       ],
       "prompt": "A violet-white lantern potion bottle holding a perfectly steady, unflickering light."
+    },
+    {
+      "id": "clearspring_draught",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A clear pale-green restorative bottle of unusual purity, high-tier morph potion icon."
+    },
+    {
+      "id": "deeproot_tonic",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A deep green tonic bottle with sediment settled at the base, slow-acting restorative icon."
+    },
+    {
+      "id": "hushwater_draught",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A silver-grey bottle of perfectly still liquid, unnervingly calm restorative icon."
+    },
+    {
+      "id": "forgelight_lantern",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A hot orange lantern potion bottle glowing like a banked forge, high-tier morph icon."
+    },
+    {
+      "id": "quickfire_draught",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A bright red-orange speed draught bottle with the liquid visibly churning."
     }
   ]
 }

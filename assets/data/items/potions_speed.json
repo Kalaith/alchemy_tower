@@ -146,6 +146,27 @@
           "description": "Lends a light, even quickness with no rough edge."
         }
       ]
+    },
+    {
+      "id": "quickfire_draught",
+      "name": "Quickfire Draught",
+      "category": "potion",
+      "base_value": 60,
+      "color": [
+        255,
+        146,
+        92,
+        255
+      ],
+      "description": "Briskstep pushed with kiln heat. It moves you faster than you meant to go, which is the point and also the problem.",
+      "effects": [
+        {
+          "kind": "speed",
+          "magnitude": 0.34,
+          "duration_seconds": 120.0,
+          "description": "A hard, short burst of speed that is difficult to steer."
+        }
+      ]
     }
   ]
 }

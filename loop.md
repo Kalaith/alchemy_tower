@@ -230,6 +230,20 @@ Stop the loop and report if:
   conditions can never all be true.*
   *Next: `archive_stack` and `observatory_span` are still empty routes, the rune workshop is still a
   gate, and five townsfolk still have one-shot requests.*
+- **2026-08-01 — recipes / morphs.** The catalyst system was fully built and 75% unused: every
+  catalyst-gated morph in the game keyed on `starlight`, the only catalyst that existed. Added
+  `kiln_geode` (tag `kilnfire`, quarry cuts, summer/autumn middays) and `stillwater_pearl` (tag
+  `stillwater`, the dead water behind the reed bar, misty spring/autumn mornings) — both *gathered*
+  under hard conditions, where starlight is *bought*, so which branch you take costs differently.
+  Five new morph branches: `healing_draught_recipe` now morphs (the starter recipe teaches the whole
+  layer), and `verdant_restorative` forks two ways on catalyst. Morph count 7 → 12.
+  *Two bugs this exposed: `morph_trigger_hint` only ever described `morph_targets.first()`, so a
+  second branch was invisible at the bench — it now hints at whichever branch the current setup is
+  closest to. And an authored morph asked for heat 4 when the dial clamps to 1–3. Those bounds are
+  now named constants and `every_recipe_and_morph_is_reachable_at_the_bench` fails any recipe or
+  morph wanting an off-dial heat, an unknown timing, or a catalyst tag no item carries.*
+  *Next: prose is the one axis never touched — `narrative_text.json` is still the smallest file in
+  the game. Or the two empty tower routes, or the five one-shot townsfolk.*
 
 ## Deferred (needs a new system; not for this loop)
 

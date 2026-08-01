@@ -1,5 +1,5 @@
 use super::gameplay_alchemy_input_text as alchemy_input_text;
-use super::gameplay_alchemy_types::ALCHEMY_TIMINGS;
+use super::gameplay_alchemy_types::{ALCHEMY_MAX_HEAT, ALCHEMY_MIN_HEAT, ALCHEMY_TIMINGS};
 use super::GameplayState;
 use crate::audio::AudioAssets;
 use crate::data::{GameData, StationKind};
@@ -39,10 +39,10 @@ impl GameplayState {
             }
         }
         if alchemy_heat_decrease_pressed() {
-            self.alchemy.heat = (self.alchemy.heat - 1).max(1);
+            self.alchemy.heat = (self.alchemy.heat - 1).max(ALCHEMY_MIN_HEAT);
         }
         if alchemy_heat_increase_pressed() {
-            self.alchemy.heat = (self.alchemy.heat + 1).min(3);
+            self.alchemy.heat = (self.alchemy.heat + 1).min(ALCHEMY_MAX_HEAT);
         }
         if sort_pressed() {
             self.cycle_inventory_sort_mode();

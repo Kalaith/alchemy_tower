@@ -326,6 +326,69 @@
           "description": "Restores deeply and leaves the drinker unusually settled."
         }
       ]
+    },
+    {
+      "id": "clearspring_draught",
+      "name": "Clearspring Draught",
+      "category": "potion",
+      "base_value": 42,
+      "color": [
+        176,
+        226,
+        214,
+        255
+      ],
+      "description": "The plainest recipe in the book, taken as far as it goes. Starlight settles the healing draught until nothing is left in it but the mending.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 40.0,
+          "duration_seconds": 0.0,
+          "description": "Restores fully and cleanly, with none of the heaviness a strong draught usually carries."
+        }
+      ]
+    },
+    {
+      "id": "deeproot_tonic",
+      "name": "Deeproot Tonic",
+      "category": "potion",
+      "base_value": 62,
+      "color": [
+        122,
+        168,
+        124,
+        255
+      ],
+      "description": "Restorative held under stillwater until it works slowly. Brin swears a bed fed with this is still answering a season later.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 46.0,
+          "duration_seconds": 0.0,
+          "description": "Restores deeply and keeps working long after it is taken."
+        }
+      ]
+    },
+    {
+      "id": "hushwater_draught",
+      "name": "Hushwater Draught",
+      "category": "potion",
+      "base_value": 74,
+      "color": [
+        196,
+        216,
+        228,
+        255
+      ],
+      "description": "Ward frost and quietbloom put under a stillwater pearl. The result is so quiet that Lyra will not keep an open bottle near the habitats.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 52.0,
+          "duration_seconds": 0.0,
+          "description": "Restores completely and leaves the drinker unnervingly calm."
+        }
+      ]
     }
   ]
 }

@@ -480,6 +480,50 @@
         64
       ],
       "prompt": "Small violet crystalline chips shed from a humming ward frame, arcane luminous reagent, readable from above."
+    },
+    {
+      "id": "kiln_geode",
+      "type": "icon_and_world_node",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A cracked stone geode with a molten orange crystalline interior still radiating heat, readable from above."
+    },
+    {
+      "id": "stillwater_pearl",
+      "type": "icon_and_world_node",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A pale blue-green pearl resting in dead-still shallow water, calm pure catalyst, readable from above."
+    },
+    {
+      "id": "kiln_geode_quarry",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "Kiln geode variant staged on cut quarry stone."
+    },
+    {
+      "id": "stillwater_pearl_lake",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "Stillwater pearl variant staged in the flat water behind a reed bar."
     }
   ]
 }
