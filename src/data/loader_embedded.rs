@@ -223,8 +223,16 @@ struct EmbeddedMutationData {
 /// a formula's home is decided by what it does rather than when it was added.
 const RECIPE_SOURCES: &[(&str, &str)] = &[
     (
-        "crafting/recipes_restore",
-        include_str!("../../assets/data/crafting/recipes_restore.json"),
+        "crafting/recipes_restore_entry_cauldron",
+        include_str!("../../assets/data/crafting/recipes_restore_entry_cauldron.json"),
+    ),
+    (
+        "crafting/recipes_restore_greenhouse_still",
+        include_str!("../../assets/data/crafting/recipes_restore_greenhouse_still.json"),
+    ),
+    (
+        "crafting/recipes_restore_containment_cold_bench",
+        include_str!("../../assets/data/crafting/recipes_restore_containment_cold_bench.json"),
     ),
     (
         "crafting/recipes_glow",

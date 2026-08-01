@@ -626,6 +626,69 @@
           "description": "Restores steadily, with none of the heaviness of a stronger draught."
         }
       ]
+    },
+    {
+      "id": "longhold_cordial",
+      "name": "Longhold Cordial",
+      "category": "potion",
+      "base_value": 190,
+      "color": [
+        198,
+        176,
+        214,
+        255
+      ],
+      "description": "Hollowroot held open by saltroad amber. It keeps working for days rather than hours, and every ingredient in it came from somewhere that had to be reached.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 70.0,
+          "duration_seconds": 0.0,
+          "description": "Restores completely and keeps restoring long after it should have stopped."
+        }
+      ]
+    },
+    {
+      "id": "keptwarm_tonic",
+      "name": "Keptwarm Tonic",
+      "category": "potion",
+      "base_value": 124,
+      "color": [
+        214,
+        200,
+        178,
+        255
+      ],
+      "description": "Ward frost persuaded to stay useful at room temperature, which the cold bench regards as cheating.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 46.0,
+          "duration_seconds": 0.0,
+          "description": "Restores deeply without needing to be kept cold."
+        }
+      ]
+    },
+    {
+      "id": "southmarket_salve",
+      "name": "Southmarket Salve",
+      "category": "potion",
+      "base_value": 72,
+      "color": [
+        196,
+        158,
+        118,
+        255
+      ],
+      "description": "Warm, resinous and faintly expensive-tasting. Two to a batch, which is the only thing that makes it worth brewing at all.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 38.0,
+          "duration_seconds": 0.0,
+          "description": "Restores well and travels without spoiling."
+        }
+      ]
     }
   ]
 }

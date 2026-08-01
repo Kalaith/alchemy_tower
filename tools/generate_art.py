@@ -212,6 +212,7 @@ def icon(item, size, world=False):
         "sumpflower",
         "driftseed",
         "lieflat_clover",
+        "southmarket_myrrh",
     } or base_item in {
         "whisper_moss",
         "sunleaf",
@@ -239,6 +240,7 @@ def icon(item, size, world=False):
         "sumpflower",
         "driftseed",
         "lieflat_clover",
+        "southmarket_myrrh",
     }:
         colors = {
             "whisper_moss": "#74d59f",
@@ -267,6 +269,7 @@ def icon(item, size, world=False):
             "sumpflower": "#94bea8",
             "driftseed": "#e2d8b0",
             "lieflat_clover": "#96c480",
+            "southmarket_myrrh": "#ba8e60",
         }
         for ox, oy in [(-10, 2), (2, -4), (12, 4), (-2, 10)]:
             d.ellipse(box(cx + ox, cy + oy, 9, 12), fill=rgb(colors[base_item]))
@@ -308,10 +311,10 @@ def icon(item, size, world=False):
                            (cx + px + 10, cy + py + 4), (cx + px, cy + py + 8)],
                           fill=rgb("#f2fbff"), outline=rgb("#a9c8d4"))
     elif base_item in {"arcane_dust", "lumen_dust", "starlight_shard", "kiln_geode",
-                       "stillwater_pearl", "washvein_crystal"}:
+                       "stillwater_pearl", "washvein_crystal", "saltroad_amber"}:
         c = {"arcane_dust": "#a781ff", "lumen_dust": "#f1e7a3", "starlight_shard": "#dbe5ff",
              "kiln_geode": "#f4985a", "stillwater_pearl": "#bae2e2",
-             "washvein_crystal": "#b2cae2"}[base_item]
+             "washvein_crystal": "#b2cae2", "saltroad_amber": "#e8a854"}[base_item]
         for ox, oy in [(-10, 8), (0, 0), (12, 10)]:
             d.polygon([(cx + ox, cy + oy - 10), (cx + ox - 8, cy + oy), (cx + ox, cy + oy + 10), (cx + ox + 8, cy + oy)], fill=rgb(c))
     elif base_item in {"mist_moth_wing", "glow_moth", "bloomwing"}:
@@ -356,7 +359,8 @@ def icon(item, size, world=False):
             "annotated_light": "#dece9e", "marginalia_lantern": "#eee4be",
             "terracemend_salve": "#baacce",
             "hollow_hearth_tonic": "#cc9870", "firstthaw_draught": "#d6e4ee",
-            "hardwinter_draught": "#e8c8aa", "sluicewater_tonic": "#a6c6ca", "openfield_draught": "#ccd69e",
+            "hardwinter_draught": "#e8c8aa", "sluicewater_tonic": "#a6c6ca", "openfield_draught": "#ccd69e", "longhold_cordial": "#c6b0d6",
+            "keptwarm_tonic": "#d6c8b2", "southmarket_salve": "#c49e76",
         }.get(item, "#d2c1ff")
         d.rounded_rectangle((cx - 8, cy - 24, cx + 8, cy - 12), radius=3, fill=rgb("#d9dfe8", 220))
         d.rectangle((cx - 5, cy - 28, cx + 5, cy - 22), fill=rgb("#8b6a4d"))

@@ -170,6 +170,15 @@
         128
       ],
       "prompt": "A ward-chilled planting bed seen from above, frost on the soil and rime along the frame, pale blue-white, readable as a planter."
+    },
+    {
+      "id": "roadside_trader",
+      "type": "world_station",
+      "image_size_px": [
+        96,
+        96
+      ],
+      "prompt": "A road trader's stall seen from above, canvas awning over crates and weighing scales, warm ochre, readable as a market stall."
     }
   ]
 }

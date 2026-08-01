@@ -144,7 +144,7 @@ Data files follow the same ~800-line rule as `.rs` files. `src/data/loader_embed
 | Ingredients | `assets/data/items/ingredients_<biome>.json` — filed under the biome that anchors the herb; `ingredients_shared.json` for herbs found in 3+ areas or produced rather than gathered |
 | Potions | `assets/data/items/potions_<effect>.json` — filed under the effect kind the potion leads with; `potions_unstable.json` for salvage outputs |
 | Creatures, catalysts, runes | `assets/data/items/materials.json` |
-| Recipes and their morph targets | `assets/data/crafting/recipes_<effect>.json` — filed under the effect kind the output potion leads with (`restore`, `glow`, `speed`) |
+| Recipes and their morph targets | `assets/data/crafting/recipes_<effect>[_<station>].json` — filed under the effect kind the output potion leads with (`restore`, `glow`, `speed`) |
 | Rune recipes, mutation formulas | `assets/data/crafting/rune_recipes.json`, `crafting/mutation_formulas.json` |
 | NPCs | `assets/data/town/npcs.json` |
 | Quests | `assets/data/town/quests_arcs.json` for a townsperson's own arc, `quests_board.json` for request-board orders |
@@ -171,6 +171,12 @@ When you split a file: move entries, add the new source to the right table in
 - **New save fields must be `#[serde(default)]`** and wired through snapshot/restore, so existing
   saves keep loading. Mirror the `relationships` / `board_quest_cooldowns` pattern.
 - **Never write anything under `D:\xampp\htdocs`** — it is a publish target only.
+- **Station positions need a capture, not arithmetic.** The HUD occupies every edge of the
+  screen: vitality and coins top-left, the area plaque top-centre, clock and minimap top-right,
+  the goal note down the left, the bag down the right, the potion belt across the bottom. A
+  station near a room's edge disappears behind one of them. This has happened three times now —
+  the cold bench, the ward-cooled bed and the trader's stall — so place stations in the middle
+  band and then look at them.
 - `assets/data/game_data_fallback.json` and the embedded-JSON path exist for WASM; if you add a
   data file, check `src/data/embedded_json.rs`.
 
@@ -540,6 +546,22 @@ Stop the loop and report if:
   heading.
   *Method note: three of the last four defects came from sweeping a known failure family rather than
   from reading new code. When a bug class repeats, grep for the rest of it.*
+- **2026-08-01 — the economy (an axis never touched).** Measured: **~2,950 coins of one-off quest
+  reward** plus unbounded repeatables, against **250 coins of floor gates** and a shop ceiling of
+  **38**. Money stopped being a decision within the first hour or two, and every content pass since
+  has widened the gap.
+  The answer is content, not tuning — retuning 32 authored rewards downward would be churn. Elric's
+  charter already says goods move on the outer road after dark, so **the road brings a trader**: a
+  stall gated on `nightwatch_for_elric`, selling what the valley has no source for.
+  *It deliberately undercuts nothing already written* — kiln geodes are dug, ward runes are prised
+  off frames, starlight is the counter's own business. What a road brings is imports:
+  `saltroad_amber` (210c, a catalyst that holds a reaction open, tag `saltroad`) and
+  `southmarket_myrrh` (128c). The money buys capability: two morph branches only `saltroad` reaches,
+  and a salve that yields two to a batch, which is the only thing justifying the myrrh at all.
+  New test `there_is_something_worth_saving_for` — a floor on ambition rather than a balance model:
+  it fails if the dearest purchasable item is not worth deliberately saving for, which is precisely
+  the state the game was in.
+  Split `crafting/recipes_restore.json` (804) by the bench that brews each recipe.
 
 ## Deferred (needs a new system; not for this loop)
 

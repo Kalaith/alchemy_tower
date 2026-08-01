@@ -330,6 +330,73 @@
       "wild_variants": [],
       "synthesis_weight": 1,
       "synthesis_value": 5
+    },
+    {
+      "id": "saltroad_amber",
+      "name": "Saltroad Amber",
+      "category": "catalyst",
+      "base_value": 132,
+      "color": [
+        232,
+        168,
+        84,
+        255
+      ],
+      "description": "Amber off the coast road, three weeks of carriage from here. It holds a reaction open far longer than anything the valley grows, and no bed, seam or ward in this valley will ever produce one.",
+      "quality": 66,
+      "rarity": 3,
+      "elements": {
+        "vita": 1,
+        "ember": 2,
+        "mist": 0,
+        "lux": 2
+      },
+      "traits": [
+        "warm",
+        "pure"
+      ],
+      "source_conditions": [
+        "carried up the coast road",
+        "bought, never found"
+      ],
+      "wild_variants": [],
+      "synthesis_weight": 1,
+      "synthesis_value": 7,
+      "catalyst_tags": [
+        "saltroad"
+      ]
+    },
+    {
+      "id": "southmarket_myrrh",
+      "name": "Southmarket Myrrh",
+      "category": "ingredient",
+      "base_value": 84,
+      "color": [
+        186,
+        142,
+        96,
+        255
+      ],
+      "description": "Resin from beyond the pass, sold in pinches and weighed carefully. Rowan has tried four times to grow the tree it comes from and will not discuss it.",
+      "quality": 54,
+      "rarity": 3,
+      "elements": {
+        "vita": 2,
+        "ember": 2,
+        "mist": 1,
+        "lux": 0
+      },
+      "traits": [
+        "restorative",
+        "warm"
+      ],
+      "source_conditions": [
+        "beyond the pass",
+        "bought, never found"
+      ],
+      "wild_variants": [],
+      "synthesis_weight": 1,
+      "synthesis_value": 6
     }
   ]
 }

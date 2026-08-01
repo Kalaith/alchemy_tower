@@ -458,6 +458,36 @@ mod tests {
         reachable
     }
 
+    /// Coins stopped being a decision once the content grew: quests pay out
+    /// thousands, the four floor gates cost 250 between them, and for a long
+    /// while the dearest thing any counter sold was 38. This is a floor on
+    /// ambition, not a balance model — it fails if nothing in the game is worth
+    /// deliberately saving for.
+    #[test]
+    fn there_is_something_worth_saving_for() {
+        const WORTH_SAVING_FOR: u32 = 150;
+
+        let data = load_embedded().expect("embedded game data should load");
+        let dearest = data
+            .stations
+            .iter()
+            .flat_map(|station| station.stock.iter())
+            .map(|stocked| stocked.price)
+            .max()
+            .unwrap_or(0);
+        let one_off_income = data
+            .quests
+            .iter()
+            .filter(|quest| !quest.repeatable)
+            .map(|quest| quest.reward_coins)
+            .sum::<u32>();
+
+        assert!(
+            dearest >= WORTH_SAVING_FOR,
+            "the dearest purchasable item costs {dearest} against {one_off_income} coins of              one-off quest income; nothing in the shops is worth saving for"
+        );
+    }
+
     #[test]
     fn quest_chains_and_gates_resolve() {
         let data = load_embedded().expect("embedded game data should load");

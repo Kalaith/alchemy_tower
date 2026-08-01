@@ -146,6 +146,68 @@
           96.0
         ]
       }
+    },
+    {
+      "id": "roadside_trader",
+      "name": "Road Trader's Stall",
+      "kind": "shop",
+      "area_id": "town_square",
+      "position": [
+        966.0,
+        470.0
+      ],
+      "interaction_radius": 52.0,
+      "color": [
+        206,
+        158,
+        106,
+        255
+      ],
+      "stock": [
+        {
+          "item_id": "saltroad_amber",
+          "price": 210
+        },
+        {
+          "item_id": "southmarket_myrrh",
+          "price": 128
+        },
+        {
+          "item_id": "starlight_shard",
+          "price": 34
+        },
+        {
+          "item_id": "splash_rune",
+          "price": 40
+        },
+        {
+          "item_id": "echo_rune",
+          "price": 44
+        },
+        {
+          "item_id": "delay_rune",
+          "price": 42
+        }
+      ],
+      "room_bonus": {
+        "quality_bonus": 0,
+        "favored_traits": [],
+        "favored_categories": [],
+        "description": ""
+      },
+      "planter_harvest_days": 0,
+      "planter_seed_ids": [],
+      "planter_yield_bonus": 0,
+      "required_completed_quest": "nightwatch_for_elric",
+      "habitat_creature_ids": [],
+      "habitat_output_item_id": "",
+      "habitat_harvest_days": 0,
+      "render": {
+        "sprite_size": [
+          96.0,
+          96.0
+        ]
+      }
     }
   ]
 }

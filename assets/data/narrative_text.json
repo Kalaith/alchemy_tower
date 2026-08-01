@@ -570,6 +570,20 @@
       "after_milestone": "crews_kept_working",
       "order": 56,
       "line": "The crews have started calling a windy morning a gathering day rather than a nuisance. Small thing. It means somebody has been paying attention to the fields for the first time in years."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "town_charter_signed",
+      "order": 99,
+      "line": "There is a stall in the square that was not there last season, run by somebody who came up the coast road because the coast road is now worth coming up. I did not plan that. I only made it possible, which I am reliably told is the job."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "town_charter_signed",
+      "order": 99,
+      "line": "The trader sells a resin I have failed to grow four times. I buy it. I am going to keep failing to grow it, and I would rather you did not raise the subject."
     }
   ],
   "epilogue_beats": [

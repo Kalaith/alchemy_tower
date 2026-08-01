@@ -1,0 +1,217 @@
+{
+  "recipes": [
+    {
+      "id": "greenmend_salve_recipe",
+      "name": "Greenmend Salve",
+      "station_id": "greenhouse_still",
+      "ingredients": [
+        {
+          "item_id": "reedflower",
+          "amount": 1
+        },
+        {
+          "item_id": "dew_slime",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "greenmend_salve",
+      "output_amount": 1,
+      "description": "A cool, clean salve tuned for wilted planter beds and delicate specimens.",
+      "required_heat": 2,
+      "required_stirs": 1,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "The glasshouse still rewards purity above force.",
+      "minimum_quality": 34,
+      "preferred_traits": [
+        "pure",
+        "calm"
+      ],
+      "guaranteed_traits": [
+        "pure"
+      ],
+      "minimum_elements": {
+        "vita": 1,
+        "ember": 0,
+        "mist": 3,
+        "lux": 0
+      },
+      "required_timing": "steady",
+      "morph_targets": []
+    },
+    {
+      "id": "hollowroot_revival_recipe",
+      "name": "Hollowroot Revival",
+      "station_id": "greenhouse_still",
+      "ingredients": [
+        {
+          "item_id": "pressed_specimen",
+          "amount": 1
+        },
+        {
+          "item_id": "bloomwing_pollen",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "hollowroot",
+      "output_amount": 1,
+      "description": "A dead cutting and living pollen. The still does not brew this so much as ask the specimen whether it would like to try again.",
+      "required_heat": 1,
+      "required_stirs": 2,
+      "unstable_output_item_id": "murky_concoction",
+      "lore_note": "It cannot be done without pollen from a bloomwing, which is exactly why the plant died: nothing was carrying for it.",
+      "minimum_quality": 30,
+      "preferred_traits": [
+        "restorative",
+        "arcane"
+      ],
+      "guaranteed_traits": [],
+      "minimum_elements": {
+        "vita": 2,
+        "ember": 0,
+        "mist": 0,
+        "lux": 1
+      },
+      "required_timing": "steady",
+      "morph_targets": []
+    },
+    {
+      "id": "hollowroot_cordial_recipe",
+      "name": "Hollowroot Cordial",
+      "station_id": "greenhouse_still",
+      "ingredients": [
+        {
+          "item_id": "hollowroot",
+          "amount": 1
+        },
+        {
+          "item_id": "quietbloom_spore",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "hollowroot_cordial",
+      "output_amount": 1,
+      "description": "The first thing brewed from a plant the valley had already finished losing.",
+      "required_heat": 2,
+      "required_stirs": 3,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "Mira asked what it tasted like. Ione said 'like a page' and would not be drawn further.",
+      "minimum_quality": 52,
+      "preferred_traits": [
+        "restorative",
+        "healing"
+      ],
+      "guaranteed_traits": [
+        "restorative"
+      ],
+      "minimum_elements": {
+        "vita": 5,
+        "ember": 0,
+        "mist": 2,
+        "lux": 2
+      },
+      "required_timing": "late",
+      "morph_targets": [
+        {
+          "output_item_id": "hollowroot_reliquary",
+          "minimum_quality": 74,
+          "catalyst_tag": "starlight",
+          "required_heat": 2,
+          "required_stirs": 3,
+          "required_timing": "late"
+        },
+        {
+          "output_item_id": "longhold_cordial",
+          "minimum_quality": 66,
+          "catalyst_tag": "saltroad",
+          "required_heat": 2,
+          "required_stirs": 3,
+          "required_timing": "steady"
+        }
+      ],
+      "required_sequence": [
+        "arcane",
+        "calm"
+      ]
+    },
+    {
+      "id": "terracemend_salve_recipe",
+      "name": "Terracemend Salve",
+      "station_id": "greenhouse_still",
+      "ingredients": [
+        {
+          "item_id": "ruinbell",
+          "amount": 2
+        },
+        {
+          "item_id": "whisper_moss",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "terracemend_salve",
+      "output_amount": 1,
+      "description": "Made from what grows on the tower's own walls. Brin uses it on ground that has been let go rather than ground that has been worked wrong.",
+      "required_heat": 1,
+      "required_stirs": 3,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "The terraces produce the thing that repairs terraces, which Brin says is either very good design or a joke at his expense.",
+      "minimum_quality": 42,
+      "preferred_traits": [
+        "restorative",
+        "pure"
+      ],
+      "guaranteed_traits": [
+        "restorative"
+      ],
+      "minimum_elements": {
+        "vita": 5,
+        "ember": 0,
+        "mist": 2,
+        "lux": 3
+      },
+      "required_timing": "steady",
+      "morph_targets": []
+    },
+    {
+      "id": "southmarket_salve_recipe",
+      "name": "Southmarket Salve",
+      "station_id": "greenhouse_still",
+      "ingredients": [
+        {
+          "item_id": "southmarket_myrrh",
+          "amount": 1
+        },
+        {
+          "item_id": "ashcap",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "southmarket_salve",
+      "output_amount": 2,
+      "description": "Imported resin cut with something that grows on burnt wood ten minutes up the road. Mira says the valley has been paying for half of this unnecessarily for years.",
+      "required_heat": 2,
+      "required_stirs": 2,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "Two to a batch, which is the only reason anybody can justify the myrrh.",
+      "minimum_quality": 50,
+      "preferred_traits": [
+        "restorative",
+        "warm"
+      ],
+      "guaranteed_traits": [
+        "restorative"
+      ],
+      "minimum_elements": {
+        "vita": 4,
+        "ember": 3,
+        "mist": 1,
+        "lux": 0
+      },
+      "required_timing": "steady",
+      "required_sequence": [
+        "warm",
+        "restorative"
+      ],
+      "morph_targets": []
+    }
+  ]
+}
