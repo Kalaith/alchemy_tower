@@ -978,6 +978,24 @@ Stop the loop and report if:
   *Cleared while looking:* rapport is complete (every townsperson has both gift tiers; Elric pays in
   coin at both, which is in character), and all eight NPCs carry the full `phase1_dialogue` key set.
   **11 epilogue beats; the ending reaches the end of the story; 85 tests.**
+- **2026-08-01 — the newest biomes never got the oldest reward.** Wild-variant coverage per area was
+  near-total everywhere except the three places this loop built: **archive 0/3, observatory 0/3,
+  southern pass 1/3.** Same shape as the greenhouse finding — an established system that new content
+  never plugged into. Eight variants added, all condition-checked against their node's own gates
+  before being written.
+  ***The measurement found a live bug on the way past.*** Sweeping all 26 existing variants for
+  reachability turned up **`quarry_lichen_sparked`: it wants wind, and its ledge only ever appeared
+  in clear or mist.** Eight quality points and a `volatile` trait that had never once been
+  obtainable. The wind is the entire idea of a *sparked* lichen, so the ledge gained the weather
+  rather than the variant losing its premise — fix the side that is wrong, not the side that is
+  easier.
+  *Guard, verified against the real bug rather than a synthetic one:*
+  `every_wild_variant_can_actually_be_found` walks a 20-day cycle per node and asks the **real**
+  `condition_matches` rather than reimplementing it. Reverting the quarry ledge made it name
+  `quarry_lichen_sparked` exactly.
+  *Plus a payoff test:* reachability proves the conditions *can* align; `a_clear_winter_morning_opens_the_rimeflower`
+  proves the reward actually resolves through the same call the game makes.
+  **34 wild variants; 87 tests; every project file under 700 lines.**
 
 ## Deferred (needs a new system; not for this loop)
 

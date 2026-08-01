@@ -29,7 +29,28 @@
         "day and evening — you have to be able to see what you are tearing",
         "leaves Ione has already written off, and no others"
       ],
-      "wild_variants": [],
+      "wild_variants": [
+        {
+          "id": "foxed_leaf_bloomed",
+          "name": "Full-Bloomed Foxed Leaf",
+          "required_conditions": [
+            "rain",
+            "evening"
+          ],
+          "bonus_traits": [
+            "restorative"
+          ],
+          "quality_bonus": 9,
+          "elements": {
+            "vita": 1,
+            "ember": 0,
+            "mist": 2,
+            "lux": 0
+          },
+          "synthesis_weight_bonus": 0,
+          "synthesis_value_bonus": 3
+        }
+      ],
       "synthesis_weight": 1,
       "synthesis_value": 5
     },
@@ -62,7 +83,28 @@
         "night, after the reading lamps are out and the shelf has cooled",
         "the shelf below the binding, never the binding"
       ],
-      "wild_variants": [],
+      "wild_variants": [
+        {
+          "id": "inkgall_bead_wept",
+          "name": "Freshly Wept Inkgall",
+          "required_conditions": [
+            "summer",
+            "night"
+          ],
+          "bonus_traits": [
+            "volatile"
+          ],
+          "quality_bonus": 10,
+          "elements": {
+            "vita": 0,
+            "ember": 1,
+            "mist": 0,
+            "lux": 2
+          },
+          "synthesis_weight_bonus": 0,
+          "synthesis_value_bonus": 5
+        }
+      ],
       "synthesis_weight": 1,
       "synthesis_value": 7
     }

@@ -29,7 +29,28 @@
         "the outer rim, not the focus ring",
         "gone by an hour after sunrise, every time"
       ],
-      "wild_variants": [],
+      "wild_variants": [
+        {
+          "id": "cloudglass_deep",
+          "name": "Deepwinter Cloudglass",
+          "required_conditions": [
+            "winter",
+            "clear"
+          ],
+          "bonus_traits": [
+            "cold"
+          ],
+          "quality_bonus": 10,
+          "elements": {
+            "vita": 0,
+            "ember": 0,
+            "mist": 2,
+            "lux": 1
+          },
+          "synthesis_weight_bonus": 0,
+          "synthesis_value_bonus": 4
+        }
+      ],
       "synthesis_weight": 1,
       "synthesis_value": 6
     },
@@ -62,7 +83,28 @@
         "the silver itself, gathered with a dry cloth",
         "they will not survive being carried warm"
       ],
-      "wild_variants": [],
+      "wild_variants": [
+        {
+          "id": "mirrorbead_standing",
+          "name": "Standing Mirrorbead",
+          "required_conditions": [
+            "autumn",
+            "mist"
+          ],
+          "bonus_traits": [
+            "pure"
+          ],
+          "quality_bonus": 8,
+          "elements": {
+            "vita": 0,
+            "ember": 0,
+            "mist": 3,
+            "lux": 0
+          },
+          "synthesis_weight_bonus": 0,
+          "synthesis_value_bonus": 3
+        }
+      ],
       "synthesis_weight": 1,
       "synthesis_value": 6
     },
@@ -95,7 +137,28 @@
         "clear nights only, and the lens must have had hours",
         "scraped off the focus ring, which is why nobody does it twice a night"
       ],
-      "wild_variants": [],
+      "wild_variants": [
+        {
+          "id": "lowstar_ash_longhold",
+          "name": "Longheld Lowstar Ash",
+          "required_conditions": [
+            "winter",
+            "clear"
+          ],
+          "bonus_traits": [
+            "volatile"
+          ],
+          "quality_bonus": 11,
+          "elements": {
+            "vita": 0,
+            "ember": 2,
+            "mist": 0,
+            "lux": 3
+          },
+          "synthesis_weight_bonus": 1,
+          "synthesis_value_bonus": 6
+        }
+      ],
       "synthesis_weight": 1,
       "synthesis_value": 9
     }

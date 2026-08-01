@@ -272,7 +272,28 @@
         "between the pages of the sealed floor logs",
         "the quiet hours, when the stacks are not being read"
       ],
-      "wild_variants": [],
+      "wild_variants": [
+        {
+          "id": "pressed_specimen_annotated",
+          "name": "Annotated Pressed Specimen",
+          "required_conditions": [
+            "autumn",
+            "night"
+          ],
+          "bonus_traits": [
+            "arcane"
+          ],
+          "quality_bonus": 8,
+          "elements": {
+            "vita": 0,
+            "ember": 0,
+            "mist": 0,
+            "lux": 2
+          },
+          "synthesis_weight_bonus": 0,
+          "synthesis_value_bonus": 4
+        }
+      ],
       "synthesis_weight": 1,
       "synthesis_value": 1
     },

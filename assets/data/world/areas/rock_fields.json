@@ -152,7 +152,8 @@
       ],
       "weathers": [
         "clear",
-        "mist"
+        "mist",
+        "windy"
       ],
       "time_windows": [
         "morning",
