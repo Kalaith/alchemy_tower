@@ -1,0 +1,113 @@
+{
+  "id": "tower_entry",
+  "name": "Tower Entry Laboratory",
+  "size": [
+    960.0,
+    720.0
+  ],
+  "background": [
+    64,
+    60,
+    72,
+    255
+  ],
+  "accent": [
+    98,
+    88,
+    110,
+    255
+  ],
+  "footstep_sound_set": "stone",
+  "render": {
+    "blocker_style": "shelf",
+    "blocker_primary": [
+      124,
+      92,
+      70,
+      255
+    ],
+    "blocker_secondary": [
+      158,
+      122,
+      94,
+      255
+    ],
+    "blocker_detail": [
+      92,
+      62,
+      46,
+      255
+    ],
+    "blocker_alt": [
+      170,
+      222,
+      210,
+      255
+    ]
+  },
+  "blockers": [
+    {
+      "x": 80.0,
+      "y": 84.0,
+      "w": 200.0,
+      "h": 60.0
+    },
+    {
+      "x": 620.0,
+      "y": 108.0,
+      "w": 210.0,
+      "h": 70.0
+    },
+    {
+      "x": 340.0,
+      "y": 500.0,
+      "w": 220.0,
+      "h": 90.0
+    }
+  ],
+  "warps": [
+    {
+      "id": "entry_to_plains",
+      "label": "North Plains",
+      "rect": {
+        "x": 432.0,
+        "y": 656.0,
+        "w": 96.0,
+        "h": 48.0
+      },
+      "target_area": "north_plains",
+      "target_position": [
+        640.0,
+        120.0
+      ]
+    },
+    {
+      "id": "entry_to_greenhouse",
+      "label": "Greenhouse Floor",
+      "rect": {
+        "x": 850.0,
+        "y": 80.0,
+        "w": 70.0,
+        "h": 120.0
+      },
+      "target_area": "greenhouse_floor",
+      "target_position": [
+        148.0,
+        360.0
+      ],
+      "required_total_brews": 10,
+      "required_coins": 40,
+      "required_item_id": "moon_fern",
+      "required_item_amount": 2,
+      "unlock_milestones": [
+        {
+          "id": "greenhouse_repaired",
+          "title": "Greenhouse Repaired",
+          "text": "The upper greenhouse seal finally yielded. For the first time in years, the town has one place that may truly remember how to grow for the valley instead of merely surviving it."
+        }
+      ],
+      "locked_note": "The staircase seal hums. The greenhouse could become the town's first real turning point if you can prove the tower is worth trusting again."
+    }
+  ],
+  "gather_nodes": []
+}

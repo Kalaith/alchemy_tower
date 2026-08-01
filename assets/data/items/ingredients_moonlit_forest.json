@@ -1,0 +1,58 @@
+{
+  "items": [
+    {
+      "id": "moon_fern",
+      "name": "Moon Fern",
+      "category": "ingredient",
+      "base_value": 7,
+      "color": [
+        144,
+        255,
+        176,
+        255
+      ],
+      "description": "A pale frond that glows faintly in shaded groves.",
+      "quality": 34,
+      "rarity": 2,
+      "elements": {
+        "vita": 0,
+        "ember": 0,
+        "mist": 2,
+        "lux": 3
+      },
+      "traits": [
+        "luminous",
+        "cold"
+      ],
+      "source_conditions": [
+        "evening or night",
+        "clear or misty weather",
+        "moonlit grove"
+      ],
+      "wild_variants": [
+        {
+          "id": "moon_fern_moonwash",
+          "name": "Moonwashed Fern",
+          "required_conditions": [
+            "night",
+            "clear"
+          ],
+          "bonus_traits": [
+            "soft_glow"
+          ],
+          "quality_bonus": 12,
+          "elements": {
+            "vita": 0,
+            "ember": 0,
+            "mist": 1,
+            "lux": 2
+          },
+          "synthesis_weight_bonus": 1,
+          "synthesis_value_bonus": 3
+        }
+      ],
+      "synthesis_weight": 3,
+      "synthesis_value": 4
+    }
+  ]
+}

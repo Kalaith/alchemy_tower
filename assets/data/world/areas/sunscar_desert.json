@@ -1,0 +1,298 @@
+{
+  "id": "sunscar_desert",
+  "name": "South Desert",
+  "size": [
+    1280.0,
+    960.0
+  ],
+  "background": [
+    194,
+    164,
+    104,
+    255
+  ],
+  "accent": [
+    220,
+    198,
+    138,
+    255
+  ],
+  "render": {
+    "blocker_style": "dunes",
+    "blocker_primary": [
+      202,
+      170,
+      106,
+      255
+    ],
+    "blocker_secondary": [
+      228,
+      202,
+      136,
+      255
+    ],
+    "blocker_detail": [
+      142,
+      106,
+      64,
+      255
+    ],
+    "blocker_alt": [
+      144,
+      152,
+      94,
+      255
+    ]
+  },
+  "blockers": [
+    {
+      "x": 186.0,
+      "y": 142.0,
+      "w": 180.0,
+      "h": 104.0
+    },
+    {
+      "x": 438.0,
+      "y": 238.0,
+      "w": 174.0,
+      "h": 120.0
+    },
+    {
+      "x": 808.0,
+      "y": 164.0,
+      "w": 222.0,
+      "h": 128.0
+    },
+    {
+      "x": 962.0,
+      "y": 404.0,
+      "w": 142.0,
+      "h": 188.0
+    },
+    {
+      "x": 512.0,
+      "y": 590.0,
+      "w": 288.0,
+      "h": 118.0
+    },
+    {
+      "x": 228.0,
+      "y": 674.0,
+      "w": 184.0,
+      "h": 96.0
+    }
+  ],
+  "warps": [
+    {
+      "id": "desert_to_town",
+      "label": "Town Square",
+      "rect": {
+        "x": 596.0,
+        "y": 28.0,
+        "w": 102.0,
+        "h": 58.0
+      },
+      "target_area": "town_square",
+      "target_position": [
+        640.0,
+        770.0
+      ]
+    }
+  ],
+  "gather_nodes": [
+    {
+      "id": "desert_sunspike_01",
+      "name": "Sunspike",
+      "item_id": "sunspike",
+      "color": [
+        255,
+        200,
+        100,
+        255
+      ],
+      "position": [
+        742.0,
+        282.0
+      ],
+      "radius": 16.0,
+      "route_id": "sunscar_dunes",
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "weathers": [
+        "clear"
+      ],
+      "time_windows": [
+        "day"
+      ],
+      "spawn_chance": 88,
+      "note": "Sunspike rises along the exposed dune lane once spring light turns sharp and uninterrupted.",
+      "render": {
+        "sprite_id": "sunspike_desert"
+      }
+    },
+    {
+      "id": "desert_dust_01",
+      "name": "Arcane Dust",
+      "item_id": "arcane_dust",
+      "color": [
+        170,
+        130,
+        250,
+        255
+      ],
+      "position": [
+        940.0,
+        506.0
+      ],
+      "radius": 14.0,
+      "route_id": "sunscar_dunes",
+      "seasons": [
+        "spring",
+        "winter"
+      ],
+      "weathers": [
+        "clear",
+        "windy"
+      ],
+      "time_windows": [
+        "day",
+        "evening"
+      ],
+      "spawn_chance": 52,
+      "note": "Dry wind catches catalyst dust in the stone scars where the dunes thin out.",
+      "render": {
+        "sprite_id": "arcane_dust_desert"
+      }
+    },
+    {
+      "id": "desert_root_01",
+      "name": "Ember Root",
+      "item_id": "ember_root",
+      "color": [
+        255,
+        124,
+        74,
+        255
+      ],
+      "position": [
+        624.0,
+        730.0
+      ],
+      "radius": 16.0,
+      "route_id": "sunscar_dunes",
+      "seasons": [
+        "autumn",
+        "winter"
+      ],
+      "weathers": [
+        "clear",
+        "windy"
+      ],
+      "time_windows": [
+        "day",
+        "evening"
+      ],
+      "spawn_chance": 78,
+      "note": "Heat-baked roots surface where the lower dunes peel back from old mineral scars.",
+      "render": {
+        "sprite_id": "ember_root_desert"
+      }
+    },
+    {
+      "id": "desert_nightglass_01",
+      "name": "Nightglass Bloom",
+      "item_id": "nightglass_bloom",
+      "color": [
+        206,
+        226,
+        255,
+        255
+      ],
+      "position": [
+        352.0,
+        462.0
+      ],
+      "radius": 16.0,
+      "route_id": "sunscar_saltpan",
+      "seasons": [],
+      "weathers": [
+        "clear",
+        "windy"
+      ],
+      "time_windows": [
+        "night"
+      ],
+      "spawn_chance": 84,
+      "note": "The blooms stay folded all day and open across the pan once the sand has given its heat back to the sky.",
+      "render": {
+        "sprite_id": "nightglass_bloom_desert"
+      }
+    },
+    {
+      "id": "desert_scorchvine_01",
+      "name": "Scorchvine Resin",
+      "item_id": "scorchvine_resin",
+      "color": [
+        232,
+        138,
+        62,
+        255
+      ],
+      "position": [
+        880.0,
+        700.0
+      ],
+      "radius": 16.0,
+      "route_id": "sunscar_dunes",
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "weathers": [
+        "clear"
+      ],
+      "time_windows": [
+        "day"
+      ],
+      "spawn_chance": 80,
+      "note": "The vines only weep while the sun is straight overhead. An hour either side and the resin has already set hard.",
+      "render": {
+        "sprite_id": "scorchvine_resin_desert"
+      }
+    },
+    {
+      "id": "desert_saltmirror_01",
+      "name": "Saltmirror Flake",
+      "item_id": "saltmirror_flake",
+      "color": [
+        222,
+        240,
+        246,
+        255
+      ],
+      "position": [
+        240.0,
+        300.0
+      ],
+      "radius": 15.0,
+      "route_id": "sunscar_saltpan",
+      "seasons": [
+        "spring",
+        "autumn"
+      ],
+      "weathers": [
+        "rain"
+      ],
+      "time_windows": [
+        "morning"
+      ],
+      "spawn_chance": 92,
+      "note": "Rain almost never reaches the pan. When it does, the morning after leaves plates of salt clear enough to see cloud in.",
+      "render": {
+        "sprite_id": "saltmirror_flake_desert"
+      }
+    }
+  ]
+}

@@ -995,6 +995,99 @@
           64
         ],
         "prompt": "A warm orange hearth-tonic bottle, cozy warmth silhouette, readable potion icon."
+      },
+      {
+        "id": "nightglass_bloom",
+        "type": "icon_and_world_node",
+        "world_sprite_px": [
+          64,
+          64
+        ],
+        "icon_size_px": [
+          64,
+          64
+        ],
+        "prompt": "A pale blue-white desert flower with glassy petals open wide under starlight, cold luminous herb, readable from above."
+      },
+      {
+        "id": "scorchvine_resin",
+        "type": "icon_and_world_node",
+        "world_sprite_px": [
+          64,
+          64
+        ],
+        "icon_size_px": [
+          64,
+          64
+        ],
+        "prompt": "Beads of hot amber resin welling from a dark dune vine, warm volatile reagent, readable from above."
+      },
+      {
+        "id": "saltmirror_flake",
+        "type": "icon_and_world_node",
+        "world_sprite_px": [
+          64,
+          64
+        ],
+        "icon_size_px": [
+          64,
+          64
+        ],
+        "prompt": "Thin mirror-bright plates of salt lying on cracked pan clay, pure reflective reagent, readable from above."
+      },
+      {
+        "id": "nightglass_bloom_desert",
+        "type": "world_node_variant",
+        "world_sprite_px": [
+          64,
+          64
+        ],
+        "prompt": "Nightglass bloom variant staged on open desert sand for the Sunscar salt pan route."
+      },
+      {
+        "id": "scorchvine_resin_desert",
+        "type": "world_node_variant",
+        "world_sprite_px": [
+          64,
+          64
+        ],
+        "prompt": "Scorchvine resin variant staged on open desert sand for the Sunscar dune route."
+      },
+      {
+        "id": "saltmirror_flake_desert",
+        "type": "world_node_variant",
+        "world_sprite_px": [
+          64,
+          64
+        ],
+        "prompt": "Saltmirror flake variant staged on cracked pan clay for the Sunscar salt pan route."
+      },
+      {
+        "id": "sunscar_glass_elixir",
+        "type": "inventory_icon",
+        "icon_size_px": [
+          64,
+          64
+        ],
+        "prompt": "A warm amber-gold elixir bottle with a faint glassy shimmer, desert lantern potion icon."
+      },
+      {
+        "id": "nightglass_lantern",
+        "type": "inventory_icon",
+        "icon_size_px": [
+          64,
+          64
+        ],
+        "prompt": "A cold silver-blue lantern potion bottle holding a steady starlit flame, high-tier morph potion icon."
+      },
+      {
+        "id": "mirrorsalt_draught",
+        "type": "inventory_icon",
+        "icon_size_px": [
+          64,
+          64
+        ],
+        "prompt": "A pale mirror-clear restorative bottle with faint salt crystals settling at the base."
       }
     ],
     "areas": [

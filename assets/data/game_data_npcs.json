@@ -593,6 +593,23 @@
           "text": "Lyra tuned the habitat wards. Gentle collection from tower creatures can now support regular alchemical work."
         }
       ]
+    },
+    {
+      "id": "board_desert_road_lanterns",
+      "title": "Board Order: Light For The Desert Road",
+      "description": "Leave 1 Fine-or-better Sunscar Glass Elixir on the board. The carters want a lamp that survives the run to the dunes and back.",
+      "required_item_id": "sunscar_glass_elixir",
+      "required_amount": 1,
+      "reward_coins": 48,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Fine",
+      "required_trait": "",
+      "required_effect_kind": "glow",
+      "prerequisite_quests": [],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 8,
+      "repeatable": true,
+      "repeat_cooldown_days": 2
     }
   ]
 }

@@ -1,0 +1,202 @@
+{
+  "id": "rock_fields",
+  "name": "Rock Fields",
+  "size": [
+    1200.0,
+    900.0
+  ],
+  "background": [
+    122,
+    124,
+    112,
+    255
+  ],
+  "accent": [
+    164,
+    146,
+    118,
+    255
+  ],
+  "render": {
+    "blocker_style": "quarry",
+    "blocker_primary": [
+      116,
+      112,
+      102,
+      255
+    ],
+    "blocker_secondary": [
+      166,
+      154,
+      136,
+      255
+    ],
+    "blocker_detail": [
+      80,
+      76,
+      72,
+      255
+    ],
+    "blocker_alt": [
+      176,
+      146,
+      242,
+      255
+    ]
+  },
+  "blockers": [
+    {
+      "x": 144.0,
+      "y": 122.0,
+      "w": 230.0,
+      "h": 136.0
+    },
+    {
+      "x": 388.0,
+      "y": 252.0,
+      "w": 176.0,
+      "h": 110.0
+    },
+    {
+      "x": 620.0,
+      "y": 108.0,
+      "w": 230.0,
+      "h": 144.0
+    },
+    {
+      "x": 760.0,
+      "y": 332.0,
+      "w": 168.0,
+      "h": 220.0
+    },
+    {
+      "x": 344.0,
+      "y": 560.0,
+      "w": 360.0,
+      "h": 118.0
+    }
+  ],
+  "warps": [
+    {
+      "id": "rocks_to_plains",
+      "label": "North Plains",
+      "rect": {
+        "x": 1110.0,
+        "y": 384.0,
+        "w": 58.0,
+        "h": 140.0
+      },
+      "target_area": "north_plains",
+      "target_position": [
+        150.0,
+        454.0
+      ]
+    }
+  ],
+  "gather_nodes": [
+    {
+      "id": "rocks_dust_01",
+      "name": "Arcane Dust",
+      "item_id": "arcane_dust",
+      "color": [
+        170,
+        130,
+        250,
+        255
+      ],
+      "position": [
+        816.0,
+        274.0
+      ],
+      "radius": 14.0,
+      "route_id": "stone_quarry",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "weathers": [
+        "clear",
+        "windy"
+      ],
+      "time_windows": [
+        "day",
+        "evening"
+      ],
+      "spawn_chance": 65,
+      "note": "Residual powder settles in the upper cut where the quarry shelves fracture into narrow lanes.",
+      "render": {
+        "sprite_id": "arcane_dust_quarry"
+      }
+    },
+    {
+      "id": "rocks_lichen_01",
+      "name": "Quarry Lichen",
+      "item_id": "quarry_lichen",
+      "color": [
+        168,
+        210,
+        186,
+        255
+      ],
+      "position": [
+        426.0,
+        700.0
+      ],
+      "radius": 14.0,
+      "route_id": "stone_quarry",
+      "seasons": [
+        "spring",
+        "winter"
+      ],
+      "weathers": [
+        "clear",
+        "mist"
+      ],
+      "time_windows": [
+        "morning",
+        "day"
+      ],
+      "spawn_chance": 80,
+      "note": "Cold lower shelves grow mineral lichen where quarry runoff gathers under broken ledges.",
+      "render": {
+        "sprite_id": "quarry_lichen_quarry"
+      }
+    },
+    {
+      "id": "rocks_root_01",
+      "name": "Ember Root",
+      "item_id": "ember_root",
+      "color": [
+        255,
+        124,
+        74,
+        255
+      ],
+      "position": [
+        684.0,
+        466.0
+      ],
+      "radius": 16.0,
+      "route_id": "stone_quarry",
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "weathers": [
+        "clear",
+        "windy"
+      ],
+      "time_windows": [
+        "day",
+        "evening"
+      ],
+      "spawn_chance": 55,
+      "note": "The sun-struck seam at mid-quarry throws enough heat for roots to harden between seasons.",
+      "render": {
+        "sprite_id": "ember_root_quarry"
+      }
+    }
+  ]
+}

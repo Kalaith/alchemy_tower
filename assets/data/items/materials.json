@@ -1,0 +1,198 @@
+{
+  "items": [
+    {
+      "id": "glow_moth",
+      "name": "Glow Moth",
+      "category": "creature",
+      "base_value": 14,
+      "color": [
+        228,
+        224,
+        146,
+        255
+      ],
+      "description": "A docile lantern moth prized for the dust it sheds in calm habitats.",
+      "quality": 34,
+      "rarity": 3,
+      "elements": {
+        "vita": 0,
+        "ember": 0,
+        "mist": 1,
+        "lux": 2
+      },
+      "traits": [
+        "luminous",
+        "calm"
+      ],
+      "source_conditions": [
+        "evening glades",
+        "clear nights",
+        "gentle capture only"
+      ],
+      "wild_variants": [],
+      "synthesis_weight": 1,
+      "synthesis_value": 2
+    },
+    {
+      "id": "dew_slug",
+      "name": "Dew Slug",
+      "category": "creature",
+      "base_value": 12,
+      "color": [
+        148,
+        210,
+        238,
+        255
+      ],
+      "description": "A placid moisture-feeding slug that leaves behind a clear stabilizing slime.",
+      "quality": 30,
+      "rarity": 2,
+      "elements": {
+        "vita": 1,
+        "ember": 0,
+        "mist": 2,
+        "lux": 0
+      },
+      "traits": [
+        "calm",
+        "cold"
+      ],
+      "source_conditions": [
+        "misty glasshouse mornings",
+        "wet stone",
+        "careful handling"
+      ],
+      "wild_variants": [],
+      "synthesis_weight": 1,
+      "synthesis_value": 2
+    },
+    {
+      "id": "starlight_shard",
+      "name": "Starlight Shard",
+      "category": "catalyst",
+      "base_value": 24,
+      "color": [
+        235,
+        225,
+        255,
+        255
+      ],
+      "description": "A polished splinter that stabilizes luminous reactions.",
+      "quality": 62,
+      "rarity": 3,
+      "elements": {
+        "vita": 0,
+        "ember": 0,
+        "mist": 1,
+        "lux": 3
+      },
+      "traits": [
+        "luminous",
+        "pure"
+      ],
+      "source_conditions": [
+        "rare market stock",
+        "archive fragments"
+      ],
+      "wild_variants": [],
+      "synthesis_weight": 1,
+      "synthesis_value": 5,
+      "catalyst_tags": [
+        "starlight"
+      ]
+    },
+    {
+      "id": "splash_rune",
+      "name": "Splash Rune",
+      "category": "rune",
+      "base_value": 22,
+      "color": [
+        120,
+        188,
+        255,
+        255
+      ],
+      "description": "Turns a potion outward into a quick burst.",
+      "quality": 40,
+      "rarity": 3,
+      "elements": {
+        "vita": 0,
+        "ember": 0,
+        "mist": 2,
+        "lux": 1
+      },
+      "traits": [
+        "arcane",
+        "spread"
+      ],
+      "source_conditions": [
+        "rune workshop stock"
+      ],
+      "wild_variants": [],
+      "synthesis_weight": 1,
+      "synthesis_value": 3
+    },
+    {
+      "id": "echo_rune",
+      "name": "Echo Rune",
+      "category": "rune",
+      "base_value": 26,
+      "color": [
+        198,
+        176,
+        255,
+        255
+      ],
+      "description": "Coils a potion into a repeating aftereffect.",
+      "quality": 44,
+      "rarity": 3,
+      "elements": {
+        "vita": 1,
+        "ember": 0,
+        "mist": 0,
+        "lux": 2
+      },
+      "traits": [
+        "arcane",
+        "echo"
+      ],
+      "source_conditions": [
+        "rune workshop stock"
+      ],
+      "wild_variants": [],
+      "synthesis_weight": 1,
+      "synthesis_value": 4
+    },
+    {
+      "id": "delay_rune",
+      "name": "Delay Rune",
+      "category": "rune",
+      "base_value": 24,
+      "color": [
+        255,
+        184,
+        126,
+        255
+      ],
+      "description": "Makes a potion wait a beat before releasing its effect.",
+      "quality": 42,
+      "rarity": 3,
+      "elements": {
+        "vita": 0,
+        "ember": 1,
+        "mist": 1,
+        "lux": 1
+      },
+      "traits": [
+        "arcane",
+        "delay"
+      ],
+      "source_conditions": [
+        "rune workshop stock"
+      ],
+      "wild_variants": [],
+      "synthesis_weight": 1,
+      "synthesis_value": 3
+    }
+  ]
+}

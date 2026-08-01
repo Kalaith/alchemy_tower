@@ -1,0 +1,276 @@
+{
+  "id": "lake_shore",
+  "name": "Lake Shore",
+  "size": [
+    1200.0,
+    900.0
+  ],
+  "background": [
+    98,
+    148,
+    172,
+    255
+  ],
+  "accent": [
+    170,
+    210,
+    220,
+    255
+  ],
+  "render": {
+    "blocker_style": "reeds",
+    "blocker_primary": [
+      124,
+      154,
+      138,
+      255
+    ],
+    "blocker_secondary": [
+      90,
+      146,
+      174,
+      255
+    ],
+    "blocker_detail": [
+      196,
+      210,
+      128,
+      255
+    ],
+    "blocker_alt": [
+      154,
+      164,
+      170,
+      255
+    ]
+  },
+  "blockers": [
+    {
+      "x": 122.0,
+      "y": 96.0,
+      "w": 210.0,
+      "h": 150.0
+    },
+    {
+      "x": 352.0,
+      "y": 204.0,
+      "w": 146.0,
+      "h": 112.0
+    },
+    {
+      "x": 578.0,
+      "y": 108.0,
+      "w": 184.0,
+      "h": 124.0
+    },
+    {
+      "x": 786.0,
+      "y": 188.0,
+      "w": 164.0,
+      "h": 112.0
+    },
+    {
+      "x": 402.0,
+      "y": 566.0,
+      "w": 248.0,
+      "h": 132.0
+    },
+    {
+      "x": 720.0,
+      "y": 620.0,
+      "w": 210.0,
+      "h": 118.0
+    }
+  ],
+  "warps": [
+    {
+      "id": "lake_to_town",
+      "label": "Town Square",
+      "rect": {
+        "x": 1104.0,
+        "y": 368.0,
+        "w": 60.0,
+        "h": 152.0
+      },
+      "target_area": "town_square",
+      "target_position": [
+        136.0,
+        428.0
+      ]
+    }
+  ],
+  "gather_nodes": [
+    {
+      "id": "lake_reedflower_01",
+      "name": "Reedflower",
+      "item_id": "reedflower",
+      "color": [
+        214,
+        241,
+        255,
+        255
+      ],
+      "position": [
+        318.0,
+        382.0
+      ],
+      "radius": 15.0,
+      "route_id": "lake_shallows",
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "weathers": [
+        "clear",
+        "mist",
+        "rain"
+      ],
+      "time_windows": [
+        "morning",
+        "day"
+      ],
+      "spawn_chance": 88,
+      "note": "The first reed bend west of town opens into cool flower pockets when the lake wind stays gentle.",
+      "render": {
+        "sprite_id": "reedflower_lake"
+      }
+    },
+    {
+      "id": "lake_slug_01",
+      "name": "Dew Slug",
+      "item_id": "dew_slug",
+      "color": [
+        148,
+        210,
+        238,
+        255
+      ],
+      "position": [
+        562.0,
+        438.0
+      ],
+      "radius": 15.0,
+      "route_id": "lake_shallows",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "weathers": [
+        "mist",
+        "rain"
+      ],
+      "time_windows": [
+        "morning",
+        "day"
+      ],
+      "spawn_chance": 60,
+      "note": "These gentle slugs gather where the reed beds hold cool morning moisture against the stones.",
+      "render": {
+        "sprite_id": "dew_slug_lake"
+      }
+    },
+    {
+      "id": "lake_moth_01",
+      "name": "Mist Moth Wing",
+      "item_id": "mist_moth_wing",
+      "color": [
+        170,
+        215,
+        255,
+        255
+      ],
+      "position": [
+        846.0,
+        322.0
+      ],
+      "radius": 14.0,
+      "route_id": "lake_shallows",
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "weathers": [
+        "mist",
+        "rain"
+      ],
+      "time_windows": [
+        "evening",
+        "night"
+      ],
+      "spawn_chance": 58,
+      "note": "Damp dusk flights leave powder on the outer reeds and weathered dock posts.",
+      "render": {
+        "sprite_id": "mist_moth_wing_lake"
+      }
+    },
+    {
+      "id": "lake_fern_01",
+      "name": "Moon Fern",
+      "item_id": "moon_fern",
+      "color": [
+        144,
+        255,
+        176,
+        255
+      ],
+      "position": [
+        434.0,
+        720.0
+      ],
+      "radius": 15.0,
+      "route_id": "lake_shallows",
+      "seasons": [
+        "spring",
+        "winter"
+      ],
+      "weathers": [
+        "clear",
+        "mist"
+      ],
+      "time_windows": [
+        "evening",
+        "night"
+      ],
+      "spawn_chance": 50,
+      "note": "Shaded coves at the south edge keep enough cool reflected light for a sparse fern line.",
+      "render": {
+        "sprite_id": "moon_fern_lake"
+      }
+    },
+    {
+      "id": "lake_moss_01",
+      "name": "Whisper Moss",
+      "item_id": "whisper_moss",
+      "color": [
+        96,
+        214,
+        150,
+        255
+      ],
+      "position": [
+        768.0,
+        598.0
+      ],
+      "radius": 14.0,
+      "route_id": "lake_shallows",
+      "seasons": [
+        "spring",
+        "winter"
+      ],
+      "weathers": [
+        "mist",
+        "rain"
+      ],
+      "time_windows": [
+        "morning",
+        "day"
+      ],
+      "spawn_chance": 62,
+      "note": "Shoreline stones below the reed beds keep just enough damp for a cool-weather moss band.",
+      "render": {
+        "sprite_id": "whisper_moss_lake"
+      }
+    }
+  ]
+}

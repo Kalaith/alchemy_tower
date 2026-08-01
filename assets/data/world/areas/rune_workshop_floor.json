@@ -1,0 +1,79 @@
+{
+  "id": "rune_workshop_floor",
+  "name": "Rune Workshop",
+  "size": [
+    960.0,
+    720.0
+  ],
+  "background": [
+    92,
+    74,
+    96,
+    255
+  ],
+  "accent": [
+    148,
+    126,
+    166,
+    255
+  ],
+  "footstep_sound_set": "stone",
+  "blockers": [
+    {
+      "x": 100.0,
+      "y": 100.0,
+      "w": 180.0,
+      "h": 120.0
+    },
+    {
+      "x": 660.0,
+      "y": 100.0,
+      "w": 180.0,
+      "h": 120.0
+    },
+    {
+      "x": 328.0,
+      "y": 500.0,
+      "w": 300.0,
+      "h": 90.0
+    }
+  ],
+  "warps": [
+    {
+      "id": "rune_to_containment",
+      "label": "Containment Floor",
+      "rect": {
+        "x": 78.0,
+        "y": 284.0,
+        "w": 66.0,
+        "h": 120.0
+      },
+      "target_area": "containment_floor",
+      "target_position": [
+        790.0,
+        180.0
+      ]
+    },
+    {
+      "id": "rune_to_archives",
+      "label": "Archives",
+      "rect": {
+        "x": 832.0,
+        "y": 118.0,
+        "w": 64.0,
+        "h": 120.0
+      },
+      "target_area": "archive_floor",
+      "target_position": [
+        150.0,
+        340.0
+      ],
+      "required_total_brews": 30,
+      "required_coins": 90,
+      "required_item_id": "star_lantern_elixir",
+      "required_item_amount": 1,
+      "locked_note": "The archive vault remains sealed until you can prove the tower's higher work is stable."
+    }
+  ],
+  "gather_nodes": []
+}

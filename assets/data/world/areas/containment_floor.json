@@ -1,0 +1,84 @@
+{
+  "id": "containment_floor",
+  "name": "Creature Containment",
+  "size": [
+    960.0,
+    720.0
+  ],
+  "background": [
+    68,
+    86,
+    110,
+    255
+  ],
+  "accent": [
+    112,
+    136,
+    172,
+    255
+  ],
+  "footstep_sound_set": "stone",
+  "blockers": [
+    {
+      "x": 100.0,
+      "y": 100.0,
+      "w": 200.0,
+      "h": 120.0
+    },
+    {
+      "x": 646.0,
+      "y": 100.0,
+      "w": 180.0,
+      "h": 120.0
+    },
+    {
+      "x": 336.0,
+      "y": 500.0,
+      "w": 280.0,
+      "h": 100.0
+    }
+  ],
+  "warps": [
+    {
+      "id": "containment_to_greenhouse",
+      "label": "Greenhouse Floor",
+      "rect": {
+        "x": 80.0,
+        "y": 280.0,
+        "w": 66.0,
+        "h": 120.0
+      },
+      "target_area": "greenhouse_floor",
+      "target_position": [
+        790.0,
+        180.0
+      ]
+    },
+    {
+      "id": "containment_to_rune_workshop",
+      "label": "Rune Workshop",
+      "rect": {
+        "x": 830.0,
+        "y": 120.0,
+        "w": 64.0,
+        "h": 120.0
+      },
+      "target_area": "rune_workshop_floor",
+      "target_position": [
+        150.0,
+        340.0
+      ],
+      "required_coins": 60,
+      "required_mastered_recipe": "glow_potion_recipe",
+      "unlock_milestones": [
+        {
+          "id": "rune_workshop_restored",
+          "title": "Rune Workshop Restored",
+          "text": "The rune benches hum again. Potions can now be reshaped after brewing instead of only before it."
+        }
+      ],
+      "locked_note": "The rune workshop remains shuttered until you have truly mastered a base brew of your own."
+    }
+  ],
+  "gather_nodes": []
+}

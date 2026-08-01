@@ -1,0 +1,220 @@
+{
+  "items": [
+    {
+      "id": "sunspike",
+      "name": "Sunspike",
+      "category": "ingredient",
+      "base_value": 7,
+      "color": [
+        255,
+        200,
+        100,
+        255
+      ],
+      "description": "A bright desert stalk that hardens into resinous heat traps under full sun.",
+      "quality": 28,
+      "rarity": 2,
+      "elements": {
+        "vita": 0,
+        "ember": 2,
+        "mist": 0,
+        "lux": 2
+      },
+      "traits": [
+        "warm",
+        "vigor"
+      ],
+      "source_conditions": [
+        "spring and summer",
+        "exposed dunes",
+        "clear daylight"
+      ],
+      "wild_variants": [
+        {
+          "id": "sunspike_glasscrest",
+          "name": "Glasscrest Sunspike",
+          "required_conditions": [
+            "summer",
+            "day"
+          ],
+          "bonus_traits": [
+            "volatile"
+          ],
+          "quality_bonus": 9,
+          "elements": {
+            "vita": 0,
+            "ember": 1,
+            "mist": 0,
+            "lux": 1
+          },
+          "synthesis_weight_bonus": 1,
+          "synthesis_value_bonus": 3
+        }
+      ],
+      "synthesis_weight": 3,
+      "synthesis_value": 3
+    },
+    {
+      "id": "nightglass_bloom",
+      "name": "Nightglass Bloom",
+      "category": "ingredient",
+      "base_value": 9,
+      "color": [
+        206,
+        226,
+        255,
+        255
+      ],
+      "description": "A dune flower that stays shut through the heat and only opens once the sand has gone cold.",
+      "quality": 34,
+      "rarity": 2,
+      "elements": {
+        "vita": 0,
+        "ember": 0,
+        "mist": 1,
+        "lux": 3
+      },
+      "traits": [
+        "luminous",
+        "cold"
+      ],
+      "source_conditions": [
+        "any season",
+        "clear or windy nights",
+        "open dune faces after the heat breaks"
+      ],
+      "wild_variants": [
+        {
+          "id": "nightglass_bloom_starfall",
+          "name": "Starfall Nightglass",
+          "required_conditions": [
+            "winter",
+            "night"
+          ],
+          "bonus_traits": [
+            "pure"
+          ],
+          "quality_bonus": 10,
+          "elements": {
+            "vita": 0,
+            "ember": 0,
+            "mist": 0,
+            "lux": 2
+          },
+          "synthesis_weight_bonus": 0,
+          "synthesis_value_bonus": 3
+        }
+      ],
+      "synthesis_weight": 2,
+      "synthesis_value": 3
+    },
+    {
+      "id": "scorchvine_resin",
+      "name": "Scorchvine Resin",
+      "category": "ingredient",
+      "base_value": 8,
+      "color": [
+        232,
+        138,
+        62,
+        255
+      ],
+      "description": "Amber resin that only bleeds from the dune vines while the sun stands directly overhead.",
+      "quality": 30,
+      "rarity": 2,
+      "elements": {
+        "vita": 0,
+        "ember": 3,
+        "mist": 0,
+        "lux": 1
+      },
+      "traits": [
+        "warm",
+        "volatile"
+      ],
+      "source_conditions": [
+        "summer to autumn",
+        "clear midday heat",
+        "deep vines on the leeward dunes"
+      ],
+      "wild_variants": [
+        {
+          "id": "scorchvine_resin_kilnfired",
+          "name": "Kilnfired Scorchvine",
+          "required_conditions": [
+            "summer",
+            "day"
+          ],
+          "bonus_traits": [
+            "vigor"
+          ],
+          "quality_bonus": 8,
+          "elements": {
+            "vita": 0,
+            "ember": 2,
+            "mist": 0,
+            "lux": 0
+          },
+          "synthesis_weight_bonus": 1,
+          "synthesis_value_bonus": 2
+        }
+      ],
+      "synthesis_weight": 2,
+      "synthesis_value": 3
+    },
+    {
+      "id": "saltmirror_flake",
+      "name": "Saltmirror Flake",
+      "category": "ingredient",
+      "base_value": 10,
+      "color": [
+        222,
+        240,
+        246,
+        255
+      ],
+      "description": "Thin plates of salt left on the pan by the rare desert rain, still holding the sky in them.",
+      "quality": 32,
+      "rarity": 2,
+      "elements": {
+        "vita": 0,
+        "ember": 0,
+        "mist": 2,
+        "lux": 2
+      },
+      "traits": [
+        "pure",
+        "calm"
+      ],
+      "source_conditions": [
+        "spring and autumn",
+        "the morning after rain reaches the dunes",
+        "the dry salt pan"
+      ],
+      "wild_variants": [
+        {
+          "id": "saltmirror_flake_stormglazed",
+          "name": "Stormglazed Saltmirror",
+          "required_conditions": [
+            "autumn",
+            "rain"
+          ],
+          "bonus_traits": [
+            "arcane"
+          ],
+          "quality_bonus": 9,
+          "elements": {
+            "vita": 0,
+            "ember": 0,
+            "mist": 1,
+            "lux": 1
+          },
+          "synthesis_weight_bonus": 0,
+          "synthesis_value_bonus": 3
+        }
+      ],
+      "synthesis_weight": 1,
+      "synthesis_value": 4
+    }
+  ]
+}

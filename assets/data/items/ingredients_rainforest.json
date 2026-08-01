@@ -1,0 +1,58 @@
+{
+  "items": [
+    {
+      "id": "rain_orchid",
+      "name": "Rain Orchid",
+      "category": "ingredient",
+      "base_value": 8,
+      "color": [
+        240,
+        167,
+        200,
+        255
+      ],
+      "description": "A broad-petaled jungle orchid that drinks from hanging mist and wet bark.",
+      "quality": 32,
+      "rarity": 2,
+      "elements": {
+        "vita": 1,
+        "ember": 0,
+        "mist": 2,
+        "lux": 1
+      },
+      "traits": [
+        "calm",
+        "luminous"
+      ],
+      "source_conditions": [
+        "spring and summer",
+        "humid clearings",
+        "rain or heavy mist"
+      ],
+      "wild_variants": [
+        {
+          "id": "rain_orchid_stormkissed",
+          "name": "Stormkissed Rain Orchid",
+          "required_conditions": [
+            "rain",
+            "day"
+          ],
+          "bonus_traits": [
+            "pure"
+          ],
+          "quality_bonus": 10,
+          "elements": {
+            "vita": 1,
+            "ember": 0,
+            "mist": 1,
+            "lux": 1
+          },
+          "synthesis_weight_bonus": 1,
+          "synthesis_value_bonus": 3
+        }
+      ],
+      "synthesis_weight": 2,
+      "synthesis_value": 3
+    }
+  ]
+}

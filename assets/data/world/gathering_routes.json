@@ -1,0 +1,88 @@
+{
+  "gathering_routes": [
+    {
+      "id": "tower_ruin_edge",
+      "name": "Tower Ruin Edge",
+      "area_id": "tower_entry",
+      "description": "A short route around the old tower walls between the interior lab and the open plains."
+    },
+    {
+      "id": "plains_crossing",
+      "name": "Plains Crossing",
+      "area_id": "north_plains",
+      "description": "An open plains crossroads shaped by field roads, low grass obstacles, and bright verges that read clearly even in the first spring pass."
+    },
+    {
+      "id": "stone_quarry",
+      "name": "Stone Quarry",
+      "area_id": "rock_fields",
+      "description": "A broken quarry lane with choke points, shelf cuts, and mineral scars where catalyst residue and stone-fed growth collect."
+    },
+    {
+      "id": "creekside_meadow",
+      "name": "Creekside Meadow",
+      "area_id": "town_square",
+      "description": "The town’s inner footpaths and verge, now serving more as a crossroads than a gathering lane."
+    },
+    {
+      "id": "moonlit_grove",
+      "name": "Moonlit Grove",
+      "area_id": "moonlit_forest",
+      "description": "The first winding forest path from the plains, with glades and canopy breaks that favor dusk gathering."
+    },
+    {
+      "id": "charred_hollow",
+      "name": "Charred Hollow",
+      "area_id": "moonlit_forest",
+      "description": "A hotter side pocket off the forest path where old fire scars keep roots active later into the year."
+    },
+    {
+      "id": "lake_shallows",
+      "name": "Lake Shallows",
+      "area_id": "lake_shore",
+      "description": "A curved shoreline route with reed beds, cool coves, and shallow-water edges that favor early moisture gathers."
+    },
+    {
+      "id": "sunscar_dunes",
+      "name": "Sunscar Dunes",
+      "area_id": "sunscar_desert",
+      "description": "A dune-lane approach cut by exposed stone scars and sparse shelter pockets where heat-touched growth survives."
+    },
+    {
+      "id": "rainmist_canopy",
+      "name": "Rainmist Canopy",
+      "area_id": "tropical_rainforest",
+      "description": "A layered jungle path with root arches, wet clearings, and persistent mist beneath a heavy canopy."
+    },
+    {
+      "id": "greenhouse_walk",
+      "name": "Greenhouse Walk",
+      "area_id": "greenhouse_floor",
+      "description": "A tiny cultivated loop that preserves a few reliable herbs inside the tower."
+    },
+    {
+      "id": "containment_ring",
+      "name": "Containment Ring",
+      "area_id": "containment_floor",
+      "description": "Quiet habitat cells fitted for harmless magical specimens and renewable harvests."
+    },
+    {
+      "id": "archive_stack",
+      "name": "Archive Stack",
+      "area_id": "archive_floor",
+      "description": "A sealed record hall where journals, floor logs, and theory notes can be reconstructed into one timeline."
+    },
+    {
+      "id": "observatory_span",
+      "name": "Observatory Span",
+      "area_id": "observatory_floor",
+      "description": "A high lens chamber that turns the tower's history into a final view rather than a weapon."
+    },
+    {
+      "id": "sunscar_saltpan",
+      "name": "Sunscar Salt Pan",
+      "area_id": "sunscar_desert",
+      "description": "The cracked pan below the dunes, worth nothing at noon and worth the whole trip after dark or after rain."
+    }
+  ]
+}

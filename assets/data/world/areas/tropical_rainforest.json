@@ -1,0 +1,242 @@
+{
+  "id": "tropical_rainforest",
+  "name": "Tropical Rainforest",
+  "size": [
+    1280.0,
+    960.0
+  ],
+  "background": [
+    64,
+    116,
+    94,
+    255
+  ],
+  "accent": [
+    108,
+    164,
+    132,
+    255
+  ],
+  "render": {
+    "blocker_style": "rainforest",
+    "blocker_primary": [
+      94,
+      72,
+      56,
+      255
+    ],
+    "blocker_secondary": [
+      52,
+      126,
+      84,
+      255
+    ],
+    "blocker_detail": [
+      28,
+      76,
+      54,
+      255
+    ],
+    "blocker_alt": [
+      188,
+      236,
+      218,
+      120
+    ]
+  },
+  "blockers": [
+    {
+      "x": 176.0,
+      "y": 118.0,
+      "w": 188.0,
+      "h": 160.0
+    },
+    {
+      "x": 428.0,
+      "y": 214.0,
+      "w": 176.0,
+      "h": 120.0
+    },
+    {
+      "x": 790.0,
+      "y": 144.0,
+      "w": 214.0,
+      "h": 170.0
+    },
+    {
+      "x": 1032.0,
+      "y": 324.0,
+      "w": 162.0,
+      "h": 210.0
+    },
+    {
+      "x": 470.0,
+      "y": 560.0,
+      "w": 310.0,
+      "h": 132.0
+    },
+    {
+      "x": 206.0,
+      "y": 650.0,
+      "w": 212.0,
+      "h": 110.0
+    }
+  ],
+  "warps": [
+    {
+      "id": "rainforest_to_town",
+      "label": "Town Square",
+      "rect": {
+        "x": 28.0,
+        "y": 382.0,
+        "w": 62.0,
+        "h": 150.0
+      },
+      "target_area": "town_square",
+      "target_position": [
+        1120.0,
+        430.0
+      ]
+    }
+  ],
+  "gather_nodes": [
+    {
+      "id": "rainforest_moss_01",
+      "name": "Whisper Moss",
+      "item_id": "whisper_moss",
+      "color": [
+        96,
+        214,
+        150,
+        255
+      ],
+      "position": [
+        576.0,
+        428.0
+      ],
+      "radius": 14.0,
+      "route_id": "rainmist_canopy",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "weathers": [
+        "clear",
+        "mist",
+        "rain"
+      ],
+      "time_windows": [
+        "morning",
+        "day"
+      ],
+      "spawn_chance": 85,
+      "note": "Soft growth thrives where root arches shade the main jungle path even after rain breaks.",
+      "render": {
+        "sprite_id": "whisper_moss_rainforest"
+      }
+    },
+    {
+      "id": "rainforest_orchid_01",
+      "name": "Rain Orchid",
+      "item_id": "rain_orchid",
+      "color": [
+        240,
+        167,
+        200,
+        255
+      ],
+      "position": [
+        904.0,
+        336.0
+      ],
+      "radius": 15.0,
+      "route_id": "rainmist_canopy",
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "weathers": [
+        "mist",
+        "rain"
+      ],
+      "time_windows": [
+        "morning",
+        "day"
+      ],
+      "spawn_chance": 72,
+      "note": "The brightest orchids open in wet clearings where filtered light reaches the lower jungle floor.",
+      "render": {
+        "sprite_id": "rain_orchid_rainforest"
+      }
+    },
+    {
+      "id": "rainforest_moth_01",
+      "name": "Mist Moth Wing",
+      "item_id": "mist_moth_wing",
+      "color": [
+        170,
+        215,
+        255,
+        255
+      ],
+      "position": [
+        1026.0,
+        626.0
+      ],
+      "radius": 14.0,
+      "route_id": "rainmist_canopy",
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "weathers": [
+        "mist",
+        "rain"
+      ],
+      "time_windows": [
+        "evening",
+        "night"
+      ],
+      "spawn_chance": 60,
+      "note": "Dense canopy turns evening flights into a drifting ribbon of scales along the lower leaves.",
+      "render": {
+        "sprite_id": "mist_moth_wing_rainforest"
+      }
+    },
+    {
+      "id": "rainforest_slug_01",
+      "name": "Dew Slug",
+      "item_id": "dew_slug",
+      "color": [
+        148,
+        210,
+        238,
+        255
+      ],
+      "position": [
+        344.0,
+        782.0
+      ],
+      "radius": 15.0,
+      "route_id": "rainmist_canopy",
+      "seasons": [
+        "spring",
+        "winter"
+      ],
+      "weathers": [
+        "mist",
+        "rain"
+      ],
+      "time_windows": [
+        "morning",
+        "day"
+      ],
+      "spawn_chance": 56,
+      "note": "The wettest clearings near the return path gather slugs once the runoff slows enough to leave puddled edges.",
+      "render": {
+        "sprite_id": "dew_slug_rainforest"
+      }
+    }
+  ]
+}

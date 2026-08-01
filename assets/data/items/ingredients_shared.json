@@ -1,0 +1,228 @@
+{
+  "items": [
+    {
+      "id": "whisper_moss",
+      "name": "Whisper Moss",
+      "category": "ingredient",
+      "base_value": 4,
+      "color": [
+        96,
+        214,
+        150,
+        255
+      ],
+      "description": "Soft moss that carries faint magical resonance.",
+      "quality": 24,
+      "rarity": 1,
+      "elements": {
+        "vita": 2,
+        "ember": 0,
+        "mist": 1,
+        "lux": 0
+      },
+      "traits": [
+        "healing",
+        "calm"
+      ],
+      "source_conditions": [
+        "spring to autumn",
+        "clear or misty mornings",
+        "old shaded stone"
+      ],
+      "wild_variants": [
+        {
+          "id": "whisper_moss_dew",
+          "name": "Dewbright Whisper Moss",
+          "required_conditions": [
+            "spring",
+            "morning"
+          ],
+          "bonus_traits": [
+            "pure"
+          ],
+          "quality_bonus": 8,
+          "elements": {
+            "vita": 1,
+            "ember": 0,
+            "mist": 0,
+            "lux": 1
+          },
+          "synthesis_weight_bonus": 1,
+          "synthesis_value_bonus": 2
+        }
+      ],
+      "synthesis_weight": 2,
+      "synthesis_value": 2
+    },
+    {
+      "id": "ember_root",
+      "name": "Ember Root",
+      "category": "ingredient",
+      "base_value": 8,
+      "color": [
+        255,
+        124,
+        74,
+        255
+      ],
+      "description": "A hot-blooded root used in energizing mixtures.",
+      "quality": 28,
+      "rarity": 2,
+      "elements": {
+        "vita": 0,
+        "ember": 4,
+        "mist": 0,
+        "lux": 0
+      },
+      "traits": [
+        "vigor",
+        "volatile"
+      ],
+      "source_conditions": [
+        "autumn and winter",
+        "charred ground",
+        "warm hollows"
+      ],
+      "wild_variants": [
+        {
+          "id": "ember_root_frostbitten",
+          "name": "Frostbitten Ember Root",
+          "required_conditions": [
+            "winter",
+            "day"
+          ],
+          "bonus_traits": [
+            "quickstep"
+          ],
+          "quality_bonus": 9,
+          "elements": {
+            "vita": 0,
+            "ember": 1,
+            "mist": 1,
+            "lux": 0
+          },
+          "synthesis_weight_bonus": 1,
+          "synthesis_value_bonus": 3
+        }
+      ],
+      "synthesis_weight": 3,
+      "synthesis_value": 4
+    },
+    {
+      "id": "mist_moth_wing",
+      "name": "Mist Moth Wing",
+      "category": "ingredient",
+      "base_value": 8,
+      "color": [
+        170,
+        215,
+        255,
+        255
+      ],
+      "description": "A cool, powdery wing scale suited to volatile brews.",
+      "quality": 26,
+      "rarity": 2,
+      "elements": {
+        "vita": 0,
+        "ember": 0,
+        "mist": 3,
+        "lux": 1
+      },
+      "traits": [
+        "cold",
+        "volatile"
+      ],
+      "source_conditions": [
+        "mist or rain",
+        "evening flights",
+        "reeds and damp bark"
+      ],
+      "wild_variants": [
+        {
+          "id": "mist_moth_wing_sheen",
+          "name": "Sheened Mist Wing",
+          "required_conditions": [
+            "rain",
+            "night"
+          ],
+          "bonus_traits": [
+            "pure"
+          ],
+          "quality_bonus": 8,
+          "elements": {
+            "vita": 0,
+            "ember": 0,
+            "mist": 1,
+            "lux": 1
+          },
+          "synthesis_weight_bonus": 1,
+          "synthesis_value_bonus": 2
+        }
+      ],
+      "synthesis_weight": 2,
+      "synthesis_value": 3
+    },
+    {
+      "id": "lumen_dust",
+      "name": "Lumen Dust",
+      "category": "ingredient",
+      "base_value": 9,
+      "color": [
+        239,
+        231,
+        174,
+        255
+      ],
+      "description": "Soft dust collected from a settled glow moth habitat.",
+      "quality": 32,
+      "rarity": 3,
+      "elements": {
+        "vita": 0,
+        "ember": 0,
+        "mist": 0,
+        "lux": 3
+      },
+      "traits": [
+        "luminous",
+        "calm"
+      ],
+      "source_conditions": [
+        "contained glow moths"
+      ],
+      "wild_variants": [],
+      "synthesis_weight": 2,
+      "synthesis_value": 3
+    },
+    {
+      "id": "dew_slime",
+      "name": "Dew Slime",
+      "category": "ingredient",
+      "base_value": 8,
+      "color": [
+        170,
+        228,
+        240,
+        255
+      ],
+      "description": "Clear, cool slime gathered from a well-kept dew slug habitat.",
+      "quality": 28,
+      "rarity": 2,
+      "elements": {
+        "vita": 1,
+        "ember": 0,
+        "mist": 2,
+        "lux": 0
+      },
+      "traits": [
+        "calm",
+        "pure"
+      ],
+      "source_conditions": [
+        "contained dew slugs"
+      ],
+      "wild_variants": [],
+      "synthesis_weight": 2,
+      "synthesis_value": 2
+    }
+  ]
+}

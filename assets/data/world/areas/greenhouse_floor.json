@@ -1,0 +1,165 @@
+{
+  "id": "greenhouse_floor",
+  "name": "Tower Greenhouse",
+  "size": [
+    960.0,
+    720.0
+  ],
+  "background": [
+    82,
+    114,
+    92,
+    255
+  ],
+  "accent": [
+    120,
+    164,
+    116,
+    255
+  ],
+  "footstep_sound_set": "greenhouse",
+  "blockers": [
+    {
+      "x": 94.0,
+      "y": 88.0,
+      "w": 180.0,
+      "h": 140.0
+    },
+    {
+      "x": 640.0,
+      "y": 108.0,
+      "w": 200.0,
+      "h": 120.0
+    },
+    {
+      "x": 330.0,
+      "y": 484.0,
+      "w": 280.0,
+      "h": 110.0
+    }
+  ],
+  "warps": [
+    {
+      "id": "greenhouse_to_entry",
+      "label": "Tower Entry",
+      "rect": {
+        "x": 80.0,
+        "y": 316.0,
+        "w": 64.0,
+        "h": 120.0
+      },
+      "target_area": "tower_entry",
+      "target_position": [
+        820.0,
+        160.0
+      ]
+    },
+    {
+      "id": "greenhouse_to_containment",
+      "label": "Containment Floor",
+      "rect": {
+        "x": 828.0,
+        "y": 110.0,
+        "w": 70.0,
+        "h": 120.0
+      },
+      "target_area": "containment_floor",
+      "target_position": [
+        150.0,
+        340.0
+      ],
+      "required_total_brews": 18,
+      "required_coins": 60,
+      "required_item_id": "moon_fern",
+      "required_item_amount": 2,
+      "unlock_milestones": [
+        {
+          "id": "containment_repaired",
+          "title": "Containment Restored",
+          "text": "The containment lift answers again. The tower is ready to shelter magical creatures instead of merely studying their remains."
+        }
+      ],
+      "locked_note": "The containment lift stays inert. The tower wants more proven alchemy before it trusts you with creatures."
+    }
+  ],
+  "gather_nodes": [
+    {
+      "id": "greenhouse_sunleaf_01",
+      "name": "Cultivated Sunleaf",
+      "item_id": "sunleaf",
+      "color": [
+        239,
+        205,
+        90,
+        255
+      ],
+      "position": [
+        320.0,
+        248.0
+      ],
+      "radius": 14.0,
+      "route_id": "greenhouse_walk",
+      "seasons": [],
+      "weathers": [],
+      "time_windows": [
+        "day",
+        "evening"
+      ],
+      "spawn_chance": 80,
+      "note": "A sheltered patch that keeps medicinal herbs alive between seasons."
+    },
+    {
+      "id": "greenhouse_moss_01",
+      "name": "Glasshouse Moss",
+      "item_id": "whisper_moss",
+      "color": [
+        96,
+        214,
+        150,
+        255
+      ],
+      "position": [
+        704.0,
+        280.0
+      ],
+      "radius": 14.0,
+      "route_id": "greenhouse_walk",
+      "seasons": [],
+      "weathers": [],
+      "time_windows": [
+        "morning",
+        "day"
+      ],
+      "spawn_chance": 75,
+      "note": "Condensation and old wards make the greenhouse stones bloom softly."
+    },
+    {
+      "id": "greenhouse_dew_slug_01",
+      "name": "Dew Slug",
+      "item_id": "dew_slug",
+      "color": [
+        148,
+        210,
+        238,
+        255
+      ],
+      "position": [
+        538.0,
+        340.0
+      ],
+      "radius": 15.0,
+      "route_id": "greenhouse_walk",
+      "seasons": [],
+      "weathers": [
+        "mist",
+        "rain"
+      ],
+      "time_windows": [
+        "morning",
+        "day"
+      ],
+      "spawn_chance": 50,
+      "note": "These gentle slugs gather where greenhouse glass sweats at dawn."
+    }
+  ]
+}

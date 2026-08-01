@@ -1,0 +1,58 @@
+{
+  "items": [
+    {
+      "id": "reedflower",
+      "name": "Reedflower",
+      "category": "ingredient",
+      "base_value": 6,
+      "color": [
+        214,
+        241,
+        255,
+        255
+      ],
+      "description": "A pale lakeside blossom that only opens where reeds soften the wind and hold cool spray.",
+      "quality": 26,
+      "rarity": 1,
+      "elements": {
+        "vita": 1,
+        "ember": 0,
+        "mist": 2,
+        "lux": 0
+      },
+      "traits": [
+        "calm",
+        "pure"
+      ],
+      "source_conditions": [
+        "spring and summer",
+        "reed beds",
+        "misty or clear mornings"
+      ],
+      "wild_variants": [
+        {
+          "id": "reedflower_mirrorwake",
+          "name": "Mirrorwake Reedflower",
+          "required_conditions": [
+            "summer",
+            "morning"
+          ],
+          "bonus_traits": [
+            "soft_glow"
+          ],
+          "quality_bonus": 8,
+          "elements": {
+            "vita": 0,
+            "ember": 0,
+            "mist": 1,
+            "lux": 1
+          },
+          "synthesis_weight_bonus": 1,
+          "synthesis_value_bonus": 2
+        }
+      ],
+      "synthesis_weight": 2,
+      "synthesis_value": 2
+    }
+  ]
+}

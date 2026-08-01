@@ -1,0 +1,112 @@
+{
+  "items": [
+    {
+      "id": "sunleaf",
+      "name": "Sunleaf",
+      "category": "ingredient",
+      "base_value": 5,
+      "color": [
+        239,
+        205,
+        90,
+        255
+      ],
+      "description": "A warming herb favored by local healers.",
+      "quality": 22,
+      "rarity": 1,
+      "elements": {
+        "vita": 2,
+        "ember": 1,
+        "mist": 0,
+        "lux": 0
+      },
+      "traits": [
+        "healing",
+        "warm"
+      ],
+      "source_conditions": [
+        "spring and summer",
+        "sunlit paths",
+        "creekside meadow routes"
+      ],
+      "wild_variants": [
+        {
+          "id": "sunleaf_highsummer",
+          "name": "Highsummer Sunleaf",
+          "required_conditions": [
+            "summer",
+            "day"
+          ],
+          "bonus_traits": [
+            "restorative"
+          ],
+          "quality_bonus": 7,
+          "elements": {
+            "vita": 1,
+            "ember": 1,
+            "mist": 0,
+            "lux": 0
+          },
+          "synthesis_weight_bonus": 1,
+          "synthesis_value_bonus": 2
+        }
+      ],
+      "synthesis_weight": 2,
+      "synthesis_value": 2
+    },
+    {
+      "id": "field_bloom",
+      "name": "Field Bloom",
+      "category": "ingredient",
+      "base_value": 5,
+      "color": [
+        246,
+        215,
+        132,
+        255
+      ],
+      "description": "A hardy meadow flower gathered where the plains roads stay sun-warm but the soil still holds spring water.",
+      "quality": 24,
+      "rarity": 1,
+      "elements": {
+        "vita": 1,
+        "ember": 0,
+        "mist": 0,
+        "lux": 2
+      },
+      "traits": [
+        "restorative",
+        "luminous"
+      ],
+      "source_conditions": [
+        "spring to autumn",
+        "open roadside verges",
+        "clear mornings or calm afternoons"
+      ],
+      "wild_variants": [
+        {
+          "id": "field_bloom_larksun",
+          "name": "Larksun Bloom",
+          "required_conditions": [
+            "spring",
+            "morning"
+          ],
+          "bonus_traits": [
+            "pure"
+          ],
+          "quality_bonus": 7,
+          "elements": {
+            "vita": 1,
+            "ember": 0,
+            "mist": 0,
+            "lux": 1
+          },
+          "synthesis_weight_bonus": 1,
+          "synthesis_value_bonus": 2
+        }
+      ],
+      "synthesis_weight": 2,
+      "synthesis_value": 2
+    }
+  ]
+}

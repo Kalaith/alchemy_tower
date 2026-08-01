@@ -1,0 +1,77 @@
+{
+  "id": "archive_floor",
+  "name": "Tower Archives",
+  "size": [
+    960.0,
+    720.0
+  ],
+  "background": [
+    80,
+    78,
+    66,
+    255
+  ],
+  "accent": [
+    132,
+    126,
+    106,
+    255
+  ],
+  "footstep_sound_set": "stone",
+  "blockers": [
+    {
+      "x": 110.0,
+      "y": 104.0,
+      "w": 200.0,
+      "h": 120.0
+    },
+    {
+      "x": 648.0,
+      "y": 104.0,
+      "w": 190.0,
+      "h": 120.0
+    },
+    {
+      "x": 328.0,
+      "y": 496.0,
+      "w": 300.0,
+      "h": 98.0
+    }
+  ],
+  "warps": [
+    {
+      "id": "archives_to_rune",
+      "label": "Rune Workshop",
+      "rect": {
+        "x": 80.0,
+        "y": 284.0,
+        "w": 64.0,
+        "h": 120.0
+      },
+      "target_area": "rune_workshop_floor",
+      "target_position": [
+        790.0,
+        180.0
+      ]
+    },
+    {
+      "id": "archives_to_observatory",
+      "label": "Portal Observatory",
+      "rect": {
+        "x": 830.0,
+        "y": 118.0,
+        "w": 64.0,
+        "h": 120.0
+      },
+      "target_area": "observatory_floor",
+      "target_position": [
+        150.0,
+        340.0
+      ],
+      "required_journal_milestone": "archive_revelation",
+      "required_journal_hint": "recover the archive revelation",
+      "locked_note": "The observatory gate does not respond until the archive timeline is complete."
+    }
+  ],
+  "gather_nodes": []
+}

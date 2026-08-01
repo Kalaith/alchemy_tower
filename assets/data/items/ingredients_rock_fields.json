@@ -1,0 +1,112 @@
+{
+  "items": [
+    {
+      "id": "arcane_dust",
+      "name": "Arcane Dust",
+      "category": "ingredient",
+      "base_value": 6,
+      "color": [
+        170,
+        130,
+        250,
+        255
+      ],
+      "description": "Sparkling powder scraped from old alchemical fixtures.",
+      "quality": 30,
+      "rarity": 2,
+      "elements": {
+        "vita": 0,
+        "ember": 0,
+        "mist": 1,
+        "lux": 3
+      },
+      "traits": [
+        "luminous",
+        "arcane"
+      ],
+      "source_conditions": [
+        "ruin edges",
+        "dry clear days",
+        "weathered magic stone"
+      ],
+      "wild_variants": [
+        {
+          "id": "arcane_dust_static",
+          "name": "Static Arcane Dust",
+          "required_conditions": [
+            "windy",
+            "evening"
+          ],
+          "bonus_traits": [
+            "volatile"
+          ],
+          "quality_bonus": 10,
+          "elements": {
+            "vita": 0,
+            "ember": 1,
+            "mist": 0,
+            "lux": 1
+          },
+          "synthesis_weight_bonus": 1,
+          "synthesis_value_bonus": 3
+        }
+      ],
+      "synthesis_weight": 2,
+      "synthesis_value": 3
+    },
+    {
+      "id": "quarry_lichen",
+      "name": "Quarry Lichen",
+      "category": "ingredient",
+      "base_value": 7,
+      "color": [
+        168,
+        210,
+        186,
+        255
+      ],
+      "description": "Mineral-fed lichen that spreads over broken quarry ledges and takes on a dusty alchemical tang.",
+      "quality": 30,
+      "rarity": 2,
+      "elements": {
+        "vita": 0,
+        "ember": 0,
+        "mist": 1,
+        "lux": 1
+      },
+      "traits": [
+        "arcane",
+        "pure"
+      ],
+      "source_conditions": [
+        "spring and winter",
+        "cold quarry shelves",
+        "stone that still remembers reagents"
+      ],
+      "wild_variants": [
+        {
+          "id": "quarry_lichen_sparked",
+          "name": "Sparked Quarry Lichen",
+          "required_conditions": [
+            "windy",
+            "day"
+          ],
+          "bonus_traits": [
+            "volatile"
+          ],
+          "quality_bonus": 8,
+          "elements": {
+            "vita": 0,
+            "ember": 1,
+            "mist": 0,
+            "lux": 1
+          },
+          "synthesis_weight_bonus": 1,
+          "synthesis_value_bonus": 3
+        }
+      ],
+      "synthesis_weight": 2,
+      "synthesis_value": 3
+    }
+  ]
+}

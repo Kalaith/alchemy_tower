@@ -153,6 +153,9 @@ def icon(item, size, world=False):
         "reedflower",
         "sunspike",
         "rain_orchid",
+        "nightglass_bloom",
+        "scorchvine_resin",
+        "saltmirror_flake",
     } or base_item in {
         "whisper_moss",
         "sunleaf",
@@ -163,6 +166,9 @@ def icon(item, size, world=False):
         "reedflower",
         "sunspike",
         "rain_orchid",
+        "nightglass_bloom",
+        "scorchvine_resin",
+        "saltmirror_flake",
     }:
         colors = {
             "whisper_moss": "#74d59f",
@@ -174,6 +180,9 @@ def icon(item, size, world=False):
             "reedflower": "#d6f1ff",
             "sunspike": "#ffc864",
             "rain_orchid": "#f0a7c8",
+            "nightglass_bloom": "#cee2ff",
+            "scorchvine_resin": "#e88a3e",
+            "saltmirror_flake": "#def0f6",
         }
         for ox, oy in [(-10, 2), (2, -4), (12, 4), (-2, 10)]:
             d.ellipse(box(cx + ox, cy + oy, 9, 12), fill=rgb(colors[base_item]))
@@ -188,6 +197,19 @@ def icon(item, size, world=False):
             d.polygon([(cx, cy - 18), (cx - 12, cy + 16), (cx + 12, cy + 16)], fill=rgb("#fff0aa"))
         elif base_item == "rain_orchid":
             d.ellipse(box(cx, cy + 2, 8, 10), fill=rgb("#fff4c8"))
+        elif base_item == "nightglass_bloom":
+            d.polygon([(cx, cy - 16), (cx + 6, cy - 2), (cx + 18, cy), (cx + 6, cy + 6),
+                       (cx, cy + 18), (cx - 6, cy + 6), (cx - 18, cy), (cx - 6, cy - 2)],
+                      fill=rgb("#f4faff"))
+        elif base_item == "scorchvine_resin":
+            d.line((cx - 16, cy + 18, cx + 14, cy - 14), fill=rgb("#6b4327"), width=3)
+            for bx, by in [(-6, 2), (4, -4), (10, 6)]:
+                d.ellipse(box(cx + bx, cy + by, 6, 8), fill=rgb("#ffc46a"))
+        elif base_item == "saltmirror_flake":
+            for px, py in [(-8, 6), (6, 0), (0, 12)]:
+                d.polygon([(cx + px - 10, cy + py + 4), (cx + px, cy + py - 6),
+                           (cx + px + 10, cy + py + 4), (cx + px, cy + py + 8)],
+                          fill=rgb("#f2fbff"), outline=rgb("#a9c8d4"))
     elif base_item in {"arcane_dust", "lumen_dust", "starlight_shard"}:
         c = {"arcane_dust": "#a781ff", "lumen_dust": "#f1e7a3", "starlight_shard": "#dbe5ff"}[base_item]
         for ox, oy in [(-10, 8), (0, 0), (12, 10)]:
@@ -218,6 +240,8 @@ def icon(item, size, world=False):
             "sunwarden_tonic": "#ffc478", "briskstep_draught": "#bcd6ec", "purified_draught": "#c4e4d6",
             "wellspring_elixir": "#aaecdc", "emberglass_tonic": "#eebe8c", "stargrove_elixir": "#dce0ff",
             "celestine_elixir": "#eceeff", "moonmoth_salve": "#c6e0bc", "kindling_tonic": "#eeb27e",
+            "sunscar_glass_elixir": "#f6d6a8", "nightglass_lantern": "#e0ecff",
+            "mirrorsalt_draught": "#cee8ec",
         }.get(item, "#d2c1ff")
         d.rounded_rectangle((cx - 8, cy - 24, cx + 8, cy - 12), radius=3, fill=rgb("#d9dfe8", 220))
         d.rectangle((cx - 5, cy - 28, cx + 5, cy - 22), fill=rgb("#8b6a4d"))

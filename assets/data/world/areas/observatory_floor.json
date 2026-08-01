@@ -1,0 +1,59 @@
+{
+  "id": "observatory_floor",
+  "name": "Portal Observatory",
+  "size": [
+    960.0,
+    720.0
+  ],
+  "background": [
+    34,
+    42,
+    68,
+    255
+  ],
+  "accent": [
+    96,
+    128,
+    180,
+    255
+  ],
+  "footstep_sound_set": "stone",
+  "blockers": [
+    {
+      "x": 140.0,
+      "y": 140.0,
+      "w": 160.0,
+      "h": 100.0
+    },
+    {
+      "x": 662.0,
+      "y": 138.0,
+      "w": 160.0,
+      "h": 100.0
+    },
+    {
+      "x": 330.0,
+      "y": 520.0,
+      "w": 300.0,
+      "h": 70.0
+    }
+  ],
+  "warps": [
+    {
+      "id": "observatory_to_archives",
+      "label": "Tower Archives",
+      "rect": {
+        "x": 80.0,
+        "y": 284.0,
+        "w": 64.0,
+        "h": 120.0
+      },
+      "target_area": "archive_floor",
+      "target_position": [
+        790.0,
+        180.0
+      ]
+    }
+  ],
+  "gather_nodes": []
+}
