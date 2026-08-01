@@ -104,6 +104,13 @@
       "after_milestone": "archive_revelation",
       "order": 92,
       "line": "It kept working. No one asked it to and no one watched it, and every clear night for twenty years it held a star steady and marked the ring. Whatever you decide the wizard was, the machine he left behind has been patient in a way he was not."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "asked_for_perfect_work",
+      "order": 98,
+      "line": "Careful. This is the part he liked. Being the only one who could do the thing is a very comfortable place to stand, and it is a long way from tending."
     }
   ]
 }

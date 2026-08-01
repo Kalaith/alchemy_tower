@@ -44,6 +44,36 @@ mod tests {
             .expect("fallback data should include at least one gather node")
     }
 
+    /// The top band is now something a request can ask for, and the whole
+    /// point of asking is that very good work will not do. Every band must
+    /// therefore rank strictly above the one below it, and — the part that can
+    /// fail quietly — an unrecognised string must not outrank anything, since
+    /// `quality_band_rank` answers 0 for anything it does not know.
+    #[test]
+    fn a_masterwork_request_cannot_be_filled_with_merely_excellent_work() {
+        use super::quality_band_rank;
+        use crate::content::ui_copy;
+
+        let crude = quality_band_rank(ui_copy("quality_band_crude"));
+        let serviceable = quality_band_rank(ui_copy("quality_band_serviceable"));
+        let fine = quality_band_rank(ui_copy("quality_band_fine"));
+        let excellent = quality_band_rank(ui_copy("quality_band_excellent"));
+        let masterwork = quality_band_rank(ui_copy("quality_band_masterwork"));
+
+        assert!(crude < serviceable, "crude should rank below serviceable");
+        assert!(serviceable < fine, "serviceable should rank below fine");
+        assert!(fine < excellent, "fine should rank below excellent");
+        assert!(
+            excellent < masterwork,
+            "an Excellent brew must not satisfy a Masterwork request"
+        );
+        assert_eq!(
+            quality_band_rank("Masterwork "),
+            crude,
+            "an unknown band is read as the lowest, which is why quest data is checked separately"
+        );
+    }
+
     #[test]
     fn sleeping_after_midnight_does_not_refresh_same_day_nodes() {
         let data = GameData::fallback();

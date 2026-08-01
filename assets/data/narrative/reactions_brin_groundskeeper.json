@@ -132,6 +132,13 @@
       "after_milestone": "greenhouse_expanded",
       "order": 92,
       "line": "The ruinbell will not come. I put four in the good soil and every one of them sulked. It wants a wall nobody has looked after in twenty years, and the whole point of this last year has been that there are no walls like that here any more. An insult with petals, right to the end."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "asked_for_perfect_work",
+      "order": 98,
+      "line": "Nine plants. I wrote it under the notice and I would write it again, and I would still have handed you the cutting myself. Both of those are true and I have stopped trying to make them agree."
     }
   ]
 }

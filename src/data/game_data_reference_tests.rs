@@ -383,6 +383,40 @@ mod tests {
     /// A rune rework is the answer the game already had: it does not repair a
     /// spoiled brew, it decides what that brew's fault gets used for. This
     /// insists every salvage bottle keeps such a route.
+    /// `quality_band_rank` matches the band name against the five UI strings
+    /// and falls through to **0 — Crude — for anything it does not recognise**.
+    /// So a request misspelling its band does not fail loudly; it silently
+    /// becomes the easiest possible request, and a note demanding the finest
+    /// work in the valley would be satisfied by the worst brew in the bag.
+    ///
+    /// Worth pinning now because this pass introduced `Masterwork`, a band no
+    /// quest had ever asked for, and a typo in it would have been invisible.
+    #[test]
+    fn every_quest_asks_for_a_quality_band_the_game_knows() {
+        use crate::content::ui_copy;
+
+        let known = [
+            ui_copy("quality_band_crude"),
+            ui_copy("quality_band_serviceable"),
+            ui_copy("quality_band_fine"),
+            ui_copy("quality_band_excellent"),
+            ui_copy("quality_band_masterwork"),
+        ];
+
+        let data = load_embedded().expect("embedded game data should load");
+        let unknown = data
+            .quests
+            .iter()
+            .filter(|quest| !known.contains(&quest.minimum_quality_band.as_str()))
+            .map(|quest| format!("{}: {:?}", quest.id, quest.minimum_quality_band))
+            .collect::<Vec<_>>();
+
+        assert!(
+            unknown.is_empty(),
+            "quests naming a band the game will silently read as Crude: {unknown:#?}"
+        );
+    }
+
     #[test]
     fn every_salvaged_brew_can_be_turned_into_something() {
         use crate::alchemy::SALVAGE_OUTPUT_ITEM_IDS;

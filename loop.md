@@ -886,6 +886,32 @@ Stop the loop and report if:
   with zero reactions — verified by dropping Tarn's entry, which named him.
   *Next split candidate:* `crafting/recipes_glow.json` (704).
   **114 reactions in 8 files; 22 mutation formulas; 81 tests.**
+- **2026-08-01 — nothing in the valley had ever asked for the player's best work.** Quest band
+  census: **Excellent 20, Fine 15, Serviceable 4, Crude 1, Masterwork 0.** The top band exists, and
+  the deepest mechanics in the game — mastery to seven brews, overcharge, room bonus, catalyst tag,
+  stir sequence — all exist to push past Excellent into it. Forty requests and not one recognised
+  that they had.
+  Two now do, framed as **need rather than achievement**, because the epilogue's whole line is that
+  the tower is not yours to conquer. A child on the north road a good cordial will not be enough
+  for, with Brin writing *nine hollowroot plants in this valley* under the notice and saying he is
+  not objecting, only recording. And Lyra asking, in her own hand, for the best stillkeeper tonic
+  ever made — after six years of arguing this valley out of exactly that kind of request. The Crow's
+  reply is the counterweight: *this is the part he liked.*
+  ***Two candidate slices measured and dropped before writing anything.***
+  `minimum_effect_matches` is used by **0 of 40** quests and `required_effect_kinds` by 1, which
+  looked like the classic built-but-unused find. It is not: `required_item_id` pins the item, so an
+  effect filter on top of a named item is decorative. There is even a unit test exercising the
+  summary. Left alone. Then the obvious guard — *is the requested band reachable?* — turned out to
+  be trivially true: a probe running the real `calculate_quality` with best-case arguments showed
+  **all 43 recipes reach 100**. Probe deleted rather than shipped.
+  *The guard that was worth having is a quieter one.* `quality_band_rank` matches five UI strings
+  and falls through to **0 — Crude — for anything unrecognised**, so a request misspelling its band
+  silently becomes the *easiest* request in the game. A note demanding the finest work in the valley
+  would be filled by the worst brew in the bag. Two tests:
+  `every_quest_asks_for_a_quality_band_the_game_knows` (verified by lowercasing "Masterwork", the
+  realistic slip — it named the quest), and a behaviour test pinning that Excellent ranks strictly
+  below Masterwork and that an unknown string outranks nothing.
+  **42 quests; first Masterwork requests; 83 tests.**
 
 ## Deferred (needs a new system; not for this loop)
 

@@ -421,6 +421,60 @@
       "repeatable": true,
       "repeat_cooldown_days": 5,
       "completion_milestones": []
+    },
+    {
+      "id": "board_masterwork_cordial",
+      "title": "Infirmary: One Hollowroot Cordial, And It Must Be Perfect",
+      "description": "A child on the north road who a good cordial will not be enough for. The note names the band and then apologises for naming it. Brin has written underneath that there are nine hollowroot plants in this valley and that he is not objecting, he is only writing it down.",
+      "required_item_id": "hollowroot_cordial",
+      "required_amount": 1,
+      "reward_coins": 420,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Masterwork",
+      "required_trait": "restorative",
+      "required_traits": [],
+      "minimum_trait_matches": 0,
+      "required_effect_kind": "restore",
+      "required_effect_kinds": [],
+      "minimum_effect_matches": 0,
+      "prerequisite_quests": [
+        "board_unsigned_third"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 40,
+      "repeatable": false,
+      "repeat_cooldown_days": 0,
+      "completion_milestones": [
+        {
+          "id": "asked_for_perfect_work",
+          "title": "Named The Band",
+          "text": "Somebody asked for the best thing this tower can make, in those words, because good would not have been enough. It is the first order in a year that could not have been filled by trying hard. It had to be filled by having got better."
+        }
+      ]
+    },
+    {
+      "id": "board_masterwork_stillkeeper",
+      "title": "Lyra: A Stillkeeper Tonic, The Best You Have Ever Made",
+      "description": "In her own hand, which she does not usually use on the board. An animal that a Fine tonic will settle and a Masterwork one will save, and she is explicit that she has spent six years arguing this valley out of exactly this kind of request.",
+      "required_item_id": "stillkeeper_tonic",
+      "required_amount": 1,
+      "reward_coins": 300,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Masterwork",
+      "required_trait": "calm",
+      "required_traits": [],
+      "minimum_trait_matches": 0,
+      "required_effect_kind": "restore",
+      "required_effect_kinds": [],
+      "minimum_effect_matches": 0,
+      "prerequisite_quests": [
+        "containment_for_lyra"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 36,
+      "repeatable": false,
+      "repeat_cooldown_days": 0,
+      "completion_milestones": []
     }
   ]
 }

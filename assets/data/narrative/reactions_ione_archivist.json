@@ -139,6 +139,13 @@
       "after_milestone": "first_rune_imbuing",
       "order": 86,
       "line": "I have started asking you for the failures. A rune does not repair a brew — it decides what the brew's fault is going to be used for, which is a different sentence and a much more interesting one. Twenty years of notes upstairs and not one line on reworking a spoiled bottle. He only ever wrote down the things that worked."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "asked_for_perfect_work",
+      "order": 96,
+      "line": "In every one of the recovered years there is not a single order that names the top band. Not one. Either nobody dared ask him, or he never got good enough to be asked, and I find I do not want to know which."
     }
   ]
 }

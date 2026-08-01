@@ -76,6 +76,13 @@
       "after_milestone": "containment_stable",
       "order": 88,
       "line": "There is a pass flower opening in the cold bed. Out of season, under a ward, two floors underground. I do not know whether that counts as saving it or as keeping it somewhere it never asked to be, and I have gone back and forth on that twice this week."
+    },
+    {
+      "npc_id": "lyra_keeper",
+      "after_quest": "",
+      "after_milestone": "asked_for_perfect_work",
+      "order": 100,
+      "line": "Six years I have told this valley that wanting the best of something is how you end up with none of it. Then I wanted one. I am not going to pretend that was a different kind of asking because it was mine."
     }
   ]
 }
