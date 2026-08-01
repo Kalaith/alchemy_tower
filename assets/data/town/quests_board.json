@@ -397,6 +397,30 @@
       "repeatable": true,
       "repeat_cooldown_days": 6,
       "completion_milestones": []
+    },
+    {
+      "id": "board_steadyhand_for_the_infirmary",
+      "title": "Infirmary: Steadyhand Tonics, Four Of Them",
+      "description": "Not a good tonic. Four identical ones. The note is explicit that the infirmary would rather have four bottles it can predict than one it cannot repeat, and that this is not a compliment about anybody's brewing.",
+      "required_item_id": "steadyhand_tonic",
+      "required_amount": 4,
+      "reward_coins": 132,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Crude",
+      "required_trait": "",
+      "required_traits": [],
+      "minimum_trait_matches": 0,
+      "required_effect_kind": "restore",
+      "required_effect_kinds": [],
+      "minimum_effect_matches": 0,
+      "prerequisite_quests": [
+        "star_elixir_for_ione"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 22,
+      "repeatable": true,
+      "repeat_cooldown_days": 5,
+      "completion_milestones": []
     }
   ]
 }

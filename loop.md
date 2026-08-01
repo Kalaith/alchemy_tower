@@ -831,6 +831,31 @@ Stop the loop and report if:
   *A caution worth keeping:* my first instinct was to report all five position/blocker overlaps as
   bugs. Two were deliberate level design. **Measure the consequence, not the coincidence.**
   **8 night schedules; 3 nodes dug out of scenery; 79 tests.**
+- **2026-08-01 — the game's failure state paid out in bottles nobody wanted.** Measured potion
+  demand: 51 of 76 potions are never asked for by a quest, but almost all are recipe outputs. The
+  four that are **input to nothing anywhere** turned out to be the **salvage bottles** — and
+  *every one of the 43 recipes* falls back to one of them, `soothing_tonic` alone catching 21.
+  Worth 2 to 14 coins, wanted by nothing. Fail a brew and the game handed you litter.
+  The answer was a system already in the game: **rune reworks** take a potion and a rune and return
+  a different potion, and all 9 existing ones took *successful* mid-tier brews. Four more now take
+  the failures — ward makes a weak tonic **the same weak tonic every time** (which is what an
+  infirmary actually orders), splash stops asking a leak to hold its light, delay spreads a rough
+  stimulant over an afternoon, and echo repeats a misfire quietly enough to watch. Runes cost coins,
+  so salvaging is a real trade against saving the rune for a good brew. Ione's line is the thesis:
+  *a rune does not repair a brew, it decides what the brew's fault gets used for.*
+  *Guard, verified against a deliberate break:* `every_salvaged_brew_can_be_turned_into_something`,
+  which named exactly the two salvage bottles whose reworks I removed. The codebase already had a
+  `SALVAGE_OUTPUT_ITEM_IDS` constant with a comment noting content checks "have to be told about
+  them separately" — nothing had ever told them.
+  ***Fourth harness pass, and the first that found a bug in my own writing.*** The rune workbench
+  had **no capture scene at all** despite being a whole overlay, so its drafts list had never been
+  photographed. Added one — pointed at the *end* of the list, since drafts are appended and rows 1-5
+  would look identical before and after. The capture immediately showed two of my four descriptions
+  **cut off mid-sentence**: the nine originals run 55-83 characters and mine ran 123-171. Trimmed to
+  house style and pinned at 120 by `every_rune_draft_description_reads_in_full` — budget set to the
+  house style rather than the truncation point, because a row that only just fits stops fitting the
+  next time the font or panel width moves.
+  **13 rune reworks; 81 tests; 80 potions.**
 
 ## Deferred (needs a new system; not for this loop)
 

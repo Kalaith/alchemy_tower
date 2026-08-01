@@ -71,6 +71,38 @@
       "rune_item_id": "ward_rune",
       "output_item_id": "hearthward_infusion",
       "description": "Turns a calming infusion inward so it settles the drinker rather than the room."
+    },
+    {
+      "id": "steadyhand_salvage_recipe",
+      "station_id": "rune_workbench",
+      "input_item_id": "soothing_tonic",
+      "rune_item_id": "ward_rune",
+      "output_item_id": "steadyhand_tonic",
+      "description": "A ward will not make a weak draught strong. It makes it the same every time, which is what the infirmary asks for."
+    },
+    {
+      "id": "leakfire_salvage_recipe",
+      "station_id": "rune_workbench",
+      "input_item_id": "lantern_leak",
+      "rune_item_id": "splash_rune",
+      "output_item_id": "leakfire_flare",
+      "description": "The leak's fault is that it will not hold its light in. Splash stops asking it to and lets it go at once."
+    },
+    {
+      "id": "longstride_salvage_recipe",
+      "station_id": "rune_workbench",
+      "input_item_id": "rush_draught",
+      "rune_item_id": "delay_rune",
+      "output_item_id": "longstride_draught",
+      "description": "The same rough lift, paid out over an afternoon instead of all in the first minute."
+    },
+    {
+      "id": "second_reading_salvage_recipe",
+      "station_id": "rune_workbench",
+      "input_item_id": "murky_concoction",
+      "rune_item_id": "echo_rune",
+      "output_item_id": "second_reading",
+      "description": "An echo does not repair the brew. It repeats it quietly enough to watch, which is how you find out what went wrong."
     }
   ]
 }

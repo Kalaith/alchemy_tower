@@ -755,6 +755,27 @@
       "after_milestone": "archive_revelation",
       "order": 92,
       "line": "It kept working. No one asked it to and no one watched it, and every clear night for twenty years it held a star steady and marked the ring. Whatever you decide the wizard was, the machine he left behind has been patient in a way he was not."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "first_rune_imbuing",
+      "order": 86,
+      "line": "I have started asking you for the failures. A rune does not repair a brew — it decides what the brew's fault is going to be used for, which is a different sentence and a much more interesting one. Twenty years of notes upstairs and not one line on reworking a spoiled bottle. He only ever wrote down the things that worked."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "first_rune_imbuing",
+      "order": 92,
+      "line": "Four weak tonics that are all the same beats one good one I cannot make twice. I know that is not what you want to hear from someone selling your work. It is still what the infirmary orders."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "first_rune_imbuing",
+      "order": 84,
+      "line": "So the ruined ones are worth something now. Twenty years of this valley throwing out whatever did not come right the first time, and it turns out the answer was to stop asking it to be what it was not."
     }
   ]
 }

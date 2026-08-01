@@ -581,6 +581,48 @@
           "description": "Steadying to sit beside, for reasons nobody has written down."
         }
       ]
+    },
+    {
+      "id": "leakfire_flare",
+      "name": "Leakfire Flare",
+      "category": "potion",
+      "base_value": 34,
+      "color": [
+        246,
+        214,
+        150,
+        255
+      ],
+      "description": "Very bright, very briefly, over a wide area. It was never going to hold its light and this is the version of that fault which is worth carrying.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 70.0,
+          "description": "A short wide flare rather than a light you can work by."
+        }
+      ]
+    },
+    {
+      "id": "second_reading",
+      "name": "Second Reading",
+      "category": "potion",
+      "base_value": 26,
+      "color": [
+        186,
+        190,
+        176,
+        255
+      ],
+      "description": "A dull, patient little light that shows the inside of a bottle rather than the room. Ione has started asking for the failures instead of the successes and will not explain.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 150.0,
+          "description": "A close working light for looking at what went wrong."
+        }
+      ]
     }
   ]
 }

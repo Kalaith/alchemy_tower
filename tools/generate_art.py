@@ -385,6 +385,8 @@ def icon(item, size, world=False):
             "forgelight_lantern": "#f8b060", "quickfire_draught": "#ff925c",
             "channelfire_lantern": "#ee9e60", "hearthchannel_lantern": "#faba78",
             "forgestep_tonic": "#e89258",
+            "steadyhand_tonic": "#9ac8aa", "leakfire_flare": "#f6d696",
+            "second_reading": "#babeb0", "longstride_draught": "#d6a882",
             "coldread_solution": "#d6e6f2", "lowstar_lantern": "#f0dcb2",
             "heldstar_lantern": "#faecc6",
             "coldiron_tincture": "#a6baac", "rimeflower_cordial": "#deeaf4",

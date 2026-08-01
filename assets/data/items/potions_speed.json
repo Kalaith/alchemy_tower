@@ -284,6 +284,27 @@
           "description": "A hard steady lift with no subtlety in it at all."
         }
       ]
+    },
+    {
+      "id": "longstride_draught",
+      "name": "Longstride Draught",
+      "category": "potion",
+      "base_value": 32,
+      "color": [
+        214,
+        168,
+        130,
+        255
+      ],
+      "description": "The rough lift of a salvaged stimulant, spread thin enough to walk on all afternoon. Nobody claims it is pleasant.",
+      "effects": [
+        {
+          "kind": "speed",
+          "magnitude": 0.14,
+          "duration_seconds": 320.0,
+          "description": "A low, long push with none of the original's kick."
+        }
+      ]
     }
   ]
 }

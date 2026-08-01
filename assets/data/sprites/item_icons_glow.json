@@ -233,6 +233,24 @@
         64
       ],
       "prompt": "A pale gold lantern bottle with a perfectly still bright core, high-tier morph icon."
+    },
+    {
+      "id": "leakfire_flare",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A bright amber flare bottle with light bursting outward, short-lived and wide."
+    },
+    {
+      "id": "second_reading",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A dull grey-green bottle with a small close working light inside."
     }
   ]
 }

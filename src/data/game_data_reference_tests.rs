@@ -374,6 +374,43 @@ mod tests {
         );
     }
 
+    /// Every one of the game's recipes falls back to one of four salvage
+    /// bottles when a brew destabilises, and free-form brewing produces them
+    /// too — `soothing_tonic` alone catches twenty-one recipes' failures. They
+    /// were worth 2 to 14 coins and **nothing in the world wanted any of them**,
+    /// so the game's entire failure state paid out in items with no destination.
+    ///
+    /// A rune rework is the answer the game already had: it does not repair a
+    /// spoiled brew, it decides what that brew's fault gets used for. This
+    /// insists every salvage bottle keeps such a route.
+    #[test]
+    fn every_salvaged_brew_can_be_turned_into_something() {
+        use crate::alchemy::SALVAGE_OUTPUT_ITEM_IDS;
+
+        let data = load_embedded().expect("embedded game data should load");
+
+        let reworkable = data
+            .rune_recipes
+            .iter()
+            .map(|recipe| recipe.input_item_id.clone())
+            .collect::<std::collections::HashSet<_>>();
+        let wanted_by_quest = data
+            .quests
+            .iter()
+            .map(|quest| quest.required_item_id.clone())
+            .collect::<std::collections::HashSet<_>>();
+
+        let dead_ends = SALVAGE_OUTPUT_ITEM_IDS
+            .iter()
+            .filter(|id| !reworkable.contains(**id) && !wanted_by_quest.contains(**id))
+            .collect::<Vec<_>>();
+
+        assert!(
+            dead_ends.is_empty(),
+            "failed brews that produce a bottle nothing in the valley wants: {dead_ends:?}"
+        );
+    }
+
     #[test]
     fn every_gatherable_ingredient_is_wanted_by_some_recipe() {
         use crate::data::ItemCategory;

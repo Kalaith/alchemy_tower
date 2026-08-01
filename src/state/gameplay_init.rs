@@ -227,6 +227,33 @@ impl GameplayState {
 
     /// Seed a ready-to-hand-in repeatable board request and open the quest
     /// board, so the capture harness can render the delivery flow.
+    /// Stand at the rune workbench holding every potion a rune will rework, so
+    /// the drafts list can actually be looked at. It had no capture scene at
+    /// all until the salvage reworks grew it from nine entries to thirteen — a
+    /// list nobody had ever photographed, which is how the drafts overflow got
+    /// in the first time.
+    pub(crate) fn open_rune_bench_sample(&mut self, data: &GameData) {
+        if let Some(station) = data
+            .stations
+            .iter()
+            .find(|station| station.kind == crate::data::StationKind::RuneWorkshop)
+        {
+            self.world.current_area_id = station.area_id.clone();
+            self.world.player.position =
+                macroquad::prelude::vec2(station.position[0], station.position[1]);
+        }
+        for recipe in &data.rune_recipes {
+            self.inventory.insert(recipe.input_item_id.clone(), 2);
+            self.inventory.insert(recipe.rune_item_id.clone(), 2);
+        }
+        self.progression.total_brews = 24;
+        // Point at the end of the list. Drafts are appended, so the first page
+        // is always the oldest content — a capture of rows 1-5 would have looked
+        // identical before and after four reworks were added.
+        self.ui.rune_index = data.rune_recipes.len().saturating_sub(1);
+        self.set_overlay(super::gameplay_overlay_types::OverlayScreen::Rune);
+    }
+
     pub(crate) fn open_quest_board_sample(&mut self, data: &GameData) {
         if let Some(station) = data
             .stations

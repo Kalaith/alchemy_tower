@@ -452,6 +452,27 @@
           "description": "Restores steadily, with none of the heaviness of a stronger draught."
         }
       ]
+    },
+    {
+      "id": "steadyhand_tonic",
+      "name": "Steadyhand Tonic",
+      "category": "potion",
+      "base_value": 30,
+      "color": [
+        154,
+        200,
+        170,
+        255
+      ],
+      "description": "Modest, and identical every single time. Mira keeps a row of them because a shelf you can predict is worth more to her than one good bottle she cannot repeat.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 22.0,
+          "duration_seconds": 0.0,
+          "description": "A small, entirely dependable mending."
+        }
+      ]
     }
   ]
 }

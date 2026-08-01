@@ -323,6 +323,15 @@
         64
       ],
       "prompt": "A warm cream-gold cordial bottle with a cold white core, high-tier morph icon."
+    },
+    {
+      "id": "steadyhand_tonic",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A plain pale green tonic bottle, deliberately unremarkable and uniform."
     }
   ]
 }
