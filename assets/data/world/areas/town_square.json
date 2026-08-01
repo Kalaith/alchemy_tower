@@ -124,6 +124,30 @@
         112.0,
         418.0
       ]
+    },
+    {
+      "id": "town_to_pass",
+      "label": "Southern Pass",
+      "rect": {
+        "x": 1120.0,
+        "y": 616.0,
+        "w": 96.0,
+        "h": 120.0
+      },
+      "target_area": "southern_pass",
+      "target_position": [
+        640.0,
+        856.0
+      ],
+      "required_completed_quest": "nightwatch_for_elric",
+      "unlock_milestones": [
+        {
+          "id": "pass_road_open",
+          "title": "The Road South",
+          "text": "With the watch holding the outer road, the switchback south is worth walking again. It is the way the traders come up and, it turns out, the way half of what blows across the plains has been coming down."
+        }
+      ],
+      "locked_note": "The switchback is not worth walking while the road below it closes at sundown."
     }
   ],
   "gather_nodes": [

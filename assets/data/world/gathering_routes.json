@@ -107,6 +107,12 @@
       "name": "Hedgerow Line",
       "area_id": "north_plains",
       "description": "The field boundary and the open meadow beside it. Both only give anything up while the wind is blowing, which is the one thing about the plains nobody thinks to tell a newcomer."
+    },
+    {
+      "id": "pass_switchback",
+      "name": "Pass Switchback",
+      "area_id": "southern_pass",
+      "description": "The cut road climbing out of the valley, above the cloud line more often than not, and the only ground in reach that belongs to somewhere else."
     }
   ]
 }

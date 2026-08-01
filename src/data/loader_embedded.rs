@@ -62,6 +62,10 @@ const AREA_SOURCES: &[(&str, &str)] = &[
         "world/areas/observatory_floor",
         include_str!("../../assets/data/world/areas/observatory_floor.json"),
     ),
+    (
+        "world/areas/southern_pass",
+        include_str!("../../assets/data/world/areas/southern_pass.json"),
+    ),
 ];
 
 /// Ingredients are filed under the biome that anchors them. Herbs gathered in
@@ -98,6 +102,10 @@ const ITEM_SOURCES: &[(&str, &str)] = &[
     (
         "items/ingredients_containment",
         include_str!("../../assets/data/items/ingredients_containment.json"),
+    ),
+    (
+        "items/ingredients_southern_pass",
+        include_str!("../../assets/data/items/ingredients_southern_pass.json"),
     ),
     (
         "items/materials",

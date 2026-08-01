@@ -1,0 +1,91 @@
+{
+  "items": [
+    {
+      "id": "driftbloom",
+      "name": "Driftbloom",
+      "category": "ingredient",
+      "base_value": 16,
+      "color": [
+        214,
+        206,
+        158,
+        255
+      ],
+      "description": "The parent of the driftseed that catches in the plains hedgerows. It has been growing an hour's climb outside the valley the whole time, and everyone who wondered where the seed came from was looking in the wrong direction.",
+      "quality": 40,
+      "rarity": 3,
+      "elements": {
+        "vita": 3,
+        "ember": 0,
+        "mist": 0,
+        "lux": 2
+      },
+      "traits": [
+        "vigor",
+        "pure"
+      ],
+      "source_conditions": [
+        "spring and summer, when the switchback is passable",
+        "clear or windy, which above the cloud line is most days",
+        "the outer edge of the cut road"
+      ],
+      "wild_variants": [
+        {
+          "id": "driftbloom_headed",
+          "name": "Headed Driftbloom",
+          "required_conditions": [
+            "summer",
+            "windy"
+          ],
+          "bonus_traits": [
+            "restorative"
+          ],
+          "quality_bonus": 11,
+          "elements": {
+            "vita": 2,
+            "ember": 0,
+            "mist": 0,
+            "lux": 0
+          },
+          "synthesis_weight_bonus": 1,
+          "synthesis_value_bonus": 3
+        }
+      ],
+      "synthesis_weight": 2,
+      "synthesis_value": 5
+    },
+    {
+      "id": "coldiron_lichen",
+      "name": "Coldiron Lichen",
+      "category": "ingredient",
+      "base_value": 18,
+      "color": [
+        148,
+        168,
+        156,
+        255
+      ],
+      "description": "Grey-green crust on the exposed rock above the weather. It takes a decade to cover a hand's width and it is worth being careful about, which Brin has said out loud twice.",
+      "quality": 42,
+      "rarity": 3,
+      "elements": {
+        "vita": 1,
+        "ember": 0,
+        "mist": 2,
+        "lux": 2
+      },
+      "traits": [
+        "pure",
+        "cold"
+      ],
+      "source_conditions": [
+        "any season; nothing up here keeps a calendar",
+        "clear days only, above the cloud line",
+        "north-facing stone that never sees full sun"
+      ],
+      "wild_variants": [],
+      "synthesis_weight": 1,
+      "synthesis_value": 5
+    }
+  ]
+}

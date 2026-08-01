@@ -1,0 +1,319 @@
+{
+  "entries": [
+    {
+      "id": "sunleaf_plains",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A plains-specific sunleaf world node with meadow markers and wind-laid grass around it, readable from above."
+    },
+    {
+      "id": "field_bloom_plains",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A plains field bloom node with open roadside framing and soft field-light accents, readable from above."
+    },
+    {
+      "id": "whisper_moss_plains",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A plains whisper moss node growing around low standing stones and roadside shade, readable from above."
+    },
+    {
+      "id": "arcane_dust_quarry",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "An arcane dust node settled into quarry cracks with stone shelf debris, readable from above."
+    },
+    {
+      "id": "quarry_lichen_quarry",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A quarry lichen node spread across a chipped slate ledge with mineral flakes, readable from above."
+    },
+    {
+      "id": "ember_root_quarry",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "An ember root node surfacing through a hot quarry seam with broken stone around it, readable from above."
+    },
+    {
+      "id": "moon_fern_forest",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A moon fern node framed by dense forest groundcover and cool moonlit shade, readable from above."
+    },
+    {
+      "id": "mist_moth_wing_forest",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A mist moth wing node caught on forest bark and ferns, readable from above."
+    },
+    {
+      "id": "glow_moth_forest",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A glow moth node hovering in a forest glade with soft moonlit halo, readable from above."
+    },
+    {
+      "id": "whisper_moss_forest",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A forest whisper moss node gathered at a shaded trunk base, readable from above."
+    },
+    {
+      "id": "ember_root_forest",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "An ember root node emerging from a charred hollow in the forest floor, readable from above."
+    },
+    {
+      "id": "reedflower_lake",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A lake reedflower node standing in shallow reeds with water-edge highlights, readable from above."
+    },
+    {
+      "id": "dew_slug_lake",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A dew slug node on wet lakeshore stones with reeds around it, readable from above."
+    },
+    {
+      "id": "mist_moth_wing_lake",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A mist moth wing node gathered from lake reeds and damp bark, readable from above."
+    },
+    {
+      "id": "moon_fern_lake",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A moon fern node rooted in a shaded lakeside cove, readable from above."
+    },
+    {
+      "id": "whisper_moss_lake",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A whisper moss node clinging to cool shoreline stones, readable from above."
+    },
+    {
+      "id": "ember_root_desert",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "An ember root node surfacing from a sun-baked desert scar with drifting sand, readable from above."
+    },
+    {
+      "id": "sunspike_desert",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A sunspike node in exposed dunes with heat-bright sand ridges, readable from above."
+    },
+    {
+      "id": "arcane_dust_desert",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "An arcane dust node trapped in desert stone cracks and dry wind lines, readable from above."
+    },
+    {
+      "id": "whisper_moss_rainforest",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A rainforest whisper moss node climbing wet roots and broad leaves, readable from above."
+    },
+    {
+      "id": "rain_orchid_rainforest",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A rainforest orchid node with humid broad-leaf framing and soft mist bloom, readable from above."
+    },
+    {
+      "id": "mist_moth_wing_rainforest",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A mist moth wing node caught on glossy jungle leaves, readable from above."
+    },
+    {
+      "id": "dew_slug_rainforest",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A dew slug node on soaked rainforest roots and puddled clearings, readable from above."
+    },
+    {
+      "id": "nightglass_bloom_desert",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "Nightglass bloom variant staged on open desert sand for the Sunscar salt pan route."
+    },
+    {
+      "id": "scorchvine_resin_desert",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "Scorchvine resin variant staged on open desert sand for the Sunscar dune route."
+    },
+    {
+      "id": "saltmirror_flake_desert",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "Saltmirror flake variant staged on cracked pan clay for the Sunscar salt pan route."
+    },
+    {
+      "id": "kiln_geode_quarry",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "Kiln geode variant staged on cut quarry stone."
+    },
+    {
+      "id": "stillwater_pearl_lake",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "Stillwater pearl variant staged in the flat water behind a reed bar."
+    },
+    {
+      "id": "starlight_shard",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "Starlight shard resting on an observatory focus ring under a clear night sky."
+    },
+    {
+      "id": "washvein_crystal_quarry",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "Washvein crystal variant staged on a wet worked quarry face."
+    },
+    {
+      "id": "sumpflower_quarry",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "Sumpflower variant staged in the flooded sump at the quarry bottom."
+    },
+    {
+      "id": "driftseed_plains",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "Driftseed variant staged along an open plains hedgerow."
+    },
+    {
+      "id": "lieflat_clover_plains",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "Lieflat clover variant staged in flattened open meadow grass."
+    },
+    {
+      "id": "driftbloom_pass",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "Driftbloom variant staged on the stony verge of a high pass road."
+    },
+    {
+      "id": "coldiron_lichen_pass",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "Coldiron lichen variant staged on north-facing pass rock."
+    }
+  ]
+}

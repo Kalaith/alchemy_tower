@@ -1,0 +1,164 @@
+{
+  "id": "southern_pass",
+  "name": "Southern Pass",
+  "size": [
+    1280.0,
+    960.0
+  ],
+  "background": [
+    122,
+    130,
+    142,
+    255
+  ],
+  "accent": [
+    168,
+    176,
+    188,
+    255
+  ],
+  "footstep_sound_set": "gravel",
+  "render": {
+    "blocker_style": "dunes",
+    "blocker_primary": [
+      140,
+      146,
+      156,
+      255
+    ],
+    "blocker_secondary": [
+      176,
+      182,
+      192,
+      255
+    ],
+    "blocker_detail": [
+      96,
+      102,
+      112,
+      255
+    ],
+    "blocker_alt": [
+      128,
+      148,
+      132,
+      255
+    ]
+  },
+  "blockers": [
+    {
+      "x": 148.0,
+      "y": 176.0,
+      "w": 220.0,
+      "h": 130.0
+    },
+    {
+      "x": 612.0,
+      "y": 96.0,
+      "w": 190.0,
+      "h": 150.0
+    },
+    {
+      "x": 936.0,
+      "y": 268.0,
+      "w": 210.0,
+      "h": 140.0
+    },
+    {
+      "x": 236.0,
+      "y": 560.0,
+      "w": 200.0,
+      "h": 150.0
+    },
+    {
+      "x": 700.0,
+      "y": 620.0,
+      "w": 260.0,
+      "h": 130.0
+    }
+  ],
+  "warps": [
+    {
+      "id": "pass_to_town",
+      "label": "Town Square",
+      "rect": {
+        "x": 592.0,
+        "y": 892.0,
+        "w": 110.0,
+        "h": 52.0
+      },
+      "target_area": "town_square",
+      "target_position": [
+        1020.0,
+        640.0
+      ]
+    }
+  ],
+  "gather_nodes": [
+    {
+      "id": "pass_driftbloom_01",
+      "name": "Driftbloom",
+      "item_id": "driftbloom",
+      "color": [
+        214,
+        206,
+        158,
+        255
+      ],
+      "position": [
+        470.0,
+        402.0
+      ],
+      "radius": 16.0,
+      "route_id": "pass_switchback",
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "weathers": [
+        "clear",
+        "windy"
+      ],
+      "time_windows": [
+        "morning",
+        "day"
+      ],
+      "spawn_chance": 88,
+      "note": "The plant nobody in the valley grows, growing here in quantity along the switchback. Every seed head is pointed downhill.",
+      "render": {
+        "sprite_id": "driftbloom_pass"
+      }
+    },
+    {
+      "id": "pass_coldiron_lichen_01",
+      "name": "Coldiron Lichen",
+      "item_id": "coldiron_lichen",
+      "color": [
+        148,
+        168,
+        156,
+        255
+      ],
+      "position": [
+        1046.0,
+        620.0
+      ],
+      "radius": 15.0,
+      "route_id": "pass_switchback",
+      "seasons": [],
+      "weathers": [
+        "clear"
+      ],
+      "time_windows": [
+        "morning",
+        "day",
+        "evening"
+      ],
+      "spawn_chance": 82,
+      "note": "It grows on the exposed faces above the cloud line, so it is only here on the days the pass is clear — which, from down in the valley, is never the days you expect.",
+      "render": {
+        "sprite_id": "coldiron_lichen_pass"
+      }
+    }
+  ]
+}

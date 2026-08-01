@@ -584,6 +584,27 @@
       "after_milestone": "town_charter_signed",
       "order": 99,
       "line": "The trader sells a resin I have failed to grow four times. I buy it. I am going to keep failing to grow it, and I would rather you did not raise the subject."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "pass_road_open",
+      "order": 100,
+      "line": "It grows on the switchback. In quantity. An hour's climb from a hedgerow I have been picking seed out of for nine years, and every head on it pointing downhill. I have been asking the wrong question in the wrong direction the entire time."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "pass_road_open",
+      "order": 100,
+      "line": "There is lichen up there that takes ten years to cover a hand's width. Take what you need and no more. I will not say it twice, but I have now said it twice."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "pass_road_open",
+      "order": 100,
+      "line": "Every map in the archive stops at the pass. Not at the valley edge — at the pass, precisely, as though the far side were somebody else's business. I would like to know who decided that and I suspect I already do."
     }
   ],
   "epilogue_beats": [

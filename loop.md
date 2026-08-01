@@ -148,7 +148,7 @@ Data files follow the same ~800-line rule as `.rs` files. `src/data/loader_embed
 | Rune recipes, mutation formulas | `assets/data/crafting/rune_recipes.json`, `crafting/mutation_formulas.json` |
 | NPCs | `assets/data/town/npcs.json` |
 | Quests | `assets/data/town/quests_arcs.json` for a townsperson's own arc, `quests_board.json` for request-board orders |
-| Art requirements | `assets/data/sprites/<section>.json` (`gatherables`, `item_icons`, `npcs`, `stations`, `areas`, `ui_and_effects`), read by `tools/generate_art.py` |
+| Art requirements | `assets/data/sprites/<section>.json` (`gatherables`, `gatherable_variants`, `item_icons`, `npcs`, `stations`, `areas`, `ui_and_effects`), read by `tools/generate_art.py` |
 
 When you split a file: move entries, add the new source to the right table in
 `loader_embedded.rs`, and confirm the counts survive (`cargo test` covers the references).
@@ -635,6 +635,27 @@ Stop the loop and report if:
   item definition and `required_item_id` is mandatory, so "at least N of these effects" on a named
   item is always trivially true or trivially false. It is unused because it is unusable, not because
   content missed it — do not contrive a use for it.*
+- **2026-08-01 — a fourteenth area. Content, deliberately.** Two passes running had been repairs, and
+  looking back at the original brief it asked for **more maps** — in twenty-six passes this loop had
+  added exactly zero areas. So: the **Southern Pass**, the switchback climbing out of the valley,
+  reached from the town square and gated on Elric's charter, because the road below it closing at
+  sundown is precisely why nobody walked it.
+  *It answers a question an earlier pass planted rather than inventing a new one.* The plains hook
+  established `driftseed` as something that arrives on the wind from a plant nobody in the valley
+  grows. **`driftbloom` grows on the switchback, in quantity, every seed head pointing downhill** —
+  an hour's climb from the hedgerow Rowan has been picking seed out of for nine years, and she says
+  so. `coldiron_lichen` covers a hand's width per decade and Brin has now said out loud twice that
+  you should take only what you need. Ione notes that every map in the archive stops at the pass
+  precisely, as though the far side were somebody else's business, and suspects she knows who decided
+  that.
+  One recipe brews the plant and its own seed together for the first time.
+  *Registration is the single point of failure for a new area: until it was added to
+  `loader_embedded.rs` four tests failed at once — route resolution, recipe references and both NPC
+  pathing tests. The suite caught it immediately, which is the argument for those tests.*
+  Split `sprites/gatherables.json` (810) into `gatherables` and `gatherable_variants` — a reagent's
+  own art and the staged copies of it per biome are different jobs — and moved four stray bag-only
+  icons into `item_icons` where they belonged.
+  **The valley is now 14 areas, 19 routes, 112 items.**
 
 ## Deferred (needs a new system; not for this loop)
 

@@ -18,7 +18,8 @@ def sprite_section(name):
 
 
 REQ = {name: sprite_section(name) for name in
-       ["player", "npcs", "stations", "gatherables", "item_icons", "areas", "ui_and_effects"]}
+       ["player", "npcs", "stations", "gatherables", "gatherable_variants", "item_icons",
+        "areas", "ui_and_effects"]}
 JOURNAL = ["routes", "notes", "brews", "greenhouse", "rapport"]
 TOASTS = ["journal_note", "recipe_logged", "quest_accepted", "quest_complete", "route_restored", "best_quality"]
 
@@ -177,7 +178,7 @@ def icon(item, size, world=False):
     cx, cy = w / 2, h / 2 + (4 if world else 0)
     style_suffix = None
     base_item = item
-    for suffix in ["plains", "quarry", "forest", "lake", "desert", "rainforest"]:
+    for suffix in ["plains", "quarry", "forest", "lake", "desert", "rainforest", "pass"]:
         token = f"_{suffix}"
         if item.endswith(token):
             base_item = item[: -len(token)]
@@ -213,6 +214,8 @@ def icon(item, size, world=False):
         "driftseed",
         "lieflat_clover",
         "southmarket_myrrh",
+        "driftbloom",
+        "coldiron_lichen",
     } or base_item in {
         "whisper_moss",
         "sunleaf",
@@ -241,6 +244,8 @@ def icon(item, size, world=False):
         "driftseed",
         "lieflat_clover",
         "southmarket_myrrh",
+        "driftbloom",
+        "coldiron_lichen",
     }:
         colors = {
             "whisper_moss": "#74d59f",
@@ -270,6 +275,8 @@ def icon(item, size, world=False):
             "driftseed": "#e2d8b0",
             "lieflat_clover": "#96c480",
             "southmarket_myrrh": "#ba8e60",
+            "driftbloom": "#d6ce9e",
+            "coldiron_lichen": "#94a89c",
         }
         for ox, oy in [(-10, 2), (2, -4), (12, 4), (-2, 10)]:
             d.ellipse(box(cx + ox, cy + oy, 9, 12), fill=rgb(colors[base_item]))
@@ -360,7 +367,7 @@ def icon(item, size, world=False):
             "terracemend_salve": "#baacce",
             "hollow_hearth_tonic": "#cc9870", "firstthaw_draught": "#d6e4ee",
             "hardwinter_draught": "#e8c8aa", "sluicewater_tonic": "#a6c6ca", "openfield_draught": "#ccd69e", "longhold_cordial": "#c6b0d6",
-            "keptwarm_tonic": "#d6c8b2", "southmarket_salve": "#c49e76",
+            "keptwarm_tonic": "#d6c8b2", "southmarket_salve": "#c49e76", "farcarried_tonic": "#d8d2a8",
         }.get(item, "#d2c1ff")
         d.rounded_rectangle((cx - 8, cy - 24, cx + 8, cy - 12), radius=3, fill=rgb("#d9dfe8", 220))
         d.rectangle((cx - 5, cy - 28, cx + 5, cy - 22), fill=rgb("#8b6a4d"))
@@ -379,6 +386,9 @@ def icon(item, size, world=False):
             d.arc((cx - 20, cy + 4, cx + 20, cy + 26), 200, 340, fill=rgb("#ffe4a6", 150), width=3)
         elif style_suffix == "rainforest":
             d.line((cx - 18, cy + 20, cx + 12, cy - 10), fill=rgb("#d4ffe6", 140), width=3)
+        elif style_suffix == "pass":
+            d.line((cx - 22, cy + 16, cx + 4, cy + 6), fill=rgb("#c8d0dc", 150), width=3)
+            d.line((cx + 4, cy + 6, cx + 22, cy + 14), fill=rgb("#c8d0dc", 150), width=3)
     return img
 
 
@@ -397,6 +407,7 @@ def area(name):
         "rune_workshop_floor": ("#6c5b78", "#31263a"),
         "archive_floor": ("#7d715a", "#383227"),
         "observatory_floor": ("#303f6b", "#11192a"),
+        "southern_pass": ("#8d95a3", "#4a5260"),
     }[name]
     img = Image.new("RGBA", (1920, 1080), rgb(colors[0]))
     d = ImageDraw.Draw(img)
@@ -498,7 +509,7 @@ def main():
     save(crow_sheet(), Path("characters/crow_guide.png"))
     for req in REQ["stations"]:
         save(station(req["id"], req["image_size_px"]), Path("stations") / f'{req["id"]}.png')
-    for req in REQ["gatherables"] + REQ["item_icons"]:
+    for req in REQ["gatherables"] + REQ["gatherable_variants"] + REQ["item_icons"]:
         if req["type"] in {"icon_and_world_node", "inventory_icon"}:
             size = req.get("icon_size_px") or req.get("world_sprite_px")
             save(icon(req["id"], size), Path("items/icons") / f'{req["id"]}.png')

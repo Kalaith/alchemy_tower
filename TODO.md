@@ -37,4 +37,4 @@
 
 ## Scope
 
-- Decide deliberately whether this is a tight three-to-four-hour experience or needs a long tail; if the latter, add a post-ending sandbox with continued town requests.
+- Decide deliberately whether this is a tight three-to-four-hour experience or needs a long tail; if the latter, add a post-ending sandbox with continued town requests. (The valley has grown to 14 areas and 6 completed arcs; repeatable board orders and standing contracts already carry the mid-game, so the long tail is the direction it has taken in practice.)

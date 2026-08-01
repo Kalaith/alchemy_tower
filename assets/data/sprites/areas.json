@@ -116,6 +116,15 @@
         1080
       ],
       "prompt": "Top-down portal observatory, astral lens, deep night palette, brass circles, restrained final-act wonder, solemn magical climax space."
+    },
+    {
+      "id": "southern_pass",
+      "type": "area_background",
+      "image_size_px": [
+        1920,
+        1080
+      ],
+      "prompt": "A high stony switchback road climbing out of a valley, grey-green scree and exposed rock above the cloud line, cool overcast light."
     }
   ]
 }

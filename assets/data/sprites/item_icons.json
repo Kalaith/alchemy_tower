@@ -647,6 +647,51 @@
         64
       ],
       "prompt": "A resinous red-brown salve jar with an imported look."
+    },
+    {
+      "id": "farcarried_tonic",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A pale gold grassy tonic bottle, plain and well-travelled."
+    },
+    {
+      "id": "bloomwing_pollen",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A small heap of warm gold pollen combed from a habitat perch, restorative reagent icon."
+    },
+    {
+      "id": "hollowroot",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A pale violet root with hollow channels running through it, revived extinct herb, restorative reagent icon."
+    },
+    {
+      "id": "saltroad_amber",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A polished amber catalyst stone with warm inner light, imported and expensive."
+    },
+    {
+      "id": "southmarket_myrrh",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A small heap of red-brown resin tears sold by weight."
     }
   ]
 }

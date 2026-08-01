@@ -212,6 +212,48 @@
         "restorative"
       ],
       "morph_targets": []
+    },
+    {
+      "id": "farcarried_tonic_recipe",
+      "name": "Farcarried Tonic",
+      "station_id": "greenhouse_still",
+      "ingredients": [
+        {
+          "item_id": "driftbloom",
+          "amount": 1
+        },
+        {
+          "item_id": "driftseed",
+          "amount": 2
+        }
+      ],
+      "output_item_id": "farcarried_tonic",
+      "output_amount": 1,
+      "description": "The plant and the seed it throws, brewed together for the first time. Rowan wanted it on record that she had asked where the seed came from for nine years.",
+      "required_heat": 2,
+      "required_stirs": 3,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "Half of this walked down into the valley on the wind and half of it had to be walked up to.",
+      "minimum_quality": 48,
+      "preferred_traits": [
+        "vigor",
+        "pure"
+      ],
+      "guaranteed_traits": [
+        "restorative"
+      ],
+      "minimum_elements": {
+        "vita": 7,
+        "ember": 0,
+        "mist": 0,
+        "lux": 4
+      },
+      "required_timing": "steady",
+      "required_sequence": [
+        "vigor",
+        "pure"
+      ],
+      "morph_targets": []
     }
   ]
 }

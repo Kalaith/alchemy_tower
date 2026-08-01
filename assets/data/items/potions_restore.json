@@ -689,6 +689,27 @@
           "description": "Restores well and travels without spoiling."
         }
       ]
+    },
+    {
+      "id": "farcarried_tonic",
+      "name": "Farcarried Tonic",
+      "category": "potion",
+      "base_value": 82,
+      "color": [
+        216,
+        210,
+        168,
+        255
+      ],
+      "description": "Pale gold and faintly grassy. It is the first thing brewed in this tower from a plant that does not grow in this valley, and it took somebody walking out of it to manage.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 44.0,
+          "duration_seconds": 0.0,
+          "description": "Restores strongly and keeps a walker going far past where they meant to stop."
+        }
+      ]
     }
   ]
 }
