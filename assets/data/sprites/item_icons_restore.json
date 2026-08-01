@@ -368,6 +368,24 @@
         64
       ],
       "prompt": "A flask of pale blue-green restorative with a faint white bloom in it, cold-grown and clean, readable potion icon."
+    },
+    {
+      "id": "standing_dose",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A plain measured flask of clear restorative with graduation marks, clinical and unglamorous, readable potion icon."
+    },
+    {
+      "id": "keptback_draught",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A dark teal flask of restorative held under pressure, waiting rather than working, readable potion icon."
     }
   ]
 }

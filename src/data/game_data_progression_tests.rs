@@ -460,6 +460,46 @@ reachable areas: {open_areas:?}"
         );
     }
 
+    /// Imbuing spends a rune and a finished bottle, and three of the four runes
+    /// cost coin while the fourth can only be prised off ward frames that have
+    /// already let go. A pattern whose output is worth less than what went into
+    /// it is therefore a trap, and the drafts list advertises every pattern
+    /// equally — the player has no way to tell before spending the rune.
+    ///
+    /// All seventeen already honour this, including the four salvage reworks,
+    /// which take a spoiled brew and are the largest upgrades in the layer.
+    /// Base value is the honest proxy here: it is what the game itself uses to
+    /// price a bottle.
+    #[test]
+    fn imbuing_is_never_a_downgrade() {
+        let data = load_embedded().expect("embedded game data should load");
+        let mut traps = Vec::new();
+
+        for recipe in &data.rune_recipes {
+            let (Some(input), Some(output)) = (
+                data.item(&recipe.input_item_id),
+                data.item(&recipe.output_item_id),
+            ) else {
+                continue; // resolution is `quest_chains_and_gates_resolve`'s job
+            };
+            if output.base_value <= input.base_value {
+                traps.push(format!(
+                    "{}: {} at {}c becomes {} at {}c",
+                    recipe.id, input.id, input.base_value, output.id, output.base_value
+                ));
+            }
+        }
+
+        assert!(
+            !data.rune_recipes.is_empty(),
+            "no rune patterns loaded at all"
+        );
+        assert!(
+            traps.is_empty(),
+            "rune patterns that cost more than they give:\n{traps:#?}"
+        );
+    }
+
     /// A habitat only does anything once a creature is put in it, so a habitat
     /// whose creature exists nowhere in the valley is furniture: it can be
     /// built, gated, drawn and walked past, and never stocked. That has already

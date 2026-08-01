@@ -389,6 +389,48 @@
           "description": "Restores deeply and leaves the legs steady on a slope."
         }
       ]
+    },
+    {
+      "id": "standing_dose",
+      "name": "Standing Dose",
+      "category": "potion",
+      "base_value": 136,
+      "color": [
+        226,
+        238,
+        242,
+        255
+      ],
+      "description": "An echo on the tonic that argues with nothing. It gives the same small measure again some hours later, and again after that, without anybody having to be there. Wren asked whether it could be made to do less, and meant it as praise.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 30.0,
+          "duration_seconds": 0.0,
+          "description": "A small measure now and the same again later, on its own schedule."
+        }
+      ]
+    },
+    {
+      "id": "keptback_draught",
+      "name": "Keptback Draught",
+      "category": "potion",
+      "base_value": 144,
+      "color": [
+        142,
+        180,
+        192,
+        255
+      ],
+      "description": "Delayed, the deepkeeper does not take hold when it is swallowed. It waits, sometimes for hours, and comes up when the body starts losing. Wren is clear that this is for the cases where you cannot be there at the hour it matters, and clear that she resents needing it.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 62.0,
+          "duration_seconds": 0.0,
+          "description": "Holds itself back and comes up when it is needed rather than when it is taken."
+        }
+      ]
     }
   ]
 }

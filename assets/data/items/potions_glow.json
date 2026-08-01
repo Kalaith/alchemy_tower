@@ -587,6 +587,33 @@
           "description": "A light nothing in the room reacts to."
         }
       ]
+    },
+    {
+      "id": "heldstar_vigil",
+      "name": "Heldstar Vigil",
+      "category": "potion",
+      "base_value": 284,
+      "color": [
+        244,
+        232,
+        206,
+        255
+      ],
+      "description": "The ward turns the lantern inward and the light mostly goes out, which is not a failure. What is left is the part Ione would not expand on: it is steadying to sit beside, and warded it steadies whoever is holding it instead of the room. Somebody up here worked long nights alone.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 150.0,
+          "description": "A small held light rather than a working one."
+        },
+        {
+          "kind": "restore",
+          "magnitude": 58.0,
+          "duration_seconds": 0.0,
+          "description": "Steadies the holder for a long stretch of work, which is what it was always for."
+        }
+      ]
     }
   ]
 }

@@ -463,6 +463,8 @@ def icon(item, size, world=False):
             "keptwarm_tonic": "#d6c8b2", "southmarket_salve": "#c49e76", "farcarried_tonic": "#d8d2a8",
             "blankwater": "#dceef2", "twicegiven_tonic": "#cfe4ea", "handmark_solution": "#b8c2e4",
             "underglass_tonic": "#c2dcd6",
+            "heldstar_vigil": "#e8c88c", "tablewide_reading": "#aab6dc",
+            "standing_dose": "#dcecf0", "keptback_draught": "#6e9aa8",
         }.get(item, "#d2c1ff")
         d.rounded_rectangle((cx - 8, cy - 24, cx + 8, cy - 12), radius=3, fill=rgb("#d9dfe8", 220))
         d.rectangle((cx - 5, cy - 28, cx + 5, cy - 22), fill=rgb("#8b6a4d"))

@@ -593,6 +593,54 @@
       "repeatable": true,
       "repeat_cooldown_days": 6,
       "completion_milestones": []
+    },
+    {
+      "id": "board_standing_doses_for_the_infirmary",
+      "title": "Infirmary: Two On The Shelf, Standing",
+      "description": "Wren's hand, and unusually long for her. Two standing doses, kept on the shelf rather than carried out, for the nights the second room has somebody in it and she is in the first. She notes that she has spent her whole working life arguing against exceptional medicine and is now ordering a bottle that dispenses itself, and asks you not to make anything of it.",
+      "required_item_id": "standing_dose",
+      "required_amount": 2,
+      "reward_coins": 330,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Fine",
+      "required_trait": "",
+      "required_traits": [],
+      "minimum_trait_matches": 0,
+      "required_effect_kind": "restore",
+      "required_effect_kinds": [],
+      "minimum_effect_matches": 0,
+      "prerequisite_quests": [
+        "worst_case_shelf_for_wren"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 40,
+      "repeatable": true,
+      "repeat_cooldown_days": 8,
+      "completion_milestones": []
+    },
+    {
+      "id": "board_tablewide_for_the_archive",
+      "title": "Archive: One Table, All Of It At Once",
+      "description": "Unsigned, but the hand is the archive's and it has stopped pretending otherwise. One tablewide reading. The note says the loose sheets have been sorted four times by four different methods and every method agreed, which is the part that has stopped being reassuring.",
+      "required_item_id": "tablewide_reading",
+      "required_amount": 1,
+      "reward_coins": 260,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "",
+      "required_traits": [],
+      "minimum_trait_matches": 0,
+      "required_effect_kind": "glow",
+      "required_effect_kinds": [],
+      "minimum_effect_matches": 0,
+      "prerequisite_quests": [
+        "restored_record_for_ione"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 44,
+      "repeatable": true,
+      "repeat_cooldown_days": 10,
+      "completion_milestones": []
     }
   ]
 }

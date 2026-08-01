@@ -146,6 +146,27 @@
           "description": "A close reading light that separates one hand from another."
         }
       ]
+    },
+    {
+      "id": "tablewide_reading",
+      "name": "Tablewide Reading",
+      "category": "potion",
+      "base_value": 148,
+      "color": [
+        198,
+        208,
+        234,
+        255
+      ],
+      "description": "Splashed, the hand-sorting light stops being a lamp you hold over one page and becomes a thing you lay a whole table under. Ione put eleven months of loose sheets out at once and did not speak for some time.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 240.0,
+          "description": "Sorts hands across everything laid out rather than one page at a time."
+        }
+      ]
     }
   ]
 }

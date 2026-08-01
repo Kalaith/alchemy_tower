@@ -103,6 +103,38 @@
       "rune_item_id": "echo_rune",
       "output_item_id": "second_reading",
       "description": "An echo does not repair the brew. It repeats it quietly enough to watch, which is how you find out what went wrong."
+    },
+    {
+      "id": "ward_heldstar_recipe",
+      "station_id": "rune_workbench",
+      "input_item_id": "heldstar_lantern",
+      "rune_item_id": "ward_rune",
+      "output_item_id": "heldstar_vigil",
+      "description": "Turns the steadiest light in the tower inward. You lose the lamp and keep the reason it was worth sitting beside."
+    },
+    {
+      "id": "splash_handmark_recipe",
+      "station_id": "rune_workbench",
+      "input_item_id": "handmark_solution",
+      "rune_item_id": "splash_rune",
+      "output_item_id": "tablewide_reading",
+      "description": "Widens the hand-sorting light off the page and across the table, so a run of records reads against itself."
+    },
+    {
+      "id": "echo_twicegiven_recipe",
+      "station_id": "rune_workbench",
+      "input_item_id": "twicegiven_tonic",
+      "rune_item_id": "echo_rune",
+      "output_item_id": "standing_dose",
+      "description": "An echo on the one brew that reacts with nothing. It repeats a small measure on its own hours."
+    },
+    {
+      "id": "delay_deepkeeper_recipe",
+      "station_id": "rune_workbench",
+      "input_item_id": "deepkeeper_draught",
+      "rune_item_id": "delay_rune",
+      "output_item_id": "keptback_draught",
+      "description": "Holds the deepest restorative back until the body asks, rather than spending it when it is swallowed."
     }
   ]
 }

@@ -1277,6 +1277,34 @@ Stop the loop and report if:
   documented ceiling**, and fits.
   **158 reactions across 9 speakers; 94 tests; no data file over 664 lines.**
 
+- **2026-08-02 — the tower's deepest verb topped out below every serious brew.** Sorted the rune
+  layer's inputs by value and the result is a whole floor out of place: **every one of the thirteen
+  imbuable potions was worth between 2 and 32 coins**, and rune outputs capped at 72. Meanwhile the
+  game's **fourteen dearest bottles — 96 to 210 coins, all of them products of the last twenty
+  passes — were imbuable by nothing at all.** The rune workshop is a restored upper floor behind a
+  mastery gate, using a rune that cannot be bought, and it only ever took the starter shelf.
+  Four patterns, one per rune, each chosen where the rune's meaning changes what the bottle *is*
+  rather than scaling it. **Ward on the Heldstar Lantern** is the one worth keeping: the lantern's
+  second effect has read *"steadying to sit beside, for reasons nobody has written down"* since it
+  was authored, and warding it turns the light inward, loses most of the lamp, and leaves exactly
+  that. Somebody up here worked long nights alone. **Splash on the Handmark Solution** takes the
+  hand-sorting light off one page and across a table, so Ione can lay out eleven months of loose
+  sheets at once. **Echo on the Twicegiven Tonic** — the brew that argues with nothing — repeats a
+  small measure on its own hours, which is a schedule rather than a treatment, and is Wren's own
+  brief taken one step past where she wanted it. **Delay on the Deepkeeper** holds the strongest
+  restorative back until the body asks. Two board orders carry the demand, both post-arc.
+  ***Guard from an invariant the content already honoured.*** Imbuing spends a rune and a finished
+  bottle, so a pattern whose output is worth *less* is a trap the drafts list advertises like any
+  other. Checked all seventeen before writing it — none violate it, including the four salvage
+  reworks — so `imbuing_is_never_a_downgrade` encodes a real rule rather than inventing one.
+  Verified by knocking the vigil down 30 coins.
+  ***Iteration 8's guard caught this pass immediately:*** all four descriptions came in at 121-139
+  characters against a 120 budget and would have been cut mid-sentence. Trimmed to 94-113 and
+  confirmed by capture, which also shows the list correctly paging *"showing 13-17 of 17"*.
+  *Patterns per rune: splash 5, echo 5, delay 4, ward 3 — the unbuyable rune is still the rarest and
+  now has the best thing to do.*
+  **17 rune patterns, 94 potions, 28 board orders; 95 tests.**
+
 ## Deferred (needs a new system; not for this loop)
 
 - Apply-potion-to-target flow (wilted plant, frightened creature, blocked path) — `TODO.md` calls it
