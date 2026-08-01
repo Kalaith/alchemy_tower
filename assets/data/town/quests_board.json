@@ -278,6 +278,101 @@
       "minimum_total_brews": 14,
       "repeatable": true,
       "repeat_cooldown_days": 1
+    },
+    {
+      "id": "board_unsigned_first",
+      "title": "Unsigned: A Purified Draught, Excellent",
+      "description": "No name on it. One Excellent Purified Draught, and the note specifies the pour must be clean rather than strong — which is an odd thing for a customer to know to ask for.",
+      "required_item_id": "purified_draught",
+      "required_amount": 1,
+      "reward_coins": 140,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "pure",
+      "required_traits": [],
+      "minimum_trait_matches": 0,
+      "required_effect_kind": "restore",
+      "required_effect_kinds": [],
+      "minimum_effect_matches": 0,
+      "prerequisite_quests": [
+        "star_elixir_for_ione"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 20,
+      "repeatable": false,
+      "repeat_cooldown_days": 0,
+      "completion_milestones": [
+        {
+          "id": "unsigned_order_taken",
+          "title": "No Name On It",
+          "text": "Somebody left an unsigned order on the board and paid four times the going rate for a clean pour. Elric checked: nobody in the valley posted it, and it was there before the board was unlocked for the morning."
+        }
+      ]
+    },
+    {
+      "id": "board_unsigned_second",
+      "title": "Unsigned: Something Luminous, Held Steady",
+      "description": "The same hand. A Wardlight Solution, Excellent. The note adds one line: hold it at the bench that favours the work, not the one that is nearest.",
+      "required_item_id": "wardlight_solution",
+      "required_amount": 1,
+      "reward_coins": 175,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "",
+      "required_traits": [],
+      "minimum_trait_matches": 0,
+      "required_effect_kind": "glow",
+      "required_effect_kinds": [],
+      "minimum_effect_matches": 0,
+      "prerequisite_quests": [
+        "board_unsigned_first"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 26,
+      "repeatable": false,
+      "repeat_cooldown_days": 0,
+      "completion_milestones": [
+        {
+          "id": "unsigned_order_method",
+          "title": "That Is Not A Customer's Sentence",
+          "text": "The second unsigned note tells the brewer which bench to use. Ione's reading is that customers ask for outcomes and only practitioners ask for method — and that whoever is writing these already knows how this tower works."
+        }
+      ]
+    },
+    {
+      "id": "board_unsigned_third",
+      "title": "Unsigned: The Cordial, And Do Not Substitute",
+      "description": "Third and last. One Excellent Hollowroot Cordial, with the note that no substitution will be accepted — for a plant that stopped existing in this valley before anybody outside it could have known it was back.",
+      "required_item_id": "hollowroot_cordial",
+      "required_amount": 1,
+      "reward_coins": 300,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "restorative",
+      "required_traits": [],
+      "minimum_trait_matches": 0,
+      "required_effect_kind": "restore",
+      "required_effect_kinds": [],
+      "minimum_effect_matches": 0,
+      "prerequisite_quests": [
+        "board_unsigned_second"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 32,
+      "repeatable": false,
+      "repeat_cooldown_days": 0,
+      "completion_milestones": [
+        {
+          "id": "unsigned_order_read",
+          "title": "Read In Order",
+          "text": "Three unsigned orders, read in the order they were posted: a clean pour, the right bench, and a plant that had been extinct for twenty years. It is not a shopping list. It is somebody checking, one item at a time, whether the tower is working again — and they knew what to check before anyone here did."
+        },
+        {
+          "id": "unsigned_order_unanswered",
+          "title": "The Question Nobody Answered",
+          "text": "The third order was collected the same night and no fourth has appeared. Whoever was asking got the answer they came for, and has not said what they intend to do with it."
+        }
+      ]
     }
   ]
 }

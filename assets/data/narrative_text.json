@@ -633,6 +633,41 @@
       "after_milestone": "pass_kept_open",
       "order": 100,
       "line": "There is a flower on the high stone that opens in the coldest weeks and closes by the thaw, and it has been doing that unwatched for as long as there has been a pass. We were not there. That is all. We were simply never there."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "unsigned_order_taken",
+      "order": 78,
+      "line": "An unsigned order, paid over the odds, on a board I hold the key to. I have asked everyone in the square and got seven honest noes. I would like it to be somebody's idea of a joke and it is not shaped like one."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "unsigned_order_method",
+      "order": 88,
+      "line": "Customers ask for outcomes. Only practitioners ask for method. Whoever wrote that note knows which bench favours which work, and there are four benches in this tower and none of them are marked."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "unsigned_order_read",
+      "order": 100,
+      "line": "Read them in order and they stop being purchases. A clean pour, the correct bench, a plant that was gone. Somebody was checking whether this tower works, item by item, and they knew the list before we did. I have spent nine years wanting evidence that anyone else was paying attention. I did not specify that I would enjoy it."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "unsigned_order_read",
+      "order": 100,
+      "line": "Somebody else has been reading. That was always going to happen. What matters is that they found the tower working rather than open."
+    },
+    {
+      "npc_id": "tarn_wayfarer",
+      "after_quest": "",
+      "after_milestone": "unsigned_order_read",
+      "order": 100,
+      "line": "Notes on a board, paid over the odds, collected the same night. That is not a local. I would have seen a local. Whoever it was came up the road or came down it, and I did not see them either, which I do not much care for."
     }
   ],
   "epilogue_beats": [

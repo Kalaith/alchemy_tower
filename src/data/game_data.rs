@@ -585,6 +585,40 @@ reachable areas: {open_areas:?}"
         );
     }
 
+    /// Delivering a repeatable request puts it on a cooldown instead of into
+    /// `completed_quests` — that is the whole point of repeatable. So anything
+    /// listing one as a prerequisite waits on a flag that is never set, and is
+    /// locked forever. Thirteen repeatable requests exist and nothing else would
+    /// notice a fourteenth being pointed at.
+    #[test]
+    fn nothing_waits_on_a_repeatable_quest() {
+        let data = load_embedded().expect("embedded game data should load");
+        let unreachable = data
+            .quests
+            .iter()
+            .flat_map(|quest| {
+                quest
+                    .prerequisite_quests
+                    .iter()
+                    .map(move |prerequisite| (quest, prerequisite))
+            })
+            .filter(|(_, prerequisite)| {
+                data.quest(prerequisite)
+                    .map(|earlier| earlier.repeatable)
+                    .unwrap_or(false)
+            })
+            .map(|(quest, prerequisite)| {
+                format!("{} waits on {prerequisite}, which repeats", quest.id)
+            })
+            .collect::<Vec<_>>();
+
+        assert!(
+            unreachable.is_empty(),
+            "quests gated behind a request that never completes:
+{unreachable:#?}"
+        );
+    }
+
     #[test]
     fn quest_chains_and_gates_resolve() {
         let data = load_embedded().expect("embedded game data should load");

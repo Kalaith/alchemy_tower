@@ -676,6 +676,27 @@ Stop the loop and report if:
   reactions and the sprite pipeline all took an eighth entry without a schema change, which is the
   first time this loop has added something and touched no Rust at all.*
   **Cast is 8; arc quests 21.**
+- **2026-08-01 — the board learns to tell a story.** Checked a hypothesis first and dropped it:
+  twenty-eight passes might have piled everything into the late game, but the distribution is
+  healthy — **37 of 59 gather nodes are reachable at a new game**, all seven wild biomes are ungated,
+  and quests spread evenly across brew tiers. **Third time this loop a suspicion did not survive
+  measurement.**
+  So the brief's last item instead. Every one of the thirty-five quests was a delivery, and the board
+  in particular only ever posted orders. It now carries **three unsigned commissions**, chained by
+  prerequisite, that are individually ordinary and in sequence are not: a clean pour, then a note
+  specifying *which bench* to use, then a plant that had been extinct for twenty years and had no
+  business being known about outside the valley. Read in order they stop being purchases — somebody
+  was checking, item by item, whether the tower works, and knew the list before anyone here did.
+  Ione gets the reading, Tarn notes that whoever collected them came up the road or down it and he
+  saw neither, and no fourth order appears.
+  *Same delivery verb, no new mechanic — the structure was already in the schema and content had
+  simply never used the board for anything but stock.*
+  *A real trap found while building it, currently unsprung:* delivering a **repeatable** request puts
+  it on a cooldown rather than into `completed_quests`, so anything listing one as a prerequisite
+  waits on a flag that is never set and is locked forever. Nothing does today, but there are thirteen
+  repeatable requests to point at by accident. `nothing_waits_on_a_repeatable_quest` guards it,
+  verified against a deliberate mispoint.
+  **38 quests across 8 givers and the board.**
 
 ## Deferred (needs a new system; not for this loop)
 
