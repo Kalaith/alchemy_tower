@@ -27,6 +27,12 @@ impl GameplayState {
             return;
         }
 
+        // And the parting gift, once everything they asked for is done.
+        if self.try_grant_trusted_gift(data, npc) {
+            self.clear_overlay();
+            return;
+        }
+
         // Only the live step of this townsperson's arc is on the table; once
         // every step is done there is nothing left to accept or hand over.
         let Some(quest) = self.npc_active_quest(data, npc) else {

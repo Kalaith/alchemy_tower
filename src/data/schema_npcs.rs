@@ -38,6 +38,18 @@ pub(crate) struct NpcDefinition {
     pub(crate) friendship_reward_item_id: String,
     #[serde(default)]
     pub(crate) friendship_reward_amount: u32,
+    /// Said once their whole arc is finished, with a parting gift that is a
+    /// product of the work rather than stock from a shelf. The friend tier is
+    /// reached less than halfway through a three-beat arc, so without this the
+    /// relationship track resolves long before the relationship does.
+    #[serde(default)]
+    pub(crate) trusted_line: String,
+    #[serde(default)]
+    pub(crate) trusted_reward_coins: u32,
+    #[serde(default)]
+    pub(crate) trusted_reward_item_id: String,
+    #[serde(default)]
+    pub(crate) trusted_reward_amount: u32,
 }
 
 impl NpcDefinition {

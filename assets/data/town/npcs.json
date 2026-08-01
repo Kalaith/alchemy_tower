@@ -114,7 +114,11 @@
         "healing_for_mira",
         "water_baseline_for_mira",
         "wellside_relief_for_mira"
-      ]
+      ],
+      "trusted_line": "My stockroom is boring now. Do you understand what that took? Take whatever you like off the bulk shelf and stop looking at me like that.",
+      "trusted_reward_coins": 80,
+      "trusted_reward_item_id": "lumen_dust",
+      "trusted_reward_amount": 3
     },
     {
       "id": "rowan_herbalist",
@@ -177,7 +181,11 @@
         "glow_for_rowan",
         "harvest_blight_for_rowan",
         "harvest_recovery_for_rowan"
-      ]
+      ],
+      "trusted_line": "Take these. They are cuttings off the turned row, which is a thing I could not have given anybody two years ago because there was no row and nothing on it. I am not going to make a speech. I am just going to keep handing you cuttings every season until one of us stops.",
+      "trusted_reward_coins": 60,
+      "trusted_reward_item_id": "ruinbell",
+      "trusted_reward_amount": 3
     },
     {
       "id": "mayor_elric",
@@ -240,7 +248,11 @@
         "stamina_for_elric",
         "ledger_proof_for_elric",
         "nightwatch_for_elric"
-      ]
+      ],
+      "trusted_line": "There is a line in the ledger for the tower and a second one, smaller, for you. It is not a large sum. It is a recurring one, which in this office is the higher compliment.",
+      "trusted_reward_coins": 220,
+      "trusted_reward_item_id": "",
+      "trusted_reward_amount": 0
     },
     {
       "id": "ione_archivist",
@@ -303,7 +315,11 @@
         "star_elixir_for_ione",
         "missing_pages_for_ione",
         "restored_record_for_ione"
-      ]
+      ],
+      "trusted_line": "One of the recovered pages is a duplicate. I have checked four times, which is three more than necessary, because I wanted it to be a duplicate so that I could give you one. Keep it somewhere dry.",
+      "trusted_reward_coins": 90,
+      "trusted_reward_item_id": "pressed_specimen",
+      "trusted_reward_amount": 2
     },
     {
       "id": "brin_groundskeeper",
@@ -366,7 +382,11 @@
         "cultivation_for_brin",
         "ruin_survey_for_brin",
         "terrace_restoration_for_brin"
-      ]
+      ],
+      "trusted_line": "First cut off the terraces. Not the best of it — the first of it, which is a different thing and worth more. Somebody laid those beds out twenty years before I understood why, and you are the reason I got to find out.",
+      "trusted_reward_coins": 65,
+      "trusted_reward_item_id": "hollowroot",
+      "trusted_reward_amount": 2
     },
     {
       "id": "lyra_keeper",
@@ -429,7 +449,11 @@
         "containment_for_lyra",
         "pollinator_survey_for_lyra",
         "pollinator_return_for_lyra"
-      ]
+      ],
+      "trusted_line": "The bloomwings let you stand closer to the perches than they let me, which I have decided not to be competitive about. Take the pollen. You are the reason there is any.",
+      "trusted_reward_coins": 70,
+      "trusted_reward_item_id": "bloomwing_pollen",
+      "trusted_reward_amount": 3
     }
   ]
 }

@@ -10,6 +10,9 @@ mod rapport_text;
 /// (+1 on accept, +2 on completion in `gameplay_dialogue`).
 pub(super) const FRIEND_RAPPORT: i32 = 3;
 const CONFIDANT_RAPPORT: i32 = 6;
+/// Accepting and finishing all three beats of an arc is worth exactly nine, so
+/// this tier means "you finished everything they asked" and nothing less.
+const KIN_RAPPORT: i32 = 9;
 
 impl GameplayState {
     pub(super) fn rapport_value(&self, npc_id: &str) -> i32 {
@@ -22,7 +25,9 @@ impl GameplayState {
 
     /// Human-readable standing for the journal rapport tab.
     pub(super) fn rapport_tier_label(&self, rapport: i32) -> &'static str {
-        if rapport >= CONFIDANT_RAPPORT {
+        if rapport >= KIN_RAPPORT {
+            ui_copy("rapport_tier_kin")
+        } else if rapport >= CONFIDANT_RAPPORT {
             ui_copy("rapport_tier_confidant")
         } else if rapport >= FRIEND_RAPPORT {
             ui_copy("rapport_tier_friend")
@@ -35,6 +40,48 @@ impl GameplayState {
 
     fn friendship_milestone_id(npc_id: &str) -> String {
         format!("rapport_friend_{npc_id}")
+    }
+
+    fn trusted_milestone_id(npc_id: &str) -> String {
+        format!("rapport_trusted_{npc_id}")
+    }
+
+    pub(super) fn has_reached_trust(&self, npc_id: &str) -> bool {
+        self.has_journal_milestone(&Self::trusted_milestone_id(npc_id))
+    }
+
+    /// The parting gift, once every request this townsperson had is finished.
+    /// Gated on the arc actually being complete rather than on a rapport number,
+    /// because that is what it means — the number is only how the journal says
+    /// it.
+    pub(super) fn try_grant_trusted_gift(&mut self, data: &GameData, npc: &NpcDefinition) -> bool {
+        if npc.id == "crow_guide" || npc.trusted_line.is_empty() {
+            return false;
+        }
+        if self.has_reached_trust(&npc.id) {
+            return false;
+        }
+        // Every beat done, and there was something to do in the first place.
+        if !self.npc_has_been_helped(npc) || self.npc_active_quest(data, npc).is_some() {
+            return false;
+        }
+
+        self.coins += npc.trusted_reward_coins;
+        if !npc.trusted_reward_item_id.is_empty() && npc.trusted_reward_amount > 0 {
+            *self
+                .inventory
+                .entry(npc.trusted_reward_item_id.clone())
+                .or_insert(0) += npc.trusted_reward_amount;
+        }
+
+        self.push_journal_milestone(
+            &Self::trusted_milestone_id(&npc.id),
+            &ui_format("rapport_trusted_title", &[("name", &npc.name)]),
+            &npc.trusted_line,
+        );
+        self.trigger_quest_complete_feedback(rapport_text::friendship_toast(&npc.name));
+        self.runtime.status_text = npc.trusted_line.clone();
+        true
     }
 
     pub(super) fn has_reached_friendship(&self, npc_id: &str) -> bool {
@@ -126,5 +173,97 @@ mod tests {
         assert_eq!(state.rapport_tier_label(1), "Acquaintance");
         assert_eq!(state.rapport_tier_label(FRIEND_RAPPORT), "Friend");
         assert_eq!(state.rapport_tier_label(6), "Confidant");
+    }
+
+    /// The friend tier arrives at rapport 3, which a three-beat arc passes
+    /// halfway through its second request. Without a second payoff the
+    /// relationship track finishes long before the relationship does.
+    #[test]
+    fn the_parting_gift_waits_for_the_whole_arc() {
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let mut state = GameplayState::new(&data);
+        let npc = data
+            .npc("rowan_herbalist")
+            .expect("rowan should exist")
+            .clone();
+        assert!(
+            !npc.trusted_line.is_empty(),
+            "rowan should have a parting gift"
+        );
+        let chain = npc.quest_chain().to_vec();
+        assert!(chain.len() >= 3);
+
+        // Every beat but the last: still nothing.
+        for quest_id in chain.iter().take(chain.len() - 1) {
+            state.progression.completed_quests.insert(quest_id.clone());
+            assert!(
+                !state.try_grant_trusted_gift(&data, &npc),
+                "the parting gift arrived while {quest_id} was still the last thing done"
+            );
+        }
+
+        state
+            .progression
+            .completed_quests
+            .insert(chain.last().expect("a last beat").clone());
+        let coins_before = state.coins;
+        assert!(state.try_grant_trusted_gift(&data, &npc));
+        assert_eq!(state.coins, coins_before + npc.trusted_reward_coins);
+        assert_eq!(
+            state
+                .inventory
+                .get(&npc.trusted_reward_item_id)
+                .copied()
+                .unwrap_or_default(),
+            npc.trusted_reward_amount
+        );
+        assert!(state.has_reached_trust(&npc.id));
+
+        // Once only.
+        assert!(!state.try_grant_trusted_gift(&data, &npc));
+    }
+
+    /// Every townsperson who can be befriended should also have somewhere for
+    /// that to end, and the gift should be something their own arc produced.
+    #[test]
+    fn everyone_with_a_friendship_has_a_parting_gift_too() {
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let mut missing = Vec::new();
+        for npc in &data.npcs {
+            if npc.friendship_line.is_empty() {
+                continue;
+            }
+            if npc.trusted_line.is_empty() {
+                missing.push(format!("{} befriends but never parts", npc.id));
+            }
+            if !npc.trusted_reward_item_id.is_empty()
+                && data.item(&npc.trusted_reward_item_id).is_none()
+            {
+                missing.push(format!(
+                    "{} gives {}, which is not an item",
+                    npc.id, npc.trusted_reward_item_id
+                ));
+            }
+        }
+        assert!(
+            missing.is_empty(),
+            "incomplete rapport arcs:
+{missing:#?}"
+        );
+    }
+
+    #[test]
+    fn the_top_tier_is_only_reachable_by_finishing_an_arc() {
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let state = GameplayState::new(&data);
+        // Accepting and completing three beats is +1 and +2 apiece.
+        assert_eq!(
+            state.rapport_tier_label(super::KIN_RAPPORT - 1),
+            state.rapport_tier_label(super::CONFIDANT_RAPPORT)
+        );
+        assert_ne!(
+            state.rapport_tier_label(super::KIN_RAPPORT),
+            state.rapport_tier_label(super::CONFIDANT_RAPPORT)
+        );
     }
 }

@@ -562,6 +562,24 @@ Stop the loop and report if:
   it fails if the dearest purchasable item is not worth deliberately saving for, which is precisely
   the state the game was in.
   Split `crafting/recipes_restore.json` (804) by the bench that brews each recipe.
+- **2026-08-01 — rapport (the track finished before the relationships did).** Measured: rapport gains
+  +1 on accepting and +2 on finishing, so a three-beat arc is worth **9**, and the top tier sat at
+  **6**. Every townsperson became a Confidant partway through their second request, and the single
+  payoff — the friendship gift — fires at **3**. Six arcs were written over eleven passes and the
+  relationship track resolved before any of them did.
+  A **Kin** tier now sits at 9, which is exactly "accepted and finished all three", and a parting
+  gift lands with it. The gift is gated on the arc genuinely being complete rather than on the
+  number, because that is what it means; the number is only how the journal says it. Four
+  `serde(default)` fields mirroring the friendship ones.
+  *The gifts are products of the arcs rather than stock from a shelf* — Rowan hands over cuttings off
+  the turned row, Lyra pollen the player is the reason there is any of, Brin the **first** cut off the
+  restored terraces rather than the best of it, Ione a recovered page she checked four times hoping
+  it was a duplicate. Elric, characteristically, adds a second line to the ledger and notes that it
+  recurs.
+  *Verification note: the gift fires on confirming a conversation, which the capture harness cannot
+  drive — it renders frames, it does not press keys. Covered by test (coins, item, milestone,
+  idempotence, and that it waits for the last beat) rather than by a screenshot, and said so rather
+  than implied.*
 
 ## Deferred (needs a new system; not for this loop)
 
