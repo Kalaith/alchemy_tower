@@ -134,6 +134,15 @@
         64
       ],
       "prompt": "A muted clay-orange draught bottle, workmanlike and unglamorous."
+    },
+    {
+      "id": "shiftlong_tonic",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A blunt rust-orange working tonic bottle, unglamorous."
     }
   ]
 }

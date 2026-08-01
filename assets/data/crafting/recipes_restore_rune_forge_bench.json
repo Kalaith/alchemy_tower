@@ -1,0 +1,46 @@
+{
+  "recipes": [
+    {
+      "id": "bankfire_tonic_recipe",
+      "name": "Bankfire Tonic",
+      "station_id": "rune_forge_bench",
+      "ingredients": [
+        {
+          "item_id": "emberbark_curl",
+          "amount": 1
+        },
+        {
+          "item_id": "whisper_moss",
+          "amount": 2
+        }
+      ],
+      "output_item_id": "bankfire_tonic",
+      "output_amount": 2,
+      "description": "Bark that kept its heat, drawn out through moss that takes the edge off it. For somebody who has been cold long enough that warming them quickly would be a cruelty.",
+      "required_heat": 2,
+      "required_stirs": 3,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "Wren asked for the slow version specifically. She has seen the fast one used on a carter brought down off the pass and will not discuss what happened next.",
+      "minimum_quality": 48,
+      "preferred_traits": [
+        "warm",
+        "healing"
+      ],
+      "guaranteed_traits": [
+        "restorative"
+      ],
+      "minimum_elements": {
+        "vita": 3,
+        "ember": 2,
+        "mist": 1,
+        "lux": 0
+      },
+      "required_timing": "steady",
+      "required_sequence": [
+        "warm",
+        "healing"
+      ],
+      "morph_targets": []
+    }
+  ]
+}

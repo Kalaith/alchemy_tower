@@ -569,6 +569,30 @@
       "reward_coins": 126,
       "minimum_quality_band": "Crude",
       "minimum_total_brews": 26
+    },
+    {
+      "id": "board_shiftlong_for_the_crews",
+      "title": "Road Crews: Shiftlong, Three At A Time",
+      "description": "They have stopped asking for the one that tastes better. Three shiftlong tonics, and the note adds that a crew is three people and one of them going without is worse than all three getting something ordinary.",
+      "required_item_id": "shiftlong_tonic",
+      "required_amount": 3,
+      "reward_coins": 138,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Fine",
+      "required_trait": "",
+      "required_traits": [],
+      "minimum_trait_matches": 0,
+      "required_effect_kind": "speed",
+      "required_effect_kinds": [],
+      "minimum_effect_matches": 0,
+      "prerequisite_quests": [
+        "winter_crossing_for_tarn"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 32,
+      "repeatable": true,
+      "repeat_cooldown_days": 6,
+      "completion_milestones": []
     }
   ]
 }

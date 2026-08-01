@@ -644,6 +644,54 @@
           "description": "A raking light that finds the impression rather than the mark."
         }
       ]
+    },
+    {
+      "id": "cinderlight_lamp",
+      "name": "Cinderlight Lamp",
+      "category": "potion",
+      "base_value": 56,
+      "color": [
+        230,
+        156,
+        96,
+        255
+      ],
+      "description": "A low ember-orange working light with no glare in it. Brin prefers it for night work in the beds because it does not blind him every time he looks up.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 250.0,
+          "description": "A low warm light that does not flare when you look at it."
+        }
+      ]
+    },
+    {
+      "id": "banked_cinderlight",
+      "name": "Banked Cinderlight",
+      "category": "potion",
+      "base_value": 132,
+      "color": [
+        244,
+        184,
+        116,
+        255
+      ],
+      "description": "Banked rather than burning. It gives the same light for four times as long and will not go out if you set it down in wind, which is the only property the crews actually asked about.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 380.0,
+          "description": "A long low light that holds through weather."
+        },
+        {
+          "kind": "restore",
+          "magnitude": 18.0,
+          "duration_seconds": 0.0,
+          "description": "Warm enough to be worth sitting beside."
+        }
+      ]
     }
   ]
 }

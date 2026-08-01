@@ -1036,6 +1036,28 @@ Stop the loop and report if:
   *No new guard.* `nothing_waits_on_a_repeatable_quest` already covers the trap these four sit in
   (all repeatable), and an "effects must be evenly demanded" rule would be legislating taste.
   **49 quests; speed is no longer a supply with no demand.**
+- **2026-08-01 — the hot bench never got the work it was cut for.** Recipes per bench:
+  `entry_cauldron` **23**, greenhouse 9, containment 5, archive 5, and **`rune_forge_bench` 2** —
+  untouched since the pass that built it, and the only bench in the tower favouring
+  warm/volatile/vigor. It also had **zero restore recipes**, which is odd for the one room that is
+  deliberately warm.
+  Three recipes, one per effect the bench lacked breadth in. **Bankfire Tonic** is for the kind of
+  cold that has had time to settle in, and works by refusing to hurry — Wren asked for the slow
+  version specifically, having seen the fast one used on a carter brought down off the pass.
+  **Cinderlight Lamp** is a charred-hollow cap and a desert stalk, two things that survived a fire,
+  lit on a bench designed for neither; it morphs to **Banked Cinderlight** on kilnfire. **Shiftlong
+  Tonic** batches three because a crew is three people, with a board order to match so it is not
+  another speed potion nobody asks for. Forge: 2 → 5, and 0 → 1 restore.
+  *Placement caught before writing:* a restore recipe at the forge belongs in
+  `recipes_restore_rune_forge_bench.json`, not bundled into the cold bench's file — restore recipes
+  are filed per bench. New file, registered in the loader.
+  *And a bug in my own script, caught before it ran:* the ingredient-set uniqueness check loaded
+  every crafting file and read `["recipes"]` **before** filtering by filename, so
+  `mutation_formulas.json` would have thrown. Rewritten as a plain function.
+  *Verifying took three attempts and that is the note worth keeping.* The archive morphs list is
+  sorted **alphabetically by recipe name** — not file order, not loader order, both of which I tried
+  first. **Check how a list is sorted before indexing into it.**
+  **47 recipes, 50 quests; every bench between 5 and 23; all files under 700 lines.**
 
 ## Deferred (needs a new system; not for this loop)
 

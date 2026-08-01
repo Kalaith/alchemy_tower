@@ -305,6 +305,27 @@
           "description": "A low, long push with none of the original's kick."
         }
       ]
+    },
+    {
+      "id": "shiftlong_tonic",
+      "name": "Shiftlong Tonic",
+      "category": "potion",
+      "base_value": 40,
+      "color": [
+        226,
+        140,
+        92,
+        255
+      ],
+      "description": "Not pleasant and not subtle, and it lasts a full shift. The crews rank it below forgestep on taste and above it on everything else, and order it three at a time.",
+      "effects": [
+        {
+          "kind": "speed",
+          "magnitude": 0.22,
+          "duration_seconds": 300.0,
+          "description": "A steady working lift that lasts the whole shift."
+        }
+      ]
     }
   ]
 }

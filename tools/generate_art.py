@@ -401,6 +401,8 @@ def icon(item, size, world=False):
             "coldread_solution": "#d6e6f2", "lowstar_lantern": "#f0dcb2",
             "heldstar_lantern": "#faecc6",
             "ghostline_solution": "#a2acce",
+            "bankfire_tonic": "#d89e76", "cinderlight_lamp": "#e69c60",
+            "banked_cinderlight": "#f4b874", "shiftlong_tonic": "#e28c5c",
             "coldiron_tincture": "#a6baac", "rimeflower_cordial": "#deeaf4",
             "lastthaw_cordial": "#ece2d2",
             "pollenwind_draught": "#f8d48c",

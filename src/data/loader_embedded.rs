@@ -255,6 +255,10 @@ const RECIPE_SOURCES: &[(&str, &str)] = &[
         include_str!("../../assets/data/crafting/recipes_restore_containment_cold_bench.json"),
     ),
     (
+        "crafting/recipes_restore_rune_forge_bench",
+        include_str!("../../assets/data/crafting/recipes_restore_rune_forge_bench.json"),
+    ),
+    (
         "crafting/recipes_glow",
         include_str!("../../assets/data/crafting/recipes_glow.json"),
     ),

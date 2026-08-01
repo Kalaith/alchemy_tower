@@ -314,6 +314,53 @@
         "warm"
       ],
       "morph_targets": []
+    },
+    {
+      "id": "shiftlong_tonic_recipe",
+      "name": "Shiftlong Tonic",
+      "station_id": "rune_forge_bench",
+      "ingredients": [
+        {
+          "item_id": "scorchvine_resin",
+          "amount": 1
+        },
+        {
+          "item_id": "bloomwing_pollen",
+          "amount": 1
+        },
+        {
+          "item_id": "ember_root",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "shiftlong_tonic",
+      "output_amount": 3,
+      "description": "Noon resin, habitat pollen and a root that comes out of the ground warm. Three to a batch because a crew is three people and handing one of them nothing is worse than handing all of them something ordinary.",
+      "required_heat": 3,
+      "required_stirs": 4,
+      "unstable_output_item_id": "rush_draught",
+      "lore_note": "The channels hold heat the length of the bench, so a batch of three finishes together instead of the last one being the worst one. That is the entire reason it is three.",
+      "minimum_quality": 50,
+      "preferred_traits": [
+        "vigor",
+        "warm",
+        "volatile"
+      ],
+      "guaranteed_traits": [
+        "quickstep"
+      ],
+      "minimum_elements": {
+        "vita": 3,
+        "ember": 7,
+        "mist": 0,
+        "lux": 2
+      },
+      "required_timing": "steady",
+      "required_sequence": [
+        "volatile",
+        "vigor"
+      ],
+      "morph_targets": []
     }
   ]
 }

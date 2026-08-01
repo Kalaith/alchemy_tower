@@ -506,6 +506,58 @@
           "room_bonus_required": true
         }
       ]
+    },
+    {
+      "id": "cinderlight_lamp_recipe",
+      "name": "Cinderlight Lamp",
+      "station_id": "rune_forge_bench",
+      "ingredients": [
+        {
+          "item_id": "ashcap",
+          "amount": 1
+        },
+        {
+          "item_id": "sunspike",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "cinderlight_lamp",
+      "output_amount": 1,
+      "description": "Charred-hollow cap held against a desert stalk on a bench that stays hot. The light is the colour of a fire an hour after it has been let go out.",
+      "required_heat": 3,
+      "required_stirs": 2,
+      "unstable_output_item_id": "lantern_leak",
+      "lore_note": "Two things that survived a fire, lit on a bench designed for neither. Ione has written that down twice in slightly different words and kept both.",
+      "minimum_quality": 46,
+      "preferred_traits": [
+        "warm",
+        "vigor"
+      ],
+      "guaranteed_traits": [
+        "soft_glow"
+      ],
+      "minimum_elements": {
+        "vita": 2,
+        "ember": 3,
+        "mist": 1,
+        "lux": 2
+      },
+      "required_timing": "early",
+      "required_sequence": [
+        "warm",
+        "vigor"
+      ],
+      "morph_targets": [
+        {
+          "output_item_id": "banked_cinderlight",
+          "minimum_quality": 68,
+          "catalyst_tag": "kilnfire",
+          "required_heat": 3,
+          "required_stirs": 3,
+          "required_timing": "early",
+          "room_bonus_required": true
+        }
+      ]
     }
   ]
 }

@@ -326,6 +326,27 @@
           "description": "The warmth of the amber, working against the cold of the flower."
         }
       ]
+    },
+    {
+      "id": "bankfire_tonic",
+      "name": "Bankfire Tonic",
+      "category": "potion",
+      "base_value": 46,
+      "color": [
+        216,
+        158,
+        118,
+        255
+      ],
+      "description": "Warm rather than hot, and it stays that way for an hour. It is for the kind of cold that has had time to settle in, and it works by refusing to be in a hurry about it.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 34.0,
+          "duration_seconds": 0.0,
+          "description": "Slow, deep warming that does not shock the body."
+        }
+      ]
     }
   ]
 }
