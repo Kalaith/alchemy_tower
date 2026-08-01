@@ -723,6 +723,29 @@ Stop the loop and report if:
   split by responsibility into `game_data_reference_tests.rs` (do ids resolve, is everything
   reachable) and `game_data_progression_tests.rs` (can a new game be finished). 83 / 258 / 491.
   **5 alchemy benches, 36 recipes, 73 tests.**
+- **2026-08-01 — the pass grew two herbs nothing wanted.** Measured recipe demand per biome:
+  every biome's harvest feeds 2–20 recipe uses except the **southern pass, which fed 1**. Two of its
+  three herbs — `coldiron_lichen` and `rimeflower` — were authored last-but-three with conditions,
+  variants, source prose and a winter-only window, and then **no recipe in the game asked for
+  either**. Pickable, describable, pointless — exactly the "no inbound reference" failure this file
+  warns about, committed by this loop two iterations after writing the warning.
+  Both are `pure`+`cold`, which is precisely what `containment_cold_bench` favours, so the fix was
+  already implied by the map. **Coldiron Tincture** answers a decade-slow lichen the only honest way
+  — one lichen, three bottles, because the ingredient cannot be hurried — and **Rimeflower Cordial**
+  is a fortnight-wide window worth planning a trip for, morphing to **Lastthaw** on `saltroad` amber
+  so the pass and the road it carries end up in one bottle. Brin's standing objection is on the
+  board *under the order itself*: ten years to cover a hand's width, and a standing order has no
+  number on it.
+  *Two guards, both verified against deliberate breaks:*
+  `every_gatherable_ingredient_is_wanted_by_some_recipe` (named exactly the two herbs when both
+  recipes were pulled — my **first** break attempt pulled only one recipe and the test correctly
+  stayed green, which is worth remembering: verify the break actually breaks the thing), and an
+  extension to the journal's herb-usage test, since `herb_used_in_text` had been returning `None`
+  for both — a blank where every other herb explains itself.
+  *Split done:* `potions_restore.json` (715) would have crossed 800, so it split along the axis the
+  recipe files already use — the bench that brews them. 21 valley-cauldron, 15 tower-bench.
+  *Next split candidates:* `narrative_text.json` (769) and `sprites/item_icons.json` (751).
+  **41 recipes, 74 tests, 39 quests.**
 
 ## Deferred (needs a new system; not for this loop)
 

@@ -107,6 +107,106 @@
           "room_bonus_required": true
         }
       ]
+    },
+    {
+      "id": "coldiron_tincture_recipe",
+      "name": "Coldiron Tincture",
+      "station_id": "containment_cold_bench",
+      "ingredients": [
+        {
+          "item_id": "coldiron_lichen",
+          "amount": 1
+        },
+        {
+          "item_id": "reedflower",
+          "amount": 2
+        }
+      ],
+      "output_item_id": "coldiron_tincture",
+      "output_amount": 3,
+      "description": "One hand's width of lichen, drawn out three ways with reedwater. The method exists because the ingredient cannot be hurried and there is no second patch.",
+      "required_heat": 1,
+      "required_stirs": 3,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "Brin has said twice that the lichen takes a decade to cover a hand's width. He said it the second time while watching somebody reach for it, which is a different sentence.",
+      "minimum_quality": 42,
+      "preferred_traits": [
+        "pure",
+        "cold",
+        "calm"
+      ],
+      "guaranteed_traits": [
+        "restorative"
+      ],
+      "minimum_elements": {
+        "vita": 2,
+        "ember": 0,
+        "mist": 5,
+        "lux": 1
+      },
+      "required_timing": "steady",
+      "required_sequence": [
+        "pure",
+        "cold"
+      ],
+      "morph_targets": []
+    },
+    {
+      "id": "rimeflower_cordial_recipe",
+      "name": "Rimeflower Cordial",
+      "station_id": "containment_cold_bench",
+      "ingredients": [
+        {
+          "item_id": "rimeflower",
+          "amount": 1
+        },
+        {
+          "item_id": "coldiron_lichen",
+          "amount": 1
+        },
+        {
+          "item_id": "whisper_moss",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "rimeflower_cordial",
+      "output_amount": 1,
+      "description": "The high stone's whole winter in a bottle: a flower that is open for a fortnight, the crust that grows beside it, and moss from a valley that has never seen either.",
+      "required_heat": 1,
+      "required_stirs": 4,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "It can only be made in the weeks the flower is open, and the flower has been opening up there unwatched for longer than the tower has stood. Brewing it is the first time anything has come of it.",
+      "minimum_quality": 52,
+      "preferred_traits": [
+        "pure",
+        "cold",
+        "calm"
+      ],
+      "guaranteed_traits": [
+        "restorative"
+      ],
+      "minimum_elements": {
+        "vita": 3,
+        "ember": 0,
+        "mist": 5,
+        "lux": 3
+      },
+      "required_timing": "late",
+      "required_sequence": [
+        "pure",
+        "cold"
+      ],
+      "morph_targets": [
+        {
+          "output_item_id": "lastthaw_cordial",
+          "minimum_quality": 72,
+          "catalyst_tag": "saltroad",
+          "required_heat": 1,
+          "required_stirs": 4,
+          "required_timing": "late",
+          "room_bonus_required": true
+        }
+      ]
     }
   ]
 }

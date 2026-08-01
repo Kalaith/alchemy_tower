@@ -367,6 +367,8 @@ def icon(item, size, world=False):
             "forgelight_lantern": "#f8b060", "quickfire_draught": "#ff925c",
             "channelfire_lantern": "#ee9e60", "hearthchannel_lantern": "#faba78",
             "forgestep_tonic": "#e89258",
+            "coldiron_tincture": "#a6baac", "rimeflower_cordial": "#deeaf4",
+            "lastthaw_cordial": "#ece2d2",
             "pollenwind_draught": "#f8d48c",
             "beacon_burst": "#e2d8a0", "nightwatch_lantern": "#e8be92",
             "fieldwide_poultice": "#d6ce8c", "second_spring_tonic": "#8ac492",

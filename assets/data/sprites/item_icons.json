@@ -719,6 +719,33 @@
         64
       ],
       "prompt": "A blunt orange speed tonic bottle, industrial and unsubtle."
+    },
+    {
+      "id": "coldiron_tincture",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A thin grey-green tincture bottle with a faint metallic sheen, plain and practical."
+    },
+    {
+      "id": "rimeflower_cordial",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A pale ice-white cordial bottle with frost cast across the glass."
+    },
+    {
+      "id": "lastthaw_cordial",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A warm cream-gold cordial bottle with a cold white core, high-tier morph icon."
     }
   ]
 }

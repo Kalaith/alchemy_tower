@@ -1,0 +1,331 @@
+{
+  "items": [
+    {
+      "id": "greenmend_salve",
+      "name": "Greenmend Salve",
+      "category": "potion",
+      "base_value": 26,
+      "color": [
+        170,
+        224,
+        196,
+        255
+      ],
+      "description": "A cool, clean salve tuned for wilted planter beds and delicate specimens.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 18.0,
+          "duration_seconds": 0.0,
+          "description": "Feeds tired roots and settles skittish growth."
+        }
+      ]
+    },
+    {
+      "id": "wardfrost_tonic",
+      "name": "Wardfrost Tonic",
+      "category": "potion",
+      "base_value": 48,
+      "color": [
+        198,
+        224,
+        232,
+        255
+      ],
+      "description": "Cold ward frost carried in quietbloom. Brewed entirely from things the tower grew for itself.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 34.0,
+          "duration_seconds": 0.0,
+          "description": "Restores deeply and leaves the drinker unusually settled."
+        }
+      ]
+    },
+    {
+      "id": "hushwater_draught",
+      "name": "Hushwater Draught",
+      "category": "potion",
+      "base_value": 74,
+      "color": [
+        196,
+        216,
+        228,
+        255
+      ],
+      "description": "Ward frost and quietbloom put under a stillwater pearl. The result is so quiet that Lyra will not keep an open bottle near the habitats.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 52.0,
+          "duration_seconds": 0.0,
+          "description": "Restores completely and leaves the drinker unnervingly calm."
+        }
+      ]
+    },
+    {
+      "id": "hollowroot_cordial",
+      "name": "Hollowroot Cordial",
+      "category": "potion",
+      "base_value": 88,
+      "color": [
+        162,
+        146,
+        206,
+        255
+      ],
+      "description": "Pale violet and slightly dusty, and the only bottle in the valley whose ingredient list includes something that had stopped existing.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 54.0,
+          "duration_seconds": 0.0,
+          "description": "Restores completely, with a depth nothing currently growing in the valley can match."
+        }
+      ]
+    },
+    {
+      "id": "hollowroot_reliquary",
+      "name": "Hollowroot Reliquary",
+      "category": "potion",
+      "base_value": 140,
+      "color": [
+        206,
+        198,
+        240,
+        255
+      ],
+      "description": "Starlight holds the cordial at the moment it finishes. Ione has one on a shelf and has not written a label for it, which for her is an enormous statement.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 64.0,
+          "duration_seconds": 0.0,
+          "description": "Restores completely and does not fade the way a brew is supposed to."
+        },
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 150.0,
+          "description": "Carries a faint violet reading-light of its own."
+        }
+      ]
+    },
+    {
+      "id": "stillkeeper_tonic",
+      "name": "Stillkeeper Tonic",
+      "category": "potion",
+      "base_value": 56,
+      "color": [
+        180,
+        210,
+        214,
+        255
+      ],
+      "description": "Cold, clear and entirely unhurried. It settles whatever takes it rather than mending anything, which for a frightened animal is the same thing.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 32.0,
+          "duration_seconds": 0.0,
+          "description": "Restores slowly and completely, and takes the panic out of the taker."
+        }
+      ]
+    },
+    {
+      "id": "deepkeeper_draught",
+      "name": "Deepkeeper Draught",
+      "category": "potion",
+      "base_value": 96,
+      "color": [
+        156,
+        192,
+        200,
+        255
+      ],
+      "description": "Stillwater held at ward temperature until the whole mixture forgets it was ever stirred. Only the cold bench can hold it long enough.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 50.0,
+          "duration_seconds": 0.0,
+          "description": "Restores fully and leaves the taker steady for the rest of the day."
+        }
+      ]
+    },
+    {
+      "id": "terracemend_salve",
+      "name": "Terracemend Salve",
+      "category": "potion",
+      "base_value": 58,
+      "color": [
+        186,
+        172,
+        206,
+        255
+      ],
+      "description": "A pale violet salve for neglected ground. It works slowly and asks to be left alone, which is exactly the complaint Brin has about it.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 34.0,
+          "duration_seconds": 0.0,
+          "description": "Restores steadily and keeps holding, in soil or in people."
+        }
+      ]
+    },
+    {
+      "id": "longhold_cordial",
+      "name": "Longhold Cordial",
+      "category": "potion",
+      "base_value": 190,
+      "color": [
+        198,
+        176,
+        214,
+        255
+      ],
+      "description": "Hollowroot held open by saltroad amber. It keeps working for days rather than hours, and every ingredient in it came from somewhere that had to be reached.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 70.0,
+          "duration_seconds": 0.0,
+          "description": "Restores completely and keeps restoring long after it should have stopped."
+        }
+      ]
+    },
+    {
+      "id": "keptwarm_tonic",
+      "name": "Keptwarm Tonic",
+      "category": "potion",
+      "base_value": 124,
+      "color": [
+        214,
+        200,
+        178,
+        255
+      ],
+      "description": "Ward frost persuaded to stay useful at room temperature, which the cold bench regards as cheating.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 46.0,
+          "duration_seconds": 0.0,
+          "description": "Restores deeply without needing to be kept cold."
+        }
+      ]
+    },
+    {
+      "id": "southmarket_salve",
+      "name": "Southmarket Salve",
+      "category": "potion",
+      "base_value": 72,
+      "color": [
+        196,
+        158,
+        118,
+        255
+      ],
+      "description": "Warm, resinous and faintly expensive-tasting. Two to a batch, which is the only thing that makes it worth brewing at all.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 38.0,
+          "duration_seconds": 0.0,
+          "description": "Restores well and travels without spoiling."
+        }
+      ]
+    },
+    {
+      "id": "farcarried_tonic",
+      "name": "Farcarried Tonic",
+      "category": "potion",
+      "base_value": 82,
+      "color": [
+        216,
+        210,
+        168,
+        255
+      ],
+      "description": "Pale gold and faintly grassy. It is the first thing brewed in this tower from a plant that does not grow in this valley, and it took somebody walking out of it to manage.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 44.0,
+          "duration_seconds": 0.0,
+          "description": "Restores strongly and keeps a walker going far past where they meant to stop."
+        }
+      ]
+    },
+    {
+      "id": "coldiron_tincture",
+      "name": "Coldiron Tincture",
+      "category": "potion",
+      "base_value": 34,
+      "color": [
+        166,
+        186,
+        172,
+        255
+      ],
+      "description": "Thin, grey-green and faintly metallic. It keeps a wound clean for a week in weather that would spoil anything else, which is why the road crews want it and why Brin would rather they wanted something faster-growing.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 26.0,
+          "duration_seconds": 0.0,
+          "description": "Steady, unhurried mending that does not spoil in the cold."
+        }
+      ]
+    },
+    {
+      "id": "rimeflower_cordial",
+      "name": "Rimeflower Cordial",
+      "category": "potion",
+      "base_value": 78,
+      "color": [
+        222,
+        234,
+        244,
+        255
+      ],
+      "description": "Clear with a white cast to it, cold in the hand long after it leaves the bench. It tastes the way the air does above the cloud line, which nobody in the valley has a word for.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 48.0,
+          "duration_seconds": 0.0,
+          "description": "Deep mending with no heat in it at all."
+        }
+      ]
+    },
+    {
+      "id": "lastthaw_cordial",
+      "name": "Lastthaw Cordial",
+      "category": "potion",
+      "base_value": 168,
+      "color": [
+        236,
+        226,
+        210,
+        255
+      ],
+      "description": "Rimeflower held against saltroad amber, the pass and the road it carries in one bottle. It does not go cold and it does not go off, and it is the only thing the tower makes that keeps through a winter on a cart.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 66.0,
+          "duration_seconds": 0.0,
+          "description": "Full, patient mending that keeps its strength however long it travels."
+        },
+        {
+          "kind": "speed",
+          "magnitude": 0.16,
+          "duration_seconds": 200.0,
+          "description": "The warmth of the amber, working against the cold of the flower."
+        }
+      ]
+    }
+  ]
+}

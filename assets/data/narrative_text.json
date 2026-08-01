@@ -682,6 +682,27 @@
       "after_milestone": "rune_workshop_restored",
       "order": 72,
       "line": "Tried the forge tonic. Tastes like a smithy and works like one. I will be having another."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "pass_kept_open",
+      "order": 76,
+      "line": "So there is a use for the lichen now. I would rather there wasn't. Ten years to cover a hand's width, and a standing order does not have a number on it — that is how a thing goes from rare to gone, and everyone involved is only ever taking a little."
+    },
+    {
+      "npc_id": "tarn_wayfarer",
+      "after_quest": "",
+      "after_milestone": "pass_kept_open",
+      "order": 78,
+      "line": "Eleven years I have gone past that flower and it may as well have been snow on a rock. You put it in a bottle and now the crews ask me to carry it. I do not know what to do with being wrong that long about something I saw every winter."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "pass_kept_open",
+      "order": 84,
+      "line": "Two plants that grow an hour above us, and this tower kept records for a century without one line on either. Not lost — never written. Whoever was up there keeping the road was not somebody the keeper thought to ask."
     }
   ],
   "epilogue_beats": [

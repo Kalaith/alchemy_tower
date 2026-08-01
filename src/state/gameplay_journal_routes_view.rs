@@ -245,6 +245,20 @@ mod tests {
             .herb_used_in_text(&data, "field_bloom")
             .expect("field bloom is used in recipes");
         assert!(!field_bloom.contains("Brews into:"), "got: {field_bloom}");
+
+        // The southern pass herbs returned None here for two iterations, which
+        // rendered as a blank where every other herb explains itself: nothing
+        // brewed with them, so the journal had nothing to say. A herb the
+        // player can pick should always be able to answer "what is this for".
+        for herb_id in ["coldiron_lichen", "rimeflower"] {
+            let text = state
+                .herb_used_in_text(&data, herb_id)
+                .unwrap_or_else(|| panic!("{herb_id} should read as used somewhere"));
+            assert!(
+                text.contains("discover"),
+                "{herb_id} uses should hint at discovery: {text}"
+            );
+        }
     }
 }
 

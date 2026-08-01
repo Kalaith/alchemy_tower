@@ -373,6 +373,30 @@
           "text": "The third order was collected the same night and no fourth has appeared. Whoever was asking got the answer they came for, and has not said what they intend to do with it."
         }
       ]
+    },
+    {
+      "id": "board_coldiron_for_the_crews",
+      "title": "Road Crews: Coldiron Tincture, Standing Order",
+      "description": "The crews working the switchback want tincture that keeps in the wet. Brin has written under the notice, in his own hand, that the lichen takes ten years to cover a hand's width and the order does not say how much is enough. Both notes are still up.",
+      "required_item_id": "coldiron_tincture",
+      "required_amount": 2,
+      "reward_coins": 96,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Fine",
+      "required_trait": "pure",
+      "required_traits": [],
+      "minimum_trait_matches": 0,
+      "required_effect_kind": "restore",
+      "required_effect_kinds": [],
+      "minimum_effect_matches": 0,
+      "prerequisite_quests": [
+        "winter_crossing_for_tarn"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 18,
+      "repeatable": true,
+      "repeat_cooldown_days": 6,
+      "completion_milestones": []
     }
   ]
 }

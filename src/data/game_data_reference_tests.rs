@@ -227,6 +227,40 @@ mod tests {
     }
 
     /// Every journal beat the game can ever record, from any source.
+    /// A plain ingredient earns its place by being wanted somewhere. Two herbs
+    /// on the southern pass — `coldiron_lichen` and `rimeflower` — were authored
+    /// with conditions, variants and prose, and then no recipe in the game
+    /// asked for either, so the newest biome's whole harvest fed nothing. They
+    /// were pickable, describable, and pointless.
+    ///
+    /// Creatures and catalysts are excluded deliberately: creatures feed
+    /// habitats and catalysts are matched by `catalyst_tag` rather than by id,
+    /// so neither shows up in a recipe's ingredient list even when in demand.
+    #[test]
+    fn every_gatherable_ingredient_is_wanted_by_some_recipe() {
+        use crate::data::ItemCategory;
+
+        let data = load_embedded().expect("embedded game data should load");
+        let wanted = data
+            .recipes
+            .iter()
+            .flat_map(|recipe| recipe.ingredients.iter().map(|entry| entry.item_id.clone()))
+            .collect::<std::collections::HashSet<_>>();
+
+        let idle = data
+            .items
+            .iter()
+            .filter(|item| item.category == ItemCategory::Ingredient)
+            .filter(|item| !wanted.contains(&item.id))
+            .map(|item| item.id.clone())
+            .collect::<std::collections::BTreeSet<_>>();
+
+        assert!(
+            idle.is_empty(),
+            "ingredients that can be picked but that nothing brews with: {idle:?}"
+        );
+    }
+
     #[test]
     fn every_brewing_trait_has_a_bench_that_favours_it() {
         use crate::data::ItemCategory;

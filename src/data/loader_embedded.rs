@@ -116,6 +116,10 @@ const ITEM_SOURCES: &[(&str, &str)] = &[
         include_str!("../../assets/data/items/potions_restore.json"),
     ),
     (
+        "items/potions_restore_tower",
+        include_str!("../../assets/data/items/potions_restore_tower.json"),
+    ),
+    (
         "items/potions_glow",
         include_str!("../../assets/data/items/potions_glow.json"),
     ),
