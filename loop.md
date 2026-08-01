@@ -366,6 +366,27 @@ Stop the loop and report if:
   immediately.*
   *Next: Brin and Ione are the last one-shot givers, and `required_sequence` is used by only 4 of 28
   recipes — the ingredient-order mechanic is the next nearly-unused system.*
+- **2026-08-01 — NPC arcs (the last two).** Brin and Ione. **Correction first: last pass's ledger
+  claimed every route had something on it, and that was wrong — `tower_ruin_edge` and
+  `creekside_meadow` were both still bare.** Brin's arc fixes the first as its payoff: there are
+  terraces cut into the slope under the tower wall that he has walked past twice a day for thirty
+  years calling them rubble, and under two feet of mortar there is bed structure, drainage and root
+  stock laid out by somebody who understood the slope better than anyone alive. He finishes their
+  work rather than starting his own. `creekside_meadow` is now the town commons — two ungated nodes,
+  which also gives the opening hours somewhere to gather that is not a half-hour walk.
+  Ione's arc is the archive's gaps rather than its contents: eleven months removed from the floor
+  logs, cleanly, by someone who left the binding intact so nobody would count. It consumes exactly
+  the last two passes' output — the **marginalia lantern** (iteration 11) raises the scraping, and a
+  **hollowroot cordial** (iteration 10) is what the recovered page describes, so she can check a
+  claim against the thing for the first time in her career. Her payoff is three journal beats at
+  once: the record, reconciled.
+  **All six townsfolk now have three-beat arcs; every route has nodes.** The route claim is now a
+  test (`every_gathering_route_has_something_on_it`) rather than something asserted from memory.
+  *Ione's final beat plus her reaction wraps to six lines and is visibly at the dialogue panel's
+  ceiling. Treat that pair as the maximum; do not author longer.*
+  *Next: no backlog item is outstanding. `required_sequence` (4 of 29 recipes) is the last
+  nearly-unused system; otherwise the open axes are prose, biome signature hooks for the five wild
+  areas that still lack one, and board-request variety.*
 
 ## Deferred (needs a new system; not for this loop)
 

@@ -65,7 +65,9 @@
           "title": "Greenhouse Expanded",
           "text": "Brin reset the old planter wards. A new moon bed is active on the north side of the greenhouse, and the town finally has reason to believe the valley can recover in more than scraps."
         }
-      ]
+      ],
+      "giver_intro_line": "The greenhouse beds are dead ground with glass over them. Give me one cultivation brew that actually works and I will show this town that growing here is still a skill and not a superstition.",
+      "giver_active_line": "Still waiting on that brew. The beds are not getting any younger and neither, frankly, am I."
     },
     {
       "id": "stamina_for_elric",
@@ -108,7 +110,9 @@
         "glow_for_rowan"
       ],
       "required_unlocked_warp": "entry_to_greenhouse",
-      "minimum_total_brews": 18
+      "minimum_total_brews": 18,
+      "giver_intro_line": "I have nine years of notes on a tower I have never been inside. Bring me something the observatory records actually describe and I can start checking my work against the thing instead of against itself.",
+      "giver_active_line": "Whenever you have it. I have waited nine years; I can manage another fortnight without becoming unreasonable about it."
     },
     {
       "id": "containment_for_lyra",
@@ -341,6 +345,120 @@
           "id": "town_charter_signed",
           "title": "A Town That Does Not Close At Sundown",
           "text": "The watch took the outer road and held it, and the council put the tower's supply into standing orders rather than one-off requests. The board in the square carries the town's business now, not its emergencies."
+        }
+      ]
+    },
+    {
+      "id": "ruin_survey_for_brin",
+      "title": "Whatever Is Left Under The Wall",
+      "description": "Deliver 2 Fine-or-better Greenmend Salves to Brin so he can find out whether anything under the tower's old terraces is still alive.",
+      "required_item_id": "greenmend_salve",
+      "required_amount": 2,
+      "reward_coins": 74,
+      "giver_npc_id": "brin_groundskeeper",
+      "minimum_quality_band": "Fine",
+      "required_trait": "restorative",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [
+        "cultivation_for_brin"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 14,
+      "giver_intro_line": "There are terraces cut into the slope under the tower wall. Nobody has put a fork in them since before I started, and I have walked past them twice a day for thirty years assuming they were rubble. Two greenmend salves and I will find out whether that assumption was work or laziness.",
+      "giver_active_line": "Two, because I want to try the north terrace and the south one. They get different light and I have been guessing about that for three decades.",
+      "completion_milestones": [
+        {
+          "id": "terraces_still_alive",
+          "title": "Still Alive Under There",
+          "text": "The tower's terraces are not rubble. Under two feet of fallen mortar Brin found bed structure, drainage channels and root stock, laid out by somebody who understood the slope better than anyone working the valley today."
+        }
+      ]
+    },
+    {
+      "id": "terrace_restoration_for_brin",
+      "title": "Somebody Knew What They Were Doing",
+      "description": "Deliver 1 Excellent Deeproot Tonic to Brin so the tower's terraces can be brought properly back into work.",
+      "required_item_id": "deeproot_tonic",
+      "required_amount": 1,
+      "reward_coins": 140,
+      "giver_npc_id": "brin_groundskeeper",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "restorative",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [
+        "ruin_survey_for_brin"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 26,
+      "giver_intro_line": "Whoever cut those terraces knew this slope better than I do and has been dead or gone for twenty years. I would like to finish their work rather than start my own. One deeproot tonic, the slow kind, because a terrace is not a season's job and I am not going to treat it like one.",
+      "giver_active_line": "The slow kind. Anything that works fast will have worn through before the first winter and I will have wasted the only chance the slope gets.",
+      "completion_milestones": [
+        {
+          "id": "terraces_worked_again",
+          "title": "The Terraces Worked Again",
+          "text": "Brin brought the tower's own terraces back into cultivation, following the original bed lines rather than laying his own. The ruin edge grows again, and he has taken to calling the person who cut them 'the previous groundskeeper', which is the highest thing he says about anybody."
+        }
+      ]
+    },
+    {
+      "id": "missing_pages_for_ione",
+      "title": "Somebody Took The Pages Out",
+      "description": "Deliver 1 Excellent Marginalia Lantern to Ione so she can raise what was scraped off the floor logs before they were sealed.",
+      "required_item_id": "marginalia_lantern",
+      "required_amount": 1,
+      "reward_coins": 118,
+      "giver_npc_id": "ione_archivist",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "",
+      "required_effect_kind": "glow",
+      "prerequisite_quests": [
+        "star_elixir_for_ione"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 26,
+      "giver_intro_line": "Eleven months are missing from the floor logs. Not lost — removed, cleanly, by someone who knew which gatherings to take and left the binding intact so nobody would count. There is scraping under the last surviving entry. I need a light that raises what is no longer strictly on the page, and I am told the tower can make one.",
+      "giver_active_line": "Excellent grade. A weak one will show me that something was written and not what, and I would rather keep the not-knowing than have it confirmed and still be useless.",
+      "completion_milestones": [
+        {
+          "id": "erased_notes_raised",
+          "title": "Under The Scraping",
+          "text": "The erased hand came up faintly under the marginalia light. It is the wizard's, it is unhurried, and it is a working note rather than a confession: eleven months of somebody quietly proving to themselves what the tower would do if it were left running."
+        }
+      ]
+    },
+    {
+      "id": "restored_record_for_ione",
+      "title": "Check It Against The Thing",
+      "description": "Deliver 1 Excellent Hollowroot Cordial to Ione so the recovered pages can be tested against something they describe.",
+      "required_item_id": "hollowroot_cordial",
+      "required_amount": 1,
+      "reward_coins": 190,
+      "giver_npc_id": "ione_archivist",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "restorative",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [
+        "missing_pages_for_ione"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 32,
+      "giver_intro_line": "The recovered pages describe a cordial made from a plant that does not exist. I have spent nine years being careful not to believe things I could not check. Bring me one and I will have done, for the first time in my career, the thing I keep telling other people to do.",
+      "giver_active_line": "One will do. I am not testing a supply, I am testing a claim, and a claim only needs to be checked once to stop being a claim.",
+      "completion_milestones": [
+        {
+          "id": "record_reconciled",
+          "title": "The Record, Reconciled",
+          "text": "Ione measured a hollowroot cordial against the description on a page that had been scraped blank for twenty years. They match. Her nine years of notes now have a foot in something outside themselves, which she says is the difference between an archive and a collection of opinions."
+        },
+        {
+          "id": "eleven_months_restored",
+          "title": "The Eleven Months",
+          "text": "The removed gatherings are legible enough to file. They cover the season before the sealing: yields falling, wards drawing more than they returned, and the same three words in the margin of four separate pages — 'not yet, then'."
+        },
+        {
+          "id": "the_previous_hand",
+          "title": "The Previous Hand",
+          "text": "Somebody removed those eleven months deliberately, and it was the wizard, and they did it after writing them. Ione's reading is that the pages were taken out not to hide the decision but to stop anyone finding the working that led to it and being persuaded by it."
         }
       ]
     }

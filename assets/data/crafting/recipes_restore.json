@@ -565,6 +565,44 @@
           "room_bonus_required": true
         }
       ]
+    },
+    {
+      "id": "terracemend_salve_recipe",
+      "name": "Terracemend Salve",
+      "station_id": "greenhouse_still",
+      "ingredients": [
+        {
+          "item_id": "ruinbell",
+          "amount": 2
+        },
+        {
+          "item_id": "whisper_moss",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "terracemend_salve",
+      "output_amount": 1,
+      "description": "Made from what grows on the tower's own walls. Brin uses it on ground that has been let go rather than ground that has been worked wrong.",
+      "required_heat": 1,
+      "required_stirs": 3,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "The terraces produce the thing that repairs terraces, which Brin says is either very good design or a joke at his expense.",
+      "minimum_quality": 42,
+      "preferred_traits": [
+        "restorative",
+        "pure"
+      ],
+      "guaranteed_traits": [
+        "restorative"
+      ],
+      "minimum_elements": {
+        "vita": 5,
+        "ember": 0,
+        "mist": 2,
+        "lux": 3
+      },
+      "required_timing": "steady",
+      "morph_targets": []
     }
   ]
 }

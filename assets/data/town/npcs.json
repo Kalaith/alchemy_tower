@@ -298,7 +298,12 @@
       "friendship_line": "I do not open these shelves to just anyone. But you mend things instead of hoarding them, and the archive knows its own. Take what it can spare.",
       "friendship_reward_coins": 20,
       "friendship_reward_item_id": "arcane_dust",
-      "friendship_reward_amount": 3
+      "friendship_reward_amount": 3,
+      "quest_ids": [
+        "star_elixir_for_ione",
+        "missing_pages_for_ione",
+        "restored_record_for_ione"
+      ]
     },
     {
       "id": "brin_groundskeeper",
@@ -356,7 +361,12 @@
       "friendship_line": "The beds answer you the way they used to answer me. That is not a small thing. Here, from the good soil - grow something worth the trouble.",
       "friendship_reward_coins": 15,
       "friendship_reward_item_id": "rain_orchid",
-      "friendship_reward_amount": 3
+      "friendship_reward_amount": 3,
+      "quest_ids": [
+        "cultivation_for_brin",
+        "ruin_survey_for_brin",
+        "terrace_restoration_for_brin"
+      ]
     },
     {
       "id": "lyra_keeper",

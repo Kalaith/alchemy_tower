@@ -479,6 +479,55 @@
       "after_milestone": "containment_repaired",
       "order": 51,
       "line": "There is a bench at the cold end of the floor that has been sitting there the whole time. I assumed it was for the wards. It is for brewing, and everything made on it comes out steadier than the same recipe made downstairs. The tower had opinions about where work should happen."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "terraces_still_alive",
+      "order": 68,
+      "line": "Bed structure. Drainage. Root stock. Under two feet of mortar I have walked past twice a day for thirty years while telling myself it was rubble because that was easier than getting a fork out."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "terraces_worked_again",
+      "order": 92,
+      "line": "I followed their bed lines instead of laying my own. Felt strange for about a week and then felt like the only sensible thing anybody has done up here."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "terraces_worked_again",
+      "order": 92,
+      "line": "Brin has started saying 'the previous groundskeeper' in the tone he normally saves for weather that behaves itself. From him that is practically a monument."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "erased_notes_raised",
+      "order": 93,
+      "line": "It is a working note. Not a confession, not a warning — somebody sitting with a problem for eleven months and being honest with themselves in private about what they were finding. I have read a great many last words. I have never read anybody's thinking."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "record_reconciled",
+      "order": 97,
+      "line": "It matched. Nine years of notes with a foot in something outside themselves at last, which is the whole difference between an archive and a collection of opinions, and I have been on the wrong side of it the entire time."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "record_reconciled",
+      "order": 97,
+      "line": "'Not yet, then.' Four times, in the margin. They kept deciding not to, and kept writing down why. That is the part worth having."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "record_reconciled",
+      "order": 97,
+      "line": "Ione has asked to enter eleven months of recovered record into the town archive. I said yes before she finished the sentence, which she has told me was procedurally improper and I have decided not to mind."
     }
   ]
 }

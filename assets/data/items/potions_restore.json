@@ -542,6 +542,27 @@
           "description": "Restores fully and leaves the taker steady for the rest of the day."
         }
       ]
+    },
+    {
+      "id": "terracemend_salve",
+      "name": "Terracemend Salve",
+      "category": "potion",
+      "base_value": 58,
+      "color": [
+        186,
+        172,
+        206,
+        255
+      ],
+      "description": "A pale violet salve for neglected ground. It works slowly and asks to be left alone, which is exactly the complaint Brin has about it.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 34.0,
+          "duration_seconds": 0.0,
+          "description": "Restores steadily and keeps holding, in soil or in people."
+        }
+      ]
     }
   ]
 }

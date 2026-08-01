@@ -176,6 +176,30 @@ mod tests {
         );
     }
 
+    /// A route with nothing on it is a name in the journal that leads to bare
+    /// ground. Two of these survived several passes purely because the claim
+    /// "every route has something on it" was being made from memory instead of
+    /// counted.
+    #[test]
+    fn every_gathering_route_has_something_on_it() {
+        let data = load_embedded().expect("embedded game data should load");
+        let mut populated = std::collections::HashSet::new();
+        for area in &data.areas {
+            for node in &area.gather_nodes {
+                populated.insert(node.route_id.clone());
+            }
+        }
+
+        let bare = data
+            .gathering_routes
+            .iter()
+            .filter(|route| !populated.contains(&route.id))
+            .map(|route| format!("{} in {}", route.id, route.area_id))
+            .collect::<Vec<_>>();
+
+        assert!(bare.is_empty(), "routes with no gather nodes:\n{bare:#?}");
+    }
+
     #[test]
     fn quests_reward_items_that_exist() {
         let data = load_embedded().expect("embedded game data should load");

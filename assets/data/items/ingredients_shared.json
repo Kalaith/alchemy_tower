@@ -223,6 +223,60 @@
       "wild_variants": [],
       "synthesis_weight": 2,
       "synthesis_value": 2
+    },
+    {
+      "id": "ruinbell",
+      "name": "Ruinbell",
+      "category": "ingredient",
+      "base_value": 12,
+      "color": [
+        198,
+        176,
+        214,
+        255
+      ],
+      "description": "A small bell-flower that only takes in old mortar, and only where the wall has been left alone long enough to stop being maintained. Brin calls it an insult with petals.",
+      "quality": 34,
+      "rarity": 2,
+      "elements": {
+        "vita": 2,
+        "ember": 0,
+        "mist": 1,
+        "lux": 2
+      },
+      "traits": [
+        "restorative",
+        "pure"
+      ],
+      "source_conditions": [
+        "spring and autumn",
+        "old mortar and unworked stone",
+        "the terraces under the tower wall"
+      ],
+      "wild_variants": [
+        {
+          "id": "ruinbell_terraced",
+          "name": "Terraced Ruinbell",
+          "required_conditions": [
+            "autumn",
+            "morning"
+          ],
+          "bonus_traits": [
+            "healing"
+          ],
+          "quality_bonus": 9,
+          "elements": {
+            "vita": 1,
+            "ember": 0,
+            "mist": 0,
+            "lux": 1
+          },
+          "synthesis_weight_bonus": 0,
+          "synthesis_value_bonus": 3
+        }
+      ],
+      "synthesis_weight": 2,
+      "synthesis_value": 3
     }
   ]
 }

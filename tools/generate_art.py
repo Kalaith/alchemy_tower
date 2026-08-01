@@ -197,6 +197,7 @@ def icon(item, size, world=False):
         "rune_ash",
         "pressed_specimen",
         "hollowroot",
+        "ruinbell",
     } or base_item in {
         "whisper_moss",
         "sunleaf",
@@ -217,6 +218,7 @@ def icon(item, size, world=False):
         "rune_ash",
         "pressed_specimen",
         "hollowroot",
+        "ruinbell",
     }:
         colors = {
             "whisper_moss": "#74d59f",
@@ -238,6 +240,7 @@ def icon(item, size, world=False):
             "rune_ash": "#aca2ba",
             "pressed_specimen": "#b2a080",
             "hollowroot": "#9484c4",
+            "ruinbell": "#c6b0d6",
         }
         for ox, oy in [(-10, 2), (2, -4), (12, 4), (-2, 10)]:
             d.ellipse(box(cx + ox, cy + oy, 9, 12), fill=rgb(colors[base_item]))
@@ -324,6 +327,7 @@ def icon(item, size, world=False):
             "hollowroot_cordial": "#a292ce", "hollowroot_reliquary": "#cec6f0",
             "stillkeeper_tonic": "#b4d2d6", "deepkeeper_draught": "#9cc0c8",
             "annotated_light": "#dece9e", "marginalia_lantern": "#eee4be",
+            "terracemend_salve": "#baacce",
         }.get(item, "#d2c1ff")
         d.rounded_rectangle((cx - 8, cy - 24, cx + 8, cy - 12), radius=3, fill=rgb("#d9dfe8", 220))
         d.rectangle((cx - 5, cy - 28, cx + 5, cy - 22), fill=rgb("#8b6a4d"))

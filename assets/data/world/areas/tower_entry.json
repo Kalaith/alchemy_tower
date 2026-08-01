@@ -109,5 +109,73 @@
       "locked_note": "The staircase seal hums. The greenhouse could become the town's first real turning point if you can prove the tower is worth trusting again."
     }
   ],
-  "gather_nodes": []
+  "gather_nodes": [
+    {
+      "id": "ruin_terrace_ruinbell_01",
+      "name": "Ruinbell",
+      "item_id": "ruinbell",
+      "color": [
+        198,
+        176,
+        214,
+        255
+      ],
+      "position": [
+        176.0,
+        618.0
+      ],
+      "radius": 16.0,
+      "route_id": "tower_ruin_edge",
+      "seasons": [
+        "spring",
+        "autumn"
+      ],
+      "weathers": [],
+      "time_windows": [
+        "morning",
+        "day",
+        "evening"
+      ],
+      "spawn_chance": 84,
+      "required_completed_quest": "terrace_restoration_for_brin",
+      "note": "It came up along the restored terrace within a fortnight. Brin maintains he did not plant it and is not pleased about how well it is doing.",
+      "render": {
+        "sprite_id": "ruinbell"
+      }
+    },
+    {
+      "id": "ruin_terrace_moss_01",
+      "name": "Whisper Moss",
+      "item_id": "whisper_moss",
+      "color": [
+        96,
+        214,
+        150,
+        255
+      ],
+      "position": [
+        824.0,
+        596.0
+      ],
+      "radius": 15.0,
+      "route_id": "tower_ruin_edge",
+      "seasons": [],
+      "weathers": [
+        "clear",
+        "mist",
+        "rain"
+      ],
+      "time_windows": [
+        "morning",
+        "day",
+        "evening"
+      ],
+      "spawn_chance": 88,
+      "required_completed_quest": "terrace_restoration_for_brin",
+      "note": "The old drainage channels hold damp exactly the way whoever cut them intended. Twenty years of neglect did not manage to undo that.",
+      "render": {
+        "sprite_id": "whisper_moss"
+      }
+    }
+  ]
 }

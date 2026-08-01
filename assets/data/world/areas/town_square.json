@@ -193,6 +193,76 @@
       "render": {
         "sprite_id": "field_bloom"
       }
+    },
+    {
+      "id": "creekside_sunleaf_01",
+      "name": "Sunleaf",
+      "item_id": "sunleaf",
+      "color": [
+        239,
+        205,
+        90,
+        255
+      ],
+      "position": [
+        860.0,
+        268.0
+      ],
+      "radius": 15.0,
+      "route_id": "creekside_meadow",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "weathers": [
+        "clear",
+        "windy"
+      ],
+      "time_windows": [
+        "morning",
+        "day"
+      ],
+      "spawn_chance": 82,
+      "note": "The creek verge is common ground and always has been. Everyone in the square takes a little and nobody has ever written down that they may.",
+      "render": {
+        "sprite_id": "sunleaf"
+      }
+    },
+    {
+      "id": "creekside_reedflower_01",
+      "name": "Reedflower",
+      "item_id": "reedflower",
+      "color": [
+        214,
+        241,
+        255,
+        255
+      ],
+      "position": [
+        742.0,
+        636.0
+      ],
+      "radius": 15.0,
+      "route_id": "creekside_meadow",
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "weathers": [
+        "mist",
+        "rain",
+        "clear"
+      ],
+      "time_windows": [
+        "morning",
+        "evening"
+      ],
+      "spawn_chance": 78,
+      "note": "Reed stands where the creek slows behind the square. Thinner than the lake shore's, but a great deal closer to the counter.",
+      "render": {
+        "sprite_id": "reedflower"
+      }
     }
   ]
 }
