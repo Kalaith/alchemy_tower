@@ -692,6 +692,27 @@
           "description": "Warm enough to be worth sitting beside."
         }
       ]
+    },
+    {
+      "id": "cloudfloor_lantern",
+      "name": "Cloudfloor Lantern",
+      "category": "potion",
+      "base_value": 74,
+      "color": [
+        216,
+        224,
+        246,
+        255
+      ],
+      "description": "A flat, cool, almost apologetic light. Creatures do not look up when it comes on, which took Lyra a season of watching to be sure of and one sentence to ask for.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 270.0,
+          "description": "A light nothing in the room reacts to."
+        }
+      ]
     }
   ]
 }

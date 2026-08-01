@@ -368,6 +368,24 @@
         64
       ],
       "prompt": "Small dark blue-black hardened ink beads scattered under a bookshelf."
+    },
+    {
+      "id": "leanaway_thrift_pass",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "Flat pink cushion plants pressed against bare mountain stone, low and wind-flattened."
+    },
+    {
+      "id": "thinair_bell_pass",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "Small pale blue-white bell flowers open on high stone above a floor of cloud."
     }
   ]
 }

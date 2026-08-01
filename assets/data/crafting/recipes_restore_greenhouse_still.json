@@ -261,6 +261,48 @@
         "pure"
       ],
       "morph_targets": []
+    },
+    {
+      "id": "leanaway_salve_recipe",
+      "name": "Leanaway Salve",
+      "station_id": "greenhouse_still",
+      "ingredients": [
+        {
+          "item_id": "leanaway_thrift",
+          "amount": 2
+        },
+        {
+          "item_id": "whisper_moss",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "leanaway_salve",
+      "output_amount": 2,
+      "description": "Cushion plant off the windward stone, worked down with moss. It does not close a wound quickly. It stops the wound getting any worse while somebody walks four hours on it.",
+      "required_heat": 1,
+      "required_stirs": 3,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "Tarn carries it and Wren stocks it, and the two of them arrived at that independently before either knew the other had.",
+      "minimum_quality": 46,
+      "preferred_traits": [
+        "restorative",
+        "vigor"
+      ],
+      "guaranteed_traits": [
+        "restorative"
+      ],
+      "minimum_elements": {
+        "vita": 7,
+        "ember": 1,
+        "mist": 1,
+        "lux": 2
+      },
+      "required_timing": "steady",
+      "required_sequence": [
+        "restorative",
+        "vigor"
+      ],
+      "morph_targets": []
     }
   ]
 }

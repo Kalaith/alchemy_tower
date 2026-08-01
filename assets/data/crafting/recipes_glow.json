@@ -565,6 +565,48 @@
           "room_bonus_required": true
         }
       ]
+    },
+    {
+      "id": "cloudfloor_lantern_recipe",
+      "name": "Cloudfloor Lantern",
+      "station_id": "containment_cold_bench",
+      "ingredients": [
+        {
+          "item_id": "thinair_bell",
+          "amount": 1
+        },
+        {
+          "item_id": "quietbloom_spore",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "cloudfloor_lantern",
+      "output_amount": 1,
+      "description": "A bell that only opens above the cloud, brewed cold so it does not notice it has been brought down. The light is flat and undisturbing, which is the whole requirement in a room full of things that startle.",
+      "required_heat": 1,
+      "required_stirs": 3,
+      "unstable_output_item_id": "lantern_leak",
+      "lore_note": "Lyra asked whether it could be made to not wake anything. It was the shortest brief anybody has ever given and the hardest one to argue with.",
+      "minimum_quality": 50,
+      "preferred_traits": [
+        "calm",
+        "luminous"
+      ],
+      "guaranteed_traits": [
+        "soft_glow"
+      ],
+      "minimum_elements": {
+        "vita": 1,
+        "ember": 0,
+        "mist": 3,
+        "lux": 4
+      },
+      "required_timing": "late",
+      "required_sequence": [
+        "calm",
+        "luminous"
+      ],
+      "morph_targets": []
     }
   ]
 }

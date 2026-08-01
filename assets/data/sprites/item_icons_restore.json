@@ -341,6 +341,15 @@
         64
       ],
       "prompt": "A warm terracotta tonic bottle with a soft steady glow."
+    },
+    {
+      "id": "leanaway_salve",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A dusky pink salve jar, plain and practical."
     }
   ]
 }

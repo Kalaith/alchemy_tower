@@ -41,7 +41,7 @@
   "warps": [
     {
       "id": "containment_to_greenhouse",
-      "label": "Greenhouse Floor",
+      "label": "Tower Greenhouse",
       "rect": {
         "x": 80.0,
         "y": 280.0,

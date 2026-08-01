@@ -473,6 +473,27 @@
           "description": "A small, entirely dependable mending."
         }
       ]
+    },
+    {
+      "id": "leanaway_salve",
+      "name": "Leanaway Salve",
+      "category": "potion",
+      "base_value": 44,
+      "color": [
+        214,
+        178,
+        190,
+        255
+      ],
+      "description": "It will not heal anything faster. It holds the damage still for as long as you keep moving, which on a mountain road is the only property that matters.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 28.0,
+          "duration_seconds": 0.0,
+          "description": "Holding rather than mending — nothing gets worse while it lasts."
+        }
+      ]
     }
   ]
 }

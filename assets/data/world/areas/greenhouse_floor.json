@@ -41,7 +41,7 @@
   "warps": [
     {
       "id": "greenhouse_to_entry",
-      "label": "Tower Entry",
+      "label": "Tower Entry Laboratory",
       "rect": {
         "x": 80.0,
         "y": 316.0,
@@ -56,7 +56,7 @@
     },
     {
       "id": "greenhouse_to_containment",
-      "label": "Containment Floor",
+      "label": "Creature Containment",
       "rect": {
         "x": 828.0,
         "y": 110.0,

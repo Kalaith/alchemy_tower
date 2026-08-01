@@ -537,6 +537,42 @@ mod tests {
     /// Two is a floor, not a target, and it is set at the leanest room that
     /// ships (the entry lab and the rune workshop, which are mostly benches and
     /// are meant to be).
+    /// A warp's label is the sign on the door, and the area banner is the sign
+    /// in the room. Nineteen of twenty-six matched exactly, so the intent was
+    /// never in doubt — the other seven had simply drifted, and the same
+    /// archive was reachable through a door marked "Archives" from one floor
+    /// and "Tower Archives" from another. Nothing broke; the player was just
+    /// told two different names for one room.
+    #[test]
+    fn every_door_is_signed_with_the_name_of_the_room_behind_it() {
+        let data = load_embedded().expect("embedded game data should load");
+        let names = data
+            .areas
+            .iter()
+            .map(|area| (area.id.as_str(), area.name.as_str()))
+            .collect::<std::collections::HashMap<_, _>>();
+
+        let mismatched = data
+            .areas
+            .iter()
+            .flat_map(|area| area.warps.iter().map(move |warp| (area, warp)))
+            .filter_map(|(area, warp)| {
+                let behind = names.get(warp.target_area.as_str())?;
+                (warp.label != *behind).then(|| {
+                    format!(
+                        "{} in {}: labelled {:?}, room is {:?}",
+                        warp.id, area.id, warp.label, behind
+                    )
+                })
+            })
+            .collect::<Vec<_>>();
+
+        assert!(
+            mismatched.is_empty(),
+            "doors signed with a name the room does not use: {mismatched:#?}"
+        );
+    }
+
     #[test]
     fn no_room_is_worth_only_one_stop() {
         const MINIMUM_NODES: usize = 2;

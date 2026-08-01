@@ -162,6 +162,115 @@
       ],
       "synthesis_weight": 1,
       "synthesis_value": 7
+    },
+    {
+      "id": "leanaway_thrift",
+      "name": "Leanaway Thrift",
+      "category": "ingredient",
+      "base_value": 22,
+      "color": [
+        206,
+        170,
+        186,
+        255
+      ],
+      "description": "A cushion plant that grows flat to the windward stone and puts nothing at all into standing up. Brin looked at it for a while and said that everything else on this mountain is dead because it argued.",
+      "quality": 45,
+      "rarity": 3,
+      "elements": {
+        "vita": 3,
+        "ember": 1,
+        "mist": 0,
+        "lux": 1
+      },
+      "traits": [
+        "restorative",
+        "vigor"
+      ],
+      "source_conditions": [
+        "spring through autumn, while there is anything to put into a cushion",
+        "windy days especially — it is easiest to find when the grass is laid over",
+        "the windward face, never the sheltered one"
+      ],
+      "wild_variants": [
+        {
+          "id": "leanaway_thrift_pressed",
+          "name": "Wind-Pressed Thrift",
+          "required_conditions": [
+            "windy",
+            "day"
+          ],
+          "bonus_traits": [
+            "healing"
+          ],
+          "quality_bonus": 10,
+          "elements": {
+            "vita": 2,
+            "ember": 0,
+            "mist": 0,
+            "lux": 0
+          },
+          "synthesis_weight_bonus": 0,
+          "synthesis_value_bonus": 4
+        }
+      ],
+      "synthesis_weight": 1,
+      "synthesis_value": 5
+    },
+    {
+      "id": "thinair_bell",
+      "name": "Thinair Bell",
+      "category": "ingredient",
+      "base_value": 30,
+      "color": [
+        212,
+        220,
+        244,
+        255
+      ],
+      "description": "A small pale bell that will not open below the cloud line and has never been successfully carried down and made to open again. Rowan has stopped trying, which took her four years and she will tell you the exact number.",
+      "quality": 50,
+      "rarity": 4,
+      "elements": {
+        "vita": 1,
+        "ember": 0,
+        "mist": 2,
+        "lux": 4
+      },
+      "traits": [
+        "luminous",
+        "calm"
+      ],
+      "source_conditions": [
+        "any season, so long as the cloud is below you rather than around you",
+        "clear and windy alike — it is the altitude it cares about, not the weather",
+        "open only in daylight; it closes as the cloud comes up in the evening"
+      ],
+      "wild_variants": [
+        {
+          "id": "thinair_bell_full",
+          "name": "Full-Open Thinair Bell",
+          "required_conditions": [
+            "summer",
+            "clear",
+            "day"
+          ],
+          "bonus_traits": [
+            "pure"
+          ],
+          "quality_bonus": 12,
+          "elements": {
+            "vita": 0,
+            "ember": 0,
+            "mist": 1,
+            "lux": 3
+          },
+          "synthesis_weight_bonus": 0,
+          "synthesis_value_bonus": 6
+        }
+      ],
+      "synthesis_weight": 1,
+      "synthesis_value": 7
     }
   ]
 }

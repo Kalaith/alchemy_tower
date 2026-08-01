@@ -1104,6 +1104,29 @@ Stop the loop and report if:
   declared sounds are neither generated nor played, but hand-authored ambient audio is on the
   **Deferred** list and event feedback is polish, not world depth.
   **90 tests; route prose 110–215 chars and none of it stale.**
+- **2026-08-02 — the southern pass was half a biome, and seven doors were signed wrong.** Distinct
+  gatherables per wild area: lake 6, forest 8, plains 6, quarry 6, desert 6, rainforest 5 — and
+  **the pass 3**, with only three traits against everyone else's six to nine. It is the road out and
+  Tarn's whole home and it had been three nodes since the pass that built it.
+  Two herbs that could only grow up there: **leanaway thrift**, a cushion plant that puts nothing
+  into standing up — Brin's line is that everything else on this mountain is dead because it argued
+  — and the **thinair bell**, which will not open below the cloud line and which Rowan spent four
+  years failing to grow downhill and can still tell you the exact number. Each feeds a recipe
+  (the guard from iteration 31 would have failed otherwise): a **holding** salve that stops damage
+  worsening for four hours of walking rather than mending it, and a light **nothing in the room
+  reacts to**, which is the shortest brief Lyra has ever given. Pass: 3 → 5 nodes, 3 → 6 traits.
+  ***Seven doors named a room something the room does not call itself.*** A door marked "Greenhouse
+  Floor" opens on a banner reading "Tower Greenhouse"; the same archive was "Archives" from one
+  floor and "Tower Archives" from another. **19 of 26 matched exactly**, so this was drift, not
+  intent. Guarded and verified.
+  *Two suspicions that did not survive the check:* "East Forest" and "South Desert" looked like
+  stale labels and are the areas' **actual names**. Measure before correcting.
+  *My own placement check earned its keep* — it rejected the bell node at 28px from a blocker
+  (30px clearance) **and aborted mid-script**, leaving the herbs written and the nodes not.
+  `git checkout -- assets/data` reverted cleanly; the lesson is that these authoring scripts are not
+  idempotent, so a failed run needs a revert rather than a re-run.
+  *Next split candidate:* `items/potions_glow.json` (718).
+  **140 items, 49 recipes, 91 tests; every wild biome now carries at least five things.**
 
 ## Deferred (needs a new system; not for this loop)
 
