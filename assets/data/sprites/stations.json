@@ -116,6 +116,15 @@
         128
       ],
       "prompt": "A top-down village apothecary counter, shelves, jars, scales, warm lantern light, merchant station silhouette, instantly readable as a shop."
+    },
+    {
+      "id": "containment_habitat_bloomwing",
+      "type": "world_station",
+      "image_size_px": [
+        128,
+        128
+      ],
+      "prompt": "A bloomwing habitat seen from above, open flowering perches under a wide low frame, warm pink and gold, safe habitat not a cage, readable as a creature habitat."
     }
   ]
 }

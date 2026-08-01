@@ -167,6 +167,33 @@
           "description": "A hard, short burst of speed that is difficult to steer."
         }
       ]
+    },
+    {
+      "id": "pollenwind_draught",
+      "name": "Pollenwind Draught",
+      "category": "potion",
+      "base_value": 54,
+      "color": [
+        248,
+        212,
+        140,
+        255
+      ],
+      "description": "Bloomwing pollen taken up in sunspike heat. It moves you the way the drift moves: light, fast, and not quite in a straight line.",
+      "effects": [
+        {
+          "kind": "speed",
+          "magnitude": 0.26,
+          "duration_seconds": 180.0,
+          "description": "A long, buoyant lift to the stride that outlasts most errands."
+        },
+        {
+          "kind": "restore",
+          "magnitude": 16.0,
+          "duration_seconds": 0.0,
+          "description": "Takes the ache out of a long walking day."
+        }
+      ]
     }
   ]
 }

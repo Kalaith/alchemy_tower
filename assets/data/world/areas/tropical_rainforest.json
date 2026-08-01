@@ -237,6 +237,38 @@
       "render": {
         "sprite_id": "dew_slug_rainforest"
       }
+    },
+    {
+      "id": "rainforest_bloomrow_01",
+      "name": "Rain Orchid",
+      "item_id": "rain_orchid",
+      "color": [
+        240,
+        167,
+        200,
+        255
+      ],
+      "position": [
+        846.0,
+        268.0
+      ],
+      "radius": 16.0,
+      "route_id": "rainmist_canopy",
+      "seasons": [],
+      "weathers": [
+        "mist",
+        "rain"
+      ],
+      "time_windows": [
+        "morning",
+        "day"
+      ],
+      "spawn_chance": 84,
+      "required_completed_quest": "pollinator_return_for_lyra",
+      "note": "Orchids that had been putting out one flower a season are carrying six. Something is finally moving between them.",
+      "render": {
+        "sprite_id": "rain_orchid_rainforest"
+      }
     }
   ]
 }

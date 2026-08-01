@@ -265,6 +265,39 @@
       "catalyst_tags": [
         "stillwater"
       ]
+    },
+    {
+      "id": "bloomwing",
+      "name": "Bloomwing",
+      "category": "creature",
+      "base_value": 20,
+      "color": [
+        244,
+        186,
+        172,
+        255
+      ],
+      "description": "A broad-winged valley pollinator, thought gone until the rows opened all at once and something came back to them.",
+      "quality": 38,
+      "rarity": 3,
+      "elements": {
+        "vita": 2,
+        "ember": 0,
+        "mist": 0,
+        "lux": 2
+      },
+      "traits": [
+        "restorative",
+        "luminous"
+      ],
+      "source_conditions": [
+        "open bloom rows",
+        "warm still days",
+        "never taken, only visited"
+      ],
+      "wild_variants": [],
+      "synthesis_weight": 1,
+      "synthesis_value": 3
     }
   ]
 }

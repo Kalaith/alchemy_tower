@@ -304,6 +304,69 @@
       "after_milestone": "archive_revelation",
       "order": 90,
       "line": "Restraint, then. Everything I have been doing to the wards by instinct, they wrote down twenty years ago and then walked away from."
+    },
+    {
+      "npc_id": "lyra_keeper",
+      "after_quest": "",
+      "after_milestone": "pollinator_count_taken",
+      "order": 65,
+      "line": "Eleven. My predecessor logged ninety on the same two rows and did not think it worth remarking on. I have read that page four times looking for the qualifier and there is not one."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "pollinator_count_taken",
+      "order": 65,
+      "line": "Lyra showed me her count. I have been turning beds for a valley that had already stopped being pollinated, which explains a decade of wondering what I was doing wrong."
+    },
+    {
+      "npc_id": "lyra_keeper",
+      "after_quest": "",
+      "after_milestone": "pollinators_returned",
+      "order": 95,
+      "line": "Three broods in the habitats and I have stopped counting the wild rows because I cannot keep up. They did not need saving. They needed a reason, and we had spent twenty years not giving them one."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "pollinators_returned",
+      "order": 95,
+      "line": "The whole valley flowered in the same four days. I walked the long field road on the last of them and I am not ashamed to say I had to stop halfway."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_quest": "",
+      "after_milestone": "pollinators_returned",
+      "order": 95,
+      "line": "My beds set fruit this year without me doing one thing differently. Turns out I was never the missing part."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "pollinators_returned",
+      "order": 95,
+      "line": "The valley flowered at once and I did not have to call a single meeting about it. I intend to enjoy that for exactly one season before somebody asks me to budget for it."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "pollinators_returned",
+      "order": 95,
+      "line": "The old floor logs describe bloom years as routine. I had them filed under exaggeration. I have moved the folder."
+    },
+    {
+      "npc_id": "mira_apothecary",
+      "after_quest": "",
+      "after_milestone": "pollinators_returned",
+      "order": 95,
+      "line": "I am buying wild-gathered stock again. Not tower-grown, not traded up the road. Gathered, out there, by people who found it growing."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "pollinators_returned",
+      "order": 95,
+      "line": "They came back because it was worth the trip. That is the only reason anything ever comes back."
     }
   ]
 }

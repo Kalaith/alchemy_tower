@@ -160,6 +160,38 @@
       ],
       "synthesis_weight": 1,
       "synthesis_value": 6
+    },
+    {
+      "id": "bloomwing_pollen",
+      "name": "Bloomwing Pollen",
+      "category": "ingredient",
+      "base_value": 16,
+      "color": [
+        248,
+        206,
+        128,
+        255
+      ],
+      "description": "Pollen combed from the habitat perches after a bloomwing has passed the night there. It carries whatever the row it visited was carrying.",
+      "quality": 38,
+      "rarity": 3,
+      "elements": {
+        "vita": 3,
+        "ember": 1,
+        "mist": 0,
+        "lux": 1
+      },
+      "traits": [
+        "restorative",
+        "vigor"
+      ],
+      "source_conditions": [
+        "the bloomwing habitat, once the valley is flowering again",
+        "gathered from the perch, not the creature"
+      ],
+      "wild_variants": [],
+      "synthesis_weight": 1,
+      "synthesis_value": 4
     }
   ]
 }

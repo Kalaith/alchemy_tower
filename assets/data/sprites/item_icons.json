@@ -440,6 +440,15 @@
         64
       ],
       "prompt": "A bright red-orange speed draught bottle with the liquid visibly churning."
+    },
+    {
+      "id": "pollenwind_draught",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A warm gold speed draught bottle with pollen drifting inside it."
     }
   ]
 }

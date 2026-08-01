@@ -120,6 +120,11 @@ def station(kind, size):
     elif "habitat_slug" in kind:
         d.rounded_rectangle((cx - 32, cy - 12, cx + 32, cy + 20), radius=10, fill=rgb("#6d7d87"))
         d.rounded_rectangle((cx - 24, cy - 4, cx + 24, cy + 12), radius=8, fill=rgb("#bfe7ef"))
+    elif "habitat_bloomwing" in kind:
+        d.rounded_rectangle((cx - 34, cy + 6, cx + 34, cy + 22), radius=8, fill=rgb("#6f6250"))
+        for ox in [-22, -7, 8, 22]:
+            d.line((cx + ox, cy + 8, cx + ox, cy - 14), fill=rgb("#8fb173"), width=2)
+            d.ellipse(box(cx + ox, cy - 16, 7, 7), fill=rgb("#f4bab0"))
     elif "rune" in kind:
         d.rounded_rectangle((cx - 30, cy - 10, cx + 30, cy + 24), radius=10, fill=rgb("#544a60"))
         d.line((cx - 20, cy + 6, cx + 20, cy + 6), fill=rgb("#e2d4ff"), width=3)
@@ -169,6 +174,7 @@ def icon(item, size, world=False):
         "wardglass_frost",
         "quietbloom_spore",
         "resonance_shard",
+        "bloomwing_pollen",
     } or base_item in {
         "whisper_moss",
         "sunleaf",
@@ -185,6 +191,7 @@ def icon(item, size, world=False):
         "wardglass_frost",
         "quietbloom_spore",
         "resonance_shard",
+        "bloomwing_pollen",
     }:
         colors = {
             "whisper_moss": "#74d59f",
@@ -202,6 +209,7 @@ def icon(item, size, world=False):
             "wardglass_frost": "#bcdcec",
             "quietbloom_spore": "#ced6ba",
             "resonance_shard": "#b2a8f4",
+            "bloomwing_pollen": "#f8ce80",
         }
         for ox, oy in [(-10, 2), (2, -4), (12, 4), (-2, 10)]:
             d.ellipse(box(cx + ox, cy + oy, 9, 12), fill=rgb(colors[base_item]))
@@ -248,8 +256,8 @@ def icon(item, size, world=False):
              "kiln_geode": "#f4985a", "stillwater_pearl": "#bae2e2"}[base_item]
         for ox, oy in [(-10, 8), (0, 0), (12, 10)]:
             d.polygon([(cx + ox, cy + oy - 10), (cx + ox - 8, cy + oy), (cx + ox, cy + oy + 10), (cx + ox + 8, cy + oy)], fill=rgb(c))
-    elif base_item in {"mist_moth_wing", "glow_moth"}:
-        c = "#b8d7ff" if base_item == "mist_moth_wing" else "#f2e49a"
+    elif base_item in {"mist_moth_wing", "glow_moth", "bloomwing"}:
+        c = {"mist_moth_wing": "#b8d7ff", "glow_moth": "#f2e49a", "bloomwing": "#f4bab0"}[base_item]
         d.ellipse(box(cx - 12, cy + 2, 12, 16), fill=rgb(c))
         d.ellipse(box(cx + 12, cy + 2, 12, 16), fill=rgb(c))
         d.ellipse(box(cx, cy + 4, 5, 13), fill=rgb("#fff3c7"))
@@ -279,6 +287,7 @@ def icon(item, size, world=False):
             "resonance_draught": "#cec8fa", "clearspring_draught": "#b0e2d6",
             "deeproot_tonic": "#7aa87c", "hushwater_draught": "#c4d8e4",
             "forgelight_lantern": "#f8b060", "quickfire_draught": "#ff925c",
+            "pollenwind_draught": "#f8d48c",
         }.get(item, "#d2c1ff")
         d.rounded_rectangle((cx - 8, cy - 24, cx + 8, cy - 12), radius=3, fill=rgb("#d9dfe8", 220))
         d.rectangle((cx - 5, cy - 28, cx + 5, cy - 22), fill=rgb("#8b6a4d"))

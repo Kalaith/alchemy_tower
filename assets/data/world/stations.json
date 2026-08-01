@@ -471,6 +471,43 @@
           128.0
         ]
       }
+    },
+    {
+      "id": "containment_habitat_bloomwing",
+      "name": "Bloom Habitat",
+      "kind": "habitat",
+      "area_id": "containment_floor",
+      "position": [
+        476.0,
+        218.0
+      ],
+      "interaction_radius": 54.0,
+      "color": [
+        244,
+        186,
+        172,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 0,
+        "favored_traits": [],
+        "favored_categories": [],
+        "description": ""
+      },
+      "planter_harvest_days": 0,
+      "habitat_creature_ids": [
+        "bloomwing"
+      ],
+      "habitat_output_item_id": "bloomwing_pollen",
+      "habitat_harvest_days": 2,
+      "required_completed_quest": "pollinator_return_for_lyra",
+      "render": {
+        "sprite_size": [
+          128.0,
+          128.0
+        ]
+      }
     }
   ]
 }

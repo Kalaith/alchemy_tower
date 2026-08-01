@@ -232,6 +232,35 @@ mod tests {
             }
         }
 
+        for station in &data.stations {
+            if !station.required_completed_quest.is_empty()
+                && data.quest(&station.required_completed_quest).is_none()
+            {
+                missing.push(format!(
+                    "{} -> gate quest {}",
+                    station.id, station.required_completed_quest
+                ));
+            }
+            for creature_id in &station.habitat_creature_ids {
+                if data.item(creature_id).is_none() {
+                    missing.push(format!("{} -> creature {}", station.id, creature_id));
+                }
+            }
+            if !station.habitat_output_item_id.is_empty()
+                && data.item(&station.habitat_output_item_id).is_none()
+            {
+                missing.push(format!(
+                    "{} -> harvest {}",
+                    station.id, station.habitat_output_item_id
+                ));
+            }
+            for stocked in &station.stock {
+                if data.item(&stocked.item_id).is_none() {
+                    missing.push(format!("{} -> stock {}", station.id, stocked.item_id));
+                }
+            }
+        }
+
         assert!(
             missing.is_empty(),
             "unresolved quest references:\n{missing:#?}"

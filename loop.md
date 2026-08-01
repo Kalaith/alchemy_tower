@@ -146,7 +146,8 @@ Data files follow the same ~800-line rule as `.rs` files. `src/data/loader_embed
 | Creatures, catalysts, runes | `assets/data/items/materials.json` |
 | Recipes and their morph targets | `assets/data/crafting/recipes_<effect>.json` — filed under the effect kind the output potion leads with (`restore`, `glow`, `speed`) |
 | Rune recipes, mutation formulas | `assets/data/crafting/rune_recipes.json`, `crafting/mutation_formulas.json` |
-| NPCs and quests | `assets/data/game_data_npcs.json` — split npcs/quests apart when it crosses 800 lines |
+| NPCs | `assets/data/town/npcs.json` |
+| Quests | `assets/data/town/quests_arcs.json` for a townsperson's own arc, `quests_board.json` for request-board orders |
 | Art requirements | `assets/data/sprites/<section>.json` (`gatherables`, `item_icons`, `npcs`, `stations`, `areas`, `ui_and_effects`), read by `tools/generate_art.py` |
 
 When you split a file: move entries, add the new source to the right table in
@@ -261,6 +262,19 @@ Stop the loop and report if:
   *Next: the two empty tower routes (`archive_stack`, `observatory_span`), the rune workshop still
   being only a gate, or the five townsfolk still on one-shot requests — Mira, Brin, Elric, Ione and
   Lyra could each take the arc treatment Rowan got.*
+- **2026-08-01 — quests / NPCs.** Lyra's very first line has always said "fewer pollinators, stranger
+  nesting" and nothing ever paid it off. The pollinator-collapse chain from `TODO.md` is now her
+  three-beat arc: shelter the creatures, then count what is still flying (eleven where the old log
+  says ninety), then give the valley one week of flowering worth coming back for. The last beat
+  demands an **Excellent Bloomrise Elixir** — a morph output — so the chain cannot be finished
+  without having actually reached the morph layer. Payoff uses `required_completed_quest` in two
+  shapes: a third habitat station (`bloomwing` → `bloomwing_pollen`, the containment floor's first
+  new occupant) and wild bloom rows opening in the plains, rainforest and moonlit forest. One recipe
+  (`pollenwind_draught`) whose ingredients did not both exist in the valley a season ago. Nine town
+  reactions to the two new beats — the reactions list from last iteration paid for itself immediately.
+  Split `game_data_npcs.json` (752) into `town/npcs.json` + `quests_arcs`/`quests_board`, and
+  extended the integrity test to station gates, habitat creatures, harvests and shop stock.
+  *Next: the two empty tower routes, the rune workshop, or arcs for Mira, Brin, Elric and Ione.*
 
 ## Deferred (needs a new system; not for this loop)
 

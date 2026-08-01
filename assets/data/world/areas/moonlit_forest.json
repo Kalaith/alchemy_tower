@@ -272,6 +272,38 @@
       "render": {
         "sprite_id": "whisper_moss_forest"
       }
+    },
+    {
+      "id": "forest_bloomrow_01",
+      "name": "Moon Fern",
+      "item_id": "moon_fern",
+      "color": [
+        184,
+        255,
+        208,
+        255
+      ],
+      "position": [
+        214.0,
+        498.0
+      ],
+      "radius": 16.0,
+      "route_id": "moonlit_grove",
+      "seasons": [],
+      "weathers": [
+        "clear",
+        "mist"
+      ],
+      "time_windows": [
+        "evening",
+        "night"
+      ],
+      "spawn_chance": 82,
+      "required_completed_quest": "pollinator_return_for_lyra",
+      "note": "The grove ferns spore in waves now instead of singly. Lyra says that is what a healthy year used to look like.",
+      "render": {
+        "sprite_id": "moon_fern_forest"
+      }
     }
   ]
 }

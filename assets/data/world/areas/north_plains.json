@@ -246,6 +246,40 @@
       "render": {
         "sprite_id": "whisper_moss_plains"
       }
+    },
+    {
+      "id": "plains_bloomrow_01",
+      "name": "Field Bloom",
+      "item_id": "field_bloom",
+      "color": [
+        244,
+        214,
+        132,
+        255
+      ],
+      "position": [
+        332.0,
+        604.0
+      ],
+      "radius": 16.0,
+      "route_id": "plains_crossing",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "weathers": [],
+      "time_windows": [
+        "morning",
+        "day",
+        "evening"
+      ],
+      "spawn_chance": 90,
+      "required_completed_quest": "pollinator_return_for_lyra",
+      "note": "The verge along the field road came up thick the week the rows opened. Half of it was never sown by anybody.",
+      "render": {
+        "sprite_id": "field_bloom_plains"
+      }
     }
   ]
 }

@@ -142,9 +142,26 @@ struct EmbeddedStationData {
 struct EmbeddedNpcData {
     #[serde(default)]
     npcs: Vec<NpcDefinition>,
+}
+
+#[derive(Debug, Deserialize)]
+struct EmbeddedQuestData {
     #[serde(default)]
     quests: Vec<QuestDefinition>,
 }
+
+/// Requests split by who hands them out: a townsperson working through their
+/// own arc, or the board in the square.
+const QUEST_SOURCES: &[(&str, &str)] = &[
+    (
+        "town/quests_arcs",
+        include_str!("../../assets/data/town/quests_arcs.json"),
+    ),
+    (
+        "town/quests_board",
+        include_str!("../../assets/data/town/quests_board.json"),
+    ),
+];
 
 #[derive(Debug, Deserialize)]
 struct EmbeddedItemData {
@@ -202,6 +219,15 @@ fn load_items() -> Result<Vec<ItemDefinition>, String> {
     Ok(items)
 }
 
+fn load_quests() -> Result<Vec<QuestDefinition>, String> {
+    let mut quests = Vec::new();
+    for &(label, source) in QUEST_SOURCES {
+        let part: EmbeddedQuestData = load_labeled_json(label, source)?;
+        quests.extend(part.quests);
+    }
+    Ok(quests)
+}
+
 fn load_recipes() -> Result<Vec<RecipeDefinition>, String> {
     let mut recipes = Vec::new();
     for &(label, source) in RECIPE_SOURCES {
@@ -225,8 +251,8 @@ pub(super) fn load_embedded_parts() -> Result<GameDataParts, String> {
         include_str!("../../assets/data/world/stations.json"),
     )?;
     let npc: EmbeddedNpcData = load_labeled_json(
-        "game_data_npcs",
-        include_str!("../../assets/data/game_data_npcs.json"),
+        "town/npcs",
+        include_str!("../../assets/data/town/npcs.json"),
     )?;
     let runes: EmbeddedRuneRecipeData = load_labeled_json(
         "crafting/rune_recipes",
@@ -242,7 +268,7 @@ pub(super) fn load_embedded_parts() -> Result<GameDataParts, String> {
         areas: load_areas()?,
         gathering_routes: routes.gathering_routes,
         npcs: npc.npcs,
-        quests: npc.quests,
+        quests: load_quests()?,
         items: load_items()?,
         recipes: load_recipes()?,
         rune_recipes: runes.rune_recipes,

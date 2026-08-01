@@ -175,6 +175,44 @@
           "required_timing": "early"
         }
       ]
+    },
+    {
+      "id": "pollenwind_draught_recipe",
+      "name": "Pollenwind Draught",
+      "station_id": "greenhouse_still",
+      "ingredients": [
+        {
+          "item_id": "bloomwing_pollen",
+          "amount": 1
+        },
+        {
+          "item_id": "sunspike",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "pollenwind_draught",
+      "output_amount": 1,
+      "description": "The first recipe in the book that could not have been brewed a season ago, because one of its two halves did not exist in the valley.",
+      "required_heat": 2,
+      "required_stirs": 3,
+      "unstable_output_item_id": "rush_draught",
+      "lore_note": "Lyra will not call the pollen a harvest. She calls it rent, and says the bloomwings set the rate.",
+      "minimum_quality": 44,
+      "preferred_traits": [
+        "restorative",
+        "vigor"
+      ],
+      "guaranteed_traits": [
+        "vigor"
+      ],
+      "minimum_elements": {
+        "vita": 3,
+        "ember": 2,
+        "mist": 0,
+        "lux": 2
+      },
+      "required_timing": "early",
+      "morph_targets": []
     }
   ]
 }
