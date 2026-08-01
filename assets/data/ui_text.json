@@ -348,6 +348,7 @@
     "overlay_usually": "Usually: {text}",
     "overlay_known_routes": "Known Routes",
     "overlay_herb_memories": "Herb Memories",
+    "journal_showing_range": "showing {first}-{last} of {total}",
     "overlay_tower_notes": "Tower Notes",
     "overlay_brew_ledger": "Brew Ledger",
     "overlay_potion_memories": "Potion Memories",

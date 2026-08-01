@@ -127,11 +127,17 @@ impl GameplayState {
     /// Seed a couple of learned herb memories and open the journal, so the
     /// capture harness can render the herb-memory tab (including the new
     /// "brews into" recipe usage line).
-    pub(crate) fn open_journal_sample(&mut self, _data: &GameData) {
-        for (item_id, route_id) in [
-            ("whisper_moss", "tower_ruin_edge"),
-            ("field_bloom", "plains_crossing"),
-        ] {
+    pub(crate) fn open_journal_sample(&mut self, data: &GameData) {
+        // Seed every gatherable the valley holds, not a token two: the point of
+        // looking at this tab is to see whether it copes with a full shelf.
+        let gathered = data
+            .areas
+            .iter()
+            .flat_map(|area| area.gather_nodes.iter())
+            .map(|node| (node.item_id.clone(), node.route_id.clone()))
+            .collect::<std::collections::BTreeMap<_, _>>();
+        for (item_id, route_id) in gathered {
+            let (item_id, route_id) = (item_id.as_str(), route_id.as_str());
             self.progression.herb_memories.insert(
                 item_id.to_owned(),
                 crate::data::HerbMemoryEntry {

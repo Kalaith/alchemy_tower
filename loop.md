@@ -476,6 +476,23 @@ Stop the loop and report if:
   conditions. Measure the absence, then write into it.*
   *Next: north plains and the rainforest have no exclusive gatherables at all, and the six fixed
   `narrative_text` milestones are still the last prose nobody has revisited.*
+- **2026-08-01 — the journal (making authored content visible).** Measured before choosing: the
+  Routes tab was showing **7 of 17 routes and about 1 of 25 herb memories**, both cut with a silent
+  `break`. Seventeen passes of authored gathering content and the record of it was the least visible
+  thing in the game. The herb column was not a paging problem — at full detail one entry filled it —
+  so both columns now use the archive's list-and-detail shape: names listed, the selected one shown
+  in full, `select` walks them, and each column says "showing X-Y of N". Third instance of this
+  family after the rune drafts and the board, so `visible_window_start` earned being shared.
+  *This also fixed a defect flagged in an early session and never actioned: route descriptions were
+  drawn as one unwrapped line at `x+20` and ran straight through the herb column at `x+420`. The
+  first fix — wrapping them in place — showed only two routes, because a route paragraph is three
+  lines in a 380px column; hence the list-and-detail shape rather than a wrap.*
+  *The capture scene seeded two herbs, which is why this was never seen. It seeds every gatherable in
+  the valley now — a sample that cannot exercise the failure is not verification.*
+  *Also measured: 14 of 29 ingredients are not plantable, but most are frost, ash, shards and pressed
+  specimens that should not be. The genuinely plantable omissions are ashcap, sumpflower, ruinbell,
+  field_bloom and frostcrack_seed — a winter-only seed in a warm bed is an interesting question for a
+  cultivation pass.*
 
 ## Deferred (needs a new system; not for this loop)
 

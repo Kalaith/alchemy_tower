@@ -10,6 +10,8 @@ pub(super) const ARCHIVE_TABS: [&str; 6] = [
 #[derive(Clone, Debug, Default)]
 pub(super) struct OverlayState {
     pub(super) journal_tab: usize,
+    /// Which herb memory the routes tab is showing in full.
+    pub(super) journal_index: usize,
     pub(super) shop_buy_tab: bool,
     pub(super) shop_index: usize,
     pub(super) rune_index: usize,

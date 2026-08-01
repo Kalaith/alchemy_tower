@@ -12,14 +12,28 @@ pub(crate) fn draw_journal_routes_tab_view(
     h: f32,
 ) {
     draw_ui_text(view.title, x + 20.0, y + 136.0, 26.0, dark::TEXT_BRIGHT);
+    if let Some(range_text) = &view.route_range_text {
+        draw_ui_text(range_text, x + 200.0, y + 136.0, 16.0, dark::TEXT_DIM);
+    }
+    // The route column stops short of the herb column. Route descriptions used
+    // to be drawn as one unwrapped line and ran straight through the herbs to
+    // the right of them.
+    const ROUTE_TEXT_WIDTH: f32 = 380.0;
+    let route_limit = y + h - 170.0;
     let mut route_y = y + 168.0;
     for route in &view.route_rows {
-        draw_ui_text(&route.title, x + 20.0, route_y, 22.0, dark::TEXT_BRIGHT);
+        let colour = if route.selected {
+            dark::TEXT_BRIGHT
+        } else {
+            dark::TEXT_DIM
+        };
+        draw_ui_text(&route.title, x + 20.0, route_y, 20.0, colour);
         route_y += 22.0;
-        draw_ui_text(&route.detail, x + 20.0, route_y, 18.0, dark::TEXT_DIM);
-        route_y += 28.0;
-        if route_y > y + h - 40.0 {
-            break;
+    }
+    if let Some(detail) = &view.route_detail {
+        route_y += 8.0;
+        if route_y <= route_limit {
+            draw_wrapped_block(detail, x + 20.0, route_y, ROUTE_TEXT_WIDTH);
         }
     }
 
@@ -70,10 +84,9 @@ pub(crate) fn draw_journal_routes_tab_view(
     }
 }
 
-/// Draw a wrapped herb-memory line and return the next y, advanced by the
-/// text's actual wrapped height so long summaries/conditions no longer overlap
-/// the line beneath them.
-fn draw_herb_wrapped_block(text: &str, x: f32, y: f32, text_width: f32) -> f32 {
+/// Draw a wrapped block and return the next y, advanced by the text's real
+/// wrapped height so a long line cannot overlap whatever comes beneath it.
+fn draw_wrapped_block(text: &str, x: f32, y: f32, text_width: f32) -> f32 {
     const FONT: f32 = 16.0;
     const LINE_HEIGHT: f32 = 18.0;
     const BLOCK_GAP: f32 = 8.0;
@@ -92,37 +105,57 @@ fn draw_journal_herb_memories_view(
     bottom_limit: f32,
 ) {
     draw_ui_text(view.title, x, title_y, 26.0, dark::TEXT_BRIGHT);
+    if let Some(range_text) = &view.range_text {
+        draw_ui_text(range_text, x + 210.0, title_y, 16.0, dark::TEXT_DIM);
+    }
     let mut entry_y = title_y + 32.0;
-    if view.entries.is_empty() {
+    if view.rows.is_empty() {
         draw_ui_text(&view.empty_text, x, entry_y, 22.0, dark::TEXT_DIM);
         return;
     }
 
-    for entry in &view.entries {
-        draw_ui_text(&entry.title, x, entry_y, 22.0, dark::TEXT_BRIGHT);
+    // One line each, so the whole shelf is legible at a glance.
+    for row in &view.rows {
+        let colour = if row.selected {
+            dark::TEXT_BRIGHT
+        } else {
+            dark::TEXT_DIM
+        };
+        draw_ui_text(&row.title, x, entry_y, 20.0, colour);
+        draw_ui_text(&row.state_line, x + 210.0, entry_y, 16.0, dark::TEXT_DIM);
         entry_y += 22.0;
-        draw_ui_text(&entry.state_line, x, entry_y, 18.0, dark::TEXT_DIM);
-        entry_y += 20.0;
-        draw_ui_text(&entry.route_line, x, entry_y, 18.0, dark::TEXT_DIM);
-        entry_y += 20.0;
-        entry_y = draw_herb_wrapped_block(&entry.summary, x, entry_y, text_width);
-        entry_y = draw_herb_wrapped_block(&entry.conditions, x, entry_y, text_width);
-        if let Some(used_in_text) = &entry.used_in_text {
-            entry_y = draw_herb_wrapped_block(used_in_text, x, entry_y, text_width);
-        }
-        if let Some(best_specimen_text) = &entry.best_specimen_text {
-            draw_ui_text(best_specimen_text, x, entry_y, 18.0, dark::TEXT_DIM);
-            entry_y += 20.0;
-        }
-        if let Some(variant_text) = &entry.variant_text {
-            draw_ui_text(variant_text, x, entry_y, 18.0, dark::TEXT_DIM);
-            entry_y += 20.0;
-        }
-        if let Some(note_text) = &entry.note_text {
-            entry_y = draw_herb_wrapped_block(note_text, x, entry_y, text_width);
-        }
+    }
+
+    // Everything known about the selected herb, under the list and clipped to
+    // the column so a long note cannot run into the panel below.
+    let Some(entry) = &view.detail else {
+        return;
+    };
+    entry_y += 8.0;
+    draw_ui_text(&entry.route_line, x, entry_y, 18.0, dark::TEXT_DIM);
+    entry_y += 20.0;
+    for block in [Some(&entry.summary), Some(&entry.conditions)]
+        .into_iter()
+        .flatten()
+        .chain(entry.used_in_text.as_ref())
+        .chain(entry.note_text.as_ref())
+    {
         if entry_y > bottom_limit {
-            break;
+            return;
         }
+        entry_y = draw_wrapped_block(block, x, entry_y, text_width);
+    }
+    for line in [
+        entry.best_specimen_text.as_ref(),
+        entry.variant_text.as_ref(),
+    ]
+    .into_iter()
+    .flatten()
+    {
+        if entry_y > bottom_limit {
+            return;
+        }
+        draw_ui_text(line, x, entry_y, 18.0, dark::TEXT_DIM);
+        entry_y += 20.0;
     }
 }

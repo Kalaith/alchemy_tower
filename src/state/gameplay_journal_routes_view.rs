@@ -1,13 +1,28 @@
+use super::gameplay_overlay_window::visible_window_start;
 use super::GameplayState;
 use crate::content::{ui_copy, ui_format};
 use crate::data::GameData;
 use crate::view_models::journal::{
-    JournalHerbMemoriesView, JournalHerbMemoryView, JournalRouteProgressView, JournalRouteRowView,
-    JournalRoutesTabView,
+    JournalHerbMemoriesView, JournalHerbMemoryView, JournalHerbRowView, JournalRouteProgressView,
+    JournalRouteRowView, JournalRoutesTabView,
 };
+
+/// Route rows are one line each, with the selected route's description beneath
+/// them — the same shape as the herb column beside it. Drawn as title plus full
+/// paragraph, the column had room for two of seventeen.
+const VISIBLE_ROUTE_ROWS: usize = 7;
+
+/// Herb rows are one line each and the block beneath belongs to the selected
+/// row. Drawn at full detail for every herb, the column had room for one.
+const VISIBLE_HERB_ROWS: usize = 6;
 
 impl GameplayState {
     pub(super) fn journal_routes_tab_view(&self, data: &GameData) -> JournalRoutesTabView {
+        let route_total = data.gathering_routes.len();
+        // Routes ride the same index as the herb list rather than claiming a
+        // second key: walking the herbs walks the routes past them too.
+        let route_selected = self.ui.journal_index.min(route_total.saturating_sub(1));
+        let route_start = visible_window_start(route_selected, route_total, VISIBLE_ROUTE_ROWS);
         let locked_lines = self
             .locked_warps(data)
             .into_iter()
@@ -29,11 +44,33 @@ impl GameplayState {
             route_rows: data
                 .gathering_routes
                 .iter()
-                .map(|route| JournalRouteRowView {
+                .skip(route_start)
+                .take(VISIBLE_ROUTE_ROWS)
+                .enumerate()
+                .map(|(offset, route)| JournalRouteRowView {
                     title: route.name.clone(),
-                    detail: route.description.clone(),
+                    selected: route_start + offset == route_selected,
                 })
                 .collect(),
+            route_range_text: (route_total > VISIBLE_ROUTE_ROWS).then(|| {
+                ui_format(
+                    "journal_showing_range",
+                    &[
+                        ("first", &(route_start + 1).to_string()),
+                        (
+                            "last",
+                            &(route_start + VISIBLE_ROUTE_ROWS)
+                                .min(route_total)
+                                .to_string(),
+                        ),
+                        ("total", &route_total.to_string()),
+                    ],
+                )
+            }),
+            route_detail: data
+                .gathering_routes
+                .get(route_selected)
+                .map(|route| route.description.clone()),
             herb_memories: self.journal_herb_memories_view(data),
             route_progress: JournalRouteProgressView {
                 all_restored_text: locked_lines
@@ -50,67 +87,95 @@ impl GameplayState {
             return JournalHerbMemoriesView {
                 title: ui_copy("overlay_herb_memories"),
                 empty_text: ui_copy("journal_memory_no_herbs").to_owned(),
-                entries: Vec::new(),
+                range_text: None,
+                rows: Vec::new(),
+                detail: None,
             };
         }
+
+        let total = herb_memories.len();
+        let selected = self.ui.journal_index.min(total - 1);
+        let start = visible_window_start(selected, total, VISIBLE_HERB_ROWS);
+        let entries = herb_memories
+            .into_iter()
+            .map(|entry| {
+                let route_id = if entry.learned {
+                    &entry.learned_route_id
+                } else {
+                    &entry.first_seen_route_id
+                };
+                let route_label = data
+                    .route(route_id)
+                    .map(|route| route.name.as_str())
+                    .unwrap_or_else(|| ui_copy("journal_memory_unknown_place"));
+                let route_copy_key = if entry.learned {
+                    "journal_memory_learned_at"
+                } else {
+                    "journal_memory_observed_at"
+                };
+                JournalHerbMemoryView {
+                    title: data.item_name(&entry.item_id).to_owned(),
+                    state_line: ui_format(
+                        "journal_memory_state_line",
+                        &[("state", ui_copy(self.herb_memory_state_key(&entry.item_id)))],
+                    ),
+                    route_line: ui_format(route_copy_key, &[("route", route_label)]),
+                    summary: self.journal_herb_summary(data, &entry.item_id),
+                    conditions: if entry.learned {
+                        self.learned_gathering_conditions(data, &entry.item_id)
+                            .unwrap_or_else(|| {
+                                ui_copy("journal_memory_conditions_unknown").to_owned()
+                            })
+                    } else {
+                        ui_copy("journal_memory_conditions_unknown").to_owned()
+                    },
+                    used_in_text: self.herb_used_in_text(data, &entry.item_id),
+                    best_specimen_text: (entry.best_quality > 0).then(|| {
+                        ui_format(
+                            "journal_memory_best_specimen",
+                            &[
+                                ("quality", &entry.best_quality.to_string()),
+                                ("band", &entry.best_quality_band),
+                            ],
+                        )
+                    }),
+                    variant_text: (!entry.variant_name.is_empty()).then(|| {
+                        ui_format(
+                            "journal_memory_variant",
+                            &[("variant", &entry.variant_name)],
+                        )
+                    }),
+                    note_text: (entry.learned && !entry.note.is_empty())
+                        .then(|| entry.note.clone()),
+                }
+            })
+            .collect::<Vec<_>>();
 
         JournalHerbMemoriesView {
             title: ui_copy("overlay_herb_memories"),
             empty_text: String::new(),
-            entries: herb_memories
-                .into_iter()
-                .map(|entry| {
-                    let route_id = if entry.learned {
-                        &entry.learned_route_id
-                    } else {
-                        &entry.first_seen_route_id
-                    };
-                    let route_label = data
-                        .route(route_id)
-                        .map(|route| route.name.as_str())
-                        .unwrap_or_else(|| ui_copy("journal_memory_unknown_place"));
-                    let route_copy_key = if entry.learned {
-                        "journal_memory_learned_at"
-                    } else {
-                        "journal_memory_observed_at"
-                    };
-                    JournalHerbMemoryView {
-                        title: data.item_name(&entry.item_id).to_owned(),
-                        state_line: ui_format(
-                            "journal_memory_state_line",
-                            &[("state", ui_copy(self.herb_memory_state_key(&entry.item_id)))],
-                        ),
-                        route_line: ui_format(route_copy_key, &[("route", route_label)]),
-                        summary: self.journal_herb_summary(data, &entry.item_id),
-                        conditions: if entry.learned {
-                            self.learned_gathering_conditions(data, &entry.item_id)
-                                .unwrap_or_else(|| {
-                                    ui_copy("journal_memory_conditions_unknown").to_owned()
-                                })
-                        } else {
-                            ui_copy("journal_memory_conditions_unknown").to_owned()
-                        },
-                        used_in_text: self.herb_used_in_text(data, &entry.item_id),
-                        best_specimen_text: (entry.best_quality > 0).then(|| {
-                            ui_format(
-                                "journal_memory_best_specimen",
-                                &[
-                                    ("quality", &entry.best_quality.to_string()),
-                                    ("band", &entry.best_quality_band),
-                                ],
-                            )
-                        }),
-                        variant_text: (!entry.variant_name.is_empty()).then(|| {
-                            ui_format(
-                                "journal_memory_variant",
-                                &[("variant", &entry.variant_name)],
-                            )
-                        }),
-                        note_text: (entry.learned && !entry.note.is_empty())
-                            .then(|| entry.note.clone()),
-                    }
+            range_text: (total > VISIBLE_HERB_ROWS).then(|| {
+                ui_format(
+                    "journal_showing_range",
+                    &[
+                        ("first", &(start + 1).to_string()),
+                        ("last", &(start + VISIBLE_HERB_ROWS).min(total).to_string()),
+                        ("total", &total.to_string()),
+                    ],
+                )
+            }),
+            rows: entries
+                .iter()
+                .enumerate()
+                .skip(start)
+                .take(VISIBLE_HERB_ROWS)
+                .map(|(index, entry)| JournalHerbRowView {
+                    title: entry.title.clone(),
+                    state_line: entry.state_line.clone(),
+                    selected: index == selected,
                 })
                 .collect(),
+            detail: entries.into_iter().nth(selected),
         }
     }
 
@@ -180,5 +245,106 @@ mod tests {
             .herb_used_in_text(&data, "field_bloom")
             .expect("field bloom is used in recipes");
         assert!(!field_bloom.contains("Brews into:"), "got: {field_bloom}");
+    }
+}
+
+#[cfg(test)]
+mod window_tests {
+    use super::{GameplayState, VISIBLE_HERB_ROWS, VISIBLE_ROUTE_ROWS};
+
+    fn seeded_state(data: &crate::data::GameData) -> GameplayState {
+        let mut state = GameplayState::new(data);
+        state.open_journal_sample(data);
+        state
+    }
+
+    /// Both columns draw into fixed boxes with no scrollbar. Emitting more rows
+    /// than fit is how this tab came to be hiding ten routes and twenty-odd
+    /// herbs without saying so.
+    #[test]
+    fn neither_column_emits_more_rows_than_its_box_holds() {
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let mut state = seeded_state(&data);
+
+        for index in 0..40 {
+            state.ui.journal_index = index;
+            let view = state.journal_routes_tab_view(&data);
+            assert!(
+                view.route_rows.len() <= VISIBLE_ROUTE_ROWS,
+                "{} route rows at index {index}",
+                view.route_rows.len()
+            );
+            assert!(
+                view.herb_memories.rows.len() <= VISIBLE_HERB_ROWS,
+                "{} herb rows at index {index}",
+                view.herb_memories.rows.len()
+            );
+        }
+    }
+
+    /// Walking the list must actually reach the far end of it, and must always
+    /// show the thing it says is selected.
+    #[test]
+    fn walking_the_list_keeps_the_selection_visible_and_reaches_the_end() {
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let mut state = seeded_state(&data);
+        let herb_total = state.herb_memories(&data).len();
+        assert!(
+            herb_total > VISIBLE_HERB_ROWS,
+            "this only proves anything with more herbs than fit"
+        );
+
+        let mut last_row_seen = String::new();
+        for index in 0..herb_total {
+            state.ui.journal_index = index;
+            let view = state.journal_routes_tab_view(&data);
+            assert!(
+                view.herb_memories.rows.iter().any(|row| row.selected),
+                "nothing selected at index {index}"
+            );
+            assert!(
+                view.route_rows.iter().any(|row| row.selected),
+                "no route selected at index {index}"
+            );
+            assert!(view.herb_memories.detail.is_some(), "no detail at {index}");
+            if let Some(row) = view.herb_memories.rows.last() {
+                last_row_seen = row.title.clone();
+            }
+        }
+
+        state.ui.journal_index = 0;
+        let first = state.journal_routes_tab_view(&data);
+        let first_page_last = first
+            .herb_memories
+            .rows
+            .last()
+            .map(|row| row.title.clone())
+            .unwrap_or_default();
+        assert_ne!(
+            last_row_seen, first_page_last,
+            "walking to the end never moved past the first page"
+        );
+    }
+
+    #[test]
+    fn the_counts_appear_only_when_something_is_out_of_sight() {
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let seeded = seeded_state(&data);
+        let view = seeded.journal_routes_tab_view(&data);
+        assert!(view.route_range_text.is_some(), "17 routes need a count");
+        assert!(
+            view.herb_memories.range_text.is_some(),
+            "a full shelf needs a count"
+        );
+
+        let empty = GameplayState::new(&data);
+        assert!(
+            empty
+                .journal_routes_tab_view(&data)
+                .herb_memories
+                .range_text
+                .is_none(),
+            "an empty shelf should not claim to be hiding anything"
+        );
     }
 }

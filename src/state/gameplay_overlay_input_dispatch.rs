@@ -4,7 +4,8 @@ use crate::audio::AudioAssets;
 use crate::data::GameData;
 use crate::input::{
     cancel_pressed, confirm_pressed, journal_pressed, left_mouse_pressed, mouse_position_point,
-    rect_contains_point, switch_next_pressed, switch_previous_pressed,
+    rect_contains_point, select_next_pressed, select_previous_pressed, switch_next_pressed,
+    switch_previous_pressed,
 };
 use crate::journal_layout::{journal_close_rect, journal_tab_rect};
 
@@ -60,12 +61,25 @@ impl GameplayState {
                 }
             }
         }
+        let previous_tab = self.ui.journal_tab;
         if switch_previous_pressed() {
             self.ui.journal_tab = self.ui.journal_tab.saturating_sub(1);
         }
         if switch_next_pressed() {
             self.ui.journal_tab =
                 (self.ui.journal_tab + 1).min(journal_tab_count.saturating_sub(1));
+        }
+        if self.ui.journal_tab != previous_tab {
+            self.ui.journal_index = 0;
+        }
+        // The routes tab holds far more herb memories than its column can show,
+        // so it needs a way to walk them. Nothing else in the journal binds
+        // these.
+        if select_previous_pressed() {
+            self.ui.journal_index = self.ui.journal_index.saturating_sub(1);
+        }
+        if select_next_pressed() {
+            self.ui.journal_index = self.ui.journal_index.saturating_add(1);
         }
         if journal_pressed() {
             self.clear_overlay();

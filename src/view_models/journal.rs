@@ -23,6 +23,15 @@ pub(crate) struct JournalBrewMemoryView {
     pub(crate) successful_brews_text: Option<String>,
 }
 
+/// A herb reduced to one line for the list column. The full block is shown for
+/// the selected herb only — at full detail the column had room for about one of
+/// twenty-nine, and cut the rest without saying so.
+pub(crate) struct JournalHerbRowView {
+    pub(crate) title: String,
+    pub(crate) state_line: String,
+    pub(crate) selected: bool,
+}
+
 pub(crate) struct JournalGreenhouseTabView {
     pub(crate) title: &'static str,
     pub(crate) empty_text: String,
@@ -69,19 +78,28 @@ pub(crate) struct JournalRoutesTabView {
     pub(crate) title: &'static str,
     pub(crate) progress_title: &'static str,
     pub(crate) route_rows: Vec<JournalRouteRowView>,
+    /// Set only when there are more routes than the column shows.
+    pub(crate) route_range_text: Option<String>,
+    /// The description of the selected route. Route prose is a paragraph and
+    /// the column is 380px wide, so showing every one at once left room for two.
+    pub(crate) route_detail: Option<String>,
     pub(crate) herb_memories: JournalHerbMemoriesView,
     pub(crate) route_progress: JournalRouteProgressView,
 }
 
 pub(crate) struct JournalRouteRowView {
     pub(crate) title: String,
-    pub(crate) detail: String,
+    pub(crate) selected: bool,
 }
 
 pub(crate) struct JournalHerbMemoriesView {
     pub(crate) title: &'static str,
     pub(crate) empty_text: String,
-    pub(crate) entries: Vec<JournalHerbMemoryView>,
+    /// Set only when there are more herbs than the column shows.
+    pub(crate) range_text: Option<String>,
+    pub(crate) rows: Vec<JournalHerbRowView>,
+    /// The full block, for the selected herb only.
+    pub(crate) detail: Option<JournalHerbMemoryView>,
 }
 
 pub(crate) struct JournalHerbMemoryView {
