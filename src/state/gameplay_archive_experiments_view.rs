@@ -1,3 +1,4 @@
+use super::gameplay_overlay_window::{paged_window, ARCHIVE_PAGE_ROWS};
 use super::GameplayState;
 use crate::alchemy::mastery_stage;
 use crate::content::{ui_copy, ui_format};
@@ -31,9 +32,8 @@ impl GameplayState {
         }
 
         let selected_index = self.archive_selected_index(entries.len());
-        let page = selected_index / 6;
-        let page_count = entries.len().div_ceil(6);
-        let page_start = page * 6;
+        let (page_start, page_text) =
+            paged_window(selected_index, entries.len(), ARCHIVE_PAGE_ROWS);
         let row_entries = entries
             .iter()
             .skip(page_start)
@@ -67,13 +67,7 @@ impl GameplayState {
         ArchiveExperimentsSectionView {
             title: ui_copy("overlay_experiment_history").to_owned(),
             filter_text,
-            page_text: Some(ui_format(
-                "overlay_page",
-                &[
-                    ("page", &(page + 1).to_string()),
-                    ("pages", &page_count.to_string()),
-                ],
-            )),
+            page_text,
             empty_text: String::new(),
             entries: row_entries,
             selected_record: Some(

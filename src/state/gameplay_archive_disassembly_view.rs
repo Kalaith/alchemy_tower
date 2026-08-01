@@ -1,3 +1,4 @@
+use super::gameplay_overlay_window::{paged_window, ARCHIVE_PAGE_ROWS};
 use super::GameplayState;
 use crate::content::{input_bindings, ui_copy, ui_format};
 use crate::data::GameData;
@@ -14,6 +15,7 @@ impl GameplayState {
                 title: ui_copy("overlay_disassembly").to_string(),
                 selected_inputs_title: ui_copy("overlay_recovered_inputs").to_string(),
                 help_text: disassembly_help_text(),
+                page_text: None,
                 empty_text: self
                     .unavailable_state_text(ui_copy("overlay_archive_empty_disassembly")),
                 entries: Vec::new(),
@@ -22,8 +24,11 @@ impl GameplayState {
         }
 
         let selected_index = self.archive_selected_index(recipes.len());
+        let (page_start, page_text) =
+            paged_window(selected_index, recipes.len(), ARCHIVE_PAGE_ROWS);
         let entries = recipes
             .iter()
+            .skip(page_start)
             .take(6)
             .enumerate()
             .map(|(index, recipe)| ArchiveDisassemblyRecipeEntry {
@@ -41,7 +46,7 @@ impl GameplayState {
                             .to_string(),
                     )],
                 ),
-                selected: index == selected_index,
+                selected: page_start + index == selected_index,
             })
             .collect();
 
@@ -63,6 +68,7 @@ impl GameplayState {
             title: ui_copy("overlay_disassembly").to_string(),
             selected_inputs_title: ui_copy("overlay_recovered_inputs").to_string(),
             help_text: disassembly_help_text(),
+            page_text,
             empty_text: String::new(),
             entries,
             selected_inputs,

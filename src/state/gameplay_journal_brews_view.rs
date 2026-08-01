@@ -1,3 +1,8 @@
+use super::gameplay_overlay_window::paged_window;
+
+/// A brew memory is a title, a state line, a recap and up to five optional
+/// lines, so three fill the tab. It used to draw until it ran out of panel.
+const VISIBLE_BREW_ROWS: usize = 3;
 use super::GameplayState;
 use crate::content::{ui_copy, ui_format};
 use crate::data::GameData;
@@ -10,15 +15,29 @@ impl GameplayState {
             return JournalBrewsTabView {
                 title: ui_copy("overlay_potion_memories"),
                 empty_text: ui_copy("journal_memory_no_potions").to_owned(),
+                page_text: None,
                 entries: Vec::new(),
             };
         }
 
+        // Fifty-odd potions exist now and the tab drew them until it ran out of
+        // panel, then stopped without a word. It pages with the journal index,
+        // the same key that walks the routes tab.
+        let total = potion_memories.len();
+        let (page_start, page_text) = paged_window(
+            self.ui.journal_index.min(total - 1),
+            total,
+            VISIBLE_BREW_ROWS,
+        );
+
         JournalBrewsTabView {
             title: ui_copy("overlay_potion_memories"),
             empty_text: String::new(),
+            page_text,
             entries: potion_memories
                 .into_iter()
+                .skip(page_start)
+                .take(VISIBLE_BREW_ROWS)
                 .map(|entry| {
                     let profile = self.journal_potion_profile_summary(&entry.item_id);
                     let formula_text = if entry.last_recipe_id.is_empty() {

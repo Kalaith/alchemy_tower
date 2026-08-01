@@ -324,7 +324,7 @@
     "overlay_unlocked_routes": "Unlocked routes: {count}",
     "overlay_experiment_history": "Experiment History",
     "overlay_filter": "Filter {mode}",
-    "overlay_page": "Page {page}/{pages}",
+    "overlay_page_of": "page {page}/{count}",
     "overlay_selected_record": "Selected Record",
     "overlay_output": "Output: {item}",
     "overlay_recipe_mastery": "Recipe Mastery",

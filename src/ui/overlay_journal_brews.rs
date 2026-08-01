@@ -11,6 +11,9 @@ pub(crate) fn draw_journal_brews_tab_view(
     h: f32,
 ) {
     draw_ui_text(view.title, x + 20.0, y + 136.0, 26.0, dark::TEXT_BRIGHT);
+    if let Some(page_text) = &view.page_text {
+        draw_ui_text(page_text, x + 240.0, y + 136.0, 16.0, dark::TEXT_DIM);
+    }
     let mut brew_y = y + 168.0;
     if view.entries.is_empty() {
         draw_ui_text(&view.empty_text, x + 20.0, brew_y, 20.0, dark::TEXT_DIM);

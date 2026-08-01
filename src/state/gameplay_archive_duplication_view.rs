@@ -1,4 +1,5 @@
 use super::gameplay_duplication::duplication_cost;
+use super::gameplay_overlay_window::{paged_window, ARCHIVE_PAGE_ROWS};
 use super::GameplayState;
 use crate::content::{input_bindings, ui_copy, ui_format};
 use crate::data::GameData;
@@ -17,6 +18,7 @@ impl GameplayState {
                 title: ui_copy("overlay_duplication").to_string(),
                 cost_title: ui_copy("overlay_duplication_cost").to_string(),
                 help_text: duplication_help_text(),
+                page_text: None,
                 empty_text: self
                     .unavailable_state_text(ui_copy("overlay_archive_empty_duplication")),
                 entries: Vec::new(),
@@ -25,8 +27,11 @@ impl GameplayState {
         }
 
         let selected_index = self.archive_selected_index(item_ids.len());
+        let (page_start, page_text) =
+            paged_window(selected_index, item_ids.len(), ARCHIVE_PAGE_ROWS);
         let entries = item_ids
             .iter()
+            .skip(page_start)
             .take(6)
             .enumerate()
             .filter_map(|(index, item_id)| {
@@ -50,7 +55,7 @@ impl GameplayState {
                         ],
                     ),
                     enabled: self.can_duplicate_item(data, item_id),
-                    selected: index == selected_index,
+                    selected: page_start + index == selected_index,
                 })
             })
             .collect();
@@ -80,6 +85,7 @@ impl GameplayState {
             title: ui_copy("overlay_duplication").to_string(),
             cost_title: ui_copy("overlay_duplication_cost").to_string(),
             help_text: duplication_help_text(),
+            page_text,
             empty_text: String::new(),
             entries,
             detail,

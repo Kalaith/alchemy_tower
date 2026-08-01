@@ -85,6 +85,21 @@ impl Game {
                 gameplay.preview_area(&self.data, area_id, day);
                 GameState::from_gameplay(gameplay)
             }
+            // "archive:<tab>:<index>" opens the archive console on a tab with a
+            // selection deliberately past the first page.
+            other if other.starts_with("archive") => {
+                let target = other.strip_prefix("archive:").unwrap_or("2:7");
+                let (tab, index) = match target.split_once(':') {
+                    Some((tab, index)) => (
+                        tab.parse::<usize>().unwrap_or(2),
+                        index.parse::<usize>().unwrap_or(7),
+                    ),
+                    None => (2, 7),
+                };
+                let mut gameplay = GameplayState::new(&self.data);
+                gameplay.open_archive_sample(&self.data, tab, index);
+                GameState::from_gameplay(gameplay)
+            }
             // "ending" opens the epilogue with every beat it can react to.
             "ending" => {
                 let mut gameplay = GameplayState::new(&self.data);

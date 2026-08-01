@@ -47,6 +47,22 @@ impl GameplayState {
         self.set_overlay(super::gameplay_overlay_types::OverlayScreen::Ending);
     }
 
+    /// Open the archive on a chosen tab with a selection past the first page —
+    /// the console has five lists and there was no way to look at any of them.
+    pub(crate) fn open_archive_sample(&mut self, data: &GameData, tab: usize, index: usize) {
+        for recipe in &data.recipes {
+            self.progression.known_recipes.insert(recipe.id.clone());
+            self.progression.recipe_mastery.insert(recipe.id.clone(), 3);
+        }
+        for item in &data.items {
+            self.inventory.insert(item.id.clone(), 2);
+        }
+        self.coins = 500;
+        self.ui.archive_tab = tab;
+        self.ui.archive_index = index;
+        self.set_overlay(super::gameplay_overlay_types::OverlayScreen::Archive);
+    }
+
     /// Stand in a named room with every gate already satisfied, so the capture
     /// harness can look at a floor or biome that was just authored. Nodes whose
     /// season, weather or hour do not match the current moment still stay

@@ -12,6 +12,9 @@ pub(crate) fn draw_archive_disassembly_section_view(
     _h: f32,
 ) {
     draw_ui_text(&view.title, x + 20.0, y + 122.0, 26.0, dark::TEXT_BRIGHT);
+    if let Some(page_text) = &view.page_text {
+        draw_ui_text(page_text, x + 320.0, y + 122.0, 20.0, dark::TEXT_DIM);
+    }
     if view.entries.is_empty() {
         draw_state_banner(x + 20.0, y + 144.0, w - 40.0, &view.empty_text, false);
         return;

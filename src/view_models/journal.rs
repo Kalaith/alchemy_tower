@@ -9,6 +9,8 @@ pub(crate) struct JournalChromeView {
 pub(crate) struct JournalBrewsTabView {
     pub(crate) title: &'static str,
     pub(crate) empty_text: String,
+    /// Which page of the shelf is on screen, when there is more than one.
+    pub(crate) page_text: Option<String>,
     pub(crate) entries: Vec<JournalBrewMemoryView>,
 }
 

@@ -524,6 +524,22 @@ Stop the loop and report if:
   *Harness: `preview_area` focused the **first** available node, which is always the oldest content
   in the file, so a capture framed the wrong thing twice running. It focuses the last one now —
   content is appended, so the newest thing in a room is the thing worth looking at.*
+- **2026-08-01 — the archive (swept for the list bug rather than tripping over it).** Having hit
+  unbounded/silently-capped lists three times, swept every draw loop in the game instead of waiting
+  for a fourth. Found it: **four of the archive's five lists took the first six rows while
+  `archive_selected_index` ranged over the whole list.** So with 32 recipes a player could select row
+  20, see no highlight anywhere, and — on the **disassembly and duplication tabs** — press Enter and
+  destroy or copy an item they had never seen selected. That is an action on an invisible selection,
+  not a display bug. Only the experiments list paged correctly; its arithmetic is now extracted as
+  `paged_window` and all five share it, so they cannot drift apart again. `journal_brews` was
+  uncapped too (50-odd potions, a draw-level `break`) and now pages the same way.
+  *Verified the test against a deliberately reverted list — it fails at index 6, exactly the first
+  page boundary.*
+  New capture scene `archive:<tab>:<index>`; the console has five tabs and there was no way to look
+  at any of them. Page label shortened after the first capture showed it colliding with the detail
+  heading.
+  *Method note: three of the last four defects came from sweeping a known failure family rather than
+  from reading new code. When a bug class repeats, grep for the rest of it.*
 
 ## Deferred (needs a new system; not for this loop)
 

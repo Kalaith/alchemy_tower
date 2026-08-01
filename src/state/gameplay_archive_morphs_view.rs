@@ -1,3 +1,4 @@
+use super::gameplay_overlay_window::{paged_window, ARCHIVE_PAGE_ROWS};
 use super::GameplayState;
 use crate::content::{ui_copy, ui_format};
 use crate::data::GameData;
@@ -13,6 +14,7 @@ impl GameplayState {
             return ArchiveMorphsSectionView {
                 title: ui_copy("overlay_morph_previews").to_string(),
                 detail_title: ui_copy("overlay_branch_detail").to_string(),
+                page_text: None,
                 empty_text: self.unavailable_state_text(ui_copy("overlay_archive_empty_morphs")),
                 entries: Vec::new(),
                 detail: None,
@@ -20,8 +22,11 @@ impl GameplayState {
         }
 
         let selected_index = self.archive_selected_index(recipes.len());
+        let (page_start, page_text) =
+            paged_window(selected_index, recipes.len(), ARCHIVE_PAGE_ROWS);
         let entries = recipes
             .iter()
+            .skip(page_start)
             .take(6)
             .enumerate()
             .map(|(index, recipe)| ArchiveMorphRecipeEntry {
@@ -31,7 +36,7 @@ impl GameplayState {
                     "overlay_archive_branches",
                     &[("count", &recipe.morph_targets.len().to_string())],
                 ),
-                selected: index == selected_index,
+                selected: page_start + index == selected_index,
             })
             .collect();
 
@@ -70,6 +75,7 @@ impl GameplayState {
         ArchiveMorphsSectionView {
             title: ui_copy("overlay_morph_previews").to_string(),
             detail_title: ui_copy("overlay_branch_detail").to_string(),
+            page_text,
             empty_text: String::new(),
             entries,
             detail: Some(ArchiveMorphDetailView {

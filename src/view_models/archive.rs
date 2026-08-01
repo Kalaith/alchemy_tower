@@ -23,6 +23,8 @@ pub(crate) struct ArchiveDisassemblySectionView {
     pub(crate) title: String,
     pub(crate) selected_inputs_title: String,
     pub(crate) help_text: String,
+    /// Which page of the list is on screen, when there is more than one.
+    pub(crate) page_text: Option<String>,
     pub(crate) empty_text: String,
     pub(crate) entries: Vec<ArchiveDisassemblyRecipeEntry>,
     pub(crate) selected_inputs: Vec<String>,
@@ -39,6 +41,8 @@ pub(crate) struct ArchiveDuplicationSectionView {
     pub(crate) title: String,
     pub(crate) cost_title: String,
     pub(crate) help_text: String,
+    /// Which page of the list is on screen, when there is more than one.
+    pub(crate) page_text: Option<String>,
     pub(crate) empty_text: String,
     pub(crate) entries: Vec<ArchiveDuplicationItemEntry>,
     pub(crate) detail: Option<ArchiveDuplicationDetailView>,
@@ -93,6 +97,8 @@ pub(crate) struct ArchiveExperimentRecipeMemoryView {
 pub(crate) struct ArchiveMasterySectionView {
     pub(crate) title: String,
     pub(crate) detail_title: String,
+    /// Which page of the list is on screen, when there is more than one.
+    pub(crate) page_text: Option<String>,
     pub(crate) empty_text: String,
     pub(crate) entries: Vec<ArchiveMasteryRecipeEntry>,
     pub(crate) detail: Option<ArchiveMasteryDetailView>,
@@ -117,6 +123,8 @@ pub(crate) struct ArchiveMasteryDetailView {
 pub(crate) struct ArchiveMorphsSectionView {
     pub(crate) title: String,
     pub(crate) detail_title: String,
+    /// Which page of the list is on screen, when there is more than one.
+    pub(crate) page_text: Option<String>,
     pub(crate) empty_text: String,
     pub(crate) entries: Vec<ArchiveMorphRecipeEntry>,
     pub(crate) detail: Option<ArchiveMorphDetailView>,
