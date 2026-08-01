@@ -1127,6 +1127,25 @@ Stop the loop and report if:
   idempotent, so a failed run needs a revert rather than a re-run.
   *Next split candidate:* `items/potions_glow.json` (718).
   **140 items, 49 recipes, 91 tests; every wild biome now carries at least five things.**
+- **2026-08-02 — the ending had not heard about the newest person in it.** Wren arrived six passes
+  after the epilogue pass, so her **entire arc was invisible to the ending** — including
+  `worst_case_shelf_cleared`, the shelf she kept twenty years for the cases she could not fix, which
+  is the most human payoff in the game. Beat added at **order 96**, so a completionist now closes on
+  valley → open question → **empty shelf**: the quietest note last. Fullest epilogue 926 of 1000.
+  *The Masterwork beat drops to fourth by design* — it and Wren's shelf are the **same character**,
+  and two beats on one person in a three-beat ending is redundancy, not depth.
+  **Reactions per townsperson: Wren 4, Tarn 6, against a mean of 14** — the two newest are the two
+  quietest, the exact pattern iteration 32 found for Tarn. Nine lines fill both, and they are the
+  two characters who see the valley from **underneath and from outside**: Wren on the tower and the
+  infirmary keeping notes on the same eleven months without knowing it, and Tarn on carts leaving
+  this valley loaded for the first time in eleven years. Wren 4→9, Tarn 6→10.
+  *Two axes measured and left alone.* The **coin economy** looks lopsided — ~4000 one-off quest
+  coins against 250 of warp gates and a dearest purchase of 210 — but
+  `there_is_something_worth_saving_for` already encodes that decision and passes. And 25 of 34
+  milestones go unreferenced by the epilogue, which is **forced by `MAX_EPILOGUE_BEATS = 3`**, not a
+  gap. *Do not re-litigate a decision the suite already records.*
+  *Next split candidate:* `items/potions_glow.json` (718).
+  **12 epilogue beats, 136 reactions; 91 tests.**
 
 ## Deferred (needs a new system; not for this loop)
 

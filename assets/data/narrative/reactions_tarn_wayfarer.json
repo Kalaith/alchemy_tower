@@ -41,6 +41,34 @@
       "after_milestone": "unsigned_order_unanswered",
       "order": 102,
       "line": "No fourth order. I have watched that road for eleven years and I know what it means when somebody stops asking: they got what they came for. Whether that is good news depends entirely on what they wanted it for, and the road does not tell you that part."
+    },
+    {
+      "npc_id": "tarn_wayfarer",
+      "after_quest": "",
+      "after_milestone": "first_town_relief",
+      "order": 34,
+      "line": "Word came up the switchback that somebody in the tower helped with something small. That is the first news about this valley I have carried in either direction in eleven years."
+    },
+    {
+      "npc_id": "tarn_wayfarer",
+      "after_quest": "",
+      "after_milestone": "greenhouse_expanded",
+      "order": 66,
+      "line": "The carters have started stopping here on the way down as well as on the way up. Nobody decided that. It happened because there is now a reason to, which is how roads actually get made."
+    },
+    {
+      "npc_id": "tarn_wayfarer",
+      "after_quest": "",
+      "after_milestone": "harvest_beds_turned",
+      "order": 72,
+      "line": "There is produce going out of this valley. Out. I have brought things in over that pass for eleven years and taken empty carts back down, and I did not think of that as strange until it stopped being true."
+    },
+    {
+      "npc_id": "tarn_wayfarer",
+      "after_quest": "",
+      "after_milestone": "crews_kept_working",
+      "order": 80,
+      "line": "The crews used to work the pass until the weather beat them and then stop until spring. They work it through now. I have watched three winters close this road and I would like to see what a fourth one does against a crew that has what it needs."
     }
   ]
 }

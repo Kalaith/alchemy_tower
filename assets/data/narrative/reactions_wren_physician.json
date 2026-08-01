@@ -27,6 +27,41 @@
       "after_milestone": "worst_case_shelf_cleared",
       "order": 102,
       "line": "People ask what the tower did for the valley and get told about the greenhouse. What it did was make it possible for me to be specific. Nine years of 'we will see' and now I can say a number out loud and be held to it. Nobody is going to write that part down."
+    },
+    {
+      "npc_id": "wren_physician",
+      "after_quest": "",
+      "after_milestone": "first_true_brew",
+      "order": 30,
+      "line": "One stable brew. I have been handed a great many bottles by people who were sure, and this is the first in nine years that came with somebody telling me what was in it."
+    },
+    {
+      "npc_id": "wren_physician",
+      "after_quest": "",
+      "after_milestone": "harvest_blight_traced",
+      "order": 62,
+      "line": "You found the cause. Do you know how rare that is in my work? I treat the same six complaints for a decade and never once learn why any of them started. You went and found out. I am not envious. I am, a bit."
+    },
+    {
+      "npc_id": "wren_physician",
+      "after_quest": "",
+      "after_milestone": "greenhouse_expanded",
+      "order": 74,
+      "line": "Half of what I hand out is a plant that was grown badly. The greenhouse changed what I can stock before it changed anything anybody notices, and nobody is going to write a song about the difference between a good calmleaf and a poor one except me."
+    },
+    {
+      "npc_id": "wren_physician",
+      "after_quest": "",
+      "after_milestone": "containment_stable",
+      "order": 80,
+      "line": "Lyra's habitats supply me now, which means I can tell a patient where a thing came from. You will think that is a small change. Try telling somebody frightened that you do not know what is in the bottle and watch what it costs you."
+    },
+    {
+      "npc_id": "wren_physician",
+      "after_quest": "",
+      "after_milestone": "eleven_months_restored",
+      "order": 90,
+      "line": "The records say the wards drew more than they gave for eleven months. I had two bad winters in that same stretch and wrote them down as bad winters. It never occurred to me that the tower and the infirmary were keeping notes on the same thing."
     }
   ]
 }

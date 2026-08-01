@@ -77,6 +77,13 @@
     },
     {
       "after_milestones": [
+        "worst_case_shelf_cleared"
+      ],
+      "order": 96,
+      "line": "The infirmary's back shelf is empty. Wren kept it twenty years for the cases she could not fix, so that she had something to do with her hands. It carries the day's stock now, which is a different sort of record entirely."
+    },
+    {
+      "after_milestones": [
         "asked_for_perfect_work"
       ],
       "order": 92,
