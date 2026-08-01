@@ -125,6 +125,15 @@
         128
       ],
       "prompt": "A bloomwing habitat seen from above, open flowering perches under a wide low frame, warm pink and gold, safe habitat not a cage, readable as a creature habitat."
+    },
+    {
+      "id": "greenhouse_planter_bloom",
+      "type": "world_station",
+      "image_size_px": [
+        128,
+        128
+      ],
+      "prompt": "A pollinated greenhouse bed seen from above, open flowering trough with bloomwings working it, warm pink and gold blossom, readable as a planter."
     }
   ]
 }

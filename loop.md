@@ -289,6 +289,21 @@ Stop the loop and report if:
   input, output, and that the rune slot holds something whose category is actually `rune`.
   *Next: `archive_stack` and `observatory_span` are the last two empty routes, or arcs for Mira,
   Brin, Elric and Ione.*
+- **2026-08-01 — cultivation.** The planter/mutation system had gone untouched for seven passes and
+  showed it: three beds accepting **four** seeds between them, all original herbs, and three mutation
+  formulas that between them only ever triggered on `glow` and `speed`. None of the fifteen-odd herbs
+  added since could be planted at all. Beds now each keep a character (west = heat and stone, east =
+  light and water, north = shade), a fourth **Pollinated Bed** unlocks off the pollinator chain and
+  takes the desert herbs plus bloomwing pollen, and mutations went 3 → 11 with `restore` finally
+  used as a trigger.
+  *Bug found before authoring a line of it: `planter_seed_choice` required `rarity >= 2` **on top of**
+  the station's seed list, so any common herb named in `planter_seed_ids` was advertised to the
+  player as accepted and then silently refused. The list is now authoritative and the rarity floor
+  only applies to beds that name nothing. Two tests: every advertised seed must be one the bed will
+  actually take (checked against a deliberately broken copy), and every mutation formula must have a
+  bed that grows its seed.*
+  *Next: `archive_stack` and `observatory_span` remain the only empty routes, or arcs for Mira, Brin,
+  Elric and Ione.*
 
 ## Deferred (needs a new system; not for this loop)
 

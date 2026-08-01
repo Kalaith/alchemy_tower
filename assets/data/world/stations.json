@@ -148,7 +148,9 @@
       "planter_harvest_days": 2,
       "planter_seed_ids": [
         "ember_root",
-        "mist_moth_wing"
+        "mist_moth_wing",
+        "sunleaf",
+        "quarry_lichen"
       ],
       "planter_yield_bonus": 1
     },
@@ -178,7 +180,9 @@
       "planter_harvest_days": 2,
       "planter_seed_ids": [
         "moon_fern",
-        "arcane_dust"
+        "arcane_dust",
+        "whisper_moss",
+        "reedflower"
       ],
       "planter_yield_bonus": 1
     },
@@ -207,7 +211,9 @@
       },
       "planter_harvest_days": 1,
       "planter_seed_ids": [
-        "moon_fern"
+        "moon_fern",
+        "quietbloom_spore",
+        "rain_orchid"
       ],
       "planter_yield_bonus": 2,
       "required_completed_quest": "cultivation_for_brin",
@@ -502,6 +508,48 @@
       "habitat_output_item_id": "bloomwing_pollen",
       "habitat_harvest_days": 2,
       "required_completed_quest": "pollinator_return_for_lyra",
+      "render": {
+        "sprite_size": [
+          128.0,
+          128.0
+        ]
+      }
+    },
+    {
+      "id": "greenhouse_planter_bloom",
+      "name": "Pollinated Bed",
+      "kind": "planter",
+      "area_id": "greenhouse_floor",
+      "position": [
+        742.0,
+        470.0
+      ],
+      "interaction_radius": 52.0,
+      "color": [
+        232,
+        186,
+        158,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 0,
+        "favored_traits": [],
+        "favored_categories": [],
+        "description": ""
+      },
+      "planter_harvest_days": 3,
+      "planter_seed_ids": [
+        "nightglass_bloom",
+        "scorchvine_resin",
+        "sunspike",
+        "bloomwing_pollen"
+      ],
+      "planter_yield_bonus": 3,
+      "required_completed_quest": "pollinator_return_for_lyra",
+      "habitat_creature_ids": [],
+      "habitat_output_item_id": "",
+      "habitat_harvest_days": 0,
       "render": {
         "sprite_size": [
           128.0,

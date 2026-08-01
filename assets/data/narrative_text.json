@@ -374,6 +374,13 @@
       "after_milestone": "first_rune_imbuing",
       "order": 72,
       "line": "You changed a potion that was already finished. Every method in the entry lab assumes you get one attempt and it is the brewing. Whoever cut those benches had stopped believing that, and did not write down when."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "greenhouse_expanded",
+      "order": 45,
+      "line": "Four beds under glass and every one of them taking something different. I spent thirty years being told a greenhouse was for keeping one crop alive, not for finding out what a crop could be talked into."
     }
   ]
 }

@@ -103,6 +103,13 @@ def station(kind, size):
         d.rounded_rectangle((cx - 28, cy + 8, cx + 28, cy + 34), radius=10, fill=rgb("#4f6c57"))
         d.ellipse(box(cx - 14, cy - 10, 14, 18), fill=rgb("#dceff3"))
         d.ellipse(box(cx + 12, cy - 6, 16, 20), fill=rgb("#d8ecef"))
+    elif "planter_bloom" in kind:
+        d.rounded_rectangle((cx - 34, cy - 6, cx + 34, cy + 22), radius=8, fill=rgb("#8a7a68"))
+        d.rounded_rectangle((cx - 28, cy, cx + 28, cy + 16), radius=6, fill=rgb("#5a4030"))
+        for ox in [-20, -7, 6, 19]:
+            d.line((cx + ox, cy + 12, cx + ox, cy - 6), fill=rgb("#8fb173"), width=2)
+            d.ellipse(box(cx + ox, cy - 9, 7, 7), fill=rgb("#f2b8a4"))
+        d.ellipse(box(cx + 14, cy - 20, 6, 4), fill=rgb("#f7d9c4"))
     elif "planter" in kind:
         d.rounded_rectangle((cx - 32, cy - 8, cx + 32, cy + 20), radius=8, fill=rgb("#8a8574"))
         d.rounded_rectangle((cx - 26, cy - 2, cx + 26, cy + 14), radius=6, fill=rgb("#5a4030"))

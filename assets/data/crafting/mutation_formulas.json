@@ -23,6 +23,70 @@
       "yield_bonus": 1,
       "growth_bonus_days": 0,
       "mutation_note": "radiant"
+    },
+    {
+      "id": "whisper_moss_restore_mutation",
+      "seed_item_id": "whisper_moss",
+      "required_effect_kind": "restore",
+      "yield_bonus": 2,
+      "growth_bonus_days": 0,
+      "mutation_note": "deep-rooted"
+    },
+    {
+      "id": "reedflower_restore_mutation",
+      "seed_item_id": "reedflower",
+      "required_effect_kind": "restore",
+      "yield_bonus": 1,
+      "growth_bonus_days": 1,
+      "mutation_note": "wellfed"
+    },
+    {
+      "id": "sunleaf_glow_mutation",
+      "seed_item_id": "sunleaf",
+      "required_effect_kind": "glow",
+      "yield_bonus": 1,
+      "growth_bonus_days": 1,
+      "mutation_note": "sunwoken"
+    },
+    {
+      "id": "quietbloom_restore_mutation",
+      "seed_item_id": "quietbloom_spore",
+      "required_effect_kind": "restore",
+      "yield_bonus": 2,
+      "growth_bonus_days": 1,
+      "mutation_note": "deepgrown"
+    },
+    {
+      "id": "quarry_lichen_speed_mutation",
+      "seed_item_id": "quarry_lichen",
+      "required_effect_kind": "speed",
+      "yield_bonus": 1,
+      "growth_bonus_days": 1,
+      "mutation_note": "quickstone"
+    },
+    {
+      "id": "rain_orchid_restore_mutation",
+      "seed_item_id": "rain_orchid",
+      "required_effect_kind": "restore",
+      "yield_bonus": 2,
+      "growth_bonus_days": 0,
+      "mutation_note": "stormfed"
+    },
+    {
+      "id": "nightglass_glow_mutation",
+      "seed_item_id": "nightglass_bloom",
+      "required_effect_kind": "glow",
+      "yield_bonus": 3,
+      "growth_bonus_days": 1,
+      "mutation_note": "starfed"
+    },
+    {
+      "id": "scorchvine_speed_mutation",
+      "seed_item_id": "scorchvine_resin",
+      "required_effect_kind": "speed",
+      "yield_bonus": 2,
+      "growth_bonus_days": 1,
+      "mutation_note": "kilnfed"
     }
   ]
 }
