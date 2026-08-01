@@ -668,6 +668,20 @@
       "after_milestone": "unsigned_order_read",
       "order": 100,
       "line": "Notes on a board, paid over the odds, collected the same night. That is not a local. I would have seen a local. Whoever it was came up the road or came down it, and I did not see them either, which I do not much care for."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "first_rune_imbuing",
+      "order": 74,
+      "line": "The workshop benches are channelled the whole length and they hold heat. That is not a side effect of imbuing, that is a second use somebody designed in — and in twenty years of notes on that floor nobody, including me, wrote down that it was a place you could also brew."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "rune_workshop_restored",
+      "order": 72,
+      "line": "Tried the forge tonic. Tastes like a smithy and works like one. I will be having another."
     }
   ],
   "epilogue_beats": [

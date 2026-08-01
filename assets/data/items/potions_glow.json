@@ -464,6 +464,54 @@
           "description": "Raises writing that is no longer strictly on the page."
         }
       ]
+    },
+    {
+      "id": "channelfire_lantern",
+      "name": "Channelfire Lantern",
+      "category": "potion",
+      "base_value": 64,
+      "color": [
+        238,
+        158,
+        96,
+        255
+      ],
+      "description": "A hard orange working light with the smell of hot stone behind it. It does not flatter anything it shines on and it does not go out.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 210.0,
+          "description": "A hot, unflattering light that holds against wind and wet."
+        }
+      ]
+    },
+    {
+      "id": "hearthchannel_lantern",
+      "name": "Hearthchannel Lantern",
+      "category": "potion",
+      "base_value": 138,
+      "color": [
+        250,
+        186,
+        120,
+        255
+      ],
+      "description": "A kiln geode taken down a hot channel. The light it gives is the colour of a forge at the end of a working day and lasts about as long as one.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 300.0,
+          "description": "Burns far longer than a carried light has any business burning."
+        },
+        {
+          "kind": "restore",
+          "magnitude": 20.0,
+          "duration_seconds": 0.0,
+          "description": "Keeps the cold out of whoever is working beside it."
+        }
+      ]
     }
   ]
 }

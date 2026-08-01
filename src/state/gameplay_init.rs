@@ -80,6 +80,20 @@ impl GameplayState {
                 self.progression.unlocked_warps.insert(warp.id.clone());
             }
         }
+        // Stations can also be gated on a journal milestone, and for a long
+        // while this only satisfied quests and warps — so every milestone-gated
+        // bench was missing from every area capture, and the rooms holding them
+        // photographed as empty floors. A capture that quietly omits the thing
+        // being verified is worse than no capture at all.
+        let milestone_ids = data
+            .stations
+            .iter()
+            .map(|station| station.required_journal_milestone.clone())
+            .filter(|id| !id.is_empty())
+            .collect::<std::collections::BTreeSet<_>>();
+        for milestone_id in milestone_ids {
+            self.push_journal_milestone(&milestone_id, "", "");
+        }
         self.progression.total_brews = 40;
         self.world.current_area_id = area_id.to_owned();
         self.refresh_available_nodes(data);

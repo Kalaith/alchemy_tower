@@ -692,6 +692,33 @@
         64
       ],
       "prompt": "A small heap of red-brown resin tears sold by weight."
+    },
+    {
+      "id": "channelfire_lantern",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A hard orange lantern bottle with visible heat shimmer, unflattering working light."
+    },
+    {
+      "id": "hearthchannel_lantern",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A deep forge-orange lantern bottle glowing like banked coals, high-tier morph icon."
+    },
+    {
+      "id": "forgestep_tonic",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A blunt orange speed tonic bottle, industrial and unsubtle."
     }
   ]
 }

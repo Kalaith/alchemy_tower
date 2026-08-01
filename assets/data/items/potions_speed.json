@@ -263,6 +263,27 @@
           "description": "Keeps the cold out for as long as it runs."
         }
       ]
+    },
+    {
+      "id": "forgestep_tonic",
+      "name": "Forgestep Tonic",
+      "category": "potion",
+      "base_value": 58,
+      "color": [
+        232,
+        146,
+        88,
+        255
+      ],
+      "description": "Tastes like a smithy and works like one. The road crews have opinions about it and take it anyway.",
+      "effects": [
+        {
+          "kind": "speed",
+          "magnitude": 0.28,
+          "duration_seconds": 170.0,
+          "description": "A hard steady lift with no subtlety in it at all."
+        }
+      ]
     }
   ]
 }

@@ -100,6 +100,12 @@ def station(kind, size):
         d.polygon([(cx - 26, cy - 4), (cx + 6, cy + 14), (cx - 18, cy + 14)], fill=rgb("#7a8fb7"))
         d.line((cx - 34, cy - 18, cx - 34, cy + 18), fill=rgb("#5d412b"), width=4)
         d.line((cx + 34, cy - 18, cx + 34, cy + 18), fill=rgb("#5d412b"), width=4)
+    elif "forge_bench" in kind:
+        d.rounded_rectangle((cx - 34, cy - 4, cx + 34, cy + 24), radius=8, fill=rgb("#3e3630"))
+        for oy in [2, 10, 18]:
+            d.line((cx - 28, cy + oy, cx + 28, cy + oy), fill=rgb("#e08a44"), width=3)
+        d.rounded_rectangle((cx - 20, cy - 14, cx + 20, cy - 2), radius=5, fill=rgb("#5a4c42"))
+        d.ellipse(box(cx, cy - 8, 8, 4), fill=rgb("#ffc27a"))
     elif "cold_bench" in kind:
         d.rounded_rectangle((cx - 32, cy - 4, cx + 32, cy + 24), radius=8, fill=rgb("#6b7d88"))
         d.rounded_rectangle((cx - 26, cy - 10, cx + 26, cy + 10), radius=6, fill=rgb("#c4dde6"))
@@ -359,6 +365,8 @@ def icon(item, size, world=False):
             "resonance_draught": "#cec8fa", "clearspring_draught": "#b0e2d6",
             "deeproot_tonic": "#7aa87c", "hushwater_draught": "#c4d8e4",
             "forgelight_lantern": "#f8b060", "quickfire_draught": "#ff925c",
+            "channelfire_lantern": "#ee9e60", "hearthchannel_lantern": "#faba78",
+            "forgestep_tonic": "#e89258",
             "pollenwind_draught": "#f8d48c",
             "beacon_burst": "#e2d8a0", "nightwatch_lantern": "#e8be92",
             "fieldwide_poultice": "#d6ce8c", "second_spring_tonic": "#8ac492",

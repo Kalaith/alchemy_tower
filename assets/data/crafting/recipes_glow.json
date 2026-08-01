@@ -549,6 +549,58 @@
         "luminous",
         "arcane"
       ]
+    },
+    {
+      "id": "channelfire_lantern_recipe",
+      "name": "Channelfire Lantern",
+      "station_id": "rune_forge_bench",
+      "ingredients": [
+        {
+          "item_id": "scorchvine_resin",
+          "amount": 1
+        },
+        {
+          "item_id": "rune_ash",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "channelfire_lantern",
+      "output_amount": 1,
+      "description": "Noon resin run down a channel that is already hot. It is the first thing anybody has brewed on this floor rather than merely reworked on it.",
+      "required_heat": 3,
+      "required_stirs": 2,
+      "unstable_output_item_id": "lantern_leak",
+      "lore_note": "The benches were cut for imbuing and they hold heat the whole length. Somebody built that in and then nobody used it for twenty years.",
+      "minimum_quality": 46,
+      "preferred_traits": [
+        "warm",
+        "volatile"
+      ],
+      "guaranteed_traits": [
+        "soft_glow"
+      ],
+      "minimum_elements": {
+        "vita": 0,
+        "ember": 4,
+        "mist": 1,
+        "lux": 2
+      },
+      "required_timing": "early",
+      "required_sequence": [
+        "volatile",
+        "warm"
+      ],
+      "morph_targets": [
+        {
+          "output_item_id": "hearthchannel_lantern",
+          "minimum_quality": 70,
+          "catalyst_tag": "kilnfire",
+          "required_heat": 3,
+          "required_stirs": 2,
+          "required_timing": "early",
+          "room_bonus_required": true
+        }
+      ]
     }
   ]
 }

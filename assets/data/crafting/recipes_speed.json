@@ -268,6 +268,52 @@
         "vigor",
         "calm"
       ]
+    },
+    {
+      "id": "forgestep_tonic_recipe",
+      "name": "Forgestep Tonic",
+      "station_id": "rune_forge_bench",
+      "ingredients": [
+        {
+          "item_id": "emberbark_curl",
+          "amount": 1
+        },
+        {
+          "item_id": "sunspike",
+          "amount": 1
+        },
+        {
+          "item_id": "ember_root",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "forgestep_tonic",
+      "output_amount": 2,
+      "description": "Three hot things and a bench that keeps them hot. Two to a batch, because the channels run the length of it and there is no sense heating them for one.",
+      "required_heat": 3,
+      "required_stirs": 3,
+      "unstable_output_item_id": "rush_draught",
+      "lore_note": "Brin's assessment was that it tastes like a smithy and works like one.",
+      "minimum_quality": 48,
+      "preferred_traits": [
+        "vigor",
+        "warm"
+      ],
+      "guaranteed_traits": [
+        "quickstep"
+      ],
+      "minimum_elements": {
+        "vita": 0,
+        "ember": 8,
+        "mist": 0,
+        "lux": 3
+      },
+      "required_timing": "steady",
+      "required_sequence": [
+        "volatile",
+        "warm"
+      ],
+      "morph_targets": []
     }
   ]
 }

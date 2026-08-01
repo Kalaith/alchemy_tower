@@ -31,6 +31,49 @@
           128.0
         ]
       }
+    },
+    {
+      "id": "rune_forge_bench",
+      "name": "Channel Forge",
+      "kind": "alchemy",
+      "area_id": "rune_workshop_floor",
+      "position": [
+        396.0,
+        306.0
+      ],
+      "interaction_radius": 52.0,
+      "color": [
+        214,
+        142,
+        90,
+        255
+      ],
+      "stock": [],
+      "room_bonus": {
+        "quality_bonus": 13,
+        "favored_traits": [
+          "warm",
+          "volatile",
+          "vigor"
+        ],
+        "favored_categories": [
+          "catalyst"
+        ],
+        "description": "The channels that take an imbuing run hot the whole length of the bench, so work that wants heat gets it here without anyone having to manage a fire."
+      },
+      "planter_harvest_days": 0,
+      "planter_seed_ids": [],
+      "planter_yield_bonus": 0,
+      "required_journal_milestone": "rune_workshop_restored",
+      "habitat_creature_ids": [],
+      "habitat_output_item_id": "",
+      "habitat_harvest_days": 0,
+      "render": {
+        "sprite_size": [
+          112.0,
+          112.0
+        ]
+      }
     }
   ]
 }

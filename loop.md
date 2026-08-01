@@ -697,6 +697,32 @@ Stop the loop and report if:
   repeatable requests to point at by accident. `nothing_waits_on_a_repeatable_quest` guards it,
   verified against a deliberate mispoint.
   **38 quests across 8 givers and the board.**
+- **2026-08-01 — a floor with no work on it, and a capture that had been lying.** Measured where
+  recipes live: `entry_cauldron` holds **23 of 34**, and the **rune workshop floor had zero alchemy
+  stations and zero recipes** — a whole restored floor you visit once to imbue and never again.
+  Worse, **no bench anywhere favoured `warm`, `volatile` or `vigor`**, so eight recipes' worth of the
+  trait vocabulary had no room that was the right room. (The premise I started from — that late
+  materials default to the starter cauldron for lack of a gate — did not survive measurement; all
+  seven wild biomes are ungated. Fourth time this loop.)
+  The **Channel Forge** goes on that floor: the imbuing channels run hot the whole length of the
+  bench, which is a second use somebody cut into it twenty years ago and nobody wrote down. Two
+  recipes brewed rather than reworked — a **Channelfire Lantern** (morphing to **Hearthchannel** only
+  with the room bonus) and a **Forgestep Tonic** that batches two, because there is no sense heating
+  the whole bench for one. Ione's line is that in twenty years of notes on that floor nobody,
+  including her, recorded that it was somewhere you could also brew.
+  *Guard added:* `every_brewing_trait_has_a_bench_that_favours_it` — verified against a stripped
+  forge, which reported exactly `{vigor, volatile, warm}`. Rune traits are excluded by category,
+  since runes rework potions and are never reagents.
+  ***The harness itself was the real find.*** `preview_area`'s comment promised "every gate already
+  satisfied" and it satisfied quests and warps but **not journal milestones** — so every
+  milestone-gated bench has been absent from every area capture, and those rooms photographed as
+  bare floors. The first forge capture came back empty and the bench was fine; **the camera was
+  wrong.** Fixed, and the rune workbench became visible for the first time too. A capture that
+  silently omits the thing being verified is worse than no capture.
+  *Restructure done in-task:* the new guard pushed `game_data.rs` to 817 lines, so its test module
+  split by responsibility into `game_data_reference_tests.rs` (do ids resolve, is everything
+  reachable) and `game_data_progression_tests.rs` (can a new game be finished). 83 / 258 / 491.
+  **5 alchemy benches, 36 recipes, 73 tests.**
 
 ## Deferred (needs a new system; not for this loop)
 

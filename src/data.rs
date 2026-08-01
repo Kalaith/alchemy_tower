@@ -3,6 +3,10 @@
 mod embedded_json;
 mod game_data;
 mod game_data_fallback;
+#[cfg(test)]
+mod game_data_progression_tests;
+#[cfg(test)]
+mod game_data_reference_tests;
 mod loader;
 mod save_models;
 mod schema;
