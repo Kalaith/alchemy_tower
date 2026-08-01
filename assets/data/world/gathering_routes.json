@@ -95,6 +95,12 @@
       "name": "Rune Bench Row",
       "area_id": "rune_workshop_floor",
       "description": "The working length of the workshop: channelled benches, spent chalk, and frames that have been shedding their own inlay since long before anyone came back."
+    },
+    {
+      "id": "quarry_sump",
+      "name": "Quarry Sump",
+      "area_id": "rock_fields",
+      "description": "The bottom of the workings, where the cut faces and the standing water are. Worth nothing at all in a dry week and worth the walk the morning after rain."
     }
   ]
 }

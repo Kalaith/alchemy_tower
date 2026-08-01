@@ -657,6 +657,48 @@
         "volatile",
         "restorative"
       ]
+    },
+    {
+      "id": "sluicewater_tonic_recipe",
+      "name": "Sluicewater Tonic",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        {
+          "item_id": "sumpflower",
+          "amount": 1
+        },
+        {
+          "item_id": "washvein_crystal",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "sluicewater_tonic",
+      "output_amount": 1,
+      "description": "Both halves come out of the quarry bottom and both of them only exist while it is wet, so the whole recipe has a weather in it.",
+      "required_heat": 1,
+      "required_stirs": 3,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "Brin's view is that the workings have been quietly making this for a hundred years and simply had nobody to hand it to.",
+      "minimum_quality": 44,
+      "preferred_traits": [
+        "pure",
+        "restorative"
+      ],
+      "guaranteed_traits": [
+        "restorative"
+      ],
+      "minimum_elements": {
+        "vita": 2,
+        "ember": 0,
+        "mist": 5,
+        "lux": 2
+      },
+      "required_timing": "steady",
+      "required_sequence": [
+        "arcane",
+        "restorative"
+      ],
+      "morph_targets": []
     }
   ]
 }

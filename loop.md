@@ -461,6 +461,21 @@ Stop the loop and report if:
   still spilled, so it shows one plus a count.
   *Next: four wild biomes without a signature hook, the six fixed `narrative_text` milestones. Before
   claiming a system is fully used, grep for its fields.*
+- **2026-08-01 — biome signature hook (rock fields).** Took the previous note's advice first and
+  swept every optional schema field against every authored record: **only `minimum_effect_matches` is
+  never set**, so the systems really are exercised now. That freed the pass for the measured gap.
+  Counted across the four unsignatured biomes: rock fields had the fewest nodes (4), no night, and —
+  in a game where weather is a core axis — **no rain at all**. It was the one biome weather could not
+  reach. So the quarry becomes the one place rain *improves*: a second route (`quarry_sump`), a
+  washvein seam that is invisible in dry grey stone and obvious while the cut face runs, and a
+  sumpflower that only grows while the sump is actually holding water. One recipe whose two halves
+  both only exist while the workings are wet, so the formula has a weather in it. Brin points at it
+  early, right after the first town relief.
+  *Method note worth keeping: both biome hooks so far came from counting rather than inventing — the
+  hollow from winter being 62% of spring, the quarry from rain never appearing in one biome's
+  conditions. Measure the absence, then write into it.*
+  *Next: north plains and the rainforest have no exclusive gatherables at all, and the six fixed
+  `narrative_text` milestones are still the last prose nobody has revisited.*
 
 ## Deferred (needs a new system; not for this loop)
 

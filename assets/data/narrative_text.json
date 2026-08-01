@@ -542,6 +542,13 @@
       "after_milestone": "terraces_still_alive",
       "order": 69,
       "line": "The burn feeds this town one quarter of every year. I have never once heard anybody thank it, and I include myself in that."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "first_town_relief",
+      "order": 22,
+      "line": "If it has been raining, go up to the quarry. Everywhere else in the valley you wait for the wet to pass. Up there the wet is the whole point — the cut faces only show their seam while they are running, and the sump only grows anything while it is holding water."
     }
   ],
   "epilogue_beats": [

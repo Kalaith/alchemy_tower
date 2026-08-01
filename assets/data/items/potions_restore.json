@@ -584,6 +584,27 @@
           "description": "Restores solidly and puts heat back into whoever takes it."
         }
       ]
+    },
+    {
+      "id": "sluicewater_tonic",
+      "name": "Sluicewater Tonic",
+      "category": "potion",
+      "base_value": 60,
+      "color": [
+        166,
+        198,
+        202,
+        255
+      ],
+      "description": "Clear, mineral and faintly cold. It tastes like the smell of a wet quarry, which is less unpleasant than it sounds and is the reason the road crews ask for it by name.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 36.0,
+          "duration_seconds": 0.0,
+          "description": "Restores well and settles the grit out of a working day."
+        }
+      ]
     }
   ]
 }

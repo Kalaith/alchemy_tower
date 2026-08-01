@@ -107,6 +107,114 @@
       ],
       "synthesis_weight": 2,
       "synthesis_value": 3
+    },
+    {
+      "id": "washvein_crystal",
+      "name": "Washvein Crystal",
+      "category": "ingredient",
+      "base_value": 15,
+      "color": [
+        178,
+        202,
+        226,
+        255
+      ],
+      "description": "The cut faces are grey and uninteresting dry. Wet, a seam comes up through them like writing under water, and it can be worked out with a thumbnail before the stone dries again.",
+      "quality": 38,
+      "rarity": 3,
+      "elements": {
+        "vita": 0,
+        "ember": 0,
+        "mist": 2,
+        "lux": 2
+      },
+      "traits": [
+        "arcane",
+        "pure"
+      ],
+      "source_conditions": [
+        "any season; the rock does not keep a calendar",
+        "rain or heavy mist, and only while the face is still wet",
+        "the worked cut faces, never the spoil"
+      ],
+      "wild_variants": [
+        {
+          "id": "washvein_crystal_stormrun",
+          "name": "Stormrun Washvein",
+          "required_conditions": [
+            "rain",
+            "morning"
+          ],
+          "bonus_traits": [
+            "luminous"
+          ],
+          "quality_bonus": 11,
+          "elements": {
+            "vita": 0,
+            "ember": 0,
+            "mist": 1,
+            "lux": 1
+          },
+          "synthesis_weight_bonus": 0,
+          "synthesis_value_bonus": 4
+        }
+      ],
+      "synthesis_weight": 1,
+      "synthesis_value": 5
+    },
+    {
+      "id": "sumpflower",
+      "name": "Sumpflower",
+      "category": "ingredient",
+      "base_value": 12,
+      "color": [
+        148,
+        190,
+        168,
+        255
+      ],
+      "description": "It grows in the flooded sump at the quarry bottom and only while the water is standing. Three dry days and there is nothing there but cracked clay and the smell of it.",
+      "quality": 34,
+      "rarity": 2,
+      "elements": {
+        "vita": 2,
+        "ember": 0,
+        "mist": 3,
+        "lux": 0
+      },
+      "traits": [
+        "restorative",
+        "calm"
+      ],
+      "source_conditions": [
+        "spring and autumn, when the rain actually stays",
+        "rain, and the mist that follows it",
+        "the flooded sump nobody bothered to drain"
+      ],
+      "wild_variants": [
+        {
+          "id": "sumpflower_standing",
+          "name": "Standing Sumpflower",
+          "required_conditions": [
+            "autumn",
+            "rain"
+          ],
+          "bonus_traits": [
+            "pure"
+          ],
+          "quality_bonus": 9,
+          "elements": {
+            "vita": 1,
+            "ember": 0,
+            "mist": 1,
+            "lux": 0
+          },
+          "synthesis_weight_bonus": 1,
+          "synthesis_value_bonus": 2
+        }
+      ],
+      "synthesis_weight": 2,
+      "synthesis_value": 3
     }
   ]
 }

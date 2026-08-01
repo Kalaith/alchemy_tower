@@ -230,6 +230,72 @@
       "render": {
         "sprite_id": "kiln_geode_quarry"
       }
+    },
+    {
+      "id": "quarry_washvein_01",
+      "name": "Washvein Crystal",
+      "item_id": "washvein_crystal",
+      "color": [
+        178,
+        202,
+        226,
+        255
+      ],
+      "position": [
+        908.0,
+        664.0
+      ],
+      "radius": 16.0,
+      "route_id": "quarry_sump",
+      "seasons": [],
+      "weathers": [
+        "rain",
+        "mist"
+      ],
+      "time_windows": [
+        "morning",
+        "day",
+        "evening"
+      ],
+      "spawn_chance": 86,
+      "note": "Dry, this face is grey stone and nothing else. Wet, the seam is obvious enough that you wonder how a century of quarrymen walked past it.",
+      "render": {
+        "sprite_id": "washvein_crystal_quarry"
+      }
+    },
+    {
+      "id": "quarry_sumpflower_01",
+      "name": "Sumpflower",
+      "item_id": "sumpflower",
+      "color": [
+        148,
+        190,
+        168,
+        255
+      ],
+      "position": [
+        286.0,
+        742.0
+      ],
+      "radius": 16.0,
+      "route_id": "quarry_sump",
+      "seasons": [
+        "spring",
+        "autumn"
+      ],
+      "weathers": [
+        "rain",
+        "mist"
+      ],
+      "time_windows": [
+        "morning",
+        "day"
+      ],
+      "spawn_chance": 82,
+      "note": "The sump has been flooding and drying since before anybody stopped cutting here. Nothing else in the valley grows on that schedule, so nothing else competes for it.",
+      "render": {
+        "sprite_id": "sumpflower_quarry"
+      }
     }
   ]
 }
