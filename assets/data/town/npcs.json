@@ -50,6 +50,14 @@
             462.0,
             270.0
           ]
+        },
+        {
+          "time_window": "night",
+          "area_id": "tower_entry",
+          "position": [
+            470.0,
+            300.0
+          ]
         }
       ]
     },
@@ -103,6 +111,14 @@
           "position": [
             690.0,
             628.0
+          ]
+        },
+        {
+          "time_window": "night",
+          "area_id": "town_square",
+          "position": [
+            742.0,
+            664.0
           ]
         }
       ],
@@ -171,6 +187,14 @@
             486.0,
             552.0
           ]
+        },
+        {
+          "time_window": "night",
+          "area_id": "moonlit_forest",
+          "position": [
+            620.0,
+            470.0
+          ]
         }
       ],
       "friendship_line": "The walk home feels like mine again, thanks to you. Here - cuttings I have been saving. A friend should have the good stock, not the leftovers.",
@@ -219,24 +243,32 @@
           "time_window": "morning",
           "area_id": "town_square",
           "position": [
-            910.0,
-            260.0
+            872.0,
+            250.0
           ]
         },
         {
           "time_window": "day",
           "area_id": "town_square",
           "position": [
-            980.0,
-            240.0
+            880.0,
+            200.0
           ]
         },
         {
           "time_window": "evening",
           "area_id": "town_square",
           "position": [
-            932.0,
-            278.0
+            876.0,
+            330.0
+          ]
+        },
+        {
+          "time_window": "night",
+          "area_id": "town_square",
+          "position": [
+            866.0,
+            330.0
           ]
         }
       ],
@@ -305,6 +337,14 @@
             1080.0,
             620.0
           ]
+        },
+        {
+          "time_window": "night",
+          "area_id": "archive_floor",
+          "position": [
+            470.0,
+            330.0
+          ]
         }
       ],
       "friendship_line": "I do not open these shelves to just anyone. But you mend things instead of hoarding them, and the archive knows its own. Take what it can spare.",
@@ -371,6 +411,14 @@
           "position": [
             676.0,
             720.0
+          ]
+        },
+        {
+          "time_window": "night",
+          "area_id": "town_square",
+          "position": [
+            318.0,
+            470.0
           ]
         }
       ],
@@ -439,6 +487,14 @@
             1152.0,
             450.0
           ]
+        },
+        {
+          "time_window": "night",
+          "area_id": "containment_floor",
+          "position": [
+            478.0,
+            348.0
+          ]
         }
       ],
       "friendship_line": "The small creatures settle when you are near now. They know a gentle hand. Take this from the habitats - you have earned their trust, and mine.",
@@ -502,6 +558,14 @@
           "position": [
             524.0,
             268.0
+          ]
+        },
+        {
+          "time_window": "night",
+          "area_id": "southern_pass",
+          "position": [
+            520.0,
+            430.0
           ]
         }
       ],

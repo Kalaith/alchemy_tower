@@ -123,6 +123,13 @@ impl GameplayState {
         self.progression.total_brews = 40;
         self.world.current_area_id = area_id.to_owned();
         self.refresh_available_nodes(data);
+        // Townsfolk are seeded onto their active schedule mark when the state is
+        // built, which happened before the clock above was moved — so they stood
+        // on their morning marks and then *walked* to wherever the scene asked
+        // for, at walking pace, over far more frames than a capture runs. Re-seed
+        // now that the hour is right, or a night capture photographs the town at
+        // breakfast and the schedule work is invisible.
+        self.initialize_npc_motion_states(data);
         // Stand where the content is. Centring the room instead means anything
         // authored in a corner is simply off-camera, which has twice made a
         // capture look like nothing had been added. The *last* available node,

@@ -802,6 +802,35 @@ Stop the loop and report if:
   reads these manifests, so only `generate_art.py` needed teaching. All 89 entries verified present.
   *Next split candidates:* `narrative_reactions.json` (760), `crafting/recipes_glow.json` (704).
   **62 gather nodes across 14 areas; 43 recipes; night-only nodes 2 → 5; 77 tests.**
+- **2026-08-01 — the valley had four hours in the day and only ever lived through three.** Every
+  townsperson had morning, day and evening marks and **no night entry at all**, and
+  `active_schedule_index` falls back to the last one — so from 21:00 until 06:00 the whole cast
+  stood frozen on its teatime spot. Harmless until last pass made night worth going out in.
+  All eight now have somewhere to be after dark, and it says something about each of them: **Ione in
+  the archive** (she reads, and now knows the room was built under the lens on purpose), **Lyra on
+  the containment floor** (she said she walks down there out of habit), **Rowan cutting in the
+  forest** because half of what she grows wants dark, **Tarn at the waystation** because that is a
+  night job or it is nothing, and the Crow at the entry, which has never pretended to sleep.
+  ***The reachability bug is the real result, and it was found by arithmetic, not by looking.***
+  Checking authored positions against area blockers turned up **three gather nodes buried deeper in
+  scenery than their own reach** — blockers stop the player with a 14px body radius, so these were
+  visible and untouchable. Worst: **`hollow_ashcap_01`, 88px inside a tree against a 44px reach, and
+  the only source of ashcap in the game** — so `hollow_hearth_tonic` and `southmarket_salve` have
+  never been brewable by anyone. Also Mayor Elric had been standing *inside the town hall* for two
+  of his three windows (reachable at 48px against a 56px radius, but rendered through the wall).
+  *Two guards, all four arms verified against deliberate breaks:*
+  `every_townsperson_has_somewhere_to_be_at_every_hour` (window coverage + scenery), and
+  `everything_the_player_must_reach_can_be_stood_next_to`, which measures **reach, not overlap** —
+  the greenhouse's north planter sits inside a blocker on purpose, because the blocker *is* the
+  raised bed, and 48px of reach clears it. A flag-on-overlap check would have condemned it.
+  ***Third harness fix in three passes, same shape as the other two.*** NPCs are seeded onto their
+  active schedule mark when the state is built, which happens *before* `preview_area` moves the
+  clock — so they stood on morning marks and then walked, at walking pace, over far more frames
+  than a capture runs. A night capture photographed the town at breakfast. Re-seeded after the hour
+  is set; Ione appeared in the archive immediately.
+  *A caution worth keeping:* my first instinct was to report all five position/blocker overlaps as
+  bugs. Two were deliberate level design. **Measure the consequence, not the coincidence.**
+  **8 night schedules; 3 nodes dug out of scenery; 79 tests.**
 
 ## Deferred (needs a new system; not for this loop)
 
