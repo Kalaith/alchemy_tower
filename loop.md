@@ -405,6 +405,23 @@ Stop the loop and report if:
   prompt live.*
   *Next: `required_sequence` (4 of 30 recipes), prose, four wild biomes still without a signature,
   board-request variety.*
+- **2026-08-01 — recipes (the ingredient-order mechanic).** `required_sequence` was on 4 of 30
+  recipes and three of those just named their own two ingredients in order, which is a memory task,
+  not a method. It is now on **13**, expressed as *traits* rather than item ids, all following one
+  rule a player can infer and then apply unaided: **the reagent that drives the reaction goes in
+  first, the one that governs it second.** All three starter recipes carry it, so the rule is met in
+  the first hour — the formulae panel now reads "order any warm -> any calm".
+  *Bug found before authoring: the only recipe already using trait tokens (`beastcalm_extract`)
+  rendered them through `item_name`, whose fallback is the raw token — so it displayed "order
+  luminous -> calm" in a list where every other entry showed item names, and a player could not tell
+  a trait from an ingredient they had not met. Sequence steps now render as an item name when the
+  token resolves to one and "any {trait}" when it does not.*
+  *New test `every_required_sequence_is_satisfiable_by_its_own_reagents` tries every arrangement of a
+  recipe's slots (they run 2–3, so exhaustive is cheap and exact). A token naming a trait none of the
+  reagents carry permanently faults the recipe with nothing on screen to explain it — verified
+  against a deliberately impossible sequence.*
+  *Next: prose, four wild biomes without a signature, board-request variety. No system remains
+  meaningfully built-but-unused.*
 
 ## Deferred (needs a new system; not for this loop)
 

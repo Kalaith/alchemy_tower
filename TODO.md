@@ -3,7 +3,7 @@
 ## Core loop & alchemy
 
 - Author 15–25 recipes with overlapping ingredients and more morph paths, so the quality/trait engine drives real brew decisions instead of a lookup. (26 recipes, 12 morph branches across three catalyst tags; the starter recipe now morphs, so the layer teaches itself.)
-- Add risk/reward to heat, stir and timing so pushing a quality band is a gamble.
+- Add risk/reward to heat, stir and timing so pushing a quality band is a gamble. (Overcharge/instability does this for heat and stirs. Ingredient order is now a third axis: 13 recipes carry a trait-ordered method.)
 - Turn the unlogged-brew salvage fallback into a discovery event: journal and celebrate a combination that resolves to a new stable formula.
 - Move recipe, herb, rapport and request tuning into validated data tables with fixtures for edge-case brews.
 - Add brew-resolution tests covering ingredient quality, recipe discovery, town requests, and tower-floor unlock conditions.

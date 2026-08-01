@@ -38,8 +38,8 @@
       "catalyst_quality_bonus": 0,
       "required_timing": "steady",
       "required_sequence": [
-        "sunleaf",
-        "whisper_moss"
+        "warm",
+        "calm"
       ],
       "morph_targets": [
         {
@@ -267,6 +267,10 @@
           "required_timing": "steady",
           "room_bonus_required": true
         }
+      ],
+      "required_sequence": [
+        "arcane",
+        "calm"
       ]
     },
     {
@@ -305,7 +309,11 @@
         "lux": 2
       },
       "required_timing": "steady",
-      "morph_targets": []
+      "morph_targets": [],
+      "required_sequence": [
+        "luminous",
+        "calm"
+      ]
     },
     {
       "id": "kindling_tonic_recipe",
@@ -511,6 +519,10 @@
           "required_stirs": 3,
           "required_timing": "late"
         }
+      ],
+      "required_sequence": [
+        "arcane",
+        "calm"
       ]
     },
     {
@@ -640,7 +652,11 @@
         "lux": 0
       },
       "required_timing": "early",
-      "morph_targets": []
+      "morph_targets": [],
+      "required_sequence": [
+        "volatile",
+        "restorative"
+      ]
     }
   ]
 }

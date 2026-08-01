@@ -39,8 +39,8 @@
       "catalyst_quality_bonus": 8,
       "required_timing": "steady",
       "required_sequence": [
-        "arcane_dust",
-        "moon_fern"
+        "arcane",
+        "cold"
       ],
       "morph_targets": [
         {
@@ -309,6 +309,10 @@
           "required_stirs": 2,
           "required_timing": "late"
         }
+      ],
+      "required_sequence": [
+        "warm",
+        "pure"
       ]
     },
     {
@@ -445,7 +449,11 @@
         "lux": 7
       },
       "required_timing": "late",
-      "morph_targets": []
+      "morph_targets": [],
+      "required_sequence": [
+        "arcane",
+        "luminous"
+      ]
     },
     {
       "id": "benchlight_solution_recipe",
@@ -535,6 +543,11 @@
           "required_timing": "late",
           "room_bonus_required": true
         }
+      ],
+      "required_sequence": [
+        "volatile",
+        "luminous",
+        "arcane"
       ]
     }
   ]

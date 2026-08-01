@@ -218,6 +218,7 @@
     "inventory_memory_meta": "mastery {mastery}  best {best}  {catalyst}",
     "inventory_memory_output": "Output {item}",
     "inventory_memory_order": "order {sequence}",
+    "inventory_memory_order_trait": "any {trait}",
     "inventory_memory_brew_steps": "brew: heat {heat}, stir {stirs}, {timing}",
     "inventory_memory_traits": "traits {traits}",
     "inventory_memory_morph": "morph path logged",

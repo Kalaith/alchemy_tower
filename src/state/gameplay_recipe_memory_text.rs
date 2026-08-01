@@ -60,8 +60,18 @@ fn order(data: &GameData, recipe: &RecipeDefinition) -> String {
     let sequence = recipe
         .required_sequence
         .iter()
-        .map(|item_id| data.item_name(item_id))
+        .map(|token| sequence_step(data, token))
         .collect::<Vec<_>>()
         .join(" -> ");
     ui_format("inventory_memory_order", &[("sequence", &sequence)])
+}
+
+/// A sequence step names either a specific reagent or a property any reagent
+/// can satisfy. Rendering both through the item-name lookup made a trait read
+/// as an ingredient nobody had ever seen.
+fn sequence_step(data: &GameData, token: &str) -> String {
+    match data.item(token) {
+        Some(item) => item.name.clone(),
+        None => ui_format("inventory_memory_order_trait", &[("trait", token)]),
+    }
 }
