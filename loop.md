@@ -1017,6 +1017,25 @@ Stop the loop and report if:
   neither does she. **The tests are now catching me faster than I catch myself.**
   *No new guard — nothing here established a rule the suite did not already hold.*
   **9 townsfolk, 45 quests, 125 reactions in 9 files; 87 tests.**
+- **2026-08-01 — a third of the brewing system had almost nobody asking for it.** Demand by effect
+  kind: **restore 28, glow 14, speed 2.** Eighteen speed potions exist and **fourteen of them are
+  never asked for by anybody**. The valley's road crews and carters are referenced constantly — in
+  potion descriptions, in recipe lore, in Tarn's whole arc — and had never once put an order up.
+  Four road orders, each wanting a *different kind* of speed rather than four of the same:
+  **trailblaze** for the switchback crews with a note not to substitute the gentle version because
+  somebody tried and the crew walked back down at noon; **briskstep** for the market walk, firm that
+  a stronger tonic is not a better one *here*; **forgestep**, which the crews complain about every
+  week and reorder every week; and **longstride**, where the carters have worked out that the
+  salvaged one is not the tonic you take at the start of a haul but the one you take when you are
+  already tired and the far side is four hours off. Speed demand 2 → 6.
+  *The salvage thread gets a second destination* — longstride comes from a failed brew reworked
+  with a delay rune, so the road is now a reason to keep failures.
+  *Checked rather than assumed:* `obtainable_item_ids` counts rune-recipe outputs, so the guard
+  genuinely validated that salvage → rework → delivery chain rather than passing it by default.
+  Second use of the `Crude` band, which suits a bottle nobody claims is pleasant.
+  *No new guard.* `nothing_waits_on_a_repeatable_quest` already covers the trap these four sit in
+  (all repeatable), and an "effects must be evenly demanded" rule would be legislating taste.
+  **49 quests; speed is no longer a supply with no demand.**
 
 ## Deferred (needs a new system; not for this loop)
 
