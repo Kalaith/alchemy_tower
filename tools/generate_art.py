@@ -215,6 +215,8 @@ def icon(item, size, world=False):
     if world:
         d.ellipse(box(cx, cy + 18, 16, 7), fill=(10, 12, 18, 70))
     if item in {
+        "heldrain_bead",
+        "stranglerfig_sap",
         "whisper_moss",
         "sunleaf",
         "moon_fern",
@@ -248,6 +250,8 @@ def icon(item, size, world=False):
         "nightwrack",
         "downwash_bloom",
     } or base_item in {
+        "heldrain_bead",
+        "stranglerfig_sap",
         "whisper_moss",
         "sunleaf",
         "moon_fern",
@@ -314,6 +318,7 @@ def icon(item, size, world=False):
             "rimeflower": "#d6e4f0",
             "nightwrack": "#6c8468",
             "downwash_bloom": "#8ec254",
+            "heldrain_bead": "#c4e0e8", "stranglerfig_sap": "#b29e6e",
         }
         for ox, oy in [(-10, 2), (2, -4), (12, 4), (-2, 10)]:
             d.ellipse(box(cx + ox, cy + oy, 9, 12), fill=rgb(colors[base_item]))
@@ -480,6 +485,7 @@ def icon(item, size, world=False):
             "standing_dose": "#dcecf0", "keptback_draught": "#6e9aa8",
             "double_read_solution": "#cee0f0", "longheld_cordial": "#c4d8be",
             "shelfwide_reading": "#c6d0e8", "carrydown_cordial": "#bccece",
+            "truemeasure_tonic": "#c6dce2",
             "longhaul_draught": "#b0c8e0",
         }.get(item, "#d2c1ff")
         d.rounded_rectangle((cx - 8, cy - 24, cx + 8, cy - 12), radius=3, fill=rgb("#d9dfe8", 220))

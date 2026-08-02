@@ -112,7 +112,13 @@ impl GameplayState {
                 title: title.to_owned(),
                 text: text.to_owned(),
             });
-        self.trigger_journal_note_feedback(world_text::new_journal_note(title));
+        // A beat with no title is a capture scene seeding a gate, not something
+        // the player did. Raising "New journal note: ." three times over is how
+        // that reads on screen, which the harness showed the moment banners
+        // started drawing.
+        if !title.is_empty() {
+            self.trigger_journal_note_feedback(world_text::new_journal_note(title));
+        }
     }
 
     pub(super) fn has_journal_milestone(&self, id: &str) -> bool {

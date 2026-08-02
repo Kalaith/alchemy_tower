@@ -500,6 +500,27 @@
           "description": "Holds the damage still and the patient quiet for the length of a descent."
         }
       ]
+    },
+    {
+      "id": "truemeasure_tonic",
+      "name": "Truemeasure Tonic",
+      "category": "potion",
+      "base_value": 96,
+      "color": [
+        198,
+        220,
+        226,
+        255
+      ],
+      "description": "Water that has been nowhere, held at ward temperature with a sap that takes twelve years to hurry. It restores about as well as a decent field draught and it does it identically every single time, which is the entire point: Lyra cannot compare this season's animals to last season's if the thing she gave them has drifted.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 40.0,
+          "duration_seconds": 0.0,
+          "description": "A middling, utterly repeatable dose — the same on the last bottle as the first."
+        }
+      ]
     }
   ]
 }

@@ -255,6 +255,63 @@
         "vigor",
         "calm"
       ]
+    },
+    {
+      "id": "truemeasure_tonic_recipe",
+      "name": "Truemeasure Tonic",
+      "station_id": "containment_cold_bench",
+      "ingredients": [
+        {
+          "item_id": "heldrain_bead",
+          "amount": 2
+        },
+        {
+          "item_id": "stranglerfig_sap",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "truemeasure_tonic",
+      "output_amount": 1,
+      "description": "Two beads of water that have touched nothing and a sap that will not be hurried, held cold. Nothing in it argues with anything, which is why it comes out the same every time.",
+      "required_heat": 1,
+      "required_stirs": 3,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "Lyra asked for a dose that does not drift and would not be talked out of the word drift. A measure that changes between seasons measures the measure.",
+      "minimum_quality": 44,
+      "preferred_traits": [
+        "pure",
+        "calm",
+        "restorative"
+      ],
+      "guaranteed_traits": [
+        "pure",
+        "calm"
+      ],
+      "minimum_elements": {
+        "vita": 2,
+        "ember": 0,
+        "mist": 6,
+        "lux": 0
+      },
+      "catalyst_tag": "stillwater",
+      "catalyst_quality_bonus": 10,
+      "required_timing": "early",
+      "required_sequence": [
+        "pure",
+        "pure",
+        "restorative"
+      ],
+      "morph_targets": [
+        {
+          "output_item_id": "blankwater",
+          "minimum_quality": 62,
+          "catalyst_tag": "stillwater",
+          "required_heat": 1,
+          "required_stirs": 4,
+          "required_timing": "early",
+          "room_bonus_required": true
+        }
+      ]
     }
   ]
 }

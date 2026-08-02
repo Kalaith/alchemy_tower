@@ -205,8 +205,15 @@ mod tests {
         let data = crate::data::load_embedded().expect("embedded game data should load");
         let mut state = GameplayState::new(&data);
 
+        // Titled, because an untitled beat is a capture scene seeding a gate
+        // rather than something the player did, and those deliberately make no
+        // noise and raise no banner.
         for index in 0..12 {
-            state.push_journal_milestone(&format!("beat_{index}"), "", "");
+            state.push_journal_milestone(
+                &format!("beat_{index}"),
+                &format!("Beat {index}"),
+                "Something happened.",
+            );
         }
 
         let taken = state.take_pending_sounds();

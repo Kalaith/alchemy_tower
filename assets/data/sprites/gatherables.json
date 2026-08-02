@@ -452,6 +452,24 @@
         64
       ],
       "prompt": "A thick bright green algal bloom on a warm shoreline, richer than everything around it, readable from above as a gatherable."
+    },
+    {
+      "id": "heldrain_bead",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A bead of clear water standing in a broad leaf axil, pale blue-white and untouched, readable from above as a gatherable."
+    },
+    {
+      "id": "stranglerfig_sap",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "Amber sap beading on a cut in an old grey trunk wrapped in fig roots, warm tan against wet bark, readable from above."
     }
   ]
 }

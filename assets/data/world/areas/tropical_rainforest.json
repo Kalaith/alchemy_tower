@@ -300,6 +300,142 @@
       "render": {
         "sprite_id": "bloomwing"
       }
+    },
+    {
+      "id": "rainforest_heldrain_01",
+      "name": "Heldrain Bead",
+      "item_id": "heldrain_bead",
+      "color": [
+        196,
+        224,
+        232,
+        255
+      ],
+      "position": [
+        700.0,
+        430.0
+      ],
+      "radius": 16.0,
+      "route_id": "rainmist_canopy",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "weathers": [
+        "clear"
+      ],
+      "time_windows": [
+        "morning"
+      ],
+      "spawn_chance": 72,
+      "note": "The axils above the arch hold a day and a half of rain. On a clear morning this is the only water up here that has not run over anything.",
+      "render": {
+        "sprite_id": "heldrain_bead_rainforest"
+      }
+    },
+    {
+      "id": "rainforest_heldrain_02",
+      "name": "Heldrain Bead",
+      "item_id": "heldrain_bead",
+      "color": [
+        196,
+        224,
+        232,
+        255
+      ],
+      "position": [
+        200.0,
+        430.0
+      ],
+      "radius": 16.0,
+      "route_id": "rainmist_driplight",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "weathers": [
+        "clear"
+      ],
+      "time_windows": [
+        "morning"
+      ],
+      "spawn_chance": 66,
+      "note": "Lower axils along the drip line, easier to reach and half as full, because this is the water already on its way down.",
+      "render": {
+        "sprite_id": "heldrain_bead_rainforest"
+      }
+    },
+    {
+      "id": "rainforest_figsap_01",
+      "name": "Stranglerfig Sap",
+      "item_id": "stranglerfig_sap",
+      "color": [
+        178,
+        158,
+        110,
+        255
+      ],
+      "position": [
+        940.0,
+        760.0
+      ],
+      "radius": 16.0,
+      "route_id": "rainmist_driplight",
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "weathers": [
+        "mist",
+        "rain"
+      ],
+      "time_windows": [
+        "evening"
+      ],
+      "spawn_chance": 66,
+      "note": "The fig finished with this trunk about four years ago. Cut the host, not the fig: the fig is still working.",
+      "render": {
+        "sprite_id": "stranglerfig_sap_rainforest"
+      }
+    },
+    {
+      "id": "rainforest_dripslug_01",
+      "name": "Dew Slug",
+      "item_id": "dew_slug",
+      "color": [
+        166,
+        214,
+        186,
+        255
+      ],
+      "position": [
+        620.0,
+        860.0
+      ],
+      "radius": 16.0,
+      "route_id": "rainmist_driplight",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "weathers": [
+        "clear",
+        "mist",
+        "rain"
+      ],
+      "time_windows": [
+        "morning",
+        "evening"
+      ],
+      "spawn_chance": 60,
+      "note": "They follow the drip line rather than the weather, which is why they are out here on a dry day.",
+      "render": {
+        "sprite_id": "dew_slug_rainforest"
+      }
     }
   ],
   "footstep_sound_set": "leaf"

@@ -631,6 +631,26 @@
       "repeatable": true,
       "repeat_cooldown_days": 9,
       "rapport_npc_id": "wren_physician"
+    },
+    {
+      "id": "board_truemeasure_for_the_survey",
+      "title": "Survey: A Dose That Does Not Drift",
+      "description": "Lyra, in the survey's hand rather than her own. Two truemeasure tonics a season, kept sealed, so that what a keeper gives an animal this spring is the same thing she gave one last spring. She notes that the whole point of a standing survey is that nothing in it is allowed to change quietly.",
+      "required_item_id": "truemeasure_tonic",
+      "required_amount": 2,
+      "reward_coins": 290,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Fine",
+      "required_trait": "pure",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [
+        "commission_valley_survey"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 44,
+      "repeatable": true,
+      "repeat_cooldown_days": 10,
+      "rapport_npc_id": "lyra_keeper"
     }
   ]
 }

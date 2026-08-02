@@ -119,6 +119,12 @@
       "name": "Lake Strandline",
       "area_id": "lake_shore",
       "description": "The bare line the water leaves overnight, walked before the sun reaches it. Weed off the inflow, glass off the tower, a bloom that is new. Nothing on this line grew where you are standing."
+    },
+    {
+      "id": "rainmist_driplight",
+      "name": "The Drip Line",
+      "area_id": "tropical_rainforest",
+      "description": "A pace out from the big trunks, where the canopy lets go of what it caught. It rains here for hours after it has stopped raining above, and on a clear morning this is the only wet ground in the valley."
     }
   ]
 }

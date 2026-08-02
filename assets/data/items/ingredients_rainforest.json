@@ -53,6 +53,114 @@
       ],
       "synthesis_weight": 2,
       "synthesis_value": 3
+    },
+    {
+      "id": "heldrain_bead",
+      "name": "Heldrain Bead",
+      "category": "ingredient",
+      "base_value": 21,
+      "color": [
+        196,
+        224,
+        232,
+        255
+      ],
+      "description": "Rain the canopy caught and never passed on, standing in a leaf axil twenty feet up. It has touched nothing since it was cloud — not soil, not stone, not the tower's own pipes — and it is the only water in the valley of which that is true. You get it on a clear morning, because the ceiling is still draining on days the sky has finished.",
+      "quality": 44,
+      "rarity": 3,
+      "elements": {
+        "vita": 1,
+        "ember": 0,
+        "mist": 5,
+        "lux": 1
+      },
+      "traits": [
+        "pure",
+        "calm"
+      ],
+      "source_conditions": [
+        "leaf axils in the high canopy, never the ground",
+        "clear mornings, while the ceiling is still letting go",
+        "spring through autumn, when the canopy is holding anything at all"
+      ],
+      "wild_variants": [
+        {
+          "id": "heldrain_bead_untouched",
+          "name": "Untouched Heldrain Bead",
+          "required_conditions": [
+            "clear",
+            "morning"
+          ],
+          "bonus_traits": [
+            "restorative"
+          ],
+          "quality_bonus": 12,
+          "elements": {
+            "vita": 1,
+            "ember": 0,
+            "mist": 2,
+            "lux": 0
+          },
+          "synthesis_weight_bonus": 1,
+          "synthesis_value_bonus": 4
+        }
+      ],
+      "synthesis_weight": 2,
+      "synthesis_value": 5
+    },
+    {
+      "id": "stranglerfig_sap",
+      "name": "Stranglerfig Sap",
+      "category": "ingredient",
+      "base_value": 28,
+      "color": [
+        178,
+        158,
+        110,
+        255
+      ],
+      "description": "A fig seeds in the crown of another tree and spends twelve years growing down it. What runs when you cut the old trunk is the fig's sap, out of wood that is no longer the fig's host so much as its scaffolding. It only runs in the hour the heat goes out of the day, which is the hour the whole forest starts dripping.",
+      "quality": 48,
+      "rarity": 3,
+      "elements": {
+        "vita": 3,
+        "ember": 0,
+        "mist": 2,
+        "lux": 0
+      },
+      "traits": [
+        "restorative",
+        "arcane"
+      ],
+      "source_conditions": [
+        "the host trunk, never the fig itself",
+        "evening, in the hour the heat leaves",
+        "summer and autumn, while the sap is still moving"
+      ],
+      "wild_variants": [
+        {
+          "id": "stranglerfig_sap_slow",
+          "name": "Slow-Run Stranglerfig Sap",
+          "required_conditions": [
+            "mist",
+            "evening"
+          ],
+          "bonus_traits": [
+            "calm"
+          ],
+          "quality_bonus": 9,
+          "elements": {
+            "vita": 2,
+            "ember": 0,
+            "mist": 1,
+            "lux": 0
+          },
+          "synthesis_weight_bonus": 1,
+          "synthesis_value_bonus": 3
+        }
+      ],
+      "synthesis_weight": 2,
+      "synthesis_value": 4
     }
   ]
 }

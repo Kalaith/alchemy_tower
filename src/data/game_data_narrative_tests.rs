@@ -304,4 +304,48 @@ pub(crate) mod tests {
 {missing:#?}"
         );
     }
+
+    /// Every beat the game records is a line in the player's own journal and a
+    /// banner as it lands, so an untitled one shows as "New journal note: ."
+    /// and reads in the journal as a blank row. Nothing authored may be empty;
+    /// the only empty titles in the game come from capture scenes seeding a
+    /// gate, and those no longer raise a banner.
+    #[test]
+    fn every_authored_journal_beat_has_something_written_in_it() {
+        let data = load_embedded().expect("embedded game data should load");
+        let mut blank = Vec::new();
+
+        let mut check = |source: &str, id: &str, title: &str, text: &str| {
+            if title.trim().is_empty() || text.trim().is_empty() {
+                blank.push(format!("{source}: {id}"));
+            }
+        };
+        for quest in &data.quests {
+            for milestone in &quest.completion_milestones {
+                check("quest", &milestone.id, &milestone.title, &milestone.text);
+            }
+        }
+        for recipe in &data.recipes {
+            for milestone in &recipe.discovery_milestones {
+                check("recipe", &milestone.id, &milestone.title, &milestone.text);
+            }
+        }
+        for area in &data.areas {
+            for target in &area.apply_targets {
+                for milestone in &target.completion_milestones {
+                    check("target", &milestone.id, &milestone.title, &milestone.text);
+                }
+            }
+        }
+        for milestone in crate::content::narrative_text().milestones.all() {
+            check("spine", &milestone.id, &milestone.title, &milestone.text);
+        }
+
+        blank.sort();
+        assert!(
+            blank.is_empty(),
+            "journal beats with nothing written in them:
+{blank:#?}"
+        );
+    }
 }

@@ -181,4 +181,67 @@ mod tests {
             "townsfolk whose whole day happens in one room:\n{sedentary:#?}"
         );
     }
+
+    /// A wild biome you travel to should be a *source*, not a corridor. The
+    /// measure that says which is which is not node count — the rainforest had
+    /// six nodes and one thing you could not pick closer to home, against four
+    /// and five elsewhere, and it read as somewhere to pass through.
+    ///
+    /// Two is a floor, not a target. `north_plains` sits on it deliberately:
+    /// it is the starter ground a new player walks first, and the whole point
+    /// of it is that most of what grows there also grows elsewhere.
+    #[test]
+    fn every_wild_biome_is_a_source_of_something() {
+        let data = load_embedded().expect("embedded game data should load");
+        let mut where_found: std::collections::HashMap<&str, std::collections::BTreeSet<&str>> =
+            std::collections::HashMap::new();
+        for area in &data.areas {
+            for node in &area.gather_nodes {
+                where_found
+                    .entry(node.item_id.as_str())
+                    .or_default()
+                    .insert(area.id.as_str());
+            }
+        }
+
+        let mut corridors = Vec::new();
+        for area in &data.areas {
+            // Tower floors are rooms in a building and the square is where the
+            // player lives; the rule is about ground you cross the valley to
+            // reach. The square's four beds are deliberately the same starter
+            // herbs the plains grow, so that a first afternoon has somewhere to
+            // practise.
+            if area.gather_nodes.is_empty()
+                || area.id.contains("floor")
+                || area.id == "tower_entry"
+                || area.id == "town_square"
+            {
+                continue;
+            }
+            let exclusive = area
+                .gather_nodes
+                .iter()
+                .map(|node| node.item_id.as_str())
+                .filter(|item_id| {
+                    where_found
+                        .get(item_id)
+                        .is_some_and(|areas| areas.len() == 1)
+                })
+                .collect::<std::collections::BTreeSet<_>>();
+            if exclusive.len() < 2 {
+                corridors.push(format!(
+                    "{}: {} exclusive gatherable(s)",
+                    area.id,
+                    exclusive.len()
+                ));
+            }
+        }
+
+        corridors.sort();
+        assert!(
+            corridors.is_empty(),
+            "biomes with nothing of their own:
+{corridors:#?}"
+        );
+    }
 }

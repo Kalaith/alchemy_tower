@@ -277,6 +277,42 @@ content with no destination.
   lines) and **a copy never sells for more than it cost to make** (every
   duplicable item).
 
+### The last biome at the floor, 2026-08-03
+
+- ~~The rainforest was a corridor~~ **Fixed 2026-08-03.** Counting *exclusive*
+  gatherables per biome rather than nodes: lake 4, forest 4, quarry 5, pass 5,
+  desert 4, plains 2 — and the **rainforest 1**, on **one route**, six nodes,
+  five of which grow closer to home. It was somewhere to walk through.
+  ***The signature was already written and nothing had been built on it.*** The
+  route text has said since it was authored that "the canopy holds the rain long
+  after it has stopped falling — the mist under it is not weather, it is the
+  ceiling draining, and it keeps going on days the sky is clear." So: **the
+  rainforest is the one place where the weather underneath is not the weather
+  above**, and the new content is gated *inversely* to every other rain thing.
+  **Heldrain Bead** is water standing in a leaf axil that has touched nothing
+  since it was cloud — not soil, not stone, not the tower's pipes — and it is
+  picked on **clear mornings**, because that is when the ceiling is still
+  letting go. **Stranglerfig Sap** runs off the host trunk in the hour the heat
+  leaves, out of a tree the fig spent twelve years growing down. A second route,
+  **The Drip Line**, and four nodes: 6 → 10 nodes, 1 → 2 routes, 1 → 3
+  exclusives.
+  Both feed **Truemeasure Tonic** at the cold bench — a dose that restores
+  middlingly and does it *identically every time*, which is what Lyra's standing
+  survey needs, because a keeper cannot compare this season's animals to last
+  season's if the thing she gave them has drifted. It has a standing order of
+  its own, so the new bottle is not vendor trash the day it ships.
+  Guard: `every_wild_biome_is_a_source_of_something` — two exclusives, a floor
+  rather than a target. `north_plains` sits on the floor deliberately (starter
+  ground is meant to be shared) and the town square is excluded by name.
+  Verified by removing the two new herbs; it names the rainforest.
+  `screenshots/hud/rainforest_dripline.png`.
+- ~~"New journal note: ." three times over~~ **Fixed 2026-08-03**, found in that
+  capture. `preview_area` seeds gate milestones with empty titles, and since the
+  banners started drawing, that reads as three untitled notes on screen. An
+  untitled beat is a capture scene seeding a gate rather than something the
+  player did, so it no longer raises one — and a guard now asserts every
+  *authored* beat has a title and text, which is what makes that rule safe.
+
 ### Authored content with no destination
 
 - **48 of 101 potions have no structural sink** — no quest, no board order, no

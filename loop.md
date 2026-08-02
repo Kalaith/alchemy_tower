@@ -1660,6 +1660,32 @@ Stop the loop and report if:
   counters.*
   **183 tests; the economy has no faucet in it.**
 
+- **2026-08-03 — the rainforest's signature had been written down for passes and nothing was built on
+  it.** Habitats read clean first (slow, day-gated, 8–26 coin ingredients — no faucet), so the audit
+  streak ended and this went back to content. Counting **exclusive** gatherables rather than nodes:
+  lake 4, forest 4, quarry 5, pass 5, desert 4, plains 2 — **rainforest 1**, one route, six nodes,
+  five of which grow closer to home. Exactly where iteration 52 said the floor was.
+  ***The hook was already in the route description:*** *"the canopy holds the rain long after it has
+  stopped falling — the mist under it is not weather, it is the ceiling draining, and it keeps going
+  on days the sky is clear."* So the new content is gated **inversely to every other rain thing**:
+  **Heldrain Bead** stands in a leaf axil having touched nothing since it was cloud, and is picked on
+  **clear mornings**; **Stranglerfig Sap** runs off a host trunk in the hour the heat leaves, out of
+  a tree the fig spent twelve years growing down. Second route (**The Drip Line**), four nodes:
+  6 → 10 nodes, 1 → 2 routes, 1 → 3 exclusives.
+  Both feed **Truemeasure Tonic** — a middling dose that is *identical every time*, which is Lyra's
+  survey's whole problem — and it has a standing order the day it ships, so the tier does not add
+  another sinkless bottle.
+  *Guard:* `every_wild_biome_is_a_source_of_something`, at **two** exclusives — a floor, not a
+  target. `north_plains` sits on it on purpose and the square is excluded by name, which is the same
+  judgement iteration 55 made when it *rejected* "every route must carry something of its own".
+  ***And the capture found a live one.*** The rainforest shot came back with three banners reading
+  **"New journal note: ."** — `preview_area` seeds gate milestones with empty titles, which was
+  invisible until banners started drawing two passes ago. An untitled beat is a harness artifact, so
+  it raises nothing now, and a new guard asserts every *authored* beat has a title and text, which is
+  what makes that rule safe rather than a hiding place. Fixing it broke the sound-queue test, whose
+  fixture pushed twelve untitled beats — the fixture now titles them, which is what a beat is.
+  **168 items, 185 tests; no biome is a corridor.**
+
 ## Deferred (needs a new system; not for this loop)
 
 - Apply-potion-to-target flow (wilted plant, frightened creature, blocked path) — `TODO.md` calls it
