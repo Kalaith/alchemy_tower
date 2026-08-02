@@ -27,6 +27,24 @@ impl GameplayState {
         state
     }
 
+    /// Put the clock in the middle of a named window.
+    ///
+    /// Mid-window in each case, so a capture never lands on a boundary minute
+    /// and disagrees with the label it was asked for. Night is 22:00 rather
+    /// than the small hours on purpose: `handle_sleep_pressure` drags the
+    /// player home between 01:00 and 02:00, so a capture aimed at 01:00
+    /// photographs the entry lab and a faint-home banner instead of the thing
+    /// it asked for.
+    pub(crate) fn set_time_window(&mut self, time_window: &str) {
+        let minutes = match time_window {
+            "night" => 1320.0,
+            "evening" => 1140.0,
+            "day" => 840.0,
+            _ => 480.0,
+        };
+        self.set_clock_minutes(minutes);
+    }
+
     /// Open a conversation with the given NPC. Used by the screenshot capture
     /// harness to seed a dialogue scene.
     pub(crate) fn open_dialogue_with(&mut self, npc_id: &str) {
@@ -112,19 +130,7 @@ impl GameplayState {
             return;
         };
         self.world.day_index = day_index;
-        // Mid-window in each case, so a capture never lands on a boundary
-        // minute and disagrees with the label it was asked for. Night is 22:00
-        // rather than the small hours on purpose: `handle_sleep_pressure` drags
-        // the player home between 01:00 and 02:00, so a capture aimed at 01:00
-        // photographs the entry lab and a faint-home banner instead of the room
-        // it asked for.
-        let minutes = match time_window {
-            "night" => 1320.0,
-            "evening" => 1140.0,
-            "day" => 840.0,
-            _ => 480.0,
-        };
-        self.set_clock_minutes(minutes);
+        self.set_time_window(time_window);
         for quest in &data.quests {
             self.progression.completed_quests.insert(quest.id.clone());
         }

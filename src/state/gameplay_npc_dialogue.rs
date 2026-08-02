@@ -35,6 +35,18 @@ impl GameplayState {
             .any(|quest_id| self.progression.completed_quests.contains(quest_id))
     }
 
+    /// What this townsperson says about being where they currently are, if the
+    /// stop they are on has anything to say. A stop at home does not — that is
+    /// where the rest of their dialogue is already set.
+    pub(super) fn npc_while_here_line<'a>(&self, npc: &'a NpcDefinition) -> Option<&'a str> {
+        let window = self.current_time_window();
+        npc.schedule
+            .iter()
+            .find(|entry| entry.time_window == window)
+            .map(|entry| entry.while_here_line.as_str())
+            .filter(|line| !line.is_empty())
+    }
+
     pub(super) fn phase1_town_recovery_reached(&self) -> bool {
         self.has_journal_milestone("greenhouse_repaired")
             || self
@@ -145,6 +157,15 @@ impl GameplayState {
         let opener = if quest_started && !phase1.active_request.is_empty() {
             // Working on it: the terse reminder of what was asked for.
             Some(phase1.active_request.as_str())
+        } else if let Some(here) = self
+            .npc_while_here_line(npc)
+            .filter(|_| !quest_started && !quest_available)
+        {
+            // Caught somewhere they do not work, with nothing of yours pending.
+            // Where a townsperson goes at which hour has been authored since
+            // before the schedule had a reader for anything but their sprite,
+            // and until now they said the same words wherever they stood.
+            Some(here)
         } else if !quest_started
             && !quest_available
             && self.phase1_town_recovery_reached()
@@ -480,6 +501,11 @@ mod tests {
     /// Walks each townsperson through the states the game puts them in and
     /// collects everything they say, then asks whether anything authored was
     /// never heard.
+    ///
+    /// The states now include **the hour**, which they did not when the
+    /// schedule was only a sprite position. A guard that walks a class of thing
+    /// has to be revisited when a new writer joins that class, and nothing
+    /// enforces that — this loop has now been caught by it twice.
     #[test]
     fn every_line_a_townsperson_has_is_reachable() {
         let data = crate::data::load_embedded().expect("embedded game data should load");
@@ -494,28 +520,33 @@ mod tests {
 
             // Before anything; after a brew; then each arc beat accepted and
             // finished in turn; with and without the town having recovered.
-            for recovered in [false, true] {
-                let mut state = GameplayState::new(&data);
-                if recovered {
-                    state.push_journal_milestone("greenhouse_repaired", "", "");
-                }
-                let collect =
-                    |state: &GameplayState, heard: &mut std::collections::HashSet<String>| {
-                        let selection = state.npc_dialogue_selection(&data, npc);
-                        heard.insert(selection.start.to_owned());
-                        heard.insert(selection.progress.to_owned());
-                        heard.insert(selection.complete.to_owned());
-                    };
+            // Every hour band, because where somebody is standing is now part
+            // of what they say.
+            for minutes in [8.0 * 60.0, 13.0 * 60.0, 18.0 * 60.0, 23.0 * 60.0] {
+                for recovered in [false, true] {
+                    let mut state = GameplayState::new(&data);
+                    state.set_clock_minutes(minutes);
+                    if recovered {
+                        state.push_journal_milestone("greenhouse_repaired", "", "");
+                    }
+                    let collect =
+                        |state: &GameplayState, heard: &mut std::collections::HashSet<String>| {
+                            let selection = state.npc_dialogue_selection(&data, npc);
+                            heard.insert(selection.start.to_owned());
+                            heard.insert(selection.progress.to_owned());
+                            heard.insert(selection.complete.to_owned());
+                        };
 
-                collect(&state, &mut heard);
-                state.progression.total_brews = 1;
-                collect(&state, &mut heard);
-                for quest_id in &chain {
-                    state.progression.started_quests.insert(quest_id.clone());
                     collect(&state, &mut heard);
-                    state.progression.started_quests.remove(quest_id);
-                    state.progression.completed_quests.insert(quest_id.clone());
+                    state.progression.total_brews = 1;
                     collect(&state, &mut heard);
+                    for quest_id in &chain {
+                        state.progression.started_quests.insert(quest_id.clone());
+                        collect(&state, &mut heard);
+                        state.progression.started_quests.remove(quest_id);
+                        state.progression.completed_quests.insert(quest_id.clone());
+                        collect(&state, &mut heard);
+                    }
                 }
             }
 
@@ -535,6 +566,11 @@ mod tests {
                     silent.push(format!("{}: {label}", npc.id));
                 }
             }
+            for entry in &npc.schedule {
+                if !entry.while_here_line.is_empty() && !heard.contains(&entry.while_here_line) {
+                    silent.push(format!("{}: while_here_line/{}", npc.id, entry.time_window));
+                }
+            }
         }
 
         silent.sort();
@@ -542,6 +578,50 @@ mod tests {
             silent.is_empty(),
             "lines authored on a townsperson that nothing can ever say:
 {silent:#?}"
+        );
+    }
+
+    /// A townsperson standing somewhere they do not work has a reason to be
+    /// there, and should be able to say it.
+    ///
+    /// Ten of the thirty-six scheduled stops are away from home, and the
+    /// schedule had been moving people between rooms since before this loop
+    /// started with nothing following them: Mira at the lake shore at dusk gave
+    /// the same words as Mira behind her counter. A player who walks somewhere
+    /// specifically to find somebody should be told why they came.
+    ///
+    /// The crow is exempt on purpose. Its four lines are a tutorial ladder tied
+    /// to progression, an away line would shadow rungs of it, and the crow does
+    /// not live anywhere — which is the joke and the exemption.
+    #[test]
+    fn a_townsperson_away_from_home_has_a_reason_to_be_there() {
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let mut unexplained = Vec::new();
+        let mut away = 0usize;
+
+        for npc in &data.npcs {
+            if npc.id == "crow_guide" {
+                continue;
+            }
+            for entry in &npc.schedule {
+                if entry.area_id == npc.area_id {
+                    continue;
+                }
+                away += 1;
+                if entry.while_here_line.is_empty() {
+                    unexplained.push(format!(
+                        "{} is in {} at {} for no stated reason",
+                        npc.id, entry.area_id, entry.time_window
+                    ));
+                }
+            }
+        }
+
+        assert!(away > 0, "nobody in this town goes anywhere");
+        assert!(
+            unexplained.is_empty(),
+            "scheduled stops nobody can explain:
+{unexplained:#?}"
         );
     }
 }

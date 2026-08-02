@@ -82,6 +82,18 @@ pub(crate) struct NpcScheduleEntry {
     pub(crate) time_window: String,
     pub(crate) area_id: String,
     pub(crate) position: [f32; 2],
+    /// Why they are standing *here*, at this hour, rather than where they work.
+    ///
+    /// The schedule has moved nine townsfolk between rooms since long before
+    /// this loop started, and their words never moved with them: Mira at the
+    /// lake shore at dusk said exactly what Mira behind her counter said. Ten of
+    /// the thirty-six stops are away from home, and each of those was a piece of
+    /// authored world nobody had ever been asked to explain.
+    ///
+    /// Empty for a stop at home — that is where the rest of their dialogue is
+    /// already set.
+    #[serde(default)]
+    pub(crate) while_here_line: String,
 }
 
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]

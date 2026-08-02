@@ -657,6 +657,45 @@ content with no destination.
   (which is her whole arc), and Rowan on the first formula in the book the
   calendar can close.
 
+### The schedule moved nine people around and their words stayed put, 2026-08-03
+
+- ~~A townsperson says the same thing wherever they are standing~~ **Fixed
+  2026-08-03.** Every NPC carries a four-stop schedule, and it has moved them
+  between rooms since before this loop started: Mira walks down to the lake
+  shore at dusk, Rowan works the moonlit forest by day *and* by night, Ione
+  reads in the entry lab in the afternoon and is in the archive after dark, Brin
+  is in the greenhouse, Lyra is at the pens, Elric climbs the tower with the
+  notices, Wren walks up with the infirmary list, Tarn comes down off the pass.
+  **Ten of the thirty-six stops are away from home, and not one of them had ever
+  been asked to explain itself.** The schedule was read for a sprite position
+  and for the journal's "here now / usually" hints — never for a word. A player
+  who walked to the lake at dusk specifically to find Mira got the line she
+  gives behind her counter.
+  `NpcScheduleEntry.while_here_line` is one `#[serde(default)]` field, read as
+  the conversation's **opener** when they are on that stop with nothing of the
+  player's pending. An errand still comes first — forward motion beats flavour —
+  so this is what they say between beats and after their arc is done, which is
+  most of act three onward.
+  Ten lines, one per away stop, each grounded in that person's own arc rather
+  than in scenery: Mira tests the lake because the well row and the lake drink
+  out of the same table and she would rather find out two years early this time;
+  Lyra counts at night because walking into the pens at noon is counting how
+  frightened they are of you; Ione works by raking light because raking light
+  only works when there is no other light; Wren walks up with the list because
+  the list has never once come to her, "which is only what happens when there is
+  no one at the top of the hill to send it to."
+  Two guards. `a_townsperson_away_from_home_has_a_reason_to_be_there` makes it a
+  rule rather than a pass — a tenth NPC inherits it the day they are authored;
+  the crow is exempt on purpose, because its four lines are a tutorial ladder an
+  away line would shadow, and because the crow does not live anywhere.
+  And `every_line_a_townsperson_has_is_reachable` **had to learn about the
+  clock** — it walked arcs and town recovery but never the hour, so ten new
+  authored strings would have passed it in silence. That is the second time this
+  loop a guard over a class of thing has missed a new writer joining the class.
+  `screenshots/hud/dialogue_away_from_home.png`; the capture harness took
+  `dialogue:<npc>:<beat>:<window>`, and the window→minutes mapping is now one
+  `set_time_window` rather than a copy inside `preview_area`.
+
 ### The ending was answered in paperwork, 2026-08-03
 
 - ~~Nothing after the ending changes where the player can walk~~ **Fixed

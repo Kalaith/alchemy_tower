@@ -1962,6 +1962,44 @@ Stop the loop and report if:
   *Next: post-ending ground exists but the post-ending **tower** does not — no floor, station or*
   *apply target waits on the ending either. And the sinkless tail is now 17 of 105.*
 
+- **2026-08-03 — nine people have walked to the same places every day for sixty passes and never once
+  said why.** Axis: NPCs and prose, rotating off two world passes and a UI surface. Measured first
+  across the whole cast — arc quests, board orders bought, rapport orders, reaction lines — and it
+  came out even, 3 arc beats each and 12–31 reactions, so the cast is not thin. The gap was one axis
+  over: **the schedule.** Every NPC carries four stops, `npc_now_hint`/`npc_later_hint` will tell you
+  where somebody is, the sprite walks there — and their *words* never moved with them. **Ten of the
+  thirty-six stops are away from home and not one had ever been asked to explain itself.** Mira at
+  the lake shore at dusk said exactly what Mira behind her counter said.
+  `NpcScheduleEntry.while_here_line`, one `#[serde(default)]` field, read as the conversation's
+  opener when they are on that stop with nothing of the player's pending. **An errand still wins** —
+  forward motion beats flavour — so this is what they say between beats and once their arc is done,
+  which is most of act three onward. Verified on screen, and the capture also confirmed the
+  precedence: Mira's away line is correctly suppressed at day one because her first errand is
+  available from the opening minute.
+  Ten lines, each out of that person's own arc rather than out of scenery. Mira tests the lake
+  because the well row and the lake drink out of the same table and she would rather find out about
+  the next one two years early than two years late. Lyra counts at night because walking into the
+  pens at noon is counting how frightened they are of you. Ione works by raking light because raking
+  light only works when there is no other light. Wren walks up with the list because the list has
+  never once come to her — *"That is not anybody's fault. It is only what happens when there is no
+  one at the top of the hill to send it to."*
+  *Guard:* `a_townsperson_away_from_home_has_a_reason_to_be_there`, which makes it a rule a tenth
+  townsperson inherits rather than a pass that happened. The crow is exempt on purpose: its four
+  lines are a tutorial ladder an away line would shadow, and it does not live anywhere, which is the
+  joke and the exemption.
+  ***And the second guard had to be taught the clock.***
+  `every_line_a_townsperson_has_is_reachable` walks each person through arcs, brews and town
+  recovery — and never through the *hour*, so all ten new strings would have passed it in silence.
+  Extended, it fails against the old selector and names all ten. **This is the second time in this
+  loop that a guard walking a class of thing has missed a new writer joining the class**, after the
+  apply-target reactions; there is still nothing that enforces the revisit.
+  *Harness:* `dialogue:<npc>:<beat>:<window>`, and the window→minutes mapping moved out of
+  `preview_area` into one `set_time_window` rather than being copied.
+  **36 scheduled stops, 10 of them explained; 199 tests.**
+  `screenshots/hud/dialogue_away_from_home.png`.
+  *Care needed next time: `git checkout <file>` to undo a sabotage discarded ten uncommitted*
+  *authored lines. Copy the file first, or sabotage in the Rust rather than in the data.*
+
 ## Deferred (needs a new system; not for this loop)
 
 - ~~Apply-potion-to-target flow (wilted plant, frightened creature, blocked path)~~ **Built

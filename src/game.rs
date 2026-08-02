@@ -73,16 +73,23 @@ impl Game {
                 gameplay.open_dialogue_after_everything(&self.data, npc_id);
                 GameState::from_gameplay(gameplay)
             }
-            // "dialogue", "dialogue:<npc_id>", or "dialogue:<npc_id>:<beat>"
-            // opens a conversation overlay; the beat index skips past that many
-            // finished steps of the townsperson's arc.
+            // "dialogue", "dialogue:<npc_id>", "dialogue:<npc_id>:<beat>", or
+            // "dialogue:<npc_id>:<beat>:<window>" opens a conversation overlay.
+            // The beat index skips past that many finished steps of the
+            // townsperson's arc; the window sets the hour, which decides which
+            // scheduled stop they are on and so what they say about being
+            // there.
             other if other.starts_with("dialogue") => {
                 let target = other.strip_prefix("dialogue:").unwrap_or("mira_apothecary");
-                let (npc_id, beat) = match target.split_once(':') {
-                    Some((npc_id, beat)) => (npc_id, beat.parse::<usize>().unwrap_or(0)),
-                    None => (target, 0),
-                };
+                let mut parts = target.split(':');
+                let npc_id = parts.next().unwrap_or("mira_apothecary");
+                let beat = parts
+                    .next()
+                    .and_then(|beat| beat.parse::<usize>().ok())
+                    .unwrap_or(0);
+                let window = parts.next().unwrap_or("morning");
                 let mut gameplay = GameplayState::new(&self.data);
+                gameplay.set_time_window(window);
                 if beat > 0 {
                     gameplay.open_dialogue_at_arc_beat(&self.data, npc_id, beat);
                 } else {
