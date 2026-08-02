@@ -137,6 +137,18 @@
       "name": "The Settled Roost",
       "area_id": "moonlit_forest",
       "description": "Nothing here can be worked in daylight, and for twenty years nothing here could be worked at all. After dark and in still air the roost comes down and stays down, which is the whole of the opportunity."
+    },
+    {
+      "id": "plains_seed_year",
+      "name": "The Seed Year",
+      "area_id": "north_plains",
+      "description": "The far end of the hedgerow, walked in autumn for the first time in twenty years with any reason to. The crowns are the same crowns. What is different is that they are carrying, and you can hear it from thirty feet."
+    },
+    {
+      "id": "lake_clear_shelf",
+      "name": "The Clear Shelf",
+      "area_id": "lake_shore",
+      "description": "The shallow shelf off the reed bar, which used to be a grey plate you took on trust and is now a floor with things growing on it. Nobody dredged it. It settled, the way water does when whatever held it up stops."
     }
   ]
 }

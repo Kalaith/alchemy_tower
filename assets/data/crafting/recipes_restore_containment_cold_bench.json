@@ -312,6 +312,55 @@
           "room_bonus_required": true
         }
       ]
+    },
+    {
+      "id": "seedhold_solution_recipe",
+      "name": "Seedhold Solution",
+      "station_id": "containment_cold_bench",
+      "ingredients": [
+        {
+          "item_id": "rattleseed",
+          "amount": 2
+        },
+        {
+          "item_id": "sunkbell",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "seedhold_solution",
+      "output_amount": 2,
+      "description": "The first crop the hedgerow has set in twenty years, held in water off a bed you can finally see, and kept a few degrees under so nothing in it is in a hurry.",
+      "required_heat": 1,
+      "required_stirs": 2,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "Both halves of it are the same fact measured twice — something came back that had been counted and written off. The bottle exists so that the next person does not have to take that on faith.",
+      "minimum_quality": 52,
+      "preferred_traits": [
+        "pure",
+        "calm"
+      ],
+      "guaranteed_traits": [
+        "pure"
+      ],
+      "minimum_elements": {
+        "vita": 6,
+        "ember": 0,
+        "mist": 3,
+        "lux": 0
+      },
+      "required_timing": "early",
+      "morph_targets": [],
+      "required_sequence": [
+        "restorative",
+        "pure"
+      ],
+      "discovery_milestones": [
+        {
+          "id": "the_ground_answered",
+          "title": "The Ground Answered",
+          "text": "Two things came back on their own and neither of them was restored by anybody: a hedgerow that can set seed again because there is something flying to set it, and a lake bed you can see because whatever was holding the silt up stopped. Neither is the tower's doing and both are the tower's argument. The bottle is the first thing anyone has made out of a valley that is going forwards."
+        }
+      ]
     }
   ]
 }

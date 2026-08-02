@@ -415,6 +415,75 @@
       "render": {
         "sprite_id": "driftseed_plains"
       }
+    },
+    {
+      "id": "plains_rattleseed_01",
+      "name": "Rattleseed",
+      "item_id": "rattleseed",
+      "color": [
+        222,
+        206,
+        128,
+        255
+      ],
+      "position": [
+        948.0,
+        726.0
+      ],
+      "radius": 16.0,
+      "route_id": "plains_seed_year",
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "weathers": [
+        "clear",
+        "windy"
+      ],
+      "time_windows": [
+        "day",
+        "evening"
+      ],
+      "spawn_chance": 74,
+      "required_journal_milestone": "observatory_ending",
+      "note": "Rowan counted the crowns along here nine years ago because she wanted a number for how fast they were going. They had not gone anywhere. They were only waiting.",
+      "render": {
+        "sprite_id": "rattleseed_plains"
+      }
+    },
+    {
+      "id": "plains_rattleseed_02",
+      "name": "Rattleseed",
+      "item_id": "rattleseed",
+      "color": [
+        222,
+        206,
+        128,
+        255
+      ],
+      "position": [
+        572.0,
+        790.0
+      ],
+      "radius": 16.0,
+      "route_id": "plains_seed_year",
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
+      "weathers": [
+        "clear",
+        "windy"
+      ],
+      "time_windows": [
+        "day"
+      ],
+      "spawn_chance": 66,
+      "required_journal_milestone": "observatory_ending",
+      "note": "Lyra has marked four crowns here and is counting pods on them the way she counted the fliers, which she says is the only honest way to find out whether one number caused the other.",
+      "render": {
+        "sprite_id": "rattleseed_plains"
+      }
     }
   ],
   "apply_targets": [

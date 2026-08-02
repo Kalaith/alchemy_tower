@@ -404,6 +404,15 @@
         64
       ],
       "prompt": "A flask of deep banked-ember orange, warm rather than bright, readable potion icon."
+    },
+    {
+      "id": "seedhold_solution",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A squat stoppered jar of pale green-grey solution with seed husks settled at the bottom, cold and still, readable at small size."
     }
   ]
 }

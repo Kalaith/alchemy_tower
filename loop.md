@@ -1919,6 +1919,49 @@ Stop the loop and report if:
   *months and the wizard's working notes are already in the fiction and already flourishes in the*
   *entry lab, and nothing in the game hands over a formula. That is content, not machinery.*
 
+- **2026-08-03 — the ending was answered entirely in paperwork.** Axis: world/gathering content,
+  rotating off a UI-surface pass. The entry that said "the ending is a wall" was ticked three passes
+  ago by three standing orders, a commission and an unsigned note — all of it **requests**. Counted
+  afterwards, the valley itself had not moved: of **85 gather nodes, 23 routes, 6 apply targets and
+  14 areas, not one waited on `observatory_ending`.** Somebody who finished the thing the whole game
+  builds towards could go on being paid, and had nowhere new to stand while it happened. The
+  Deferred entry said as much in its own last sentence and nothing had acted on it.
+  ***The fix came out of the story bible rather than out of me.*** Three of its rules decide the
+  whole design: **restoration is to the ground, not to the tower** ("anything that reads as the
+  tower reclaiming the valley is off-model"); **recovery is measurable, and the measurements are the
+  drama**; and **new content should diagnose before it fixes.** So the post-ending world change is
+  two pieces of ordinary ground that came back *on their own*, each a second-order payoff of an arc
+  the ending already requires, and each a thing somebody counts rather than announces.
+  **The Seed Year** (north_plains): **Rattleseed** cannot set its own seed, and for twenty years was
+  the same crowns making no pods, because there was nothing flying to set it. Lyra counted eleven
+  fliers where the book said ninety; she is counting pods on four marked crowns now, "which is the
+  only honest way to find out whether one number caused the other." Autumn, and dry — a wet pod does
+  not rattle and does not keep. **The Clear Shelf** (lake_shore): **Sunkbell** flowers on the bed
+  rather than the surface, so it opens only where light reaches the bottom; the shelf carried a foot
+  of suspended silt on a still day for twenty years and everybody put that down to the lake being
+  the lake. Nobody dredged it. It settled.
+  Both feed **Seedhold Solution** at the ward-cooled bench — deliberately a *poor* draught, on the
+  truemeasure precedent, because what it is for is that seed steeped in it goes on being seed. Rowan
+  buys it as the start of a four-year seed store she has wanted to place since she was nineteen, so
+  a valley that has only just got its seed back never bets the whole of it on one autumn again.
+  One beat, `the_ground_answered`; Lyra and Rowan each have a line. Rowan's is the one I would keep:
+  *"I had decided it was a plant that did not rattle. That is the part I keep coming back to — not
+  that it stopped, but that I had already finished being surprised about it."*
+  *Guard:* `the_ending_opens_ground_and_not_only_paperwork`, which asks for **two routes** rather
+  than a node count — one route is a corner, and the flourish pass already established that a world
+  change satisfied in a single place is not a world change. Verified by pointing it at a milestone
+  that does not exist.
+  ***Four existing guards bit during authoring, which is the argument for all of them:*** two nodes
+  were dropped inside blockers (`everything_the_player_must_reach_can_be_stood_next_to`, 58 against
+  a 44 reach), two were so narrowly conditioned they turned up **4 days in 100**
+  (`every_gather_node_turns_up_soon_enough_and_often_enough`), both route descriptions overran the
+  pane by ~30 characters, and the art manifest caught three missing icons. None of that was visible
+  by reading.
+  **23 → 25 routes, 85 → 89 nodes, 170 → 173 items, 62 → 63 recipes, 96 → 97 quests; 198 tests.**
+  `screenshots/hud/plains_seed_year.png`, `lake_clear_shelf.png`.
+  *Next: post-ending ground exists but the post-ending **tower** does not — no floor, station or*
+  *apply target waits on the ending either. And the sinkless tail is now 17 of 105.*
+
 ## Deferred (needs a new system; not for this loop)
 
 - ~~Apply-potion-to-target flow (wilted plant, frightened creature, blocked path)~~ **Built
@@ -1932,3 +1975,7 @@ Stop the loop and report if:
   unsigned note and a flourish now come *after* `observatory_ending`. Still open as content: four
   post-ending requests is a coda rather than a sandbox, and nothing after the ending changes where
   the player can walk.
+  **The walking half fixed 2026-08-03**: two routes, four nodes, two reagents, a recipe and a fifth
+  standing order now wait on the ending — the seed year in the plains and the clear shelf on the
+  lake. Still open: the post-ending *tower*. No floor, station, bench or apply target waits on the
+  ending, so the building the game is about reopening is the one place the ending changes nothing.

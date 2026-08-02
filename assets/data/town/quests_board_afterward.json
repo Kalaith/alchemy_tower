@@ -56,6 +56,25 @@
       "repeatable": true,
       "repeat_cooldown_days": 12,
       "rapport_npc_id": "lyra_keeper"
+    },
+    {
+      "id": "board_after_the_seed_store",
+      "title": "Beds: Four Years In A Cold Room",
+      "description": "Six seedhold solutions for the bed rows, and Rowan is blunt that this is not an order for this year. It is the beginning of a seed store: four autumns of stock held cold, so that the valley never again finds out what it costs to lose one. She has wanted to write this order since she was nineteen and has never once had the seed to spare for it.",
+      "required_item_id": "seedhold_solution",
+      "required_amount": 6,
+      "reward_coins": 540,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "pure",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 0,
+      "required_journal_milestone": "observatory_ending",
+      "repeatable": true,
+      "repeat_cooldown_days": 14,
+      "rapport_npc_id": "rowan_herbalist"
     }
   ]
 }

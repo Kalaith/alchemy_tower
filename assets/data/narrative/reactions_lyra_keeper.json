@@ -130,6 +130,12 @@
       "after_milestone": "forest_roost_settled",
       "order": 108,
       "line": "They have stopped going up every time somebody walks under them. Do you know what a roost that is not panicking does? It feeds. It is the first thing I have been able to count twice and get the same number."
+    },
+    {
+      "npc_id": "lyra_keeper",
+      "after_milestone": "the_ground_answered",
+      "order": 130,
+      "line": "Four marked crowns, and I have counted pods on all four for three weeks. It is not proof — one autumn never is — but I have wanted for nine years to be arguing about whether a number is good rather than about whether anybody wrote it down."
     }
   ]
 }

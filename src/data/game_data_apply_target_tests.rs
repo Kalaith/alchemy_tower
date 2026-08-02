@@ -133,6 +133,49 @@ mod tests {
         );
     }
 
+    /// And the half of that wall the request count could not see. The pass that
+    /// answered "the ending is a wall" answered it entirely in **paperwork** —
+    /// three standing orders, a commission and an unsigned note — and left the
+    /// valley itself frozen: of 85 gather nodes, 23 routes, 6 apply targets and
+    /// 14 areas, **not one** waited on the ending. A player who finished the
+    /// thing the whole game builds towards could go on being paid, and had
+    /// nowhere new to stand while it happened.
+    ///
+    /// This is the world counterpart, and it asks for ground rather than for a
+    /// number of nodes: the ending has to open at least two *routes*, because
+    /// one route is a corner and the rule this project already wrote down for
+    /// flourishes is that a world change satisfied in a single place is not a
+    /// world change.
+    #[test]
+    fn the_ending_opens_ground_and_not_only_paperwork() {
+        let data = load_embedded().expect("embedded game data should load");
+        let ending = crate::content::narrative_text()
+            .milestones
+            .observatory_ending
+            .id
+            .clone();
+
+        let opened = data
+            .areas
+            .iter()
+            .flat_map(|area| area.gather_nodes.iter())
+            .filter(|node| node.required_journal_milestone == ending)
+            .map(|node| node.route_id.as_str())
+            .collect::<std::collections::BTreeSet<_>>();
+
+        assert!(
+            opened.len() >= 2,
+            "the ending opens {} route(s) of ground; the valley stops being walkable the day it is finished",
+            opened.len()
+        );
+        for route_id in &opened {
+            assert!(
+                data.route(route_id).is_some(),
+                "post-ending ground is filed under {route_id}, which is not a route"
+            );
+        }
+    }
+
     /// A flourish waits on a quest or a beat, both of which are strings in an
     /// area file. One that names something that does not exist is a piece of
     /// the world that never appears, and nothing on screen would say why.

@@ -215,6 +215,60 @@
       ],
       "synthesis_weight": 2,
       "synthesis_value": 2
+    },
+    {
+      "id": "rattleseed",
+      "name": "Rattleseed",
+      "category": "ingredient",
+      "base_value": 24,
+      "color": [
+        222,
+        206,
+        128,
+        255
+      ],
+      "description": "A hedgerow plant that cannot set its own seed and has been waiting twenty years for something to come and do it for it. The old crowns held on the whole time; not one of them made a pod. Walk the line in autumn now and the whole hedge rattles, which is a sound nobody under thirty in this valley has ever heard and nobody over thirty thought to miss.",
+      "quality": 46,
+      "rarity": 3,
+      "elements": {
+        "vita": 5,
+        "ember": 0,
+        "mist": 1,
+        "lux": 0
+      },
+      "traits": [
+        "restorative",
+        "calm"
+      ],
+      "source_conditions": [
+        "the hedgerow line, on the crowns that were there all along",
+        "late summer and autumn, once the pods have hardened",
+        "dry air — a wet pod does not rattle and does not keep"
+      ],
+      "wild_variants": [
+        {
+          "id": "rattleseed_fullpod",
+          "name": "Full-Pod Rattleseed",
+          "required_conditions": [
+            "autumn",
+            "clear"
+          ],
+          "bonus_traits": [
+            "pure"
+          ],
+          "quality_bonus": 11,
+          "elements": {
+            "vita": 2,
+            "ember": 0,
+            "mist": 0,
+            "lux": 0
+          },
+          "synthesis_weight_bonus": 1,
+          "synthesis_value_bonus": 4
+        }
+      ],
+      "synthesis_weight": 2,
+      "synthesis_value": 5
     }
   ]
 }

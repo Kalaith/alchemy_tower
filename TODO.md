@@ -657,6 +657,44 @@ content with no destination.
   (which is her whole arc), and Rowan on the first formula in the book the
   calendar can close.
 
+### The ending was answered in paperwork, 2026-08-03
+
+- ~~Nothing after the ending changes where the player can walk~~ **Fixed
+  2026-08-03.** The pass that answered "the ending is a wall" answered it
+  entirely in **requests**: three standing orders, a commission and an unsigned
+  note. Measured afterwards, the valley itself was still frozen — of **85 gather
+  nodes, 23 routes, 6 apply targets and 14 areas, not one waited on
+  `observatory_ending`.** A player who finished the thing the whole game builds
+  towards could go on being paid and had nowhere new to stand while it happened.
+  The fix is on the story bible's own model rather than invented. The bible is
+  explicit that **restoration is to the ground, not to the tower**, that
+  **recovery is measurable and the measurements are the drama**, and that **new
+  content should diagnose before it fixes.** So what opens after the ending is
+  two pieces of ordinary ground that came back on their own, each the
+  second-order payoff of an arc the ending already required, and each a thing
+  somebody counts rather than announces:
+  **The Seed Year** (north_plains) — **Rattleseed** cannot set its own seed and
+  spent twenty years as the same crowns making no pods, because there was
+  nothing flying to set it. Lyra counted eleven pollinators where the book said
+  ninety; she is counting pods on four marked crowns now. Autumn work, and dry —
+  a wet pod does not rattle and does not keep.
+  **The Clear Shelf** (lake_shore) — **Sunkbell** flowers on the bed rather than
+  the surface, so it opens only where light reaches the bottom. The shelf
+  carried a foot of suspended silt on a still day for twenty years and everyone
+  put that down to the lake being the lake. Nobody dredged it; it settled.
+  Both feed **Seedhold Solution** at the ward-cooled bench — a poor draught
+  whose actual purpose is that seed steeped in it goes on being seed, so a
+  valley that has only just got its seed back never has to bet the whole of it
+  on one autumn again. Rowan's post-ending standing order is the beginning of a
+  four-year seed store she has wanted to place since she was nineteen.
+  One journal beat, `the_ground_answered`, with Lyra and Rowan on it.
+  `the_ending_opens_ground_and_not_only_paperwork` is the guard, and it asks for
+  **two routes** rather than a node count, because one route is a corner and
+  this project already wrote down for flourishes that a world change satisfied
+  in a single place is not a world change.
+  **23 → 25 routes; 85 → 89 nodes; 170 → 173 items; 62 → 63 recipes.**
+  `screenshots/hud/plains_seed_year.png`, `lake_clear_shelf.png`.
+
 ### The game had sixty-two formulae and told you how to make three, 2026-08-03
 
 - ~~Fifty-nine recipes are learned only by guessing their exact reagents~~

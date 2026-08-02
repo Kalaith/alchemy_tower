@@ -422,6 +422,24 @@
         64
       ],
       "prompt": "A quarry stillwater pearl node: a pale pearl in undisturbed flooded gallery water, cut stone edges around it, readable from above."
+    },
+    {
+      "id": "rattleseed_plains",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A plains rattleseed node: a stand of dry seed heads on a hedgerow crown, straw and grey-green against field grass, readable from above."
+    },
+    {
+      "id": "sunkbell_lake",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A lake sunkbell node: pale bells on the gravel bed under shin-deep clear water, ripple highlights over them, readable from above."
     }
   ]
 }

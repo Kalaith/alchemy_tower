@@ -123,6 +123,12 @@
       "after_milestone": "greenhouse_bed_revived",
       "order": 108,
       "line": "That bed had been sitting there refusing to do anything for two years and I had written it off in the book. You poured something on it. I want to be clear that I am pleased and also that I have questions about the method, in that order, and only just."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_milestone": "the_ground_answered",
+      "order": 130,
+      "line": "I walked that hedge every autumn of my working life and I never once heard it. I had decided it was a plant that did not rattle. That is the part I keep coming back to — not that it stopped, but that I had already finished being surprised about it."
     }
   ]
 }

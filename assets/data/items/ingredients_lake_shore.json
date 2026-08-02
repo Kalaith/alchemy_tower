@@ -214,6 +214,60 @@
       ],
       "synthesis_weight": 2,
       "synthesis_value": 4
+    },
+    {
+      "id": "sunkbell",
+      "name": "Sunkbell",
+      "category": "ingredient",
+      "base_value": 26,
+      "color": [
+        180,
+        214,
+        206,
+        255
+      ],
+      "description": "It flowers on the bed of the shallows rather than at the surface, so it opens only where enough light gets that far down. For twenty years the shelf carried a foot of suspended silt on a still day and the bells stayed shut inside their sheaths, which everyone put down to the lake being the lake. You can see the bottom now, and so can the plant.",
+      "quality": 48,
+      "rarity": 3,
+      "elements": {
+        "vita": 2,
+        "ember": 0,
+        "mist": 4,
+        "lux": 2
+      },
+      "traits": [
+        "pure",
+        "cold"
+      ],
+      "source_conditions": [
+        "the shallow shelf, on the bed itself, never at the surface",
+        "clear water and clear sky — it wants light reaching the bottom",
+        "spring and summer, in the middle of the day"
+      ],
+      "wild_variants": [
+        {
+          "id": "sunkbell_openbed",
+          "name": "Open-Bed Sunkbell",
+          "required_conditions": [
+            "clear",
+            "day"
+          ],
+          "bonus_traits": [
+            "luminous"
+          ],
+          "quality_bonus": 12,
+          "elements": {
+            "vita": 0,
+            "ember": 0,
+            "mist": 1,
+            "lux": 2
+          },
+          "synthesis_weight_bonus": 1,
+          "synthesis_value_bonus": 4
+        }
+      ],
+      "synthesis_weight": 2,
+      "synthesis_value": 5
     }
   ]
 }

@@ -521,6 +521,27 @@
           "description": "A middling, utterly repeatable dose — the same on the last bottle as the first."
         }
       ]
+    },
+    {
+      "id": "seedhold_solution",
+      "name": "Seedhold Solution",
+      "category": "potion",
+      "base_value": 128,
+      "color": [
+        200,
+        214,
+        176,
+        255
+      ],
+      "description": "Seed steeped in this and dried goes on being seed. It is a poor draught and an unremarkable one — it will take the edge off a long day and no more than that — and what it is actually for is that a valley which has only just got its seed back should not have to bet the whole of it on one autumn ever again. Rowan wants four years of stock standing in a cold room before she is willing to relax.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 32.0,
+          "duration_seconds": 0.0,
+          "description": "A thin, cold dose. It is not what the bottle is for."
+        }
+      ]
     }
   ]
 }

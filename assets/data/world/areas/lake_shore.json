@@ -401,6 +401,73 @@
       "render": {
         "sprite_id": "downwash_bloom"
       }
+    },
+    {
+      "id": "lake_sunkbell_01",
+      "name": "Sunkbell",
+      "item_id": "sunkbell",
+      "color": [
+        180,
+        214,
+        206,
+        255
+      ],
+      "position": [
+        1000.0,
+        690.0
+      ],
+      "radius": 16.0,
+      "route_id": "lake_clear_shelf",
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "weathers": [
+        "clear"
+      ],
+      "time_windows": [
+        "day"
+      ],
+      "spawn_chance": 72,
+      "required_journal_milestone": "observatory_ending",
+      "note": "Shin deep, and you can read the gravel through it. The bells open facing up, which is a thing you can only find out about a plant once you can see it.",
+      "render": {
+        "sprite_id": "sunkbell_lake"
+      }
+    },
+    {
+      "id": "lake_sunkbell_02",
+      "name": "Sunkbell",
+      "item_id": "sunkbell",
+      "color": [
+        180,
+        214,
+        206,
+        255
+      ],
+      "position": [
+        700.0,
+        262.0
+      ],
+      "radius": 16.0,
+      "route_id": "lake_clear_shelf",
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "weathers": [
+        "clear",
+        "windy"
+      ],
+      "time_windows": [
+        "day"
+      ],
+      "spawn_chance": 64,
+      "required_journal_milestone": "observatory_ending",
+      "note": "Further out, where the shelf drops, and they are smaller for it — the light gets there but it does not get there for long.",
+      "render": {
+        "sprite_id": "sunkbell_lake"
+      }
     }
   ],
   "footstep_sound_set": "shore"
