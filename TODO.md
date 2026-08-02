@@ -361,9 +361,21 @@ content with no destination.
 
 ## Presentation
 
-- World and character art pass. The art is procedurally generated
-  (`tools/generate_art.py`) and the ornate HUD frames a placeholder world; that
-  inversion is still the weakest first impression.
+- World and character art pass. **Ground floor done 2026-08-02.** The specific
+  problem was narrower than "procedural art looks procedural":
+  `generate_art.py` had hand-tuned treatments for six areas and an `else` branch
+  drawing a uniform 96px grid of rounded rectangles, and *eight* areas fell into
+  it — every tower floor, the town square, and the pass. That included
+  `tower_entry` and `town_square`, the two rooms that are the whole first
+  impression. Each of the eight now has a treatment about what the room is for:
+  flagstones with a worn strip down the entry lab, cobbles and cart ruts in the
+  square, bed rows under glazing bars, ward rings with drainage, the cut
+  channels on the rune floor, shelf ranks around a clear reading floor, the lens
+  ring and its chart lines, a switchback across scree. Captures in
+  `screenshots/hud/`.
+  Still open, and wanting an artist rather than another pass from me: characters
+  are four-colour figures and props are primitives. No room reads as scaffolding
+  any more, which is a different and lower bar than good.
 - ~~Offer a quieter HUD option so the world reads as the visual star~~ **Done
   2026-08-02.** A Quiet HUD toggle in Settings. It keeps the four things a player
   acts on — vitality (it can end the working day), the clock (it decides whether
