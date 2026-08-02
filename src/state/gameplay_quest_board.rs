@@ -64,6 +64,16 @@ impl GameplayState {
         self.inventory.retain(|_, amount| *amount > 0);
         self.progression.started_quests.remove(quest_id);
         self.coins += quest.reward_coins;
+        // A board order is still somebody's problem solved. Without this the
+        // repeatable layer — the bulk of the long tail — earned no standing
+        // with anyone, however many times it was run.
+        if !quest.rapport_npc_id.is_empty() {
+            *self
+                .progression
+                .relationships
+                .entry(quest.rapport_npc_id.clone())
+                .or_insert(0) += 1;
+        }
         self.push_quest_completion_milestones(quest);
         if quest.repeatable {
             let cooldown = quest.repeat_cooldown_days.max(1);
@@ -233,5 +243,59 @@ mod tests {
 
         state.deliver_board_quest(&data, quest_id);
         assert!(state.progression.completed_quests.contains(quest_id));
+    }
+
+    /// The repeatable layer used to be decoupled from the townsfolk entirely:
+    /// thirty-odd orders, none of which earned standing with anybody, however
+    /// many times they were run. Every order now names whose work it serves.
+    #[test]
+    fn a_board_delivery_earns_standing_with_whoever_it_was_for() {
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let mut state = GameplayState::new(&data);
+        let quest = data
+            .quest("board_restorative_stash")
+            .expect("board quest should exist");
+        assert_eq!(quest.rapport_npc_id, "wren_physician");
+
+        state.progression.total_brews = 10;
+        state.progression.started_quests.insert(quest.id.clone());
+        stock_healing_draught(&mut state);
+
+        let before = state.rapport_value(&quest.rapport_npc_id);
+        state.deliver_board_quest(&data, &quest.id);
+        assert_eq!(
+            state.rapport_value(&quest.rapport_npc_id),
+            before + 1,
+            "the infirmary learned nothing from being supplied"
+        );
+    }
+
+    /// A request can now wait on standing rather than on progress. Without the
+    /// gate being read, a confidant-only order would sit on the board from the
+    /// first day and the upper rapport tiers would go back to being labels.
+    #[test]
+    fn a_confidant_order_waits_until_the_standing_is_there() {
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let mut state = GameplayState::new(&data);
+        let quest = data
+            .quest("board_confidant_coldread_for_ione")
+            .expect("the confidant order should exist");
+        assert_eq!(
+            quest.required_rapport,
+            crate::state::gameplay::gameplay_rapport::CONFIDANT_RAPPORT
+        );
+
+        // Everything but the standing.
+        state
+            .progression
+            .unlocked_warps
+            .insert(quest.required_unlocked_warp.clone());
+        assert!(!state.quest_is_available(quest));
+
+        state.progression.relationships.insert(
+            quest.required_rapport_npc_id.clone(),
+            quest.required_rapport,
+        );
+        assert!(state.quest_is_available(quest));
     }
 }

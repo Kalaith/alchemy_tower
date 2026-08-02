@@ -149,6 +149,20 @@ pub(crate) struct QuestDefinition {
     /// about.
     #[serde(default)]
     pub(crate) required_mastered_recipe: String,
+    /// The townsperson whose work this request serves. Board orders are posted
+    /// by the board rather than by a person, so without this the whole
+    /// repeatable layer earned no standing with anybody — the prose named the
+    /// infirmary or the lamplighters and the game did nothing with it.
+    /// Delivering awards this person +1 rapport.
+    #[serde(default)]
+    pub(crate) rapport_npc_id: String,
+    /// Standing this request waits on: the named townsperson must trust the
+    /// player this far before it is posted at all. This is what the upper
+    /// rapport tiers are *for*.
+    #[serde(default)]
+    pub(crate) required_rapport_npc_id: String,
+    #[serde(default)]
+    pub(crate) required_rapport: i32,
     #[serde(default)]
     pub(crate) completion_milestones: Vec<JournalMilestoneEntry>,
     /// What the giver says while this step is on offer, and once it is accepted.

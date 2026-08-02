@@ -74,12 +74,19 @@ content with no destination.
 
 ### Mechanics that run but connect to nothing
 
-- **Rapport above FRIEND is a label.** `CONFIDANT_RAPPORT` and `KIN_RAPPORT`
-  (`state/gameplay_rapport.rs`) are read only by the journal tier string;
-  trusted gifts gate on arc completion, not rapport. Board orders never award
-  rapport at all, so the repeatable layer is fully decoupled from
-  relationships. Either give the two upper tiers an unlock each and let board
-  deliveries earn +1, or drop the tiers.
+- ~~Rapport above FRIEND is a label~~ **Fixed 2026-08-02.** Board orders now
+  carry `rapport_npc_id` — the townsperson whose work they serve, which the
+  prose already named ("the infirmary", "the lamplighters", "the carters") —
+  and delivering one awards them +1, so the repeatable layer finally feeds
+  relationships. All 31 existing orders are assigned across the eight
+  townsfolk. Requests can gate on `required_rapport_npc_id`/`required_rapport`,
+  which is what CONFIDANT is now *for*; two confidant-only orders exist
+  (Ione/`coldread_solution`, Wren/`keptwarm_tonic`, both drawn from the
+  no-sink potion list). KIN stays honest: board rapport can carry the number
+  to 9, so the top tier's label also requires the arc finished — a reliable
+  supplier is a confidant, not kin. New `game_data_rapport_tests.rs` asserts
+  every order names a real beneficiary and every standing gate can have its
+  standing earned without already having it.
 - **Wild variants are a journal cosmetic.** Of the eight
   `WildVariantDefinition` fields, only `required_conditions`, `quality_bonus`,
   and `name` are read — and even `quality_bonus` never reaches brewing,

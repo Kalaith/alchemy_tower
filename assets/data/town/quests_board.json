@@ -17,7 +17,8 @@
       "required_unlocked_warp": "entry_to_greenhouse",
       "minimum_total_brews": 10,
       "repeatable": true,
-      "repeat_cooldown_days": 1
+      "repeat_cooldown_days": 1,
+      "rapport_npc_id": "rowan_herbalist"
     },
     {
       "id": "board_restorative_stash",
@@ -34,7 +35,8 @@
       "required_unlocked_warp": "",
       "minimum_total_brews": 4,
       "repeatable": true,
-      "repeat_cooldown_days": 1
+      "repeat_cooldown_days": 1,
+      "rapport_npc_id": "wren_physician"
     },
     {
       "id": "board_lantern_supply",
@@ -51,7 +53,8 @@
       "required_unlocked_warp": "",
       "minimum_total_brews": 6,
       "repeatable": true,
-      "repeat_cooldown_days": 1
+      "repeat_cooldown_days": 1,
+      "rapport_npc_id": "mayor_elric"
     },
     {
       "id": "board_field_poultice_run",
@@ -68,7 +71,8 @@
       "required_unlocked_warp": "",
       "minimum_total_brews": 6,
       "repeatable": true,
-      "repeat_cooldown_days": 1
+      "repeat_cooldown_days": 1,
+      "rapport_npc_id": "brin_groundskeeper"
     },
     {
       "id": "board_desert_road_lanterns",
@@ -85,7 +89,8 @@
       "required_unlocked_warp": "",
       "minimum_total_brews": 8,
       "repeatable": true,
-      "repeat_cooldown_days": 2
+      "repeat_cooldown_days": 2,
+      "rapport_npc_id": "tarn_wayfarer"
     },
     {
       "id": "board_steady_light_order",
@@ -104,7 +109,8 @@
       "required_unlocked_warp": "",
       "minimum_total_brews": 20,
       "repeatable": true,
-      "repeat_cooldown_days": 3
+      "repeat_cooldown_days": 3,
+      "rapport_npc_id": "brin_groundskeeper"
     },
     {
       "id": "board_standing_road_supply",
@@ -123,7 +129,8 @@
       "required_unlocked_warp": "",
       "minimum_total_brews": 30,
       "repeatable": true,
-      "repeat_cooldown_days": 4
+      "repeat_cooldown_days": 4,
+      "rapport_npc_id": "mayor_elric"
     },
     {
       "id": "board_standing_infirmary_draw",
@@ -142,7 +149,8 @@
       "required_unlocked_warp": "",
       "minimum_total_brews": 28,
       "repeatable": true,
-      "repeat_cooldown_days": 3
+      "repeat_cooldown_days": 3,
+      "rapport_npc_id": "mira_apothecary"
     },
     {
       "id": "board_winter_laying_in",
@@ -159,7 +167,8 @@
       "required_unlocked_warp": "",
       "minimum_total_brews": 16,
       "repeatable": true,
-      "repeat_cooldown_days": 3
+      "repeat_cooldown_days": 3,
+      "rapport_npc_id": "mayor_elric"
     },
     {
       "id": "board_exacting_pour",
@@ -183,7 +192,8 @@
       "required_unlocked_warp": "",
       "minimum_total_brews": 22,
       "repeatable": false,
-      "repeat_cooldown_days": 0
+      "repeat_cooldown_days": 0,
+      "rapport_npc_id": "mira_apothecary"
     },
     {
       "id": "board_settled_stock",
@@ -208,7 +218,8 @@
       "required_unlocked_warp": "",
       "minimum_total_brews": 26,
       "repeatable": true,
-      "repeat_cooldown_days": 3
+      "repeat_cooldown_days": 3,
+      "rapport_npc_id": "lyra_keeper"
     },
     {
       "id": "board_double_duty_lamp",
@@ -232,7 +243,8 @@
       "required_unlocked_warp": "",
       "minimum_total_brews": 28,
       "repeatable": true,
-      "repeat_cooldown_days": 4
+      "repeat_cooldown_days": 4,
+      "rapport_npc_id": "brin_groundskeeper"
     },
     {
       "id": "board_bulk_poultice_run",
@@ -253,7 +265,8 @@
       "required_unlocked_warp": "",
       "minimum_total_brews": 10,
       "repeatable": true,
-      "repeat_cooldown_days": 1
+      "repeat_cooldown_days": 1,
+      "rapport_npc_id": "brin_groundskeeper"
     },
     {
       "id": "board_rush_infirmary",
@@ -277,7 +290,8 @@
       "required_unlocked_warp": "",
       "minimum_total_brews": 14,
       "repeatable": true,
-      "repeat_cooldown_days": 1
+      "repeat_cooldown_days": 1,
+      "rapport_npc_id": "wren_physician"
     },
     {
       "id": "board_unsigned_first",
@@ -307,7 +321,8 @@
           "title": "No Name On It",
           "text": "Somebody left an unsigned order on the board and paid four times the going rate for a clean pour. Elric checked: nobody in the valley posted it, and it was there before the board was unlocked for the morning."
         }
-      ]
+      ],
+      "rapport_npc_id": "ione_archivist"
     },
     {
       "id": "board_unsigned_second",
@@ -337,7 +352,8 @@
           "title": "That Is Not A Customer's Sentence",
           "text": "The second unsigned note tells the brewer which bench to use. Ione's reading is that customers ask for outcomes and only practitioners ask for method — and that whoever is writing these already knows how this tower works."
         }
-      ]
+      ],
+      "rapport_npc_id": "ione_archivist"
     },
     {
       "id": "board_unsigned_third",
@@ -372,7 +388,8 @@
           "title": "The Question Nobody Answered",
           "text": "The third order was collected the same night and no fourth has appeared. Whoever was asking got the answer they came for, and has not said what they intend to do with it."
         }
-      ]
+      ],
+      "rapport_npc_id": "ione_archivist"
     },
     {
       "id": "board_coldiron_for_the_crews",
@@ -396,7 +413,8 @@
       "minimum_total_brews": 18,
       "repeatable": true,
       "repeat_cooldown_days": 6,
-      "completion_milestones": []
+      "completion_milestones": [],
+      "rapport_npc_id": "brin_groundskeeper"
     },
     {
       "id": "board_steadyhand_for_the_infirmary",
@@ -420,7 +438,8 @@
       "minimum_total_brews": 22,
       "repeatable": true,
       "repeat_cooldown_days": 5,
-      "completion_milestones": []
+      "completion_milestones": [],
+      "rapport_npc_id": "wren_physician"
     },
     {
       "id": "board_masterwork_cordial",
@@ -450,7 +469,8 @@
           "title": "Named The Band",
           "text": "Somebody asked for the best thing this tower can make, in those words, because good would not have been enough. It is the first order in a year that could not have been filled by trying hard. It had to be filled by having got better."
         }
-      ]
+      ],
+      "rapport_npc_id": "wren_physician"
     },
     {
       "id": "board_masterwork_stillkeeper",
@@ -474,7 +494,8 @@
       "minimum_total_brews": 36,
       "repeatable": false,
       "repeat_cooldown_days": 0,
-      "completion_milestones": []
+      "completion_milestones": [],
+      "rapport_npc_id": "lyra_keeper"
     },
     {
       "required_trait": "",
@@ -498,7 +519,8 @@
       "required_amount": 2,
       "reward_coins": 104,
       "minimum_quality_band": "Fine",
-      "minimum_total_brews": 20
+      "minimum_total_brews": 20,
+      "rapport_npc_id": "brin_groundskeeper"
     },
     {
       "required_trait": "",
@@ -520,7 +542,8 @@
       "required_amount": 2,
       "reward_coins": 68,
       "minimum_quality_band": "Fine",
-      "minimum_total_brews": 14
+      "minimum_total_brews": 14,
+      "rapport_npc_id": "tarn_wayfarer"
     },
     {
       "required_trait": "",
@@ -544,7 +567,8 @@
       "required_amount": 2,
       "reward_coins": 148,
       "minimum_quality_band": "Fine",
-      "minimum_total_brews": 30
+      "minimum_total_brews": 30,
+      "rapport_npc_id": "brin_groundskeeper"
     },
     {
       "required_trait": "",
@@ -568,7 +592,8 @@
       "required_amount": 3,
       "reward_coins": 126,
       "minimum_quality_band": "Crude",
-      "minimum_total_brews": 26
+      "minimum_total_brews": 26,
+      "rapport_npc_id": "tarn_wayfarer"
     },
     {
       "id": "board_shiftlong_for_the_crews",
@@ -592,7 +617,8 @@
       "minimum_total_brews": 32,
       "repeatable": true,
       "repeat_cooldown_days": 6,
-      "completion_milestones": []
+      "completion_milestones": [],
+      "rapport_npc_id": "brin_groundskeeper"
     },
     {
       "id": "board_standing_doses_for_the_infirmary",
@@ -616,7 +642,8 @@
       "minimum_total_brews": 40,
       "repeatable": true,
       "repeat_cooldown_days": 8,
-      "completion_milestones": []
+      "completion_milestones": [],
+      "rapport_npc_id": "wren_physician"
     },
     {
       "id": "board_tablewide_for_the_archive",
@@ -640,7 +667,8 @@
       "minimum_total_brews": 44,
       "repeatable": true,
       "repeat_cooldown_days": 10,
-      "completion_milestones": []
+      "completion_milestones": [],
+      "rapport_npc_id": "ione_archivist"
     },
     {
       "id": "board_mastered_healing_for_the_infirmary",
@@ -665,7 +693,8 @@
       "required_mastered_recipe": "healing_draught_recipe",
       "repeatable": true,
       "repeat_cooldown_days": 7,
-      "completion_milestones": []
+      "completion_milestones": [],
+      "rapport_npc_id": "wren_physician"
     },
     {
       "id": "board_mastered_lanterns_for_the_road",
@@ -690,7 +719,8 @@
       "required_mastered_recipe": "lantern_draught_recipe",
       "repeatable": true,
       "repeat_cooldown_days": 8,
-      "completion_milestones": []
+      "completion_milestones": [],
+      "rapport_npc_id": "brin_groundskeeper"
     },
     {
       "id": "board_mastered_glowwork_for_the_archive",
@@ -715,7 +745,48 @@
       "required_mastered_recipe": "glow_potion_recipe",
       "repeatable": true,
       "repeat_cooldown_days": 7,
-      "completion_milestones": []
+      "completion_milestones": [],
+      "rapport_npc_id": "ione_archivist"
+    },
+    {
+      "id": "board_confidant_coldread_for_ione",
+      "title": "Board Order: A Light That Flatters Nothing",
+      "description": "Not on the board where anyone can read it. Two Coldread Solutions, cold and even, and the note says only that she has pages she would rather check than trust. She would not have asked a stranger.",
+      "required_item_id": "coldread_solution",
+      "required_amount": 2,
+      "reward_coins": 190,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "",
+      "required_effect_kind": "glow",
+      "prerequisite_quests": [],
+      "required_unlocked_warp": "rune_to_archives",
+      "minimum_total_brews": 0,
+      "repeatable": true,
+      "repeat_cooldown_days": 4,
+      "rapport_npc_id": "ione_archivist",
+      "required_rapport_npc_id": "ione_archivist",
+      "required_rapport": 6
+    },
+    {
+      "id": "board_confidant_keptwarm_for_wren",
+      "title": "Board Order: Something The Shelf Can Hold",
+      "description": "Two Keptwarm Tonics. The infirmary has been rationing the cold bench for a year and Wren has stopped pretending otherwise in writing, which she would not do for somebody she was still being careful around.",
+      "required_item_id": "keptwarm_tonic",
+      "required_amount": 2,
+      "reward_coins": 210,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [],
+      "required_unlocked_warp": "greenhouse_to_containment",
+      "minimum_total_brews": 0,
+      "repeatable": true,
+      "repeat_cooldown_days": 4,
+      "rapport_npc_id": "wren_physician",
+      "required_rapport_npc_id": "wren_physician",
+      "required_rapport": 6
     }
   ]
 }

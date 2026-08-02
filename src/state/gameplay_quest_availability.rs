@@ -19,6 +19,14 @@ impl GameplayState {
                     .contains(&quest.required_unlocked_warp))
             && self.progression.total_brews >= quest.minimum_total_brews
             && self.has_mastered_requirement(quest)
+            && self.has_rapport_requirement(quest)
+    }
+
+    /// Standing gate. A townsperson who counts the player a confidant asks for
+    /// things they would not mention to a stranger.
+    fn has_rapport_requirement(&self, quest: &QuestDefinition) -> bool {
+        quest.required_rapport_npc_id.is_empty()
+            || self.rapport_value(&quest.required_rapport_npc_id) >= quest.required_rapport
     }
 
     /// Mastery is seven clean brews of one formula. `total_brews` measures how

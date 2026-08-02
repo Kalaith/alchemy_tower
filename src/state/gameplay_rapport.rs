@@ -9,9 +9,14 @@ mod rapport_text;
 /// one-time thank-you gift. Reachable by seeing one of their errands through
 /// (+1 on accept, +2 on completion in `gameplay_dialogue`).
 pub(super) const FRIEND_RAPPORT: i32 = 3;
-const CONFIDANT_RAPPORT: i32 = 6;
+/// Reliability, rather than story: reachable by running board orders somebody
+/// benefits from as well as by their own errands. A confidant asks for things
+/// they would not mention to a stranger — see `required_rapport_npc_id`.
+pub(super) const CONFIDANT_RAPPORT: i32 = 6;
 /// Accepting and finishing all three beats of an arc is worth exactly nine, so
-/// this tier means "you finished everything they asked" and nothing less.
+/// this tier means "you finished everything they asked" and nothing less. Board
+/// orders can carry the *number* there without the story being done, so the
+/// label checks the arc too rather than letting a supply run buy the top tier.
 const KIN_RAPPORT: i32 = 9;
 
 impl GameplayState {
@@ -23,9 +28,11 @@ impl GameplayState {
             .unwrap_or_default()
     }
 
-    /// Human-readable standing for the journal rapport tab.
-    pub(super) fn rapport_tier_label(&self, rapport: i32) -> &'static str {
-        if rapport >= KIN_RAPPORT {
+    /// Human-readable standing for the journal rapport tab. The top tier wants
+    /// the arc finished as well as the number, so that a player who supplied a
+    /// lot of board orders is a confidant rather than kin.
+    pub(super) fn rapport_tier_label(&self, npc_id: &str, rapport: i32) -> &'static str {
+        if rapport >= KIN_RAPPORT && self.has_reached_trust(npc_id) {
             ui_copy("rapport_tier_kin")
         } else if rapport >= CONFIDANT_RAPPORT {
             ui_copy("rapport_tier_confidant")
@@ -169,10 +176,11 @@ mod tests {
     fn rapport_tiers_track_standing() {
         let data = crate::data::load_embedded().expect("embedded game data should load");
         let state = GameplayState::new(&data);
-        assert_eq!(state.rapport_tier_label(0), "Stranger");
-        assert_eq!(state.rapport_tier_label(1), "Acquaintance");
-        assert_eq!(state.rapport_tier_label(FRIEND_RAPPORT), "Friend");
-        assert_eq!(state.rapport_tier_label(6), "Confidant");
+        let npc = "mira_apothecary";
+        assert_eq!(state.rapport_tier_label(npc, 0), "Stranger");
+        assert_eq!(state.rapport_tier_label(npc, 1), "Acquaintance");
+        assert_eq!(state.rapport_tier_label(npc, FRIEND_RAPPORT), "Friend");
+        assert_eq!(state.rapport_tier_label(npc, 6), "Confidant");
     }
 
     /// The friend tier arrives at rapport 3, which a three-beat arc passes
@@ -252,18 +260,39 @@ mod tests {
         );
     }
 
+    /// Board orders now pay rapport, so the number alone can be carried to the
+    /// top of the ladder by supply runs. The top tier is supposed to mean the
+    /// player saw everything this person asked for through, so it wants the arc
+    /// finished as well — a reliable supplier is a confidant, not kin.
     #[test]
     fn the_top_tier_is_only_reachable_by_finishing_an_arc() {
         let data = crate::data::load_embedded().expect("embedded game data should load");
-        let state = GameplayState::new(&data);
+        let mut state = GameplayState::new(&data);
+        let npc = data
+            .npc("rowan_herbalist")
+            .expect("rowan should exist")
+            .clone();
+
         // Accepting and completing three beats is +1 and +2 apiece.
         assert_eq!(
-            state.rapport_tier_label(super::KIN_RAPPORT - 1),
-            state.rapport_tier_label(super::CONFIDANT_RAPPORT)
+            state.rapport_tier_label(&npc.id, super::KIN_RAPPORT - 1),
+            state.rapport_tier_label(&npc.id, super::CONFIDANT_RAPPORT)
         );
+        // The number on its own does not buy the top tier.
+        assert_eq!(
+            state.rapport_tier_label(&npc.id, super::KIN_RAPPORT),
+            state.rapport_tier_label(&npc.id, super::CONFIDANT_RAPPORT),
+            "supply runs alone should not make somebody kin"
+        );
+
+        // Seeing the arc through does.
+        for quest_id in npc.quest_chain() {
+            state.progression.completed_quests.insert(quest_id.clone());
+        }
+        assert!(state.try_grant_trusted_gift(&data, &npc));
         assert_ne!(
-            state.rapport_tier_label(super::KIN_RAPPORT),
-            state.rapport_tier_label(super::CONFIDANT_RAPPORT)
+            state.rapport_tier_label(&npc.id, super::KIN_RAPPORT),
+            state.rapport_tier_label(&npc.id, super::CONFIDANT_RAPPORT)
         );
     }
 }
