@@ -22,6 +22,23 @@ pub(super) struct RuntimeState {
     pub(super) area_banner_area_id: String,
     pub(super) area_banner_label: String,
     pub(super) area_banner_seconds: f32,
+    /// Sounds the game has decided to make but has not played yet.
+    ///
+    /// The moments worth hearing — a beat recorded, a request finished, a route
+    /// opened, a day run out — are triggered deep in state code that has no
+    /// `AudioAssets` and should not grow one. They queue here and the frame
+    /// loop drains them, which is exactly how the visual feedbacks beside them
+    /// already work.
+    pub(super) pending_sounds: Vec<GameSound>,
+}
+
+/// A moment worth hearing.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub(super) enum GameSound {
+    JournalNote,
+    WorkLanded,
+    RouteRestored,
+    CollapseHome,
 }
 
 impl RuntimeState {
@@ -44,6 +61,7 @@ impl RuntimeState {
                 .map(|area| area.name.clone())
                 .unwrap_or_default(),
             area_banner_seconds: 2.6,
+            pending_sounds: Vec::new(),
         }
     }
 }

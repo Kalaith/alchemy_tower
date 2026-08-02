@@ -234,6 +234,63 @@ def footstep_leaf(seed: int) -> list[float]:
     return normalize(buffer, 0.48)
 
 
+
+def journal_note(seed: int) -> list[float]:
+    """A beat going into the journal. Small, dry and low — a pen stopping, not
+    a fanfare. It fires for every recorded moment in the game, so it has to be
+    something a player can hear four hundred times."""
+    rng = random.Random(seed)
+    duration = 0.34 + rng.uniform(0.0, 0.03)
+    buffer = [0.0] * int(SAMPLE_RATE * duration)
+    add_impulse(buffer, 0.0, 0.05, 1180 + rng.uniform(-40, 40), 0.10)
+    add_sine(buffer, 660 + rng.uniform(-14, 14), 0.055, 0.008, 0.28)
+    add_sine(buffer, 880 + rng.uniform(-18, 18), 0.030, 0.012, 0.22)
+    add_noise(buffer, rng, 0.020, 0.006, 0.12, highpass_strength=0.6)
+    return normalize(buffer, 0.42)
+
+
+def work_landed(seed: int) -> list[float]:
+    """Something the valley asked for, finished. Warmer and a little longer
+    than the journal tick, because a delivered request, a treated bank and a
+    funded commission are the payoffs the whole game is arranged around."""
+    rng = random.Random(seed)
+    duration = 0.86 + rng.uniform(0.0, 0.06)
+    buffer = [0.0] * int(SAMPLE_RATE * duration)
+    add_sine(buffer, 294 + rng.uniform(-6, 6), 0.15, 0.03, 0.80)
+    add_sine(buffer, 440 + rng.uniform(-8, 8), 0.11, 0.06, 0.74)
+    add_sine(buffer, 587 + rng.uniform(-10, 10), 0.07, 0.12, 0.62)
+    add_sine(buffer, 147 + rng.uniform(-5, 5), 0.09, 0.02, 0.55)
+    add_noise(buffer, rng, 0.018, 0.05, 0.28, highpass_strength=0.45)
+    return normalize(buffer, 0.62)
+
+
+def route_restored(seed: int) -> list[float]:
+    """A way through opening. Rising rather than resolving, because a route is
+    an invitation and not a conclusion."""
+    rng = random.Random(seed)
+    duration = 1.05 + rng.uniform(0.0, 0.08)
+    buffer = [0.0] * int(SAMPLE_RATE * duration)
+    add_sine(buffer, 196 + rng.uniform(-5, 5), 0.13, 0.04, 0.85)
+    add_sine(buffer, 262 + rng.uniform(-6, 6), 0.11, 0.18, 0.75)
+    add_sine(buffer, 392 + rng.uniform(-8, 8), 0.09, 0.34, 0.62)
+    add_sine(buffer, 523 + rng.uniform(-10, 10), 0.06, 0.52, 0.48)
+    add_lowpass_noise(buffer, rng, 0.05, 0.10, 0.60, 0.12)
+    return normalize(buffer, 0.60)
+
+
+def collapse_home(seed: int) -> list[float]:
+    """Running out. Falls away rather than lands, and has no resolution in it,
+    because waking up at ten having lost the morning is not a success chime."""
+    rng = random.Random(seed)
+    duration = 1.20 + rng.uniform(0.0, 0.10)
+    buffer = [0.0] * int(SAMPLE_RATE * duration)
+    add_sine(buffer, 138 + rng.uniform(-6, 6), 0.15, 0.03, 0.95)
+    add_sine(buffer, 92 + rng.uniform(-5, 5), 0.13, 0.10, 0.90)
+    add_sine(buffer, 69 + rng.uniform(-4, 4), 0.10, 0.28, 0.80)
+    add_lowpass_noise(buffer, rng, 0.14, 0.02, 0.85, 0.06)
+    return normalize(buffer, 0.55)
+
+
 ASSETS = {
     "footstep_stone": (6, footstep_stone),
     "footstep_dirt_path": (6, footstep_dirt),
@@ -247,6 +304,10 @@ ASSETS = {
     "alchemy_stir": (4, alchemy_stir),
     "brew_success": (3, brew_success),
     "brew_collapse": (3, brew_collapse),
+    "journal_note": (4, journal_note),
+    "work_landed": (3, work_landed),
+    "route_restored": (2, route_restored),
+    "collapse_home": (2, collapse_home),
 }
 
 

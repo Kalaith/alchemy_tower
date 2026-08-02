@@ -60,6 +60,7 @@ impl GameplayState {
                 self.stop_player_motion();
             }
             self.runtime.sleep_flash_seconds = 1.2;
+            self.queue_sound(super::gameplay_runtime_types::GameSound::CollapseHome);
             self.runtime.status_text = time_status_text::fainted_home();
         } else {
             self.runtime.status_text = time_status_text::slept_until("07:00");

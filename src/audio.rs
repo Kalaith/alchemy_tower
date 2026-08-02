@@ -23,6 +23,10 @@ const REQUIRED_VARIATION_SETS: &[(&str, usize)] = &[
     ("alchemy_stir", 4),
     ("brew_success", 3),
     ("brew_collapse", 3),
+    ("journal_note", 4),
+    ("work_landed", 3),
+    ("route_restored", 2),
+    ("collapse_home", 2),
 ];
 
 pub(crate) struct AudioAssets {
@@ -38,6 +42,10 @@ pub(crate) struct AudioAssets {
     alchemy_stir: Vec<Sound>,
     brew_success: Vec<Sound>,
     brew_collapse: Vec<Sound>,
+    journal_note: Vec<Sound>,
+    work_landed: Vec<Sound>,
+    route_restored: Vec<Sound>,
+    collapse_home: Vec<Sound>,
 }
 
 impl AudioAssets {
@@ -67,6 +75,10 @@ impl AudioAssets {
             alchemy_stir: load_variations("alchemy_stir", 4, asset_pack.as_ref()).await?,
             brew_success: load_variations("brew_success", 3, asset_pack.as_ref()).await?,
             brew_collapse: load_variations("brew_collapse", 3, asset_pack.as_ref()).await?,
+            journal_note: load_variations("journal_note", 4, asset_pack.as_ref()).await?,
+            work_landed: load_variations("work_landed", 3, asset_pack.as_ref()).await?,
+            route_restored: load_variations("route_restored", 2, asset_pack.as_ref()).await?,
+            collapse_home: load_variations("collapse_home", 2, asset_pack.as_ref()).await?,
         })
     }
 
@@ -102,6 +114,30 @@ impl AudioAssets {
         } else {
             play_random(&self.brew_collapse, 0.44);
         }
+    }
+
+    /// A beat going into the journal. Quiet on purpose — this fires for every
+    /// recorded moment in the game, so it has to survive being heard hundreds
+    /// of times.
+    pub(crate) fn play_journal_note(&self) {
+        play_random(&self.journal_note, 0.30);
+    }
+
+    /// Something the valley asked for, finished: a delivered request, a treated
+    /// bank, a funded commission. The payoffs the game is arranged around were
+    /// silent until now.
+    pub(crate) fn play_work_landed(&self) {
+        play_random(&self.work_landed, 0.46);
+    }
+
+    pub(crate) fn play_route_restored(&self) {
+        play_random(&self.route_restored, 0.44);
+    }
+
+    /// Running out. Deliberately unresolved — waking at ten having lost the
+    /// morning is not a success chime.
+    pub(crate) fn play_collapse_home(&self) {
+        play_random(&self.collapse_home, 0.42);
     }
 }
 

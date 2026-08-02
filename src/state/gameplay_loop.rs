@@ -41,6 +41,7 @@ impl GameplayState {
             self.handle_exploration_inputs(data, audio, frame_time);
         }
 
+        self.play_pending_sounds(audio);
         self.handle_save_shortcuts(data);
 
         None
