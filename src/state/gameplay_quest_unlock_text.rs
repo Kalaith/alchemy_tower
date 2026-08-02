@@ -5,6 +5,8 @@ pub(super) struct QuestUnlockRequirements {
     pub(super) missing_warp: bool,
     pub(super) missing_total_brews: bool,
     pub(super) minimum_total_brews: u32,
+    /// Empty unless the request wants a formula mastered and it is not.
+    pub(super) missing_mastery: String,
 }
 
 pub(super) fn summary(requirements: QuestUnlockRequirements) -> String {
@@ -17,6 +19,12 @@ pub(super) fn summary(requirements: QuestUnlockRequirements) -> String {
     }
     if requirements.missing_warp {
         reasons.push(ui_format("quests_unlock_greenhouse", &[]));
+    }
+    if !requirements.missing_mastery.is_empty() {
+        reasons.push(ui_format(
+            "quests_unlock_mastery",
+            &[("recipe", &requirements.missing_mastery)],
+        ));
     }
     if requirements.missing_total_brews {
         reasons.push(ui_format(

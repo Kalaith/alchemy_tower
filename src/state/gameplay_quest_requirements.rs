@@ -117,6 +117,7 @@ mod tests {
             prerequisite_quests: Vec::new(),
             required_unlocked_warp: String::new(),
             minimum_total_brews: 0,
+            required_mastered_recipe: String::new(),
             completion_milestones: Vec::new(),
             giver_intro_line: String::new(),
             giver_active_line: String::new(),

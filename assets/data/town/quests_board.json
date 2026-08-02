@@ -641,6 +641,81 @@
       "repeatable": true,
       "repeat_cooldown_days": 10,
       "completion_milestones": []
+    },
+    {
+      "id": "board_mastered_healing_for_the_infirmary",
+      "title": "Infirmary: The One You Make Every Week",
+      "description": "Wren, and she has clearly thought about how to word it. Four healing draughts, and the note says she is not asking for the best one you have ever made -- she is asking for the one you have made so many times that you no longer think about it. She would rather have four identical ordinary bottles than one exceptional one and three guesses.",
+      "required_item_id": "healing_draught",
+      "required_amount": 4,
+      "reward_coins": 190,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Fine",
+      "required_trait": "",
+      "required_traits": [],
+      "minimum_trait_matches": 0,
+      "required_effect_kind": "restore",
+      "required_effect_kinds": [],
+      "minimum_effect_matches": 0,
+      "prerequisite_quests": [
+        "shelf_stock_for_wren"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 24,
+      "required_mastered_recipe": "healing_draught_recipe",
+      "repeatable": true,
+      "repeat_cooldown_days": 7,
+      "completion_milestones": []
+    },
+    {
+      "id": "board_mastered_lanterns_for_the_road",
+      "title": "Road Crews: Six Lanterns, All The Same",
+      "description": "The switchback crews want six lantern draughts and have specified, in a hand that has clearly had this argument before, that they must all burn for the same length of time. A crew that has to guess which of six lamps will go first has six problems. They will pay for the ordinary one, made properly, over anything clever.",
+      "required_item_id": "lantern_draught",
+      "required_amount": 6,
+      "reward_coins": 225,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Fine",
+      "required_trait": "",
+      "required_traits": [],
+      "minimum_trait_matches": 0,
+      "required_effect_kind": "glow",
+      "required_effect_kinds": [],
+      "minimum_effect_matches": 0,
+      "prerequisite_quests": [
+        "waystation_light_for_tarn"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 28,
+      "required_mastered_recipe": "lantern_draught_recipe",
+      "repeatable": true,
+      "repeat_cooldown_days": 8,
+      "completion_milestones": []
+    },
+    {
+      "id": "board_mastered_glowwork_for_the_archive",
+      "title": "Archive: Steady Light, Not Bright Light",
+      "description": "Unsigned again, and by now nobody is pretending. Three glow potions of a consistent burn. The note observes that a reading room lit by a different lamp every evening is a reading room where nobody can tell whether the ink has changed or the light has, and that this has cost the archive more than it would like to put in writing.",
+      "required_item_id": "glow_potion",
+      "required_amount": 3,
+      "reward_coins": 165,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Fine",
+      "required_trait": "",
+      "required_traits": [],
+      "minimum_trait_matches": 0,
+      "required_effect_kind": "glow",
+      "required_effect_kinds": [],
+      "minimum_effect_matches": 0,
+      "prerequisite_quests": [
+        "missing_pages_for_ione"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 26,
+      "required_mastered_recipe": "glow_potion_recipe",
+      "repeatable": true,
+      "repeat_cooldown_days": 7,
+      "completion_milestones": []
     }
   ]
 }

@@ -1,9 +1,7 @@
 use super::GameData;
-#[cfg(test)]
-use crate::data::RecipeDefinition;
 use crate::data::{
     AreaDefinition, GatheringRouteDefinition, ItemDefinition, MutationFormulaDefinition,
-    NpcDefinition, QuestDefinition,
+    NpcDefinition, QuestDefinition, RecipeDefinition,
 };
 
 impl GameData {
@@ -41,6 +39,10 @@ impl GameData {
         self.quest_index
             .get(quest_id)
             .and_then(|index| self.quests.get(*index))
+    }
+
+    pub(crate) fn recipe(&self, recipe_id: &str) -> Option<&RecipeDefinition> {
+        self.recipes.iter().find(|recipe| recipe.id == recipe_id)
     }
 
     #[cfg(test)]

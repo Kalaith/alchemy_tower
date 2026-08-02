@@ -460,6 +460,54 @@ reachable areas: {open_areas:?}"
         );
     }
 
+    /// A request can now ask that a formula be *mastered* — seven clean brews —
+    /// rather than merely attempted. Two ways that goes wrong and neither
+    /// announces itself: naming a recipe that does not exist, which makes the
+    /// request permanently invisible; and naming a recipe that produces
+    /// something other than what is being asked for, which reads to the player
+    /// as "master this unrelated thing first" and is a puzzle nobody set.
+    ///
+    /// A morph counts. A request for a morph output is legitimately satisfied
+    /// by mastering the formula it branches from, since there is no separate
+    /// recipe to master.
+    #[test]
+    fn a_mastery_requirement_names_the_formula_that_makes_the_thing() {
+        let data = load_embedded().expect("embedded game data should load");
+        let mut wrong = Vec::new();
+        let mut gated = 0usize;
+
+        for quest in &data.quests {
+            if quest.required_mastered_recipe.is_empty() {
+                continue;
+            }
+            gated += 1;
+            let Some(recipe) = data.recipe(&quest.required_mastered_recipe) else {
+                wrong.push(format!(
+                    "{} wants {} mastered, and no such recipe exists",
+                    quest.id, quest.required_mastered_recipe
+                ));
+                continue;
+            };
+            let produces = recipe.output_item_id == quest.required_item_id
+                || recipe
+                    .morph_targets
+                    .iter()
+                    .any(|morph| morph.output_item_id == quest.required_item_id);
+            if !produces {
+                wrong.push(format!(
+                    "{} asks for {} but wants {} mastered, which makes {}",
+                    quest.id, quest.required_item_id, recipe.id, recipe.output_item_id
+                ));
+            }
+        }
+
+        assert!(gated > 0, "no request asks for a formula to be mastered");
+        assert!(
+            wrong.is_empty(),
+            "mastery requirements pointing at the wrong formula:\n{wrong:#?}"
+        );
+    }
+
     /// Imbuing spends a rune and a finished bottle, and three of the four runes
     /// cost coin while the fourth can only be prised off ward frames that have
     /// already let go. A pattern whose output is worth less than what went into

@@ -132,6 +132,13 @@ pub(crate) struct QuestDefinition {
     pub(crate) required_unlocked_warp: String,
     #[serde(default)]
     pub(crate) minimum_total_brews: u32,
+    /// A recipe the player must have *mastered* — seven clean brews of the same
+    /// formula — before this request will post. Brew count alone says how busy
+    /// somebody has been; this says they can make one particular thing the same
+    /// way twice, which is a different claim and the one an infirmary cares
+    /// about.
+    #[serde(default)]
+    pub(crate) required_mastered_recipe: String,
     #[serde(default)]
     pub(crate) completion_milestones: Vec<JournalMilestoneEntry>,
     /// What the giver says while this step is on offer, and once it is accepted.
