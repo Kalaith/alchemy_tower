@@ -1878,6 +1878,47 @@ Stop the loop and report if:
   85 is invisible precisely because it looks like the way things are.
   **21 → 23 routes; 193 tests.**
 
+- **2026-08-03 — the game has sixty-two formulae and tells you how to make three.** Axis: the
+  discovery layer, which is not on the standing-themes list and had never been examined in sixty-odd
+  passes. Measured before choosing, and the measurement is the whole finding. There are exactly
+  three routes to knowing a formula: `starter_known` (3 recipes), hitting its exact ingredient
+  multiset at its exact bench, or — nothing. **Quests carry no `teaches_recipe` field, no counter
+  sells a formula, and disassembly requires the recipe to be known already.** So the other **59**
+  are guessed, against **46 two-reagent recipes** (1,485 pairs across the 54 things that can go in
+  a pot) and **16 three-reagent** ones. The bench does confirm an exact hit *before* you spend
+  anything, so it is browsing rather than blind — tedium rather than impossibility, and no better a
+  use of an evening.
+  ***And the journal, the game's own memory, was where the information should have been and wasn't.***
+  Every undiscovered use of every herb read *"Used in formulae you have not yet discovered."* A
+  count. Sixty passes of authored recipes behind a line that names the gap and not one thing to do
+  about it.
+  **Discovery stays the design** — `starter_known` is untouched and no formula is named. The line
+  points instead: **where the missing half comes from**, as ground you can walk to, a counter that
+  stocks it, or the fact that it must be brewed rather than picked (which is also the only way the
+  second-order tier announces itself). Once everything the nearest formula wants has been met, it
+  stops sending the player out and names **the bench** — for anyone who has been round the valley
+  that is the whole of the useful answer, and pointing them at ground they have already worked
+  would be the old useless count in a longer sentence.
+  *Derived, not authored:* nothing is written per recipe, so a formula added tomorrow is pointed at
+  the day it ships. 57 reagents resolve to ground, 5 to a counter, 105 to a bench.
+  *Two rules the derivation had to learn, both from reading the output rather than from theory.*
+  Ground still shut is worse than no hint — "not here" and "not yet" read identically — and whisper
+  moss grows in seven places with Brin's terraces sorting ahead of the plains. And season, weather
+  and hour are deliberately **not** consulted: the hint answers *where*, the conditions line
+  immediately above it already answers *when*.
+  *Guards:* every reagent that feeds a formula points somewhere (verified by cutting the bench
+  branch — it names all 14 compound reagents); the hint names neither the formula nor the reagent it
+  wants; and nothing is sent to shut ground (verified by dropping the preference — it names whisper
+  moss to the terraces and stillwater pearl to the quarry).
+  ***The entry box is full now, and the guard from the hearsay pass proved it.*** The first copy
+  overran by **6px** on Inkgall Bead — three lines of conditions plus two of hint against room for
+  four. Shortened, and the harness took a `journal:<herb>` scene so the worst entry in the game gets
+  photographed rather than trusted to a `chars-per-line` estimate the comment itself calls generous.
+  `screenshots/hud/journal_formula_hint.png`, `journal_hearsay.png`. **197 tests.**
+  *Next: the obvious follow-on is a `teaches_recipe_ids` field on quests — Ione's recovered eleven*
+  *months and the wizard's working notes are already in the fiction and already flourishes in the*
+  *entry lab, and nothing in the game hands over a formula. That is content, not machinery.*
+
 ## Deferred (needs a new system; not for this loop)
 
 - ~~Apply-potion-to-target flow (wilted plant, frightened creature, blocked path)~~ **Built

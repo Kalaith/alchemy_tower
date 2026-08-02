@@ -657,6 +657,47 @@ content with no destination.
   (which is her whole arc), and Rowan on the first formula in the book the
   calendar can close.
 
+### The game had sixty-two formulae and told you how to make three, 2026-08-03
+
+- ~~Fifty-nine recipes are learned only by guessing their exact reagents~~
+  **Fixed 2026-08-03.** Discovery is the design — `starter_known` belongs only
+  on the three entry basics and this pass does not change that. What the game
+  gave the player to work with was the problem. Three routes to knowing a
+  formula exist: it is flagged starter, or you hit its exact ingredient multiset
+  at its exact bench, or — no third one. Quests never teach a formula, no
+  counter sells one, disassembly requires the recipe to be *known already*, and
+  the herb journal, which is the game's own memory of everything ever gathered,
+  said of every undiscovered use only **"Used in formulae you have not yet
+  discovered."** A count, with no direction in it at all, against **46
+  two-reagent formulae** (1,485 pairs across the 54 things that can go in a pot)
+  and **16 three-reagent** ones. The bench does confirm an exact hit before you
+  spend anything, so it is browsing rather than blind guessing — which makes it
+  tedium rather than impossibility, and no better a use of the player's evening.
+  The journal points now, and it still names neither the formula nor the
+  reagent. It names **where the missing half comes from**: ground you can walk
+  to, a counter that stocks it, or the fact that it has to be brewed rather than
+  picked — which is also the only way the second-order tier announces that it
+  exists. Once the player has met everything the nearest formula wants, the line
+  stops sending them out and names **the bench** instead, because for a player
+  who has been round the valley that is the whole of the useful answer.
+  Nothing is authored per recipe: the hint is derived, so a formula added
+  tomorrow is pointed at the day it ships.
+  *Two rules the derivation had to learn.* Ground the player cannot work yet is
+  worse than no hint, because "not here" and "not yet" read the same — whisper
+  moss grows in seven places and the terraces under the tower wall, which open
+  at the end of Brin's arc, sorted ahead of the plains. And season, weather and
+  hour are deliberately **not** consulted: the hint answers *where*, and the
+  conditions line directly above it already answers *when*.
+  Three guards: every reagent that feeds a formula points somewhere, the hint
+  names neither the formula nor the reagent it wants, and no reagent is sent to
+  ground that is still shut. All three verified by breaking them.
+  `screenshots/hud/journal_formula_hint.png`, `journal_hearsay.png`.
+  *The entry box is now genuinely full.* The first draft of the copy overran by
+  6px on Inkgall Bead — three lines of conditions plus two of hint against room
+  for four — and the fit guard from the hearsay pass named it. The copy is
+  shorter for it, and the capture harness took a `journal:<herb>` scene so the
+  worst entry in the game can be looked at rather than trusted to arithmetic.
+
 ## Core loop & alchemy
 
 - ~~Turn the unlogged-brew salvage into a discovery event~~ **Done 2026-08-02.**

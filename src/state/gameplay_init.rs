@@ -406,6 +406,19 @@ impl GameplayState {
         self.set_overlay(super::gameplay_overlay_types::OverlayScreen::Journal);
     }
 
+    /// Point the herb column at one named entry. The list is sorted rather than
+    /// filed, so there is no arithmetic that finds a given herb's row — and the
+    /// entry worth photographing is the longest one, not the first.
+    pub(crate) fn select_journal_herb(&mut self, data: &GameData, item_id: &str) {
+        if let Some(index) = self
+            .herb_memories(data)
+            .iter()
+            .position(|entry| entry.item_id == item_id)
+        {
+            self.ui.journal_index = index;
+        }
+    }
+
     /// Seed a ready-to-hand-in repeatable board request and open the quest
     /// board, so the capture harness can render the delivery flow.
     /// Stand at the rune workbench holding every potion a rune will rework, so

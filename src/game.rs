@@ -159,10 +159,18 @@ impl Game {
                 gameplay.open_quest_board_sample(&self.data);
                 GameState::from_gameplay(gameplay)
             }
-            // "journal" opens the journal on the herb-memory tab.
-            "journal" => {
+            // "journal[:<herb>]" opens the journal on the herb-memory tab.
+            // Naming a herb id is how the longest entry in the game gets
+            // photographed: the entry box holds about four lines and the
+            // arithmetic guarding it is deliberately generous, so the worst
+            // case has to be looked at rather than trusted.
+            other if other.starts_with("journal") => {
+                let herb_id = other.strip_prefix("journal:").unwrap_or_default();
                 let mut gameplay = GameplayState::new(&self.data);
                 gameplay.open_journal_sample(&self.data);
+                if !herb_id.is_empty() {
+                    gameplay.select_journal_herb(&self.data, herb_id);
+                }
                 GameState::from_gameplay(gameplay)
             }
             // Default ("menu" or anything else): the boot flow already lands

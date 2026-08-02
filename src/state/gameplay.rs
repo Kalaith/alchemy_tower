@@ -118,6 +118,8 @@ mod gameplay_feedback_toasts;
 mod gameplay_feedback_types;
 #[path = "gameplay_feedback_update.rs"]
 mod gameplay_feedback_update;
+#[path = "gameplay_formula_hint.rs"]
+mod gameplay_formula_hint;
 #[path = "gameplay_gathering.rs"]
 mod gameplay_gathering;
 #[path = "gameplay_gathering_conditions.rs"]

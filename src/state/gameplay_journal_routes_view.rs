@@ -194,9 +194,14 @@ impl GameplayState {
     }
 
     /// Names the brews this ingredient feeds. Only recipes the player has
-    /// discovered are named; still-unknown uses are counted, not spoiled, so
-    /// the journal teaches what a gathered herb is *for* without giving away
-    /// the whole catalogue.
+    /// discovered are named; still-unknown uses are never named, so the journal
+    /// teaches what a gathered herb is *for* without giving away the catalogue.
+    ///
+    /// They are pointed at, though. Counting them and stopping there — which is
+    /// all this line did for fifty-nine of the game's sixty-two formulae — left
+    /// the only route to a formula being to guess its exact reagents. The hint
+    /// says where the missing half of the nearest one comes from and nothing
+    /// else; see [`super::gameplay_formula_hint`].
     fn herb_used_in_text(&self, data: &GameData, item_id: &str) -> Option<String> {
         let mut known = Vec::new();
         let mut undiscovered = 0u32;
@@ -217,15 +222,21 @@ impl GameplayState {
         if known.is_empty() && undiscovered == 0 {
             return None;
         }
+        let hint = self
+            .undiscovered_formula_hint(data, item_id)
+            .unwrap_or_else(|| ui_copy("journal_formula_hint_unknown").to_owned());
         if known.is_empty() {
-            return Some(ui_copy("journal_memory_used_in_unknown").to_owned());
+            return Some(ui_format(
+                "journal_memory_used_in_unknown",
+                &[("hint", &hint)],
+            ));
         }
 
         let recipes = known.join(", ");
         Some(if undiscovered > 0 {
             ui_format(
                 "journal_memory_used_in_more",
-                &[("recipes", &recipes), ("count", &undiscovered.to_string())],
+                &[("recipes", &recipes), ("hint", &hint)],
             )
         } else {
             ui_format("journal_memory_used_in", &[("recipes", &recipes)])
@@ -238,7 +249,7 @@ mod tests {
     use super::GameplayState;
 
     #[test]
-    fn herb_usage_names_known_recipes_and_hides_undiscovered() {
+    fn herb_usage_names_known_recipes_and_points_at_the_rest() {
         let data = crate::data::load_embedded().expect("embedded game data should load");
         let state = GameplayState::new(&data);
 
@@ -249,8 +260,8 @@ mod tests {
             .expect("whisper moss is used in recipes");
         assert!(text.contains("Healing Draught"), "got: {text}");
         assert!(
-            text.contains("discover"),
-            "undiscovered uses hinted: {text}"
+            text.contains("The nearest wants"),
+            "undiscovered uses pointed at: {text}"
         );
 
         // Field Bloom is not in any starter recipe, so its uses read as
@@ -264,13 +275,17 @@ mod tests {
         // rendered as a blank where every other herb explains itself: nothing
         // brewed with them, so the journal had nothing to say. A herb the
         // player can pick should always be able to answer "what is this for".
-        for herb_id in ["coldiron_lichen", "rimeflower"] {
+        //
+        // Answering it used to stop at a count — "used in formulae you have not
+        // yet discovered" — which named the gap and not one thing to do about
+        // it. Every entry now says where the missing half comes from.
+        for herb_id in ["coldiron_lichen", "rimeflower", "field_bloom"] {
             let text = state
                 .herb_used_in_text(&data, herb_id)
                 .unwrap_or_else(|| panic!("{herb_id} should read as used somewhere"));
             assert!(
-                text.contains("discover"),
-                "{herb_id} uses should hint at discovery: {text}"
+                text.contains("The nearest wants"),
+                "{herb_id} uses should point somewhere: {text}"
             );
         }
     }
