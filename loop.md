@@ -1825,6 +1825,36 @@ Stop the loop and report if:
   16 plain recipe outputs plus 4 a recipe and a branch both make, with no shared cause — a tail
   rather than a hole, and probably a *recipe* problem rather than a demand one.
 
+- **2026-08-03 — second-order brewing was a feature of one room, not a tier.** Axis: the recipe
+  lattice, taking the previous entry's own suggestion that the rest of the tail is a *recipe*
+  problem. The measure: per bench, how many of its own outputs anything anywhere consumes as a
+  reagent. Archive 4, greenhouse 4, cold bench 1 — and **the entry cauldron's 24 outputs and the
+  rune forge's 5 fed nothing at all, anywhere.** The forge was the worst room in the building: five
+  recipes, three of them making bottles nobody wanted, behind a whole floor of the tower.
+  *The fix routes the dead stock by eating it rather than by writing more orders for it.* The
+  **channel forge accepts finished bottles** now — the most natural place in the tower, because the
+  rune workbench on that same floor already reworks finished bottles, so it is the floor's own
+  premise. Its room bonus already said what the bench is for ("the channels that take an imbuing run
+  hot the whole length of the bench"), so its second-order character is *heat nobody has to stand
+  over*, against the archive's *reading*.
+  **Banked-Through Tonic** (bankfire + kindling + emberbark): nothing happens for a while and then
+  you are simply not cold until it gets light. **Held-Heat Lamp** (channelfire + cinderlight +
+  scorchvine): a working light that is also a brazier, because a crew in a wet cut has only ever
+  been able to carry one of the two down and has always chosen the light and then stood about being
+  cold. Both are the first recipes in the game to *require* `kilnfire` — a tag five morph branches
+  asked for and no recipe ever did.
+  ***Every branch on both reaches a bottle something already wants***, so a tier that would have
+  added six bottles added two: lastthaw / kept-warm off the tonic, hearthchannel / banked-cinderlight
+  off the lamp. Cool the tonic right down and you get the keeper the winter stores want; drive it
+  with road amber and you get the cordial that survives the cart — a three-way choice between things
+  the valley wants, which is what a branch is for.
+  *Guard:* `more_than_one_bench_takes_a_finished_bottle_and_means_it` — a tier is not one room, and
+  a bench that advertises it takes a bottle must have something asking for one. Verified by turning
+  the forge back off.
+  **Forge 3-of-5 sinkless → 0-of-7; 20 → 16 sinkless potions; 60 → 62 recipes; 192 tests.**
+  The `compound` capture scene now finds the *forge* rather than the archive, which is a nice
+  accident of it picking the first second-order recipe in data order.
+
 ## Deferred (needs a new system; not for this loop)
 
 - ~~Apply-potion-to-target flow (wilted plant, frightened creature, blocked path)~~ **Built

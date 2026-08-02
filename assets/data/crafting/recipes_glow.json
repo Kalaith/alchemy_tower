@@ -607,6 +607,86 @@
         "luminous"
       ],
       "morph_targets": []
+    },
+    {
+      "id": "heldheat_lamp_recipe",
+      "name": "Held-Heat Lamp",
+      "station_id": "rune_forge_bench",
+      "ingredients": [
+        {
+          "item_id": "channelfire_lantern",
+          "amount": 1
+        },
+        {
+          "item_id": "cinderlight_lamp",
+          "amount": 1
+        },
+        {
+          "item_id": "scorchvine_resin",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "heldheat_lamp",
+      "output_amount": 1,
+      "description": "A working light and a brazier folded into one bottle, because a crew in a wet cut has only ever been able to carry one of them down.",
+      "required_heat": 3,
+      "required_stirs": 5,
+      "unstable_output_item_id": "lantern_leak",
+      "lore_note": "Light and heat come off the same channel. Splitting them into two bottles was a convenience of the entry lab's, not a fact about the work.",
+      "minimum_quality": 50,
+      "preferred_traits": [
+        "warm",
+        "luminous",
+        "volatile"
+      ],
+      "guaranteed_traits": [
+        "warm",
+        "luminous"
+      ],
+      "minimum_elements": {
+        "vita": 0,
+        "ember": 3,
+        "mist": 0,
+        "lux": 1
+      },
+      "catalyst_tag": "kilnfire",
+      "catalyst_quality_bonus": 15,
+      "required_timing": "early",
+      "required_sequence": [
+        "channelfire_lantern",
+        "cinderlight_lamp",
+        "warm"
+      ],
+      "morph_targets": [
+        {
+          "output_item_id": "hearthchannel_lantern",
+          "minimum_quality": 70,
+          "catalyst_tag": "kilnfire",
+          "required_heat": 3,
+          "required_stirs": 6,
+          "required_timing": "early",
+          "required_sequence": [
+            "channelfire_lantern",
+            "cinderlight_lamp",
+            "warm"
+          ],
+          "room_bonus_required": true
+        },
+        {
+          "output_item_id": "banked_cinderlight",
+          "minimum_quality": 62,
+          "catalyst_tag": "saltroad",
+          "required_heat": 2,
+          "required_stirs": 5,
+          "required_timing": "steady",
+          "required_sequence": [
+            "channelfire_lantern",
+            "cinderlight_lamp",
+            "warm"
+          ],
+          "room_bonus_required": false
+        }
+      ]
     }
   ]
 }

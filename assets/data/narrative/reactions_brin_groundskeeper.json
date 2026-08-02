@@ -171,6 +171,13 @@
       "after_milestone": "quarry_gallery_lit",
       "order": 110,
       "line": "Forty feet back under the sump, and I cut in that quarry for nine years without knowing it was there. Nobody flooded it. The pumps just stopped the year everything stopped, and the water has been sitting there ever since being none of our business."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_quest": "",
+      "after_milestone": "the_forge_took_a_finished_bottle",
+      "order": 116,
+      "line": "You put a finished bottle back in. I watched you do it and I still do not like it. Then I carried the result down to the lower cut and stood next to it for an hour in the wet and did not have to go back up for the brazier, and I have decided I do not have to like a thing to want four more of them by Thursday."
     }
   ]
 }

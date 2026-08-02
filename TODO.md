@@ -7,12 +7,12 @@ measured against that target; anything not listed here is considered done.
 
 Where the content currently stands (re-counted 2026-08-03, second count that
 day — a week of iterations moves these fast enough that stale figures mislead):
-14 areas, 85 gather nodes and 21 routes, 6 apply targets, 168 items of which 102
-are potions and 49 ingredients, 60 recipes across 5 benches (with 33 morph
-branches) plus 17 rune patterns and 28 mutations, 9 townsfolk with 177 reaction
-lines, 24 story-arc requests, 24 open board orders, 32 standing orders, 5
-unsigned notes, 3 post-ending orders and 6 commissions, plus an epilogue and
-work that continues past it. That is the mid-game and most of the way into the last third; the
+14 areas, 85 gather nodes and 21 routes, 6 apply targets, 170 items of which 104
+are potions and 49 ingredients, 62 recipes across 5 benches (with 37 morph
+branches, and two benches that take finished bottles) plus 17 rune patterns and
+28 mutations, 9 townsfolk with 181 reaction lines, 24 story-arc requests, 24 open
+board orders, 34 standing orders, 5 unsigned notes, 3 post-ending orders and 6
+commissions, plus an epilogue and work that continues past it. That is the mid-game and most of the way into the last third; the
 remaining work is what makes it a 20–25 hour game rather than a well-furnished
 8-hour one.
 
@@ -780,6 +780,47 @@ content with no destination.
   `recipes_speed_archive_reading_bench.json` rather than bundled into the glow
   file, and `longheld_cordial` moved with them. Still open: the three new outputs
   have no destination but the counter (see the sinkless-potion entry).
+- ~~The tier is one room, not a tier~~ **Fixed 2026-08-03.** Second-order
+  brewing existed at exactly **one bench in a five-bench tower**, which makes it
+  a feature of the archive rather than a layer of the game. The measure that
+  showed it was counting, per bench, how many of its own outputs anything
+  anywhere consumes: the archive ate four of its own and the greenhouse fed
+  four, and **the entry cauldron's twenty-four outputs and the rune forge's five
+  fed nothing at all, anywhere.** The forge was the worst room in the building —
+  five recipes, three of them making bottles nobody wanted, and a whole floor of
+  the tower behind it.
+  The **channel forge takes finished bottles now**, which is the most natural
+  place in the tower for it: the rune workbench on that same floor already
+  reworks finished bottles, so the floor's premise is exactly this. Its room
+  bonus already said what it is for — "the channels that take an imbuing run hot
+  the whole length of the bench" — so the forge's second-order character is
+  *heat you do not have to stand over*, against the archive's *reading*.
+  Two recipes, and the point of both is that they eat the forge's own dead
+  stock. **Banked-Through Tonic** folds a bankfire tonic and a kindling tonic
+  down the hot channel: nothing happens for a while and then you are simply not
+  cold, and you stay not cold until it gets light. **Held-Heat Lamp** folds the
+  channelfire lantern and the cinderlight lamp into a working light that is also
+  a brazier, because a crew in a wet cut has only ever been able to carry one of
+  the two down and has always chosen the light and then stood about being cold.
+  Both are the first recipes in the game to *require* a `kilnfire` catalyst —
+  that tag was asked for by five morph branches and no recipe at all.
+  Every branch on both reaches a bottle something already wants, so the tier
+  adds two bottles rather than six: **Lastthaw Cordial** and **Kept-Warm Tonic**
+  off the banked-through, **Hearthchannel Lantern** and **Banked Cinderlight**
+  off the lamp. Cool the banked-through right down and you get the keeper the
+  winter stores want; drive it with road amber and you get the cordial that
+  survives the cart. That is a three-way decision between things the valley
+  wants, which is what a branch is for.
+  Two standing orders route the new pair: the relief post's four hours kept warm
+  (Wren, after the post is funded) and one bottle instead of two for the lower
+  cut (Brin). Brin also has a word about the beat — "I watched you do it and I
+  still do not like it… I have decided I do not have to like a thing to want
+  four more of them by Thursday."
+  `more_than_one_bench_takes_a_finished_bottle_and_means_it` is the guard: a
+  tier is not one room, and a bench that advertises it will take a bottle has to
+  have something that asks for one. Verified by turning the forge back off.
+  **Rune forge 3-of-5 sinkless → 0-of-7; 20 → 16 sinkless potions; 60 → 62
+  recipes.** `screenshots/hud/compound_bench.png` is the forge, not the archive.
 
 ## Story & world state
 

@@ -41,6 +41,93 @@
         "healing"
       ],
       "morph_targets": []
+    },
+    {
+      "id": "bankedthrough_tonic_recipe",
+      "name": "Banked-Through Tonic",
+      "station_id": "rune_forge_bench",
+      "ingredients": [
+        {
+          "item_id": "bankfire_tonic",
+          "amount": 1
+        },
+        {
+          "item_id": "kindling_tonic",
+          "amount": 1
+        },
+        {
+          "item_id": "emberbark_curl",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "bankedthrough_tonic",
+      "output_amount": 1,
+      "description": "Two finished warming brews driven down the channel until the heat banks instead of burning. The forge is the only bench in the tower that can hold a heat that long without anybody standing over it.",
+      "required_heat": 3,
+      "required_stirs": 4,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "Bank a fire properly and it is still there in the morning. The whole floor is built on that and nobody had thought to put it in a bottle.",
+      "minimum_quality": 48,
+      "preferred_traits": [
+        "warm",
+        "restorative",
+        "vigor"
+      ],
+      "guaranteed_traits": [
+        "warm",
+        "restorative"
+      ],
+      "minimum_elements": {
+        "vita": 0,
+        "ember": 3,
+        "mist": 0,
+        "lux": 0
+      },
+      "catalyst_tag": "kilnfire",
+      "catalyst_quality_bonus": 14,
+      "required_timing": "steady",
+      "required_sequence": [
+        "bankfire_tonic",
+        "kindling_tonic",
+        "warm"
+      ],
+      "morph_targets": [
+        {
+          "output_item_id": "lastthaw_cordial",
+          "minimum_quality": 66,
+          "catalyst_tag": "saltroad",
+          "required_heat": 3,
+          "required_stirs": 5,
+          "required_timing": "late",
+          "required_sequence": [
+            "bankfire_tonic",
+            "kindling_tonic",
+            "warm"
+          ],
+          "room_bonus_required": true
+        },
+        {
+          "output_item_id": "keptwarm_tonic",
+          "minimum_quality": 54,
+          "catalyst_tag": "stillwater",
+          "required_heat": 1,
+          "required_stirs": 4,
+          "required_timing": "early",
+          "required_sequence": [
+            "bankfire_tonic",
+            "kindling_tonic",
+            "warm"
+          ],
+          "room_bonus_required": false
+        }
+      ],
+      "discovery_milestones": [
+        {
+          "id": "the_forge_took_a_finished_bottle",
+          "title": "It Was Already Finished",
+          "text": "The channel forge will take a bottle that is already made and drive it further, which the entry lab's book says outright is not a thing that can be done. It can. Two warming brews went down the channel and what came out is warm from dusk to dawn rather than for an hour, and the only new thing in it was heat that nobody had to stand over."
+        }
+      ]
     }
   ]
 }

@@ -629,6 +629,60 @@
           "description": "Steadies the holder for a long stretch of work, which is what it was always for."
         }
       ]
+    },
+    {
+      "id": "bankedthrough_tonic",
+      "name": "Banked-Through Tonic",
+      "category": "potion",
+      "base_value": 112,
+      "color": [
+        232,
+        146,
+        84,
+        255
+      ],
+      "description": "Two banked fires taken down a hot channel until the heat stops being a moment and starts being a night. It does not warm you the way a mouthful of spirit does — nothing happens for a while, and then you are simply not cold, and you stay not cold until it gets light.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 34.0,
+          "duration_seconds": 0.0,
+          "description": "Warmth that arrives slowly and does not leave."
+        },
+        {
+          "kind": "speed",
+          "magnitude": 0.08,
+          "duration_seconds": 240.0,
+          "description": "The small steadiness of hands that are not cold."
+        }
+      ]
+    },
+    {
+      "id": "heldheat_lamp",
+      "name": "Held-Heat Lamp",
+      "category": "potion",
+      "base_value": 118,
+      "color": [
+        246,
+        172,
+        96,
+        255
+      ],
+      "description": "A working light and a brazier out of one bottle. A crew in a wet cut at night has always had to choose which of the two to carry down, and has always chosen the light and then stood about being cold. This is what the channel forge is for, and it took the tower twenty years to notice.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 300.0,
+          "description": "A hard orange light with real heat behind it."
+        },
+        {
+          "kind": "restore",
+          "magnitude": 26.0,
+          "duration_seconds": 0.0,
+          "description": "Warm enough that a crew will stand near it."
+        }
+      ]
     }
   ]
 }

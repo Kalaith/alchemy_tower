@@ -503,6 +503,56 @@ mod tests {
         );
     }
 
+    /// Second-order brewing existed at exactly one bench in a five-bench tower,
+    /// which made it a feature of the archive rather than a tier. The measure
+    /// that showed it: counting, per bench, how many of its outputs anything
+    /// anywhere uses as a reagent. The archive ate four of its own and the
+    /// greenhouse fed four; **the entry cauldron's twenty-four outputs and the
+    /// rune forge's five fed nothing at all, anywhere**. Three of the forge's
+    /// five recipes made bottles nobody wanted, which is the worst ratio in the
+    /// building, and it is a floor of the tower.
+    ///
+    /// Two rules, both about a claim matching a fact: a tier is not one room,
+    /// and a bench that advertises it will take a finished bottle has to have
+    /// something that actually asks for one.
+    #[test]
+    fn more_than_one_bench_takes_a_finished_bottle_and_means_it() {
+        use crate::data::ItemCategory;
+
+        let data = load_embedded().expect("embedded game data should load");
+        let accepting = data
+            .stations
+            .iter()
+            .filter(|station| station.accepts_potions)
+            .collect::<Vec<_>>();
+
+        assert!(
+            accepting.len() >= 2,
+            "only {} bench takes finished bottles; that is a feature of one room, not a tier",
+            accepting.len()
+        );
+
+        let mut idle = accepting
+            .iter()
+            .filter(|station| {
+                !data.recipes.iter().any(|recipe| {
+                    recipe.station_id == station.id
+                        && recipe.ingredients.iter().any(|ingredient| {
+                            data.item(&ingredient.item_id)
+                                .is_some_and(|item| item.category == ItemCategory::Potion)
+                        })
+                })
+            })
+            .map(|station| station.id.clone())
+            .collect::<Vec<_>>();
+
+        idle.sort();
+        assert!(
+            idle.is_empty(),
+            "benches that claim to take a finished bottle and are never asked for one: {idle:?}"
+        );
+    }
+
     /// The late tier exists to deepen decisions, not to lengthen a list. A
     /// second-order recipe should use the parts of the lattice the mid-game
     /// barely touches: three reagents, a full sequence, and a branch.

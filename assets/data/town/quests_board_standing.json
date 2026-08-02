@@ -713,6 +713,46 @@
       "required_item_id": "heldstar_vigil",
       "required_amount": 1,
       "rapport_npc_id": "mayor_elric"
+    },
+    {
+      "id": "board_bankedthrough_for_the_relief_post",
+      "title": "Relief Post: The Four Hours, Kept Warm",
+      "description": "Two banked-through tonics a season for the post at the head of the switchback. Wren's whole argument for the post was that somebody found at the top of the pass has about four hours in them and most of those hours are spent going cold. A stretcher and a lamp do not fix that. This does, and it does it without anybody having to sit up and tend a fire.",
+      "required_item_id": "bankedthrough_tonic",
+      "required_amount": 2,
+      "reward_coins": 380,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "warm",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [
+        "commission_relief_post"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 42,
+      "repeatable": true,
+      "repeat_cooldown_days": 8,
+      "rapport_npc_id": "wren_physician"
+    },
+    {
+      "id": "board_heldheat_for_the_wet_cut",
+      "title": "Road Crews: One Bottle Instead Of Two",
+      "description": "Two held-heat lamps for the crews working the lower cut after rain. They have carried a lantern down and stood beside it being cold for as long as there have been crews, because the brazier is the other trip and nobody makes the other trip. Brin notes drily that the tower has had a bench that could do this for twenty years.",
+      "required_item_id": "heldheat_lamp",
+      "required_amount": 2,
+      "reward_coins": 400,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "",
+      "required_effect_kind": "glow",
+      "prerequisite_quests": [
+        "terrace_restoration_for_brin"
+      ],
+      "required_unlocked_warp": "containment_to_rune_workshop",
+      "minimum_total_brews": 40,
+      "repeatable": true,
+      "repeat_cooldown_days": 8,
+      "rapport_npc_id": "brin_groundskeeper"
     }
   ]
 }
