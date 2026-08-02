@@ -11,6 +11,13 @@ pub(crate) struct PlanterStateEntry {
     pub(crate) ready: bool,
     #[serde(default)]
     pub(crate) tended_day: u32,
+    /// How many separate days the bed has been tended. A bed grows on its own
+    /// from the day it was planted; each day the player actually turns up is
+    /// worth one extra day of growth on top of that. Kept apart from
+    /// `growth_days` because that is the derived total, recomputed at every
+    /// rollover — anything stored only there is erased at midnight.
+    #[serde(default)]
+    pub(crate) tended_days: u32,
     #[serde(default)]
     pub(crate) growth_days: u32,
     #[serde(default)]

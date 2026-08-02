@@ -1,3 +1,4 @@
+use super::gameplay_planter_actions::{planter_growth_days, planter_growth_target};
 use super::GameplayState;
 use crate::data::{GameData, JournalMilestoneEntry};
 
@@ -80,15 +81,9 @@ impl GameplayState {
                 .stations
                 .iter()
                 .find(|station| station.id == state.station_id)
-                .map(|station| {
-                    station
-                        .planter_harvest_days
-                        .max(1)
-                        .saturating_sub(state.mutation_growth_bonus_days)
-                        .max(1)
-                })
+                .map(|station| planter_growth_target(station, state))
                 .unwrap_or(2);
-            state.growth_days = self.world.day_index.saturating_sub(state.planted_day);
+            state.growth_days = planter_growth_days(state, self.world.day_index);
             if state.growth_days >= days {
                 state.ready = true;
             }

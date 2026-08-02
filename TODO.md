@@ -61,10 +61,16 @@ content with no destination.
   `GameplayState` is gone. A test in `gameplay_brew_records.rs` overcharges a
   clean recipe until it collapses and asserts both the log entry and the
   memory rebuilt from it; it fails against the old expression.
-- **Planter tending is discarded at midnight.** `tend_or_report_planter`
-  increments `growth_days`, then the day rollover (`gameplay_world.rs:74-95`)
-  overwrites it with pure elapsed time. Tending only matters within the
-  current day. Pick one model or compose them.
+- ~~Planter tending is discarded at midnight~~ **Fixed 2026-08-02.** The two
+  models are composed rather than one being dropped: elapsed time is the floor
+  (a forgotten bed still comes good) and each day tended is worth a day on top,
+  held in a new persisted `tended_days` so the rollover can no longer erase it.
+  `planter_growth_days` is the single definition and the rollover now shares
+  `planter_growth_target` instead of re-deriving it. Two further bugs fell out
+  of writing the test: the first approach to a never-touched bed reported "no
+  seed for this" while the player held one (the seed lookup read the *existing*
+  entry, and a fresh bed has none), and a bed planted on day zero could never
+  be tended, because `tended_day` initialises to 0 and day zero is also 0.
 
 ### Mechanics that run but connect to nothing
 

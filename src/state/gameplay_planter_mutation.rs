@@ -85,6 +85,7 @@ mod tests {
             planted_day: 0,
             ready: false,
             tended_day: 0,
+            tended_days: 0,
             growth_days: 0,
             mutation_formula_id: String::new(),
             mutation_yield_bonus: 0,

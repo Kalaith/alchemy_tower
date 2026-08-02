@@ -167,6 +167,7 @@ mod tests {
                 planted_item_id: "ember_root".to_owned(),
                 planted_day: 4,
                 tended_day: 5,
+                tended_days: 1,
                 growth_days: 2,
                 ready: false,
                 mutation_formula_id: String::new(),
@@ -255,6 +256,34 @@ mod tests {
             "experiments"
         );
         assert_eq!(a.planter_states.len(), b.planter_states.len(), "planters");
+        // Not just the count: a bed's growth is part elapsed time and part days
+        // tended, and the tended half exists only in the save. Losing it would
+        // look exactly like the midnight overwrite this field was added to fix.
+        let restored_bed = a
+            .planter_states
+            .get("greenhouse_planter_west")
+            .expect("the saved planter should survive");
+        let saved_bed = b
+            .planter_states
+            .get("greenhouse_planter_west")
+            .expect("fixture planter");
+        assert_eq!(
+            (
+                &restored_bed.planted_item_id,
+                restored_bed.planted_day,
+                restored_bed.tended_day,
+                restored_bed.tended_days,
+                restored_bed.growth_days,
+            ),
+            (
+                &saved_bed.planted_item_id,
+                saved_bed.planted_day,
+                saved_bed.tended_day,
+                saved_bed.tended_days,
+                saved_bed.growth_days,
+            ),
+            "planter growth state"
+        );
         assert_eq!(a.habitat_states.len(), b.habitat_states.len(), "habitats");
         // Restoring deliberately *rebuilds* potion memories from the inventory,
         // the experiment log, known recipes and crafted profiles, so a loaded

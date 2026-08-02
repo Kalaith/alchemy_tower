@@ -4,10 +4,17 @@ use crate::data::{GameData, ItemCategory, PlanterStateEntry, StationDefinition};
 impl GameplayState {
     pub(super) fn interact_with_planter(&mut self, data: &GameData, station: &StationDefinition) {
         let existing_state = self.progression.planter_states.get(&station.id).cloned();
-        let candidate = existing_state
+        // A bed nobody has touched yet has no entry at all, and that counts as
+        // empty. Reading the candidate off the *existing* entry meant the first
+        // approach to a fresh bed always fell through to "you have no seed for
+        // this" while the player was holding one, and only the second worked.
+        let bed_is_empty = existing_state
             .as_ref()
-            .filter(|state| state.planted_item_id.is_empty())
-            .and_then(|_| self.planter_seed_choice(data, station));
+            .map(|state| state.planted_item_id.is_empty())
+            .unwrap_or(true);
+        let candidate = bed_is_empty
+            .then(|| self.planter_seed_choice(data, station))
+            .flatten();
         let mutation_candidate = existing_state.as_ref().and_then(|state| {
             (!state.planted_item_id.is_empty()
                 && !state.ready
@@ -25,6 +32,7 @@ impl GameplayState {
                 planted_day: self.world.day_index,
                 ready: false,
                 tended_day: 0,
+                tended_days: 0,
                 growth_days: 0,
                 mutation_formula_id: String::new(),
                 mutation_yield_bonus: 0,
@@ -99,6 +107,61 @@ pub(crate) fn planter_accepts(
 #[cfg(test)]
 mod tests {
     use super::planter_accepts;
+    use super::GameplayState;
+
+    /// Tending used to be spent by the clock. `tend_or_report_planter` added a
+    /// day of growth, and the midnight rollover then recomputed the same field
+    /// from elapsed time alone and threw the visit away — so the beds ripened
+    /// on a pure timer and turning up changed nothing past the current day.
+    /// The two models are composed now: elapsed time is the floor, and each
+    /// day tended is worth a day on top of it. This walks a real bed across a
+    /// rollover to prove the visit survives.
+    #[test]
+    fn a_tended_bed_stays_ahead_of_one_left_alone() {
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let station = data
+            .stations
+            .iter()
+            .find(|station| station.planter_harvest_days >= 3)
+            .expect("some bed should take more than a couple of days");
+
+        let mut state = GameplayState::new(&data);
+        let seed = station
+            .planter_seed_ids
+            .first()
+            .cloned()
+            .expect("a specialised bed names its seeds");
+        state.inventory.insert(seed.clone(), 1);
+        state.interact_with_planter(&data, station);
+        assert_eq!(
+            state.progression.planter_states[&station.id].planted_item_id, seed,
+            "the seed should have gone in"
+        );
+
+        // Tend on the day it was planted, then let midnight pass.
+        state.interact_with_planter(&data, station);
+        assert_eq!(state.progression.planter_states[&station.id].tended_days, 1);
+        state.world.day_index += 1;
+        state.advance_planters(&data);
+
+        let tended = state.progression.planter_states[&station.id].growth_days;
+        assert_eq!(
+            tended, 2,
+            "one day elapsed plus one day tended should survive the rollover"
+        );
+
+        // The same bed, same elapsed time, never visited.
+        let mut untended = GameplayState::new(&data);
+        untended.inventory.insert(seed, 1);
+        untended.interact_with_planter(&data, station);
+        untended.world.day_index += 1;
+        untended.advance_planters(&data);
+        assert_eq!(
+            untended.progression.planter_states[&station.id].growth_days, 1,
+            "an untended bed should still grow, just slower"
+        );
+        assert!(tended > untended.progression.planter_states[&station.id].growth_days);
+    }
 
     /// A bed lists what it accepts, and that list is shown to the player. Any id
     /// on it that the bed would in fact refuse is a promise the game breaks the
