@@ -30,7 +30,7 @@ impl GameplayState {
             self.alchemy_timing(),
             self.preview_mastery_brews(data, station, &selected),
         );
-        let stable_brew = self.brew_is_stable(&resolution);
+        let stable_brew = resolution.is_stable();
         self.trigger_brew_result_feedback(
             station.position,
             stable_brew,
@@ -39,7 +39,7 @@ impl GameplayState {
         self.consume_brew_inputs(&selected);
         let previous_profile = self.record_brew_inventory_result(data, &resolution, stable_brew);
         self.update_brew_result_status(data, &resolution, stable_brew);
-        audio.play_brew_result(self.brew_is_stable(&resolution));
+        audio.play_brew_result(stable_brew);
         let current_profile = self
             .progression
             .crafted_item_profiles

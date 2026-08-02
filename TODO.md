@@ -51,12 +51,16 @@ content with no destination.
   the gate quest's ingredient tree so a future gate can't strand its own key
   on the far side (the pass carries five ingredients found nowhere else, which
   feed six brews).
-- **The experiment log disagrees with the game about stability.**
-  `record_experiment_log` (`state/gameplay_brew_records.rs:51`) omits
-  `!destabilized` from the `stable` flag that `brew_is_stable`
-  (`state/gameplay_inventory.rs:8`) includes, so an overcharge collapse files
-  as a stable brew in the archive — and `gameplay_memory_rebuild.rs` rebuilds
-  potion memory from the log on load, so save/load flips recorded stability.
+- ~~The experiment log disagrees with the game about stability~~ **Fixed
+  2026-08-02.** The rule was written out in three places and one copy left
+  `!destabilized` off, so an overcharge collapse filed as a stable brew and —
+  since `gameplay_memory_rebuild.rs` rebuilds potion memory from the log —
+  survived a save/load as a success. There is now one definition:
+  `alchemy::stable_brew` plus `BrewResolution::is_stable()`, used by the
+  brewer, the log, the preview, and the result feedback. `brew_is_stable` on
+  `GameplayState` is gone. A test in `gameplay_brew_records.rs` overcharges a
+  clean recipe until it collapses and asserts both the log entry and the
+  memory rebuilt from it; it fails against the old expression.
 - **Planter tending is discarded at midnight.** `tend_or_report_planter`
   increments `growth_days`, then the day rollover (`gameplay_world.rs:74-95`)
   overwrites it with pure elapsed time. Tending only matters within the

@@ -38,6 +38,35 @@ pub(crate) struct BrewResolution<'a> {
     pub(crate) morph_hint: Option<String>,
 }
 
+impl BrewResolution<'_> {
+    /// Whether this brew came out clean. Every consumer asks here rather than
+    /// re-deriving it: the experiment log used to spell the rule out itself and
+    /// left `destabilized` off, so an overcharge collapse filed as a stable
+    /// brew in the archive — and because potion memory is rebuilt from that log
+    /// on load, a save/load flipped the recorded stability of the collapse.
+    pub(crate) fn is_stable(&self) -> bool {
+        stable_brew(
+            self.process_match,
+            self.minimum_quality_met,
+            self.minimum_elements_met,
+            self.destabilized,
+        )
+    }
+}
+
+/// The one definition of a clean brew. `resolve_known_recipe_brew` needs the
+/// answer while it is still assembling the resolution — to pick the output item
+/// and decide whether a morph triggers — so the rule lives here as a function
+/// rather than only as a method.
+pub(super) fn stable_brew(
+    process_match: bool,
+    minimum_quality_met: bool,
+    minimum_elements_met: bool,
+    destabilized: bool,
+) -> bool {
+    process_match && minimum_quality_met && minimum_elements_met && !destabilized
+}
+
 pub(crate) fn resolve_brew<'a>(
     data: &'a GameData,
     station: &StationDefinition,

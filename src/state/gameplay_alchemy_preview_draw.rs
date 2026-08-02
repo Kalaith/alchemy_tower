@@ -32,7 +32,7 @@ impl GameplayState {
                 .map(|recipe| self.recipe_is_known(&recipe.id))
                 .unwrap_or(false);
             let preview_uncertain = known && self.preview_is_uncertain(&preview);
-            let stable_preview = self.brew_is_stable(&preview);
+            let stable_preview = preview.is_stable();
             let quest_line = self.brew_quest_motivation(data, &preview.output_item_id);
 
             AlchemyPreviewPanelView::resolved(

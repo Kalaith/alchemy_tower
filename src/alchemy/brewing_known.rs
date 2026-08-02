@@ -6,7 +6,7 @@ use super::super::quality::{calculate_quality, mastery_stage, quality_band, room
 use super::super::traits::inherited_traits;
 use super::super::volatility::{brew_instability, is_destabilized};
 use super::brewing_failures::brew_failure_reasons;
-use super::BrewResolution;
+use super::{stable_brew, BrewResolution};
 
 pub(super) fn resolve_known_recipe_brew<'a>(
     data: &'a GameData,
@@ -67,7 +67,12 @@ pub(super) fn resolve_known_recipe_brew<'a>(
         mastery_brews,
     );
     let destabilized = is_destabilized(instability);
-    let stable = process_match && minimum_quality_met && minimum_elements_met && !destabilized;
+    let stable = stable_brew(
+        process_match,
+        minimum_quality_met,
+        minimum_elements_met,
+        destabilized,
+    );
     let inherited_traits = inherited_traits(recipe, &ingredient_items, catalyst);
     let morph_output_item_id = if stable {
         morph_output(
