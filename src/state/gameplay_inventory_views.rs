@@ -17,11 +17,15 @@ impl GameplayState {
         let Some(item) = data.item(item_id) else {
             return 0;
         };
-        if item.category == ItemCategory::Potion {
+        let base = if item.category == ItemCategory::Potion {
             item.base_value + (item.base_value / 4).max(1)
         } else {
             item.base_value
-        }
+        };
+        // What a counter pays depends on what is in the bottle. A flat price
+        // meant a Masterwork and a Crude brew of the same recipe fetched the
+        // same coin, so quality was worth nothing outside a quest gate.
+        self.quality_adjusted_value(data, item_id, base)
     }
 
     pub(super) fn quick_potions(&self, data: &GameData) -> Vec<String> {

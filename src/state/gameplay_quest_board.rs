@@ -58,10 +58,14 @@ impl GameplayState {
         if !self.quest_requirements_met(data, quest) {
             return;
         }
-        self.spend_bottles_for_quest(data, quest, quest.required_amount);
+        let delivered_rank = self.spend_bottles_for_quest(data, quest, quest.required_amount);
         self.take_from_inventory(&quest.required_item_id, quest.required_amount);
         self.progression.started_quests.remove(quest_id);
-        self.coins += quest.reward_coins;
+        // Beating the grade the order asked for is paid for, so there is a
+        // reason to send good work to the board rather than the worst thing
+        // that clears the bar.
+        let bonus = self.quality_bonus_coins(quest, delivered_rank);
+        self.coins += quest.reward_coins + bonus;
         // A board order is still somebody's problem solved. Without this the
         // repeatable layer — the bulk of the long tail — earned no standing
         // with anyone, however many times it was run.
@@ -223,8 +227,15 @@ mod tests {
         let coins_before = state.coins;
         state.deliver_board_quest(&data, quest_id);
 
-        // Delivered: paid out, consumed, and NOT permanently completed.
-        assert_eq!(state.coins, coins_before + quest.reward_coins);
+        // Delivered: paid out, consumed, and NOT permanently completed. The
+        // fixture bottle is Fine against a Serviceable order, so the payment
+        // includes the bonus for beating the bar by a band.
+        let bonus = state.quality_bonus_coins(
+            quest,
+            crate::state::gameplay::gameplay_support::quality_band_rank("Fine"),
+        );
+        assert!(bonus > 0, "a Fine bottle beats a Serviceable order");
+        assert_eq!(state.coins, coins_before + quest.reward_coins + bonus);
         assert!(!state.progression.completed_quests.contains(quest_id));
         assert!(!state.progression.started_quests.contains(quest_id));
         assert_eq!(

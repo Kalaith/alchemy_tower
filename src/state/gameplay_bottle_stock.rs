@@ -25,6 +25,9 @@ use super::GameplayState;
 use crate::alchemy::{quality_band, BrewResolution};
 use crate::data::{BottleBatchEntry, GameData, QuestDefinition};
 
+/// The top band's rank, as `quality_band_rank` scores it.
+const MASTERWORK_RANK: u8 = 4;
+
 impl GameplayState {
     /// File the bottles a brew just produced, so what they are worth travels
     /// with them instead of being flattened into a best-ever record.
@@ -167,13 +170,17 @@ impl GameplayState {
     /// Hand over `amount` bottles that meet the request, worst acceptable first
     /// — somebody who brewed one Masterwork and three merely Excellent bottles
     /// for an Excellent order should keep the Masterwork.
+    ///
+    /// Returns the rank of the *worst* bottle handed over. A delivery is only
+    /// as good as its weakest bottle, and that is what the payment reads.
     pub(super) fn spend_bottles_for_quest(
         &mut self,
         data: &GameData,
         quest: &QuestDefinition,
         amount: u32,
-    ) {
+    ) -> u8 {
         self.reconcile_bottle_stock(&quest.required_item_id);
+        let mut worst = u8::MAX;
 
         // Plain stock goes first when it is good enough: it is the least
         // interesting thing on the shelf.
@@ -182,42 +189,122 @@ impl GameplayState {
             let plain = self
                 .untracked_bottles(&quest.required_item_id)
                 .min(remaining);
+            if plain > 0 {
+                let plain_rank = data
+                    .item(&quest.required_item_id)
+                    .map(|item| quality_band_rank(quality_band(item.quality)))
+                    .unwrap_or_default();
+                worst = worst.min(plain_rank);
+            }
             remaining -= plain;
         }
-        if remaining == 0 {
-            return;
+
+        if remaining > 0 {
+            let quest = quest.clone();
+            if let Some(batches) = self
+                .progression
+                .bottle_stock
+                .get_mut(&quest.required_item_id)
+            {
+                for batch in batches.iter_mut() {
+                    if remaining == 0 {
+                        break;
+                    }
+                    if !Self::batch_qualifies(&quest, batch) {
+                        continue;
+                    }
+                    let spent = batch.count.min(remaining);
+                    batch.count -= spent;
+                    remaining -= spent;
+                    worst = worst.min(quality_band_rank(&batch.quality_band));
+                }
+                batches.retain(|batch| batch.count > 0);
+                if batches.is_empty() {
+                    self.progression
+                        .bottle_stock
+                        .remove(&quest.required_item_id);
+                }
+            }
         }
 
-        let quest = quest.clone();
-        let Some(batches) = self
-            .progression
-            .bottle_stock
-            .get_mut(&quest.required_item_id)
-        else {
-            return;
-        };
-        for batch in batches.iter_mut() {
-            if remaining == 0 {
-                break;
-            }
-            if !Self::batch_qualifies(&quest, batch) {
-                continue;
-            }
-            let spent = batch.count.min(remaining);
-            batch.count -= spent;
-            remaining -= spent;
+        if worst == u8::MAX {
+            0
+        } else {
+            worst
         }
-        batches.retain(|batch| batch.count > 0);
-        if batches.is_empty() {
-            self.progression
-                .bottle_stock
-                .remove(&quest.required_item_id);
+    }
+
+    /// What a bottle of this grade is worth, as a percentage of the item's base
+    /// value. Selling used to ignore quality entirely, which made the whole
+    /// brewing-well half of the game worth nothing to anyone but a quest giver.
+    ///
+    /// Balance constants, and among the last left in Rust — see the TODO note
+    /// about moving tuning into data.
+    fn band_value_percent(rank: u8) -> u32 {
+        match rank {
+            0 => 55,  // Crude
+            1 => 80,  // Serviceable
+            2 => 100, // Fine
+            3 => 140, // Excellent
+            _ => 200, // Masterwork
         }
+    }
+
+    /// The grade of the bottle a sale would actually part with. Selling takes
+    /// the worst one held, matching how `reconcile_bottle_stock` trims, so a
+    /// player clearing shelf space never loses their best work by accident.
+    pub(super) fn worst_held_band_rank(&self, data: &GameData, item_id: &str) -> u8 {
+        let plain_rank = data
+            .item(item_id)
+            .map(|item| quality_band_rank(quality_band(item.quality)))
+            .unwrap_or_default();
+        if self.untracked_bottles(item_id) > 0 {
+            return plain_rank;
+        }
+        self.live_batches(item_id)
+            .first()
+            .map(|batch| quality_band_rank(&batch.quality_band))
+            .unwrap_or(plain_rank)
+    }
+
+    /// Scale a price by what the bottle being sold is actually worth.
+    pub(super) fn quality_adjusted_value(&self, data: &GameData, item_id: &str, base: u32) -> u32 {
+        let percent = Self::band_value_percent(self.worst_held_band_rank(data, item_id));
+        (base.saturating_mul(percent) / 100).max(1)
+    }
+
+    /// Extra payment for beating the grade a request asked for. A request with
+    /// no stated band pays its flat rate — there is no bar to clear.
+    pub(super) fn quality_bonus_coins(&self, quest: &QuestDefinition, delivered_rank: u8) -> u32 {
+        if quest.minimum_quality_band.is_empty() {
+            return 0;
+        }
+        let asked = quality_band_rank(&quest.minimum_quality_band);
+        let over = u32::from(delivered_rank.saturating_sub(asked));
+        // A quarter of the fee per band above the bar, so exceeding a request
+        // is worth the reagents it costs without dwarfing the fee itself.
+        quest.reward_coins.saturating_mul(over) / 4
+    }
+
+    /// Whether a delivery was good enough for the person receiving it to think
+    /// better of the player for it: two clear bands over what they asked, or
+    /// Masterwork against a request that named any bar at all.
+    pub(super) fn delivery_was_exceptional(
+        &self,
+        quest: &QuestDefinition,
+        delivered_rank: u8,
+    ) -> bool {
+        if quest.minimum_quality_band.is_empty() {
+            return false;
+        }
+        let asked = quality_band_rank(&quest.minimum_quality_band);
+        delivered_rank.saturating_sub(asked) >= 2 || delivered_rank >= MASTERWORK_RANK
     }
 }
 
 #[cfg(test)]
 mod tests {
+    use super::quality_band_rank;
     use super::GameplayState;
     use crate::data::{BottleBatchEntry, CraftedItemProfileEntry, GameData, QuestDefinition};
 
@@ -341,5 +428,83 @@ mod tests {
             0,
             "a shop bottle inherited the grade of one that was already gone"
         );
+    }
+
+    /// A counter used to pay the same for a Masterwork and a Crude brew of the
+    /// same recipe, so the entire brewing-well half of the game was worth
+    /// nothing to anyone but a quest giver.
+    #[test]
+    fn a_better_bottle_fetches_a_better_price() {
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let mut state = GameplayState::new(&data);
+
+        state.inventory.insert("healing_draught".to_owned(), 1);
+        state
+            .progression
+            .bottle_stock
+            .insert("healing_draught".to_owned(), vec![bottle("Crude", 10, 1)]);
+        let crude = state.sell_price(&data, "healing_draught");
+
+        state.progression.bottle_stock.insert(
+            "healing_draught".to_owned(),
+            vec![bottle("Masterwork", 95, 1)],
+        );
+        let masterwork = state.sell_price(&data, "healing_draught");
+
+        assert!(
+            masterwork > crude,
+            "a masterwork fetched {masterwork} against a crude bottle's {crude}"
+        );
+    }
+
+    /// Selling parts with the worst bottle held — the same order
+    /// `reconcile_bottle_stock` trims in — so clearing shelf space can never
+    /// cost the player their best work by accident, and the price says so.
+    #[test]
+    fn selling_prices_the_bottle_it_would_actually_part_with() {
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let mut state = GameplayState::new(&data);
+
+        state.inventory.insert("healing_draught".to_owned(), 2);
+        state.progression.bottle_stock.insert(
+            "healing_draught".to_owned(),
+            vec![bottle("Crude", 10, 1), bottle("Masterwork", 95, 1)],
+        );
+        let mixed = state.sell_price(&data, "healing_draught");
+
+        state.inventory.insert("healing_draught".to_owned(), 1);
+        state
+            .progression
+            .bottle_stock
+            .insert("healing_draught".to_owned(), vec![bottle("Crude", 10, 1)]);
+        assert_eq!(
+            mixed,
+            state.sell_price(&data, "healing_draught"),
+            "holding a masterwork should not raise the price of the crude one being sold"
+        );
+    }
+
+    /// Beating the grade a request asked for pays, and is noticed. Without
+    /// this the rational play is always to hand over the worst bottle that
+    /// clears the bar, which makes the quality system a bar rather than a
+    /// reason to brew well.
+    #[test]
+    fn exceeding_a_request_pays_more_and_is_remembered() {
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let state = GameplayState::new(&data);
+        let mut quest = masterwork_request(&data);
+        quest.minimum_quality_band = "Serviceable".to_owned();
+        quest.reward_coins = 100;
+
+        let asked = quality_band_rank("Serviceable");
+        assert_eq!(state.quality_bonus_coins(&quest, asked), 0);
+        assert!(state.quality_bonus_coins(&quest, 4) > 0);
+        assert!(!state.delivery_was_exceptional(&quest, asked));
+        assert!(state.delivery_was_exceptional(&quest, 4));
+
+        // A request with no stated bar has nothing to beat.
+        quest.minimum_quality_band = String::new();
+        assert_eq!(state.quality_bonus_coins(&quest, 4), 0);
+        assert!(!state.delivery_was_exceptional(&quest, 4));
     }
 }

@@ -61,17 +61,23 @@ impl GameplayState {
         }
 
         if self.quest_requirements_met(data, quest) {
-            self.spend_bottles_for_quest(data, quest, quest.required_amount);
+            let delivered_rank = self.spend_bottles_for_quest(data, quest, quest.required_amount);
             self.take_from_inventory(&quest.required_item_id, quest.required_amount);
             self.progression.started_quests.remove(&quest.id);
             self.progression.completed_quests.insert(quest.id.clone());
-            self.coins += quest.reward_coins;
+            let bonus = self.quality_bonus_coins(quest, delivered_rank);
+            self.coins += quest.reward_coins + bonus;
             if quest.giver_npc_id != "quest_board" {
+                // Work that clearly beat what was asked for is remembered as
+                // such. Quality reached the coin purse before it reached
+                // anybody's opinion of the player, which was the wrong way
+                // round for a game about being the town's alchemist.
+                let exceptional = u32::from(self.delivery_was_exceptional(quest, delivered_rank));
                 *self
                     .progression
                     .relationships
                     .entry(quest.giver_npc_id.clone())
-                    .or_insert(0) += 2;
+                    .or_insert(0) += 2 + exceptional as i32;
             }
             self.push_quest_completion_milestones(quest);
             self.trigger_quest_complete_feedback(dialogue_quest_text::complete_toast(&quest.title));

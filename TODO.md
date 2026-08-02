@@ -111,8 +111,17 @@ content with no destination.
   `take_from_inventory` choke point that reconciles the batch list, so a stale
   batch cannot outlive the bottle it described and re-grade its replacement —
   a lazy read-time trim missed exactly that case and the test caught it.
-  Still open: quality does not touch payment (flat `reward_coins`), rapport, or
-  reactions, and sell price ignores quality and traits.
+- ~~Quality never touches payment, rapport, or sell price~~ **Fixed
+  2026-08-02**, on top of the above. `sell_price` scales by the band of the
+  bottle a sale would actually part with (the worst held, matching the order
+  `reconcile_bottle_stock` trims in, so clearing shelf space cannot cost the
+  player their best work). Delivering returns the worst grade handed over, and
+  beating a request's stated bar pays a quarter of the fee per band above it;
+  a delivery two bands over — or any Masterwork against a stated bar — also
+  earns +1 rapport with the giver on top of the usual +2. A request naming no
+  band has nothing to beat and still pays flat. Remaining: NPC reaction lines
+  do not vary with delivered quality, and the band multipliers are Rust
+  constants (see the tuning-into-data item below).
 - **The seventh brew — the one that flips "Mastered" — adds nothing.** The
   quality bonus caps at `min(6)*3` and the output bonus lands at 6, so the
   brew that opens the mastery gates is mechanically empty. No story-arc quest
