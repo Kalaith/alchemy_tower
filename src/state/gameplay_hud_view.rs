@@ -3,6 +3,10 @@ use crate::content::{input_bindings, ui_copy, ui_format};
 use crate::data::{AreaDefinition, GameData};
 use crate::view_models::hud::{HudControlTag, HudPotionSlot, HudView, HOTBAR_SLOT_COUNT};
 
+/// Where the HUD starts saying you are running out. Presentation rather
+/// than balance, so it stays beside the panel that draws it.
+const LOW_VITALITY_WARNING: f32 = 20.0;
+
 impl GameplayState {
     pub(super) fn build_hud_view(&self, area: &AreaDefinition, data: &GameData) -> HudView {
         let quick = self.quick_potions(data);
@@ -43,7 +47,12 @@ impl GameplayState {
                 "hud_day_count",
                 &[("day", &(self.world.day_index + 1).to_string())],
             ),
-            sleep_warning_text: if self.current_clock_minutes() < 60.0 {
+            // Two ways the day can end without being chosen. Running low is
+            // worth saying out loud — collapsing costs the morning, and a
+            // player who could have drunk something should be told in time to.
+            sleep_warning_text: if self.vitality <= LOW_VITALITY_WARNING {
+                Some(ui_copy("hud_vitality_warning").to_owned())
+            } else if self.current_clock_minutes() < 60.0 {
                 Some(ui_copy("hud_sleep_warning").to_owned())
             } else {
                 None

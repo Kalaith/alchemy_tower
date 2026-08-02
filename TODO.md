@@ -18,12 +18,20 @@ what makes it a 20–25 hour game rather than a well-furnished 8-hour one.
   permanently empty. The original body is restored and two tests in
   `state/gameplay_inventory_views.rs` now pin the belt contents and the
   drink-decrements-and-applies path so a future stub can't pass CI.
-- With drinking restored, two of the four `EffectKind`s still do nothing:
-  `vitality` starts at 100 and nothing in the game ever decrements it, so
-  `Restore` (51 of 110 authored effect blocks) is a no-op; `Glow` only tints
-  the player sprite because there is no darkness/visibility system. Effects
-  need something to matter *against* — a vitality drain (sleep pressure,
-  brewing cost) and a dark-hours gathering rule would activate both.
+- ~~`Restore` is a no-op because nothing decrements vitality~~ **Fixed
+  2026-08-02.** Vitality is the working day now: a brew costs 5, a gather 1.5,
+  and running out carries you home at 10:00 having lost the morning — the same
+  collapse the small hours already caused, reusing `handle_sleep_pressure`.
+  Sleeping in a bed by choice gives the day back in full (100); being carried
+  home gives 55, so there is a reason to stop. A full day buys 20 brews, or 10
+  brews and 33 gathers; a healing draught buys 9 more brews. All four numbers
+  are in `config.balance.vitality`. The HUD warns below 20 rather than letting
+  the collapse arrive unannounced. Five tests, including the collapse end to end
+  and that drinking in time keeps the day.
+- `Glow` still only tints the player sprite, because there is no
+  darkness/visibility system for it to matter against. A dark-hours gathering
+  rule is the obvious counterpart to the vitality drain above — the night time
+  window already exists and gather nodes already carry `time_windows`.
 - Implement the apply-potion-to-target flow (wilted route plant, frightened
   creature, blocked path) on top of the existing `EffectKind` system. Delivery
   is still just handing a bottle to an NPC; blockers are collision and art only

@@ -30,6 +30,27 @@ pub(crate) struct BalanceDefinition {
     pub(crate) rapport: RapportTuning,
     pub(crate) salvage: SalvageTuning,
     pub(crate) quality_value_percent: QualityValueTuning,
+    pub(crate) vitality: VitalityTuning,
+}
+
+/// What a day's work costs and what rest gives back.
+///
+/// Vitality shipped as a number that only ever went up: `Restore` — 51 of the
+/// game's 110 authored effect blocks — had nothing to restore *from*. It is the
+/// day's stamina now, so a restorative is what lets somebody keep working.
+#[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
+pub(crate) struct VitalityTuning {
+    /// Spent standing over a cauldron.
+    pub(crate) brew_cost: f32,
+    /// Spent walking a route and bending down.
+    pub(crate) gather_cost: f32,
+    /// A night in a bed, by choice.
+    pub(crate) sleep_restores: f32,
+    /// Waking up somewhere you did not choose, having run out. Deliberately
+    /// less than a proper night: collapsing should cost something beyond the
+    /// morning it already eats.
+    pub(crate) collapse_restores: f32,
 }
 
 /// Standing thresholds. FRIEND is reachable by seeing one errand through;

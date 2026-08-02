@@ -56,6 +56,7 @@ impl GameplayState {
         node: &GatherNodeDefinition,
     ) {
         if self.node_is_available(node) {
+            self.spend_gathering_vitality(data);
             self.world.gathered_nodes.insert(node.id.clone());
             *self.inventory.entry(node.item_id.clone()).or_insert(0) += 1;
             self.note_inventory_observation(data, &node.item_id);

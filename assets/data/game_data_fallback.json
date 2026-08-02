@@ -28,6 +28,12 @@
         "fine": 100,
         "excellent": 140,
         "masterwork": 200
+      },
+      "vitality": {
+        "brew_cost": 5.0,
+        "gather_cost": 1.5,
+        "sleep_restores": 100.0,
+        "collapse_restores": 55.0
       }
     }
   },

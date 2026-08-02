@@ -334,6 +334,8 @@ mod gameplay_types;
 mod gameplay_ui_text;
 #[path = "gameplay_variant_stock.rs"]
 mod gameplay_variant_stock;
+#[path = "gameplay_vitality.rs"]
+mod gameplay_vitality;
 #[path = "gameplay_warps.rs"]
 mod gameplay_warps;
 #[path = "gameplay_world.rs"]

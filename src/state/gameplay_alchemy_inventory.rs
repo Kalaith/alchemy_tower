@@ -38,6 +38,8 @@ impl GameplayState {
             stable_brew,
             resolution.recipe.is_none(),
         );
+        // A brew is an hour on your feet over a hot cauldron.
+        self.spend_brewing_vitality(data);
         // The variant units go into the pot with everything else.
         self.spend_brew_variants(data, &selected);
         self.consume_brew_inputs(&selected);

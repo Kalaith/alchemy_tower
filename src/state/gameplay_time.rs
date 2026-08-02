@@ -41,6 +41,13 @@ impl GameplayState {
             self.advance_to_next_day(data, false);
         }
         self.set_clock_minutes(wake_minutes);
+        let tuning = &data.config.balance.vitality;
+        let recovered = if forced_home {
+            tuning.collapse_restores
+        } else {
+            tuning.sleep_restores
+        };
+        self.restore_vitality_to(recovered);
         if forced_home {
             if let Some(bed) = data
                 .stations
@@ -59,9 +66,11 @@ impl GameplayState {
         }
     }
 
+    /// The two ways a working day ends without the player choosing it: the
+    /// small hours, and running out of anything left to give.
     pub(super) fn handle_sleep_pressure(&mut self, data: &GameData) {
         let minutes = self.current_clock_minutes();
-        if (60.0..120.0).contains(&minutes) {
+        if (60.0..120.0).contains(&minutes) || self.is_exhausted() {
             self.sleep_until(data, 10.0 * 60.0, true);
         }
     }
