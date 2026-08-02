@@ -166,6 +166,17 @@ impl Game {
                 gameplay.open_quest_board_sample(&self.data);
                 GameState::from_gameplay(gameplay)
             }
+            // "notes[:<index>]" opens the journal's Notes tab with the whole
+            // recorded story in it, selecting one beat.
+            other if other.starts_with("notes") => {
+                let index = other
+                    .strip_prefix("notes:")
+                    .and_then(|index| index.parse::<usize>().ok())
+                    .unwrap_or(0);
+                let mut gameplay = GameplayState::new(&self.data);
+                gameplay.open_notes_sample(&self.data, index);
+                GameState::from_gameplay(gameplay)
+            }
             // "journal[:<herb>]" opens the journal on the herb-memory tab.
             // Naming a herb id is how the longest entry in the game gets
             // photographed: the entry box holds about four lines and the

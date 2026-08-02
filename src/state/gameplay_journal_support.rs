@@ -5,11 +5,6 @@ use crate::data::{GameData, JournalMilestoneEntry};
 #[path = "gameplay_journal_support_text.rs"]
 mod journal_support_text;
 
-pub(super) struct JournalMilestoneSummary {
-    pub(super) title: String,
-    pub(super) text: String,
-}
-
 impl GameplayState {
     pub(super) fn active_quest_summary(&self, data: &GameData) -> Option<String> {
         let quest = self
@@ -45,19 +40,6 @@ impl GameplayState {
 
     pub(super) fn journal_tabs(&self) -> Vec<&'static str> {
         journal_support_text::tabs(self.greenhouse_journal_unlocked())
-    }
-
-    pub(super) fn recent_journal_milestones(&self, limit: usize) -> Vec<JournalMilestoneSummary> {
-        self.progression
-            .journal_milestones
-            .iter()
-            .rev()
-            .take(limit)
-            .map(|milestone| JournalMilestoneSummary {
-                title: milestone.title.clone(),
-                text: milestone.text.clone(),
-            })
-            .collect()
     }
 
     pub(super) fn greenhouse_journal_unlocked(&self) -> bool {

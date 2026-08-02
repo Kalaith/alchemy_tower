@@ -49,9 +49,17 @@ pub(crate) struct JournalNotesTabView {
     pub(crate) title: &'static str,
     pub(crate) active_title: &'static str,
     pub(crate) milestones_title: &'static str,
+    pub(crate) notes_title: &'static str,
     pub(crate) active_summary: String,
     pub(crate) milestone_rows: Vec<JournalMilestoneStatusView>,
-    pub(crate) recent_milestones: Vec<JournalRecentMilestoneView>,
+    /// Titles of the recorded beats, newest first, windowed to what the box
+    /// holds. The whole record is walkable — it used to be the last five and
+    /// nothing else, with fifty-odd authored beats behind them.
+    pub(crate) note_rows: Vec<JournalNoteRowView>,
+    pub(crate) note_range_text: Option<String>,
+    /// The selected beat's paragraph. The title is not repeated here — the
+    /// row above it is already highlighted and carries it.
+    pub(crate) note_detail: Option<String>,
 }
 
 pub(crate) struct JournalMilestoneStatusView {
@@ -59,9 +67,9 @@ pub(crate) struct JournalMilestoneStatusView {
     pub(crate) detail: String,
 }
 
-pub(crate) struct JournalRecentMilestoneView {
+pub(crate) struct JournalNoteRowView {
     pub(crate) title: String,
-    pub(crate) text: String,
+    pub(crate) selected: bool,
 }
 
 pub(crate) struct JournalRapportTabView {

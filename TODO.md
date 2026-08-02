@@ -657,6 +657,42 @@ content with no destination.
   (which is her whole arc), and Rowan on the first formula in the book the
   calendar can close.
 
+### The game's own record of what you did was write-only past the tail, 2026-08-03
+
+- ~~The journal shows the last five beats and no way back~~ **Fixed
+  2026-08-03.** Measured: the game authors **54 journal beats** across quests,
+  recipe discoveries and apply targets, averaging **244 characters** and running
+  to 413 — about fourteen thousand characters of prose written specifically to
+  be the player's record of their own campaign. The Notes tab drew
+  `.rev().take(5)` and the archive console's timeline `.rev().take(7)`, and
+  **those were the only two readers.** Everything older than the last five
+  entries was written into the player's journal and then permanently out of
+  reach. In a game whose scope note says twenty to twenty-five hours, act one
+  was unreadable by act three.
+  ***And the five it did show were broken as well.*** The renderer advanced a
+  fixed 74px per entry while `draw_wrapped_text` laid the text out to its real
+  height, so beats that wrap to three or four lines overlapped each other; the
+  section started at y+448 while the milestone rows above it ended at y+480, so
+  the last milestone's detail was overprinted by the first note's title on every
+  full record; and the whole section had about 80px of a panel whose longest
+  beat needs 140. The capture shows all three at once.
+  The tab is two columns now — Active Work and Tower Milestones on the left, and
+  **The Record** on the right: titles listed newest first, the selected beat
+  written out beneath them, "showing 49-54 of 54", walked with the keys the
+  routes tab already binds. Same list-and-detail shape as the routes tab and the
+  archive console, and the fifth use of the shared `visible_window_start`.
+  Two guards. `every_recorded_note_can_be_read_again` walks a finished
+  campaign's whole record and fails on any beat the tab can never select again —
+  against the old `take(5)` it names forty-nine. `the_longest_recorded_beat_fits
+  _the_panel` does the layout arithmetic with the renderer's **own exported
+  constants** for every authored beat, so a 500-character beat is a red test
+  rather than a paragraph running through the panel frame.
+  `recent_journal_milestones` and `JournalMilestoneSummary` are deleted; the
+  archive keeps its own seven-line summary, which is a status panel rather than
+  a record and is right to be short. `screenshots/hud/journal_notes.png`, and
+  the harness took a `notes[:<index>]` scene, because a long record is the only
+  state that shows whether the section copes.
+
 ### The one place the ending changed nothing was the tower, 2026-08-03
 
 - ~~Post-ending ground is all outdoors~~ **Fixed 2026-08-03.** The pass that

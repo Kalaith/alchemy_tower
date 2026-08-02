@@ -60,12 +60,13 @@ pub(crate) use overlay_exports::{
     draw_quest_board_overlay_view, draw_rune_overlay_view, draw_selected_experiment_record_view,
     draw_shop_overlay_view, draw_sleep_flash_overlay_view,
 };
-/// The herb-detail layout numbers, for the guard that keeps that entry inside
-/// its box. Only the test needs them; the renderer has them in scope already.
+/// The herb-detail and recorded-note layout numbers, for the guards that keep
+/// those blocks inside their boxes. Only the tests need them; the renderers
+/// have them in scope already.
 #[cfg(test)]
 pub(crate) use overlay_exports::{
-    HERB_DETAIL_BLOCK_GAP, HERB_DETAIL_LINE_HEIGHT, HERB_DETAIL_TOP_GAP, HERB_LINE_STEP,
-    HERB_ROW_STEP,
+    note_detail_top, HERB_DETAIL_BLOCK_GAP, HERB_DETAIL_LINE_HEIGHT, HERB_DETAIL_TOP_GAP,
+    HERB_LINE_STEP, HERB_ROW_STEP, NOTES_BOTTOM_MARGIN, NOTE_DETAIL_LINE_HEIGHT,
 };
 use overlay_layout::standard_overlay_panel_rect;
 pub(crate) use panels::{

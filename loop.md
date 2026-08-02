@@ -2113,6 +2113,41 @@ Stop the loop and report if:
   **25 → 27 routes, 89 → 93 nodes, 173 → 176 items, 63 → 64 recipes, 103 → 104 quests; 205 tests.**
   `screenshots/hud/entry_second_bench.png`, `archive_copying_table.png`.
 
+- **2026-08-03 — fourteen thousand characters of the player's own record, and five of them readable.**
+  Axis: making authored content visible, which is the journal pass one system over. Went looking for
+  a content slice, measured the shop shelf and the request pacing curve and found both healthy, then
+  counted what the game *writes down*: **54 journal beats** from quests, recipe discoveries and
+  apply targets, averaging **244 characters** and running to 413. Then counted the readers. The
+  Notes tab drew `.rev().take(5)`; the archive timeline `.rev().take(7)`. **There is no third
+  reader.** Everything older than the last five entries was written into the player's journal and
+  then permanently out of reach — in a game whose scope note says twenty to twenty-five hours, act
+  one is unreadable by act three.
+  ***And the five it did show were broken three ways, all visible in one capture.*** The row advance
+  was a fixed 74px while the text was laid out to its real wrapped height, so three- and four-line
+  beats overlapped each other. The section began at y+448 while the milestone rows above it ended at
+  y+480, so the last milestone's detail was overprinted by the first note's title on every full
+  record — in the shipped game. And the section had about 80px of panel for beats that need 140.
+  The tab is two columns now: Active Work and Tower Milestones left, **The Record** right — titles
+  newest first, the selected beat written out beneath them, "showing 49-54 of 54", walked with the
+  keys the routes tab already binds and reset on a tab switch so the two lists do not inherit each
+  other's position. Fifth use of the shared `visible_window_start`, same list-and-detail shape as the
+  routes tab and the archive.
+  *Two guards.* `every_recorded_note_can_be_read_again` walks a finished campaign's whole record and
+  fails on any beat the tab can never select — against the old `take(5)` it names forty-nine.
+  `the_longest_recorded_beat_fits_the_panel` does the layout arithmetic for every authored beat with
+  the **renderer's own exported constants**, so a 500-character beat is a red test rather than a
+  paragraph through the frame; verified by widening the row window until the longest beat overran.
+  *Deletions:* `recent_journal_milestones` and `JournalMilestoneSummary` are gone. The archive keeps
+  its own seven-line summary on purpose — that is a status panel, not a record, and it is right to
+  be short.
+  *Harness:* a `notes[:<index>]` scene, because a long record is the only state that shows whether
+  the section copes, and no other route to one exists short of finishing the game.
+  **208 tests.** `screenshots/hud/journal_notes.png`.
+  ***Method note:*** this is the fifth instance of the capped-list family and the first where the
+  data had **no other reader at all** — the earlier four were display bugs over data reachable some
+  other way. Worth asking of any list: not "does it page" but "is there anywhere else this can be
+  read".
+
 ## Deferred (needs a new system; not for this loop)
 
 - ~~Apply-potion-to-target flow (wilted plant, frightened creature, blocked path)~~ **Built

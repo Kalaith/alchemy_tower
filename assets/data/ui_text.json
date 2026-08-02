@@ -316,6 +316,7 @@
     "overlay_progress_locked": "Locked",
     "overlay_progress_routes": "Tower Access",
     "overlay_progress_active": "Active Work",
+    "overlay_recorded_notes": "The Record",
     "overlay_progress_milestones": "Tower Milestones",
     "overlay_planter_ready": "ready: {item}",
     "overlay_town_rapport": "Town Rapport",

@@ -80,8 +80,9 @@ impl GameplayState {
             self.ui.journal_index = 0;
         }
         // The routes tab holds far more herb memories than its column can show,
-        // so it needs a way to walk them. Nothing else in the journal binds
-        // these.
+        // and the notes tab far more recorded beats, so both need a way to walk
+        // them. Switching tabs resets the index, above, so the two lists do not
+        // inherit each other's position.
         if select_previous_pressed() {
             self.ui.journal_index = self.ui.journal_index.saturating_sub(1);
         }

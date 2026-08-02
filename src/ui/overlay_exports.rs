@@ -24,6 +24,10 @@ pub(crate) use super::overlay_journal_chrome::{
 };
 pub(crate) use super::overlay_journal_greenhouse::draw_journal_greenhouse_tab_view;
 pub(crate) use super::overlay_journal_notes::draw_journal_notes_tab_view;
+#[cfg(test)]
+pub(crate) use super::overlay_journal_notes::{
+    note_detail_top, NOTES_BOTTOM_MARGIN, NOTE_DETAIL_LINE_HEIGHT,
+};
 pub(crate) use super::overlay_journal_rapport::draw_journal_rapport_tab_view;
 pub(crate) use super::overlay_journal_routes::draw_journal_routes_tab_view;
 #[cfg(test)]

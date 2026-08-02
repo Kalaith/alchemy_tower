@@ -412,6 +412,36 @@ impl GameplayState {
         self.set_overlay(super::gameplay_overlay_types::OverlayScreen::Journal);
     }
 
+    /// Open the journal on the Notes tab with every beat the game can record
+    /// already in it, which is the state a finished campaign's journal is in.
+    ///
+    /// The tab drew the last five recorded beats and nothing else, so there was
+    /// no way to look at a long record — and a long record is the only state
+    /// that shows whether the section copes.
+    pub(crate) fn open_notes_sample(&mut self, data: &GameData, index: usize) {
+        for quest in &data.quests {
+            for milestone in &quest.completion_milestones {
+                self.push_journal_milestone(&milestone.id, &milestone.title, &milestone.text);
+            }
+        }
+        for recipe in &data.recipes {
+            for milestone in &recipe.discovery_milestones {
+                self.push_journal_milestone(&milestone.id, &milestone.title, &milestone.text);
+            }
+        }
+        for area in &data.areas {
+            for target in &area.apply_targets {
+                for milestone in &target.completion_milestones {
+                    self.push_journal_milestone(&milestone.id, &milestone.title, &milestone.text);
+                }
+            }
+        }
+        // Tab order is routes, notes, brews, [greenhouse], rapport.
+        self.ui.journal_tab = 1;
+        self.ui.journal_index = index;
+        self.set_overlay(super::gameplay_overlay_types::OverlayScreen::Journal);
+    }
+
     /// Point the herb column at one named entry. The list is sorted rather than
     /// filed, so there is no arithmetic that finds a given herb's row — and the
     /// entry worth photographing is the longest one, not the first.
