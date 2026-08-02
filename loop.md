@@ -2000,6 +2000,44 @@ Stop the loop and report if:
   *Care needed next time: `git checkout <file>` to undo a sabotage discarded ten uncommitted*
   *authored lines. Copy the file first, or sabotage in the Rust rather than in the data.*
 
+- **2026-08-03 — the sinkless tail had a cause after all, and it was a room.** Axis: recipes and
+  demand, rotating off world and NPC passes. Three earlier readings of this list called it "a flat
+  class with no shared cause" and moved on. Counted **per bench** rather than per bottle it has one:
+  **the greenhouse still made twelve bottles and six of them were wanted by nothing at all.** That is
+  the worst room in the building — entry cauldron 7 of 24, cold bench 2 of 9, reading bench 1 of 11,
+  rune forge 0 of 7 — and it is the bench act two is spent at.
+  ***And the six were not a random half.*** Every wanted greenhouse output has a morph branch or
+  feeds another recipe; every unwanted one is flat — two reagents, one bottle, no branch, no
+  downstream, no buyer. They are the **place** recipes: the brew that exists because a particular
+  piece of ground does. The salve made of what grows on the terraces Brin spent thirty years calling
+  rubble. The tonic that brews a plant together with the seed it throws, from opposite ends of a
+  question Rowan asked for nine years. The draught made of pollen that did not exist in this valley
+  a season ago. **The game opens the ground, authors the brew that ground exists for, and then
+  nobody ever asks for the result.**
+  Six orders, and — as with the thirteen morph branches — *every buyer was already written into the
+  bottle's own description*: "Brin uses it on ground that has been let go", "Mira says the valley
+  has been paying for half of this unnecessarily for years", "Rowan wanted it on record that she had
+  asked where the seed came from for nine years", "Lyra will not call the pollen a harvest, she
+  calls it rent". Filed in a new `quests_board_ground.json` because they share a cause rather than a
+  tier, and because the standing file is at 658. Spread over six townsfolk with the two lightest
+  buyers picking up one each; each gated on the arc that opened its ground.
+  *Guard:* `no_bench_makes_more_vendor_trash_than_it_makes_work` — a floor, not a target: a bench
+  must want more of its own output than it wastes. Verified in the Rust (not the data, see below)
+  by dropping the new orders out of the demand set; it names the greenhouse at 6 against 6.
+  ***A second finding fell out of the arithmetic and is now a tripwire.*** Every demand pass routes
+  a bottle by writing a **repeatable** order, and a repeatable order is unbounded income. Across
+  four passes a full board cycle went **4,766 → 8,574 → 10,050 → 13,086** while the commission sink
+  was set once at **15,300** and never moved. Nothing noticed, because the existing balance guard
+  compares the sink to *one-off* income, which barely changes.
+  `a_single_board_cycle_does_not_pay_for_the_whole_last_third` now fails if one lap of the board
+  funds the whole last third. About 15% of headroom left, which is roughly one more pass of this
+  size; when it goes, the answer is another commission rather than smaller rewards — the demand is
+  the content and the sink is the tuning.
+  **16 → 10 sinkless potions; 97 → 103 quests; 201 tests.** Board overlay checked at 103 quests and
+  still windowing correctly ("showing 1-3 of 5", "+73 more locked").
+  *Sabotage done in the Rust this time rather than in the data, per last pass's note. It works and*
+  *is safer: there is no uncommitted authored prose to lose.*
+
 ## Deferred (needs a new system; not for this loop)
 
 - ~~Apply-potion-to-target flow (wilted plant, frightened creature, blocked path)~~ **Built

@@ -1,0 +1,124 @@
+{
+  "quests": [
+    {
+      "id": "board_ground_terrace_beds",
+      "title": "Terraces: Ground That Was Let Go",
+      "description": "Two terracemend salves for the upper beds, and Brin is careful about the wording: this is not for ground anybody worked wrong. It is for ground nobody worked at all. He has spent thirty years being told the difference does not matter and has never once agreed.",
+      "required_item_id": "terracemend_salve",
+      "required_amount": 2,
+      "reward_coins": 168,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Fine",
+      "required_trait": "",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [
+        "ruin_survey_for_brin"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 16,
+      "repeatable": true,
+      "repeat_cooldown_days": 5,
+      "rapport_npc_id": "brin_groundskeeper"
+    },
+    {
+      "id": "board_ground_counter_stock",
+      "title": "Counter: The Half We Were Paying For",
+      "description": "Four southmarket salves for the apothecary shelf. Mira has done the arithmetic and is not pleased with it: the valley has been buying the finished article off the road for years, and the resin is the only part of it that ever needed to come up the pass. The rest grows on burnt wood ten minutes from her door.",
+      "required_item_id": "southmarket_salve",
+      "required_amount": 4,
+      "reward_coins": 336,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Fine",
+      "required_trait": "",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [
+        "nightwatch_for_elric"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 30,
+      "repeatable": true,
+      "repeat_cooldown_days": 6,
+      "rapport_npc_id": "mira_apothecary"
+    },
+    {
+      "id": "board_ground_both_ends",
+      "title": "Hedgerow: Both Ends Of The Same Question",
+      "description": "Three farcarried tonics, and Rowan wants the order kept with the ledger rather than thrown out with the others. She picked seed out of that hedge for nine years without knowing what dropped it. The bottle is the plant and the seed brewed together, which means somebody finally walked up and looked.",
+      "required_item_id": "farcarried_tonic",
+      "required_amount": 3,
+      "reward_coins": 396,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Fine",
+      "required_trait": "",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [
+        "nightwatch_for_elric"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 32,
+      "repeatable": true,
+      "repeat_cooldown_days": 7,
+      "rapport_npc_id": "rowan_herbalist"
+    },
+    {
+      "id": "board_ground_footing",
+      "title": "Pass: Something For The Footing",
+      "description": "Two underglass tonics for the carters. Tarn is blunt that a tonic which keeps a walker going is half of what the switchback needs and the cheaper half. Above the treeline the trouble is not being tired. It is putting a boot somewhere you could not see well enough to decide about.",
+      "required_item_id": "underglass_tonic",
+      "required_amount": 2,
+      "reward_coins": 312,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [
+        "waystation_light_for_tarn"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 34,
+      "repeatable": true,
+      "repeat_cooldown_days": 8,
+      "rapport_npc_id": "tarn_wayfarer"
+    },
+    {
+      "id": "board_ground_shore_line",
+      "title": "Town Hall: A Restorative That Costs A Walk",
+      "description": "Three strandline tonics, and Elric is placing this one because of what it is made of rather than what it does. Weed the water brought down, held in glass this tower threw out. Nobody bought either half. He would like at least one line in the town's medicine budget that reads as a walk to the shore and an afternoon.",
+      "required_item_id": "strandline_tonic",
+      "required_amount": 3,
+      "reward_coins": 234,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Fine",
+      "required_trait": "",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [
+        "ledger_proof_for_elric"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 22,
+      "repeatable": true,
+      "repeat_cooldown_days": 5,
+      "rapport_npc_id": "mayor_elric"
+    },
+    {
+      "id": "board_ground_rent_paid",
+      "title": "Survey: Rent, And What It Buys",
+      "description": "Three pollenwind draughts for the keepers walking the rounds, which Lyra notes is the pollen being spent on the people who made there be any pollen. She still will not call it a harvest. She says the bloomwings set the rate and that the rate is currently generous, and that she intends to keep saying so where they can hear it.",
+      "required_item_id": "pollenwind_draught",
+      "required_amount": 3,
+      "reward_coins": 270,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Fine",
+      "required_trait": "",
+      "required_effect_kind": "speed",
+      "prerequisite_quests": [
+        "pollinator_return_for_lyra"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 30,
+      "repeatable": true,
+      "repeat_cooldown_days": 6,
+      "rapport_npc_id": "lyra_keeper"
+    }
+  ]
+}

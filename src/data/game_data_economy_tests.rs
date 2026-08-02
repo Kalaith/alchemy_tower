@@ -85,6 +85,43 @@ mod tests {
         );
     }
 
+    /// A tripwire under the loop's own habit, added when it became visible.
+    ///
+    /// Every pass that routes a sinkless bottle does it by writing a
+    /// **repeatable** order, and a repeatable order is unbounded income. Across
+    /// four such passes a full board cycle went 4,766 → 8,574 → 10,050 →
+    /// 13,086, while the commission sink was set once at 15,300 and has not
+    /// moved. Nobody was watching the ratio, because the guard above compares
+    /// the sink to *one-off* income only, and one-off income barely changes.
+    ///
+    /// So: one lap of the whole repeatable board must not, on its own, pay for
+    /// everything the last third asks the player to fund. When this fails the
+    /// answer is another commission, not smaller rewards — the demand is the
+    /// content and the sink is the tuning.
+    #[test]
+    fn a_single_board_cycle_does_not_pay_for_the_whole_last_third() {
+        let data = load_embedded().expect("embedded game data should load");
+
+        let cycle = data
+            .quests
+            .iter()
+            .filter(|quest| quest.repeatable)
+            .map(|quest| quest.reward_coins)
+            .sum::<u32>();
+        let sink = data
+            .quests
+            .iter()
+            .filter(|quest| quest.coin_cost > 0)
+            .map(|quest| quest.coin_cost)
+            .sum::<u32>();
+
+        assert!(cycle > 0 && sink > 0, "the economy has no two sides to it");
+        assert!(
+            cycle < sink,
+            "one board cycle earns {cycle} against a {sink} sink, so the endgame funds itself in a single lap"
+        );
+    }
+
     /// Commissions escalate. Three unrelated things to buy is a shop; a chain
     /// where each one is dearer and needs better work than the last is what the
     /// end of a game is for.

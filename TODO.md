@@ -657,6 +657,48 @@ content with no destination.
   (which is her whole arc), and Rowan on the first formula in the book the
   calendar can close.
 
+### The bench act two lives at was half vendor trash, 2026-08-03
+
+- ~~Sixteen plain recipe outputs are wanted by nothing~~ **Six of them fixed,
+  and the cause found 2026-08-03.** The sinkless tail had been read three times
+  as "a flat class with no shared cause". Counted **per bench** it has one:
+  **the greenhouse still made twelve bottles and six of them were wanted by
+  nothing at all** — the worst room in the building by that measure, and the
+  bench act two is spent at. Entry cauldron 7 of 24, cold bench 2 of 9, reading
+  bench 1 of 11, rune forge 0 of 7.
+  **And the six were not a random half.** Every *wanted* greenhouse output has a
+  morph branch or feeds another recipe. Every *unwanted* one is flat: two
+  reagents, one bottle, no branch, no downstream, no buyer. And they are the
+  **place** recipes — the brew that exists because a particular piece of ground
+  does. The salve made of what grows on the terraces Brin spent thirty years
+  calling rubble. The tonic that brews a plant together with the seed it throws,
+  from opposite ends of a question Rowan asked for nine years. The draught made
+  of pollen that did not exist in this valley a season ago. **The game opens the
+  ground, authors the brew that ground exists for, and then nobody ever asks for
+  the result.**
+  Six orders, each in the voice of whoever the bottle's own description already
+  named, in a new `quests_board_ground.json` — filed apart because they share a
+  cause rather than a tier, and because the standing file is at 658 lines.
+  Spread over six townsfolk, with the two lightest buyers (Rowan, Mira) picking
+  up one each. Each gated on the arc that opened its ground.
+  `no_bench_makes_more_vendor_trash_than_it_makes_work` is the guard, and it is
+  a floor rather than a target: a bench must want more of its own output than it
+  wastes. Six of twelve is not more, so it fails on the state that prompted it.
+  **16 → 10 sinkless potions; greenhouse 6/12 → 0/12.** What is left is 7 at the
+  entry cauldron, 2 at the cold bench, 1 at the reading bench.
+- ~~Nothing was watching what the demand passes do to the endgame~~ **Guarded
+  2026-08-03.** Every pass that routes a sinkless bottle does it by writing a
+  **repeatable** order, and a repeatable order is unbounded income. Across four
+  such passes a full board cycle went **4,766 → 8,574 → 10,050 → 13,086**, while
+  the commission sink was set once at **15,300** and has not moved. Nobody
+  noticed, because the existing balance guard compares the sink to *one-off*
+  income, which barely changes. `a_single_board_cycle_does_not_pay_for_the_whole
+  _last_third` is the tripwire: one lap of the whole repeatable board must not
+  fund everything the last third asks for. It passes now with about 15% of
+  headroom, which is roughly one more pass of this size — and when it fails the
+  answer is another commission, not smaller rewards. The demand is the content;
+  the sink is the tuning.
+
 ### The schedule moved nine people around and their words stayed put, 2026-08-03
 
 - ~~A townsperson says the same thing wherever they are standing~~ **Fixed

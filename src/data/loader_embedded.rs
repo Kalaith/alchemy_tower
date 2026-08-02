@@ -244,6 +244,15 @@ const QUEST_SOURCES: &[(&str, &str)] = &[
         "town/quests_board_afterward",
         include_str!("../../assets/data/town/quests_board_afterward.json"),
     ),
+    // Orders that exist only because a particular piece of ground does. Filed
+    // apart from the standing orders because the standing file was at 658 lines
+    // and because these six share a cause rather than a tier: each is the
+    // greenhouse's flat, two-reagent brew for somewhere an arc opened, and none
+    // of them had a buyer until the bench was counted room by room.
+    (
+        "town/quests_board_ground",
+        include_str!("../../assets/data/town/quests_board_ground.json"),
+    ),
 ];
 
 #[derive(Debug, Deserialize)]

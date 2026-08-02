@@ -546,6 +546,68 @@ mod tests {
         );
     }
 
+    /// The same question as the rune and morph guards, asked one level up: not
+    /// "is this bottle wanted" but **"is this room worth working in"**.
+    ///
+    /// Counted per bench, the answer was no for the greenhouse still — **six of
+    /// its twelve recipes made a bottle nothing in the game asks for**, which
+    /// is the bench act two lives at. And the six were not a random half. Every
+    /// wanted greenhouse output has a morph branch or feeds another recipe;
+    /// every unwanted one is flat — two reagents, one bottle, no branch, no
+    /// downstream, no buyer. They are the *place* recipes: the salve made of
+    /// what grows on the terraces Brin uncovered, the tonic made of the plant
+    /// and the seed it throws from opposite ends of a nine-year question, the
+    /// draught made of pollen that did not exist in the valley a season ago.
+    /// The game opened the ground, authored the brew that ground exists for,
+    /// and then nobody ever asked for the result.
+    ///
+    /// The rule is a floor rather than a target: a bench must want more of its
+    /// own output than it wastes. Six of twelve is not more, so this fails on
+    /// the state that prompted it.
+    #[test]
+    fn no_bench_makes_more_vendor_trash_than_it_makes_work() {
+        let data = load_embedded().expect("embedded game data should load");
+
+        let mut wanted = std::collections::HashSet::new();
+        for quest in &data.quests {
+            wanted.insert(quest.required_item_id.clone());
+        }
+        for recipe in &data.recipes {
+            for ingredient in &recipe.ingredients {
+                wanted.insert(ingredient.item_id.clone());
+            }
+        }
+        for rune in &data.rune_recipes {
+            wanted.insert(rune.input_item_id.clone());
+        }
+
+        let mut counts: std::collections::BTreeMap<&str, (usize, usize)> =
+            std::collections::BTreeMap::new();
+        for recipe in &data.recipes {
+            let entry = counts.entry(recipe.station_id.as_str()).or_default();
+            if wanted.contains(&recipe.output_item_id) {
+                entry.0 += 1;
+            } else {
+                entry.1 += 1;
+            }
+        }
+
+        let idle = counts
+            .iter()
+            .filter(|(_, (asked, unasked))| unasked >= asked)
+            .map(|(station, (asked, unasked))| {
+                format!("{station}: {unasked} unasked-for against {asked} asked-for")
+            })
+            .collect::<Vec<_>>();
+
+        assert!(!counts.is_empty(), "no bench brews anything");
+        assert!(
+            idle.is_empty(),
+            "benches that mostly make things to sell:
+{idle:#?}"
+        );
+    }
+
     /// Second-order brewing existed at exactly one bench in a five-bench tower,
     /// which made it a feature of the archive rather than a tier. The measure
     /// that showed it: counting, per bench, how many of its outputs anything
