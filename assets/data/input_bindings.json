@@ -8,7 +8,11 @@
     "save": "F5",
     "load": "F9",
     "fullscreen": "F11",
-    "quick_potions": ["Z", "X", "C"]
+    "quick_potions": [
+      "Z",
+      "X",
+      "C"
+    ]
   },
   "navigation": {
     "select": "Up/Down",
@@ -19,19 +23,37 @@
     "switch_next": "Right"
   },
   "movement": {
-    "up": ["W", "Up"],
-    "down": ["S", "Down"],
-    "left": ["A", "Left"],
-    "right": ["D", "Right"]
+    "up": [
+      "W",
+      "Up"
+    ],
+    "down": [
+      "S",
+      "Down"
+    ],
+    "left": [
+      "A",
+      "Left"
+    ],
+    "right": [
+      "D",
+      "Right"
+    ]
   },
   "alchemy": {
     "open": "Tab",
-    "heat": "Left/Right",
     "heat_decrease": "Left",
     "heat_increase": "Right",
-    "fill_slots": "1/2/3",
-    "fill_slot_keys": ["1", "2", "3"],
-    "clear_slot_keys": ["Q", "W", "E"],
+    "fill_slot_keys": [
+      "1",
+      "2",
+      "3"
+    ],
+    "clear_slot_keys": [
+      "Q",
+      "W",
+      "E"
+    ],
     "stir": "S",
     "timing": "T",
     "catalyst": "F",

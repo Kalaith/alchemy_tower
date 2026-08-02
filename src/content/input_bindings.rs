@@ -4,7 +4,12 @@ use serde::Deserialize;
 
 use super::embedded_json::parse_required_json;
 
+/// `deny_unknown_fields` throughout: `alchemy.heat` and `alchemy.fill_slots`
+/// sat in this file for months as display labels no struct claimed, so serde
+/// dropped them in silence and the controls they described were listed nowhere.
+/// A binding nothing reads should refuse to load rather than look configured.
 #[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct InputBindings {
     pub(crate) global: GlobalBindings,
     pub(crate) navigation: NavigationBindings,
@@ -16,6 +21,7 @@ pub(crate) struct InputBindings {
 }
 
 #[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct GlobalBindings {
     pub(crate) confirm: String,
     pub(crate) cancel: String,
@@ -29,6 +35,7 @@ pub(crate) struct GlobalBindings {
 }
 
 #[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct NavigationBindings {
     pub(crate) select: String,
     pub(crate) select_previous: String,
@@ -39,6 +46,7 @@ pub(crate) struct NavigationBindings {
 }
 
 #[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct MovementBindings {
     pub(crate) up: Vec<String>,
     pub(crate) down: Vec<String>,
@@ -47,6 +55,7 @@ pub(crate) struct MovementBindings {
 }
 
 #[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct AlchemyBindings {
     pub(crate) open: String,
     pub(crate) heat_decrease: String,
@@ -64,17 +73,20 @@ pub(crate) struct AlchemyBindings {
 }
 
 #[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct ArchiveBindings {
     pub(crate) filter: String,
 }
 
 #[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct DialogueBindings {
     pub(crate) advance: String,
     pub(crate) advance_alternate: String,
 }
 
 #[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct ShopBindings {
     pub(crate) switch_tab: String,
 }

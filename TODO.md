@@ -211,12 +211,23 @@ content with no destination.
   Item traits `spread`/`echo`/`delay` *are* on items in `materials.json`; what
   they lack is any recipe asking for them, which is a content gap, not dead
   data.
-- ~50 dead `ui_text.json` keys — superseded HUD/menu/gather strings, the four
-  `effect_name_*` keys (no composer exists), and `brew_failure_heat_high`/
-  `_stirs_high`, which contradict the current deliberate-overfire design.
-- `input_bindings.json` declares `alchemy.heat` and `alchemy.fill_slots`
-  labels that `AlchemyBindings` doesn't have; 20 bare-id world-node PNGs are
-  generated but never loaded (every node uses a biome-suffixed sprite).
+- ~~~50 dead `ui_text.json` keys~~ **Fixed 2026-08-02.** 52 removed, and two
+  tests keep the file honest: `every_line_of_copy_is_asked_for_by_something`
+  scans the source for each key, and `composed_copy_keys_name_real_items` covers
+  the `journal_herb_summary_`/`journal_potion_recap_` families, which are built
+  from item ids at runtime and so never appear as literals. A first pass at the
+  count was wrong in both directions — those two families are live, and the
+  `statuses`/`prompts`/`overlays` sections are typed structs read by field
+  rather than by string, so all 21 of their keys are used.
+- ~~`input_bindings.json` orphan labels and 20 unused world-node PNGs~~ **Fixed
+  2026-08-02.** `alchemy.heat`/`alchemy.fill_slots` had no struct field, so
+  serde dropped them silently — the same shape as the Southern Pass gate. Both
+  removed, and every bindings struct took `deny_unknown_fields` so the next one
+  fails to load instead of looking configured. The 20 PNGs were generated
+  because their `gatherables.json` entries claimed `icon_and_world_node` while
+  every node overrides with a biome-suffixed sprite; those entries are
+  `inventory_icon` now, so regeneration no longer recreates them (85 world
+  sprites down to 65).
 - ~~Three recipe discovery milestones have no reaction line~~ **Fixed
   2026-08-02.** `every_recorded_moment_gets_remarked_on_by_somebody` now chains
   recipe `discovery_milestones` alongside quest and spine beats, and named

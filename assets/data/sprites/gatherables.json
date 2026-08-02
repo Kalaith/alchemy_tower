@@ -15,11 +15,7 @@
     },
     {
       "id": "arcane_dust",
-      "type": "icon_and_world_node",
-      "world_sprite_px": [
-        64,
-        64
-      ],
+      "type": "inventory_icon",
       "icon_size_px": [
         64,
         64
@@ -41,11 +37,7 @@
     },
     {
       "id": "moon_fern",
-      "type": "icon_and_world_node",
-      "world_sprite_px": [
-        64,
-        64
-      ],
+      "type": "inventory_icon",
       "icon_size_px": [
         64,
         64
@@ -54,11 +46,7 @@
     },
     {
       "id": "ember_root",
-      "type": "icon_and_world_node",
-      "world_sprite_px": [
-        64,
-        64
-      ],
+      "type": "inventory_icon",
       "icon_size_px": [
         64,
         64
@@ -67,11 +55,7 @@
     },
     {
       "id": "mist_moth_wing",
-      "type": "icon_and_world_node",
-      "world_sprite_px": [
-        64,
-        64
-      ],
+      "type": "inventory_icon",
       "icon_size_px": [
         64,
         64
@@ -80,11 +64,7 @@
     },
     {
       "id": "glow_moth",
-      "type": "icon_and_world_node",
-      "world_sprite_px": [
-        64,
-        64
-      ],
+      "type": "inventory_icon",
       "icon_size_px": [
         64,
         64
@@ -119,11 +99,7 @@
     },
     {
       "id": "quarry_lichen",
-      "type": "icon_and_world_node",
-      "world_sprite_px": [
-        64,
-        64
-      ],
+      "type": "inventory_icon",
       "icon_size_px": [
         64,
         64
@@ -145,11 +121,7 @@
     },
     {
       "id": "sunspike",
-      "type": "icon_and_world_node",
-      "world_sprite_px": [
-        64,
-        64
-      ],
+      "type": "inventory_icon",
       "icon_size_px": [
         64,
         64
@@ -158,11 +130,7 @@
     },
     {
       "id": "rain_orchid",
-      "type": "icon_and_world_node",
-      "world_sprite_px": [
-        64,
-        64
-      ],
+      "type": "inventory_icon",
       "icon_size_px": [
         64,
         64
@@ -171,11 +139,7 @@
     },
     {
       "id": "nightglass_bloom",
-      "type": "icon_and_world_node",
-      "world_sprite_px": [
-        64,
-        64
-      ],
+      "type": "inventory_icon",
       "icon_size_px": [
         64,
         64
@@ -184,11 +148,7 @@
     },
     {
       "id": "scorchvine_resin",
-      "type": "icon_and_world_node",
-      "world_sprite_px": [
-        64,
-        64
-      ],
+      "type": "inventory_icon",
       "icon_size_px": [
         64,
         64
@@ -197,11 +157,7 @@
     },
     {
       "id": "saltmirror_flake",
-      "type": "icon_and_world_node",
-      "world_sprite_px": [
-        64,
-        64
-      ],
+      "type": "inventory_icon",
       "icon_size_px": [
         64,
         64
@@ -249,11 +205,7 @@
     },
     {
       "id": "kiln_geode",
-      "type": "icon_and_world_node",
-      "world_sprite_px": [
-        64,
-        64
-      ],
+      "type": "inventory_icon",
       "icon_size_px": [
         64,
         64
@@ -262,11 +214,7 @@
     },
     {
       "id": "stillwater_pearl",
-      "type": "icon_and_world_node",
-      "world_sprite_px": [
-        64,
-        64
-      ],
+      "type": "inventory_icon",
       "icon_size_px": [
         64,
         64
@@ -379,11 +327,7 @@
     },
     {
       "id": "washvein_crystal",
-      "type": "icon_and_world_node",
-      "world_sprite_px": [
-        64,
-        64
-      ],
+      "type": "inventory_icon",
       "icon_size_px": [
         64,
         64
@@ -392,11 +336,7 @@
     },
     {
       "id": "sumpflower",
-      "type": "icon_and_world_node",
-      "world_sprite_px": [
-        64,
-        64
-      ],
+      "type": "inventory_icon",
       "icon_size_px": [
         64,
         64
@@ -405,11 +345,7 @@
     },
     {
       "id": "driftseed",
-      "type": "icon_and_world_node",
-      "world_sprite_px": [
-        64,
-        64
-      ],
+      "type": "inventory_icon",
       "icon_size_px": [
         64,
         64
@@ -418,11 +354,7 @@
     },
     {
       "id": "lieflat_clover",
-      "type": "icon_and_world_node",
-      "world_sprite_px": [
-        64,
-        64
-      ],
+      "type": "inventory_icon",
       "icon_size_px": [
         64,
         64
@@ -431,11 +363,7 @@
     },
     {
       "id": "driftbloom",
-      "type": "icon_and_world_node",
-      "world_sprite_px": [
-        64,
-        64
-      ],
+      "type": "inventory_icon",
       "icon_size_px": [
         64,
         64
@@ -444,11 +372,7 @@
     },
     {
       "id": "coldiron_lichen",
-      "type": "icon_and_world_node",
-      "world_sprite_px": [
-        64,
-        64
-      ],
+      "type": "inventory_icon",
       "icon_size_px": [
         64,
         64
@@ -457,11 +381,7 @@
     },
     {
       "id": "rimeflower",
-      "type": "icon_and_world_node",
-      "world_sprite_px": [
-        64,
-        64
-      ],
+      "type": "inventory_icon",
       "icon_size_px": [
         64,
         64
