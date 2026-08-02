@@ -212,8 +212,13 @@ struct EmbeddedQuestData {
 
 /// Requests split by who hands them out and what it takes to be offered one: a
 /// townsperson working through their own arc, the open board in the square, the
-/// standing work that only comes to somebody who has earned it, and the
-/// commissions, which the player pays into rather than being paid for.
+/// standing work that only comes to somebody who has earned it, the commissions
+/// the player pays into rather than being paid for, the unsigned notes, and the
+/// work the valley places once it no longer needs rescuing.
+///
+/// The unsigned chain came out of the standing board because it is a story
+/// rather than a supply arrangement — five notes in one hand with their own
+/// beats — and because that file had reached 776 lines.
 const QUEST_SOURCES: &[(&str, &str)] = &[
     (
         "town/quests_arcs",
@@ -230,6 +235,14 @@ const QUEST_SOURCES: &[(&str, &str)] = &[
     (
         "town/quests_board_commissions",
         include_str!("../../assets/data/town/quests_board_commissions.json"),
+    ),
+    (
+        "town/quests_board_unsigned",
+        include_str!("../../assets/data/town/quests_board_unsigned.json"),
+    ),
+    (
+        "town/quests_board_afterward",
+        include_str!("../../assets/data/town/quests_board_afterward.json"),
     ),
 ];
 

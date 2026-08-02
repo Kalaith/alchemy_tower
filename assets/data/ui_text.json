@@ -232,6 +232,7 @@
     "quests_unlock_greenhouse": "restore the greenhouse",
     "quests_unlock_brews": "reach {brews} total brews",
     "quests_unlock_mastery": "master {recipe}",
+    "quests_unlock_beat": "record \"{beat}\" in the journal",
     "quests_unlock_closed": "This request is not open yet.",
     "quests_unlock_after": "This request opens after you {reasons}",
     "quests_requirement_carry": "carry {carried}/{required}",

@@ -1763,12 +1763,52 @@ Stop the loop and report if:
   verbatim. Committed separately in `macroquad-toolkit`.
   **14 → 21 flourishes, 5 → 9 areas; 188 tests.**
 
+- **2026-08-03 — the ending was a wall, and the Deferred entry saying it needed a new system was
+  wrong.** Axis: story/world state. Every request, node, warp and flourish in the game was reachable
+  *before* the observatory, so the moment a player finished the thing the whole game builds towards,
+  the valley had **nine sentences of last words and then never changed again** — against a scope note
+  that says a finished product is 20–25 hours.
+  It needed no new system. `observatory_ending` is a journal beat, and beats are the currency warps,
+  stations and gather nodes already gate with. **Quests were the one thing that could not read
+  them** — a request could wait on another request, a warp, a brew count, a mastered formula or
+  somebody's standing, and none of those can say "after the ending". One `#[serde(default)]` field,
+  `QuestDefinition.required_journal_milestone`, read by `quest_is_available` and named by title (not
+  id) in the locked line. `QuestDefinition` took `deny_unknown_fields` in the same pass, because a
+  gate key with no reader is this project's most repeated failure and a request is the worst place
+  for it.
+  **The Second Bench** — 5,200 coins, six purified draughts, formula must be *mastered* — is the
+  sixth commission and the last thing the game asks for. It buys a second bench in the entry lab and
+  a year of somebody standing at it: stipend, reference shelf, and a formula book allowed to be wrong
+  in the margins. *The last thing the game asks for is the first thing you learned, made well enough
+  that somebody else can learn it from the bottle.* Lands visibly in `tower_entry`; Elric, Ione and
+  the Crow each have a word ("You just bought the thing that makes you unnecessary").
+  Three post-ending standing orders in a new `quests_board_afterward.json` — the square's lamps as a
+  budget line rather than a favour, the infirmary's own restock list, the survey's rounds handed to
+  a keeper who is not Lyra. All three are the valley placing ordinary business instead of being
+  rescued. Plus a **fifth unsigned note**, the first after the observatory, with no question in it,
+  which is worse; Ione files all five and writes "still open", because the bible marks that question
+  deliberately unclosed.
+  *Guards:* `something_in_the_game_happens_after_the_ending` (reads the beat off the narrative spine,
+  so a rename cannot hollow it out — verified by stripping the gates, it names 0 requests) and
+  `a_beat_gated_request_waits_for_the_beat`, which drives shut → named → open rather than trusting
+  the expression (verified by breaking the reader).
+  ***A test was quietly wrong too.*** `the_opening_can_be_completed_from_a_new_game` decided what an
+  opening quest is from three gates and did not know about mastery, rapport or beats — so the whole
+  post-ending board read as available at minute one. It checks every gate now.
+  *Filing done as promised:* `quests_board_standing.json` was 776 lines; the unsigned chain moved to
+  its own file (it is a story with its own beats, not a supply arrangement), leaving 658.
+  **Sink 15,300 against 4,881 one-off and 8,574 a cycle; 85 quests; 190 tests.**
+
 ## Deferred (needs a new system; not for this loop)
 
 - ~~Apply-potion-to-target flow (wilted plant, frightened creature, blocked path)~~ **Built
   2026-08-02, widened 2026-08-03.** It was a new verb, so it sat here; once built it became content
   like anything else — six targets across six areas now, all four effect kinds covered.
 - World/character art pass and hand-authored ambient audio.
-- Post-ending sandbox. **The scope question resolved (2026-08-02): long tail, 20-25 hours for a
-  finished product — see `TODO.md`. So this is in scope as content, but it still needs somewhere for
-  the game to go after the epilogue, which nothing currently provides.**
+- ~~Post-ending sandbox~~ **Started 2026-08-03, and it never needed a new system.** This entry sat
+  here for a week on the belief that "somewhere for the game to go after the epilogue" was
+  machinery. It was one `#[serde(default)]` field letting a request wait on a journal beat, which is
+  what every other gate in the game already reads. A commission, three standing orders, a fifth
+  unsigned note and a flourish now come *after* `observatory_ending`. Still open as content: four
+  post-ending requests is a coda rather than a sandbox, and nothing after the ending changes where
+  the player can walk.

@@ -139,6 +139,13 @@
       "after_milestone": "first_true_brew",
       "order": 28,
       "line": "One that worked. Now find out why, before you like it too much."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_quest": "",
+      "after_milestone": "commission_second_bench_staffed",
+      "order": 136,
+      "line": "Somebody else's hands on the same work. That is the whole of it. He was the only one who could do this and he liked being the only one, and the liking is what killed the valley for twenty years. You just bought the thing that makes you unnecessary. Well done. Go and be unnecessary somewhere for an afternoon."
     }
   ]
 }

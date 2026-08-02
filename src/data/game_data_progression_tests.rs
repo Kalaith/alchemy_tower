@@ -211,9 +211,16 @@ mod tests {
             .quests
             .iter()
             .filter(|quest| {
+                // Every gate, not just the three this originally knew about. A
+                // request waiting on a journal beat, a mastered formula or
+                // somebody's standing is not on offer at the start, and reading
+                // it as one made the post-ending board look like the opening.
                 quest.prerequisite_quests.is_empty()
                     && quest.required_unlocked_warp.is_empty()
                     && quest.minimum_total_brews == 0
+                    && quest.required_journal_milestone.is_empty()
+                    && quest.required_mastered_recipe.is_empty()
+                    && quest.required_rapport_npc_id.is_empty()
                     && !quest.required_item_id.is_empty()
             })
             .collect::<Vec<_>>();

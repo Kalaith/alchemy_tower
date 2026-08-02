@@ -20,6 +20,15 @@ impl GameplayState {
             && self.progression.total_brews >= quest.minimum_total_brews
             && self.has_mastered_requirement(quest)
             && self.has_rapport_requirement(quest)
+            && self.has_journal_requirement(quest)
+    }
+
+    /// Beat gate. The same field warps, stations and gather nodes already read,
+    /// which is what lets a request wait on the ending without any new gating
+    /// machinery — `observatory_ending` is a journal beat like any other.
+    fn has_journal_requirement(&self, quest: &QuestDefinition) -> bool {
+        quest.required_journal_milestone.is_empty()
+            || self.has_journal_milestone(&quest.required_journal_milestone)
     }
 
     /// Standing gate. A townsperson who counts the player a confidant asks for
@@ -66,14 +75,55 @@ impl GameplayState {
                 .unwrap_or_else(|| quest.required_mastered_recipe.clone())
         };
 
+        // Name the beat the way the journal did. A raw beat id here would be the
+        // same leak the prerequisite titles above were fixed for.
+        let missing_beat = if self.has_journal_requirement(quest) {
+            String::new()
+        } else {
+            beat_title(data, &quest.required_journal_milestone)
+        };
+
         quest_unlock_text::summary(QuestUnlockRequirements {
             missing_prereqs,
             missing_warp,
             missing_total_brews,
             minimum_total_brews: quest.minimum_total_brews,
             missing_mastery,
+            missing_beat,
         })
     }
+}
+
+/// A beat's title, wherever it was authored: the narrative spine, a quest's
+/// completion milestones, a recipe's discovery milestones, or an apply target.
+/// Falls back to the id, which is better than an empty reason.
+fn beat_title(data: &GameData, beat_id: &str) -> String {
+    let spine = crate::content::narrative_text()
+        .milestones
+        .all()
+        .into_iter()
+        .find(|milestone| milestone.id == beat_id)
+        .map(|milestone| milestone.title.clone());
+    spine
+        .or_else(|| {
+            data.quests
+                .iter()
+                .flat_map(|quest| quest.completion_milestones.iter())
+                .chain(
+                    data.recipes
+                        .iter()
+                        .flat_map(|recipe| recipe.discovery_milestones.iter()),
+                )
+                .chain(
+                    data.areas
+                        .iter()
+                        .flat_map(|area| area.apply_targets.iter())
+                        .flat_map(|target| target.completion_milestones.iter()),
+                )
+                .find(|milestone| milestone.id == beat_id)
+                .map(|milestone| milestone.title.clone())
+        })
+        .unwrap_or_else(|| beat_id.to_owned())
 }
 
 #[cfg(test)]
@@ -129,6 +179,56 @@ mod tests {
         assert!(
             state.quest_is_available(quest),
             "the seventh brew should open it"
+        );
+    }
+
+    /// The field is new, and a new gate field is exactly what this project keeps
+    /// getting wrong — a key with no reader looks configured and opens nothing.
+    /// So drive it: a request waiting on a beat must stay shut until the beat is
+    /// recorded, must open the moment it is, and must name the beat by its
+    /// *title* while shut rather than leaking the id.
+    #[test]
+    fn a_beat_gated_request_waits_for_the_beat() {
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let quest = data
+            .quests
+            .iter()
+            .find(|quest| !quest.required_journal_milestone.is_empty())
+            .expect("some request should wait on a journal beat");
+        let beat = quest.required_journal_milestone.clone();
+        let title = super::beat_title(&data, &beat);
+        assert_ne!(title, beat, "the beat should be authored with a title");
+
+        let mut state = GameplayState::new(&data);
+        state.progression.total_brews = 999;
+        for prerequisite in &quest.prerequisite_quests {
+            state
+                .progression
+                .completed_quests
+                .insert(prerequisite.clone());
+        }
+        if !quest.required_mastered_recipe.is_empty() {
+            state.progression.recipe_mastery.insert(
+                quest.required_mastered_recipe.clone(),
+                crate::alchemy::MASTERED_BREW_COUNT,
+            );
+        }
+
+        assert!(
+            !state.quest_is_available(quest),
+            "{} is on offer before its beat is recorded",
+            quest.id
+        );
+        let locked = state.quest_unlock_summary(&data, quest);
+        assert!(
+            locked.contains(&title),
+            "a shut request should name the beat it waits on: {locked}"
+        );
+
+        state.push_journal_milestone(&beat, &title, "recorded by the test");
+        assert!(
+            state.quest_is_available(quest),
+            "recording the beat should open it"
         );
     }
 }

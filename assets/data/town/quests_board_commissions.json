@@ -139,6 +139,36 @@
           "text": "Two carts a week, posted on a board in the square where anybody can read the days. Half of them leave under-loaded and go anyway, which is the entire point and the part that cost 3,400 coins. Tarn says a road forgets a place that only sends for things, and remembers one that sends things out."
         }
       ]
+    },
+    {
+      "id": "commission_second_bench",
+      "title": "Commission: The Second Bench",
+      "description": "Six purified draughts and 5,200 coins fits out a second bench in the entry laboratory and pays somebody to stand at it for a year: a stipend, a reference shelf they can measure their own work against, and a formula book that is allowed to be wrong in the margins. The draughts are the reference shelf. It is the plainest thing in the book, which is the point — the first thing you ever learned, made well enough that somebody else can learn it from the bottle.",
+      "required_item_id": "purified_draught",
+      "required_amount": 6,
+      "reward_coins": 0,
+      "coin_cost": 5200,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "",
+      "required_effect_kind": "",
+      "prerequisite_quests": [
+        "commission_road_service"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 0,
+      "required_mastered_recipe": "purified_draught_recipe",
+      "required_journal_milestone": "observatory_ending",
+      "repeatable": false,
+      "repeat_cooldown_days": 0,
+      "rapport_npc_id": "mayor_elric",
+      "completion_milestones": [
+        {
+          "id": "commission_second_bench_staffed",
+          "title": "Somebody Else's Turn At It",
+          "text": "A second bench along the east wall of the entry laboratory, a stipend for a year, and six purified draughts on a shelf above it to measure against. The tower has been one person's for twenty years twice over, and both times that was the problem rather than the arrangement. It is not the arrangement now. Whoever stands at that bench will be wrong about things, in the margins, in ink, where somebody can read it."
+        }
+      ]
     }
   ]
 }

@@ -118,6 +118,7 @@ mod tests {
             required_unlocked_warp: String::new(),
             minimum_total_brews: 0,
             required_mastered_recipe: String::new(),
+            required_journal_milestone: String::new(),
             coin_cost: 0,
             rapport_npc_id: String::new(),
             required_rapport_npc_id: String::new(),

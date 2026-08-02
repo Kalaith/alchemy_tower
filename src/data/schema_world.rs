@@ -247,7 +247,13 @@ pub(crate) struct GatheringRouteDefinition {
     pub(crate) description: String,
 }
 
+/// `deny_unknown_fields` because a gate key with no struct field behind it is
+/// this project's most repeated failure — the Southern Pass gate, the input
+/// binding labels and the toast icons all shipped as configuration serde threw
+/// away in silence. A request that claims to wait on something and does not is
+/// the same bug with the stakes of a whole act.
 #[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct QuestDefinition {
     pub(crate) id: String,
     pub(crate) title: String,
@@ -283,6 +289,15 @@ pub(crate) struct QuestDefinition {
     /// about.
     #[serde(default)]
     pub(crate) required_mastered_recipe: String,
+    /// A journal beat this request waits on — the same currency warps, stations
+    /// and gather nodes already gate with. A quest could only wait on other
+    /// quests, a warp, a brew count or a mastered formula, and none of those can
+    /// say "after the ending": `observatory_ending` is a beat. Every request in
+    /// the game was reachable before the observatory, so the moment a player
+    /// finished the thing the whole game builds towards, nothing new ever
+    /// happened again.
+    #[serde(default)]
+    pub(crate) required_journal_milestone: String,
     /// The townsperson whose work this request serves. Board orders are posted
     /// by the board rather than by a person, so without this the whole
     /// repeatable layer earned no standing with anybody — the prose named the

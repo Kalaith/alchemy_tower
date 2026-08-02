@@ -7,6 +7,10 @@ pub(super) struct QuestUnlockRequirements {
     pub(super) minimum_total_brews: u32,
     /// Empty unless the request wants a formula mastered and it is not.
     pub(super) missing_mastery: String,
+    /// Empty unless the request waits on a journal beat not yet recorded. Named
+    /// by its *title*, because a beat id in a locked line is the same leak raw
+    /// quest ids were.
+    pub(super) missing_beat: String,
 }
 
 pub(super) fn summary(requirements: QuestUnlockRequirements) -> String {
@@ -24,6 +28,12 @@ pub(super) fn summary(requirements: QuestUnlockRequirements) -> String {
         reasons.push(ui_format(
             "quests_unlock_mastery",
             &[("recipe", &requirements.missing_mastery)],
+        ));
+    }
+    if !requirements.missing_beat.is_empty() {
+        reasons.push(ui_format(
+            "quests_unlock_beat",
+            &[("beat", &requirements.missing_beat)],
         ));
     }
     if requirements.missing_total_brews {

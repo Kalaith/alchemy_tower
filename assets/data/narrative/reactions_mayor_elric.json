@@ -151,6 +151,13 @@
       "after_milestone": "plains_hedgerow_closed",
       "order": 110,
       "line": "Forty feet of gap, three harvests of seed gone through it, and a hedge takes four years — I have that arithmetic in a ledger from before I was mayor. It took a fortnight. I am not going to pretend I know what to do with that."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "commission_second_bench_staffed",
+      "order": 130,
+      "line": "Two benches. I have been mayor for nine years and this is the first line in the budget I have written that is not about a thing going wrong. A stipend, a year, and a shelf to measure against. If the next one is any good we will not need to send anybody up that hill at all, and I would like to be the mayor who arranged that rather than the one who kept being rescued."
     }
   ]
 }

@@ -198,6 +198,20 @@
       "after_milestone": "observatory_mirror_cleared",
       "order": 112,
       "line": "The bloom came off in a sheet. Which means every reading taken from that ring in twenty years was taken through a haze, including the ones I have been treating as the reliable half of the record. I am going to have to go back through all of it, and I am glad."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "commission_second_bench_staffed",
+      "order": 132,
+      "line": "I have started a second book. Not a copy — a working one, for whoever stands at that bench, and it is allowed to be wrong in the margins. He kept his working and then removed it, and a hundred sheets of certainty went into a sealed room where nobody could argue with it. This one stays out on the table where it can be argued with."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "unsigned_order_after_the_end",
+      "order": 134,
+      "line": "Five now. The fifth came after the observatory, which means whoever writes them was waiting to see whether you would finish it. No question in this one. Just that they are glad it was done properly. I have copied all five into the record and written 'still open' underneath, because that is the honest entry and I am not going to pretend otherwise for the sake of a tidy shelf."
     }
   ]
 }

@@ -95,6 +95,44 @@ mod tests {
         );
     }
 
+    /// The ending was a wall. Every one of the game's requests, nodes, warps and
+    /// flourishes was reachable *before* the observatory, so the moment a player
+    /// finished the thing the whole game builds towards, the valley had nine
+    /// sentences of last words and then never changed again — in a game whose
+    /// own scope note says a finished product is twenty to twenty-five hours.
+    ///
+    /// The ending beat is read off the narrative spine rather than spelled here,
+    /// so renaming it cannot quietly turn this into a test of nothing.
+    #[test]
+    fn something_in_the_game_happens_after_the_ending() {
+        let data = load_embedded().expect("embedded game data should load");
+        let ending = crate::content::narrative_text()
+            .milestones
+            .observatory_ending
+            .id
+            .clone();
+
+        let requests = data
+            .quests
+            .iter()
+            .filter(|quest| quest.required_journal_milestone == ending)
+            .count();
+        let commissions = data
+            .quests
+            .iter()
+            .filter(|quest| quest.required_journal_milestone == ending && quest.coin_cost > 0)
+            .count();
+
+        assert!(
+            requests >= 3,
+            "only {requests} request(s) wait on the ending; the valley stops the day it is finished"
+        );
+        assert!(
+            commissions >= 1,
+            "nothing after the ending costs anything, so a finished campaign's coins have nowhere left to go"
+        );
+    }
+
     /// A flourish waits on a quest or a beat, both of which are strings in an
     /// area file. One that names something that does not exist is a piece of
     /// the world that never appears, and nothing on screen would say why.

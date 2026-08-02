@@ -10,8 +10,9 @@ day — a week of iterations moves these fast enough that stale figures mislead)
 14 areas, 85 gather nodes and 21 routes, 6 apply targets, 168 items of which 102
 are potions and 49 ingredients, 60 recipes across 5 benches (with 33 morph
 branches) plus 17 rune patterns and 28 mutations, 9 townsfolk with 177 reaction
-lines, 24 story-arc requests, 18 open board orders, 33 standing orders and 5
-commissions, plus an epilogue. That is the mid-game and most of the way into the last third; the
+lines, 24 story-arc requests, 18 open board orders, 29 standing orders, 5
+unsigned notes, 3 post-ending orders and 6 commissions, plus an epilogue and
+work that continues past it. That is the mid-game and most of the way into the last third; the
 remaining work is what makes it a 20–25 hour game rather than a well-furnished
 8-hour one.
 
@@ -649,6 +650,49 @@ content with no destination.
   the cut is what it takes to be offered the work: the open board (11), the
   standing orders you have to have earned (25), and the commissions you pay
   into (5).
+- ~~The ending is a wall~~ **Fixed 2026-08-03.** Every request, node, warp and
+  flourish in the game was reachable *before* the observatory. So the moment a
+  player finished the thing the whole game builds towards, the valley had nine
+  sentences of last words and then **nothing new ever happened again** — in a
+  game whose scope note says a finished product is 20–25 hours. `loop.md` had
+  this in Deferred as needing a new system. It did not: `observatory_ending` is
+  a journal beat, and beats are the currency warps, stations and gather nodes
+  already gate with. Quests were the one thing that could not read them —
+  they could wait on another quest, a warp, a brew count, a mastered formula or
+  somebody's standing, and none of those can say "after the ending."
+  `QuestDefinition.required_journal_milestone` fixes that in one
+  `#[serde(default)]` field, and the struct took `deny_unknown_fields` at the
+  same time — a gate key with no reader behind it is this project's most
+  repeated failure and a request is the worst place for it.
+  **The Second Bench** (5,200, six purified draughts, and the formula has to be
+  *mastered*) is the sixth commission and the last thing the game asks for: it
+  fits out a second bench in the entry laboratory and pays somebody to stand at
+  it for a year — a stipend, a reference shelf, and a formula book that is
+  allowed to be wrong in the margins. The draughts are the reference shelf. It
+  is the plainest thing in the book, which is the point: **the last thing the
+  game asks for is the first thing you learned, made well enough that somebody
+  else can learn it from the bottle.** It lands visibly in `tower_entry`
+  (`screenshots/hud/tower_entry_lab.png`) and Elric, Ione and the Crow each have
+  a word about it — the Crow's is "You just bought the thing that makes you
+  unnecessary."
+  Three standing orders in a new `quests_board_afterward.json`: the square's
+  lamps as *a line in the budget rather than a favour* (Elric), the infirmary's
+  own restock list rather than Wren walking up the hill (Wren), and the survey's
+  rounds handed to a keeper who is not Lyra. All three are about the valley
+  placing ordinary business with the tower instead of being rescued by it.
+  And a **fifth unsigned note**, the first to arrive after the observatory,
+  which says only that whoever writes them is glad it was finished properly.
+  No question in it, which is worse. Ione copies all five into the record and
+  writes "still open" underneath — the story bible marks that question as
+  deliberately unclosed and it stays that way.
+  Economy: sink **15,300** against 4,881 one-off and 8,574 a full cycle.
+  Two guards: `something_in_the_game_happens_after_the_ending` (reads the ending
+  beat off the narrative spine, so renaming it cannot hollow the test out) and
+  `a_beat_gated_request_waits_for_the_beat`, which drives the new field through
+  shut → named → open rather than trusting the expression.
+  *Filing done as promised:* `quests_board_standing.json` was 776 lines; the
+  unsigned chain moved to `quests_board_unsigned.json` (it is a story with its
+  own beats, not a supply arrangement), leaving 658.
 - ~~Late-game recipe tier~~ **Started 2026-08-02.** The tier is *second-order
   brewing*: a bench with `accepts_potions` takes finished bottles as reagents,
   which is both a new decision layer and the only structural sink the deep

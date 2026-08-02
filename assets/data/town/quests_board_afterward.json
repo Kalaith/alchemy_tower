@@ -1,0 +1,61 @@
+{
+  "quests": [
+    {
+      "id": "board_after_the_charter_lamps",
+      "title": "Town Hall: Lamps, As A Line In The Budget",
+      "description": "Two lantern draughts a month for the square, and the note makes a point of the wording: this is not a favour and it is not an emergency. It is an order placed by a town with a charter, against a budget line, with a price agreed in advance. Elric has wanted to write that sentence for four years.",
+      "required_item_id": "lantern_draught",
+      "required_amount": 2,
+      "reward_coins": 96,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Fine",
+      "required_trait": "",
+      "required_effect_kind": "glow",
+      "prerequisite_quests": [],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 0,
+      "required_journal_milestone": "observatory_ending",
+      "repeatable": true,
+      "repeat_cooldown_days": 6,
+      "rapport_npc_id": "mayor_elric"
+    },
+    {
+      "id": "board_after_the_infirmary_list",
+      "title": "Infirmary: On The List, Not On The Door",
+      "description": "Three healing draughts a season, from the infirmary's own restock list rather than from Wren coming up the hill to ask. She notes that the list has had a blank line at the bottom of it for twenty years and that filling it in took her about nine seconds once there was somebody to fill it in with.",
+      "required_item_id": "healing_draught",
+      "required_amount": 3,
+      "reward_coins": 168,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 0,
+      "required_journal_milestone": "observatory_ending",
+      "repeatable": true,
+      "repeat_cooldown_days": 8,
+      "rapport_npc_id": "wren_physician"
+    },
+    {
+      "id": "board_after_the_survey_rounds",
+      "title": "Survey: Somebody Else's Rounds Now",
+      "description": "Four truemeasure tonics, sealed, for a keeper who is not Lyra. The survey has taken on a second pair of hands and the whole point of a dose that does not drift is that it works the same in somebody else's. Lyra writes that she is finding this harder to hand over than she expected to, and that this is her problem rather than the valley's.",
+      "required_item_id": "truemeasure_tonic",
+      "required_amount": 4,
+      "reward_coins": 420,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "pure",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 0,
+      "required_journal_milestone": "observatory_ending",
+      "repeatable": true,
+      "repeat_cooldown_days": 12,
+      "rapport_npc_id": "lyra_keeper"
+    }
+  ]
+}
