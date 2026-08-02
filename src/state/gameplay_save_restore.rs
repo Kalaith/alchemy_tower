@@ -226,7 +226,6 @@ mod tests {
             HabitatStateEntry {
                 station_id: "containment_habitat_moth".to_owned(),
                 creature_item_id: "glow_moth".to_owned(),
-                placed_day: 6,
                 last_harvest_day: 8,
             },
         );

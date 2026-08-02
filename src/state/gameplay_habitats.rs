@@ -38,6 +38,10 @@ impl GameplayState {
                         .any(|creature_id| creature_id == *item_id)
             })
             .map(|(item_id, _)| item_id.clone());
+        // Read the clock before taking the entry's mutable borrow: settling a
+        // creature dates from today, not from whenever this habitat's record
+        // happened to be created.
+        let today = self.world.day_index;
         let state = self
             .progression
             .habitat_states
@@ -45,8 +49,7 @@ impl GameplayState {
             .or_insert(HabitatStateEntry {
                 station_id: station.id.clone(),
                 creature_item_id: String::new(),
-                placed_day: self.world.day_index,
-                last_harvest_day: self.world.day_index,
+                last_harvest_day: today,
             });
 
         if state.creature_item_id.is_empty() {
@@ -54,10 +57,8 @@ impl GameplayState {
                 self.runtime.status_text = habitat_text::accepts(data, station);
                 return;
             };
-            let day_index = state.placed_day;
             state.creature_item_id = creature_id.clone();
-            state.placed_day = day_index;
-            state.last_harvest_day = day_index;
+            state.last_harvest_day = today;
             // The habitat entry's borrow ends here, so the creature can leave
             // the inventory through the one path that keeps bottle stock honest.
             self.take_from_inventory(&creature_id, 1);

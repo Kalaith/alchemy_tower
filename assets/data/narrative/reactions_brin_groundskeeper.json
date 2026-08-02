@@ -153,6 +153,12 @@
       "after_milestone": "first_true_brew",
       "order": 28,
       "line": "One good bottle is not a supply, and I say that as somebody who has been handed one good apple off a dying tree. Do it again next week off the same rows and I will have something to say about it."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_milestone": "discovered_the_channels_hold",
+      "order": 105,
+      "line": "Somebody cut those channels twenty years ago and then never got to use them for anything. You did. First thing actually made on that floor rather than mended on it. I have been calling it a workshop out of politeness up to now."
     }
   ]
 }

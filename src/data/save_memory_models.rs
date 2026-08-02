@@ -4,9 +4,6 @@ use serde::{Deserialize, Serialize};
 pub(crate) struct FieldJournalEntry {
     pub(crate) item_id: String,
     pub(crate) route_id: String,
-    pub(crate) season: String,
-    pub(crate) weather: String,
-    pub(crate) time_window: String,
     pub(crate) note: String,
     #[serde(default)]
     pub(crate) best_quality: u32,

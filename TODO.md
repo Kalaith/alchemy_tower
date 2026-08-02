@@ -194,20 +194,36 @@ content with no destination.
 
 ### Dead data (low stakes, cheap deletes or one-line hookups)
 
-- `ItemDefinition.source_conditions` (61 JSON occurrences), `RoomBonusDefinition.description`
-  (19 authored, preview shows only Active/Inactive), item traits
-  `spread`/`echo`/`delay` (in no trait set anywhere), `HabitatStateEntry.placed_day`,
-  and `FieldJournalEntry`'s season/weather/time fields (written blank, read
-  only by an unreachable migration).
+- ~~`HabitatStateEntry.placed_day` and `FieldJournalEntry`'s season/weather/time
+  fields~~ **Deleted 2026-08-02.** Both confirmed write-only: the journal
+  migration reads every other field and skips those three, and `placed_day` was
+  set twice and read nowhere. Deleting `placed_day` also surfaced a regression
+  the last pass introduced — the habitat borrow fix had it seeding
+  `last_harvest_day` from the *stale* `placed_day` rather than today, so a
+  re-stocked habitat would have carried the wrong harvest timer. Both now read
+  the clock before taking the entry's borrow.
+- Still dead, and worth a decision rather than a reflex delete:
+  `ItemDefinition.source_conditions` (61 authored strings — "evening glades",
+  "clear nights", "gentle capture only") is real player-facing information now
+  that gathering under the right sky changes the brew, so the herb journal is a
+  hookup candidate rather than a delete. `RoomBonusDefinition.description` (19
+  authored, preview shows only Active/Inactive) is the same shape of question.
+  Item traits `spread`/`echo`/`delay` *are* on items in `materials.json`; what
+  they lack is any recipe asking for them, which is a content gap, not dead
+  data.
 - ~50 dead `ui_text.json` keys — superseded HUD/menu/gather strings, the four
   `effect_name_*` keys (no composer exists), and `brew_failure_heat_high`/
   `_stirs_high`, which contradict the current deliberate-overfire design.
 - `input_bindings.json` declares `alchemy.heat` and `alchemy.fill_slots`
   labels that `AlchemyBindings` doesn't have; 20 bare-id world-node PNGs are
   generated but never loaded (every node uses a biome-suffixed sprite).
-- Three recipe discovery milestones (`the_channels_hold`, `the_raking_light`,
-  `the_fortnight`) have no reaction line — the "every moment gets remarked
-  on" test iterates quest milestones but skips recipe discoveries.
+- ~~Three recipe discovery milestones have no reaction line~~ **Fixed
+  2026-08-02.** `every_recorded_moment_gets_remarked_on_by_somebody` now chains
+  recipe `discovery_milestones` alongside quest and spine beats, and named
+  exactly those three. Brin remarks on the rune floor finally making something
+  rather than mending it, Ione on a light that reads the dent instead of the ink
+  (which is her whole arc), and Rowan on the first formula in the book the
+  calendar can close.
 
 ## Core loop & alchemy
 

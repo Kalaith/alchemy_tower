@@ -36,7 +36,5 @@ pub(crate) struct HabitatStateEntry {
     #[serde(default)]
     pub(crate) creature_item_id: String,
     #[serde(default)]
-    pub(crate) placed_day: u32,
-    #[serde(default)]
     pub(crate) last_harvest_day: u32,
 }

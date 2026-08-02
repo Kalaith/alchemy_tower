@@ -111,6 +111,12 @@
       "after_milestone": "observatory_ending",
       "order": 120,
       "line": "I have his notes on the bench beside eleven pages of my own, and we were both wrong, in opposite directions, about the same plants. He thought the valley could be corrected. I thought it could not be argued with. It turns out you can put a question to it, as long as you are prepared to be told no for four years."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_milestone": "discovered_the_fortnight",
+      "order": 105,
+      "line": "A formula with a season on it. I have spent my working life being told when I can and cannot have a thing, and this is the first time the tower has had to listen to the same calendar I do. I find I do not mind it."
     }
   ]
 }

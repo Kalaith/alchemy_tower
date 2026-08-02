@@ -33,9 +33,6 @@ pub(super) fn build_save_snapshot(state: &GameplayState, data: &GameData) -> Sav
             .map(|entry| FieldJournalEntry {
                 item_id: entry.item_id.clone(),
                 route_id: entry.learned_route_id.clone(),
-                season: String::new(),
-                weather: String::new(),
-                time_window: String::new(),
                 note: entry.note.clone(),
                 best_quality: entry.best_quality,
                 best_quality_band: entry.best_quality_band.clone(),

@@ -162,6 +162,15 @@ pub(crate) mod tests {
                     .into_iter()
                     .map(|milestone| milestone.id.clone()),
             )
+            // And discoveries. Recipes became a third writer into the journal
+            // and this check was never taught about them, so a formula the
+            // player worked out for themselves landed with nobody saying a word.
+            .chain(
+                data.recipes
+                    .iter()
+                    .flat_map(|recipe| recipe.discovery_milestones.iter())
+                    .map(|milestone| milestone.id.clone()),
+            )
             .filter(|id| !RECORDED_AT_NEW_GAME.contains(&id.as_str()))
             .filter(|id| !spoken_for.contains(id))
             .collect::<std::collections::BTreeSet<_>>();
