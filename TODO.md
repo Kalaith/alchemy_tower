@@ -144,11 +144,19 @@ content with no destination.
   requested by nothing, and no rune output feeds another rune recipe. When
   building the late-game recipe tier, route requests at these before adding
   new recipes.
-- **Three relationship gifts are inert**: `starlight_shard` (Mira, FRIEND),
-  `saltroad_amber` (Tarn, trusted), `stillwater_pearl` (Wren, trusted) are
-  used by no recipe or quest and are also plain shop stock — the friendship
-  payoff item is something the player could already buy. The other ten gifts
-  are real recipe inputs; these three should be too.
+- ~~Three relationship gifts are inert~~ **Fixed 2026-08-02.** The "used by no
+  recipe" half of this was wrong: all three are catalysts, and each is the *sole*
+  supplier of its tag (`starlight` feeds 9 recipe/morph slots, `saltroad` and
+  `stillwater` 3 each), so they cannot be removed from shops without starving
+  those formulas. The true half was that the payoff was buyable. Each of the
+  three relationships now gives a better, gift-only version instead —
+  `counterkept_shard` (Mira), `elevenyear_amber` (Tarn's parting gift),
+  `backshelf_pearl` (Wren) — same catalyst tags, higher quality and synthesis
+  value, sold and gathered nowhere. A new test asserts no gift is a single unit
+  of plain shop stock; it caught a fourth case the audit missed, Tarn's
+  friendship myrrh, now given by the measure rather than the pinch he sells.
+  `obtainable_item_ids` also learned that a gift is a way to obtain something —
+  every previous gift doubled as stock or a gatherable, so nothing had noticed.
 - ~~36 of 160 NPC reaction lines can never be spoken~~ **Fixed 2026-08-02.**
   The selector rotates through earned-but-unsaid lines, earliest first, so a run
   of beats that came due together is worked through one conversation at a time;

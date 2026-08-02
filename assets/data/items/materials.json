@@ -520,6 +520,105 @@
       "wild_variants": [],
       "synthesis_weight": 1,
       "synthesis_value": 5
+    },
+    {
+      "id": "counterkept_shard",
+      "name": "Counterkept Shard",
+      "category": "catalyst",
+      "base_value": 96,
+      "color": [
+        214,
+        226,
+        248,
+        255
+      ],
+      "description": "Mira keeps a few back under the counter and sells the rest. She has never explained the difference to a customer, and the difference is that these ones were picked. Steadier in a luminous reaction than anything the square will sell you.",
+      "quality": 78,
+      "rarity": 4,
+      "elements": {
+        "vita": 0,
+        "ember": 0,
+        "mist": 1,
+        "lux": 5
+      },
+      "traits": [
+        "luminous",
+        "pure",
+        "calm"
+      ],
+      "source_conditions": [],
+      "wild_variants": [],
+      "synthesis_weight": 1,
+      "synthesis_value": 9,
+      "catalyst_tags": [
+        "starlight"
+      ]
+    },
+    {
+      "id": "elevenyear_amber",
+      "name": "Eleven-Year Amber",
+      "category": "catalyst",
+      "base_value": 320,
+      "color": [
+        214,
+        156,
+        78,
+        255
+      ],
+      "description": "Tarn has carried this since before he took the waystation, through eleven years of watching carts go past the top of the valley without stopping. He is not sentimental about it and says so twice, which is how you know.",
+      "quality": 82,
+      "rarity": 4,
+      "elements": {
+        "vita": 2,
+        "ember": 3,
+        "mist": 0,
+        "lux": 3
+      },
+      "traits": [
+        "warm",
+        "pure",
+        "vigor"
+      ],
+      "source_conditions": [],
+      "wild_variants": [],
+      "synthesis_weight": 1,
+      "synthesis_value": 12,
+      "catalyst_tags": [
+        "saltroad"
+      ]
+    },
+    {
+      "id": "backshelf_pearl",
+      "name": "Backshelf Pearl",
+      "category": "catalyst",
+      "base_value": 140,
+      "color": [
+        196,
+        216,
+        214,
+        255
+      ],
+      "description": "It sat twenty years on the shelf Wren kept for the cases she could not fix, because a pearl that settles anything was the nearest thing to use she could find for it. She would rather it went into work now.",
+      "quality": 74,
+      "rarity": 4,
+      "elements": {
+        "vita": 2,
+        "ember": 0,
+        "mist": 5,
+        "lux": 0
+      },
+      "traits": [
+        "calm",
+        "pure",
+        "restorative"
+      ],
+      "source_conditions": [],
+      "wild_variants": [],
+      "synthesis_weight": 1,
+      "synthesis_value": 9,
+      "catalyst_tags": [
+        "stillwater"
+      ]
     }
   ]
 }

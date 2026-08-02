@@ -120,7 +120,7 @@
       ],
       "friendship_line": "You have carried more of this town's aches than you know. Take this - it caught the light in the archive fragments and made me think of your work. Friends share what they cannot use alone.",
       "friendship_reward_coins": 20,
-      "friendship_reward_item_id": "starlight_shard",
+      "friendship_reward_item_id": "counterkept_shard",
       "friendship_reward_amount": 1,
       "quest_ids": [
         "healing_for_mira",
@@ -563,10 +563,10 @@
       "friendship_line": "You keep coming up. Nobody comes up. Take this — it came over the pass with a carter who could not pay, and I have no use for it and you will.",
       "friendship_reward_coins": 55,
       "friendship_reward_item_id": "southmarket_myrrh",
-      "friendship_reward_amount": 1,
+      "friendship_reward_amount": 3,
       "trusted_line": "Eleven years I called this the valley with the dead tower, because that is what the road called it and I never thought to check. I have started saying the name instead. Take the amber. Do not tell me what it is worth; I know what it is worth, and I am giving it to you anyway.",
       "trusted_reward_coins": 120,
-      "trusted_reward_item_id": "saltroad_amber",
+      "trusted_reward_item_id": "elevenyear_amber",
       "trusted_reward_amount": 1
     },
     {
@@ -634,7 +634,7 @@
       "friendship_reward_amount": 3,
       "trusted_line": "I keep one of these for a mixture that must not move once it is made. You will get more use out of it than a drawer will, and I have stopped pretending otherwise.",
       "trusted_reward_coins": 85,
-      "trusted_reward_item_id": "stillwater_pearl",
+      "trusted_reward_item_id": "backshelf_pearl",
       "trusted_reward_amount": 1,
       "quest_ids": [
         "shelf_stock_for_wren",

@@ -123,4 +123,57 @@ mod tests {
             "only {gated} request(s) wait on standing; the upper tiers are labels again"
         );
     }
+
+    /// A friendship payoff has to be worth the friendship. Three of the gifts
+    /// were plain shop stock — Mira's thank-you was a starlight shard her own
+    /// counter sells for twenty-eight coins — so the reward for a relationship
+    /// was something the player could have bought on day one and probably had.
+    ///
+    /// Every gift is now either something no counter carries, or something a
+    /// counter carries that the giver hands over in quantity.
+    #[test]
+    fn a_relationship_gift_is_not_something_the_shops_already_sell() {
+        let data = load_embedded().expect("embedded game data should load");
+        let mut for_sale = std::collections::HashSet::new();
+        for station in &data.stations {
+            for stocked in &station.stock {
+                for_sale.insert(stocked.item_id.as_str());
+            }
+        }
+
+        let mut gifts = 0usize;
+        let mut buyable = Vec::new();
+        for npc in &data.npcs {
+            for (label, item_id, amount) in [
+                (
+                    "friendship",
+                    npc.friendship_reward_item_id.as_str(),
+                    npc.friendship_reward_amount,
+                ),
+                (
+                    "parting",
+                    npc.trusted_reward_item_id.as_str(),
+                    npc.trusted_reward_amount,
+                ),
+            ] {
+                if item_id.is_empty() {
+                    continue;
+                }
+                gifts += 1;
+                if for_sale.contains(item_id) && amount < 2 {
+                    buyable.push(format!(
+                        "{}'s {label} gift is one {item_id}, which any counter will sell",
+                        npc.id
+                    ));
+                }
+            }
+        }
+
+        assert!(gifts > 0, "nobody in the valley gives anything");
+        assert!(
+            buyable.is_empty(),
+            "relationship payoffs the player could simply buy:
+{buyable:#?}"
+        );
+    }
 }

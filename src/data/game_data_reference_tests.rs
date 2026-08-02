@@ -166,6 +166,17 @@ mod tests {
                 .iter()
                 .map(|recipe| recipe.output_item_id.clone()),
         );
+        // A townsperson handing you something is a way of getting it. Every
+        // relationship gift used to double as shop stock or a gatherable, so
+        // nothing noticed this was missing until one existed that a counter
+        // will not sell.
+        for npc in &data.npcs {
+            for item_id in [&npc.friendship_reward_item_id, &npc.trusted_reward_item_id] {
+                if !item_id.is_empty() {
+                    obtainable.insert(item_id.clone());
+                }
+            }
+        }
         // Salvage outputs are chosen in code when a mixture matches nothing, so
         // they never appear as any recipe's declared output.
         obtainable.extend(
