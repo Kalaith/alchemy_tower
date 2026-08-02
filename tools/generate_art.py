@@ -562,6 +562,96 @@ def area(name):
             d.rectangle((x + 92, 250 + (x % 110), x + 120, 500 + (x % 110)), fill=rgb("#5b402f", 170))
         for x, y in [(380, 740), (980, 700), (1420, 620)]:
             d.arc((x - 120, y - 60, x + 120, y + 90), 180, 340, fill=rgb("#8d5f3f", 170), width=16)
+    elif name == "tower_entry":
+        # Flagstones, laid irregularly and worn pale down the middle where
+        # twenty years of nobody has still been somebody occasionally.
+        for gy in range(0, 1080, 132):
+            offset = 66 if (gy // 132) % 2 else 0
+            for gx in range(-66, 1920, 176):
+                x, y = gx + offset, gy
+                d.rounded_rectangle((x + 5, y + 5, x + 171, y + 127), radius=8,
+                                    fill=rgb("#6a5c72", 90), outline=rgb("#4a4051", 130), width=3)
+        d.polygon([(760, 0), (1150, 0), (1080, 1080), (830, 1080)], fill=rgb("#8d7f94", 60))
+        for x, y, r in [(300, 760, 120), (1560, 300, 90)]:
+            d.ellipse(box(x, y, r, r * 0.6), fill=rgb("#b9a6ff", 34))
+    elif name == "town_square":
+        # Packed earth with a cobbled centre, grass verges at the edges and
+        # cart ruts worn across it.
+        d.rounded_rectangle((300, 220, 1620, 900), radius=70, fill=rgb("#a8926c", 150))
+        for gy in range(240, 900, 46):
+            for gx in range(320, 1620, 52):
+                jitter = ((gx * 7 + gy * 13) % 9) - 4
+                d.ellipse((gx, gy + jitter, gx + 38, gy + 32 + jitter),
+                          fill=rgb("#b9a37a", 90), outline=rgb("#8e7a58", 60))
+        for y in [380, 700]:
+            d.arc((260, y - 40, 1680, y + 150), 188, 352, fill=rgb("#8a7452", 110), width=14)
+        for x in range(60, 1920, 150):
+            d.ellipse((x, 40 + (x % 70), x + 90, 96 + (x % 70)), fill=rgb("#6f9a5f", 110))
+            d.ellipse((x + 40, 980 - (x % 60), x + 130, 1040 - (x % 60)), fill=rgb("#6f9a5f", 110))
+    elif name == "greenhouse_floor":
+        # Bed rows under glazing bars, and the light they throw down.
+        for x in range(120, 1860, 96):
+            d.line((x, 0, x - 60, 1080), fill=rgb("#cfe6d2", 30), width=7)
+        for y in range(200, 1000, 190):
+            d.rounded_rectangle((150, y, 1770, y + 118), radius=26,
+                                fill=rgb("#4f6b4e", 140), outline=rgb("#3a5139", 170), width=4)
+            for x in range(200, 1740, 84):
+                d.ellipse(box(x, y + 58, 20, 16), fill=rgb("#87c07f", 120))
+        d.ellipse(box(960, 300, 520, 240), fill=rgb("#e8ffe6", 26))
+    elif name == "containment_floor":
+        # Ward rings set into the floor, with drainage channels between them.
+        for cx, cy in [(420, 340), (1020, 300), (1520, 420), (620, 800), (1280, 820)]:
+            for r, a in [(190, 60), (140, 80), (86, 110)]:
+                d.ellipse(box(cx, cy, r, r * 0.82), outline=rgb("#8fb6e8", a), width=4)
+            d.ellipse(box(cx, cy, 40, 32), fill=rgb("#6f93c4", 70))
+        for y in range(0, 1080, 240):
+            d.line((0, y + 120, 1920, y + 120), fill=rgb("#2f3b4d", 150), width=10)
+    elif name == "rune_workshop_floor":
+        # The channels somebody cut twenty years ago, still holding heat.
+        for i in range(-6, 20):
+            x = i * 140
+            d.line((x, 0, x + 340, 1080), fill=rgb("#3a2d45", 170), width=12)
+            d.line((x + 6, 0, x + 346, 1080), fill=rgb("#c98a52", 60), width=3)
+        for y in range(140, 1080, 260):
+            d.line((0, y, 1920, y), fill=rgb("#3a2d45", 150), width=10)
+        for x, y in [(560, 400), (1300, 660), (900, 900)]:
+            d.ellipse(box(x, y, 80, 80), outline=rgb("#f0b070", 90), width=5)
+    elif name == "archive_floor":
+        # Boards running one way, shelf ranks the other, and a reading floor
+        # kept clear in the middle of them.
+        for y in range(0, 1080, 34):
+            d.line((0, y, 1920, y), fill=rgb("#6b6049", 90), width=2)
+        for x in [140, 400, 1520, 1780]:
+            d.rounded_rectangle((x, 90, x + 150, 990), radius=14,
+                                fill=rgb("#5a4f3b", 190), outline=rgb("#413929", 210), width=4)
+            for y in range(130, 960, 92):
+                d.rectangle((x + 14, y, x + 136, y + 12), fill=rgb("#8d7f61", 150))
+        d.rounded_rectangle((640, 300, 1280, 780), radius=40, fill=rgb("#8b7d60", 40))
+    elif name == "observatory_floor":
+        # A lens ring inlaid in dark stone, with the chart lines it was set by.
+        for r, a in [(430, 70), (330, 55), (230, 45), (130, 40)]:
+            d.ellipse(box(960, 540, r, r), outline=rgb("#9fb6ff", a), width=3)
+        for i in range(16):
+            a = i * math.pi / 8
+            d.line((960 + math.cos(a) * 130, 540 + math.sin(a) * 130,
+                    960 + math.cos(a) * 460, 540 + math.sin(a) * 460),
+                   fill=rgb("#7f95d8", 45), width=2)
+        for x, y, r in [(220, 200, 3), (1700, 260, 4), (400, 900, 3), (1560, 880, 3), (1100, 120, 2)]:
+            d.ellipse(box(x, y, r * 3, r * 3), fill=rgb("#e8eeff", 190))
+    elif name == "southern_pass":
+        # A switchback cut across scree, with old snow in the lee of it.
+        d.polygon([(0, 980), (700, 520), (1250, 700), (1920, 240), (1920, 1080), (0, 1080)],
+                  fill=rgb("#7d8695", 120))
+        for pts in [[(0, 900), (620, 470)], [(620, 470), (1180, 650)], [(1180, 650), (1920, 190)]]:
+            (x1, y1), (x2, y2) = pts
+            d.line((x1, y1, x2, y2), fill=rgb("#b3a894", 170), width=46)
+            d.line((x1, y1, x2, y2), fill=rgb("#cfc6b2", 90), width=22)
+        for x, y, r in [(300, 300, 70), (1450, 420, 90), (880, 880, 60)]:
+            d.ellipse(box(x, y, r, r * 0.5), fill=rgb("#e9eef2", 90))
+        for i in range(90):
+            x = (i * 197) % 1920
+            y = (i * 313) % 1080
+            d.ellipse(box(x, y, 5, 4), fill=rgb("#5f6874", 110))
     else:
         for gy in range(0, 1080, 96):
             for gx in range(0, 1920, 96):
