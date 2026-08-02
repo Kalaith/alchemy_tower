@@ -28,10 +28,18 @@ what makes it a 20–25 hour game rather than a well-furnished 8-hour one.
   are in `config.balance.vitality`. The HUD warns below 20 rather than letting
   the collapse arrive unannounced. Five tests, including the collapse end to end
   and that drinking in time keeps the day.
-- `Glow` still only tints the player sprite, because there is no
-  darkness/visibility system for it to matter against. A dark-hours gathering
-  rule is the obvious counterpart to the vitality drain above — the night time
-  window already exists and gather nodes already carry `time_windows`.
+- ~~`Glow` only tints the player sprite~~ **Fixed 2026-08-02.** Gathering during
+  a dark hour now needs a light, and a lit brew is one. Twenty-one nodes carry a
+  night window and seven appear *only* in the dark — including four on the
+  observatory floor, so the endgame area now expects you to bring something that
+  throws a light. Which windows count as dark is
+  `config.balance.gathering.dark_time_windows` (a list, so evening can be added
+  without touching Rust). Three tests: daylight needs no help and a glow potion
+  buys the night shift; the dark-hours list is genuinely read; and nothing the
+  glow potion itself requires is night-only, so the rule cannot bootstrap
+  badly — `starlight_shard` is night-only but also shop stock, and the recipe's
+  two reagents are day-gatherable.
+  All four `EffectKind`s now do something.
 - Implement the apply-potion-to-target flow (wilted route plant, frightened
   creature, blocked path) on top of the existing `EffectKind` system. Delivery
   is still just handing a bottle to an NPC; blockers are collision and art only

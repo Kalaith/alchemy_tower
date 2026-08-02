@@ -55,6 +55,12 @@ impl GameplayState {
         audio: &AudioAssets,
         node: &GatherNodeDefinition,
     ) {
+        // Nothing is worth picking that you cannot see. A lit brew is what
+        // makes the night shift possible.
+        if !self.can_see_to_gather(data) {
+            self.runtime.status_text = player_interaction_text::too_dark_to_gather();
+            return;
+        }
         if self.node_is_available(node) {
             self.spend_gathering_vitality(data);
             self.world.gathered_nodes.insert(node.id.clone());

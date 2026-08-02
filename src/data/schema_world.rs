@@ -31,6 +31,7 @@ pub(crate) struct BalanceDefinition {
     pub(crate) salvage: SalvageTuning,
     pub(crate) quality_value_percent: QualityValueTuning,
     pub(crate) vitality: VitalityTuning,
+    pub(crate) gathering: GatheringTuning,
 }
 
 /// What a day's work costs and what rest gives back.
@@ -51,6 +52,16 @@ pub(crate) struct VitalityTuning {
     /// less than a proper night: collapsing should cost something beyond the
     /// morning it already eats.
     pub(crate) collapse_restores: f32,
+}
+
+/// Rules about working the ground.
+#[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
+pub(crate) struct GatheringTuning {
+    /// Time windows too dark to pick anything in without a light. `Glow` used
+    /// to tint the player sprite and nothing else; this is what it is for.
+    /// A list rather than a flag so evening can be added without touching Rust.
+    pub(crate) dark_time_windows: Vec<String>,
 }
 
 /// Standing thresholds. FRIEND is reachable by seeing one errand through;

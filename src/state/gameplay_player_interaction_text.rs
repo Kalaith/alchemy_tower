@@ -1,4 +1,4 @@
-use crate::content::{ui_format, ui_text};
+use crate::content::{ui_copy, ui_format, ui_text};
 
 pub(super) fn talking_to(npc_name: &str) -> String {
     ui_format("gameplay_talking_to", &[("name", npc_name)])
@@ -14,4 +14,8 @@ pub(super) fn route_restored(warp_label: &str) -> String {
 
 pub(super) fn repaired_access(warp_label: &str) -> String {
     ui_format("gameplay_repaired_access", &[("label", warp_label)])
+}
+
+pub(super) fn too_dark_to_gather() -> String {
+    ui_copy("gather_too_dark").to_owned()
 }

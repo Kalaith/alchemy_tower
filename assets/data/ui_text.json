@@ -588,6 +588,7 @@
     "journal_found_formula_title": "Found: {output}",
     "journal_found_formula_text": "Nobody wrote this one down. {reagents} at the {station}, three times over, and it comes out {output} every time. The book in this tower is a record of what somebody once worked out, and it is one line longer now.",
     "overlay_alchemy_read_found": "No page for this, but you have made it before and it held. Your hands know the shape of it.",
-    "hud_vitality_warning": "You are running out. Drink something restorative or get to a bed before you drop."
+    "hud_vitality_warning": "You are running out. Drink something restorative or get to a bed before you drop.",
+    "gather_too_dark": "Too dark to tell one leaf from another. Something that throws a light would fix that."
   }
 }
