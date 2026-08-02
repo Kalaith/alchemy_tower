@@ -304,6 +304,166 @@
           "text": "The light sorts a page into who wrote what, and the first log it was held over came apart into two hands where it should have held one. He did not only take eleven months out of the record. He wrote some of what was left, in a hand that was not his, and left it to be read."
         }
       ]
+    },
+    {
+      "id": "double_read_solution_recipe",
+      "name": "Double-Read Solution",
+      "station_id": "archive_reading_bench",
+      "ingredients": [
+        {
+          "item_id": "coldread_solution",
+          "amount": 1
+        },
+        {
+          "item_id": "ghostline_solution",
+          "amount": 1
+        },
+        {
+          "item_id": "lumen_dust",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "double_read_solution",
+      "output_amount": 1,
+      "description": "Two finished lights folded together over dust rather than brewed from leaf. The bench will take a bottle as a reagent; nothing downstairs will.",
+      "required_heat": 3,
+      "required_stirs": 4,
+      "unstable_output_item_id": "murky_concoction",
+      "lore_note": "The entry lab makes potions out of plants. This floor makes them out of potions, which is either the tower's best idea or the reason it had to be sealed, depending on which of Ione's pages you are reading.",
+      "minimum_quality": 44,
+      "preferred_traits": [
+        "luminous",
+        "pure",
+        "arcane"
+      ],
+      "guaranteed_traits": [
+        "luminous",
+        "pure"
+      ],
+      "minimum_elements": {
+        "vita": 0,
+        "ember": 0,
+        "mist": 1,
+        "lux": 2
+      },
+      "catalyst_tag": "starlight",
+      "catalyst_quality_bonus": 12,
+      "required_timing": "late",
+      "required_sequence": [
+        "coldread_solution",
+        "ghostline_solution",
+        "luminous"
+      ],
+      "morph_targets": [
+        {
+          "output_item_id": "lowstar_lantern",
+          "minimum_quality": 62,
+          "catalyst_tag": "stillwater",
+          "required_heat": 2,
+          "required_stirs": 4,
+          "required_timing": "steady",
+          "required_sequence": [
+            "coldread_solution",
+            "ghostline_solution",
+            "luminous"
+          ],
+          "room_bonus_required": false
+        },
+        {
+          "output_item_id": "annotated_light",
+          "minimum_quality": 56,
+          "catalyst_tag": "starlight",
+          "required_heat": 3,
+          "required_stirs": 3,
+          "required_timing": "early",
+          "required_sequence": [
+            "coldread_solution",
+            "ghostline_solution",
+            "luminous"
+          ],
+          "room_bonus_required": true
+        }
+      ]
+    },
+    {
+      "id": "longheld_cordial_recipe",
+      "name": "Longheld Cordial",
+      "station_id": "archive_reading_bench",
+      "ingredients": [
+        {
+          "item_id": "keptwarm_tonic",
+          "amount": 1
+        },
+        {
+          "item_id": "wardfrost_tonic",
+          "amount": 1
+        },
+        {
+          "item_id": "hollowroot",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "longheld_cordial",
+      "output_amount": 1,
+      "description": "A restorative rebuilt out of two that were already finished. Wren has opinions about the waste and keeps asking for more of them.",
+      "required_heat": 2,
+      "required_stirs": 5,
+      "unstable_output_item_id": "murky_concoction",
+      "lore_note": "Nothing in the entry lab's book explains why this works. Everything on this floor assumes it.",
+      "minimum_quality": 46,
+      "preferred_traits": [
+        "restorative",
+        "calm",
+        "pure"
+      ],
+      "guaranteed_traits": [
+        "restorative",
+        "calm"
+      ],
+      "minimum_elements": {
+        "vita": 2,
+        "ember": 0,
+        "mist": 1,
+        "lux": 0
+      },
+      "catalyst_tag": "stillwater",
+      "catalyst_quality_bonus": 14,
+      "required_timing": "steady",
+      "required_sequence": [
+        "keptwarm_tonic",
+        "wardfrost_tonic",
+        "restorative"
+      ],
+      "morph_targets": [
+        {
+          "output_item_id": "cloudfloor_lantern",
+          "minimum_quality": 64,
+          "catalyst_tag": "starlight",
+          "required_heat": 3,
+          "required_stirs": 5,
+          "required_timing": "late",
+          "required_sequence": [
+            "keptwarm_tonic",
+            "wardfrost_tonic",
+            "restorative"
+          ],
+          "room_bonus_required": false
+        },
+        {
+          "output_item_id": "rimeflower_cordial",
+          "minimum_quality": 58,
+          "catalyst_tag": "stillwater",
+          "required_heat": 1,
+          "required_stirs": 6,
+          "required_timing": "early",
+          "required_sequence": [
+            "keptwarm_tonic",
+            "wardfrost_tonic",
+            "restorative"
+          ],
+          "room_bonus_required": true
+        }
+      ]
     }
   ]
 }

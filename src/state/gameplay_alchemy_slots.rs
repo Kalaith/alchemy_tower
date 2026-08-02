@@ -21,7 +21,13 @@ impl GameplayState {
         let Some(item) = data.item(item_id) else {
             return;
         };
-        if item.category != ItemCategory::Ingredient {
+        let bench_takes_potions = self
+            .nearby_station(data)
+            .map(|station| station.accepts_potions)
+            .unwrap_or(false);
+        let usable = item.category == ItemCategory::Ingredient
+            || (bench_takes_potions && item.category == ItemCategory::Potion);
+        if !usable {
             self.runtime.status_text = self.unavailable_state_text(
                 &alchemy_slot_text::fill_slot_requires_ingredient(&item.name),
             );

@@ -216,4 +216,97 @@ mod tests {
 {orphaned:#?}"
         );
     }
+
+    /// Second-order brewing: a bench that takes finished bottles as reagents.
+    /// It is the only structural sink the deep benches' outputs have — nothing
+    /// asks for a benchlight solution, so the way it stops being vendor trash
+    /// is for something else to need one.
+    ///
+    /// The rule this pins is the one a content author will trip over: a recipe
+    /// may only call for a potion at a bench that accepts potions. The entry
+    /// cauldron does not, and a recipe there naming a bottle would be
+    /// unfillable with nothing on screen to explain it.
+    #[test]
+    fn a_recipe_only_asks_for_a_bottle_at_a_bench_that_takes_bottles() {
+        use crate::data::ItemCategory;
+
+        let data = load_embedded().expect("embedded game data should load");
+        let mut second_order = 0usize;
+        let mut misplaced = Vec::new();
+
+        for recipe in &data.recipes {
+            let bottles = recipe
+                .ingredients
+                .iter()
+                .filter(|ingredient| {
+                    data.item(&ingredient.item_id)
+                        .is_some_and(|item| item.category == ItemCategory::Potion)
+                })
+                .count();
+            if bottles == 0 {
+                continue;
+            }
+            second_order += 1;
+            let takes_bottles = data
+                .stations
+                .iter()
+                .find(|station| station.id == recipe.station_id)
+                .is_some_and(|station| station.accepts_potions);
+            if !takes_bottles {
+                misplaced.push(format!(
+                    "{} wants {bottles} finished bottle(s) at {}, which will not take one",
+                    recipe.id, recipe.station_id
+                ));
+            }
+        }
+
+        assert!(
+            second_order > 0,
+            "no recipe consumes a finished bottle; the deep benches still make vendor trash"
+        );
+        assert!(
+            misplaced.is_empty(),
+            "recipes asking for bottles at a bench that refuses them:
+{misplaced:#?}"
+        );
+    }
+
+    /// The late tier exists to deepen decisions, not to lengthen a list. A
+    /// second-order recipe should use the parts of the lattice the mid-game
+    /// barely touches: three reagents, a full sequence, and a branch.
+    #[test]
+    fn the_late_tier_is_deeper_than_the_middle_of_the_game() {
+        use crate::data::ItemCategory;
+
+        let data = load_embedded().expect("embedded game data should load");
+        let mut shallow = Vec::new();
+
+        for recipe in &data.recipes {
+            let second_order = recipe.ingredients.iter().any(|ingredient| {
+                data.item(&ingredient.item_id)
+                    .is_some_and(|item| item.category == ItemCategory::Potion)
+            });
+            if !second_order {
+                continue;
+            }
+            if recipe.ingredients.len() < 3
+                || recipe.required_sequence.len() < 3
+                || recipe.morph_targets.len() < 2
+            {
+                shallow.push(format!(
+                    "{}: {} reagents, {}-step sequence, {} branches",
+                    recipe.id,
+                    recipe.ingredients.len(),
+                    recipe.required_sequence.len(),
+                    recipe.morph_targets.len()
+                ));
+            }
+        }
+
+        assert!(
+            shallow.is_empty(),
+            "late-tier recipes that are flat variants in disguise:
+{shallow:#?}"
+        );
+    }
 }

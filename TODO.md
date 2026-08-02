@@ -310,9 +310,22 @@ content with no destination.
   lights the archive's middle table, and the standing survey plants marked posts
   along the well row. Still open: only three commissions exist, which is a start
   on the last third rather than a last third.
-- Late-game recipe tier — the current 49 recipes bottom out well before 20 hours
-  of brewing decisions. New ones should extend the trait/morph lattice rather
-  than add flat variants.
+- ~~Late-game recipe tier~~ **Started 2026-08-02.** The tier is *second-order
+  brewing*: a bench with `accepts_potions` takes finished bottles as reagents,
+  which is both a new decision layer and the only structural sink the deep
+  benches' outputs can have (nothing asks for a benchlight solution, so the way
+  it stops being vendor trash is for something else to need one). The archive
+  reading bench works this way, which its own milestone justifies — "the tower's
+  later methods were more modular than the entry lab ever suggested". Two
+  recipes so far, `double_read_solution` and `longheld_cordial`, each with three
+  reagents, a three-step sequence and two morph branches, against a mid-game
+  where 35 of 54 recipes have no branch at all and sequences are almost all two
+  steps. Four previously sinkless potions are now required reagents. Two tests:
+  a recipe may only ask for a bottle at a bench that takes bottles, and a
+  second-order recipe must actually be deep rather than a flat variant wearing
+  the label. Still open: two recipes is a proof, not a tier, and the balance has
+  not been played — potions default to quality 20 with no traits or elements, so
+  a compound brew leans on process bonuses and the catalyst to reach a band.
 
 ## Story & world state
 

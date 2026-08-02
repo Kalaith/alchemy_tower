@@ -18,6 +18,12 @@ pub(super) struct AlchemyProcessSummary {
 
 impl GameplayState {
     pub(super) fn alchemy_materials(&self, data: &GameData) -> Vec<String> {
+        // A bench that works second-order lists finished bottles alongside the
+        // raw stock, because at that bench they are raw stock.
+        let bench_takes_potions = self
+            .nearby_station(data)
+            .map(|station| station.accepts_potions)
+            .unwrap_or(false);
         let mut items = self
             .inventory
             .iter()
@@ -28,6 +34,7 @@ impl GameplayState {
                         .map(|item| {
                             item.category == ItemCategory::Ingredient
                                 || item.category == ItemCategory::Catalyst
+                                || (bench_takes_potions && item.category == ItemCategory::Potion)
                         })
                         .unwrap_or(false)
             })

@@ -167,6 +167,27 @@
           "description": "Sorts hands across everything laid out rather than one page at a time."
         }
       ]
+    },
+    {
+      "id": "double_read_solution",
+      "name": "Double-Read Solution",
+      "category": "potion",
+      "base_value": 210,
+      "color": [
+        206,
+        224,
+        240,
+        255
+      ],
+      "description": "Two finished lights folded into one another rather than brewed from leaf. It shows a page under cold even light and under raking light at the same time, which no single pour has ever managed and which Ione says is the difference between reading a page and reading what happened to it.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 300.0,
+          "description": "Cold and raking light at once — surface and pressure together."
+        }
+      ]
     }
   ]
 }

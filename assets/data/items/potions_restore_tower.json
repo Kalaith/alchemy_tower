@@ -452,6 +452,27 @@
           "description": "Restores steadily, cool going down."
         }
       ]
+    },
+    {
+      "id": "longheld_cordial",
+      "name": "Longheld Cordial",
+      "category": "potion",
+      "base_value": 240,
+      "color": [
+        196,
+        216,
+        190,
+        255
+      ],
+      "description": "A restorative rebuilt out of two that had already been made, which the entry lab would have called a waste and the rune floor calls Tuesday. It keeps without cold and it keeps for a season.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 68.0,
+          "duration_seconds": 0.0,
+          "description": "Restores deeply and does not need a cold shelf to do it."
+        }
+      ]
     }
   ]
 }

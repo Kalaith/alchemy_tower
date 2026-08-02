@@ -12,6 +12,16 @@ pub(crate) struct StationDefinition {
     pub(crate) color: [u8; 4],
     #[serde(default)]
     pub(crate) stock: Vec<ShopStockDefinition>,
+    /// Whether this bench will take a finished bottle as a reagent.
+    ///
+    /// The entry cauldron will not, and should not: first-order alchemy is
+    /// ingredients into a potion. The tower's later benches are another matter —
+    /// `first_rune_imbuing` says outright that "the tower's later methods were
+    /// more modular than the entry lab ever suggested". A bench that accepts
+    /// potions is what gives the deep benches' outputs somewhere to go besides
+    /// a counter.
+    #[serde(default)]
+    pub(crate) accepts_potions: bool,
     #[serde(default)]
     pub(crate) room_bonus: RoomBonusDefinition,
     #[serde(default)]

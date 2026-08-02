@@ -206,6 +206,24 @@
         64
       ],
       "prompt": "A pale still-water pearl with a soft green-grey sheen, quiet and settled, catalyst icon."
+    },
+    {
+      "id": "double_read_solution",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A layered reading solution, cold white over a faint raking gold, two lights held in one flask, archive catalyst icon."
+    },
+    {
+      "id": "longheld_cordial",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A sealed keeping-cordial in soft green-grey, wax over the stopper, built to last a season without cold."
     }
   ]
 }
