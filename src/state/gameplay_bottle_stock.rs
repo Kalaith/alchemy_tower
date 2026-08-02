@@ -278,6 +278,26 @@ impl GameplayState {
         quest.reward_coins.saturating_mul(over) / 4
     }
 
+    /// Say what the person receiving it thinks of work that beat the bar.
+    ///
+    /// Quality has paid coin and standing since the quality pass, and nobody
+    /// ever said a word about it — the one thing a game about being the
+    /// valley's alchemist should not be silent on. One authored line each, in
+    /// their own idiom, raised as a banner because the payoff channel is where
+    /// a moment like this belongs.
+    pub(super) fn remark_on_exceptional_delivery(&mut self, data: &GameData, npc_id: &str) {
+        let Some(line) = data
+            .npcs
+            .iter()
+            .find(|npc| npc.id == npc_id)
+            .map(|npc| npc.exceptional_delivery_line.clone())
+            .filter(|line| !line.is_empty())
+        else {
+            return;
+        };
+        self.trigger_exceptional_delivery_feedback(line);
+    }
+
     /// Whether a delivery was good enough for the person receiving it to think
     /// better of the player for it: two clear bands over what they asked, or
     /// Masterwork against a request that named any bar at all.
@@ -498,5 +518,70 @@ mod tests {
         quest.minimum_quality_band = String::new();
         assert_eq!(state.quality_bonus_coins(&quest, 4), 0);
         assert!(!state.delivery_was_exceptional(&quest, 4));
+    }
+
+    /// Coin and standing have paid for good work since the quality pass and
+    /// nobody said anything about it. This checks the remark reaches the
+    /// player's screen, and — the half that matters — that it stays quiet for a
+    /// delivery that merely cleared the bar. Praise for everything is praise
+    /// for nothing.
+    #[test]
+    fn beating_the_bar_is_remarked_on_and_meeting_it_is_not() {
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let mut state = GameplayState::new(&data);
+        let npc_id = "wren_physician";
+        let expected = data
+            .npcs
+            .iter()
+            .find(|npc| npc.id == npc_id)
+            .map(|npc| npc.exceptional_delivery_line.clone())
+            .expect("Wren should have a line for work that beat the order");
+
+        state.remark_on_exceptional_delivery(&data, npc_id);
+        let toasts = state.build_hud_toasts();
+        assert_eq!(toasts.len(), 1, "nothing was said about exceptional work");
+        assert_eq!(toasts[0].text, expected);
+
+        // Nobody has a word for a bottle that simply met the specification.
+        let mut plain = GameplayState::new(&data);
+        plain.remark_on_exceptional_delivery(&data, "quest_board");
+        assert!(
+            plain.build_hud_toasts().is_empty(),
+            "the board is not a person and has no opinion"
+        );
+    }
+
+    /// Everyone who can receive a delivery needs one, or the remark is a thing
+    /// that happens for some townsfolk and silently does not for others. Both
+    /// paths matter: an arc request handed over face to face, and a board order
+    /// whose beneficiary the prose names.
+    #[test]
+    fn everyone_who_takes_a_delivery_has_something_to_say_about_good_work() {
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let mut receivers = std::collections::BTreeSet::new();
+        for quest in &data.quests {
+            if quest.giver_npc_id != "quest_board" {
+                receivers.insert(quest.giver_npc_id.clone());
+            }
+            if !quest.rapport_npc_id.is_empty() {
+                receivers.insert(quest.rapport_npc_id.clone());
+            }
+        }
+
+        let silent = receivers
+            .iter()
+            .filter(|npc_id| {
+                data.npcs
+                    .iter()
+                    .find(|npc| &&npc.id == npc_id)
+                    .is_none_or(|npc| npc.exceptional_delivery_line.is_empty())
+            })
+            .collect::<Vec<_>>();
+
+        assert!(!receivers.is_empty(), "nobody receives deliveries at all");
+        assert!(
+            silent.is_empty(),
+            "townsfolk who take deliveries and never remark on good work: {silent:?}"
+        );
     }
 }

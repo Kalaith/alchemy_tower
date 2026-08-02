@@ -315,8 +315,10 @@ impl GameplayState {
         self.progression.total_brews = 12;
         let here = [self.world.player.position.x, self.world.player.position.y];
         self.trigger_route_restored_feedback("The switchback is walkable again.", here);
-        self.trigger_new_best_brew_feedback("Best yet: Healing Draught, Excellent (68).");
         self.trigger_quest_complete_feedback("Delivered: Something For The Headaches.");
+        // The longest thing a banner can be asked to carry: a townsperson's own
+        // words about work that beat what they asked for.
+        self.remark_on_exceptional_delivery(data, "wren_physician");
         self.runtime.status_text = self.next_goal_summary(data);
     }
 

@@ -119,6 +119,7 @@
         }
       ],
       "friendship_line": "You have carried more of this town's aches than you know. Take this - it caught the light in the archive fragments and made me think of your work. Friends share what they cannot use alone.",
+      "exceptional_delivery_line": "I asked for a working draught and you have handed me one I would keep on the good shelf. It is on the good shelf.",
       "friendship_reward_coins": 20,
       "friendship_reward_item_id": "counterkept_shard",
       "friendship_reward_amount": 1,
@@ -192,6 +193,7 @@
         }
       ],
       "friendship_line": "The walk home feels like mine again, thanks to you. Here - cuttings I have been saving. A friend should have the good stock, not the leftovers.",
+      "exceptional_delivery_line": "You over-made it. I noticed, obviously. That is the whole of what I am going to say about it.",
       "friendship_reward_coins": 15,
       "friendship_reward_item_id": "moon_fern",
       "friendship_reward_amount": 3,
@@ -265,6 +267,7 @@
         }
       ],
       "friendship_line": "The town argues less about the tower now and more about what to build next. That is your doing. Take this from the civic purse, and count yourself welcome at any table in the square.",
+      "exceptional_delivery_line": "That is over the standard the council set, which I will now have to explain twice and will enjoy explaining.",
       "friendship_reward_coins": 45,
       "friendship_reward_item_id": "",
       "friendship_reward_amount": 0,
@@ -338,6 +341,7 @@
         }
       ],
       "friendship_line": "I do not open these shelves to just anyone. But you mend things instead of hoarding them, and the archive knows its own. Take what it can spare.",
+      "exceptional_delivery_line": "This is above the specification. I have copied the specification out again with your number in the margin.",
       "friendship_reward_coins": 20,
       "friendship_reward_item_id": "arcane_dust",
       "friendship_reward_amount": 3,
@@ -411,6 +415,7 @@
         }
       ],
       "friendship_line": "The beds answer you the way they used to answer me. That is not a small thing. Here, from the good soil - grow something worth the trouble.",
+      "exceptional_delivery_line": "Better work than the job needed. The crews will notice on the third day, which is when they notice anything.",
       "friendship_reward_coins": 15,
       "friendship_reward_item_id": "rain_orchid",
       "friendship_reward_amount": 3,
@@ -484,6 +489,7 @@
         }
       ],
       "friendship_line": "The small creatures settle when you are near now. They know a gentle hand. Take this from the habitats - you have earned their trust, and mine.",
+      "exceptional_delivery_line": "They settled faster than they should have. That is your pour and not my handling, and I am recording it as yours.",
       "friendship_reward_coins": 20,
       "friendship_reward_item_id": "lumen_dust",
       "friendship_reward_amount": 2,
@@ -561,6 +567,7 @@
         "town_recovery_observation": "Something has changed down there. I can tell from up here by how many carts turn off. Whatever you have all been doing, the road has noticed."
       },
       "friendship_line": "You keep coming up. Nobody comes up. Take this — it came over the pass with a carter who could not pay, and I have no use for it and you will.",
+      "exceptional_delivery_line": "That will travel further than the order asked it to. On a road, that is the whole of the difference.",
       "friendship_reward_coins": 55,
       "friendship_reward_item_id": "southmarket_myrrh",
       "friendship_reward_amount": 3,
@@ -629,6 +636,7 @@
         }
       ],
       "friendship_line": "You have never once given me a bottle you were pleased with instead of the bottle I asked for. That is rarer in a craftsman than you would like to hear. Take these.",
+      "exceptional_delivery_line": "You have given me margin. I do not often get margin, and I would rather not say what I usually do instead.",
       "friendship_reward_coins": 25,
       "friendship_reward_item_id": "reedflower",
       "friendship_reward_amount": 3,

@@ -35,6 +35,13 @@ pub(crate) struct NpcDefinition {
     /// (rapport reaches the friend tier). Also recorded as a journal beat.
     #[serde(default)]
     pub(crate) friendship_line: String,
+    /// Said when a delivery clearly beats what was asked for — two grades over
+    /// the stated bar, or a Masterwork against any bar at all. Quality has paid
+    /// coin and rapport since the quality pass and nobody has ever remarked on
+    /// it, which for a game about being the valley's alchemist is the wrong way
+    /// round.
+    #[serde(default)]
+    pub(crate) exceptional_delivery_line: String,
     /// One-time thank-you gift handed over when friendship is first reached.
     #[serde(default)]
     pub(crate) friendship_reward_coins: u32,

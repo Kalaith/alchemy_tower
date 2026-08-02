@@ -1525,6 +1525,27 @@ Stop the loop and report if:
   hand; captured at 20 frames rather than the default 150, which would have caught the fade instead.
   **168 tests; the payoff channel says what it has been trying to say all along.**
 
+- **2026-08-03 — the errand the last pass was blocked on, now that there is somewhere to say it.**
+  Quality has paid coin and standing since the quality pass and **not one townsperson had ever
+  remarked on it**. Eight `exceptional_delivery_line`s, one each and in their own idiom — Rowan:
+  *"You over-made it. I noticed, obviously. That is the whole of what I am going to say about it."*;
+  Wren: *"You have given me margin. I do not often get margin."* — raised when a delivery beats the
+  stated bar by two grades or lands a Masterwork against any bar, and **silent when it merely
+  cleared the bar**, because praise for everything is praise for nothing.
+  *An asymmetry fixed on the way:* the board path awarded flat rapport and ignored quality entirely,
+  so the same bottle was worth more standing depending on which counter it crossed. Both paths now
+  read the same rule.
+  ***A rendering bug the capture caught and the test could not.*** The banner grew to two lines for
+  these, the box grew with it — and the text still came out elided on one line. `wrap_text` returned
+  two lines of 79 characters and `truncate_text_to_width` then cut the first one, because **the wrap
+  applies the UI scale to the font size and the truncate does not**. A wrapped line must be drawn as
+  wrapped, never re-measured. Found with an `eprintln` in the draw loop and a six-frame capture,
+  which is the cheapest debugger this project has.
+  *Guards:* the remark reaches the screen and stays quiet when unearned; everyone who can receive a
+  delivery has a line (both arc givers and board beneficiaries); and every line fits the banner it
+  is raised in, at 2 × 60 characters measured off the capture.
+  **171 tests; the valley finally says thank you for the good stuff.**
+
 ## Deferred (needs a new system; not for this loop)
 
 - Apply-potion-to-target flow (wilted plant, frightened creature, blocked path) — `TODO.md` calls it

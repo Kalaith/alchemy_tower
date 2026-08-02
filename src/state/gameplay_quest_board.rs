@@ -72,12 +72,21 @@ impl GameplayState {
         // A board order is still somebody's problem solved. Without this the
         // repeatable layer — the bulk of the long tail — earned no standing
         // with anyone, however many times it was run.
+        // Beating the bar counts with the person the order serves, on the board
+        // as much as face to face — the arc path has awarded this since the
+        // quality pass and the board path quietly did not, so the same bottle
+        // was worth more standing depending on which counter it crossed.
+        let exceptional = self.delivery_was_exceptional(quest, delivered_rank);
         if !quest.rapport_npc_id.is_empty() {
             *self
                 .progression
                 .relationships
                 .entry(quest.rapport_npc_id.clone())
-                .or_insert(0) += 1;
+                .or_insert(0) += 1 + i32::from(exceptional);
+            if exceptional {
+                let npc_id = quest.rapport_npc_id.clone();
+                self.remark_on_exceptional_delivery(data, &npc_id);
+            }
         }
         self.push_quest_completion_milestones(quest);
         if quest.repeatable {

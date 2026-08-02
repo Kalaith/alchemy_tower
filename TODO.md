@@ -151,9 +151,24 @@ content with no destination.
   beating a request's stated bar pays a quarter of the fee per band above it;
   a delivery two bands over — or any Masterwork against a stated bar — also
   earns +1 rapport with the giver on top of the usual +2. A request naming no
-  band has nothing to beat and still pays flat. Remaining: NPC reaction lines
-  do not vary with delivered quality, and the band multipliers are Rust
-  constants (see the tuning-into-data item below).
+  band has nothing to beat and still pays flat. Remaining: the band multipliers
+  are Rust constants (see the tuning-into-data item below).
+- ~~Nobody ever says anything about good work~~ **Fixed 2026-08-03.** Quality
+  had paid coin and standing since that pass and not one townsperson remarked on
+  it, which for a game about being the valley's alchemist is the wrong way
+  round. Eight authored `exceptional_delivery_line`s, one each and in their own
+  idiom — Rowan's is "You over-made it. I noticed, obviously. That is the whole
+  of what I am going to say about it." — raised as a banner when a delivery
+  beats the stated bar by two grades or lands a Masterwork against any bar. It
+  stays silent for a bottle that merely cleared the bar, because praise for
+  everything is praise for nothing.
+  The board path also awards the exceptional +1 rapport now: the arc path has
+  since the quality pass and the board quietly did not, so the same bottle was
+  worth more standing depending on which counter it crossed.
+  Three tests: the remark reaches the screen and is silent when unearned,
+  everyone who can receive a delivery has a line, and every line fits the
+  banner — which needed the banner to grow to two lines
+  (`screenshots/hud/event_toasts.png`).
 - ~~The seventh brew — the one that flips "Mastered" — adds nothing~~ **Fixed
   2026-08-02.** All three ramps capped at six, one short of the step that names
   them: the quality bonus and the instability reduction now run to

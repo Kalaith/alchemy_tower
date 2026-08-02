@@ -92,6 +92,13 @@ impl GameplayState {
         );
     }
 
+    /// A townsperson's own words about work that beat what they asked for. It
+    /// takes the best-quality mark rather than the delivery one: what is being
+    /// remarked on is the grade, not the errand.
+    pub(super) fn trigger_exceptional_delivery_feedback(&mut self, toast_text: impl Into<String>) {
+        self.push_event_toast_with_icon(toast_text, rgba(255, 230, 170, 255), "best_quality");
+    }
+
     pub(super) fn trigger_new_best_brew_feedback(&mut self, toast_text: impl Into<String>) {
         self.push_event_toast_with_icon(toast_text, rgba(188, 255, 220, 255), "best_quality");
     }

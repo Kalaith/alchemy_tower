@@ -80,12 +80,15 @@ impl GameplayState {
                 // such. Quality reached the coin purse before it reached
                 // anybody's opinion of the player, which was the wrong way
                 // round for a game about being the town's alchemist.
-                let exceptional = u32::from(self.delivery_was_exceptional(quest, delivered_rank));
+                let exceptional = self.delivery_was_exceptional(quest, delivered_rank);
                 *self
                     .progression
                     .relationships
                     .entry(quest.giver_npc_id.clone())
-                    .or_insert(0) += 2 + exceptional as i32;
+                    .or_insert(0) += 2 + i32::from(exceptional);
+                if exceptional {
+                    self.remark_on_exceptional_delivery(data, &quest.giver_npc_id);
+                }
             }
             self.push_quest_completion_milestones(quest);
             self.trigger_quest_complete_feedback(dialogue_quest_text::complete_toast(&quest.title));
