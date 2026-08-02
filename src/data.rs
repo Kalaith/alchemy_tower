@@ -31,8 +31,8 @@ pub(crate) use save_models::{
 };
 pub(crate) use schema::{
     ApplyTargetDefinition, AreaDefinition, BlockerVisualStyle, EffectDefinition, EffectKind,
-    ElementProfile, GameConfig, GatherNodeDefinition, GatheringRouteDefinition, HabitatStateEntry,
-    ItemCategory, ItemDefinition, JournalMilestoneEntry, MorphDefinition,
+    ElementProfile, FlourishShape, GameConfig, GatherNodeDefinition, GatheringRouteDefinition,
+    HabitatStateEntry, ItemCategory, ItemDefinition, JournalMilestoneEntry, MorphDefinition,
     MutationFormulaDefinition, NpcDefinition, PlanterStateEntry, QuestDefinition, RecipeDefinition,
     RectDefinition, RuneRecipeDefinition, SalvageTuning, StationDefinition, StationKind,
     WarpDefinition, WildVariantDefinition,

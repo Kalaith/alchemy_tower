@@ -285,5 +285,52 @@
         }
       ]
     }
+  ],
+  "flourishes": [
+    {
+      "id": "pass_switchback_open",
+      "after_any_journal_milestone": [
+        "pass_root_wall_cleared"
+      ],
+      "shapes": [
+        {
+          "kind": "rect",
+          "x": 560,
+          "y": 380,
+          "w": 160,
+          "h": 10,
+          "color": [
+            176,
+            158,
+            132,
+            255
+          ]
+        },
+        {
+          "kind": "circle",
+          "x": 600,
+          "y": 360,
+          "radius": 8.0,
+          "color": [
+            126,
+            220,
+            158,
+            255
+          ]
+        },
+        {
+          "kind": "circle",
+          "x": 680,
+          "y": 356,
+          "radius": 8.0,
+          "color": [
+            126,
+            220,
+            158,
+            255
+          ]
+        }
+      ]
+    }
   ]
 }

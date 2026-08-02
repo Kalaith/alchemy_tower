@@ -94,4 +94,67 @@ mod tests {
             "no route or facility waits on a brew being poured on anything"
         );
     }
+
+    /// A flourish waits on a quest or a beat, both of which are strings in an
+    /// area file. One that names something that does not exist is a piece of
+    /// the world that never appears, and nothing on screen would say why.
+    #[test]
+    fn every_flourish_waits_on_something_real() {
+        use crate::data::game_data_narrative_tests::tests::recordable_milestone_ids;
+
+        let data = load_embedded().expect("embedded game data should load");
+        let recordable = recordable_milestone_ids(&data);
+        let mut flourishes = 0usize;
+        let mut dangling = Vec::new();
+
+        for area in &data.areas {
+            for flourish in &area.flourishes {
+                flourishes += 1;
+                for quest_id in &flourish.after_any_completed_quest {
+                    if data.quest(quest_id).is_none() {
+                        dangling.push(format!("{} waits on quest {quest_id}", flourish.id));
+                    }
+                }
+                for milestone_id in &flourish.after_any_journal_milestone {
+                    if !recordable.contains(milestone_id) {
+                        dangling.push(format!("{} waits on beat {milestone_id}", flourish.id));
+                    }
+                }
+                if flourish.shapes.is_empty() {
+                    dangling.push(format!("{} draws nothing at all", flourish.id));
+                }
+            }
+        }
+
+        assert!(flourishes > 0, "the world never changes for anything");
+        assert!(
+            dangling.is_empty(),
+            "flourishes waiting on things that never happen:
+{dangling:#?}"
+        );
+    }
+
+    /// The point of moving these into data was coverage. Twelve story chains
+    /// finish in this game and the world used to acknowledge four of them,
+    /// across two areas, because each one was a `match` arm somebody had to
+    /// write. This is a floor, not a target.
+    #[test]
+    fn the_world_changes_in_more_than_a_couple_of_places() {
+        let data = load_embedded().expect("embedded game data should load");
+        let areas = data
+            .areas
+            .iter()
+            .filter(|area| !area.flourishes.is_empty())
+            .count();
+        let total = data
+            .areas
+            .iter()
+            .map(|area| area.flourishes.len())
+            .sum::<usize>();
+
+        assert!(
+            areas >= 3 && total >= 6,
+            "only {total} flourishes across {areas} areas; the world barely notices what you do"
+        );
+    }
 }

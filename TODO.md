@@ -307,11 +307,19 @@ content with no destination.
 - Write the story bible locking the wizard's backstory, the failed intervention,
   the ecosystem model, and the act-by-act reveal order. The arcs were written
   ahead of it, and nine townsfolk now depend on staying consistent.
-- Extend visible town-state change past the four hardcoded cases.
-  `draw_phase1_story_flourishes_view` matches on area id in Rust for two areas;
-  the gating data (`required_completed_quest`) is already used in twelve files,
-  so the flourishes should be data-driven and cover every completed chain — a
-  reopened stall, fuller beds, lit streets.
+- ~~Extend visible town-state change past the four hardcoded cases~~ **Done
+  2026-08-02.** Areas carry `flourishes`: an id, the beats that earn it (`after_
+  any_completed_quest` / `after_any_journal_milestone` — lists, because the
+  first one authored already needed an "or"), and a list of shapes. The renderer
+  is a generic loop over rect/circle/line, with `pulse` on circles for
+  lamplight; the `match` on area id is gone, and adding a flourish is an entry
+  in an area file rather than a change in two Rust files. The original four are
+  ported unchanged and five more added: lit streets on the outer road after the
+  nightwatch, the well row gone quiet, Tarn's market stall reopened, fuller
+  greenhouse beds once the stalled bed is treated, and the switchback clear once
+  the root wall is. Nine flourishes across three areas. Two tests: every
+  flourish waits on a quest or beat that really exists and draws something, and
+  a floor on how many places the world changes at all.
 
 ## Presentation
 

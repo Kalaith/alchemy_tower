@@ -1,4 +1,4 @@
-use super::{AreaRenderDefinition, GatherNodeRenderDefinition};
+use super::{AreaRenderDefinition, FlourishDefinition, GatherNodeRenderDefinition};
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -325,6 +325,8 @@ pub(crate) struct AreaDefinition {
     pub(crate) gather_nodes: Vec<GatherNodeDefinition>,
     #[serde(default)]
     pub(crate) apply_targets: Vec<ApplyTargetDefinition>,
+    #[serde(default)]
+    pub(crate) flourishes: Vec<FlourishDefinition>,
     #[serde(default)]
     pub(crate) render: AreaRenderDefinition,
 }

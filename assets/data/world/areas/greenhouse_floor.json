@@ -191,5 +191,199 @@
         }
       ]
     }
+  ],
+  "flourishes": [
+    {
+      "id": "greenhouse_recovery_growth",
+      "after_any_completed_quest": [
+        "cultivation_for_brin"
+      ],
+      "shapes": [
+        {
+          "kind": "circle",
+          "x": 690,
+          "y": 190,
+          "radius": 10.0,
+          "color": [
+            126,
+            220,
+            158,
+            255
+          ]
+        },
+        {
+          "kind": "circle",
+          "x": 700,
+          "y": 186,
+          "radius": 7.0,
+          "color": [
+            239,
+            205,
+            90,
+            255
+          ]
+        },
+        {
+          "kind": "circle",
+          "x": 742,
+          "y": 174,
+          "radius": 10.0,
+          "color": [
+            126,
+            220,
+            158,
+            255
+          ]
+        },
+        {
+          "kind": "circle",
+          "x": 752,
+          "y": 170,
+          "radius": 7.0,
+          "color": [
+            239,
+            205,
+            90,
+            255
+          ]
+        },
+        {
+          "kind": "circle",
+          "x": 794,
+          "y": 190,
+          "radius": 10.0,
+          "color": [
+            126,
+            220,
+            158,
+            255
+          ]
+        },
+        {
+          "kind": "circle",
+          "x": 804,
+          "y": 186,
+          "radius": 7.0,
+          "color": [
+            239,
+            205,
+            90,
+            255
+          ]
+        }
+      ]
+    },
+    {
+      "id": "greenhouse_beds_full",
+      "after_any_journal_milestone": [
+        "greenhouse_bed_revived"
+      ],
+      "shapes": [
+        {
+          "kind": "circle",
+          "x": 560,
+          "y": 300,
+          "radius": 8.0,
+          "color": [
+            126,
+            220,
+            158,
+            255
+          ]
+        },
+        {
+          "kind": "line",
+          "x": 560,
+          "y": 308.0,
+          "to_x": 560,
+          "to_y": 318.0,
+          "thickness": 2.0,
+          "color": [
+            88,
+            152,
+            102,
+            255
+          ]
+        },
+        {
+          "kind": "circle",
+          "x": 600,
+          "y": 292,
+          "radius": 8.0,
+          "color": [
+            188,
+            255,
+            220,
+            255
+          ]
+        },
+        {
+          "kind": "line",
+          "x": 600,
+          "y": 300.0,
+          "to_x": 600,
+          "to_y": 310.0,
+          "thickness": 2.0,
+          "color": [
+            88,
+            152,
+            102,
+            255
+          ]
+        },
+        {
+          "kind": "circle",
+          "x": 640,
+          "y": 304,
+          "radius": 8.0,
+          "color": [
+            239,
+            205,
+            90,
+            255
+          ]
+        },
+        {
+          "kind": "line",
+          "x": 640,
+          "y": 312.0,
+          "to_x": 640,
+          "to_y": 322.0,
+          "thickness": 2.0,
+          "color": [
+            88,
+            152,
+            102,
+            255
+          ]
+        },
+        {
+          "kind": "circle",
+          "x": 680,
+          "y": 296,
+          "radius": 8.0,
+          "color": [
+            126,
+            220,
+            158,
+            255
+          ]
+        },
+        {
+          "kind": "line",
+          "x": 680,
+          "y": 304.0,
+          "to_x": 680,
+          "to_y": 314.0,
+          "thickness": 2.0,
+          "color": [
+            88,
+            152,
+            102,
+            255
+          ]
+        }
+      ]
+    }
   ]
 }

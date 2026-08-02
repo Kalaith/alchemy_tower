@@ -26,7 +26,8 @@ pub(crate) use self::schema_items::{EffectDefinition, ItemDefinition, WildVarian
 pub(crate) use self::schema_npcs::NpcDefinition;
 pub(crate) use self::schema_progression::{HabitatStateEntry, PlanterStateEntry};
 pub(crate) use self::schema_render::{
-    AreaRenderDefinition, BlockerVisualStyle, GatherNodeRenderDefinition, StationRenderDefinition,
+    AreaRenderDefinition, BlockerVisualStyle, FlourishDefinition, FlourishShape,
+    GatherNodeRenderDefinition, StationRenderDefinition,
 };
 pub(crate) use self::schema_stations::StationDefinition;
 pub(crate) use self::schema_world::{

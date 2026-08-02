@@ -288,5 +288,427 @@
         "sprite_id": "reedflower"
       }
     }
+  ],
+  "flourishes": [
+    {
+      "id": "town_apothecary_shelf",
+      "after_any_completed_quest": [
+        "healing_for_mira"
+      ],
+      "shapes": [
+        {
+          "kind": "rect",
+          "x": 684,
+          "y": 670,
+          "w": 72,
+          "h": 18,
+          "color": [
+            122,
+            88,
+            66,
+            255
+          ]
+        },
+        {
+          "kind": "rect",
+          "x": 694,
+          "y": 652,
+          "w": 10,
+          "h": 18,
+          "color": [
+            176,
+            226,
+            255,
+            255
+          ]
+        },
+        {
+          "kind": "rect",
+          "x": 714,
+          "y": 646,
+          "w": 12,
+          "h": 24,
+          "color": [
+            255,
+            214,
+            132,
+            255
+          ]
+        },
+        {
+          "kind": "rect",
+          "x": 736,
+          "y": 654,
+          "w": 10,
+          "h": 16,
+          "color": [
+            176,
+            226,
+            255,
+            255
+          ]
+        }
+      ]
+    },
+    {
+      "id": "town_footpath_lights",
+      "after_any_completed_quest": [
+        "glow_for_rowan"
+      ],
+      "shapes": [
+        {
+          "kind": "circle",
+          "x": 536,
+          "y": 540,
+          "radius": 10.0,
+          "color": [
+            255,
+            228,
+            150,
+            120
+          ],
+          "pulse": true
+        },
+        {
+          "kind": "circle",
+          "x": 536,
+          "y": 540,
+          "radius": 5.0,
+          "color": [
+            255,
+            244,
+            188,
+            255
+          ]
+        },
+        {
+          "kind": "circle",
+          "x": 610,
+          "y": 470,
+          "radius": 10.0,
+          "color": [
+            255,
+            228,
+            150,
+            120
+          ],
+          "pulse": true
+        },
+        {
+          "kind": "circle",
+          "x": 610,
+          "y": 470,
+          "radius": 5.0,
+          "color": [
+            255,
+            244,
+            188,
+            255
+          ]
+        },
+        {
+          "kind": "circle",
+          "x": 696,
+          "y": 404,
+          "radius": 10.0,
+          "color": [
+            255,
+            228,
+            150,
+            120
+          ],
+          "pulse": true
+        },
+        {
+          "kind": "circle",
+          "x": 696,
+          "y": 404,
+          "radius": 5.0,
+          "color": [
+            255,
+            244,
+            188,
+            255
+          ]
+        }
+      ]
+    },
+    {
+      "id": "town_recovery_flowers",
+      "after_any_completed_quest": [
+        "cultivation_for_brin"
+      ],
+      "after_any_journal_milestone": [
+        "greenhouse_repaired"
+      ],
+      "shapes": [
+        {
+          "kind": "circle",
+          "x": 598,
+          "y": 760,
+          "radius": 8.0,
+          "color": [
+            126,
+            220,
+            158,
+            255
+          ]
+        },
+        {
+          "kind": "line",
+          "x": 598,
+          "y": 768.0,
+          "to_x": 598,
+          "to_y": 778.0,
+          "thickness": 2.0,
+          "color": [
+            88,
+            152,
+            102,
+            255
+          ]
+        },
+        {
+          "kind": "circle",
+          "x": 640,
+          "y": 744,
+          "radius": 8.0,
+          "color": [
+            239,
+            205,
+            90,
+            255
+          ]
+        },
+        {
+          "kind": "line",
+          "x": 640,
+          "y": 752.0,
+          "to_x": 640,
+          "to_y": 762.0,
+          "thickness": 2.0,
+          "color": [
+            88,
+            152,
+            102,
+            255
+          ]
+        },
+        {
+          "kind": "circle",
+          "x": 676,
+          "y": 764,
+          "radius": 8.0,
+          "color": [
+            188,
+            255,
+            220,
+            255
+          ]
+        },
+        {
+          "kind": "line",
+          "x": 676,
+          "y": 772.0,
+          "to_x": 676,
+          "to_y": 782.0,
+          "thickness": 2.0,
+          "color": [
+            88,
+            152,
+            102,
+            255
+          ]
+        }
+      ]
+    },
+    {
+      "id": "town_outer_road_lit",
+      "after_any_completed_quest": [
+        "nightwatch_for_elric"
+      ],
+      "shapes": [
+        {
+          "kind": "circle",
+          "x": 880,
+          "y": 700,
+          "radius": 10.0,
+          "color": [
+            255,
+            228,
+            150,
+            120
+          ],
+          "pulse": true
+        },
+        {
+          "kind": "circle",
+          "x": 880,
+          "y": 700,
+          "radius": 5.0,
+          "color": [
+            255,
+            244,
+            188,
+            255
+          ]
+        },
+        {
+          "kind": "circle",
+          "x": 980,
+          "y": 660,
+          "radius": 10.0,
+          "color": [
+            255,
+            228,
+            150,
+            120
+          ],
+          "pulse": true
+        },
+        {
+          "kind": "circle",
+          "x": 980,
+          "y": 660,
+          "radius": 5.0,
+          "color": [
+            255,
+            244,
+            188,
+            255
+          ]
+        },
+        {
+          "kind": "circle",
+          "x": 1080,
+          "y": 624,
+          "radius": 10.0,
+          "color": [
+            255,
+            228,
+            150,
+            120
+          ],
+          "pulse": true
+        },
+        {
+          "kind": "circle",
+          "x": 1080,
+          "y": 624,
+          "radius": 5.0,
+          "color": [
+            255,
+            244,
+            188,
+            255
+          ]
+        }
+      ]
+    },
+    {
+      "id": "town_well_row_quiet",
+      "after_any_completed_quest": [
+        "wellside_relief_for_mira"
+      ],
+      "shapes": [
+        {
+          "kind": "rect",
+          "x": 420,
+          "y": 700,
+          "w": 64,
+          "h": 10,
+          "color": [
+            126,
+            152,
+            168,
+            255
+          ]
+        },
+        {
+          "kind": "circle",
+          "x": 452,
+          "y": 690,
+          "radius": 12.0,
+          "color": [
+            176,
+            226,
+            255,
+            200
+          ]
+        },
+        {
+          "kind": "circle",
+          "x": 452,
+          "y": 690,
+          "radius": 5.0,
+          "color": [
+            228,
+            246,
+            255,
+            255
+          ]
+        }
+      ]
+    },
+    {
+      "id": "town_market_stall_reopened",
+      "after_any_completed_quest": [
+        "mule_relief_for_tarn"
+      ],
+      "shapes": [
+        {
+          "kind": "rect",
+          "x": 300,
+          "y": 610,
+          "w": 96,
+          "h": 12,
+          "color": [
+            122,
+            88,
+            66,
+            255
+          ]
+        },
+        {
+          "kind": "rect",
+          "x": 300,
+          "y": 560,
+          "w": 96,
+          "h": 50,
+          "color": [
+            214,
+            178,
+            140,
+            220
+          ]
+        },
+        {
+          "kind": "rect",
+          "x": 316,
+          "y": 596,
+          "w": 20,
+          "h": 14,
+          "color": [
+            255,
+            214,
+            132,
+            255
+          ]
+        },
+        {
+          "kind": "rect",
+          "x": 348,
+          "y": 596,
+          "w": 20,
+          "h": 14,
+          "color": [
+            176,
+            226,
+            255,
+            255
+          ]
+        }
+      ]
+    }
   ]
 }
