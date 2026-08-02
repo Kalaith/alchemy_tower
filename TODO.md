@@ -8,10 +8,10 @@ measured against that target; anything not listed here is considered done.
 Where the content currently stands (re-counted 2026-08-03, second count that
 day — a week of iterations moves these fast enough that stale figures mislead):
 14 areas, 85 gather nodes and 21 routes, 6 apply targets, 168 items of which 102
-are potions and 49 ingredients, 60 recipes across 5 benches plus 17 rune
-patterns and 28 mutations, 9 townsfolk with 177 reaction lines, 24 story-arc
-requests, 11 open board orders, 27 standing orders and 5 commissions, plus an
-epilogue. That is the mid-game and most of the way into the last third; the
+are potions and 49 ingredients, 60 recipes across 5 benches (with 33 morph
+branches) plus 17 rune patterns and 28 mutations, 9 townsfolk with 177 reaction
+lines, 24 story-arc requests, 18 open board orders, 33 standing orders and 5
+commissions, plus an epilogue. That is the mid-game and most of the way into the last third; the
 remaining work is what makes it a 20–25 hour game rather than a well-furnished
 8-hour one.
 
@@ -369,6 +369,44 @@ content with no destination.
   recipe's output is wanted by no request, no reagent slot and no rune pattern;
   a morph target deliberately does not count, since that is another way to make
   the thing rather than a reason to have one. **43 of 101 sinkless.**
+  **Down to 29 of 102 on 2026-08-03** — see the precision-layer entry below,
+  which cleared the largest single block of it. What is left, measured rather
+  than estimated: **16** plain recipe outputs, **9** rune outputs, and **4**
+  bottles a recipe and a branch both make. The rune nine are the next coherent
+  group — the rune floor makes seventeen things and nine of them are wanted by
+  nothing, which is the same shape one verb over.
+
+### The precision layer had no buyer, 2026-08-03
+
+- ~~Hitting a morph branch pays out in vendor trash~~ **Fixed 2026-08-03.** A
+  branch is the hardest thing the brewing system asks for — the quality bar, the
+  exact heat and stir count, the timing word, often a named catalyst, sometimes
+  a reagent order and the room bonus, *all at once*. There are 33 branches
+  making 29 distinct bottles, and **13 of those bottles were wanted by nothing
+  at all**: no request, no reagent slot, no rune pattern. They were 13 of the 42
+  sinkless potions, and they were the reward for the deepest verb in the tower.
+  **Thirteen orders, and every one of them was already written.** Each of these
+  bottles carries a description that names its own buyer and had never been
+  asked to — "the only property the crews actually asked about" (banked
+  cinderlight), "Ione has one on a shelf and has not written a label for it"
+  (hollowroot reliquary), "the desert's own lantern" (nightglass), "the plainest
+  recipe in the book, taken as far as it goes" (clearspring). So the authoring
+  was demand for prose that already existed, not new fiction.
+  Seven go on the **open board**, gated only on brew count (16–26), because the
+  first time a player hits a branch should be the first time somebody wants what
+  it made. Six are **standing orders** off the deep benches and the rune floor,
+  gated on the arc that earns them. The thirteenth is the **fourth unsigned
+  note**: a wildfire draught, "hot and past where the recipe stops", at roughly
+  three times what anyone in the valley would pay for a thing that should be
+  handed over with a warning. No address on it. There never is.
+  Spread across all eight townsfolk rather than pooling on the two who buy the
+  most — Mira, Brin ×2, Tarn ×3, Elric ×2, Lyra, Ione ×2, Wren.
+  Economy after: one-off income 4,621, a full repeatable cycle 7,890, commission
+  sink 10,100 — still more to fund than to earn in a cycle.
+  `a_morph_branch_pays_out_in_something_somebody_wants` is the guard, verified
+  by deleting the thirteen: it names every one of them.
+  *Filing note:* `quests_board_standing.json` is at 776 lines and wants a split
+  before it takes another order.
 - ~~Three relationship gifts are inert~~ **Fixed 2026-08-02.** The "used by no
   recipe" half of this was wrong: all three are catalysts, and each is the *sole*
   supplier of its tag (`starlight` feeds 9 recipe/morph slots, `saltroad` and

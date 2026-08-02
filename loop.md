@@ -1710,6 +1710,30 @@ Stop the loop and report if:
   three quarters of the ground.
   **186 tests; all four effect kinds have somewhere to land.**
 
+- **2026-08-03 — the hardest thing the brewing system asks for paid out in vendor trash.** Axis:
+  recipes/requests, deliberately off the last two passes' world-content axis. A **morph branch** is
+  the deepest verb in the tower: the quality bar, the exact heat and stir count, the timing word,
+  often a named catalyst, sometimes a reagent order *and* the room bonus, all at once. 33 branches
+  make 29 distinct bottles — and **13 of those were wanted by nothing**: no request, no reagent slot,
+  no rune pattern. 13 of the 42 sinkless potions were the *reward for precision*.
+  ***And the orders were already written.*** Every one of the thirteen carries a description that
+  names its own buyer and had never been asked to: "the only property the crews actually asked
+  about", "Ione has one on a shelf and has not written a label for it", "the desert's own lantern",
+  "the plainest recipe in the book, taken as far as it goes". The authoring was demand for prose
+  that already existed.
+  Seven on the **open board**, gated only on brew count (16–26) so a player's first branch is also
+  the first time somebody wants what it made. Six **standing orders** off the deep benches and the
+  rune floor, gated on the arc that earns them. The thirteenth is the **fourth unsigned note** —
+  wildfire draught, "hot and past where the recipe stops", three times the going rate, no address.
+  Spread over all eight townsfolk rather than pooling on the two who buy most.
+  *Guard:* `a_morph_branch_pays_out_in_something_somebody_wants`, verified by deleting the thirteen —
+  it names all of them. A bottle an ordinary recipe *also* makes is excluded on purpose; this asks
+  what the branch is worth reaching for.
+  **42 → 29 sinkless potions; 187 tests.** What is left is measured, not guessed: 16 plain recipe
+  outputs, 9 rune outputs, 4 recipe-and-branch. *Next iteration's obvious group is the rune nine —*
+  *the rune floor makes seventeen things and nine are wanted by nothing, same shape one verb over.*
+  *Filing:* `quests_board_standing.json` is at 776 lines; split it before adding another order.
+
 ## Deferred (needs a new system; not for this loop)
 
 - ~~Apply-potion-to-target flow (wilted plant, frightened creature, blocked path)~~ **Built

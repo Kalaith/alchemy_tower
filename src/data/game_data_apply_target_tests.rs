@@ -321,6 +321,63 @@ mod tests {
         );
     }
 
+    /// A morph branch is the hardest thing the brewing system asks for: the
+    /// quality bar, the exact heat and stir count, the timing word, sometimes a
+    /// named catalyst, a reagent order and the room bonus, all at once. Thirteen
+    /// of the twenty-nine bottles only a branch can make were wanted by nothing
+    /// — so the reward for the deepest verb in the tower was a thing to sell.
+    ///
+    /// "Wanted" is the same broad definition the compound tier uses: a request,
+    /// a repeatable order, a commission, a rune pattern, or a reagent slot. A
+    /// second morph reaching the same bottle deliberately does not count; that
+    /// is another way to make it, not a reason to have one.
+    #[test]
+    fn a_morph_branch_pays_out_in_something_somebody_wants() {
+        let data = load_embedded().expect("embedded game data should load");
+
+        let mut wanted = std::collections::HashSet::new();
+        for quest in &data.quests {
+            wanted.insert(quest.required_item_id.clone());
+        }
+        for recipe in &data.recipes {
+            for ingredient in &recipe.ingredients {
+                wanted.insert(ingredient.item_id.clone());
+            }
+        }
+        for rune in &data.rune_recipes {
+            wanted.insert(rune.input_item_id.clone());
+        }
+
+        // A bottle an ordinary recipe also makes is somebody else's problem —
+        // this guard is about what the *branch* is worth reaching for.
+        let plainly_brewable = data
+            .recipes
+            .iter()
+            .map(|recipe| recipe.output_item_id.clone())
+            .collect::<std::collections::HashSet<_>>();
+
+        let mut unwanted = data
+            .recipes
+            .iter()
+            .flat_map(|recipe| {
+                recipe
+                    .morph_targets
+                    .iter()
+                    .map(move |morph| (recipe, &morph.output_item_id))
+            })
+            .filter(|(_, output)| !wanted.contains(*output) && !plainly_brewable.contains(*output))
+            .map(|(recipe, output)| format!("{} branches into {output}, unasked for", recipe.id))
+            .collect::<Vec<_>>();
+
+        unwanted.sort();
+        unwanted.dedup();
+        assert!(
+            unwanted.is_empty(),
+            "precision brewing that pays out in vendor trash:
+{unwanted:#?}"
+        );
+    }
+
     /// The late tier exists to deepen decisions, not to lengthen a list. A
     /// second-order recipe should use the parts of the lattice the mid-game
     /// barely touches: three reagents, a full sequence, and a branch.
