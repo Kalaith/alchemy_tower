@@ -97,6 +97,56 @@ mod tests {
         );
     }
 
+    /// Two rules the whole world followed except in one place, which is why
+    /// nothing had noticed either of them was a rule.
+    ///
+    /// **A node belongs to a route.** `route_id` is what the herb journal writes
+    /// into `first_seen_route_id`/`learned_route_id`, so a node without one
+    /// files the pickup as "an unknown place" — the player poured a brew on
+    /// something, opened new ground, walked it, picked something, and the
+    /// journal cannot say where they were.
+    ///
+    /// **No ground in this valley is available all the time.** Every node in the
+    /// game constrains at least one of season, weather or time window — 44 of
+    /// them constrain all three — because deciding *when* to walk somewhere is
+    /// the outer loop of this game.
+    ///
+    /// The exception, on both counts, was the five nodes the first apply-target
+    /// pass opened: three on the re-seated bank above the switchback and two at
+    /// the settled roost. Ground the game's newest verb unlocks was the only
+    /// ground with no name and no season.
+    #[test]
+    fn every_gather_node_has_a_place_and_a_season() {
+        let data = load_embedded().expect("embedded game data should load");
+        let mut nameless = Vec::new();
+        let mut timeless = Vec::new();
+
+        for area in &data.areas {
+            for node in &area.gather_nodes {
+                if node.route_id.is_empty() {
+                    nameless.push(format!("{} ({})", node.id, area.id));
+                }
+                if node.seasons.is_empty()
+                    && node.weathers.is_empty()
+                    && node.time_windows.is_empty()
+                {
+                    timeless.push(format!("{} ({})", node.id, area.id));
+                }
+            }
+        }
+
+        nameless.sort();
+        timeless.sort();
+        assert!(
+            nameless.is_empty(),
+            "nodes that file into the journal as an unknown place:\n{nameless:#?}"
+        );
+        assert!(
+            timeless.is_empty(),
+            "ground that can be worked at any hour of any day of any year:\n{timeless:#?}"
+        );
+    }
+
     /// A route with nothing on it is a name in the journal that leads to bare
     /// ground. Two of these survived several passes purely because the claim
     /// "every route has something on it" was being made from memory instead of

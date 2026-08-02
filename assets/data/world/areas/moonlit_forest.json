@@ -421,12 +421,18 @@
         340
       ],
       "radius": 26.0,
-      "route_id": "",
+      "route_id": "forest_settled_roost",
       "seasons": [],
-      "weathers": [],
-      "time_windows": [],
+      "weathers": [
+        "clear",
+        "mist"
+      ],
+      "time_windows": [
+        "evening",
+        "night"
+      ],
       "spawn_chance": 90,
-      "note": "The roost holds still long enough to take a wing from the ground beneath it. It did not, before.",
+      "note": "The roost holds still long enough to take a wing from the ground beneath it, after dark and in air that is not moving. It did not, before.",
       "required_completed_quest": "",
       "required_journal_milestone": "forest_roost_settled",
       "render": {
@@ -448,12 +454,17 @@
         392
       ],
       "radius": 26.0,
-      "route_id": "",
+      "route_id": "forest_settled_roost",
       "seasons": [],
-      "weathers": [],
-      "time_windows": [],
+      "weathers": [
+        "clear",
+        "mist"
+      ],
+      "time_windows": [
+        "night"
+      ],
       "spawn_chance": 90,
-      "note": "Lyra will only take these by hand and only from a roost that is not panicking.",
+      "note": "Lyra will only take these by hand, at night, and only from a roost that is not panicking.",
       "required_completed_quest": "",
       "required_journal_milestone": "forest_roost_settled",
       "render": {

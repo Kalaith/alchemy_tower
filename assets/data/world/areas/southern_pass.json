@@ -272,12 +272,18 @@
         296
       ],
       "radius": 26.0,
-      "route_id": "",
-      "seasons": [],
+      "route_id": "pass_upper_bank",
+      "seasons": [
+        "summer",
+        "autumn"
+      ],
       "weathers": [],
-      "time_windows": [],
+      "time_windows": [
+        "morning",
+        "day"
+      ],
       "spawn_chance": 90,
-      "note": "Growing out of the bank that was lying across the path a season ago.",
+      "note": "Growing out of the bank that was lying across the path a season ago. It comes on with the heat and holds until the leaves turn.",
       "required_completed_quest": "",
       "required_journal_milestone": "pass_root_wall_cleared",
       "render": {
@@ -299,12 +305,18 @@
         272
       ],
       "radius": 26.0,
-      "route_id": "",
-      "seasons": [],
+      "route_id": "pass_upper_bank",
+      "seasons": [
+        "spring",
+        "summer"
+      ],
       "weathers": [],
-      "time_windows": [],
+      "time_windows": [
+        "morning",
+        "day"
+      ],
       "spawn_chance": 90,
-      "note": "The upper switchback carries flower now. Nobody cut this back; it was woken.",
+      "note": "The upper switchback carries flower now, and carries it early, before anything else this high. Nobody cut this back; it was woken.",
       "required_completed_quest": "",
       "required_journal_milestone": "pass_root_wall_cleared",
       "render": {
@@ -326,12 +338,18 @@
         320
       ],
       "radius": 26.0,
-      "route_id": "",
-      "seasons": [],
-      "weathers": [],
+      "route_id": "pass_upper_bank",
+      "seasons": [
+        "autumn",
+        "winter"
+      ],
+      "weathers": [
+        "clear",
+        "mist"
+      ],
       "time_windows": [],
       "spawn_chance": 90,
-      "note": "Lichen on the re-seated root wall, which is the sort of thing that only grows on something that is staying put.",
+      "note": "Lichen on the re-seated root wall, which only grows on something that is staying put, and only once the cold is properly in.",
       "required_completed_quest": "",
       "required_journal_milestone": "pass_root_wall_cleared",
       "render": {

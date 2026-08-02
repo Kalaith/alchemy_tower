@@ -7,7 +7,7 @@ measured against that target; anything not listed here is considered done.
 
 Where the content currently stands (re-counted 2026-08-03, second count that
 day — a week of iterations moves these fast enough that stale figures mislead):
-14 areas, 85 gather nodes and 21 routes, 6 apply targets, 170 items of which 104
+14 areas, 85 gather nodes and 23 routes, 6 apply targets, 170 items of which 104
 are potions and 49 ingredients, 62 recipes across 5 benches (with 37 morph
 branches, and two benches that take finished bottles) plus 17 rune patterns and
 28 mutations, 9 townsfolk with 181 reaction lines, 24 story-arc requests, 24 open
@@ -98,6 +98,38 @@ lines authored, one speaker each: Rowan on the bed, Lyra on the roost, Tarn on
 the root wall, Brin on the gallery, Elric on the hedgerow, Ione on the mirror.
 A second guard, `every_effect_a_bottle_can_carry_has_something_to_pour_it_on`,
 keeps the next `EffectKind` from shipping with nowhere to go.
+
+### The ground a target opens had no name, 2026-08-03
+
+- ~~The five nodes the first apply-target pass unlocked have no route and no
+  conditions~~ **Fixed 2026-08-03.** Two rules the whole world followed in one
+  place each, which is why nothing had noticed either was a rule:
+  **A node belongs to a route.** `route_id` is what the herb journal writes into
+  `first_seen_route_id`/`learned_route_id`, so a node without one files the
+  pickup as *"an unknown place"* — the player poured a brew on something, opened
+  new ground, walked it, picked something, and the journal could not say where
+  they had been.
+  **No ground in this valley is available all the time.** Every node in the game
+  constrains at least one of season, weather or time window, and 44 of them
+  constrain all three, because deciding *when* to walk somewhere is the outer
+  loop of this game.
+  The exception on both counts was exactly the five nodes the first apply-target
+  pass opened on 2026-08-02 — three on the re-seated bank above the switchback,
+  two at the settled roost. (The three the *second* pass opened have routes and
+  conditions, so this was one pass's blind spot rather than a habit.)
+  Two routes authored, which also fixes the pass being eight nodes on one route:
+  **The Upper Bank** — the bank that lay across the switchback a season ago is
+  now the only south-facing soil above the treeline, and it hands you a
+  different plant per season: driftbloom early, leanaway thrift through the
+  heat, coldiron lichen once the cold is properly in. **The Settled Roost** —
+  nothing there can be worked in daylight and, for twenty years, nothing there
+  could be worked at all; after dark and in still air the roost comes down and
+  stays down. Five nodes given seasons, hours and weather to match, and their
+  notes rewritten so the prose and the conditions agree.
+  `every_gather_node_has_a_place_and_a_season` is the guard, both halves
+  verified separately — stripping the routes names all five, stripping only the
+  conditions names the three on the bank. 21 → 23 routes.
+  `screenshots/hud/journal_routes.png`.
 
 ## Unconnected systems — audit 2026-08-02
 

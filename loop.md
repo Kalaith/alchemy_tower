@@ -1855,6 +1855,29 @@ Stop the loop and report if:
   The `compound` capture scene now finds the *forge* rather than the archive, which is a nice
   accident of it picking the first second-order recipe in data order.
 
+- **2026-08-03 — the ground the newest verb opens was the only ground with no name and no season.**
+  Axis: world/gathering, rotating off two passes of recipes and demand. Two rules the entire world
+  obeys, each broken in exactly one place, which is why neither had ever been written down:
+  **a node belongs to a route** — `route_id` is what the herb journal writes into
+  `first_seen_route_id`/`learned_route_id`, so a node without one files the pickup as *"an unknown
+  place"* — and **no ground in this valley is available all the time** (every node constrains at
+  least one of season/weather/time; 44 constrain all three).
+  The exception on both counts was the **five nodes the first apply-target pass opened**: three on
+  the re-seated bank above the switchback, two at the settled roost. So a player poured a brew on a
+  thing, opened new ground, walked it, picked something — and the journal could not say where they
+  had been, and the ground itself could be worked at any hour of any day of any year. *The three
+  nodes the second apply-target pass opened do have routes and conditions, so it was one pass's
+  blind spot, not a habit.*
+  **The Upper Bank** (southern_pass, also fixing 8 nodes on 1 route) hands you a different plant per
+  season — driftbloom early, thrift through the heat, coldiron lichen once the cold is in. **The
+  Settled Roost** (moonlit_forest) can only be worked after dark and in still air, which for twenty
+  years meant not at all. Notes rewritten so prose and conditions agree.
+  *Guard:* `every_gather_node_has_a_place_and_a_season`, **both halves verified separately** —
+  strip the routes and it names all five, strip only the conditions and it names the three on the
+  bank. The lesson is the shape of the finding rather than the fix: a rule followed 80 times out of
+  85 is invisible precisely because it looks like the way things are.
+  **21 → 23 routes; 193 tests.**
+
 ## Deferred (needs a new system; not for this loop)
 
 - ~~Apply-potion-to-target flow (wilted plant, frightened creature, blocked path)~~ **Built

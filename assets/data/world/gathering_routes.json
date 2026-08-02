@@ -125,6 +125,18 @@
       "name": "The Drip Line",
       "area_id": "tropical_rainforest",
       "description": "A pace out from the big trunks, where the canopy lets go of what it caught. It rains here for hours after it has stopped raining above, and on a clear morning this is the only wet ground in the valley."
+    },
+    {
+      "id": "pass_upper_bank",
+      "name": "The Upper Bank",
+      "area_id": "southern_pass",
+      "description": "The bank that lay across the switchback a season ago is now the only south-facing soil above the treeline. Flower early in the year, thrift through the heat, lichen once the cold is properly in."
+    },
+    {
+      "id": "forest_settled_roost",
+      "name": "The Settled Roost",
+      "area_id": "moonlit_forest",
+      "description": "Nothing here can be worked in daylight, and for twenty years nothing here could be worked at all. After dark and in still air the roost comes down and stays down, which is the whole of the opportunity."
     }
   ]
 }
