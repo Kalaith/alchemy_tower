@@ -386,82 +386,89 @@
       ]
     },
     {
-      "id": "longheld_cordial_recipe",
-      "name": "Longheld Cordial",
+      "id": "shelfwide_reading_recipe",
+      "name": "Shelf-Wide Reading",
       "station_id": "archive_reading_bench",
       "ingredients": [
         {
-          "item_id": "keptwarm_tonic",
+          "item_id": "annotated_light",
           "amount": 1
         },
         {
-          "item_id": "wardfrost_tonic",
+          "item_id": "benchlight_solution",
           "amount": 1
         },
         {
-          "item_id": "hollowroot",
+          "item_id": "mirrorbead",
           "amount": 1
         }
       ],
-      "output_item_id": "longheld_cordial",
+      "output_item_id": "shelfwide_reading",
       "output_amount": 1,
-      "description": "A restorative rebuilt out of two that were already finished. Wren has opinions about the waste and keeps asking for more of them.",
+      "description": "One light that stands ink off a page and one that finds a worn edge, laid over a bead that will not wet. What comes out reads the shelf instead of the book.",
       "required_heat": 2,
-      "required_stirs": 5,
-      "unstable_output_item_id": "murky_concoction",
-      "lore_note": "Nothing in the entry lab's book explains why this works. Everything on this floor assumes it.",
-      "minimum_quality": 46,
+      "required_stirs": 4,
+      "unstable_output_item_id": "lantern_leak",
+      "lore_note": "Nobody kept a record of what was consulted up here, because for twenty years nothing was. The shelves kept one regardless, in dust, and it is the only account of the last months that he did not get to first.",
+      "minimum_quality": 50,
       "preferred_traits": [
-        "restorative",
+        "luminous",
         "calm",
-        "pure"
+        "arcane"
       ],
       "guaranteed_traits": [
-        "restorative",
+        "luminous",
         "calm"
       ],
       "minimum_elements": {
-        "vita": 2,
+        "vita": 0,
         "ember": 0,
-        "mist": 1,
-        "lux": 0
+        "mist": 3,
+        "lux": 2
       },
-      "catalyst_tag": "stillwater",
-      "catalyst_quality_bonus": 14,
-      "required_timing": "steady",
+      "catalyst_tag": "starlight",
+      "catalyst_quality_bonus": 12,
+      "required_timing": "late",
       "required_sequence": [
-        "keptwarm_tonic",
-        "wardfrost_tonic",
-        "restorative"
+        "annotated_light",
+        "benchlight_solution",
+        "calm"
       ],
       "morph_targets": [
         {
-          "output_item_id": "cloudfloor_lantern",
-          "minimum_quality": 64,
+          "output_item_id": "heldstar_lantern",
+          "minimum_quality": 68,
           "catalyst_tag": "starlight",
-          "required_heat": 3,
+          "required_heat": 2,
           "required_stirs": 5,
           "required_timing": "late",
           "required_sequence": [
-            "keptwarm_tonic",
-            "wardfrost_tonic",
-            "restorative"
+            "annotated_light",
+            "benchlight_solution",
+            "calm"
           ],
-          "room_bonus_required": false
+          "room_bonus_required": true
         },
         {
-          "output_item_id": "rimeflower_cordial",
+          "output_item_id": "marginalia_lantern",
           "minimum_quality": 58,
           "catalyst_tag": "stillwater",
           "required_heat": 1,
-          "required_stirs": 6,
-          "required_timing": "early",
+          "required_stirs": 4,
+          "required_timing": "steady",
           "required_sequence": [
-            "keptwarm_tonic",
-            "wardfrost_tonic",
-            "restorative"
+            "annotated_light",
+            "benchlight_solution",
+            "calm"
           ],
-          "room_bonus_required": true
+          "room_bonus_required": false
+        }
+      ],
+      "discovery_milestones": [
+        {
+          "id": "the_shelves_kept_their_own_record",
+          "title": "The Shelves Kept Their Own Record",
+          "text": "Held along a rank of spines, the light shows which volumes came off the shelf and roughly when. He removed eleven months of his own notes and could not do anything about the dust, so the archive has been holding a list of what he was reading at the end the whole time nobody was here."
         }
       ]
     }

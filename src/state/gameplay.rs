@@ -264,6 +264,8 @@ mod gameplay_quest_requirements;
 mod gameplay_quests;
 #[path = "gameplay_rapport.rs"]
 mod gameplay_rapport;
+#[path = "gameplay_reagent_bottles.rs"]
+mod gameplay_reagent_bottles;
 #[path = "gameplay_recipe_memory.rs"]
 mod gameplay_recipe_memory;
 #[path = "gameplay_render.rs"]

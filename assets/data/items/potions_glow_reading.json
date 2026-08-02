@@ -188,6 +188,27 @@
           "description": "Cold and raking light at once — surface and pressure together."
         }
       ]
+    },
+    {
+      "id": "shelfwide_reading",
+      "name": "Shelf-Wide Reading",
+      "category": "potion",
+      "base_value": 196,
+      "color": [
+        198,
+        208,
+        232,
+        255
+      ],
+      "description": "Two desk lights folded over a mirror bead, so the reading comes off the page and lies flat along a whole rank of spines. Every volume taken down in the last twenty years wears a different line of dust, and this shows all of them at once without touching one.",
+      "effects": [
+        {
+          "kind": "glow",
+          "magnitude": 1.0,
+          "duration_seconds": 320.0,
+          "description": "A working light that reads a shelf rather than a page."
+        }
+      ]
     }
   ]
 }

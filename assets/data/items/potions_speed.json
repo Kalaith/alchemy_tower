@@ -347,6 +347,27 @@
           "description": "A hard, cheap turn of speed that does not last."
         }
       ]
+    },
+    {
+      "id": "longhaul_draught",
+      "name": "Long-Haul Draught",
+      "category": "potion",
+      "base_value": 188,
+      "color": [
+        176,
+        200,
+        224,
+        255
+      ],
+      "description": "One draught that arrives late and one that comes back after a gap, poured into each other until the gap is exactly the wait. Neither is any use alone, which is the tell. Tarn timed it up the switchback twice and then asked, in his way, whether it could be made in quantity.",
+      "effects": [
+        {
+          "kind": "speed",
+          "magnitude": 0.3,
+          "duration_seconds": 420.0,
+          "description": "A lift that does not fade between the switchback and the top."
+        }
+      ]
     }
   ]
 }

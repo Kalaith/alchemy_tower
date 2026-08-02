@@ -96,7 +96,7 @@ impl GameplayState {
 
     /// The batches this item really has, with anything the inventory no longer
     /// supports trimmed off. The read-only twin of `reconcile_bottle_stock`.
-    fn live_batches(&self, item_id: &str) -> Vec<BottleBatchEntry> {
+    pub(super) fn live_batches(&self, item_id: &str) -> Vec<BottleBatchEntry> {
         let held = self.inventory.get(item_id).copied().unwrap_or_default();
         let mut batches = self
             .progression

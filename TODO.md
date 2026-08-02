@@ -165,13 +165,17 @@ content with no destination.
 
 ### Authored content with no destination
 
-- **53 of 96 potions have no structural sink** — no quest, no board order, no
-  rune input, no recipe use; sale and planter-mutation fuel only. The worst
-  bench is `archive_reading_bench`: behind the deepest gate in the game, and
-  five of its six outputs are vendor trash. 11 of 17 rune-bench outputs are
-  requested by nothing, and no rune output feeds another rune recipe. When
-  building the late-game recipe tier, route requests at these before adding
-  new recipes.
+- **48 of 101 potions have no structural sink** — no quest, no board order, no
+  rune input, no recipe use; sale and planter-mutation fuel only. **Six routed
+  2026-08-03** by the second-order tier, which is the mechanism this entry
+  asked for: two archive outputs (`annotated_light`, `benchlight_solution`),
+  two mid-bench restoratives (`hushwater_draught`, `leanaway_salve`) and two
+  speed draughts including a *rune* output (`relay_draught`, `firstthaw_draught`)
+  are now required reagents. That answers "no rune output feeds anything" —
+  the rune floor's product is an input to the floor above it — but the tier
+  also makes three new top-of-chain bottles whose only destination is sale, so
+  the count moved by three rather than six. The next pass at this should be
+  requests, not recipes: a board order or commission wanting a compound bottle.
 - ~~Three relationship gifts are inert~~ **Fixed 2026-08-02.** The "used by no
   recipe" half of this was wrong: all three are catalysts, and each is the *sole*
   supplier of its tag (`starlight` feeds 9 recipe/morph slots, `saltroad` and
@@ -326,6 +330,38 @@ content with no destination.
   the label. Still open: two recipes is a proof, not a tier, and the balance has
   not been played — potions default to quality 20 with no traits or elements, so
   a compound brew leans on process bonuses and the catalyst to reach a band.
+- ~~The bottle you pour in is worth nothing~~ **Fixed 2026-08-03**, which was the
+  balance hole the entry above named. Every potion in the data leaves `quality`
+  unset, so the schema default of 20 stood in for a Crude bottle and a Masterwork
+  one alike and the tier's whole premise — brew the input well — bought exactly
+  nothing. Bottles have carried their grade in `bottle_stock` since the quality
+  work; `brew_ingredients` now folds the best held bottle into the reagent the
+  same way it folds a wild variant, so quality, traits, preferred-trait matches
+  and sequence tokens all pick it up without knowing bottles are graded. The
+  brew spends *that* batch: `take_from_inventory` trims the worst, which is
+  right for a sale and would have quietly kept the Masterwork the bench just
+  poured. On spec the five compound recipes score 51–73 on plain bottles and
+  90–100 on Masterwork ones. Elements are deliberately not folded — a batch
+  records what a brew resolves, and a potion's element profile is authored.
+  The materials list reads the poured grade rather than the item file's 20,
+  because that decision has to be visible at the bench; `screenshots/hud/
+  compound_bench.png` and a `compound` capture scene are the check. Five tests,
+  including one that runs *every* second-order recipe to its own spec twice and
+  fails if masterwork reagents do not beat plain ones.
+- ~~Two recipes is a proof, not a tier~~ **Five now, 2026-08-03**, one per effect
+  kind the bench lacked. **Shelf-Wide Reading** folds the two archive lights the
+  audit called vendor trash over a mirror bead, and reads a rank of spines rather
+  than a page — the dust says which volumes came off the shelf, so the shelves
+  have been keeping the record he removed the whole time (Ione's line, journal
+  beat). **Carry-Down Cordial** is a holding salve and a draught quiet enough to
+  move somebody under: it treats the journey, not the injury, which is Wren's
+  twenty-year complaint. **Long-Haul Draught** takes a *rune* output and a
+  greenhouse draught whose faults are the same length and cancels one against the
+  other. Filing fixed on the way: the restore and speed recipes are in
+  `recipes_restore_archive_reading_bench.json` and
+  `recipes_speed_archive_reading_bench.json` rather than bundled into the glow
+  file, and `longheld_cordial` moved with them. Still open: the three new outputs
+  have no destination but the counter (see the sinkless-potion entry).
 
 ## Story & world state
 

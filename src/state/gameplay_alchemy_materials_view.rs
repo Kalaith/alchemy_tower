@@ -28,7 +28,13 @@ impl GameplayState {
                     );
                     AlchemyMaterialRowView {
                         title: data.item_name(&card.item_id).to_owned(),
-                        meta: self.item_card_meta(data, &card.item_id, card.amount, &extra),
+                        meta: self.item_card_meta_at_quality(
+                            data,
+                            &card.item_id,
+                            card.amount,
+                            &extra,
+                            self.reagent_quality(data, &card.item_id),
+                        ),
                         selected: card.selected,
                         enabled: card.ready > 0,
                     }

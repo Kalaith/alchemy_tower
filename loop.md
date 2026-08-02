@@ -1370,6 +1370,38 @@ Stop the loop and report if:
   check what the doc comments above a test are actually describing before moving it.*
   **558 + 184 lines; largest file in the project now 646 (data) and 558 (code); 96 tests.**
 
+- **2026-08-03 — the deepest bench in the tower could not tell a Masterwork bottle from a bought
+  one.** Second-order brewing shipped two passes ago as *the* late tier, and every potion in the
+  data files leaves `quality` unset, so the schema default of **20** stood in for every bottle
+  poured into a compound brew. The tier's entire premise — brew the input well, then fold it —
+  bought **nothing**, and the materials list said so out loud: a row reading *quality 20* beside a
+  bench about to pour a solution the player had spent four reagents getting to Excellent.
+  The fix was already half-built. Bottles have carried their grade in `bottle_stock` since the
+  quality pass; `brew_ingredients` now folds the best held bottle into the reagent exactly the way
+  it folds a wild variant, so quality, traits, preferred-trait matches and **sequence tokens** all
+  pick it up with nothing downstream knowing bottles are graded. **On spec the five compound
+  recipes score 51–73 on plain bottles and 90–100 on Masterwork ones.**
+  ***The subtle half is what gets spent.*** `take_from_inventory` trims the **worst** batch, which
+  is correct for a sale and wrong here — pour a Masterwork and the shelf would have quietly kept
+  it and dropped a Crude one, so one lucky bottle would have improved every future brew of that
+  recipe forever. `spend_brew_bottles` runs *inside* `consume_brew_inputs`, before the count drops,
+  and the test drives that real path rather than the helper: I first wrote it against the helper,
+  deleted the wiring to check it bit, and it **passed**. A test that cannot fail is not a guard.
+  *Content, one per effect kind the bench lacked:* **Shelf-Wide Reading** folds the two archive
+  lights the sinkless audit named as vendor trash and reads a rank of spines instead of a page —
+  dust says which volumes came off the shelf, so the shelves kept the record he removed. **Carry-
+  Down Cordial** treats the journey rather than the injury. **Long-Haul Draught** takes a **rune
+  output** and a greenhouse draught whose faults are the same length and cancels one against the
+  other — the first time anything the rune floor makes feeds the floor above it. Tier 2 → 5, and
+  six previously sinkless potions are required reagents.
+  *Filing drift fixed on the way:* a restore and a speed recipe do not belong in the *glow* file,
+  so `recipes_restore_archive_reading_bench.json` and `recipes_speed_archive_reading_bench.json`
+  now exist and `longheld_cordial` moved into the first — it had been misfiled since it was written.
+  *Harness:* new `compound` scene. The plain `brew` scene **cannot** show this, because a bench
+  that refuses bottles never lists one; and the first capture came back with the overlay shut,
+  because a second-order bench is gated by definition and the sample had not opened its milestone.
+  **101 potions, 59 recipes (5 second-order), 48 sinkless; 161 tests.**
+
 ## Deferred (needs a new system; not for this loop)
 
 - Apply-potion-to-target flow (wilted plant, frightened creature, blocked path) — `TODO.md` calls it

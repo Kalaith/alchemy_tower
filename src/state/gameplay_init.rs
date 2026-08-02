@@ -217,6 +217,74 @@ impl GameplayState {
         self.set_overlay(super::gameplay_overlay_types::OverlayScreen::Alchemy);
     }
 
+    /// Seed a second-order bench with the bottles a compound formula asks for,
+    /// graded as brews rather than as shop stock, and open it. The plain `brew`
+    /// scene cannot show this: a bench that does not take bottles never lists
+    /// one, so the grade a poured bottle carries has nowhere to appear.
+    pub(crate) fn open_compound_brew_sample(&mut self, data: &GameData) {
+        let Some(recipe) = data.recipes.iter().find(|recipe| {
+            data.stations
+                .iter()
+                .any(|station| station.id == recipe.station_id && station.accepts_potions)
+                && recipe.ingredients.iter().any(|ingredient| {
+                    data.item(&ingredient.item_id)
+                        .is_some_and(|item| item.category == crate::data::ItemCategory::Potion)
+                })
+        }) else {
+            return;
+        };
+        if let Some(station) = data
+            .stations
+            .iter()
+            .find(|station| station.id == recipe.station_id)
+        {
+            self.world.current_area_id = station.area_id.clone();
+            self.world.player.position =
+                macroquad::prelude::vec2(station.position[0], station.position[1]);
+            // A second-order bench is behind a gate by definition — it is the
+            // deepest floor in the tower — so the scene has to have opened it.
+            if !station.required_journal_milestone.is_empty() {
+                let milestone = station.required_journal_milestone.clone();
+                self.push_journal_milestone(&milestone, "", "");
+            }
+        }
+        for (slot, ingredient) in recipe.ingredients.iter().take(3).enumerate() {
+            self.inventory.insert(ingredient.item_id.clone(), 2);
+            self.alchemy.slots[slot] = Some(ingredient.item_id.clone());
+            let Some(item) = data.item(&ingredient.item_id) else {
+                continue;
+            };
+            if item.category != crate::data::ItemCategory::Potion {
+                continue;
+            }
+            self.progression.bottle_stock.insert(
+                ingredient.item_id.clone(),
+                vec![crate::data::BottleBatchEntry {
+                    item_id: ingredient.item_id.clone(),
+                    quality_score: 78,
+                    quality_band: "Excellent".to_owned(),
+                    traits: vec!["luminous".to_owned()],
+                    count: 2,
+                }],
+            );
+        }
+        if !recipe.catalyst_tag.is_empty() {
+            if let Some(catalyst) = data
+                .items
+                .iter()
+                .find(|item| item.catalyst_tags.contains(&recipe.catalyst_tag))
+            {
+                self.inventory.insert(catalyst.id.clone(), 1);
+                self.alchemy.catalyst = Some(catalyst.id.clone());
+            }
+        }
+        self.progression.known_recipes.insert(recipe.id.clone());
+        self.progression.total_brews = 40;
+        self.alchemy.heat = recipe.required_heat;
+        self.alchemy.stirs = recipe.required_stirs;
+        self.set_overlay(super::gameplay_overlay_types::OverlayScreen::Alchemy);
+    }
+
     /// Seed a couple of learned herb memories and open the journal, so the
     /// capture harness can render the herb-memory tab (including the new
     /// "brews into" recipe usage line).

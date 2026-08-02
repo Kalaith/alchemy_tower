@@ -15,8 +15,9 @@
 //! calculation — quality, traits, elements, volatility, synthesis — to pick the
 //! difference up without knowing variants exist.
 
+use super::gameplay_reagent_bottles::pour_bottle;
 use super::GameplayState;
-use crate::data::{GameData, ItemDefinition, WildVariantDefinition};
+use crate::data::{GameData, ItemCategory, ItemDefinition, WildVariantDefinition};
 
 impl GameplayState {
     /// Record that one gathered unit of `item_id` came up as `variant_id`.
@@ -66,8 +67,9 @@ impl GameplayState {
     }
 
     /// The ingredients a brew of `selected_items` would actually be made from,
-    /// with the best held variant folded into each one. Returned owned because
-    /// a variant-grade reagent is not any `ItemDefinition` the data file holds.
+    /// with the best held variant folded into each herb and the best held bottle
+    /// folded into each potion. Returned owned because neither a variant-grade
+    /// reagent nor a graded bottle is any `ItemDefinition` the data file holds.
     pub(super) fn brew_ingredients(
         &self,
         data: &GameData,
@@ -75,12 +77,16 @@ impl GameplayState {
     ) -> Vec<ItemDefinition> {
         // One unit of each variant can only be spent once, so a brew calling for
         // two of the same herb gets the variant for the first and the plain herb
-        // for the second.
+        // for the second. Bottles work the same way, best first.
         let mut remaining = self.progression.variant_stock.clone();
+        let mut pour = self.reagent_bottle_pour();
         selected_items
             .iter()
             .filter_map(|item_id| {
                 let item = data.item(item_id)?;
+                if item.category == ItemCategory::Potion {
+                    return Some(pour_bottle(item, &mut pour));
+                }
                 let variant = self
                     .best_held_variant(data, item_id)
                     .filter(|variant| {

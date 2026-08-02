@@ -134,6 +134,12 @@ impl Game {
                 gameplay.open_alchemy_sample_brew(&self.data);
                 GameState::from_gameplay(gameplay)
             }
+            // "compound" opens a bench that takes bottles, holding graded ones.
+            "compound" => {
+                let mut gameplay = GameplayState::new(&self.data);
+                gameplay.open_compound_brew_sample(&self.data);
+                GameState::from_gameplay(gameplay)
+            }
             // "rune" opens the rune workbench holding every reworkable potion.
             "rune" => {
                 let mut gameplay = GameplayState::new(&self.data);

@@ -266,6 +266,10 @@ const RECIPE_SOURCES: &[(&str, &str)] = &[
         include_str!("../../assets/data/crafting/recipes_restore_rune_forge_bench.json"),
     ),
     (
+        "crafting/recipes_restore_archive_reading_bench",
+        include_str!("../../assets/data/crafting/recipes_restore_archive_reading_bench.json"),
+    ),
+    (
         "crafting/recipes_glow",
         include_str!("../../assets/data/crafting/recipes_glow.json"),
     ),
@@ -276,6 +280,10 @@ const RECIPE_SOURCES: &[(&str, &str)] = &[
     (
         "crafting/recipes_speed",
         include_str!("../../assets/data/crafting/recipes_speed.json"),
+    ),
+    (
+        "crafting/recipes_speed_archive_reading_bench",
+        include_str!("../../assets/data/crafting/recipes_speed_archive_reading_bench.json"),
     ),
 ];
 

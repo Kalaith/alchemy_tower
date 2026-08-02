@@ -4,7 +4,11 @@ use crate::content::narrative_text;
 use crate::data::{CraftedItemProfileEntry, GameData, ItemCategory};
 
 impl GameplayState {
-    pub(super) fn consume_brew_inputs(&mut self, selected: &[String]) {
+    pub(super) fn consume_brew_inputs(&mut self, data: &GameData, selected: &[String]) {
+        // A poured bottle has to leave the shelf before the count drops, or the
+        // reconcile inside `take_from_inventory` would trim the *worst* batch
+        // and quietly keep the good bottle the bench just used.
+        self.spend_brew_bottles(data, selected);
         for item_id in selected {
             self.take_from_inventory(item_id, 1);
         }

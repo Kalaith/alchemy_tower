@@ -1,0 +1,164 @@
+{
+  "recipes": [
+    {
+      "id": "longheld_cordial_recipe",
+      "name": "Longheld Cordial",
+      "station_id": "archive_reading_bench",
+      "ingredients": [
+        {
+          "item_id": "keptwarm_tonic",
+          "amount": 1
+        },
+        {
+          "item_id": "wardfrost_tonic",
+          "amount": 1
+        },
+        {
+          "item_id": "hollowroot",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "longheld_cordial",
+      "output_amount": 1,
+      "description": "A restorative rebuilt out of two that were already finished. Wren has opinions about the waste and keeps asking for more of them.",
+      "required_heat": 2,
+      "required_stirs": 5,
+      "unstable_output_item_id": "murky_concoction",
+      "lore_note": "Nothing in the entry lab's book explains why this works. Everything on this floor assumes it.",
+      "minimum_quality": 46,
+      "preferred_traits": [
+        "restorative",
+        "calm",
+        "pure"
+      ],
+      "guaranteed_traits": [
+        "restorative",
+        "calm"
+      ],
+      "minimum_elements": {
+        "vita": 2,
+        "ember": 0,
+        "mist": 1,
+        "lux": 0
+      },
+      "catalyst_tag": "stillwater",
+      "catalyst_quality_bonus": 14,
+      "required_timing": "steady",
+      "required_sequence": [
+        "keptwarm_tonic",
+        "wardfrost_tonic",
+        "restorative"
+      ],
+      "morph_targets": [
+        {
+          "output_item_id": "cloudfloor_lantern",
+          "minimum_quality": 64,
+          "catalyst_tag": "starlight",
+          "required_heat": 3,
+          "required_stirs": 5,
+          "required_timing": "late",
+          "required_sequence": [
+            "keptwarm_tonic",
+            "wardfrost_tonic",
+            "restorative"
+          ],
+          "room_bonus_required": false
+        },
+        {
+          "output_item_id": "rimeflower_cordial",
+          "minimum_quality": 58,
+          "catalyst_tag": "stillwater",
+          "required_heat": 1,
+          "required_stirs": 6,
+          "required_timing": "early",
+          "required_sequence": [
+            "keptwarm_tonic",
+            "wardfrost_tonic",
+            "restorative"
+          ],
+          "room_bonus_required": true
+        }
+      ]
+    },
+    {
+      "id": "carrydown_cordial_recipe",
+      "name": "Carry-Down Cordial",
+      "station_id": "archive_reading_bench",
+      "ingredients": [
+        {
+          "item_id": "hushwater_draught",
+          "amount": 1
+        },
+        {
+          "item_id": "leanaway_salve",
+          "amount": 1
+        },
+        {
+          "item_id": "hollowroot",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "carrydown_cordial",
+      "output_amount": 1,
+      "description": "A salve that refuses to let damage worsen and a draught quiet enough to move somebody under, folded over the root the valley lost. What it treats is the journey.",
+      "required_heat": 1,
+      "required_stirs": 5,
+      "unstable_output_item_id": "murky_concoction",
+      "lore_note": "Wren has twenty years of notes on people who arrived too late. This is the first thing the tower has made that changes the arriving rather than the treating, and she said so in one sentence and then went back to work.",
+      "minimum_quality": 48,
+      "preferred_traits": [
+        "restorative",
+        "calm",
+        "pure"
+      ],
+      "guaranteed_traits": [
+        "restorative",
+        "calm"
+      ],
+      "minimum_elements": {
+        "vita": 2,
+        "ember": 0,
+        "mist": 1,
+        "lux": 0
+      },
+      "catalyst_tag": "stillwater",
+      "catalyst_quality_bonus": 14,
+      "required_timing": "early",
+      "required_sequence": [
+        "hushwater_draught",
+        "leanaway_salve",
+        "restorative"
+      ],
+      "morph_targets": [
+        {
+          "output_item_id": "lastthaw_cordial",
+          "minimum_quality": 62,
+          "catalyst_tag": "saltroad",
+          "required_heat": 2,
+          "required_stirs": 5,
+          "required_timing": "steady",
+          "required_sequence": [
+            "hushwater_draught",
+            "leanaway_salve",
+            "restorative"
+          ],
+          "room_bonus_required": false
+        },
+        {
+          "output_item_id": "hollowroot_reliquary",
+          "minimum_quality": 56,
+          "catalyst_tag": "stillwater",
+          "required_heat": 1,
+          "required_stirs": 6,
+          "required_timing": "early",
+          "required_sequence": [
+            "hushwater_draught",
+            "leanaway_salve",
+            "restorative"
+          ],
+          "room_bonus_required": true
+        }
+      ]
+    }
+  ]
+}

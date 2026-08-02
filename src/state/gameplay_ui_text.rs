@@ -10,11 +10,27 @@ impl GameplayState {
         amount: u32,
         extra: &str,
     ) -> String {
-        let item = data.item(item_id);
-        let quality = item
+        let quality = data
+            .item(item_id)
             .map(|item| item.quality)
-            .unwrap_or_default()
-            .to_string();
+            .unwrap_or_default();
+        self.item_card_meta_at_quality(data, item_id, amount, extra, quality)
+    }
+
+    /// The same card, told what the item is worth in this context. A shop row
+    /// describes the bottle on the counter and takes the authored quality; the
+    /// bench's materials list describes the bottle on your own shelf, which is
+    /// worth what you brewed it at.
+    pub(super) fn item_card_meta_at_quality(
+        &self,
+        data: &GameData,
+        item_id: &str,
+        amount: u32,
+        extra: &str,
+        quality: u32,
+    ) -> String {
+        let item = data.item(item_id);
+        let quality = quality.to_string();
         let rarity = item.map(|item| item.rarity).unwrap_or_default().to_string();
         let amount = amount.to_string();
         let base = ui_format(

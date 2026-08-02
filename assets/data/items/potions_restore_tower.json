@@ -473,6 +473,27 @@
           "description": "Restores deeply and does not need a cold shelf to do it."
         }
       ]
+    },
+    {
+      "id": "carrydown_cordial",
+      "name": "Carry-Down Cordial",
+      "category": "potion",
+      "base_value": 205,
+      "color": [
+        188,
+        206,
+        206,
+        255
+      ],
+      "description": "A salve that holds damage still and a draught quiet enough that Lyra will not keep it near the habitats, folded into one bottle. It mends nothing on the way down. It makes the way down survivable, which Wren says is a different profession and the one this valley actually needs.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 58.0,
+          "duration_seconds": 0.0,
+          "description": "Holds the damage still and the patient quiet for the length of a descent."
+        }
+      ]
     }
   ]
 }

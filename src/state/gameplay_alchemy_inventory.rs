@@ -42,7 +42,7 @@ impl GameplayState {
         self.spend_brewing_vitality(data);
         // The variant units go into the pot with everything else.
         self.spend_brew_variants(data, &selected);
-        self.consume_brew_inputs(&selected);
+        self.consume_brew_inputs(data, &selected);
         let previous_profile = self.record_brew_inventory_result(data, &resolution, stable_brew);
         // A mixture nobody wrote down, made enough times to stop being an
         // accident, is a formula the player found on their own.

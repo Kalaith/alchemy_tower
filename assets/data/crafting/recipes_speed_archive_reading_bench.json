@@ -1,0 +1,83 @@
+{
+  "recipes": [
+    {
+      "id": "longhaul_draught_recipe",
+      "name": "Long-Haul Draught",
+      "station_id": "archive_reading_bench",
+      "ingredients": [
+        {
+          "item_id": "relay_draught",
+          "amount": 1
+        },
+        {
+          "item_id": "firstthaw_draught",
+          "amount": 1
+        },
+        {
+          "item_id": "driftbloom",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "longhaul_draught",
+      "output_amount": 2,
+      "description": "The draught that arrives late poured into the one that comes back after a gap. Their two faults are the same length, and folded together they cancel.",
+      "required_heat": 2,
+      "required_stirs": 4,
+      "unstable_output_item_id": "rush_draught",
+      "lore_note": "This is the only thing the reading bench makes that nobody reads by. Ione pointed that out; Tarn pointed out that the road is four days and the light is not the problem.",
+      "minimum_quality": 46,
+      "preferred_traits": [
+        "vigor",
+        "pure",
+        "arcane"
+      ],
+      "guaranteed_traits": [
+        "vigor"
+      ],
+      "minimum_elements": {
+        "vita": 2,
+        "ember": 0,
+        "mist": 0,
+        "lux": 1
+      },
+      "catalyst_tag": "saltroad",
+      "catalyst_quality_bonus": 12,
+      "required_timing": "steady",
+      "required_sequence": [
+        "relay_draught",
+        "firstthaw_draught",
+        "vigor"
+      ],
+      "morph_targets": [
+        {
+          "output_item_id": "longstride_draught",
+          "minimum_quality": 58,
+          "catalyst_tag": "stillwater",
+          "required_heat": 1,
+          "required_stirs": 4,
+          "required_timing": "late",
+          "required_sequence": [
+            "relay_draught",
+            "firstthaw_draught",
+            "vigor"
+          ],
+          "room_bonus_required": false
+        },
+        {
+          "output_item_id": "farcarried_tonic",
+          "minimum_quality": 64,
+          "catalyst_tag": "saltroad",
+          "required_heat": 3,
+          "required_stirs": 5,
+          "required_timing": "steady",
+          "required_sequence": [
+            "relay_draught",
+            "firstthaw_draught",
+            "vigor"
+          ],
+          "room_bonus_required": true
+        }
+      ]
+    }
+  ]
+}

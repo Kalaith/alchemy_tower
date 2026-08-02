@@ -186,6 +186,12 @@
       "after_milestone": "commission_reading_room_opened",
       "order": 115,
       "line": "There are three people at the middle table and one of them is arguing with me. Nine years I worked in here on my own and I would have told you the quiet was the point. It was not the point. It was just what there was."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_milestone": "the_shelves_kept_their_own_record",
+      "order": 112,
+      "line": "Dust. Twenty years of it, and it has been keeping a list the entire time of which volumes came off the shelf and roughly when. He was careful with the record and could not be careful with the shelf. I know what he was reading in his last month here, and I did not have to find a single page of it to know."
     }
   ]
 }
