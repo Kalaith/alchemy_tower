@@ -44,6 +44,9 @@ pub(super) struct ProgressionState {
     /// Off-book mixture signature -> how many times it has been brewed. See
     /// `gameplay_salvage_discovery`.
     pub(super) salvage_familiarity: BTreeMap<String, u32>,
+    /// Things in the world a brew has been poured on — see
+    /// `gameplay_apply_targets`.
+    pub(super) treated_targets: HashSet<String>,
 }
 
 impl ProgressionState {
@@ -68,6 +71,7 @@ impl ProgressionState {
             bottle_stock: BTreeMap::new(),
             spoken_reactions: HashSet::new(),
             salvage_familiarity: BTreeMap::new(),
+            treated_targets: HashSet::new(),
         }
     }
 }

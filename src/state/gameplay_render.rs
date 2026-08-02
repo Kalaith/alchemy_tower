@@ -20,5 +20,6 @@ impl GameplayState {
         self.draw_area_stations(area, offset, data, art);
         self.draw_area_npcs(area, offset, data, art);
         self.draw_area_gather_nodes(area, offset, data, art);
+        self.draw_area_apply_targets(area, offset);
     }
 }

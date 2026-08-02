@@ -32,6 +32,11 @@ pub(crate) mod tests {
             for warp in &area.warps {
                 recordable.extend(warp.unlock_milestones.iter().map(|m| m.id.clone()));
             }
+            // And a fourth writer: something in the world having a brew poured
+            // on it. A gate waiting on one of these is waiting on a real beat.
+            for target in &area.apply_targets {
+                recordable.extend(target.completion_milestones.iter().map(|m| m.id.clone()));
+            }
         }
         recordable
     }

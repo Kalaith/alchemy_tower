@@ -69,6 +69,11 @@ impl GameplayState {
             }
         }
 
+        if let Some(target) = self.interaction_apply_target(area) {
+            self.handle_apply_target_interaction(data, target);
+            return;
+        }
+
         if let Some(warp) = self.interaction_warp(area) {
             self.handle_warp_interaction(data, warp);
             return;

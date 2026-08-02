@@ -40,13 +40,24 @@ what makes it a 20–25 hour game rather than a well-furnished 8-hour one.
   badly — `starlight_shard` is night-only but also shop stock, and the recipe's
   two reagents are day-gatherable.
   All four `EffectKind`s now do something.
-- Implement the apply-potion-to-target flow (wilted route plant, frightened
-  creature, blocked path) on top of the existing `EffectKind` system. Delivery
-  is still just handing a bottle to an NPC; blockers are collision and art only
-  (`data/schema_render.rs`, `art/props.rs`), never something a brew can act on.
-  Until this exists the game's stated premise is unexpressed.
-- Once targets exist, gate two or three route/floor openings behind applying a
-  potion rather than delivering one, so the mechanic is on the critical path.
+- ~~Implement the apply-potion-to-target flow~~ **Done 2026-08-02.** Areas carry
+  `apply_targets`: things a brew is poured *on* rather than drunk or handed
+  over. Each names an effect kind and optionally a grade; treating one spends a
+  qualifying bottle (worst acceptable first, the same courtesy delivery pays)
+  and records journal milestones. Those milestones are deliberately the same
+  currency every existing gate reads, so warps, stations and nodes can wait on a
+  treated target with no new gating machinery. Three authored to the TODO's own
+  examples: a stalled propagation bed (greenhouse), a startled moth roost
+  (forest), and a slumped root wall across the upper switchback (pass). Targets
+  draw as a pulsing ring from primitives — legible before there is art for them.
+- ~~Gate route/floor openings behind applying a potion~~ **Partly done
+  2026-08-02.** The containment lift now waits on the greenhouse bed being
+  revived, so the mechanic is on the critical path rather than optional scenery,
+  and a test asserts *something* opens only by treating. Two of the three
+  targets are still their own reward; the root wall in particular wants
+  something above the upper switchback to open onto, which the pass does not yet
+  have. `recordable_milestone_ids` learned that targets are a fourth writer into
+  the journal, so a gate waiting on one is not reported as waiting on nothing.
 
 ## Unconnected systems — audit 2026-08-02
 

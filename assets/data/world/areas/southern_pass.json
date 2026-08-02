@@ -257,5 +257,33 @@
         "sprite_id": "thinair_bell_pass"
       }
     }
+  ],
+  "apply_targets": [
+    {
+      "id": "pass_root_wall",
+      "name": "Slumped Root Wall",
+      "position": [
+        640.0,
+        420.0
+      ],
+      "radius": 38.0,
+      "color": [
+        190,
+        150,
+        110,
+        255
+      ],
+      "required_effect_kind": "restore",
+      "minimum_quality_band": "Fine",
+      "untreated_note": "A whole bank of root has come down across the upper switchback. Cutting it would take a crew a week; waking it would take an afternoon and a good bottle.",
+      "treated_note": "The root wall stirs, takes hold of its own bank again, and lifts clear of the path. The upper switchback is walkable.",
+      "completion_milestones": [
+        {
+          "id": "pass_root_wall_cleared",
+          "title": "The Bank Takes Hold Again",
+          "text": "The slumped root across the upper switchback was not cut away. It was treated, and it took hold of its own bank again — the road above it is open because something was grown rather than removed."
+        }
+      ]
+    }
   ]
 }

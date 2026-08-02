@@ -589,6 +589,10 @@
     "journal_found_formula_text": "Nobody wrote this one down. {reagents} at the {station}, three times over, and it comes out {output} every time. The book in this tower is a record of what somebody once worked out, and it is one line longer now.",
     "overlay_alchemy_read_found": "No page for this, but you have made it before and it held. Your hands know the shape of it.",
     "hud_vitality_warning": "You are running out. Drink something restorative or get to a bed before you drop.",
-    "gather_too_dark": "Too dark to tell one leaf from another. Something that throws a light would fix that."
+    "gather_too_dark": "Too dark to tell one leaf from another. Something that throws a light would fix that.",
+    "target_treated_toast": "Treated: {name}",
+    "target_needs_effect": "Nothing you are carrying would help. This wants something {effect} poured on it.",
+    "target_needs_graded_effect": "Nothing you are carrying is good enough. This wants something {effect}, {band} or better.",
+    "world_prompt_apply": "{interact}: Treat {name}"
   }
 }

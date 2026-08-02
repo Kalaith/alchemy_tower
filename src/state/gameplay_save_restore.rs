@@ -117,6 +117,7 @@ pub(super) fn apply_save_snapshot(
         .into_iter()
         .map(|entry| (entry.signature, entry.attempts))
         .collect();
+    state.progression.treated_targets = save.treated_targets.into_iter().collect();
     state.world.available_nodes.clear();
     state.ui = OverlayState::new_gameplay();
     state.alchemy = AlchemySession::default();

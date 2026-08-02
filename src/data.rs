@@ -2,6 +2,8 @@
 
 mod embedded_json;
 mod game_data;
+#[cfg(test)]
+mod game_data_apply_target_tests;
 mod game_data_fallback;
 #[cfg(test)]
 mod game_data_narrative_tests;
@@ -28,10 +30,10 @@ pub(crate) use save_models::{
     RelationshipEntry, SalvageFamiliarityEntry, SaveData, VariantStockEntry,
 };
 pub(crate) use schema::{
-    AreaDefinition, BlockerVisualStyle, EffectDefinition, EffectKind, ElementProfile, GameConfig,
-    GatherNodeDefinition, GatheringRouteDefinition, HabitatStateEntry, ItemCategory,
-    ItemDefinition, JournalMilestoneEntry, MorphDefinition, MutationFormulaDefinition,
-    NpcDefinition, PlanterStateEntry, QuestDefinition, RecipeDefinition, RectDefinition,
-    RuneRecipeDefinition, SalvageTuning, StationDefinition, StationKind, WarpDefinition,
-    WildVariantDefinition,
+    ApplyTargetDefinition, AreaDefinition, BlockerVisualStyle, EffectDefinition, EffectKind,
+    ElementProfile, GameConfig, GatherNodeDefinition, GatheringRouteDefinition, HabitatStateEntry,
+    ItemCategory, ItemDefinition, JournalMilestoneEntry, MorphDefinition,
+    MutationFormulaDefinition, NpcDefinition, PlanterStateEntry, QuestDefinition, RecipeDefinition,
+    RectDefinition, RuneRecipeDefinition, SalvageTuning, StationDefinition, StationKind,
+    WarpDefinition, WildVariantDefinition,
 };

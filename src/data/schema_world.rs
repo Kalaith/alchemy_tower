@@ -205,6 +205,34 @@ pub(crate) struct GatherNodeDefinition {
     pub(crate) render: GatherNodeRenderDefinition,
 }
 
+/// Something in the world a brew can be used *on*, rather than drunk or handed
+/// over: a wilted plant, a frightened creature, a slumped root wall across a
+/// path. The game is about applied alchemy and until these existed the only
+/// thing a bottle could do to the world was change an NPC's mind about you.
+///
+/// Resolving one records journal milestones, which is deliberately the same
+/// currency every other gate already reads — a warp, a station or a gather node
+/// can wait on a target being treated without any new gating machinery.
+#[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
+pub(crate) struct ApplyTargetDefinition {
+    pub(crate) id: String,
+    pub(crate) name: String,
+    pub(crate) position: [f32; 2],
+    pub(crate) radius: f32,
+    pub(crate) color: [u8; 4],
+    /// The kind of brew this needs poured on it.
+    pub(crate) required_effect_kind: String,
+    /// And how good it has to be. Empty means any bottle that does the job.
+    #[serde(default)]
+    pub(crate) minimum_quality_band: String,
+    /// What the player is told before treating it, and after.
+    pub(crate) untreated_note: String,
+    pub(crate) treated_note: String,
+    #[serde(default)]
+    pub(crate) completion_milestones: Vec<JournalMilestoneEntry>,
+}
+
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub(crate) struct GatheringRouteDefinition {
     pub(crate) id: String,
@@ -295,6 +323,8 @@ pub(crate) struct AreaDefinition {
     pub(crate) blockers: Vec<RectDefinition>,
     pub(crate) warps: Vec<WarpDefinition>,
     pub(crate) gather_nodes: Vec<GatherNodeDefinition>,
+    #[serde(default)]
+    pub(crate) apply_targets: Vec<ApplyTargetDefinition>,
     #[serde(default)]
     pub(crate) render: AreaRenderDefinition,
 }

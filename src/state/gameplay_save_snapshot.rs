@@ -114,5 +114,6 @@ pub(super) fn build_save_snapshot(state: &GameplayState, data: &GameData) -> Sav
                 attempts: *attempts,
             })
             .collect(),
+        treated_targets: state.progression.treated_targets.iter().cloned().collect(),
     }
 }

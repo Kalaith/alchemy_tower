@@ -407,5 +407,33 @@
       }
     }
   ],
-  "footstep_sound_set": "leaf"
+  "footstep_sound_set": "leaf",
+  "apply_targets": [
+    {
+      "id": "forest_startled_roost",
+      "name": "Startled Roost",
+      "position": [
+        980.0,
+        300.0
+      ],
+      "radius": 34.0,
+      "color": [
+        160,
+        150,
+        220,
+        255
+      ],
+      "required_effect_kind": "misfire",
+      "minimum_quality_band": "",
+      "untreated_note": "Something has the whole roost on edge. They scatter before you are within ten paces and will not settle.",
+      "treated_note": "The air goes thick and slow and the roost stops flinching. Whatever was in the dark has decided elsewhere is better.",
+      "completion_milestones": [
+        {
+          "id": "forest_roost_settled",
+          "title": "The Roost Stops Flinching",
+          "text": "The moth roost under the north stand had been scattering at footsteps for weeks. It settled once something was poured out under it — Lyra had been asking what frightens a thing that has no predators here, and now there is a place to ask it from."
+        }
+      ]
+    }
+  ]
 }

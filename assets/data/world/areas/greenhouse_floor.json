@@ -79,7 +79,9 @@
           "text": "The containment lift answers again. The tower is ready to shelter magical creatures instead of merely studying their remains."
         }
       ],
-      "locked_note": "The containment lift stays inert. The tower wants more proven alchemy before it trusts you with creatures."
+      "locked_note": "The containment lift stays inert. Lyra will not have creatures in a tower whose own beds are refusing to root — show the greenhouse can be brought back first.",
+      "required_journal_milestone": "greenhouse_bed_revived",
+      "required_journal_hint": "wake the stalled propagation bed with a restorative"
     }
   ],
   "gather_nodes": [
@@ -160,6 +162,34 @@
       ],
       "spawn_chance": 50,
       "note": "These gentle slugs gather where greenhouse glass sweats at dawn."
+    }
+  ],
+  "apply_targets": [
+    {
+      "id": "greenhouse_stalled_bed",
+      "name": "Stalled Propagation Bed",
+      "position": [
+        700.0,
+        250.0
+      ],
+      "radius": 34.0,
+      "color": [
+        120,
+        190,
+        130,
+        255
+      ],
+      "required_effect_kind": "restore",
+      "minimum_quality_band": "",
+      "untreated_note": "The end bed has not taken. The cuttings are alive and doing nothing, which Brin says is worse than dead.",
+      "treated_note": "The bed drinks it in and the stalled cuttings put out root inside the hour. Brin will want to see this.",
+      "completion_milestones": [
+        {
+          "id": "greenhouse_bed_revived",
+          "title": "The Bed That Would Not Take",
+          "text": "The end propagation bed had been alive and refusing to root for a season. It took a restorative poured straight onto the soil rather than anything anybody drank, which is the first time the tower's work has gone into the ground instead of into a person."
+        }
+      ]
     }
   ]
 }

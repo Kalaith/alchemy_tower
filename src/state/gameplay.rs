@@ -42,6 +42,8 @@ mod gameplay_alchemy_slots_draw;
 mod gameplay_alchemy_slots_view;
 #[path = "gameplay_alchemy_types.rs"]
 mod gameplay_alchemy_types;
+#[path = "gameplay_apply_targets.rs"]
+mod gameplay_apply_targets;
 #[path = "gameplay_archive_disassembly_draw.rs"]
 mod gameplay_archive_disassembly_draw;
 #[path = "gameplay_archive_disassembly_view.rs"]
@@ -266,6 +268,8 @@ mod gameplay_rapport;
 mod gameplay_recipe_memory;
 #[path = "gameplay_render.rs"]
 mod gameplay_render;
+#[path = "gameplay_render_apply_targets.rs"]
+mod gameplay_render_apply_targets;
 #[path = "gameplay_render_color.rs"]
 mod gameplay_render_color;
 #[path = "gameplay_render_environment.rs"]

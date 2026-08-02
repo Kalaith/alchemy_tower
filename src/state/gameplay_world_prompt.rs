@@ -19,10 +19,20 @@ impl GameplayState {
         if let Some(prompt) = self.visible_station_prompt_view(area, data) {
             return Some(prompt);
         }
+        if let Some(prompt) = self.apply_target_prompt_view(area) {
+            return Some(prompt);
+        }
         if let Some(prompt) = self.warp_prompt_view(area, data) {
             return Some(prompt);
         }
         self.gather_prompt_view(area, data)
+    }
+
+    fn apply_target_prompt_view(&self, area: &AreaDefinition) -> Option<WorldPromptView> {
+        let target = self.interaction_apply_target(area)?;
+        Some(WorldPromptView {
+            text: self.interact_prompt_copy("world_prompt_apply", &[("name", &target.name)]),
+        })
     }
 
     fn npc_prompt_view(&self, data: &GameData) -> Option<WorldPromptView> {
