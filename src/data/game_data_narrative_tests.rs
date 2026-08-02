@@ -261,4 +261,47 @@ pub(crate) mod tests {
 {collisions:#?}"
         );
     }
+
+    /// The story bible is a lock on a history the content already commits to,
+    /// which only helps if it keeps up with the content. Prose is too brittle
+    /// to assert on, but ids are not: every townsperson who carries an arc, and
+    /// every beat on the narrative spine, has to be named somewhere in it.
+    ///
+    /// This catches the failure that makes a bible worse than useless — a new
+    /// townsperson or a new spine beat landing while the document still
+    /// describes the old shape, so the next writer trusts something stale.
+    #[test]
+    fn the_story_bible_still_describes_the_game_that_exists() {
+        use crate::content::narrative_text;
+
+        let bible = std::fs::read_to_string(
+            std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("docs/story_bible.md"),
+        )
+        .expect("docs/story_bible.md should exist");
+
+        let data = load_embedded().expect("embedded game data should load");
+        let mut missing = Vec::new();
+
+        for npc in &data.npcs {
+            if npc.quest_chain().is_empty() {
+                continue;
+            }
+            // Named by first name, which is how the document reads.
+            if !bible.contains(&npc.name) {
+                missing.push(format!("townsperson {} ({})", npc.name, npc.id));
+            }
+        }
+        for milestone in narrative_text().milestones.all() {
+            if !bible.contains(&milestone.id) {
+                missing.push(format!("spine beat {}", milestone.id));
+            }
+        }
+
+        missing.sort();
+        assert!(
+            missing.is_empty(),
+            "the story bible does not mention:
+{missing:#?}"
+        );
+    }
 }

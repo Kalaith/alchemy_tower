@@ -304,9 +304,22 @@ content with no destination.
 
 ## Story & world state
 
-- Write the story bible locking the wizard's backstory, the failed intervention,
-  the ecosystem model, and the act-by-act reveal order. The arcs were written
-  ahead of it, and nine townsfolk now depend on staying consistent.
+- ~~Write the story bible~~ **Done 2026-08-02** — `docs/story_bible.md`. It
+  locks rather than invents: the arcs, reaction lines, journal beats and
+  epilogue already commit to a specific history with specific numbers, and the
+  document writes that down with the beat id behind every claim so a statement
+  can be checked rather than trusted. Covers the wizard (sealed deliberately;
+  eleven months of working notes; removed them *after* writing them so nobody
+  would find the working and be persuaded by it; "not yet, then"), the failed
+  intervention as a slow ward-draw that reads as ordinary bad luck, the
+  ecosystem rule and its four load-bearing consequences, a timeline anchored on
+  the numbers already in the text, the three acts as the brew gates already
+  enforce them, a table of what each townsperson measures and puts down, and six
+  writing rules. Two things are marked **OPEN — deliberately** and left that
+  way: whether the wizard lives, and who sends the unsigned orders (the epilogue
+  says outright that question "was never yours to close"). A test asserts every
+  arc-carrying townsperson and every spine beat is named in the document — it
+  found two gaps in my first draft, `containment_started` and Mayor Elric.
 - ~~Extend visible town-state change past the four hardcoded cases~~ **Done
   2026-08-02.** Areas carry `flourishes`: an id, the beats that earn it (`after_
   any_completed_quest` / `after_any_journal_milestone` — lists, because the
