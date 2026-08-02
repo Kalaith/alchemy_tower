@@ -180,6 +180,12 @@
       "after_milestone": "discovered_the_raking_light",
       "order": 105,
       "line": "You have made a light that reads the dent instead of the ink. Do you understand what that means for a room where somebody went through and scraped. It is all still there. It has been all still there the whole time, and I have been sitting in it."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_milestone": "commission_reading_room_opened",
+      "order": 115,
+      "line": "There are three people at the middle table and one of them is arguing with me. Nine years I worked in here on my own and I would have told you the quiet was the point. It was not the point. It was just what there was."
     }
   ]
 }

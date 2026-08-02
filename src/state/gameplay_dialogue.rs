@@ -71,7 +71,10 @@ impl GameplayState {
             self.progression.started_quests.remove(&quest.id);
             self.progression.completed_quests.insert(quest.id.clone());
             let bonus = self.quality_bonus_coins(quest, delivered_rank);
-            self.coins += quest.reward_coins + bonus;
+            self.coins = self
+                .coins
+                .saturating_sub(quest.coin_cost)
+                .saturating_add(quest.reward_coins + bonus);
             if quest.giver_npc_id != "quest_board" {
                 // Work that clearly beat what was asked for is remembered as
                 // such. Quality reached the coin purse before it reached

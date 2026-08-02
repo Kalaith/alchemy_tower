@@ -21,6 +21,11 @@ impl GameplayState {
             return false;
         }
 
+        // A commission is funded, not merely filled.
+        if self.coins < quest.coin_cost {
+            return false;
+        }
+
         // Quality and traits are asked of the bottles actually on the shelf,
         // not of `crafted_item_profiles`, which is a best-ever record: one
         // Masterwork used to satisfy every later Masterwork request forever,

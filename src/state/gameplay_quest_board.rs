@@ -65,7 +65,10 @@ impl GameplayState {
         // reason to send good work to the board rather than the worst thing
         // that clears the bar.
         let bonus = self.quality_bonus_coins(quest, delivered_rank);
-        self.coins += quest.reward_coins + bonus;
+        self.coins = self
+            .coins
+            .saturating_sub(quest.coin_cost)
+            .saturating_add(quest.reward_coins + bonus);
         // A board order is still somebody's problem solved. Without this the
         // repeatable layer — the bulk of the long tail — earned no standing
         // with anyone, however many times it was run.

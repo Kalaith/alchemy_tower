@@ -282,6 +282,13 @@ pub(crate) struct QuestDefinition {
     /// repeatable layer earned no standing with anybody — the prose named the
     /// infirmary or the lamplighters and the game did nothing with it.
     /// Delivering awards this person +1 rapport.
+    /// Coin the player *puts in* rather than takes out. A request with a cost
+    /// is a commission: the valley is not paying you to solve an emergency, you
+    /// are funding something it wants to keep. This is what the last third of
+    /// the game is for, and it is the only thing in the game that spends the
+    /// several thousand coins a finished campaign has lying around.
+    #[serde(default)]
+    pub(crate) coin_cost: u32,
     #[serde(default)]
     pub(crate) rapport_npc_id: String,
     /// Standing this request waits on: the named townsperson must trust the

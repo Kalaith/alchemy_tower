@@ -83,6 +83,12 @@
       "after_milestone": "observatory_ending",
       "order": 120,
       "line": "I have carried past this valley for eleven years and never had a reason to come down into it. That is finished. The road will hear about this before the snow and the road does not forget places twice. Be ready to be visited."
+    },
+    {
+      "npc_id": "tarn_wayfarer",
+      "after_milestone": "commission_winter_stores_laid_in",
+      "order": 115,
+      "line": "Stores. Not rations, stores. I spent the morning deciding where to put things instead of what to go without, and I had to sit down partway through because I did not know what to do with the feeling."
     }
   ]
 }

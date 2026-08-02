@@ -4,6 +4,8 @@ mod embedded_json;
 mod game_data;
 #[cfg(test)]
 mod game_data_apply_target_tests;
+#[cfg(test)]
+mod game_data_economy_tests;
 mod game_data_fallback;
 #[cfg(test)]
 mod game_data_narrative_tests;

@@ -787,6 +787,90 @@
       "rapport_npc_id": "wren_physician",
       "required_rapport_npc_id": "wren_physician",
       "required_rapport": 6
+    },
+    {
+      "id": "commission_winter_stores",
+      "title": "Commission: The Winter Stores",
+      "description": "The board is asking for money as well as work now. Four cold-bench tonics and 900 coins lays in a winter's stock the valley has never once had, held at the waystation and the infirmary both.",
+      "required_item_id": "keptwarm_tonic",
+      "required_amount": 4,
+      "reward_coins": 0,
+      "coin_cost": 900,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "",
+      "required_effect_kind": "",
+      "prerequisite_quests": [
+        "winter_crossing_for_tarn"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 0,
+      "repeatable": false,
+      "repeat_cooldown_days": 0,
+      "rapport_npc_id": "tarn_wayfarer",
+      "completion_milestones": [
+        {
+          "id": "commission_winter_stores_laid_in",
+          "title": "Stores, Not Rations",
+          "text": "The valley has a winter's stock laid in for the first time in living memory, funded out of the tower's own takings. Tarn pointed out that it is the first year anybody has had to decide where to put things rather than what to do without."
+        }
+      ]
+    },
+    {
+      "id": "commission_reading_room",
+      "title": "Commission: The Reading Room",
+      "description": "Six archive lights and 1,400 coins turns Ione's corner into a room other people can work in. She has not asked. Brin has, on her behalf, twice.",
+      "required_item_id": "coldread_solution",
+      "required_amount": 6,
+      "reward_coins": 0,
+      "coin_cost": 1400,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "",
+      "required_effect_kind": "",
+      "prerequisite_quests": [
+        "restored_record_for_ione"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 0,
+      "repeatable": false,
+      "repeat_cooldown_days": 0,
+      "rapport_npc_id": "ione_archivist",
+      "completion_milestones": [
+        {
+          "id": "commission_reading_room_opened",
+          "title": "A Room Other People Can Work In",
+          "text": "The archive corner is a reading room. Ione has stopped apologising for the light and started complaining about the noise, which everybody agrees is an improvement. The eleven months sit in the open on the middle table, and people come up to read them."
+        }
+      ]
+    },
+    {
+      "id": "commission_valley_survey",
+      "title": "Commission: The Standing Survey",
+      "description": "Eight resonance draughts and 2,600 coins puts a permanent measure on the valley: bloom counts, well readings and yields, taken every season by people who are paid to take them. Nobody has to notice a collapse by accident again.",
+      "required_item_id": "resonance_draught",
+      "required_amount": 8,
+      "reward_coins": 0,
+      "coin_cost": 2600,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Masterwork",
+      "required_trait": "",
+      "required_effect_kind": "",
+      "prerequisite_quests": [
+        "commission_reading_room"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 0,
+      "repeatable": false,
+      "repeat_cooldown_days": 0,
+      "rapport_npc_id": "lyra_keeper",
+      "completion_milestones": [
+        {
+          "id": "commission_survey_standing",
+          "title": "Nobody Notices By Accident Again",
+          "text": "The valley measures itself now, every season, by people paid to do it. It took a keeper counting eleven where the log said ninety to work out what was happening, and the whole point of the survey is that the next person will not have to be that observant to find out in time."
+        }
+      ]
     }
   ]
 }

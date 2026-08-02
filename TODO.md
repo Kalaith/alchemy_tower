@@ -292,12 +292,21 @@ content with no destination.
 
 ## Long tail content
 
-- Decide what the last third is *for* and build it: the ending overlay is
-  dismissible and board orders continue, but nothing new opens after the
-  epilogue. Standing contracts that escalate, a late-game coin/material sink, or
-  a reason to keep restoring past the final gate. The sink gap is now measured:
-  one-off income is ~5,000 coins plus ~3,100 per repeatable board cycle plus
-  unbounded sales, against ~800 of shop stock and 250 of one-time warp tolls.
+- ~~Decide what the last third is *for* and build it~~ **Answered and started
+  2026-08-02.** The answer comes out of the story bible: the valley stops asking
+  for emergencies and starts asking for standards, and the player funds them.
+  **Commissions** are requests with a `coin_cost` — you pay in rather than being
+  paid, the reward is a milestone and a changed valley rather than money. Three
+  escalate: the winter stores (900, Tarn), the reading room (1,400, Ione), the
+  standing survey (2,600, Lyra, gated behind the reading room). Each demands
+  four to eight bottles off a deep bench at Excellent or Masterwork, which routes
+  demand at the sinkless-potion list as that entry asks. The whole change was one
+  schema field plus two lines of arithmetic, because the board flow already knew
+  how to gate, accept, check quality, deliver and record.
+  The sink now stands at 4,900 against 4,001 of one-off income, so coins are a
+  decision again; two tests hold that ratio and the escalation. Still open: only
+  three commissions exist, and nothing yet *opens* off them — the milestones are
+  authored and remarked on but no flourish or route reads them yet.
 - Late-game recipe tier — the current 49 recipes bottom out well before 20 hours
   of brewing decisions. New ones should extend the trait/morph lattice rather
   than add flat variants.
