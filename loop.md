@@ -1402,6 +1402,41 @@ Stop the loop and report if:
   because a second-order bench is gated by definition and the sample had not opened its milestone.
   **101 potions, 59 recipes (5 second-order), 48 sinkless; 161 tests.**
 
+- **2026-08-03 — the tier built to stop making vendor trash was making its own.** Last pass'
+  own note said the follow-up was *requests, not recipes*, and the count said why: five compound
+  bottles, worth 188-240 each and costing two finished brews apiece to make, and **not one of them
+  was asked for by anything**. The chain had simply terminated one layer higher up.
+  Two **commissions** and three **standing orders** route all five. The commissions are the last
+  third doing what the story bible says it does — the valley stops asking for emergencies and asks
+  for standards, and the player funds them. **The Relief Post** (1,800, five Carry-Down Cordials)
+  is a stretcher, a filled lamp and something that holds a person still at the head of the
+  switchback; **Wren costed it eleven years ago and was told the valley could not afford it**, and
+  her line is that the number was never the difficulty — nobody had brought the valley anything it
+  could sell. **The Standing Road** (3,400, six Long-Haul Draughts) buys two carts a week both
+  ways, in weather, **half of them under-loaded on purpose**, because a road remembers a place that
+  sends things out and forgets one that only sends for things. Sink 4,900 → **10,100** against
+  4,001 of one-off income and 4,766 a full board cycle.
+  *The third order is the one worth noting:* the survey commission now has a **downstream** — Lyra
+  wants a Masterwork Double-Read Solution for the old well books, because *a number written down
+  carefully is not the same as a number taken carefully*. Commissions used to end at a milestone.
+  ***Guard:*** `the_late_tier_does_not_make_its_own_vendor_trash`. A morph target deliberately does
+  **not** count as demand — that is another way to *make* the thing, not a reason to have one.
+  Verified by deleting the shelf-wide order, which names it exactly.
+  ***And the verification nearly lied.*** Restoring that order with `mv` kept the file's old mtime,
+  so cargo did not rebuild the `include_str!` and the guard failed against data that was already
+  fixed. **After restoring a data file by move or copy, touch it before re-running.**
+  ***A capture that omits the thing being verified:*** `preview_area` claims *every gate satisfied*
+  and seeded **station** milestones only — so every flourish waiting on a beat had been invisible to
+  the harness since flourishes were built, including four shipped payoffs. It now seeds all four
+  milestone writers (stations, nodes, warps, flourishes). The comment above that code already
+  described this exact bug being fixed for stations; the fix had not been generalised.
+  *And the first relief post I placed rendered **behind the Current Goal panel** — the station-
+  placement rule in `AGENTS.md` applies to anything drawn in the world, not just stations. Moved,
+  recaptured, moved again off a gather node.*
+  *Board file split three ways by what it takes to be offered the work:* the open board (11), the
+  standing orders you have to have earned (25), the commissions you pay into (5). 876 → 240/616/144.
+  **65 requests, 5 commissions, 43 of 101 potions sinkless; 162 tests.**
+
 ## Deferred (needs a new system; not for this loop)
 
 - Apply-potion-to-target flow (wilted plant, frightened creature, blocked path) — `TODO.md` calls it

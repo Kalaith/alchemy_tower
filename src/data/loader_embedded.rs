@@ -210,8 +210,10 @@ struct EmbeddedQuestData {
     quests: Vec<QuestDefinition>,
 }
 
-/// Requests split by who hands them out: a townsperson working through their
-/// own arc, or the board in the square.
+/// Requests split by who hands them out and what it takes to be offered one: a
+/// townsperson working through their own arc, the open board in the square, the
+/// standing work that only comes to somebody who has earned it, and the
+/// commissions, which the player pays into rather than being paid for.
 const QUEST_SOURCES: &[(&str, &str)] = &[
     (
         "town/quests_arcs",
@@ -220,6 +222,14 @@ const QUEST_SOURCES: &[(&str, &str)] = &[
     (
         "town/quests_board",
         include_str!("../../assets/data/town/quests_board.json"),
+    ),
+    (
+        "town/quests_board_standing",
+        include_str!("../../assets/data/town/quests_board_standing.json"),
+    ),
+    (
+        "town/quests_board_commissions",
+        include_str!("../../assets/data/town/quests_board_commissions.json"),
     ),
 ];
 

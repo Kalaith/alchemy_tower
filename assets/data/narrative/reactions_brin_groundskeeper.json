@@ -159,6 +159,12 @@
       "after_milestone": "discovered_the_channels_hold",
       "order": 105,
       "line": "Somebody cut those channels twenty years ago and then never got to use them for anything. You did. First thing actually made on that floor rather than mended on it. I have been calling it a workshop out of politeness up to now."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_milestone": "commission_relief_post_stocked",
+      "order": 116,
+      "line": "Two of my crews work above that post in the cutting season and I have spent every one of those seasons doing arithmetic on the way down. Four hours to the infirmary, and the arithmetic never once came out. It still takes four hours. It is no longer four hours of nothing."
     }
   ]
 }

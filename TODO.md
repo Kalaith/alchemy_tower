@@ -176,6 +176,15 @@ content with no destination.
   also makes three new top-of-chain bottles whose only destination is sale, so
   the count moved by three rather than six. The next pass at this should be
   requests, not recipes: a board order or commission wanting a compound bottle.
+  **Done 2026-08-03**, and it is now a rule rather than an intention: two
+  commissions (Carry-Down, Long-Haul) and three standing orders (Shelf-Wide for
+  the archive, Longheld for the infirmary, Double-Read for the survey — the
+  first thing the survey commission asks for, so a commission finally has a
+  downstream) route all five compound bottles.
+  `the_late_tier_does_not_make_its_own_vendor_trash` fails if a second-order
+  recipe's output is wanted by no request, no reagent slot and no rune pattern;
+  a morph target deliberately does not count, since that is another way to make
+  the thing rather than a reason to have one. **43 of 101 sinkless.**
 - ~~Three relationship gifts are inert~~ **Fixed 2026-08-02.** The "used by no
   recipe" half of this was wrong: all three are catalysts, and each is the *sole*
   supplier of its tag (`starlight` feeds 9 recipe/morph slots, `saltroad` and
@@ -314,6 +323,24 @@ content with no destination.
   lights the archive's middle table, and the standing survey plants marked posts
   along the well row. Still open: only three commissions exist, which is a start
   on the last third rather than a last third.
+- ~~Only three commissions exist~~ **Five, 2026-08-03**, and the two new ones are
+  what the compound tier is *for*. **The Relief Post** (1,800, five Carry-Down
+  Cordials, Wren, after the winter stores) puts a stretcher, a filled lamp and
+  something that holds a person still at the head of the switchback — Wren
+  costed it eleven years ago and was told the valley could not afford it.
+  **The Standing Road** (3,400, six Long-Haul Draughts, Tarn, after the post)
+  buys two carts a week both ways in weather, half of them under-loaded on
+  purpose, because a road forgets a place that only sends for things. Both land
+  visibly (`screenshots/hud/pass_relief_post.png`,
+  `town_road_service.png`) and four townsfolk remark on them.
+  The sink is **10,100** now against 4,001 of one-off quest income and 4,766 a
+  full board cycle, so the last third is roughly a cycle and a half of standing
+  work rather than a wall. Two chains escalate rather than one: stores → post →
+  road, and reading room → survey.
+  Board file split three ways on the way — `quests_board.json` was 876 lines and
+  the cut is what it takes to be offered the work: the open board (11), the
+  standing orders you have to have earned (25), and the commissions you pay
+  into (5).
 - ~~Late-game recipe tier~~ **Started 2026-08-02.** The tier is *second-order
   brewing*: a bench with `accepts_potions` takes finished bottles as reagents,
   which is both a new decision layer and the only structural sink the deep

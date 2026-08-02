@@ -138,12 +138,34 @@ impl GameplayState {
         // bench was missing from every area capture, and the rooms holding them
         // photographed as empty floors. A capture that quietly omits the thing
         // being verified is worse than no capture at all.
-        let milestone_ids = data
+        //
+        // The same omission then repeated one layer out: a flourish waits on a
+        // beat, and seeding only station gates meant every commission payoff and
+        // every treated bank was invisible to the harness — the scene claims
+        // *every gate satisfied*, so it has to mean all four writers.
+        let mut milestone_ids = data
             .stations
             .iter()
             .map(|station| station.required_journal_milestone.clone())
-            .filter(|id| !id.is_empty())
             .collect::<std::collections::BTreeSet<_>>();
+        for other in &data.areas {
+            milestone_ids.extend(
+                other
+                    .gather_nodes
+                    .iter()
+                    .map(|node| node.required_journal_milestone.clone()),
+            );
+            milestone_ids.extend(
+                other
+                    .warps
+                    .iter()
+                    .map(|warp| warp.required_journal_milestone.clone()),
+            );
+            for flourish in &other.flourishes {
+                milestone_ids.extend(flourish.after_any_journal_milestone.iter().cloned());
+            }
+        }
+        milestone_ids.retain(|id| !id.is_empty());
         for milestone_id in milestone_ids {
             self.push_journal_milestone(&milestone_id, "", "");
         }

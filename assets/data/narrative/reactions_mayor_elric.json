@@ -139,6 +139,12 @@
       "after_milestone": "first_true_brew",
       "order": 28,
       "line": "The tower produced something usable. That is a fact, it is dated, and I can put it in front of a council that has spent nine years hearing me call the place a hazard. Do not make a liar of me too quickly."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_milestone": "commission_road_service_running",
+      "order": 118,
+      "line": "There is a timetable on a board in my square. I want to be measured about this and I find that I cannot be. For nine years the answer to what happens next was whoever happens to be passing, and now it is Tuesday."
     }
   ]
 }

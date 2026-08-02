@@ -1,0 +1,144 @@
+{
+  "quests": [
+    {
+      "id": "commission_winter_stores",
+      "title": "Commission: The Winter Stores",
+      "description": "The board is asking for money as well as work now. Four cold-bench tonics and 900 coins lays in a winter's stock the valley has never once had, held at the waystation and the infirmary both.",
+      "required_item_id": "keptwarm_tonic",
+      "required_amount": 4,
+      "reward_coins": 0,
+      "coin_cost": 900,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "",
+      "required_effect_kind": "",
+      "prerequisite_quests": [
+        "winter_crossing_for_tarn"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 0,
+      "repeatable": false,
+      "repeat_cooldown_days": 0,
+      "rapport_npc_id": "tarn_wayfarer",
+      "completion_milestones": [
+        {
+          "id": "commission_winter_stores_laid_in",
+          "title": "Stores, Not Rations",
+          "text": "The valley has a winter's stock laid in for the first time in living memory, funded out of the tower's own takings. Tarn pointed out that it is the first year anybody has had to decide where to put things rather than what to do without."
+        }
+      ]
+    },
+    {
+      "id": "commission_reading_room",
+      "title": "Commission: The Reading Room",
+      "description": "Six archive lights and 1,400 coins turns Ione's corner into a room other people can work in. She has not asked. Brin has, on her behalf, twice.",
+      "required_item_id": "coldread_solution",
+      "required_amount": 6,
+      "reward_coins": 0,
+      "coin_cost": 1400,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "",
+      "required_effect_kind": "",
+      "prerequisite_quests": [
+        "restored_record_for_ione"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 0,
+      "repeatable": false,
+      "repeat_cooldown_days": 0,
+      "rapport_npc_id": "ione_archivist",
+      "completion_milestones": [
+        {
+          "id": "commission_reading_room_opened",
+          "title": "A Room Other People Can Work In",
+          "text": "The archive corner is a reading room. Ione has stopped apologising for the light and started complaining about the noise, which everybody agrees is an improvement. The eleven months sit in the open on the middle table, and people come up to read them."
+        }
+      ]
+    },
+    {
+      "id": "commission_valley_survey",
+      "title": "Commission: The Standing Survey",
+      "description": "Eight resonance draughts and 2,600 coins puts a permanent measure on the valley: bloom counts, well readings and yields, taken every season by people who are paid to take them. Nobody has to notice a collapse by accident again.",
+      "required_item_id": "resonance_draught",
+      "required_amount": 8,
+      "reward_coins": 0,
+      "coin_cost": 2600,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Masterwork",
+      "required_trait": "",
+      "required_effect_kind": "",
+      "prerequisite_quests": [
+        "commission_reading_room"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 0,
+      "repeatable": false,
+      "repeat_cooldown_days": 0,
+      "rapport_npc_id": "lyra_keeper",
+      "completion_milestones": [
+        {
+          "id": "commission_survey_standing",
+          "title": "Nobody Notices By Accident Again",
+          "text": "The valley measures itself now, every season, by people paid to do it. It took a keeper counting eleven where the log said ninety to work out what was happening, and the whole point of the survey is that the next person will not have to be that observant to find out in time."
+        }
+      ]
+    },
+    {
+      "id": "commission_relief_post",
+      "title": "Commission: The Relief Post",
+      "description": "Five carry-down cordials and 1,800 coins puts a stocked post at the head of the switchback: a stretcher, a lamp kept filled, and something that holds a person still for the four hours it takes four people to carry them down. Wren costed this eleven years ago and was told the valley could not afford it.",
+      "required_item_id": "carrydown_cordial",
+      "required_amount": 5,
+      "reward_coins": 0,
+      "coin_cost": 1800,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "",
+      "required_effect_kind": "",
+      "prerequisite_quests": [
+        "commission_winter_stores"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 0,
+      "repeatable": false,
+      "repeat_cooldown_days": 0,
+      "rapport_npc_id": "wren_physician",
+      "completion_milestones": [
+        {
+          "id": "commission_relief_post_stocked",
+          "title": "Four Hours, With Something In It",
+          "text": "There is a post at the head of the switchback now, with a lamp somebody fills and a shelf somebody restocks. The four hours down are the same four hours. What has changed is that they are no longer the whole of the treatment, and Wren has stopped writing the phrase 'arrived too late' in a hand that gets smaller each time."
+        }
+      ]
+    },
+    {
+      "id": "commission_road_service",
+      "title": "Commission: The Standing Road",
+      "description": "Six long-haul draughts and 3,400 coins puts a scheduled run on the road: two carts a week, both directions, in weather, whether or not there is a full load to justify it. Tarn has argued for eleven years that a valley a road merely passes is not on the road at all.",
+      "required_item_id": "longhaul_draught",
+      "required_amount": 6,
+      "reward_coins": 0,
+      "coin_cost": 3400,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "",
+      "required_effect_kind": "",
+      "prerequisite_quests": [
+        "commission_relief_post"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 0,
+      "repeatable": false,
+      "repeat_cooldown_days": 0,
+      "rapport_npc_id": "tarn_wayfarer",
+      "completion_milestones": [
+        {
+          "id": "commission_road_service_running",
+          "title": "Both Directions, In Weather",
+          "text": "Two carts a week, posted on a board in the square where anybody can read the days. Half of them leave under-loaded and go anyway, which is the entire point and the part that cost 3,400 coins. Tarn says a road forgets a place that only sends for things, and remembers one that sends things out."
+        }
+      ]
+    }
+  ]
+}

@@ -76,6 +76,12 @@
       "after_milestone": "observatory_ending",
       "order": 120,
       "line": "Everyone is going to tell this as a story about one person and a tower, and in ten years the interesting part will be gone. The interesting part is that I can write a dose on a shelf card and it will mean the same thing next month. Keep it dull. Dull is the achievement."
+    },
+    {
+      "npc_id": "wren_physician",
+      "after_milestone": "commission_relief_post_stocked",
+      "order": 116,
+      "line": "I costed that post eleven years ago. A stretcher, a lamp, and something to hold a person still on the way down, and I was told what it would cost and that the valley did not have it. It has it now, and it turns out the number was never the difficulty. Nobody had brought the valley anything it could sell."
     }
   ]
 }

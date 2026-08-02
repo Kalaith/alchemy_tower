@@ -271,6 +271,56 @@ mod tests {
         );
     }
 
+    /// The tier was built to give the deep benches' outputs a destination, so
+    /// it must not become the new worst offender. A compound bottle costs two
+    /// finished brews and a reagent to make; if nothing then asks for it, the
+    /// whole chain terminates in vendor trash one layer further up than before.
+    ///
+    /// "Asks for it" is deliberately broad — a request, a repeatable order, a
+    /// commission, a rune pattern, or another recipe using it as a reagent. A
+    /// morph target does not count: that is another way to *make* the thing,
+    /// not a reason to have one.
+    #[test]
+    fn the_late_tier_does_not_make_its_own_vendor_trash() {
+        use crate::data::ItemCategory;
+
+        let data = load_embedded().expect("embedded game data should load");
+
+        let mut wanted = std::collections::HashSet::new();
+        for quest in &data.quests {
+            wanted.insert(quest.required_item_id.clone());
+        }
+        for recipe in &data.recipes {
+            for ingredient in &recipe.ingredients {
+                wanted.insert(ingredient.item_id.clone());
+            }
+        }
+        for rune in &data.rune_recipes {
+            wanted.insert(rune.input_item_id.clone());
+        }
+
+        let mut unwanted = Vec::new();
+        for recipe in &data.recipes {
+            let second_order = recipe.ingredients.iter().any(|ingredient| {
+                data.item(&ingredient.item_id)
+                    .is_some_and(|item| item.category == ItemCategory::Potion)
+            });
+            if second_order && !wanted.contains(&recipe.output_item_id) {
+                unwanted.push(format!(
+                    "{} makes {}, which nothing asks for",
+                    recipe.id, recipe.output_item_id
+                ));
+            }
+        }
+
+        unwanted.sort();
+        assert!(
+            unwanted.is_empty(),
+            "compound bottles with nowhere to go:
+{unwanted:#?}"
+        );
+    }
+
     /// The late tier exists to deepen decisions, not to lengthen a list. A
     /// second-order recipe should use the parts of the lattice the mid-game
     /// barely touches: three reagents, a full sequence, and a branch.

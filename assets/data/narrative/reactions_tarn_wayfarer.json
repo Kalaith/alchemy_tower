@@ -89,6 +89,12 @@
       "after_milestone": "commission_winter_stores_laid_in",
       "order": 115,
       "line": "Stores. Not rations, stores. I spent the morning deciding where to put things instead of what to go without, and I had to sit down partway through because I did not know what to do with the feeling."
+    },
+    {
+      "npc_id": "tarn_wayfarer",
+      "after_milestone": "commission_road_service_running",
+      "order": 118,
+      "line": "Two a week, both ways, posted where anybody can read the days. Half of them will go out under-loaded and that is the part you paid for — a road remembers a place that sends things out and forgets one that only sends for things. I have watched it forget three valleys. Not this one, now."
     }
   ]
 }
