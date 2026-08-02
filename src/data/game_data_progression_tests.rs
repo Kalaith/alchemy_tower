@@ -119,10 +119,21 @@ mod tests {
         );
     }
 
-    /// What a plain brew of this item ends up carrying, taken from the real
-    /// inheritance rule. A catalyst can add more, so this is the honest floor.
+    /// What a bottle of this item can carry, taken from the real rules. A
+    /// catalyst can add more, so this is the honest floor.
+    ///
+    /// Two sources, because there are two ways to end up holding one. A brew
+    /// inherits from its recipe and its reagents. Anything that did not come off
+    /// a bench — bought, gifted, or handed back by the rune workshop — carries
+    /// the item's own authored traits, which is exactly what
+    /// `plain_bottle_qualifies` checks a delivery against. Walking only the
+    /// recipes made every imbued bottle look traitless, so a request for the
+    /// pattern a rune had just put into it read as impossible.
     fn reachable_traits(data: &GameData, item_id: &str) -> std::collections::BTreeSet<String> {
-        let mut reachable = std::collections::BTreeSet::new();
+        let mut reachable: std::collections::BTreeSet<String> = data
+            .item(item_id)
+            .map(|item| item.traits.iter().cloned().collect())
+            .unwrap_or_default();
         for recipe in &data.recipes {
             let produces = recipe.output_item_id == item_id
                 || recipe

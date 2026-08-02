@@ -1465,6 +1465,40 @@ Stop the loop and report if:
   never been photographed at all. It now seeds a third of them as hearsay and opens on one.*
   **61 + 5 authored strings live; 163 tests.**
 
+- **2026-08-03 — the deepest verb in the tower left no mark anything could read.** The standing
+  entry was that `spread`, `echo` and `delay` were on items and no recipe asked for them. The real
+  measurement was worse: those traits sat on the three runes **and on nothing else**, because all
+  **17 rune outputs carried no traits at all** — so a bottle that had been through the rune floor
+  was, to every trait check in the game, the same object as one that had not.
+  Each output now carries the pattern its rune put into it (`pure` for the ward, which is the ward
+  rune's own second trait). That lands in two places at once, both already built: an imbued bottle
+  can satisfy a **trait-gated request**, and it contributes its pattern to a **compound brew** when
+  poured in — `pour_bottle` hands an unbatched bottle's authored traits straight through.
+  *Demand, so the marks are wanted rather than decorative:* the two standing orders whose prose
+  already described a pattern now **ask** for it — Wren's standing doses have to be the echoed one
+  (*"a second bottle beside the bed is not the same thing"*), the archive's tablewide reading has to
+  be splashed — and a new order wants a **keptback draught**, held rather than spent, which routes
+  another sinkless potion. `longhaul_draught_recipe` prefers `echo`, so folding the echo-imbued
+  relay draught into it pays.
+  ***A test was quietly lying, and the content walked straight into it.*** `reachable_traits` —
+  which decides whether a request can be met at all — walked only **recipes**, so every bottle the
+  rune floor makes looked traitless and all three new gates read as impossible. It reads the item's
+  own authored traits now, which is exactly what `plain_bottle_qualifies` has always checked a
+  delivery against. **A guard that models half the rules will fail correct content.**
+  *Two guards added:* `an_imbued_bottle_carries_the_pattern_it_was_given` (per rune, so a fifth rune
+  is covered the day it is authored — verified by stripping `echo` off the relay draught) and
+  `every_rune_pattern_is_asked_for_by_something` (verified by dropping the delay demand; it names
+  `delay` exactly).
+  *Applied last pass's lesson:* both sabotage-and-restore runs finished with `os.utime` on the
+  restored file, because a `move` keeps the old mtime and cargo will not rebuild the `include_str!`.
+  *Bookkeeping:* the TODO's content census was four passes stale (49 recipes, 26 board orders). Now
+  re-counted: **14 areas, 77 nodes, 165 items (101 potions, 47 ingredients), 59 recipes across 5
+  benches, 17 rune patterns, 25 mutations, 9 townsfolk with 171 reaction lines, 11 + 26 + 5
+  requests.**
+  *Note for the next pass:* `game_data_progression_tests.rs` is at **734** lines; the next test that
+  belongs there should trigger a split instead.
+  **42 of 101 potions sinkless; 165 tests.**
+
 ## Deferred (needs a new system; not for this loop)
 
 - Apply-potion-to-target flow (wilted plant, frightened creature, blocked path) — `TODO.md` calls it

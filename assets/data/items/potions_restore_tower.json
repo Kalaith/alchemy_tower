@@ -402,6 +402,9 @@
         255
       ],
       "description": "An echo on the tonic that argues with nothing. It gives the same small measure again some hours later, and again after that, without anybody having to be there. Wren asked whether it could be made to do less, and meant it as praise.",
+      "traits": [
+        "echo"
+      ],
       "effects": [
         {
           "kind": "restore",
@@ -423,6 +426,9 @@
         255
       ],
       "description": "Delayed, the deepkeeper does not take hold when it is swallowed. It waits, sometimes for hours, and comes up when the body starts losing. Wren is clear that this is for the cases where you cannot be there at the hour it matters, and clear that she resents needing it.",
+      "traits": [
+        "delay"
+      ],
       "effects": [
         {
           "kind": "restore",

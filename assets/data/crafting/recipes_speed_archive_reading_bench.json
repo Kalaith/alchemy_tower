@@ -27,9 +27,9 @@
       "lore_note": "This is the only thing the reading bench makes that nobody reads by. Ione pointed that out; Tarn pointed out that the road is four days and the light is not the problem.",
       "minimum_quality": 46,
       "preferred_traits": [
+        "echo",
         "vigor",
-        "pure",
-        "arcane"
+        "pure"
       ],
       "guaranteed_traits": [
         "vigor"

@@ -33,6 +33,9 @@
         255
       ],
       "description": "Held in reserve and released later, so a crew can take it at the start of a shift and feel it at the end, which is when the walking back actually happens.",
+      "traits": [
+        "delay"
+      ],
       "effects": [
         {
           "kind": "speed",
@@ -207,6 +210,9 @@
         255
       ],
       "description": "Briskstep threaded through an echo rune. The lift fades, and then some minutes later it comes back, which is either a gift or a nuisance depending where you are standing.",
+      "traits": [
+        "echo"
+      ],
       "effects": [
         {
           "kind": "speed",
@@ -297,6 +303,9 @@
         255
       ],
       "description": "The rough lift of a salvaged stimulant, spread thin enough to walk on all afternoon. Nobody claims it is pleasant.",
+      "traits": [
+        "delay"
+      ],
       "effects": [
         {
           "kind": "speed",

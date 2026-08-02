@@ -54,6 +54,9 @@
         255
       ],
       "description": "The draught, then a second softer pulse a moment later. Mira says patients trust the second one more, because by then they have stopped bracing for it.",
+      "traits": [
+        "echo"
+      ],
       "effects": [
         {
           "kind": "restore",
@@ -339,6 +342,9 @@
         255
       ],
       "description": "A poultice thrown wide instead of applied. Weaker on any one person and far better across a work crew that all came off the same field.",
+      "traits": [
+        "spread"
+      ],
       "effects": [
         {
           "kind": "restore",
@@ -360,6 +366,9 @@
         255
       ],
       "description": "A restorative coiled into itself by an echo rune, so the bed it is worked into answers once now and once again a fortnight later.",
+      "traits": [
+        "echo"
+      ],
       "effects": [
         {
           "kind": "restore",
@@ -381,6 +390,9 @@
         255
       ],
       "description": "Calmleaf turned inward by a ward rune. It settles the drinker rather than the room, which is the harder of the two and the one people actually ask for.",
+      "traits": [
+        "pure"
+      ],
       "effects": [
         {
           "kind": "restore",
@@ -465,6 +477,9 @@
         255
       ],
       "description": "Modest, and identical every single time. Mira keeps a row of them because a shelf you can predict is worth more to her than one good bottle she cannot repeat.",
+      "traits": [
+        "pure"
+      ],
       "effects": [
         {
           "kind": "restore",

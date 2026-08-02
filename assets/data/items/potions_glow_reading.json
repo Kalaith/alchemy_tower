@@ -96,6 +96,9 @@
         255
       ],
       "description": "A dull, patient little light that shows the inside of a bottle rather than the room. Ione has started asking for the failures instead of the successes and will not explain.",
+      "traits": [
+        "echo"
+      ],
       "effects": [
         {
           "kind": "glow",
@@ -159,6 +162,9 @@
         255
       ],
       "description": "Splashed, the hand-sorting light stops being a lamp you hold over one page and becomes a thing you lay a whole table under. Ione put eleven months of loose sheets out at once and did not speak for some time.",
+      "traits": [
+        "spread"
+      ],
       "effects": [
         {
           "kind": "glow",

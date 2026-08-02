@@ -566,4 +566,83 @@ mod tests {
             "traits no bench rewards, so nowhere is the right place to brew them: {unrewarded:?}"
         );
     }
+
+    /// Imbuing has to leave a mark the rest of the game can read.
+    ///
+    /// The rune floor is the deepest verb in the tower and its outputs were
+    /// indistinguishable, to every trait check in the game, from any other
+    /// bottle: `spread`, `echo` and `delay` sat on the three runes and on
+    /// nothing else, so a pattern was a name and a price and no property. Now
+    /// each output carries the pattern its rune put into it, which is what lets
+    /// a request ask for the echoed dose specifically and what a compound brew
+    /// reads when one is folded in.
+    ///
+    /// The rule is per-rune rather than a hardcoded list, so a fifth rune is
+    /// covered the day it is authored.
+    #[test]
+    fn an_imbued_bottle_carries_the_pattern_it_was_given() {
+        let data = load_embedded().expect("embedded game data should load");
+        let mut unmarked = Vec::new();
+
+        for recipe in &data.rune_recipes {
+            let (Some(rune), Some(output)) = (
+                data.item(&recipe.rune_item_id),
+                data.item(&recipe.output_item_id),
+            ) else {
+                continue; // resolution is `quest_chains_and_gates_resolve`'s job
+            };
+            // `arcane` is what every rune is; the other trait is what it does.
+            let Some(pattern) = rune.traits.iter().find(|held| *held != "arcane") else {
+                unmarked.push(format!("{} has no pattern trait at all", rune.id));
+                continue;
+            };
+            if !output.traits.contains(pattern) {
+                unmarked.push(format!(
+                    "{}: {} leaves no {pattern} on {}",
+                    recipe.id, rune.id, output.id
+                ));
+            }
+        }
+
+        assert!(
+            unmarked.is_empty(),
+            "rune patterns that leave no mark:
+{unmarked:#?}"
+        );
+    }
+
+    /// A pattern nothing asks for is a label. Each one has to be wanted by a
+    /// request or rewarded by a bench, or the rune floor is making bottles that
+    /// differ from ordinary ones only in price.
+    #[test]
+    fn every_rune_pattern_is_asked_for_by_something() {
+        let data = load_embedded().expect("embedded game data should load");
+
+        let mut wanted = std::collections::HashSet::new();
+        for quest in &data.quests {
+            wanted.insert(quest.required_trait.clone());
+            wanted.extend(quest.required_traits.iter().cloned());
+        }
+        for recipe in &data.recipes {
+            wanted.extend(recipe.preferred_traits.iter().cloned());
+            wanted.extend(recipe.required_sequence.iter().cloned());
+        }
+        for station in &data.stations {
+            wanted.extend(station.room_bonus.favored_traits.iter().cloned());
+        }
+
+        let ignored = data
+            .items
+            .iter()
+            .filter(|item| item.category == crate::data::ItemCategory::Rune)
+            .flat_map(|rune| rune.traits.iter())
+            .filter(|held| *held != "arcane")
+            .filter(|pattern| !wanted.contains(*pattern))
+            .collect::<std::collections::BTreeSet<_>>();
+
+        assert!(
+            ignored.is_empty(),
+            "rune patterns nothing wants: {ignored:?}"
+        );
+    }
 }

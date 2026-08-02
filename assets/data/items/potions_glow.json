@@ -102,6 +102,9 @@
         255
       ],
       "description": "A glow brew opened outward into a quick halo. It lights everything at once and then stops, which is exactly right for finding a dropped thing and useless for anything else.",
+      "traits": [
+        "spread"
+      ],
       "effects": [
         {
           "kind": "glow",
@@ -372,6 +375,9 @@
         255
       ],
       "description": "A lantern draught opened outward all at once. One bottle lights an entire crossroads for as long as it takes to decide which way you are going.",
+      "traits": [
+        "spread"
+      ],
       "effects": [
         {
           "kind": "glow",
@@ -393,6 +399,9 @@
         255
       ],
       "description": "Emberglass held back by a delay rune. It does nothing at all until you have stopped moving, and then it lights and keeps lighting.",
+      "traits": [
+        "delay"
+      ],
       "effects": [
         {
           "kind": "glow",
@@ -510,6 +519,9 @@
         255
       ],
       "description": "Very bright, very briefly, over a wide area. It was never going to hold its light and this is the version of that fault which is worth carrying.",
+      "traits": [
+        "spread"
+      ],
       "effects": [
         {
           "kind": "glow",
@@ -600,6 +612,9 @@
         255
       ],
       "description": "The ward turns the lantern inward and the light mostly goes out, which is not a failure. What is left is the part Ione would not expand on: it is steadying to sit beside, and warded it steadies whoever is holding it instead of the room. Somebody up here worked long nights alone.",
+      "traits": [
+        "pure"
+      ],
       "effects": [
         {
           "kind": "glow",

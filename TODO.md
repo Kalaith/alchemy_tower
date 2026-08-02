@@ -5,10 +5,14 @@
 **Long tail. A finished product is 20–25 hours of play.** Everything below is
 measured against that target; anything not listed here is considered done.
 
-Where the content currently stands: 14 areas, 49 recipes across 6 benches, 9
-townsfolk, 24 story-arc requests, 26 repeatable board orders, 11 biome
-ingredient tables, plus an epilogue. That is the mid-game; the remaining work is
-what makes it a 20–25 hour game rather than a well-furnished 8-hour one.
+Where the content currently stands (re-counted 2026-08-03; the old figures here
+were four passes stale): 14 areas and 77 gather nodes, 165 items of which 101
+are potions and 47 ingredients, 59 recipes across 5 benches plus 17 rune
+patterns and 25 mutations, 9 townsfolk with 171 reaction lines, 24 story-arc
+requests, 11 open board orders, 26 standing orders and 5 commissions, plus an
+epilogue. That is the mid-game and most of the way into the last third; the
+remaining work is what makes it a 20–25 hour game rather than a well-furnished
+8-hour one.
 
 ## Applied alchemy — the largest open gap
 
@@ -267,9 +271,29 @@ content with no destination.
   The shared overlay subtitle also grew: it was a fixed 36px box, which was one
   line, and it now sizes to its text and wraps short of the close button.
   `screenshots/hud/journal_hearsay.png`, `compound_bench.png`.
-- Still dead: item traits `spread`/`echo`/`delay` *are* on items in
-  `materials.json`; what they lack is any recipe asking for them, which is a
-  content gap, not dead data.
+- ~~Item traits `spread`/`echo`/`delay` have nothing asking for them~~ **Fixed
+  2026-08-03, and the gap was wider than the entry said.** Those three traits sat
+  on the three runes and on *nothing else*: every one of the 17 rune outputs
+  carried no traits at all, so a bottle that had been through the deepest verb in
+  the tower was, to every trait check in the game, indistinguishable from one
+  that had not. Each output now carries the pattern its rune put into it
+  (`spread`/`echo`/`delay`, and `pure` for the ward, which is the ward rune's own
+  trait), which makes an imbued bottle both *deliverable against a trait gate*
+  and *readable by a compound brew* when it is folded in.
+  Demand to match: the two standing orders whose prose already described a
+  pattern now ask for it (Wren's standing doses have to be the echoed one; the
+  archive's tablewide reading has to be splashed), and a new order wants a
+  keptback draught — held rather than spent — which routes another sinkless
+  potion. `longhaul_draught_recipe` prefers `echo`, so folding the echo-imbued
+  relay draught into it pays. **42 of 101 sinkless.**
+  Two guards: `an_imbued_bottle_carries_the_pattern_it_was_given` (per rune, so
+  a fifth rune is covered the day it is authored) and
+  `every_rune_pattern_is_asked_for_by_something`.
+  ***And a test was quietly lying.*** `reachable_traits`, which decides whether a
+  request can be met at all, walked only *recipes* — so every bottle the rune
+  floor makes looked traitless and a request for the pattern just imbued into it
+  read as impossible. It reads the item's own authored traits now, which is what
+  `plain_bottle_qualifies` has always checked a delivery against.
 - ~~~50 dead `ui_text.json` keys~~ **Fixed 2026-08-02.** 52 removed, and two
   tests keep the file honest: `every_line_of_copy_is_asked_for_by_something`
   scans the source for each key, and `composed_copy_keys_name_real_items` covers

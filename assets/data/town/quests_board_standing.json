@@ -387,13 +387,13 @@
     {
       "id": "board_standing_doses_for_the_infirmary",
       "title": "Infirmary: Two On The Shelf, Standing",
-      "description": "Wren's hand, and unusually long for her. Two standing doses, kept on the shelf rather than carried out, for the nights the second room has somebody in it and she is in the first. She notes that she has spent her whole working life arguing against exceptional medicine and is now ordering a bottle that dispenses itself, and asks you not to make anything of it.",
+      "description": "Wren's hand, and unusually long for her. Two standing doses, kept on the shelf rather than carried out, for the nights the second room has somebody in it and she is in the first. She notes that she has spent her whole working life arguing against exceptional medicine and is now ordering a bottle that dispenses itself, and asks you not to make anything of it. It has to be the echoed one; a second bottle beside the bed is not the same thing.",
       "required_item_id": "standing_dose",
       "required_amount": 2,
       "reward_coins": 330,
       "giver_npc_id": "quest_board",
       "minimum_quality_band": "Fine",
-      "required_trait": "",
+      "required_trait": "echo",
       "required_traits": [],
       "minimum_trait_matches": 0,
       "required_effect_kind": "restore",
@@ -412,13 +412,13 @@
     {
       "id": "board_tablewide_for_the_archive",
       "title": "Archive: One Table, All Of It At Once",
-      "description": "Unsigned, but the hand is the archive's and it has stopped pretending otherwise. One tablewide reading. The note says the loose sheets have been sorted four times by four different methods and every method agreed, which is the part that has stopped being reassuring.",
+      "description": "Unsigned, but the hand is the archive's and it has stopped pretending otherwise. One tablewide reading, splashed rather than poured — one page at a time is what she has been doing for nine years. The note says the loose sheets have been sorted four times by four different methods and every method agreed, which is the part that has stopped being reassuring.",
       "required_item_id": "tablewide_reading",
       "required_amount": 1,
       "reward_coins": 260,
       "giver_npc_id": "quest_board",
       "minimum_quality_band": "Excellent",
-      "required_trait": "",
+      "required_trait": "spread",
       "required_traits": [],
       "minimum_trait_matches": 0,
       "required_effect_kind": "glow",
@@ -611,6 +611,26 @@
       "repeatable": true,
       "repeat_cooldown_days": 12,
       "rapport_npc_id": "lyra_keeper"
+    },
+    {
+      "id": "board_keptback_for_the_infirmary",
+      "title": "Infirmary: The One That Waits",
+      "description": "Wren again, shorter. One keptback draught, held rather than spent — she has a patient who will not take anything and will need it in about four hours, and she would rather hand them a bottle now than argue with them then.",
+      "required_item_id": "keptback_draught",
+      "required_amount": 1,
+      "reward_coins": 360,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Fine",
+      "required_trait": "delay",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [
+        "worst_case_shelf_for_wren"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 46,
+      "repeatable": true,
+      "repeat_cooldown_days": 9,
+      "rapport_npc_id": "wren_physician"
     }
   ]
 }
