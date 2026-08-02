@@ -657,6 +657,49 @@ content with no destination.
   (which is her whole arc), and Rowan on the first formula in the book the
   calendar can close.
 
+### The rest of the sweep for this project's most repeated bug, 2026-08-03
+
+- ~~`deny_unknown_fields` had only ever been added to the one struct that had
+  just failed~~ **Swept 2026-08-03. A correctness pass, not a content one,
+  saying so plainly.** The single most repeated failure in this project is **a
+  key in a data file that no struct claims**: serde drops it in silence, so the
+  file reads as configured and the game ignores it, and nothing says so. It has
+  landed at least four times — the Southern Pass's `required_completed_quest`,
+  which meant the gate the whole southern half of the map sits behind did not
+  exist at runtime; `alchemy.heat` and `alchemy.fill_slots` in the input
+  bindings; `toast_icons`/`default_toast_icon` in `ui_art.json`, which is why
+  six generated icons sat unloaded for the life of the project; and three
+  duplicate entries in the narrative milestone block.
+  Each time the fix was the attribute on **that one struct**, and nobody went
+  looking for the rest — despite this project's own method note saying that when
+  a bug class repeats you should grep for the others. Counted: **11 of 48
+  deserialised structs were strict. 37 were not**, including `ItemDefinition`,
+  `RecipeDefinition`, `AreaDefinition`, `StationDefinition`, `NpcDefinition`,
+  `GatherNodeDefinition`, and the nine file-envelope structs where a stray
+  *top-level* key would vanish.
+  All 37 are strict now. **The sweep found no dead keys in the current data**,
+  which is the good outcome and worth saying rather than dressing up: the value
+  is that the fifth instance becomes a red test instead of a mystery.
+  Two exclusions, deliberate: `save_models.rs`, `save_memory_models.rs` and
+  `schema_progression.rs` stay lenient, because they parse files written by
+  *older builds* rather than by an author — `HabitatStateEntry.placed_day` was
+  deleted as dead in an earlier pass and every save from before that still
+  carries it. Strictness is right for content you control and wrong for a record
+  the player already has on disk.
+  Three guards in a new `game_data_schema_tests.rs`:
+  `every_content_schema_rejects_a_key_it_does_not_read` walks **every `.rs` file
+  under `src`** rather than a hand-written list of "the schema files" — which
+  matters, because `UiArtCatalog`, the struct that motivated all this, lives in
+  `src/art` and a list would have missed exactly it. It also asserts it found at
+  least 35 structs, because a source-scanning guard fails *open*.
+  `a_key_nothing_reads_is_now_a_load_failure` drives a misspelled key through
+  the real loader and asserts the error names it, so the guard's belief about
+  what the attribute does is checked rather than assumed. And
+  `every_embedded_content_file_still_parses` moves the failure from runtime to
+  CI: `ui_text.json` loads through a fallback path that prints to stderr and
+  carries on with `[missing ...]` placeholders, so without this a typo would
+  ship as a game with no words in it rather than as a red test.
+
 ### The bench act two lives at was half vendor trash, 2026-08-03
 
 - ~~Sixteen plain recipe outputs are wanted by nothing~~ **Six of them fixed,

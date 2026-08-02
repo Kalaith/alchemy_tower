@@ -2,6 +2,7 @@ use super::{RoomBonusDefinition, StationKind, StationRenderDefinition};
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct StationDefinition {
     pub(crate) id: String,
     pub(crate) name: String,
@@ -47,6 +48,7 @@ pub(crate) struct StationDefinition {
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct ShopStockDefinition {
     pub(crate) item_id: String,
     pub(crate) price: u32,

@@ -2,6 +2,7 @@ use super::{ElementProfile, JournalMilestoneEntry};
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct MorphDefinition {
     pub(crate) output_item_id: String,
     #[serde(default)]
@@ -21,6 +22,7 @@ pub(crate) struct MorphDefinition {
 }
 
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct RoomBonusDefinition {
     #[serde(default)]
     pub(crate) quality_bonus: u32,
@@ -33,12 +35,14 @@ pub(crate) struct RoomBonusDefinition {
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct RecipeIngredient {
     pub(crate) item_id: String,
     pub(crate) amount: u32,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct RecipeDefinition {
     pub(crate) id: String,
     pub(crate) name: String,
@@ -88,6 +92,7 @@ pub(crate) struct RecipeDefinition {
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct RuneRecipeDefinition {
     pub(crate) id: String,
     pub(crate) station_id: String,
@@ -98,6 +103,7 @@ pub(crate) struct RuneRecipeDefinition {
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct MutationFormulaDefinition {
     pub(crate) id: String,
     pub(crate) seed_item_id: String,

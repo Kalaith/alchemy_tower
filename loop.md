@@ -2038,6 +2038,44 @@ Stop the loop and report if:
   *Sabotage done in the Rust this time rather than in the data, per last pass's note. It works and*
   *is safer: there is no uncommitted authored prose to lose.*
 
+- **2026-08-03 — the rest of the sweep for the bug this project keeps having. A correctness pass,
+  not a content one; saying so plainly.** Started by measuring the cast, the creatures and the
+  habitats for a content slice and finding all three healthy — five creatures each caught in the
+  wild and each feeding a recipe, nine townsfolk evenly served. So I swept a known failure family
+  instead, which this file's own method note has recommended since the archive pass and which nobody
+  had done for the biggest one.
+  **A key in a data file that no struct claims.** Serde drops it in silence, the file reads as
+  configured, the game ignores it, and nothing anywhere says so. Four instances on record: the
+  Southern Pass's `required_completed_quest` (the gate the southern half of the map sits behind did
+  not exist at runtime); `alchemy.heat` and `alchemy.fill_slots` in the input bindings;
+  `toast_icons`/`default_toast_icon` in `ui_art.json`, which is why six generated icons were never
+  loaded; and three duplicate entries in the narrative milestone block. **Every time, the fix was
+  the attribute on that one struct.** Counted: **11 of 48 deserialised structs strict, 37 not** —
+  `ItemDefinition`, `RecipeDefinition`, `AreaDefinition`, `StationDefinition`, `NpcDefinition`,
+  `GatherNodeDefinition`, and the nine file-envelope structs where a stray *top-level* key vanishes.
+  All 37 strict now, and **the sweep found no dead keys in the current data.** That is the good
+  outcome and it should be reported as one rather than dressed up: the value is that the fifth
+  instance is a red test rather than a mystery six months later.
+  *Two exclusions, deliberate:* the save-side files stay lenient. They parse what **older builds**
+  wrote, not what an author typed — `HabitatStateEntry.placed_day` was deleted as dead in an earlier
+  pass and every save from before that still carries it. Strictness is right for content you control
+  and wrong for a record the player already has on disk.
+  *Three guards, in a new `game_data_schema_tests.rs`.*
+  `every_content_schema_rejects_a_key_it_does_not_read` walks **every `.rs` file under `src`** and
+  keys off the `Deserialize` derive rather than off a hand-written list of "the schema files" —
+  which matters: `UiArtCatalog`, the struct that motivated the whole thing, lives in `src/art`, and
+  my first draft's hardcoded list missed exactly it. Widening the scan then named twelve more,
+  including all nine envelopes. It also asserts it found ≥35 structs, because **a source-scanning
+  guard fails open** — rename a file and it checks nothing while still passing.
+  `a_key_nothing_reads_is_now_a_load_failure` drives a misspelling through the real loader and
+  asserts the error names it, so the guard's belief about what the attribute *does* is tested rather
+  than assumed. `every_embedded_content_file_still_parses` moves the failure from runtime to CI:
+  `ui_text.json` loads through `parse_json_or_else`, which prints to stderr and carries on with
+  `[missing ...]` placeholders, so without it a typo ships as a game with no words in it.
+  **201 → 204 tests. No content added, and none was the point.**
+  *Lesson worth keeping: the hand-written file list was the same mistake one level up — a sweep*
+  *scoped to where I remembered the bug being rather than to where the class lives.*
+
 ## Deferred (needs a new system; not for this loop)
 
 - ~~Apply-potion-to-target flow (wilted plant, frightened creature, blocked path)~~ **Built

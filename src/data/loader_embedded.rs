@@ -149,17 +149,20 @@ const ITEM_SOURCES: &[(&str, &str)] = &[
 ];
 
 #[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
 struct EmbeddedConfigData {
     config: GameConfig,
 }
 
 #[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
 struct EmbeddedRouteData {
     #[serde(default)]
     gathering_routes: Vec<GatheringRouteDefinition>,
 }
 
 #[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
 struct EmbeddedStationData {
     #[serde(default)]
     stations: Vec<StationDefinition>,
@@ -199,12 +202,14 @@ const STATION_SOURCES: &[(&str, &str)] = &[
 ];
 
 #[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
 struct EmbeddedNpcData {
     #[serde(default)]
     npcs: Vec<NpcDefinition>,
 }
 
 #[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
 struct EmbeddedQuestData {
     #[serde(default)]
     quests: Vec<QuestDefinition>,
@@ -256,23 +261,27 @@ const QUEST_SOURCES: &[(&str, &str)] = &[
 ];
 
 #[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
 struct EmbeddedItemData {
     items: Vec<ItemDefinition>,
 }
 
 #[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
 struct EmbeddedRecipeData {
     #[serde(default)]
     recipes: Vec<RecipeDefinition>,
 }
 
 #[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
 struct EmbeddedRuneRecipeData {
     #[serde(default)]
     rune_recipes: Vec<RuneRecipeDefinition>,
 }
 
 #[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
 struct EmbeddedMutationData {
     #[serde(default)]
     mutation_formulas: Vec<MutationFormulaDefinition>,

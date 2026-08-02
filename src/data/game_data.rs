@@ -14,6 +14,7 @@ mod game_data_access;
 mod game_data_indexes;
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct GameData {
     pub(crate) config: GameConfig,
     pub(crate) areas: Vec<AreaDefinition>,

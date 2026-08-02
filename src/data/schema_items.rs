@@ -2,6 +2,7 @@ use super::{EffectKind, ElementProfile, ItemCategory};
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct WildVariantDefinition {
     pub(crate) id: String,
     pub(crate) name: String,
@@ -20,6 +21,7 @@ pub(crate) struct WildVariantDefinition {
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct ItemDefinition {
     pub(crate) id: String,
     pub(crate) name: String,
@@ -50,6 +52,7 @@ pub(crate) struct ItemDefinition {
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct EffectDefinition {
     pub(crate) kind: EffectKind,
     pub(crate) magnitude: f32,

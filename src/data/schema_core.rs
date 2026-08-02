@@ -71,6 +71,7 @@ pub(crate) enum StationKind {
 }
 
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct ElementProfile {
     #[serde(default)]
     pub(crate) vita: i32,

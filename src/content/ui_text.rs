@@ -6,6 +6,7 @@ use serde::Deserialize;
 use super::embedded_json::parse_json_or_else;
 
 #[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct UiText {
     pub(crate) statuses: StatusText,
     pub(crate) prompts: PromptText,
@@ -15,6 +16,7 @@ pub(crate) struct UiText {
 }
 
 #[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct StatusText {
     pub(crate) closed_alchemy: String,
     pub(crate) closed_shop: String,
@@ -28,6 +30,7 @@ pub(crate) struct StatusText {
 }
 
 #[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct PromptText {
     pub(crate) open_alchemy: String,
     pub(crate) sleep_in_bed: String,
@@ -39,6 +42,7 @@ pub(crate) struct PromptText {
 }
 
 #[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct OverlayText {
     pub(crate) shop_subtitle: String,
     pub(crate) rune_subtitle: String,

@@ -22,6 +22,7 @@ pub(super) struct UiArtCatalog {
 }
 
 #[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub(super) struct JournalTabIconBinding {
     pub(super) label: String,
     pub(super) icon_key: String,
@@ -29,6 +30,7 @@ pub(super) struct JournalTabIconBinding {
 }
 
 #[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub(super) struct UiIconAssetDefinition {
     pub(super) key: String,
     pub(super) path: String,

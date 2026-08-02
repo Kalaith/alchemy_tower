@@ -16,6 +16,7 @@ pub(crate) enum BlockerVisualStyle {
 }
 
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct AreaRenderDefinition {
     #[serde(default)]
     pub(crate) blocker_style: BlockerVisualStyle,
@@ -30,6 +31,7 @@ pub(crate) struct AreaRenderDefinition {
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct StationRenderDefinition {
     #[serde(default = "default_station_sprite_size")]
     pub(crate) sprite_size: [f32; 2],
@@ -56,6 +58,7 @@ impl Default for StationRenderDefinition {
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct GatherNodeRenderDefinition {
     #[serde(default = "default_gather_node_sprite_size")]
     pub(crate) sprite_size: [f32; 2],

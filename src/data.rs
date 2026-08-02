@@ -16,6 +16,8 @@ mod game_data_rapport_tests;
 #[cfg(test)]
 mod game_data_reference_tests;
 #[cfg(test)]
+mod game_data_schema_tests;
+#[cfg(test)]
 mod game_data_world_tests;
 mod loader;
 mod save_models;

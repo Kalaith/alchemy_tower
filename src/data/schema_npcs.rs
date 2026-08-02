@@ -1,6 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct NpcDefinition {
     pub(crate) id: String,
     pub(crate) name: String,
@@ -78,6 +79,7 @@ impl NpcDefinition {
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct NpcScheduleEntry {
     pub(crate) time_window: String,
     pub(crate) area_id: String,
@@ -97,6 +99,7 @@ pub(crate) struct NpcScheduleEntry {
 }
 
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct NpcPhase1DialogueDefinition {
     #[serde(default)]
     pub(crate) intro: String,
@@ -111,6 +114,7 @@ pub(crate) struct NpcPhase1DialogueDefinition {
 }
 
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct CrowPhase1DialogueDefinition {
     #[serde(default)]
     pub(crate) first_meeting: String,

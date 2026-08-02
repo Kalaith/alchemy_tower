@@ -6,6 +6,7 @@ use super::embedded_json::parse_required_json;
 use crate::data::JournalMilestoneEntry;
 
 #[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct NarrativeText {
     pub(crate) milestones: NarrativeMilestones,
     pub(crate) statuses: NarrativeStatuses,
@@ -22,6 +23,7 @@ pub(crate) struct NarrativeText {
 /// however much of the valley had been put back, which made the last thing the
 /// game says the only thing it says that the player had no hand in.
 #[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct NarrativeEpilogueBeat {
     /// Every one of these must be recorded. Empty means always earned.
     #[serde(default)]
@@ -66,6 +68,7 @@ impl NarrativeMilestones {
 }
 
 #[derive(Debug, Deserialize, Clone)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct NarrativeMilestone {
     pub(crate) id: String,
     pub(crate) title: String,
@@ -83,6 +86,7 @@ impl NarrativeMilestone {
 }
 
 #[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct NarrativeStatuses {
     pub(crate) archive_timeline_complete: String,
     pub(crate) archive_timeline_incomplete: String,
@@ -95,6 +99,7 @@ pub(crate) struct NarrativeStatuses {
 }
 
 #[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct NarrativeOverlays {
     pub(crate) observatory_epilogue: String,
     pub(crate) observatory_footer: String,
@@ -106,6 +111,7 @@ pub(crate) struct NarrativeOverlays {
 /// the reaction a condition and an `order`, and the highest-ordered earned line
 /// for that person is the one they speak.
 #[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct NarrativeReaction {
     pub(crate) npc_id: String,
     /// Earned once this quest is completed. Empty means no quest condition.
@@ -165,6 +171,7 @@ const REACTION_SOURCES: &[(&str, &str)] = &[
 /// The reactions file on its own. Only exists so the split file can be parsed
 /// and folded into [`NarrativeText`].
 #[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
 struct NarrativeReactions {
     reactions: Vec<NarrativeReaction>,
 }

@@ -2,6 +2,7 @@ use super::{AreaRenderDefinition, FlourishDefinition, GatherNodeRenderDefinition
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct GameConfig {
     pub(crate) starting_area: String,
     pub(crate) starting_position: [f32; 2],
@@ -116,6 +117,7 @@ impl QualityValueTuning {
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct RectDefinition {
     pub(crate) x: f32,
     pub(crate) y: f32,
@@ -177,6 +179,7 @@ pub(crate) struct WarpDefinition {
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct GatherNodeDefinition {
     pub(crate) id: String,
     pub(crate) name: String,
@@ -240,6 +243,7 @@ pub(crate) struct ApplyTargetDefinition {
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct GatheringRouteDefinition {
     pub(crate) id: String,
     pub(crate) name: String,
@@ -340,6 +344,7 @@ pub(crate) struct QuestDefinition {
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct AreaDefinition {
     pub(crate) id: String,
     pub(crate) name: String,
