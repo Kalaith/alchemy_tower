@@ -188,7 +188,8 @@ mod tests {
                     && warp.required_coins == 0
                     && warp.required_item_id.is_empty()
                     && warp.required_mastered_recipe.is_empty()
-                    && warp.required_journal_milestone.is_empty();
+                    && warp.required_journal_milestone.is_empty()
+                    && warp.required_completed_quest.is_empty();
                 if ungated {
                     frontier.push(warp.target_area.clone());
                 }
@@ -343,6 +344,16 @@ reachable areas: {open_areas:?}"
                     missing.push(format!(
                         "{} -> gate quest {}",
                         node.id, node.required_completed_quest
+                    ));
+                }
+            }
+            for warp in &area.warps {
+                if !warp.required_completed_quest.is_empty()
+                    && data.quest(&warp.required_completed_quest).is_none()
+                {
+                    missing.push(format!(
+                        "{} -> gate quest {}",
+                        warp.id, warp.required_completed_quest
                     ));
                 }
             }
@@ -591,6 +602,139 @@ reachable areas: {open_areas:?}"
         assert!(
             orphans.is_empty(),
             "habitats waiting on creatures that cannot be met:\n{orphans:#?}"
+        );
+    }
+
+    /// Every way the game knows to make an item: brewing it, or branching a brew
+    /// into one of its morphs.
+    fn ways_to_make<'a>(
+        data: &'a GameData,
+        item_id: &str,
+    ) -> Vec<&'a crate::data::RecipeDefinition> {
+        data.recipes
+            .iter()
+            .filter(|recipe| {
+                recipe.output_item_id == item_id
+                    || recipe
+                        .morph_targets
+                        .iter()
+                        .any(|morph| morph.output_item_id == item_id)
+            })
+            .collect()
+    }
+
+    /// True when no route to `item_id` avoids the forbidden ingredients — an
+    /// item is blocked when it is forbidden outright, or when every recipe for
+    /// it has at least one blocked ingredient. Items nothing brews are ground
+    /// or shop stock and count as available.
+    fn item_is_blocked(
+        data: &GameData,
+        item_id: &str,
+        forbidden: &std::collections::HashSet<&str>,
+        visiting: &mut Vec<String>,
+    ) -> bool {
+        if forbidden.contains(item_id) {
+            return true;
+        }
+        // A recipe reachable only by looping back through itself is no route.
+        if visiting.iter().any(|seen| seen == item_id) {
+            return true;
+        }
+        let recipes = ways_to_make(data, item_id);
+        if recipes.is_empty() {
+            return false;
+        }
+        visiting.push(item_id.to_owned());
+        let blocked = recipes.iter().all(|recipe| {
+            recipe
+                .ingredients
+                .iter()
+                .any(|ingredient| item_is_blocked(data, &ingredient.item_id, forbidden, visiting))
+        });
+        visiting.pop();
+        blocked
+    }
+
+    /// A warp gated on a finished quest can strand the player in one very quiet
+    /// way: put the ingredients that quest needs on the far side of the gate it
+    /// opens. Nothing about the authoring makes that visible — the Southern
+    /// Pass carries five ingredients found nowhere else, and its gate went
+    /// unenforced for months, so the arrangement was never under any pressure.
+    /// Now that the gate is real, this asserts the key is not locked inside the
+    /// door it opens.
+    #[test]
+    fn a_story_gate_never_locks_away_its_own_key() {
+        let data = load_embedded().expect("embedded game data should load");
+        let mut gates = 0usize;
+        let mut deadlocks = Vec::new();
+
+        for area in &data.areas {
+            for warp in &area.warps {
+                if warp.required_completed_quest.is_empty() {
+                    continue;
+                }
+                gates += 1;
+
+                // Ingredients the far side is the only source of. Approximate
+                // "far side" as the target area itself, which is where a gate's
+                // exclusive ground actually sits.
+                let Some(target) = data.area(&warp.target_area) else {
+                    continue;
+                };
+                let mut elsewhere = std::collections::HashSet::new();
+                for other in data.areas.iter().filter(|a| a.id != target.id) {
+                    elsewhere.extend(other.gather_nodes.iter().map(|node| node.item_id.as_str()));
+                }
+                for station in &data.stations {
+                    elsewhere.extend(station.stock.iter().map(|stocked| stocked.item_id.as_str()));
+                }
+                let behind_the_gate = target
+                    .gather_nodes
+                    .iter()
+                    .map(|node| node.item_id.as_str())
+                    .filter(|item_id| !elsewhere.contains(item_id))
+                    .collect::<std::collections::HashSet<_>>();
+                if behind_the_gate.is_empty() {
+                    continue;
+                }
+
+                // Everything the gate quest and its prerequisites ask for.
+                let mut chain = vec![warp.required_completed_quest.clone()];
+                let mut walked = std::collections::HashSet::new();
+                while let Some(quest_id) = chain.pop() {
+                    if !walked.insert(quest_id.clone()) {
+                        continue;
+                    }
+                    let Some(quest) = data.quest(&quest_id) else {
+                        continue;
+                    };
+                    chain.extend(quest.prerequisite_quests.iter().cloned());
+                    if quest.required_item_id.is_empty() {
+                        continue;
+                    }
+                    if item_is_blocked(
+                        &data,
+                        &quest.required_item_id,
+                        &behind_the_gate,
+                        &mut Vec::new(),
+                    ) {
+                        deadlocks.push(format!(
+                            "{} opens on {}, but {} needs {} and only {} carries the makings",
+                            warp.id,
+                            warp.required_completed_quest,
+                            quest.id,
+                            quest.required_item_id,
+                            target.id
+                        ));
+                    }
+                }
+            }
+        }
+
+        assert!(gates > 0, "no warp in the world waits on a finished quest");
+        assert!(
+            deadlocks.is_empty(),
+            "story gates that lock away their own key:\n{deadlocks:#?}"
         );
     }
 }

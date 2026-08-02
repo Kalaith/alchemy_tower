@@ -75,6 +75,7 @@
     "gameplay_requirement_more_coins": "{count} more coins",
     "gameplay_requirement_item_amount": "{item} x{amount}",
     "gameplay_requirement_archive_entry": "recover the required archive entry",
+    "gameplay_requirement_completed_quest": "finish {quest}",
     "gameplay_warp_lock_text": "{label} needs {requirements}.",
     "gameplay_planter_harvested": "Harvested {item} x{amount} from {station}.",
     "gameplay_planter_harvested_mutation": "Harvested {item} x{amount} from {station}. Mutation: {mutation}.",

@@ -39,16 +39,18 @@ content with no destination.
 
 ### Bugs
 
-- **The Southern Pass gate does not exist at runtime.** `town_to_pass` in
-  `town_square.json` sets `required_completed_quest: nightwatch_for_elric`,
-  but `WarpDefinition` (`data/schema_world.rs:40`) has no such field — gather
-  nodes have it, warps don't — so serde silently drops it and the pass is
-  walkable from minute one (four ungated nodes, including the
-  `coldiron_tincture` input). Because the warp is never locked,
-  `restore_warp_route` never fires and the `pass_road_open` milestone is never
-  recorded, killing its three NPC reaction lines and the authored
-  `locked_note`. Add the field to the schema; consider `deny_unknown_fields`
-  (no schema in `data/` uses it) so the next dropped gate fails loudly.
+- ~~The Southern Pass gate does not exist at runtime~~ **Fixed 2026-08-02.**
+  `WarpDefinition` now carries `required_completed_quest`, and it is read by
+  `warp_is_unlocked`/`can_unlock_warp`/`warp_progress_score` and surfaced in
+  the requirement summary, so the switchback locks until
+  `nightwatch_for_elric` is delivered, `restore_warp_route` fires, and the
+  `pass_road_open` milestone behind three NPC lines is recorded. The struct
+  took `deny_unknown_fields` so the next dropped gate fails to load rather
+  than silently opening. Two new tests: `gameplay_warps` pins locked → quest →
+  unlocked → milestone, and `a_story_gate_never_locks_away_its_own_key` walks
+  the gate quest's ingredient tree so a future gate can't strand its own key
+  on the far side (the pass carries five ingredients found nowhere else, which
+  feed six brews).
 - **The experiment log disagrees with the game about stability.**
   `record_experiment_log` (`state/gameplay_brew_records.rs:51`) omits
   `!destabilized` from the `stable` flag that `brew_is_stable`

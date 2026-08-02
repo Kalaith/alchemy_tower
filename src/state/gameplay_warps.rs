@@ -13,7 +13,17 @@ impl GameplayState {
                 && warp.required_coins == 0
                 && warp.required_item_id.is_empty()
                 && warp.required_journal_milestone.is_empty()
+                && warp.required_completed_quest.is_empty()
                 && warp.required_mastered_recipe.is_empty())
+    }
+
+    /// True when the warp has no story gate, or the quest behind it is finished.
+    pub(super) fn quest_requirement_met(&self, warp: &WarpDefinition) -> bool {
+        warp.required_completed_quest.is_empty()
+            || self
+                .progression
+                .completed_quests
+                .contains(&warp.required_completed_quest)
     }
 
     pub(super) fn can_unlock_warp(&self, warp: &WarpDefinition) -> bool {
@@ -28,6 +38,7 @@ impl GameplayState {
                     >= warp.required_item_amount)
             && (warp.required_journal_milestone.is_empty()
                 || self.has_journal_milestone(&warp.required_journal_milestone))
+            && self.quest_requirement_met(warp)
             && self.mastery_requirement_met(warp)
     }
 
@@ -75,6 +86,7 @@ impl GameplayState {
                 && !self.has_journal_milestone(&warp.required_journal_milestone),
         );
         let mastery_missing = u32::from(!self.mastery_requirement_met(warp));
+        let quest_missing = u32::from(!self.quest_requirement_met(warp));
 
         warp.required_total_brews
             .saturating_sub(self.progression.total_brews)
@@ -83,6 +95,7 @@ impl GameplayState {
             .saturating_add(item_missing.saturating_mul(25))
             .saturating_add(milestone_missing.saturating_mul(150))
             .saturating_add(mastery_missing.saturating_mul(150))
+            .saturating_add(quest_missing.saturating_mul(150))
     }
 
     pub(super) fn warp_requirement_summary(
@@ -117,6 +130,7 @@ impl GameplayState {
             self.coins,
             owned_required_item,
             missing_journal_milestone,
+            !self.quest_requirement_met(warp),
             mastered_recipe_brews,
         )
     }
@@ -151,5 +165,42 @@ mod tests {
             crate::alchemy::MASTERED_BREW_COUNT,
         );
         assert!(state.can_unlock_warp(&warp));
+    }
+
+    /// The Southern Pass authored a `required_completed_quest` that no schema
+    /// field claimed, so serde dropped it and the switchback was walkable from
+    /// minute one — which also meant `restore_warp_route` never ran and the
+    /// `pass_road_open` milestone behind three NPC lines was never recorded.
+    /// This pins both halves: locked at a new game, and opening the quest both
+    /// unlocks the route and files the milestone.
+    #[test]
+    fn a_story_gated_warp_stays_shut_until_its_quest_is_done() {
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let mut state = GameplayState::new(&data);
+
+        let warp = data
+            .areas
+            .iter()
+            .flat_map(|area| area.warps.iter())
+            .find(|warp| warp.id == "town_to_pass")
+            .expect("southern pass warp should exist")
+            .clone();
+        assert_eq!(warp.required_completed_quest, "nightwatch_for_elric");
+
+        assert!(!state.warp_is_unlocked(&warp));
+        assert!(!state.can_unlock_warp(&warp));
+
+        state
+            .progression
+            .completed_quests
+            .insert(warp.required_completed_quest.clone());
+        assert!(state.can_unlock_warp(&warp));
+
+        state.handle_warp_interaction(&data, &warp);
+        assert!(state.warp_is_unlocked(&warp));
+        assert!(
+            state.has_journal_milestone("pass_road_open"),
+            "restoring the pass should record the milestone its NPC lines wait on"
+        );
     }
 }

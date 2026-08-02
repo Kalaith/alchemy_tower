@@ -6,6 +6,7 @@ pub(super) struct WarpRequirementProgress {
     coins: u32,
     owned_required_item: u32,
     missing_journal_milestone: bool,
+    missing_completed_quest: bool,
     mastered_recipe_brews: u32,
 }
 
@@ -15,6 +16,7 @@ impl WarpRequirementProgress {
         coins: u32,
         owned_required_item: u32,
         missing_journal_milestone: bool,
+        missing_completed_quest: bool,
         mastered_recipe_brews: u32,
     ) -> Self {
         Self {
@@ -22,6 +24,7 @@ impl WarpRequirementProgress {
             coins,
             owned_required_item,
             missing_journal_milestone,
+            missing_completed_quest,
             mastered_recipe_brews,
         }
     }
@@ -89,6 +92,16 @@ pub(super) fn warp_requirement_summary(
                 ("have", &progress.mastered_recipe_brews.to_string()),
                 ("need", &crate::alchemy::MASTERED_BREW_COUNT.to_string()),
             ],
+        ));
+    }
+    if progress.missing_completed_quest {
+        let quest_title = data
+            .quest(&warp.required_completed_quest)
+            .map(|quest| quest.title.as_str())
+            .unwrap_or_default();
+        parts.push(ui_format(
+            "gameplay_requirement_completed_quest",
+            &[("quest", quest_title)],
         ));
     }
     if progress.missing_journal_milestone {

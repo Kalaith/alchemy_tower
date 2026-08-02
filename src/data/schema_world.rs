@@ -36,7 +36,12 @@ pub(crate) struct JournalMilestoneEntry {
     pub(crate) text: String,
 }
 
+/// `deny_unknown_fields` because the Southern Pass shipped for months with a
+/// `required_completed_quest` key that no field claimed: serde dropped it in
+/// silence, the gate never locked, and the milestone behind it never fired.
+/// A gate that is not read should refuse to load, not quietly open.
 #[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct WarpDefinition {
     pub(crate) id: String,
     pub(crate) label: String,
@@ -60,6 +65,11 @@ pub(crate) struct WarpDefinition {
     pub(crate) required_mastered_recipe: String,
     #[serde(default)]
     pub(crate) required_journal_hint: String,
+    /// A route the town only reopens once a story beat has landed — the same
+    /// gate gather nodes and stations already use, so a finished chain changes
+    /// where the player can walk and not just what the journal says.
+    #[serde(default)]
+    pub(crate) required_completed_quest: String,
     #[serde(default)]
     pub(crate) unlock_milestones: Vec<JournalMilestoneEntry>,
     #[serde(default)]
