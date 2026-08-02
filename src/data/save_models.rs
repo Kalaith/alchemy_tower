@@ -106,6 +106,8 @@ pub(crate) struct SaveData {
     pub(crate) salvage_familiarity: Vec<SalvageFamiliarityEntry>,
     #[serde(default)]
     pub(crate) treated_targets: Vec<String>,
+    #[serde(default)]
+    pub(crate) shown_tutorial_hints: Vec<String>,
 }
 
 /// How many times the player has run one particular off-book mixture. Brewing

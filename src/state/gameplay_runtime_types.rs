@@ -68,37 +68,17 @@ impl RuntimeState {
 
 #[derive(Clone, Debug)]
 pub(super) struct TutorialState {
+    /// A frame timer, which is why this one stays in runtime: it paces the
+    /// hints within a session and means nothing across a save. Which hints have
+    /// already been shown moved to `progression.shown_tutorial_hints`, because
+    /// runtime is rebuilt on load and the opening three fire unconditionally.
     pub(super) next_hint_delay_seconds: f32,
-    pub(super) crow_intro_hint_shown: bool,
-    pub(super) save_hint_shown: bool,
-    pub(super) journal_hint_shown: bool,
-    pub(super) alchemy_hint_shown: bool,
-    pub(super) potion_hint_shown: bool,
-    pub(super) gather_hint_shown: bool,
-    pub(super) brew_goal_hint_shown: bool,
-    pub(super) mira_hint_shown: bool,
-    pub(super) rowan_hint_shown: bool,
-    pub(super) quest_hint_shown: bool,
-    pub(super) delivery_hint_shown: bool,
-    pub(super) route_hint_shown: bool,
 }
 
 impl Default for TutorialState {
     fn default() -> Self {
         Self {
             next_hint_delay_seconds: 1.5,
-            crow_intro_hint_shown: false,
-            save_hint_shown: false,
-            journal_hint_shown: false,
-            alchemy_hint_shown: false,
-            potion_hint_shown: false,
-            gather_hint_shown: false,
-            brew_goal_hint_shown: false,
-            mira_hint_shown: false,
-            rowan_hint_shown: false,
-            quest_hint_shown: false,
-            delivery_hint_shown: false,
-            route_hint_shown: false,
         }
     }
 }

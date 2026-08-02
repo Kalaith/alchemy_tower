@@ -1546,6 +1546,33 @@ Stop the loop and report if:
   is raised in, at 2 × 60 characters measured off the capture.
   **171 tests; the valley finally says thank you for the good stuff.**
 
+- **2026-08-03 — the first words a new player reads had never been read by anybody.** The banners
+  came alive last pass, and the tutorial hints ride the same channel, so this is the first time the
+  opening instructions could be seen at all. Reading them turned up **three defects, all of which
+  cost nothing while the channel was dead**:
+  the shown-flags lived in **runtime** state, which is rebuilt on load — so the crow's introduction,
+  the save hint and the journal hint replayed **every time a save was opened**;
+  `tutorial_potions` was formatted with a `{quick_potions}` substitution its copy **had no
+  placeholder for**, so the belt keys were looked up, joined and dropped (the banner bug one layer
+  down); and three hints **spelled keys out as literals** — "Press J", "with E" — while
+  `input_bindings.json` owns them and the rest of the HUD reads it.
+  Flags moved to `progression.shown_tutorial_hints`; six copy lines rewritten to ask for the
+  binding; the selector is a **list** rather than a ladder of `if`s so a guard can walk it.
+  ***The binding guard had to check the copy, not the render.*** My first version asserted the
+  rendered hint contains the bound key — and *"Press J to open the field journal"* contains `J` by
+  coincidence, so it passed against the exact string it was written to catch. It asserts the copy
+  asks for `{journal}` now; verified against the old line.
+  *The banner cap went 2 → 3 lines:* the crow's opening instruction is the longest thing the channel
+  carries and was being cut mid-sentence the day it became visible. The fit guard from last pass
+  covered only the townsfolk's remarks; **the other family of authored line overran it the same
+  afternoon**, so it walks both now.
+  ***Harness note worth keeping.*** A headless capture runs about **twenty times faster than real
+  time** and hint pacing is real-time, so the default 150 frames photographs roughly a tenth of a
+  second — three captures showed an empty screen before an `eprintln` in the update loop showed the
+  delay ticking down at 0.0008s a frame. Anything on a timer needs frame counts in the **thousands**;
+  this one took 3,000.
+  **174 tests; `screenshots/hud/opening_hint.png` is the crow, finally saying it.**
+
 ## Deferred (needs a new system; not for this loop)
 
 - Apply-potion-to-target flow (wilted plant, frightened creature, blocked path) — `TODO.md` calls it

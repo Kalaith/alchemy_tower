@@ -118,6 +118,7 @@ pub(super) fn apply_save_snapshot(
         .map(|entry| (entry.signature, entry.attempts))
         .collect();
     state.progression.treated_targets = save.treated_targets.into_iter().collect();
+    state.progression.shown_tutorial_hints = save.shown_tutorial_hints.into_iter().collect();
     state.world.available_nodes.clear();
     state.ui = OverlayState::new_gameplay();
     state.alchemy = AlchemySession::default();
@@ -180,6 +181,8 @@ mod tests {
             }],
         );
         p.spoken_reactions.insert("deadbeefdeadbeef".to_owned());
+        p.shown_tutorial_hints
+            .insert("tutorial_crow_intro".to_owned());
         p.salvage_familiarity
             .insert("entry_cauldron|sunleaf+whisper_moss".to_owned(), 2);
         p.variant_stock.insert(
@@ -313,6 +316,12 @@ mod tests {
         // Which lines a townsperson has already said lives only in the save;
         // losing it makes the whole town repeat their opening remarks.
         assert_eq!(a.spoken_reactions, b.spoken_reactions, "spoken reactions");
+        // And the same for the opening hints, which fire on no condition at
+        // all: losing this reintroduces the crow to a player forty hours in.
+        assert_eq!(
+            a.shown_tutorial_hints, b.shown_tutorial_hints,
+            "tutorial hints already shown"
+        );
         // Losing this makes every off-book mixture the player had half worked
         // out start again from a blind guess.
         assert_eq!(

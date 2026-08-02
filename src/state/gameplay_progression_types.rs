@@ -41,6 +41,13 @@ pub(super) struct ProgressionState {
     /// shadowed forever. Remembering what has been said lets the earlier ones
     /// have their turn first.
     pub(super) spoken_reactions: HashSet<String>,
+    /// Which opening hints have been shown. Progression rather than runtime,
+    /// because runtime is rebuilt on load: the crow's introduction, the save
+    /// hint and the journal hint all fire unconditionally, so a player forty
+    /// hours in was told how to open the journal every time they loaded. It
+    /// cost nothing while the toasts were invisible and became a defect the
+    /// moment they were not.
+    pub(super) shown_tutorial_hints: HashSet<String>,
     /// Off-book mixture signature -> how many times it has been brewed. See
     /// `gameplay_salvage_discovery`.
     pub(super) salvage_familiarity: BTreeMap<String, u32>,
@@ -70,6 +77,7 @@ impl ProgressionState {
             variant_stock: BTreeMap::new(),
             bottle_stock: BTreeMap::new(),
             spoken_reactions: HashSet::new(),
+            shown_tutorial_hints: HashSet::new(),
             salvage_familiarity: BTreeMap::new(),
             treated_targets: HashSet::new(),
         }

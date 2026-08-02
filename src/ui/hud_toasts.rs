@@ -22,9 +22,11 @@ const TOAST_WIDTH: f32 = 680.0;
 const ICON_SIZE: f32 = 26.0;
 pub(crate) const TOAST_FONT: f32 = 18.0;
 pub(crate) const TOAST_LINE_HEIGHT: f32 = 21.0;
-/// A banner holds a sentence, and a sentence that needs a third line belongs in
-/// the journal rather than in something that leaves after two seconds.
-pub(crate) const TOAST_MAX_LINES: usize = 2;
+/// A banner holds a short paragraph. Two lines covers every remark and every
+/// delivery note; the crow's opening instruction — the first words a new player
+/// reads — needs a third, and cutting that one mid-sentence is worse than a
+/// slightly taller box.
+pub(crate) const TOAST_MAX_LINES: usize = 3;
 const TOAST_PADDING: f32 = 19.0;
 const TOAST_GAP: f32 = 6.0;
 
@@ -111,20 +113,27 @@ mod tests {
     /// The shortest window the game is laid out for.
     const REFERENCE_SCREEN_WIDTH: f32 = 1280.0;
 
-    /// A banner leaves after two seconds and holds two lines. A townsperson's
-    /// remark that needs a third is one nobody will finish reading, and the
-    /// renderer would cut it mid-sentence — the same failure the epilogue and
-    /// the route pane each shipped once.
+    /// A banner leaves after a couple of seconds and holds three lines. Anything
+    /// longer is cut mid-sentence — the same failure the epilogue and the route
+    /// pane each shipped once, and the crow's opening instruction shipped in
+    /// this box the day it became visible.
+    ///
+    /// Both families of authored line go through this box, so both are walked:
+    /// the first version of this guard covered only the townsfolk's remarks and
+    /// the tutorial hints overran it the same afternoon.
     #[test]
-    fn what_a_townsperson_says_about_good_work_fits_the_banner() {
+    fn everything_raised_in_a_banner_fits_it() {
+        use crate::state::GameplayState;
+
         let data = crate::data::load_embedded().expect("embedded game data should load");
+        let state = GameplayState::new(&data);
         let budget = TOAST_MAX_LINES * CHARS_PER_LINE;
         assert!(
             toast_text_width(REFERENCE_SCREEN_WIDTH) > 0.0,
             "the banner has no room for text at all"
         );
 
-        let overrun = data
+        let mut overrun = data
             .npcs
             .iter()
             .filter(|npc| npc.exceptional_delivery_line.len() > budget)
@@ -136,10 +145,17 @@ mod tests {
                 )
             })
             .collect::<Vec<_>>();
+        overrun.extend(
+            state
+                .tutorial_hint_texts()
+                .into_iter()
+                .filter(|(_, text)| text.len() > budget)
+                .map(|(key, text)| format!("{key}: {} characters against {budget}", text.len())),
+        );
 
         assert!(
             overrun.is_empty(),
-            "remarks that will not fit the banner they are raised in: {overrun:#?}"
+            "lines that will not fit the banner they are raised in: {overrun:#?}"
         );
     }
 }

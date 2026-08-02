@@ -274,6 +274,31 @@ content with no destination.
   Three tests and a `toasts` capture scene (`screenshots/hud/event_toasts.png`),
   which exists because a banner lasts two seconds and there is no catching one
   by hand.
+- ~~The tutorial layer had never been read by anybody~~ **Fixed 2026-08-03**, the
+  same day it became visible. Three defects, all of which cost nothing while the
+  banners were dead and were live the moment they were not:
+  **the shown-flags lived in runtime state**, which is rebuilt on load, so the
+  crow's introduction, the save hint and the journal hint replayed every time a
+  save was opened — they are `progression.shown_tutorial_hints` now, saved with
+  everything else; **`tutorial_potions` was formatted with a `{quick_potions}`
+  substitution its copy had no placeholder for**, so the belt keys were looked
+  up, joined and dropped, which is the banner bug one layer down; and **three
+  hints spelled keys out as literals** ("Press J", "with E") while
+  `input_bindings.json` owns them and the rest of the HUD reads it. Six lines
+  rewritten to ask for the binding.
+  The selector is a list rather than a ladder of `if`s, so a guard can walk it.
+  Three tests: a hint that names a key names the *bound* one — checked against
+  the copy rather than the rendered string, because "Press J" contains the bound
+  key by coincidence — every hint has words behind it with no unfilled
+  placeholder, and a hint already seen does not come back after a load.
+  The banner cap went from two lines to three, because the crow's opening
+  instruction is the longest thing the channel carries and was being cut
+  mid-sentence; the fit guard now walks the hints as well as the townsfolk's
+  remarks. `screenshots/hud/opening_hint.png`.
+  ***Harness note:*** a headless capture runs about twenty times faster than
+  real time, and hint pacing is real-time. The default 150 frames photographs
+  roughly a tenth of a second, so anything on a timer needs frame counts in the
+  thousands — this one took 3,000.
 
 ### Dead data (low stakes, cheap deletes or one-line hookups)
 
