@@ -201,6 +201,12 @@ pub(crate) struct GatherNodeDefinition {
     /// only a journal entry.
     #[serde(default)]
     pub(crate) required_completed_quest: String,
+    /// The same, keyed on a journal beat rather than a request. This is what
+    /// lets a *treated* thing open ground: pour a restorative on a slumped root
+    /// wall and the bank takes hold again and starts growing, which is the
+    /// premise of the whole applied-alchemy layer stated in one field.
+    #[serde(default)]
+    pub(crate) required_journal_milestone: String,
     #[serde(default)]
     pub(crate) render: GatherNodeRenderDefinition,
 }

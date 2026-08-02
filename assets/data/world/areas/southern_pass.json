@@ -256,6 +256,87 @@
       "render": {
         "sprite_id": "thinair_bell_pass"
       }
+    },
+    {
+      "id": "pass_bank_thrift_01",
+      "name": "Leanaway Thrift",
+      "item_id": "leanaway_thrift",
+      "color": [
+        150,
+        190,
+        150,
+        255
+      ],
+      "position": [
+        560,
+        296
+      ],
+      "radius": 26.0,
+      "route_id": "",
+      "seasons": [],
+      "weathers": [],
+      "time_windows": [],
+      "spawn_chance": 90,
+      "note": "Growing out of the bank that was lying across the path a season ago.",
+      "required_completed_quest": "",
+      "required_journal_milestone": "pass_root_wall_cleared",
+      "render": {
+        "sprite_id": "leanaway_thrift_pass"
+      }
+    },
+    {
+      "id": "pass_bank_driftbloom_01",
+      "name": "Driftbloom",
+      "item_id": "driftbloom",
+      "color": [
+        150,
+        190,
+        150,
+        255
+      ],
+      "position": [
+        700,
+        272
+      ],
+      "radius": 26.0,
+      "route_id": "",
+      "seasons": [],
+      "weathers": [],
+      "time_windows": [],
+      "spawn_chance": 90,
+      "note": "The upper switchback carries flower now. Nobody cut this back; it was woken.",
+      "required_completed_quest": "",
+      "required_journal_milestone": "pass_root_wall_cleared",
+      "render": {
+        "sprite_id": "driftbloom_pass"
+      }
+    },
+    {
+      "id": "pass_bank_coldiron_01",
+      "name": "Coldiron Lichen",
+      "item_id": "coldiron_lichen",
+      "color": [
+        150,
+        190,
+        150,
+        255
+      ],
+      "position": [
+        800,
+        320
+      ],
+      "radius": 26.0,
+      "route_id": "",
+      "seasons": [],
+      "weathers": [],
+      "time_windows": [],
+      "spawn_chance": 90,
+      "note": "Lichen on the re-seated root wall, which is the sort of thing that only grows on something that is staying put.",
+      "required_completed_quest": "",
+      "required_journal_milestone": "pass_root_wall_cleared",
+      "render": {
+        "sprite_id": "coldiron_lichen_pass"
+      }
     }
   ],
   "apply_targets": [

@@ -49,6 +49,12 @@ impl GameplayState {
             {
                 continue;
             }
+            // And ground opened by something having been treated or restored.
+            if !node.required_journal_milestone.is_empty()
+                && !self.has_journal_milestone(&node.required_journal_milestone)
+            {
+                continue;
+            }
             let season_ok = node.seasons.is_empty()
                 || node
                     .seasons
@@ -133,6 +139,16 @@ mod tests {
         for quest in &data.quests {
             state.progression.completed_quests.insert(quest.id.clone());
         }
+        // Ground can now also wait on a journal beat — treating a slumped root
+        // wall opens the bank above it — so a run that has finished everything
+        // has recorded those too.
+        for area in &data.areas {
+            for node in &area.gather_nodes {
+                if !node.required_journal_milestone.is_empty() {
+                    state.push_journal_milestone(&node.required_journal_milestone, "", "");
+                }
+            }
+        }
 
         // Season advances every 5 days and weather every 4, so a 20-day sweep
         // covers every pairing; the extra days vary the per-node daily roll.
@@ -186,6 +202,16 @@ mod tests {
         let mut state = GameplayState::new(&data);
         for quest in &data.quests {
             state.progression.completed_quests.insert(quest.id.clone());
+        }
+        // Ground can now also wait on a journal beat — treating a slumped root
+        // wall opens the bank above it — so a run that has finished everything
+        // has recorded those too.
+        for area in &data.areas {
+            for node in &area.gather_nodes {
+                if !node.required_journal_milestone.is_empty() {
+                    state.push_journal_milestone(&node.required_journal_milestone, "", "");
+                }
+            }
         }
 
         let day_length = state.world.day_length_seconds;

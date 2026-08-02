@@ -157,4 +157,63 @@ mod tests {
             "only {total} flourishes across {areas} areas; the world barely notices what you do"
         );
     }
+
+    /// Every beat a milestone-writer records should lead somewhere. Treating a
+    /// thing, or funding a commission, is expensive — bottles at a grade, and
+    /// for a commission thousands of coins — and a payoff that exists only as a
+    /// journal entry reads as a receipt rather than a change.
+    ///
+    /// "Somewhere" is deliberately broad: a route, a facility, ground that
+    /// starts growing, or a visible change in the world all count. What does
+    /// not count is nothing.
+    #[test]
+    fn treating_and_funding_things_leads_somewhere() {
+        let data = load_embedded().expect("embedded game data should load");
+
+        let mut consumed = std::collections::HashSet::new();
+        for area in &data.areas {
+            for warp in &area.warps {
+                consumed.insert(warp.required_journal_milestone.clone());
+            }
+            for node in &area.gather_nodes {
+                consumed.insert(node.required_journal_milestone.clone());
+            }
+            for flourish in &area.flourishes {
+                consumed.extend(flourish.after_any_journal_milestone.iter().cloned());
+            }
+        }
+        for station in &data.stations {
+            consumed.insert(station.required_journal_milestone.clone());
+        }
+
+        let mut orphaned = Vec::new();
+
+        for area in &data.areas {
+            for target in &area.apply_targets {
+                if !target
+                    .completion_milestones
+                    .iter()
+                    .any(|milestone| consumed.contains(&milestone.id))
+                {
+                    orphaned.push(format!("treating {} opens nothing", target.id));
+                }
+            }
+        }
+        for quest in data.quests.iter().filter(|quest| quest.coin_cost > 0) {
+            if !quest
+                .completion_milestones
+                .iter()
+                .any(|milestone| consumed.contains(&milestone.id))
+            {
+                orphaned.push(format!("funding {} changes nothing", quest.id));
+            }
+        }
+
+        orphaned.sort();
+        assert!(
+            orphaned.is_empty(),
+            "work whose only payoff is a journal entry:
+{orphaned:#?}"
+        );
+    }
 }

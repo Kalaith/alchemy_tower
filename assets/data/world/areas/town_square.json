@@ -709,6 +709,178 @@
           ]
         }
       ]
+    },
+    {
+      "id": "town_winter_stores",
+      "after_any_journal_milestone": [
+        "commission_winter_stores_laid_in"
+      ],
+      "shapes": [
+        {
+          "kind": "rect",
+          "x": 760,
+          "y": 730,
+          "w": 52,
+          "h": 34,
+          "color": [
+            168,
+            132,
+            96,
+            255
+          ]
+        },
+        {
+          "kind": "rect",
+          "x": 760,
+          "y": 724,
+          "w": 52,
+          "h": 8,
+          "color": [
+            198,
+            166,
+            124,
+            255
+          ]
+        },
+        {
+          "kind": "rect",
+          "x": 818,
+          "y": 738,
+          "w": 44,
+          "h": 26,
+          "color": [
+            168,
+            132,
+            96,
+            255
+          ]
+        },
+        {
+          "kind": "rect",
+          "x": 818,
+          "y": 732,
+          "w": 44,
+          "h": 8,
+          "color": [
+            198,
+            166,
+            124,
+            255
+          ]
+        },
+        {
+          "kind": "rect",
+          "x": 788,
+          "y": 700,
+          "w": 44,
+          "h": 26,
+          "color": [
+            168,
+            132,
+            96,
+            255
+          ]
+        },
+        {
+          "kind": "rect",
+          "x": 788,
+          "y": 694,
+          "w": 44,
+          "h": 8,
+          "color": [
+            198,
+            166,
+            124,
+            255
+          ]
+        }
+      ]
+    },
+    {
+      "id": "town_survey_posts",
+      "after_any_journal_milestone": [
+        "commission_survey_standing"
+      ],
+      "shapes": [
+        {
+          "kind": "line",
+          "x": 470,
+          "y": 652,
+          "to_x": 470,
+          "to_y": 610,
+          "thickness": 3.0,
+          "color": [
+            92,
+            84,
+            78,
+            255
+          ]
+        },
+        {
+          "kind": "circle",
+          "x": 470,
+          "y": 606,
+          "radius": 6.0,
+          "color": [
+            126,
+            180,
+            214,
+            255
+          ]
+        },
+        {
+          "kind": "line",
+          "x": 560,
+          "y": 676,
+          "to_x": 560,
+          "to_y": 634,
+          "thickness": 3.0,
+          "color": [
+            92,
+            84,
+            78,
+            255
+          ]
+        },
+        {
+          "kind": "circle",
+          "x": 560,
+          "y": 630,
+          "radius": 6.0,
+          "color": [
+            126,
+            180,
+            214,
+            255
+          ]
+        },
+        {
+          "kind": "line",
+          "x": 652,
+          "y": 660,
+          "to_x": 652,
+          "to_y": 618,
+          "thickness": 3.0,
+          "color": [
+            92,
+            84,
+            78,
+            255
+          ]
+        },
+        {
+          "kind": "circle",
+          "x": 652,
+          "y": 614,
+          "radius": 6.0,
+          "color": [
+            126,
+            180,
+            214,
+            255
+          ]
+        }
+      ]
     }
   ]
 }

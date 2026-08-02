@@ -50,14 +50,15 @@ what makes it a 20–25 hour game rather than a well-furnished 8-hour one.
   examples: a stalled propagation bed (greenhouse), a startled moth roost
   (forest), and a slumped root wall across the upper switchback (pass). Targets
   draw as a pulsing ring from primitives — legible before there is art for them.
-- ~~Gate route/floor openings behind applying a potion~~ **Partly done
-  2026-08-02.** The containment lift now waits on the greenhouse bed being
-  revived, so the mechanic is on the critical path rather than optional scenery,
-  and a test asserts *something* opens only by treating. Two of the three
-  targets are still their own reward; the root wall in particular wants
-  something above the upper switchback to open onto, which the pass does not yet
-  have. `recordable_milestone_ids` learned that targets are a fourth writer into
-  the journal, so a gate waiting on one is not reported as waiting on nothing.
+- ~~Gate route/floor openings behind applying a potion~~ **Done 2026-08-02.**
+  The containment lift waits on the greenhouse bed being revived. Gather nodes
+  gained `required_journal_milestone` — the same gate stations and warps already
+  had — which is what lets a *treated* thing open ground: waking the slumped root
+  wall puts three nodes on the bank above the upper switchback, and settling the
+  moth roost makes it workable, two nodes that a panicking roost never allowed.
+  All three targets now lead somewhere. `recordable_milestone_ids` knows targets
+  are a fourth writer into the journal, and a new test asserts every target and
+  every commission changes something beyond the journal.
 
 ## Unconnected systems — audit 2026-08-02
 
@@ -304,9 +305,11 @@ content with no destination.
   schema field plus two lines of arithmetic, because the board flow already knew
   how to gate, accept, check quality, deliver and record.
   The sink now stands at 4,900 against 4,001 of one-off income, so coins are a
-  decision again; two tests hold that ratio and the escalation. Still open: only
-  three commissions exist, and nothing yet *opens* off them — the milestones are
-  authored and remarked on but no flourish or route reads them yet.
+  decision again; two tests hold that ratio and the escalation. Each commission
+  now visibly lands: the winter stores stack in the square, the reading room
+  lights the archive's middle table, and the standing survey plants marked posts
+  along the well row. Still open: only three commissions exist, which is a start
+  on the last third rather than a last third.
 - Late-game recipe tier — the current 49 recipes bottom out well before 20 hours
   of brewing decisions. New ones should extend the trait/morph lattice rather
   than add flat variants.

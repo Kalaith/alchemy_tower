@@ -405,6 +405,60 @@
       "render": {
         "sprite_id": "emberbark_curl"
       }
+    },
+    {
+      "id": "forest_settled_roost_01",
+      "name": "Mist Moth Wing",
+      "item_id": "mist_moth_wing",
+      "color": [
+        150,
+        190,
+        150,
+        255
+      ],
+      "position": [
+        1020,
+        340
+      ],
+      "radius": 26.0,
+      "route_id": "",
+      "seasons": [],
+      "weathers": [],
+      "time_windows": [],
+      "spawn_chance": 90,
+      "note": "The roost holds still long enough to take a wing from the ground beneath it. It did not, before.",
+      "required_completed_quest": "",
+      "required_journal_milestone": "forest_roost_settled",
+      "render": {
+        "sprite_id": "mist_moth_wing_forest"
+      }
+    },
+    {
+      "id": "forest_settled_glow_01",
+      "name": "Glow Moth",
+      "item_id": "glow_moth",
+      "color": [
+        150,
+        190,
+        150,
+        255
+      ],
+      "position": [
+        940,
+        392
+      ],
+      "radius": 26.0,
+      "route_id": "",
+      "seasons": [],
+      "weathers": [],
+      "time_windows": [],
+      "spawn_chance": 90,
+      "note": "Lyra will only take these by hand and only from a roost that is not panicking.",
+      "required_completed_quest": "",
+      "required_journal_milestone": "forest_roost_settled",
+      "render": {
+        "sprite_id": "glow_moth_forest"
+      }
     }
   ],
   "footstep_sound_set": "leaf",
