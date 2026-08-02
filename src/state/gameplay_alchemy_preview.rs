@@ -17,9 +17,13 @@ impl GameplayState {
         station: &StationDefinition,
         selected: &[String],
     ) -> u32 {
+        // "How many times have you done this exact thing before." For a written
+        // recipe that is its mastery count; for a mixture nobody wrote down it
+        // is how familiar the player has made themselves with it, which the
+        // salvage curve reads the same way.
         crate::alchemy::match_recipe(data, station, selected)
             .map(|recipe| self.recipe_mastery_brews(&recipe.id))
-            .unwrap_or_default()
+            .unwrap_or_else(|| self.salvage_familiarity(station, selected))
     }
 
     pub(super) fn preview_is_uncertain(&self, preview: &BrewResolution<'_>) -> bool {

@@ -102,6 +102,18 @@ pub(crate) struct SaveData {
     pub(crate) bottle_stock: Vec<BottleBatchEntry>,
     #[serde(default)]
     pub(crate) spoken_reactions: Vec<String>,
+    #[serde(default)]
+    pub(crate) salvage_familiarity: Vec<SalvageFamiliarityEntry>,
+}
+
+/// How many times the player has run one particular off-book mixture. Brewing
+/// something no recipe describes used to be a dead end that always handed back
+/// the same four salvage bottles; doing it repeatedly is now how a formula gets
+/// found without anybody writing it down first.
+#[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Eq)]
+pub(crate) struct SalvageFamiliarityEntry {
+    pub(crate) signature: String,
+    pub(crate) attempts: u32,
 }
 
 /// How many of the player's units of `item_id` were gathered as a particular

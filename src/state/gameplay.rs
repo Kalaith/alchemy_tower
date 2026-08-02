@@ -294,6 +294,8 @@ mod gameplay_rune_overlay_view;
 mod gameplay_rune_recipes;
 #[path = "gameplay_runtime_types.rs"]
 mod gameplay_runtime_types;
+#[path = "gameplay_salvage_discovery.rs"]
+mod gameplay_salvage_discovery;
 #[path = "gameplay_save_input.rs"]
 mod gameplay_save_input;
 #[path = "gameplay_save_migrations.rs"]

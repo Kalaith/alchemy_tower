@@ -112,6 +112,11 @@ pub(super) fn apply_save_snapshot(
         batches.sort_by_key(|batch| batch.quality_score);
     }
     state.progression.spoken_reactions = save.spoken_reactions.into_iter().collect();
+    state.progression.salvage_familiarity = save
+        .salvage_familiarity
+        .into_iter()
+        .map(|entry| (entry.signature, entry.attempts))
+        .collect();
     state.world.available_nodes.clear();
     state.ui = OverlayState::new_gameplay();
     state.alchemy = AlchemySession::default();
@@ -174,6 +179,8 @@ mod tests {
             }],
         );
         p.spoken_reactions.insert("deadbeefdeadbeef".to_owned());
+        p.salvage_familiarity
+            .insert("entry_cauldron|sunleaf+whisper_moss".to_owned(), 2);
         p.variant_stock.insert(
             "whisper_moss".to_owned(),
             [("whisper_moss_dew".to_owned(), 2u32)]
@@ -305,6 +312,12 @@ mod tests {
         // Which lines a townsperson has already said lives only in the save;
         // losing it makes the whole town repeat their opening remarks.
         assert_eq!(a.spoken_reactions, b.spoken_reactions, "spoken reactions");
+        // Losing this makes every off-book mixture the player had half worked
+        // out start again from a blind guess.
+        assert_eq!(
+            a.salvage_familiarity, b.salvage_familiarity,
+            "salvage familiarity"
+        );
         // What each bottle is worth lives only in the save; losing it would put
         // the quality gates back to reading a best-ever record.
         assert_eq!(a.bottle_stock, b.bottle_stock, "bottle stock");

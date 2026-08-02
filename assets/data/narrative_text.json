@@ -38,7 +38,8 @@
     "archive_reconstruction_missing": "Final timeline still has missing pieces.",
     "save_unknown_area": "Save referenced an unknown area.",
     "cauldron_empty": "The cauldron is empty.",
-    "greenhouse_unlock": "The tower greenhouse unlocks upstairs after your tenth brew. If it can be restored, the town may have its first reliable growing refuge again."
+    "greenhouse_unlock": "The tower greenhouse unlocks upstairs after your tenth brew. If it can be restored, the town may have its first reliable growing refuge again.",
+    "found_formula": "You have made that three times now, the same way, and it comes out the same. That is a formula, whoever did or did not write it down."
   },
   "overlays": {
     "observatory_epilogue": "The restored tower resolves its own history through the lens above the clouds. The wizard did not vanish in failure. They chose distance over domination, leaving a machine of rooms that only remains safe when used with restraint. The tower is not yours to conquer. It is yours to tend.",

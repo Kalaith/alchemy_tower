@@ -42,7 +42,14 @@ impl GameplayState {
         self.spend_brew_variants(data, &selected);
         self.consume_brew_inputs(&selected);
         let previous_profile = self.record_brew_inventory_result(data, &resolution, stable_brew);
+        // A mixture nobody wrote down, made enough times to stop being an
+        // accident, is a formula the player found on their own.
+        let found_formula = resolution.recipe.is_none()
+            && self.record_salvage_attempt(data, station, &selected, &resolution);
         self.update_brew_result_status(data, &resolution, stable_brew);
+        if found_formula {
+            self.trigger_quest_complete_feedback(narrative_text().statuses.found_formula.clone());
+        }
         audio.play_brew_result(stable_brew);
         let current_profile = self
             .progression

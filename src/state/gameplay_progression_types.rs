@@ -41,6 +41,9 @@ pub(super) struct ProgressionState {
     /// shadowed forever. Remembering what has been said lets the earlier ones
     /// have their turn first.
     pub(super) spoken_reactions: HashSet<String>,
+    /// Off-book mixture signature -> how many times it has been brewed. See
+    /// `gameplay_salvage_discovery`.
+    pub(super) salvage_familiarity: BTreeMap<String, u32>,
 }
 
 impl ProgressionState {
@@ -64,6 +67,7 @@ impl ProgressionState {
             variant_stock: BTreeMap::new(),
             bottle_stock: BTreeMap::new(),
             spoken_reactions: HashSet::new(),
+            salvage_familiarity: BTreeMap::new(),
         }
     }
 }

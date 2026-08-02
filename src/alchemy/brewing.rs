@@ -100,7 +100,7 @@ pub(crate) fn resolve_brew<'a>(
 
     let ingredient_items = ingredients.iter().collect::<Vec<_>>();
     let catalyst = catalyst_item.and_then(|item_id| data.item(item_id));
-    let quality_score = salvage_quality(&ingredient_items, catalyst);
+    let quality_score = salvage_quality(&ingredient_items, catalyst, mastery_brews);
     BrewResolution {
         recipe: None,
         output_item_id: infer_trait_output(data, selected_items).to_owned(),

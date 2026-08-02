@@ -4,14 +4,34 @@ use crate::data::{GameData, ItemDefinition};
 
 use super::quality::weighted_quality_average;
 
+/// Quality of a mixture no recipe describes.
+///
+/// `familiarity` is how many times the player has made this exact thing before.
+/// A first blind attempt is capped hard, because they are guessing; a mixture
+/// they have worked out is capped higher and carries a bonus, because by then
+/// they are not. Without this the discovery in
+/// `state::gameplay_salvage_discovery` would be a journal line about nothing.
 pub(super) fn salvage_quality(
     ingredients: &[&ItemDefinition],
     catalyst: Option<&ItemDefinition>,
+    familiarity: u32,
 ) -> u32 {
     let base = weighted_quality_average(ingredients) * ingredients.len().min(3) as u32 / 3;
     let catalyst_bonus = catalyst.map(|item| item.quality / 6).unwrap_or_default();
-    (base + catalyst_bonus).min(40)
+    let practice = familiarity.min(SALVAGE_PRACTICE_CAP);
+    let cap = BLIND_SALVAGE_CAP + practice * SALVAGE_CAP_PER_ATTEMPT;
+    (base + catalyst_bonus + practice * SALVAGE_BONUS_PER_ATTEMPT).min(cap)
 }
+
+/// What a first guess can come to.
+const BLIND_SALVAGE_CAP: u32 = 40;
+/// How far the cap lifts per attempt at the same mixture.
+const SALVAGE_CAP_PER_ATTEMPT: u32 = 6;
+/// Quality added per attempt, so practice shows even below the cap.
+const SALVAGE_BONUS_PER_ATTEMPT: u32 = 3;
+/// Practice stops paying a little past the point a formula is credited, so an
+/// off-book mixture never overtakes the written recipes.
+const SALVAGE_PRACTICE_CAP: u32 = 4;
 
 pub(super) fn fallback_traits(
     ingredients: &[&ItemDefinition],

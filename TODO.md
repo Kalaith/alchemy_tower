@@ -238,11 +238,19 @@ content with no destination.
 
 ## Core loop & alchemy
 
-- Turn the unlogged-brew salvage into a discovery event. Salvage currently lands
-  on fixed outputs (`alchemy/fallback.rs`) that the rune bench re-reads; a
-  repeated combination that resolves stably should journal and celebrate itself
-  as a formula the player found without a recipe. This is the one place the
-  engine can still surprise someone who is not following instructions.
+- ~~Turn the unlogged-brew salvage into a discovery event~~ **Done 2026-08-02.**
+  An off-book mixture is remembered by signature (bench + sorted reagents;
+  loading order is how you fill the pot, not what you made), and the third
+  attempt that comes to anything journals it as a formula the player worked out
+  rather than read, with a toast. Familiarity reaches the brewer through the
+  existing `mastery_brews` parameter, which now means "how many times have you
+  done this exact thing before" for both paths: `salvage_quality` lifts its cap
+  by 6 and adds 3 per attempt, stopping at 4 so an off-book mixture never
+  overtakes a written recipe. The bench says so too — a discovered mixture reads
+  "your hands know the shape of it" instead of the no-recipe line. Four tests,
+  including that a worked-out formula genuinely brews better than a blind
+  attempt; the off-book pair is *found* rather than named, so a new recipe
+  covering it cannot quietly turn these into tests of the written-recipe path.
 - Move the last tuning constants out of Rust into data: the rapport tiers
   (`FRIEND`/`CONFIDANT`/`KIN` in `state/gameplay_rapport.rs`) and the salvage
   quality curve in `alchemy/fallback.rs` are the remaining hardcoded balance.

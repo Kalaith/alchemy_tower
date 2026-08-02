@@ -62,7 +62,9 @@ pub(super) fn read_line(preview: &BrewResolution<'_>, known: bool, stable_previe
         "overlay_alchemy_read",
         &[(
             "text",
-            ui_copy(if preview.recipe.is_none() {
+            ui_copy(if preview.recipe.is_none() && known {
+                "overlay_alchemy_read_found"
+            } else if preview.recipe.is_none() {
                 "overlay_alchemy_read_fallback"
             } else if !known {
                 "overlay_alchemy_read_unlogged"

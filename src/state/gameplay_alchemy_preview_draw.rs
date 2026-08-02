@@ -31,10 +31,13 @@ impl GameplayState {
                 self.alchemy_timing(),
                 self.preview_mastery_brews(data, station, &selected),
             );
+            // "Do you know what you are making." For a written formula that is
+            // whether it has been logged; for a mixture nobody wrote down it is
+            // whether the player has worked it out for themselves.
             let known = preview
                 .recipe
                 .map(|recipe| self.recipe_is_known(&recipe.id))
-                .unwrap_or(false);
+                .unwrap_or_else(|| self.salvage_is_discovered(station, &selected));
             let preview_uncertain = known && self.preview_is_uncertain(&preview);
             let stable_preview = preview.is_stable();
             let quest_line = self.brew_quest_motivation(data, &preview.output_item_id);

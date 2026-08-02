@@ -91,6 +91,7 @@ pub(crate) struct NarrativeStatuses {
     pub(crate) save_unknown_area: String,
     pub(crate) cauldron_empty: String,
     pub(crate) greenhouse_unlock: String,
+    pub(crate) found_formula: String,
 }
 
 #[derive(Debug, Deserialize)]
