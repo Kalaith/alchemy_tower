@@ -364,6 +364,17 @@ content with no destination.
 - World and character art pass. The art is procedurally generated
   (`tools/generate_art.py`) and the ornate HUD frames a placeholder world; that
   inversion is still the weakest first impression.
-- Offer a quieter HUD option so the world reads as the visual star.
+- ~~Offer a quieter HUD option so the world reads as the visual star~~ **Done
+  2026-08-02.** A Quiet HUD toggle in Settings. It keeps the four things a player
+  acts on — vitality (it can end the working day), the clock (it decides whether
+  ground is gatherable and when you collapse), the potion belt and the status
+  strip — and drops the six that frame the picture or repeat the journal: title
+  banner, minimap frame, side panel, control tags, coin chip, goal note. Which
+  panels exist is one list rather than ten scattered conditionals, so the policy
+  is testable: quiet must remove something and must never drop a load-bearing
+  panel, and Full is the default. The capture harness takes a `+quiet` scene
+  suffix; `screenshots/hud/full.png` and `quiet.png` are the comparison, and it
+  is stark — three townsfolk, a market stall and the whole top-left of the square
+  are behind panels in one and visible in the other.
 - Replace the procedural one-shots (`tools/generate_audio.py`) with
   hand-authored ambient audio and music.
