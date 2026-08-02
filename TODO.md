@@ -729,6 +729,48 @@ content with no destination.
   the root wall is. Nine flourishes across three areas. Two tests: every
   flourish waits on a quest or beat that really exists and draws something, and
   a floor on how many places the world changes at all.
+- ~~The tower does not notice what you do to it~~ **Fixed 2026-08-03.** The
+  floor above is a *count*, and a count is satisfied by putting everything in
+  one room — which is what happened. **Nine of the first fourteen flourishes
+  were in the town square.** The tower, the building this game is about
+  reopening, changed in two of its six rooms; `containment_floor`,
+  `rune_workshop_floor` and `observatory_floor` changed for nothing, and so did
+  **`tower_entry`** — the room the player starts in, sleeps in, brews in for the
+  first several hours and crosses on the way to everything.
+  Seven flourishes, all on beats that already existed:
+  - **the entry lab in use** (`first_town_relief`) — a second stool at the
+    cauldron, delivered stock crated by the wall, a line of cloths drying. It
+    stops being one person improvising the day the town first sends work up.
+  - **the ledger post** (`tower_entered_the_ledger`) — a board by the door with
+    the town's notices pinned to it. The tower is now somewhere that receives
+    post.
+  - **the previous hand** (`eleven_months_restored`) — the wizard's eleven
+    months of working notes, stacked back on the case they were taken from,
+    with a lamp left burning over them. The most loaded of the seven: the
+    epilogue's open question standing in the room where the game starts.
+  - **the pens settled** (`containment_stable`) — steady lamps instead of
+    flickering ones, bedding down, a filled trough.
+  - **the channels running** (`discovered_the_channels_hold`) — the cut floor
+    channels lit end to end and a finished lamp left on the forge bench: the
+    rune floor making something rather than mending something.
+  - **the mirror silvered** (`observatory_mirror_cleared`) — the endgame room's
+    lens throwing a clean fan of light in three directions. This one is the
+    apply target from earlier the same day getting a *visible* payoff on top of
+    the ground it opens.
+  - **the shelves' own record** (`the_shelves_kept_their_own_record`) — raking
+    light across a rank of spines and the gaps where volumes came off.
+  `every_room_the_player_works_in_changes_for_something` is the guard, and it
+  derives "a room the player works in" from where the **stations** are rather
+  than from a list, so a bench on a new floor is covered the day it is placed.
+  Verified by deleting the four: it names all four.
+  `screenshots/hud/tower_entry_lab.png`, `containment_pens.png`,
+  `rune_channels.png`, `observatory_silvered.png`.
+  ***Placement lesson, re-learned twice in one pass.*** The first draft put the
+  drying line and the wizard's notes in the top band the title banner and the
+  clock own, and the observatory's chart-floor lines under the potion belt. The
+  capture is the only way to know — reasoning about screen coordinates does not
+  work, because the camera follows the player and the offset changes with where
+  they stand.
 
 ## Presentation
 

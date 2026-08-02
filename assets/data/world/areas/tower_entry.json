@@ -109,6 +109,307 @@
       "locked_note": "The staircase seal hums. The greenhouse could become the town's first real turning point if you can prove the tower is worth trusting again."
     }
   ],
+  "flourishes": [
+    {
+      "id": "entry_lab_in_use",
+      "after_any_journal_milestone": [
+        "first_town_relief"
+      ],
+      "shapes": [
+        {
+          "kind": "line",
+          "x": 612,
+          "y": 296,
+          "to_x": 816,
+          "to_y": 296,
+          "thickness": 2.0,
+          "color": [
+            186,
+            178,
+            168,
+            255
+          ]
+        },
+        {
+          "kind": "rect",
+          "x": 636,
+          "y": 296,
+          "w": 18,
+          "h": 34,
+          "color": [
+            214,
+            208,
+            198,
+            255
+          ]
+        },
+        {
+          "kind": "rect",
+          "x": 692,
+          "y": 296,
+          "w": 18,
+          "h": 30,
+          "color": [
+            226,
+            220,
+            210,
+            255
+          ]
+        },
+        {
+          "kind": "rect",
+          "x": 748,
+          "y": 296,
+          "w": 18,
+          "h": 36,
+          "color": [
+            206,
+            200,
+            190,
+            255
+          ]
+        },
+        {
+          "kind": "rect",
+          "x": 628,
+          "y": 420,
+          "w": 44,
+          "h": 34,
+          "color": [
+            150,
+            124,
+            92,
+            255
+          ]
+        },
+        {
+          "kind": "rect",
+          "x": 676,
+          "y": 428,
+          "w": 38,
+          "h": 26,
+          "color": [
+            134,
+            110,
+            82,
+            255
+          ]
+        },
+        {
+          "kind": "rect",
+          "x": 632,
+          "y": 458,
+          "w": 52,
+          "h": 22,
+          "color": [
+            162,
+            136,
+            100,
+            255
+          ]
+        },
+        {
+          "kind": "circle",
+          "x": 528,
+          "y": 300,
+          "radius": 10.0,
+          "color": [
+            128,
+            112,
+            96,
+            255
+          ]
+        }
+      ]
+    },
+    {
+      "id": "entry_lab_ledger_post",
+      "after_any_journal_milestone": [
+        "tower_entered_the_ledger"
+      ],
+      "shapes": [
+        {
+          "kind": "rect",
+          "x": 336,
+          "y": 604,
+          "w": 58,
+          "h": 44,
+          "color": [
+            96,
+            82,
+            66,
+            255
+          ]
+        },
+        {
+          "kind": "rect",
+          "x": 342,
+          "y": 610,
+          "w": 20,
+          "h": 14,
+          "color": [
+            226,
+            220,
+            204,
+            255
+          ]
+        },
+        {
+          "kind": "rect",
+          "x": 366,
+          "y": 610,
+          "w": 20,
+          "h": 14,
+          "color": [
+            226,
+            220,
+            204,
+            255
+          ]
+        },
+        {
+          "kind": "rect",
+          "x": 342,
+          "y": 628,
+          "w": 20,
+          "h": 14,
+          "color": [
+            214,
+            206,
+            188,
+            255
+          ]
+        },
+        {
+          "kind": "rect",
+          "x": 366,
+          "y": 628,
+          "w": 20,
+          "h": 14,
+          "color": [
+            232,
+            226,
+            210,
+            255
+          ]
+        },
+        {
+          "kind": "line",
+          "x": 365,
+          "y": 648,
+          "to_x": 365,
+          "to_y": 668,
+          "thickness": 3.0,
+          "color": [
+            78,
+            66,
+            54,
+            255
+          ]
+        }
+      ]
+    },
+    {
+      "id": "entry_lab_previous_hand",
+      "after_any_journal_milestone": [
+        "eleven_months_restored"
+      ],
+      "shapes": [
+        {
+          "kind": "line",
+          "x": 560,
+          "y": 612,
+          "to_x": 760,
+          "to_y": 612,
+          "thickness": 2.0,
+          "color": [
+            140,
+            124,
+            100,
+            255
+          ]
+        },
+        {
+          "kind": "rect",
+          "x": 566,
+          "y": 618,
+          "w": 30,
+          "h": 26,
+          "color": [
+            222,
+            214,
+            192,
+            255
+          ]
+        },
+        {
+          "kind": "rect",
+          "x": 602,
+          "y": 614,
+          "w": 28,
+          "h": 30,
+          "color": [
+            232,
+            224,
+            202,
+            255
+          ]
+        },
+        {
+          "kind": "rect",
+          "x": 640,
+          "y": 620,
+          "w": 32,
+          "h": 24,
+          "color": [
+            212,
+            204,
+            184,
+            255
+          ]
+        },
+        {
+          "kind": "rect",
+          "x": 680,
+          "y": 616,
+          "w": 26,
+          "h": 28,
+          "color": [
+            222,
+            214,
+            192,
+            255
+          ]
+        },
+        {
+          "kind": "rect",
+          "x": 714,
+          "y": 622,
+          "w": 28,
+          "h": 22,
+          "color": [
+            218,
+            210,
+            190,
+            255
+          ]
+        },
+        {
+          "kind": "circle",
+          "x": 748,
+          "y": 598,
+          "radius": 7.0,
+          "color": [
+            244,
+            214,
+            140,
+            255
+          ],
+          "pulse": true
+        }
+      ]
+    }
+  ],
   "gather_nodes": [
     {
       "id": "ruin_terrace_ruinbell_01",

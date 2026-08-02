@@ -158,6 +158,43 @@ mod tests {
         );
     }
 
+    /// The floor above counts flourishes and is satisfied by putting them all in
+    /// one room, which is exactly what happened: nine of the first fourteen were
+    /// in the town square, and the tower — the building this game is *about*
+    /// reopening — changed in two of its six rooms. The entry lab, where the
+    /// player starts every day and brews for the first several hours, changed
+    /// for nothing at all.
+    ///
+    /// A room the player works in is derived from the stations, not listed here,
+    /// so a new bench on a new floor is covered the day it is placed.
+    #[test]
+    fn every_room_the_player_works_in_changes_for_something() {
+        let data = load_embedded().expect("embedded game data should load");
+
+        let working_rooms = data
+            .stations
+            .iter()
+            .map(|station| station.area_id.clone())
+            .collect::<std::collections::BTreeSet<_>>();
+
+        let mut unchanging = working_rooms
+            .iter()
+            .filter(|area_id| {
+                data.areas
+                    .iter()
+                    .find(|area| &&area.id == area_id)
+                    .is_none_or(|area| area.flourishes.is_empty())
+            })
+            .cloned()
+            .collect::<Vec<_>>();
+
+        unchanging.sort();
+        assert!(
+            unchanging.is_empty(),
+            "rooms the player works in that never change: {unchanging:?}"
+        );
+    }
+
     /// Every beat a milestone-writer records should lead somewhere. Treating a
     /// thing, or funding a commission, is expensive — bottles at a grade, and
     /// for a commission thousands of coins — and a payoff that exists only as a

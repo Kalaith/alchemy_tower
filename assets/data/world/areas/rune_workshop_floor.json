@@ -75,6 +75,96 @@
       "locked_note": "The archive vault remains sealed until you can prove the tower's higher work is stable."
     }
   ],
+  "flourishes": [
+    {
+      "id": "rune_channels_running",
+      "after_any_journal_milestone": [
+        "discovered_the_channels_hold"
+      ],
+      "shapes": [
+        {
+          "kind": "line",
+          "x": 272,
+          "y": 622,
+          "to_x": 688,
+          "to_y": 622,
+          "thickness": 5.0,
+          "color": [
+            238,
+            146,
+            74,
+            255
+          ]
+        },
+        {
+          "kind": "line",
+          "x": 272,
+          "y": 650,
+          "to_x": 688,
+          "to_y": 650,
+          "thickness": 5.0,
+          "color": [
+            214,
+            120,
+            58,
+            255
+          ]
+        },
+        {
+          "kind": "circle",
+          "x": 272,
+          "y": 622,
+          "radius": 7.0,
+          "color": [
+            255,
+            196,
+            120,
+            255
+          ],
+          "pulse": true
+        },
+        {
+          "kind": "circle",
+          "x": 688,
+          "y": 650,
+          "radius": 7.0,
+          "color": [
+            255,
+            196,
+            120,
+            255
+          ],
+          "pulse": true
+        },
+        {
+          "kind": "circle",
+          "x": 480,
+          "y": 636,
+          "radius": 6.0,
+          "color": [
+            255,
+            214,
+            150,
+            255
+          ],
+          "pulse": true
+        },
+        {
+          "kind": "rect",
+          "x": 424,
+          "y": 336,
+          "w": 26,
+          "h": 26,
+          "color": [
+            255,
+            190,
+            110,
+            255
+          ]
+        }
+      ]
+    }
+  ],
   "gather_nodes": [
     {
       "id": "rune_ash_channel_01",

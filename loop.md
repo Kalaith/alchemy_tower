@@ -1734,6 +1734,35 @@ Stop the loop and report if:
   *the rune floor makes seventeen things and nine are wanted by nothing, same shape one verb over.*
   *Filing:* `quests_board_standing.json` is at 776 lines; split it before adding another order.
 
+- **2026-08-03 — the tower does not notice what you do to it.** Axis: world/place, rotating off two
+  passes of demand-routing. `the_world_changes_in_more_than_a_couple_of_places` is a *count*, and a
+  count is satisfied by putting everything in one room — which is exactly what had happened:
+  **nine of the fourteen flourishes were in the town square.** The tower, the building this game is
+  about reopening, changed in two of its six rooms. `containment_floor`, `rune_workshop_floor` and
+  `observatory_floor` changed for nothing — and so did **`tower_entry`**, the room the player starts
+  in, sleeps in, brews in for hours and crosses on the way to everything else.
+  Seven flourishes on beats that already existed, no new schema and no new milestones: the entry lab
+  **in use** (a second stool, crated stock, a drying line — `first_town_relief`); the **ledger post**
+  by the door (`tower_entered_the_ledger`); **the previous hand** — the wizard's eleven months
+  stacked back on the case they were taken from with a lamp left burning over them
+  (`eleven_months_restored`); the **pens settled** (`containment_stable`); the **channels running**
+  and a finished lamp on the forge bench (`discovered_the_channels_hold`); the **mirror silvered**,
+  a clean fan of light from the lens (`observatory_mirror_cleared` — the apply target from earlier
+  the same day, now with a visible payoff as well as ground); the **shelves' own record**
+  (`the_shelves_kept_their_own_record`).
+  *Guard:* `every_room_the_player_works_in_changes_for_something`, and the definition of "a room the
+  player works in" is **derived from where the stations are** rather than listed, so a bench on a new
+  floor is covered the day it is placed. Verified by deleting the four; it names all four.
+  ***The placement lesson, re-learned twice in one pass.*** First draft put the drying line and the
+  wizard's notes in the band the title banner and the clock own, and the observatory's chart-floor
+  lines under the potion belt. Reasoning about screen coordinates does not work here — the camera
+  follows the player, so the world→screen offset changes with where they stand. Capture, look, move.
+  *Toolkit fix on the way:* `capture_ui.ps1` built its output filename straight from the scene name,
+  so any game addressing scenes as `area:rock_fields:0:day` got an InvalidFilename panic on Windows
+  reported as "capture failed". The filename is sanitised now; the game still gets the scene
+  verbatim. Committed separately in `macroquad-toolkit`.
+  **14 → 21 flourishes, 5 → 9 areas; 188 tests.**
+
 ## Deferred (needs a new system; not for this loop)
 
 - ~~Apply-potion-to-target flow (wilted plant, frightened creature, blocked path)~~ **Built

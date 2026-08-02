@@ -55,6 +55,111 @@
       ]
     }
   ],
+  "flourishes": [
+    {
+      "id": "observatory_mirror_silvered",
+      "after_any_journal_milestone": [
+        "observatory_mirror_cleared"
+      ],
+      "shapes": [
+        {
+          "kind": "line",
+          "x": 392,
+          "y": 296,
+          "to_x": 452,
+          "to_y": 254,
+          "thickness": 3.0,
+          "color": [
+            206,
+            226,
+            255,
+            255
+          ]
+        },
+        {
+          "kind": "line",
+          "x": 496,
+          "y": 236,
+          "to_x": 650,
+          "to_y": 190,
+          "thickness": 3.0,
+          "color": [
+            188,
+            214,
+            255,
+            255
+          ]
+        },
+        {
+          "kind": "circle",
+          "x": 652,
+          "y": 188,
+          "radius": 6.0,
+          "color": [
+            226,
+            238,
+            255,
+            255
+          ],
+          "pulse": true
+        },
+        {
+          "kind": "line",
+          "x": 452,
+          "y": 262,
+          "to_x": 320,
+          "to_y": 220,
+          "thickness": 2.0,
+          "color": [
+            168,
+            198,
+            246,
+            255
+          ]
+        },
+        {
+          "kind": "circle",
+          "x": 318,
+          "y": 218,
+          "radius": 5.0,
+          "color": [
+            206,
+            226,
+            255,
+            255
+          ],
+          "pulse": true
+        },
+        {
+          "kind": "line",
+          "x": 486,
+          "y": 272,
+          "to_x": 600,
+          "to_y": 392,
+          "thickness": 2.0,
+          "color": [
+            168,
+            198,
+            246,
+            255
+          ]
+        },
+        {
+          "kind": "circle",
+          "x": 602,
+          "y": 394,
+          "radius": 5.0,
+          "color": [
+            206,
+            226,
+            255,
+            255
+          ],
+          "pulse": true
+        }
+      ]
+    }
+  ],
   "gather_nodes": [
     {
       "id": "observatory_starlight_01",

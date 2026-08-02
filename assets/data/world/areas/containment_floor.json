@@ -80,6 +80,95 @@
       "locked_note": "The rune workshop remains shuttered until you have truly mastered a base brew of your own."
     }
   ],
+  "flourishes": [
+    {
+      "id": "containment_pens_settled",
+      "after_any_journal_milestone": [
+        "containment_stable"
+      ],
+      "shapes": [
+        {
+          "kind": "circle",
+          "x": 400,
+          "y": 168,
+          "radius": 9.0,
+          "color": [
+            232,
+            220,
+            158,
+            255
+          ],
+          "pulse": true
+        },
+        {
+          "kind": "circle",
+          "x": 556,
+          "y": 168,
+          "radius": 9.0,
+          "color": [
+            232,
+            220,
+            158,
+            255
+          ],
+          "pulse": true
+        },
+        {
+          "kind": "rect",
+          "x": 372,
+          "y": 436,
+          "w": 88,
+          "h": 24,
+          "color": [
+            186,
+            166,
+            116,
+            255
+          ]
+        },
+        {
+          "kind": "rect",
+          "x": 556,
+          "y": 436,
+          "w": 88,
+          "h": 24,
+          "color": [
+            186,
+            166,
+            116,
+            255
+          ]
+        },
+        {
+          "kind": "rect",
+          "x": 462,
+          "y": 464,
+          "w": 76,
+          "h": 20,
+          "color": [
+            170,
+            150,
+            104,
+            255
+          ]
+        },
+        {
+          "kind": "line",
+          "x": 372,
+          "y": 496,
+          "to_x": 644,
+          "to_y": 496,
+          "thickness": 3.0,
+          "color": [
+            120,
+            158,
+            186,
+            255
+          ]
+        }
+      ]
+    }
+  ],
   "gather_nodes": [
     {
       "id": "containment_wardglass_01",
