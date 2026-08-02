@@ -25,12 +25,12 @@ pub(crate) use loader::load_embedded_or_fallback;
 pub(crate) use save_models::{
     BoardQuestCooldownEntry, CraftedItemProfileEntry, ExperimentLogEntry, FieldJournalEntry,
     HerbMemoryEntry, InventoryEntry, PotionMemoryEntry, RecipeMasteryEntry, RelationshipEntry,
-    SaveData,
+    SaveData, VariantStockEntry,
 };
 pub(crate) use schema::{
     AreaDefinition, BlockerVisualStyle, EffectDefinition, EffectKind, ElementProfile, GameConfig,
     GatherNodeDefinition, GatheringRouteDefinition, HabitatStateEntry, ItemCategory,
     ItemDefinition, JournalMilestoneEntry, MorphDefinition, MutationFormulaDefinition,
     NpcDefinition, PlanterStateEntry, QuestDefinition, RecipeDefinition, RectDefinition,
-    RuneRecipeDefinition, StationDefinition, StationKind, WarpDefinition,
+    RuneRecipeDefinition, StationDefinition, StationKind, WarpDefinition, WildVariantDefinition,
 };

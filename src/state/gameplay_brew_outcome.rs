@@ -94,6 +94,7 @@ mod tests {
             &data,
             station,
             &selected,
+            &state.brew_ingredients(&data, &selected),
             None,
             recipe.required_heat,
             recipe.required_stirs,

@@ -1,8 +1,8 @@
 use crate::content::ui_copy;
-use crate::data::{GameData, RecipeDefinition, StationDefinition};
+use crate::data::{GameData, ItemDefinition, RecipeDefinition, StationDefinition};
 
 use super::fallback::{fallback_traits, infer_trait_output, salvage_quality};
-use super::matching::{match_recipe, selected_item_defs};
+use super::matching::match_recipe;
 use super::quality::quality_band;
 
 #[path = "brewing_failures.rs"]
@@ -67,10 +67,17 @@ pub(super) fn stable_brew(
     process_match && minimum_quality_met && minimum_elements_met && !destabilized
 }
 
+/// `ingredients` is what the brew is actually made from — the same reagents the
+/// slots name, but with any wild variant the player gathered folded in. Passing
+/// them rather than looking them up by id is what lets a variant's quality,
+/// traits and elements reach every calculation below without any of them
+/// knowing variants exist. Callers with no variant stock to consult use
+/// `selected_item_defs`.
 pub(crate) fn resolve_brew<'a>(
     data: &'a GameData,
     station: &StationDefinition,
     selected_items: &[String],
+    ingredients: &[ItemDefinition],
     catalyst_item: Option<&str>,
     heat: i32,
     stirs: u32,
@@ -81,7 +88,7 @@ pub(crate) fn resolve_brew<'a>(
         return resolve_known_recipe_brew(
             data,
             station,
-            selected_items,
+            ingredients,
             catalyst_item,
             heat,
             stirs,
@@ -91,7 +98,7 @@ pub(crate) fn resolve_brew<'a>(
         );
     }
 
-    let ingredient_items = selected_item_defs(data, selected_items);
+    let ingredient_items = ingredients.iter().collect::<Vec<_>>();
     let catalyst = catalyst_item.and_then(|item_id| data.item(item_id));
     let quality_score = salvage_quality(&ingredient_items, catalyst);
     BrewResolution {

@@ -96,6 +96,18 @@ pub(crate) struct SaveData {
     pub(crate) habitat_states: Vec<HabitatStateEntry>,
     #[serde(default)]
     pub(crate) board_quest_cooldowns: Vec<BoardQuestCooldownEntry>,
+    #[serde(default)]
+    pub(crate) variant_stock: Vec<VariantStockEntry>,
+}
+
+/// How many of the player's units of `item_id` were gathered as a particular
+/// wild variant. The plain inventory count stays the total; this says how much
+/// of that total is the good stuff.
+#[derive(Clone, Debug, Deserialize, Serialize)]
+pub(crate) struct VariantStockEntry {
+    pub(crate) item_id: String,
+    pub(crate) variant_id: String,
+    pub(crate) count: u32,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]

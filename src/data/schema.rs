@@ -22,7 +22,7 @@ pub(crate) use self::schema_alchemy::{
     RuneRecipeDefinition,
 };
 pub(crate) use self::schema_core::{EffectKind, ElementProfile, ItemCategory, StationKind};
-pub(crate) use self::schema_items::{EffectDefinition, ItemDefinition};
+pub(crate) use self::schema_items::{EffectDefinition, ItemDefinition, WildVariantDefinition};
 pub(crate) use self::schema_npcs::NpcDefinition;
 pub(crate) use self::schema_progression::{HabitatStateEntry, PlanterStateEntry};
 pub(crate) use self::schema_render::{

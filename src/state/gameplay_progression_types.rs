@@ -24,6 +24,12 @@ pub(super) struct ProgressionState {
     pub(super) board_quest_cooldowns: BTreeMap<String, u32>,
     pub(super) herb_memories: BTreeMap<String, HerbMemoryEntry>,
     pub(super) potion_memories: BTreeMap<String, PotionMemoryEntry>,
+    /// item id -> variant id -> how many held units came up as that variant.
+    /// The plain `inventory` count remains the total held; this records which
+    /// part of it was gathered under the right sky. Without it a variant was a
+    /// line in the journal and nothing else, because inventory counts units and
+    /// has nowhere to say one unit is better than another.
+    pub(super) variant_stock: BTreeMap<String, BTreeMap<String, u32>>,
 }
 
 impl ProgressionState {
@@ -44,6 +50,7 @@ impl ProgressionState {
             board_quest_cooldowns: BTreeMap::new(),
             herb_memories: BTreeMap::new(),
             potion_memories: BTreeMap::new(),
+            variant_stock: BTreeMap::new(),
         }
     }
 }

@@ -1,5 +1,5 @@
 use crate::content::{ui_copy, ui_format};
-use crate::data::{GameData, ItemDefinition, MorphDefinition, RecipeDefinition};
+use crate::data::{ItemDefinition, MorphDefinition, RecipeDefinition};
 
 use super::matching::sequence_matches;
 
@@ -18,14 +18,13 @@ fn catalyst_matches(morph: &MorphDefinition, catalyst: Option<&ItemDefinition>) 
 /// branch is worth talking about, never to decide whether one fires.
 #[allow(clippy::too_many_arguments)]
 fn unmet_requirement_count(
-    data: &GameData,
     morph: &MorphDefinition,
     quality_score: u32,
     catalyst: Option<&ItemDefinition>,
     heat: i32,
     stirs: u32,
     timing: &str,
-    selected_items: &[String],
+    ingredients: &[ItemDefinition],
     room_bonus_applied: bool,
 ) -> usize {
     let checks = [
@@ -35,27 +34,26 @@ fn unmet_requirement_count(
         stirs != morph.required_stirs,
         !morph.required_timing.is_empty() && morph.required_timing != timing,
         !morph.required_sequence.is_empty()
-            && !sequence_matches(data, selected_items, &morph.required_sequence),
+            && !sequence_matches(ingredients, &morph.required_sequence),
         morph.room_bonus_required && !room_bonus_applied,
     ];
     checks.into_iter().filter(|unmet| *unmet).count()
 }
 
 pub(super) fn morph_output(
-    data: &GameData,
     recipe: &RecipeDefinition,
     quality_score: u32,
     catalyst: Option<&ItemDefinition>,
     heat: i32,
     stirs: u32,
     timing: &str,
-    selected_items: &[String],
+    ingredients: &[ItemDefinition],
     room_bonus_applied: bool,
 ) -> Option<String> {
     for morph in &recipe.morph_targets {
         let catalyst_ok = catalyst_matches(morph, catalyst);
         let timing_ok = morph.required_timing.is_empty() || morph.required_timing == timing;
-        let sequence_ok = sequence_matches(data, selected_items, &morph.required_sequence);
+        let sequence_ok = sequence_matches(ingredients, &morph.required_sequence);
         if quality_score >= morph.minimum_quality
             && catalyst_ok
             && heat == morph.required_heat
@@ -71,14 +69,13 @@ pub(super) fn morph_output(
 }
 
 pub(super) fn morph_trigger_hint(
-    data: &GameData,
     recipe: &RecipeDefinition,
     quality_score: u32,
     catalyst: Option<&ItemDefinition>,
     heat: i32,
     stirs: u32,
     timing: &str,
-    selected_items: &[String],
+    ingredients: &[ItemDefinition],
     room_bonus_applied: bool,
 ) -> Option<String> {
     // A recipe can fork into several branches on different catalysts. Hinting
@@ -86,14 +83,13 @@ pub(super) fn morph_trigger_hint(
     // the bench, so point at the one the current setup is closest to reaching.
     let morph = recipe.morph_targets.iter().min_by_key(|morph| {
         unmet_requirement_count(
-            data,
             morph,
             quality_score,
             catalyst,
             heat,
             stirs,
             timing,
-            selected_items,
+            ingredients,
             room_bonus_applied,
         )
     })?;
@@ -126,7 +122,7 @@ pub(super) fn morph_trigger_hint(
         ));
     }
     if !morph.required_sequence.is_empty()
-        && !sequence_matches(data, selected_items, &morph.required_sequence)
+        && !sequence_matches(ingredients, &morph.required_sequence)
     {
         return Some(ui_copy("morph_hint_sequence").to_owned());
     }

@@ -328,6 +328,8 @@ mod gameplay_tutorial_hint_selection;
 mod gameplay_types;
 #[path = "gameplay_ui_text.rs"]
 mod gameplay_ui_text;
+#[path = "gameplay_variant_stock.rs"]
+mod gameplay_variant_stock;
 #[path = "gameplay_warps.rs"]
 mod gameplay_warps;
 #[path = "gameplay_world.rs"]

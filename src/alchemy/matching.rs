@@ -26,16 +26,6 @@ fn item_counts(selected_items: &[String]) -> BTreeMap<String, u32> {
     counts
 }
 
-pub(super) fn selected_item_defs<'a>(
-    data: &'a GameData,
-    selected_items: &[String],
-) -> Vec<&'a ItemDefinition> {
-    selected_items
-        .iter()
-        .filter_map(|item_id| data.item(item_id))
-        .collect()
-}
-
 pub(super) fn total_elements(
     ingredients: &[&ItemDefinition],
     catalyst: Option<&ItemDefinition>,
@@ -50,26 +40,25 @@ pub(super) fn total_elements(
     total
 }
 
+/// Whether the loaded slots satisfy a required reagent order. Reads the
+/// ingredients the brew is actually made from rather than looking them up by id,
+/// so a trait a wild variant added can satisfy a sequence token the plain herb
+/// could not.
 pub(super) fn sequence_matches(
-    data: &GameData,
-    selected_items: &[String],
+    ingredients: &[ItemDefinition],
     required_sequence: &[String],
 ) -> bool {
     if required_sequence.is_empty() {
         return true;
     }
-    if selected_items.len() < required_sequence.len() {
+    if ingredients.len() < required_sequence.len() {
         return false;
     }
 
-    selected_items
+    ingredients
         .iter()
         .zip(required_sequence.iter())
-        .all(|(item_id, token)| {
-            data.item(item_id)
-                .map(|item| sequence_token_matches(item, token))
-                .unwrap_or(false)
-        })
+        .all(|(item, token)| sequence_token_matches(item, token))
 }
 
 fn sequence_token_matches(item: &ItemDefinition, token: &str) -> bool {
@@ -131,9 +120,14 @@ mod tests {
         slots: &[String],
         sequence: &[String],
     ) -> bool {
-        permutations(slots)
-            .into_iter()
-            .any(|ordering| sequence_matches(data, &ordering, sequence))
+        permutations(slots).into_iter().any(|ordering| {
+            let items = ordering
+                .iter()
+                .filter_map(|item_id| data.item(item_id))
+                .cloned()
+                .collect::<Vec<_>>();
+            sequence_matches(&items, sequence)
+        })
     }
 
     fn permutations(slots: &[String]) -> Vec<Vec<String>> {

@@ -61,6 +61,13 @@ impl GameplayState {
         let (best_quality, variant_name) = self
             .current_item_quality_snapshot(data, node.item_id.as_str())
             .unwrap_or((0, String::new()));
+        // The unit just picked up keeps its variant, so the bench can spend it.
+        if let Some(variant_id) = self
+            .matching_wild_variant(data, node.item_id.as_str())
+            .map(|variant| variant.id.clone())
+        {
+            self.note_variant_gathered(&node.item_id, &variant_id);
+        }
         let previous = self.progression.herb_memories.get(&node.item_id).cloned();
         let variant_discovered = !variant_name.is_empty()
             && previous

@@ -17,10 +17,14 @@ impl GameplayState {
         let view = if selected.is_empty() {
             AlchemyPreviewPanelView::empty_selection()
         } else if let Some(station) = self.nearby_station(data) {
+            // The preview shows the brew the player would actually get, so it
+            // reads the same variant stock the bench will spend.
+            let ingredients = self.brew_ingredients(data, &selected);
             let preview = resolve_brew(
                 data,
                 station,
                 &selected,
+                &ingredients,
                 self.selected_catalyst(),
                 self.alchemy.heat,
                 self.alchemy.stirs,

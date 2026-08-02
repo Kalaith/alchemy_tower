@@ -20,10 +20,12 @@ impl GameplayState {
             return;
         }
         self.save_last_brew_setup();
+        let ingredients = self.brew_ingredients(data, &selected);
         let resolution = resolve_brew(
             data,
             station,
             &selected,
+            &ingredients,
             self.selected_catalyst(),
             self.alchemy.heat,
             self.alchemy.stirs,
@@ -36,6 +38,8 @@ impl GameplayState {
             stable_brew,
             resolution.recipe.is_none(),
         );
+        // The variant units go into the pot with everything else.
+        self.spend_brew_variants(data, &selected);
         self.consume_brew_inputs(&selected);
         let previous_profile = self.record_brew_inventory_result(data, &resolution, stable_brew);
         self.update_brew_result_status(data, &resolution, stable_brew);

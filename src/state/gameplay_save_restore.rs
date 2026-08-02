@@ -84,6 +84,18 @@ pub(super) fn apply_save_snapshot(
         .into_iter()
         .map(|entry| (entry.quest_id, entry.available_day))
         .collect();
+    state.progression.variant_stock.clear();
+    for entry in save.variant_stock {
+        if entry.count == 0 {
+            continue;
+        }
+        state
+            .progression
+            .variant_stock
+            .entry(entry.item_id)
+            .or_default()
+            .insert(entry.variant_id, entry.count);
+    }
     state.world.available_nodes.clear();
     state.ui = OverlayState::new_gameplay();
     state.alchemy = AlchemySession::default();
@@ -135,6 +147,12 @@ mod tests {
         p.relationships.insert("mira_apothecary".to_owned(), 9);
         p.board_quest_cooldowns
             .insert("board_lantern_supply".to_owned(), 23);
+        p.variant_stock.insert(
+            "whisper_moss".to_owned(),
+            [("whisper_moss_dew".to_owned(), 2u32)]
+                .into_iter()
+                .collect(),
+        );
         p.journal_milestones.push(JournalMilestoneEntry {
             id: "test_beat".to_owned(),
             title: "Test Beat".to_owned(),
@@ -255,6 +273,9 @@ mod tests {
             b.experiment_log.len(),
             "experiments"
         );
+        // Which held units were gathered as variants lives only in the save;
+        // losing it silently downgrades the player's stock back to plain.
+        assert_eq!(a.variant_stock, b.variant_stock, "variant stock");
         assert_eq!(a.planter_states.len(), b.planter_states.len(), "planters");
         // Not just the count: a bed's growth is part elapsed time and part days
         // tended, and the tended half exists only in the save. Losing it would

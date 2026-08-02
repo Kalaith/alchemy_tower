@@ -1,7 +1,7 @@
 use super::GameplayState;
 use crate::data::{
     BoardQuestCooldownEntry, FieldJournalEntry, GameData, InventoryEntry, RecipeMasteryEntry,
-    RelationshipEntry, SaveData,
+    RelationshipEntry, SaveData, VariantStockEntry,
 };
 
 pub(super) fn build_save_snapshot(state: &GameplayState, data: &GameData) -> SaveData {
@@ -87,6 +87,18 @@ pub(super) fn build_save_snapshot(state: &GameplayState, data: &GameData) -> Sav
             .map(|(quest_id, available_day)| BoardQuestCooldownEntry {
                 quest_id: quest_id.clone(),
                 available_day: *available_day,
+            })
+            .collect(),
+        variant_stock: state
+            .progression
+            .variant_stock
+            .iter()
+            .flat_map(|(item_id, held)| {
+                held.iter().map(|(variant_id, count)| VariantStockEntry {
+                    item_id: item_id.clone(),
+                    variant_id: variant_id.clone(),
+                    count: *count,
+                })
             })
             .collect(),
     }

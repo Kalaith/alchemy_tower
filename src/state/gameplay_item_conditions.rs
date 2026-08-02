@@ -1,26 +1,35 @@
 use super::GameplayState;
-use crate::data::GameData;
+use crate::data::{GameData, WildVariantDefinition};
 
 impl GameplayState {
+    /// The wild variant this ingredient would come up as under the current sky,
+    /// if any. Gathering records the variant's *id* against the stock it just
+    /// put in the bag, so the bench can spend it later — the name alone was
+    /// enough while this only ever fed a journal line.
+    pub(super) fn matching_wild_variant<'a>(
+        &self,
+        data: &'a GameData,
+        item_id: &str,
+    ) -> Option<&'a WildVariantDefinition> {
+        data.item(item_id)?.wild_variants.iter().find(|variant| {
+            variant
+                .required_conditions
+                .iter()
+                .all(|condition| self.condition_matches(condition))
+        })
+    }
+
     pub(super) fn current_item_quality_snapshot(
         &self,
         data: &GameData,
         item_id: &str,
     ) -> Option<(u32, String)> {
         let item = data.item(item_id)?;
-        let mut quality = item.quality;
-        let mut variant_name = String::new();
-        for variant in &item.wild_variants {
-            if variant
-                .required_conditions
-                .iter()
-                .all(|condition| self.condition_matches(condition))
-            {
-                quality += variant.quality_bonus;
-                variant_name = variant.name.clone();
-                break;
-            }
-        }
+        let variant = self.matching_wild_variant(data, item_id);
+        let quality = item.quality + variant.map(|variant| variant.quality_bonus).unwrap_or(0);
+        let variant_name = variant
+            .map(|variant| variant.name.clone())
+            .unwrap_or_default();
         Some((quality.min(100), variant_name))
     }
 

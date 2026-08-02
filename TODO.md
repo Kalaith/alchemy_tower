@@ -87,13 +87,19 @@ content with no destination.
   supplier is a confidant, not kin. New `game_data_rapport_tests.rs` asserts
   every order names a real beneficiary and every standing gate can have its
   standing earned without already having it.
-- **Wild variants are a journal cosmetic.** Of the eight
-  `WildVariantDefinition` fields, only `required_conditions`, `quality_bonus`,
-  and `name` are read — and even `quality_bonus` never reaches brewing,
-  because inventory is `BTreeMap<id, count>` with no per-instance quality;
-  the only consumer is the journal's best-quality-seen line. All 40 variants'
-  `bonus_traits`, `elements`, and synthesis bonuses are dead. The whole
-  "gather in the right season/weather" loop currently changes a string.
+- ~~Wild variants are a journal cosmetic~~ **Fixed 2026-08-02.** A gathered
+  variant now sticks to the stock it went into: `variant_stock`
+  (item -> variant -> count, persisted) records which of the held units came up
+  under the right sky, alongside the plain inventory count. `brew_ingredients`
+  folds the best held variant into the reagent it stands in for and hands the
+  *adjusted* items to `resolve_brew`, so quality, traits, elements, volatility
+  and synthesis all pick the difference up without any of them knowing variants
+  exist — every dead field went live at once. `sequence_matches` now reads the
+  ingredients rather than looking them up by id, so a variant's bonus trait can
+  satisfy a reagent-order token. Brewing spends the unit; the preview reads the
+  same stock the bench will. Remaining gap: the *belt* still shows one stack per
+  id, so the player cannot see or choose which units are variant-grade — the
+  bench spends the best one automatically.
 - **Quest quality gates check history, not the bottle.** Delivery reads
   `best_quality_band` — the best ever brewed for that item id — so one
   Masterwork brew permanently satisfies the gate for every later Crude one,
