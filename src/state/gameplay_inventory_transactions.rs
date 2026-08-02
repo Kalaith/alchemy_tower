@@ -9,16 +9,10 @@ impl GameplayState {
         let Some(item) = data.item(item_id) else {
             return;
         };
-        let Some(amount) = self.inventory.get_mut(item_id) else {
-            return;
-        };
-        if *amount == 0 {
+        if self.inventory.get(item_id).copied().unwrap_or_default() == 0 {
             return;
         }
-        *amount -= 1;
-        if *amount == 0 {
-            self.inventory.remove(item_id);
-        }
+        self.take_from_inventory(item_id, 1);
         for effect in &item.effects {
             self.apply_effect(effect);
         }
@@ -41,16 +35,10 @@ impl GameplayState {
             return;
         };
         let price = self.sell_price(data, item_id);
-        let Some(amount) = self.inventory.get_mut(item_id) else {
-            return;
-        };
-        if *amount == 0 {
+        if self.inventory.get(item_id).copied().unwrap_or_default() == 0 {
             return;
         }
-        *amount -= 1;
-        if *amount == 0 {
-            self.inventory.remove(item_id);
-        }
+        self.take_from_inventory(item_id, 1);
         self.coins += price;
         self.runtime.status_text = transaction_text::sold(&item.name, price);
         if self.sell_is_safe(data, item_id) {

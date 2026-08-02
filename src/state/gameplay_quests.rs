@@ -21,27 +21,25 @@ impl GameplayState {
             return false;
         }
 
+        // Quality and traits are asked of the bottles actually on the shelf,
+        // not of `crafted_item_profiles`, which is a best-ever record: one
+        // Masterwork used to satisfy every later Masterwork request forever,
+        // including ones filled with Crude bottles brewed after it.
+        if self.qualifying_bottle_count(data, quest) < quest.required_amount {
+            return false;
+        }
+
+        // Effects belong to the item rather than the bottle, so they are still
+        // read from the definition.
         let profile = self
             .progression
             .crafted_item_profiles
             .get(&quest.required_item_id);
-        let quality_ok = quest.minimum_quality_band.is_empty()
-            || profile
-                .map(|profile| {
-                    quality_band_rank(&profile.best_quality_band)
-                        >= quality_band_rank(&quest.minimum_quality_band)
-                })
-                .unwrap_or(false);
-        let trait_ok = profile
-            .map(|profile| trait_requirement_met(quest, &profile.inherited_traits))
-            .unwrap_or_else(|| trait_requirement_target(quest) == 0);
-        let effect_ok = effect_requirement_met(
+        effect_requirement_met(
             data,
             quest,
             profile.map(|profile| profile.effect_kinds.as_slice()),
-        );
-
-        quality_ok && trait_ok && effect_ok
+        )
     }
 
     pub(super) fn quest_requirement_summary(

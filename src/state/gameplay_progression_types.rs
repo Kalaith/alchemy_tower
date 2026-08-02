@@ -1,8 +1,8 @@
 use std::collections::{BTreeMap, HashSet};
 
 use crate::data::{
-    CraftedItemProfileEntry, ExperimentLogEntry, HabitatStateEntry, HerbMemoryEntry,
-    JournalMilestoneEntry, PlanterStateEntry, PotionMemoryEntry,
+    BottleBatchEntry, CraftedItemProfileEntry, ExperimentLogEntry, HabitatStateEntry,
+    HerbMemoryEntry, JournalMilestoneEntry, PlanterStateEntry, PotionMemoryEntry,
 };
 
 #[derive(Clone, Debug)]
@@ -30,6 +30,11 @@ pub(super) struct ProgressionState {
     /// line in the journal and nothing else, because inventory counts units and
     /// has nowhere to say one unit is better than another.
     pub(super) variant_stock: BTreeMap<String, BTreeMap<String, u32>>,
+    /// item id -> the batches of that item currently on the shelf, worst first.
+    /// A request used to be checked against `crafted_item_profiles`, which
+    /// records the best the player has *ever* brewed, so one masterwork
+    /// satisfied every later gate forever. Bottles have their own quality now.
+    pub(super) bottle_stock: BTreeMap<String, Vec<BottleBatchEntry>>,
 }
 
 impl ProgressionState {
@@ -51,6 +56,7 @@ impl ProgressionState {
             herb_memories: BTreeMap::new(),
             potion_memories: BTreeMap::new(),
             variant_stock: BTreeMap::new(),
+            bottle_stock: BTreeMap::new(),
         }
     }
 }

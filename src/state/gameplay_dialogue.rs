@@ -61,10 +61,8 @@ impl GameplayState {
         }
 
         if self.quest_requirements_met(data, quest) {
-            if let Some(amount) = self.inventory.get_mut(&quest.required_item_id) {
-                *amount -= quest.required_amount;
-            }
-            self.inventory.retain(|_, amount| *amount > 0);
+            self.spend_bottles_for_quest(data, quest, quest.required_amount);
+            self.take_from_inventory(&quest.required_item_id, quest.required_amount);
             self.progression.started_quests.remove(&quest.id);
             self.progression.completed_quests.insert(quest.id.clone());
             self.coins += quest.reward_coins;

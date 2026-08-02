@@ -6,16 +6,11 @@ use crate::data::{CraftedItemProfileEntry, GameData, ItemCategory};
 impl GameplayState {
     pub(super) fn consume_brew_inputs(&mut self, selected: &[String]) {
         for item_id in selected {
-            if let Some(amount) = self.inventory.get_mut(item_id) {
-                *amount -= 1;
-            }
+            self.take_from_inventory(item_id, 1);
         }
         if let Some(item_id) = self.selected_catalyst().map(str::to_owned) {
-            if let Some(amount) = self.inventory.get_mut(&item_id) {
-                *amount -= 1;
-            }
+            self.take_from_inventory(&item_id, 1);
         }
-        self.inventory.retain(|_, amount| *amount > 0);
     }
 
     pub(super) fn record_brew_inventory_result(
@@ -30,6 +25,8 @@ impl GameplayState {
             .or_insert(0) += resolution.output_amount;
         self.note_inventory_observation(data, &resolution.output_item_id);
         self.progression.total_brews += 1;
+        // The bottles keep the quality they were brewed at.
+        self.record_bottle_batch(resolution);
         self.record_experiment_log(resolution);
         if self.progression.total_brews == 1 {
             let milestone = &narrative_text().milestones.first_true_brew;

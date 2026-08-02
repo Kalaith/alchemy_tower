@@ -65,12 +65,7 @@ impl GameplayState {
         };
 
         self.coins = self.coins.saturating_sub(cost);
-        if let Some(amount) = self.inventory.get_mut(&catalyst_item_id) {
-            *amount = amount.saturating_sub(1);
-            if *amount == 0 {
-                self.inventory.remove(&catalyst_item_id);
-            }
-        }
+        self.take_from_inventory(&catalyst_item_id, 1);
         *self.inventory.entry(item_id.to_owned()).or_insert(0) += 1;
         self.note_inventory_observation(data, item_id);
 

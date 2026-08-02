@@ -74,6 +74,8 @@ mod gameplay_archive_progress;
 mod gameplay_archive_timeline_draw;
 #[path = "gameplay_archive_timeline_view.rs"]
 mod gameplay_archive_timeline_view;
+#[path = "gameplay_bottle_stock.rs"]
+mod gameplay_bottle_stock;
 #[path = "gameplay_brew_inventory.rs"]
 mod gameplay_brew_inventory;
 #[path = "gameplay_brew_outcome.rs"]

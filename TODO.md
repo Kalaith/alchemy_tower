@@ -100,11 +100,19 @@ content with no destination.
   same stock the bench will. Remaining gap: the *belt* still shows one stack per
   id, so the player cannot see or choose which units are variant-grade — the
   bench spends the best one automatically.
-- **Quest quality gates check history, not the bottle.** Delivery reads
-  `best_quality_band` — the best ever brewed for that item id — so one
-  Masterwork brew permanently satisfies the gate for every later Crude one,
-  and quality never touches payment (flat `reward_coins`), rapport, or
-  reactions. Sell price ignores quality and traits too.
+- ~~Quest quality gates check history, not the bottle~~ **Fixed 2026-08-02.**
+  Bottles carry the quality and traits they were brewed at, in a persisted
+  `bottle_stock` (item -> batches, worst first), and a request is now checked
+  against `qualifying_bottle_count` — what is on the shelf — instead of
+  `crafted_item_profiles`, which is a best-ever record. Delivery spends the
+  *worst* bottle that still qualifies, so brewing well is not a tax. Bottles
+  from anywhere but the bench (bought, gifted, granted) have no batch and count
+  as a plain example of the item. All inventory removal now goes through one
+  `take_from_inventory` choke point that reconciles the batch list, so a stale
+  batch cannot outlive the bottle it described and re-grade its replacement —
+  a lazy read-time trim missed exactly that case and the test caught it.
+  Still open: quality does not touch payment (flat `reward_coins`), rapport, or
+  reactions, and sell price ignores quality and traits.
 - **The seventh brew — the one that flips "Mastered" — adds nothing.** The
   quality bonus caps at `min(6)*3` and the output bonus lands at 6, so the
   brew that opens the mastery gates is mechanically empty. No story-arc quest

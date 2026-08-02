@@ -96,6 +96,21 @@ pub(super) fn apply_save_snapshot(
             .or_default()
             .insert(entry.variant_id, entry.count);
     }
+    state.progression.bottle_stock.clear();
+    for entry in save.bottle_stock {
+        if entry.count == 0 {
+            continue;
+        }
+        state
+            .progression
+            .bottle_stock
+            .entry(entry.item_id.clone())
+            .or_default()
+            .push(entry);
+    }
+    for batches in state.progression.bottle_stock.values_mut() {
+        batches.sort_by_key(|batch| batch.quality_score);
+    }
     state.world.available_nodes.clear();
     state.ui = OverlayState::new_gameplay();
     state.alchemy = AlchemySession::default();
@@ -147,6 +162,16 @@ mod tests {
         p.relationships.insert("mira_apothecary".to_owned(), 9);
         p.board_quest_cooldowns
             .insert("board_lantern_supply".to_owned(), 23);
+        p.bottle_stock.insert(
+            "healing_draught".to_owned(),
+            vec![crate::data::BottleBatchEntry {
+                item_id: "healing_draught".to_owned(),
+                quality_score: 71,
+                quality_band: "Excellent".to_owned(),
+                traits: vec!["restorative".to_owned()],
+                count: 1,
+            }],
+        );
         p.variant_stock.insert(
             "whisper_moss".to_owned(),
             [("whisper_moss_dew".to_owned(), 2u32)]
@@ -276,6 +301,9 @@ mod tests {
         // Which held units were gathered as variants lives only in the save;
         // losing it silently downgrades the player's stock back to plain.
         assert_eq!(a.variant_stock, b.variant_stock, "variant stock");
+        // What each bottle is worth lives only in the save; losing it would put
+        // the quality gates back to reading a best-ever record.
+        assert_eq!(a.bottle_stock, b.bottle_stock, "bottle stock");
         assert_eq!(a.planter_states.len(), b.planter_states.len(), "planters");
         // Not just the count: a bed's growth is part elapsed time and part days
         // tended, and the tended half exists only in the save. Losing it would

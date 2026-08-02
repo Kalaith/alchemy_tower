@@ -46,11 +46,8 @@ impl GameplayState {
     }
 
     fn consume_rune_recipe_inputs(&mut self, recipe: &RuneRecipeDefinition) {
-        for item_id in [&recipe.input_item_id, &recipe.rune_item_id] {
-            if let Some(amount) = self.inventory.get_mut(item_id) {
-                *amount = amount.saturating_sub(1);
-            }
+        for item_id in [recipe.input_item_id.clone(), recipe.rune_item_id.clone()] {
+            self.take_from_inventory(&item_id, 1);
         }
-        self.inventory.retain(|_, amount| *amount > 0);
     }
 }

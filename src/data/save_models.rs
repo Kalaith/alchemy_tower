@@ -98,15 +98,32 @@ pub(crate) struct SaveData {
     pub(crate) board_quest_cooldowns: Vec<BoardQuestCooldownEntry>,
     #[serde(default)]
     pub(crate) variant_stock: Vec<VariantStockEntry>,
+    #[serde(default)]
+    pub(crate) bottle_stock: Vec<BottleBatchEntry>,
 }
 
 /// How many of the player's units of `item_id` were gathered as a particular
 /// wild variant. The plain inventory count stays the total; this says how much
 /// of that total is the good stuff.
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Eq)]
 pub(crate) struct VariantStockEntry {
     pub(crate) item_id: String,
     pub(crate) variant_id: String,
+    pub(crate) count: u32,
+}
+
+/// Bottles of one item that came off the bench together, and how good they
+/// were. The inventory count is still the total held; this says what the
+/// individual bottles making up that total are actually worth, so a request can
+/// be checked against the shelf rather than against the player's best-ever
+/// record. Bottles from anywhere but the bench — bought, gifted, granted — have
+/// no batch and count as a plain example of the item.
+#[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Eq)]
+pub(crate) struct BottleBatchEntry {
+    pub(crate) item_id: String,
+    pub(crate) quality_score: u32,
+    pub(crate) quality_band: String,
+    pub(crate) traits: Vec<String>,
     pub(crate) count: u32,
 }
 

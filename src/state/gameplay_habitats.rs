@@ -54,13 +54,13 @@ impl GameplayState {
                 self.runtime.status_text = habitat_text::accepts(data, station);
                 return;
             };
-            if let Some(amount) = self.inventory.get_mut(&creature_id) {
-                *amount -= 1;
-            }
-            self.inventory.retain(|_, amount| *amount > 0);
+            let day_index = state.placed_day;
             state.creature_item_id = creature_id.clone();
-            state.placed_day = self.world.day_index;
-            state.last_harvest_day = self.world.day_index;
+            state.placed_day = day_index;
+            state.last_harvest_day = day_index;
+            // The habitat entry's borrow ends here, so the creature can leave
+            // the inventory through the one path that keeps bottle stock honest.
+            self.take_from_inventory(&creature_id, 1);
             let milestone = &narrative_text().milestones.containment_started;
             self.push_journal_milestone(&milestone.id, &milestone.title, &milestone.text);
             self.runtime.status_text = habitat_text::settled(data, station, &creature_id);

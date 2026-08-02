@@ -101,5 +101,11 @@ pub(super) fn build_save_snapshot(state: &GameplayState, data: &GameData) -> Sav
                 })
             })
             .collect(),
+        bottle_stock: state
+            .progression
+            .bottle_stock
+            .values()
+            .flat_map(|batches| batches.iter().cloned())
+            .collect(),
     }
 }

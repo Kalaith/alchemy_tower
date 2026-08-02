@@ -58,10 +58,8 @@ impl GameplayState {
         if !self.quest_requirements_met(data, quest) {
             return;
         }
-        if let Some(amount) = self.inventory.get_mut(&quest.required_item_id) {
-            *amount = amount.saturating_sub(quest.required_amount);
-        }
-        self.inventory.retain(|_, amount| *amount > 0);
+        self.spend_bottles_for_quest(data, quest, quest.required_amount);
+        self.take_from_inventory(&quest.required_item_id, quest.required_amount);
         self.progression.started_quests.remove(quest_id);
         self.coins += quest.reward_coins;
         // A board order is still somebody's problem solved. Without this the
@@ -175,10 +173,23 @@ impl GameplayState {
 #[cfg(test)]
 mod tests {
     use super::GameplayState;
-    use crate::data::CraftedItemProfileEntry;
+    use crate::data::{BottleBatchEntry, CraftedItemProfileEntry};
 
+    /// One Fine, restorative healing draught actually on the shelf. It has to be
+    /// a real bottle now, not merely a best-ever record: a request is checked
+    /// against what is being handed over.
     fn stock_healing_draught(state: &mut GameplayState) {
         state.inventory.insert("healing_draught".to_owned(), 1);
+        state.progression.bottle_stock.insert(
+            "healing_draught".to_owned(),
+            vec![BottleBatchEntry {
+                item_id: "healing_draught".to_owned(),
+                quality_score: 60,
+                quality_band: "Fine".to_owned(),
+                traits: vec!["restorative".to_owned()],
+                count: 1,
+            }],
+        );
         state.progression.crafted_item_profiles.insert(
             "healing_draught".to_owned(),
             CraftedItemProfileEntry {

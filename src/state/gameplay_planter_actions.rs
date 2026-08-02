@@ -60,10 +60,7 @@ impl GameplayState {
         state: &mut PlanterStateEntry,
         item_id: String,
     ) {
-        if let Some(amount) = self.inventory.get_mut(&item_id) {
-            *amount -= 1;
-        }
-        self.inventory.retain(|_, amount| *amount > 0);
+        self.take_from_inventory(&item_id, 1);
         state.planted_item_id = item_id.clone();
         state.planted_day = self.world.day_index;
         state.ready = false;

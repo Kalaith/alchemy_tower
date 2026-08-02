@@ -53,10 +53,7 @@ impl GameplayState {
     pub(super) fn pay_warp_costs(&mut self, warp: &WarpDefinition) {
         self.coins = self.coins.saturating_sub(warp.required_coins);
         if !warp.required_item_id.is_empty() {
-            if let Some(amount) = self.inventory.get_mut(&warp.required_item_id) {
-                *amount = amount.saturating_sub(warp.required_item_amount);
-            }
-            self.inventory.retain(|_, amount| *amount > 0);
+            self.take_from_inventory(&warp.required_item_id, warp.required_item_amount);
         }
     }
 

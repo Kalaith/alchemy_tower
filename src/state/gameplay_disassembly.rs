@@ -26,19 +26,17 @@ impl GameplayState {
     }
 
     pub(super) fn disassemble_recipe(&mut self, data: &GameData, recipe: &RecipeDefinition) {
-        let Some(output_amount) = self.inventory.get_mut(&recipe.output_item_id) else {
-            self.runtime.status_text = disassembly_text::cannot_disassemble(&recipe.name);
-            return;
-        };
-        if *output_amount == 0 {
+        if self
+            .inventory
+            .get(&recipe.output_item_id)
+            .copied()
+            .unwrap_or_default()
+            == 0
+        {
             self.runtime.status_text = disassembly_text::cannot_disassemble(&recipe.name);
             return;
         }
-
-        *output_amount -= 1;
-        if *output_amount == 0 {
-            self.inventory.remove(&recipe.output_item_id);
-        }
+        self.take_from_inventory(&recipe.output_item_id, 1);
 
         let mut returned = Vec::new();
         for ingredient in &recipe.ingredients {

@@ -23,9 +23,9 @@ pub(crate) use game_data::GameDataParts;
 pub(crate) use loader::load_embedded;
 pub(crate) use loader::load_embedded_or_fallback;
 pub(crate) use save_models::{
-    BoardQuestCooldownEntry, CraftedItemProfileEntry, ExperimentLogEntry, FieldJournalEntry,
-    HerbMemoryEntry, InventoryEntry, PotionMemoryEntry, RecipeMasteryEntry, RelationshipEntry,
-    SaveData, VariantStockEntry,
+    BoardQuestCooldownEntry, BottleBatchEntry, CraftedItemProfileEntry, ExperimentLogEntry,
+    FieldJournalEntry, HerbMemoryEntry, InventoryEntry, PotionMemoryEntry, RecipeMasteryEntry,
+    RelationshipEntry, SaveData, VariantStockEntry,
 };
 pub(crate) use schema::{
     AreaDefinition, BlockerVisualStyle, EffectDefinition, EffectKind, ElementProfile, GameConfig,
