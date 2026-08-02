@@ -1,5 +1,7 @@
 use crate::input::{cancel_pressed, confirm_pressed, fullscreen_pressed, rect_clicked};
-use crate::menu_layout::{fullscreen_toggle_rect, settings_back_rect, title_button_rect};
+use crate::menu_layout::{
+    fullscreen_toggle_rect, quiet_hud_toggle_rect, settings_back_rect, title_button_rect,
+};
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub(super) enum TitleAction {
@@ -12,6 +14,7 @@ pub(super) enum TitleAction {
 pub(super) enum SettingsAction {
     Back,
     ToggleFullscreen,
+    ToggleQuietHud,
 }
 
 pub(super) fn selected_title_action() -> Option<TitleAction> {
@@ -29,6 +32,10 @@ pub(super) fn selected_title_action() -> Option<TitleAction> {
 pub(super) fn selected_settings_action() -> Option<SettingsAction> {
     if cancel_pressed() || rect_clicked(settings_back_rect()) {
         return Some(SettingsAction::Back);
+    }
+
+    if rect_clicked(quiet_hud_toggle_rect()) {
+        return Some(SettingsAction::ToggleQuietHud);
     }
 
     (fullscreen_pressed() || rect_clicked(fullscreen_toggle_rect()))

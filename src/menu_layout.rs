@@ -44,7 +44,12 @@ pub(crate) fn fullscreen_toggle_rect() -> Rect {
     Rect::new(rect.x + 24.0, rect.y + 122.0, rect.w - 48.0, 44.0)
 }
 
+pub(crate) fn quiet_hud_toggle_rect() -> Rect {
+    let rect = settings_rect();
+    Rect::new(rect.x + 24.0, rect.y + 172.0, rect.w - 48.0, 44.0)
+}
+
 pub(crate) fn settings_back_rect() -> Rect {
     let rect = settings_rect();
-    Rect::new(rect.x + 24.0, rect.y + 178.0, rect.w - 48.0, 38.0)
+    Rect::new(rect.x + 24.0, rect.y + 228.0, rect.w - 48.0, 38.0)
 }

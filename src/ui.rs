@@ -1,4 +1,6 @@
 mod hud;
+mod hud_density;
+pub(crate) use hud_density::{quiet_hud_enabled, set_quiet_hud};
 mod menu_background;
 mod menu_screen;
 mod overlay_alchemy_actions;

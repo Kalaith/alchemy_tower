@@ -52,6 +52,15 @@ impl Game {
 
     /// Seed a specific scene for the screenshot harness.
     pub(crate) fn begin_capture_scene(&mut self, scene: &str) {
+        // "<scene>+quiet" captures the same moment with the quiet HUD, which is
+        // the only way to compare the two without a person holding a camera.
+        let scene = match scene.strip_suffix("+quiet") {
+            Some(base) => {
+                crate::ui::set_quiet_hud(true);
+                base
+            }
+            None => scene,
+        };
         self.state = Some(match scene {
             "gameplay" => GameState::from_gameplay(GameplayState::new(&self.data)),
             "paused" => GameState::pause(GameplayState::new(&self.data)),

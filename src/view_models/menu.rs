@@ -8,6 +8,7 @@ pub(crate) struct MenuScreenView {
     pub(crate) settings_title: String,
     pub(crate) settings_hint: String,
     pub(crate) fullscreen_label: String,
+    pub(crate) quiet_hud_label: String,
     pub(crate) settings_back_label: String,
     pub(crate) status_text: String,
 }

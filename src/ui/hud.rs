@@ -91,22 +91,30 @@ pub(super) fn hud_h() -> f32 {
 }
 
 pub(crate) fn draw_hud_view(view: &HudView, art: &ArtAssets) {
+    use super::hud_density::HudPanel;
     // The vignette and world-anchored gather feedbacks stay in real screen space
     // so they always cover the whole window; only the panels are scaled.
     draw_hud_vignette();
     draw_hud_feedbacks(&view.feedbacks, art);
 
     let scaled = crate::ui_scale::begin_ui_camera();
-    draw_title_banner(view);
-    draw_vitality_medallion(view);
-    draw_coin_chip(view);
-    draw_goal_note(view, art);
-    draw_time_panel(view);
-    draw_minimap_frame(view);
-    draw_side_status_panel(view);
-    draw_control_tags(view);
-    draw_potion_belt(view, art);
-    draw_status_strip(view);
+    // Which panels exist at all is a display preference — see `hud_density`.
+    // Quiet mode keeps what a player acts on and drops the framing, so the
+    // valley rather than the panelling is what fills the screen.
+    for panel in super::hud_density::visible_panels(super::hud_density::hud_density()) {
+        match panel {
+            HudPanel::TitleBanner => draw_title_banner(view),
+            HudPanel::VitalityMedallion => draw_vitality_medallion(view),
+            HudPanel::CoinChip => draw_coin_chip(view),
+            HudPanel::GoalNote => draw_goal_note(view, art),
+            HudPanel::TimePanel => draw_time_panel(view),
+            HudPanel::MinimapFrame => draw_minimap_frame(view),
+            HudPanel::SideStatusPanel => draw_side_status_panel(view),
+            HudPanel::ControlTags => draw_control_tags(view),
+            HudPanel::PotionBelt => draw_potion_belt(view, art),
+            HudPanel::StatusStrip => draw_status_strip(view),
+        }
+    }
     crate::ui_scale::end_ui_camera(scaled);
 }
 

@@ -593,6 +593,10 @@
     "target_treated_toast": "Treated: {name}",
     "target_needs_effect": "Nothing you are carrying would help. This wants something {effect} poured on it.",
     "target_needs_graded_effect": "Nothing you are carrying is good enough. This wants something {effect}, {band} or better.",
-    "world_prompt_apply": "{interact}: Treat {name}"
+    "world_prompt_apply": "{interact}: Treat {name}",
+    "menu_quiet_hud_on": "Quiet HUD: On",
+    "menu_quiet_hud_off": "Quiet HUD: Off",
+    "menu_quiet_hud_on_status": "Quiet HUD enabled. The frames step back and the valley fills the screen.",
+    "menu_quiet_hud_off_status": "Quiet HUD disabled."
   }
 }

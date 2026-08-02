@@ -26,6 +26,7 @@ pub(crate) struct MenuState {
     mode: TitleMode,
     status_text: String,
     fullscreen_enabled: bool,
+    quiet_hud: bool,
 }
 
 impl MenuState {
@@ -34,6 +35,7 @@ impl MenuState {
             mode: TitleMode::Actions,
             status_text: String::new(),
             fullscreen_enabled: saved_fullscreen_enabled(),
+            quiet_hud: crate::ui::quiet_hud_enabled(),
         }
     }
 
@@ -69,6 +71,16 @@ impl MenuState {
                     "menu_fullscreen_on_status"
                 } else {
                     "menu_fullscreen_off_status"
+                })
+                .to_owned();
+            }
+            Some(SettingsAction::ToggleQuietHud) => {
+                self.quiet_hud = !self.quiet_hud;
+                crate::ui::set_quiet_hud(self.quiet_hud);
+                self.status_text = ui_copy(if self.quiet_hud {
+                    "menu_quiet_hud_on_status"
+                } else {
+                    "menu_quiet_hud_off_status"
                 })
                 .to_owned();
             }
@@ -108,6 +120,12 @@ impl MenuState {
                 "menu_fullscreen_on"
             } else {
                 "menu_fullscreen_off"
+            })
+            .to_owned(),
+            quiet_hud_label: ui_copy(if self.quiet_hud {
+                "menu_quiet_hud_on"
+            } else {
+                "menu_quiet_hud_off"
             })
             .to_owned(),
             settings_back_label: ui_copy("menu_settings_back").to_owned(),

@@ -3,7 +3,8 @@ use super::{draw_action_button, draw_wrapped_text, truncate_text_to_width};
 use crate::art::ArtAssets;
 use crate::data::GameData;
 use crate::menu_layout::{
-    fullscreen_toggle_rect, settings_back_rect, settings_rect, status_y, title_button_rect,
+    fullscreen_toggle_rect, quiet_hud_toggle_rect, settings_back_rect, settings_rect, status_y,
+    title_button_rect,
 };
 use crate::view_models::menu::MenuScreenView;
 use macroquad::prelude::*;
@@ -84,6 +85,7 @@ fn draw_settings(view: &MenuScreenView) {
     );
 
     draw_action_button(fullscreen_toggle_rect(), &view.fullscreen_label, 24.0);
+    draw_action_button(quiet_hud_toggle_rect(), &view.quiet_hud_label, 24.0);
     draw_action_button(settings_back_rect(), &view.settings_back_label, 24.0);
 }
 
