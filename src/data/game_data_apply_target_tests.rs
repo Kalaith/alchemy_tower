@@ -453,6 +453,56 @@ mod tests {
         );
     }
 
+    /// The rune floor's whole verb is "take a bottle you can already make and
+    /// rework it into something else", and nine of its seventeen imbuings came
+    /// out to a thing nobody wanted. Worse, they were the *early* nine: the
+    /// inputs are the glow potion, the healing draught, the lantern draught,
+    /// calmleaf, the verdant restorative and the stamina tonic — everything a
+    /// player learns in act one. So the most natural first use of a newly opened
+    /// floor, improve what I am already good at, paid out in vendor trash every
+    /// single time, while the eight imbuings the valley did want all sat at the
+    /// far end of the game.
+    ///
+    /// Same broad definition of "wanted" the compound tier and the morph
+    /// branches use: a request, a repeatable order, a commission, a rune input,
+    /// a reagent slot, or a warp toll.
+    #[test]
+    fn every_imbuing_the_rune_floor_makes_is_wanted_by_something() {
+        let data = load_embedded().expect("embedded game data should load");
+
+        let mut wanted = std::collections::HashSet::new();
+        for quest in &data.quests {
+            wanted.insert(quest.required_item_id.clone());
+        }
+        for recipe in &data.recipes {
+            for ingredient in &recipe.ingredients {
+                wanted.insert(ingredient.item_id.clone());
+            }
+        }
+        for rune in &data.rune_recipes {
+            wanted.insert(rune.input_item_id.clone());
+        }
+        for area in &data.areas {
+            for warp in &area.warps {
+                wanted.insert(warp.required_item_id.clone());
+            }
+        }
+
+        let mut unwanted = data
+            .rune_recipes
+            .iter()
+            .filter(|rune| !wanted.contains(&rune.output_item_id))
+            .map(|rune| format!("{} makes {}, unasked for", rune.id, rune.output_item_id))
+            .collect::<Vec<_>>();
+
+        unwanted.sort();
+        assert!(
+            unwanted.is_empty(),
+            "imbuings the valley has no use for:
+{unwanted:#?}"
+        );
+    }
+
     /// The late tier exists to deepen decisions, not to lengthen a list. A
     /// second-order recipe should use the parts of the lattice the mid-game
     /// barely touches: three reagents, a full sequence, and a branch.

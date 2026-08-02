@@ -10,7 +10,7 @@ day — a week of iterations moves these fast enough that stale figures mislead)
 14 areas, 85 gather nodes and 21 routes, 6 apply targets, 168 items of which 102
 are potions and 49 ingredients, 60 recipes across 5 benches (with 33 morph
 branches) plus 17 rune patterns and 28 mutations, 9 townsfolk with 177 reaction
-lines, 24 story-arc requests, 18 open board orders, 29 standing orders, 5
+lines, 24 story-arc requests, 24 open board orders, 32 standing orders, 5
 unsigned notes, 3 post-ending orders and 6 commissions, plus an epilogue and
 work that continues past it. That is the mid-game and most of the way into the last third; the
 remaining work is what makes it a 20–25 hour game rather than a well-furnished
@@ -376,6 +376,45 @@ content with no destination.
   bottles a recipe and a branch both make. The rune nine are the next coherent
   group — the rune floor makes seventeen things and nine of them are wanted by
   nothing, which is the same shape one verb over.
+  **And 20 of 102 the same day**, the rune nine being the group above. What is
+  left is one flat class: **16** plain recipe outputs plus **4** that a recipe
+  and a branch both make, spread across five benches with no shared cause.
+  That is a tail rather than a hole, and the next pass at it should probably be
+  *recipes* — several of the twenty are outputs nothing else in their own bench's
+  chain consumes.
+
+### The rune floor's first eight imbuings were all wasted, 2026-08-03
+
+- ~~Nine of seventeen imbuings make something nobody wants~~ **Fixed
+  2026-08-03.** The rune floor's whole verb is *take a bottle you can already
+  make and rework it into something else*, and nine of its seventeen outputs
+  were wanted by nothing at all.
+  **And they were the early nine.** The inputs are the glow potion, the healing
+  draught, the lantern draught, calmleaf, the verdant restorative and the
+  stamina tonic — everything a player learns in act one — plus two salvage
+  bottles and the top of the whole chain. So the most natural first use of a
+  newly opened floor, *improve the thing I am already good at*, paid out in
+  vendor trash every single time, while the eight imbuings the valley did want
+  all sat at the far end of the game.
+  Nine orders, one buyer each and drawn from what the imbuing actually does:
+  a **splashed glow** lights the whole cut at once instead of eleven people
+  passing one lamp (Brin); an **echoed healing draught** arrives twice for
+  patients who will not sit still for the second (Mira); a **delayed stamina
+  tonic** is drunk at the bottom of the pass and works at the top (Tarn); a
+  **beacon burst** is not for walking by, it is for being found (Elric); a
+  **warded calmleaf** holds a shallow sleep to morning rather than going deeper,
+  which is what Wren actually asks for; a **second-spring tonic** feeds a bed
+  again in the second week, when a bed decides whether it took (Rowan); three
+  **leakfire flares** because the crews would rather have three bad ones than
+  one good one; two **second readings** because Ione will not accept a reading
+  she cannot check against itself; and one **heldstar vigil**, the deepest thing
+  the tower makes, burning dusk to dawn unattended on the hall steps the nights
+  the pass is shut.
+  Two of those route *salvage* bottles — a failed glow brew and the unnamed
+  murky mixture — so the failure tail finally pays at the top of the tower.
+  `every_imbuing_the_rune_floor_makes_is_wanted_by_something` is the guard, the
+  rune analogue of the morph one, verified by deleting the nine: it names all
+  nine. `screenshots/hud/rune_workbench.png`.
 
 ### The precision layer had no buyer, 2026-08-03
 

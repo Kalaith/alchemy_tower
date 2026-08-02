@@ -653,6 +653,66 @@
       "repeatable": true,
       "repeat_cooldown_days": 10,
       "rapport_npc_id": "wren_physician"
+    },
+    {
+      "reward_coins": 190,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Crude",
+      "required_trait": "",
+      "required_effect_kind": "glow",
+      "prerequisite_quests": [
+        "terrace_restoration_for_brin"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 30,
+      "repeatable": true,
+      "repeat_cooldown_days": 5,
+      "id": "board_leakfire_for_the_crews",
+      "title": "Road Crews: Three Flares, And They Do Not Care How They Look",
+      "description": "Three leakfire flares, standing, and the request is unusually blunt about what they are: a glow brew that failed, splashed through a rune, burning fast and ugly. The crews do not want a good lamp for this. They want something cheap enough that setting one off to say 'here, this way' costs nobody anything, and they would rather have three bad ones than one good one.",
+      "required_item_id": "leakfire_flare",
+      "required_amount": 3,
+      "rapport_npc_id": "brin_groundskeeper"
+    },
+    {
+      "reward_coins": 120,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Crude",
+      "required_trait": "",
+      "required_effect_kind": "glow",
+      "prerequisite_quests": [
+        "missing_pages_for_ione"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 34,
+      "repeatable": true,
+      "repeat_cooldown_days": 6,
+      "id": "board_second_reading_for_the_archive",
+      "title": "Archive: Read It Twice, Separately",
+      "description": "Two second readings for the archive. The joke is that they are made out of the failed mixture nobody has a name for, run through an echo rune; the point is that they show the same page twice with a gap in between, and Ione will not accept a reading she has not been able to check against itself. She says a single reading is an opinion.",
+      "required_item_id": "second_reading",
+      "required_amount": 2,
+      "rapport_npc_id": "ione_archivist"
+    },
+    {
+      "reward_coins": 520,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "pure",
+      "required_effect_kind": "glow",
+      "prerequisite_quests": [
+        "nightwatch_for_elric"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 44,
+      "repeatable": true,
+      "repeat_cooldown_days": 12,
+      "id": "board_heldstar_vigil_for_the_watch",
+      "title": "Standing Order: One Night, Unattended",
+      "description": "One heldstar vigil. It is the deepest thing the tower makes — a lowstar lantern taken to its own limit and then warded — and it does exactly one thing: it burns from dusk to dawn without being tended, trimmed or relit. Elric wants one on the hall steps on the nights the pass is shut, so that anybody coming down late can see there is somebody awake in this valley, which there is not, but the light does not know that.",
+      "required_item_id": "heldstar_vigil",
+      "required_amount": 1,
+      "rapport_npc_id": "mayor_elric"
     }
   ]
 }

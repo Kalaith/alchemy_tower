@@ -1799,6 +1799,32 @@ Stop the loop and report if:
   its own file (it is a story with its own beats, not a supply arrangement), leaving 658.
   **Sink 15,300 against 4,881 one-off and 8,574 a cycle; 85 quests; 190 tests.**
 
+- **2026-08-03 — the rune floor's *first* eight imbuings were all wasted.** Axis: the rune verb and
+  its demand, the group the last-but-two pass wrote down as next. Nine of seventeen imbuings made
+  something wanted by nothing — and the ordering is the finding. The nine inputs are the **glow
+  potion, healing draught, lantern draught, calmleaf, verdant restorative and stamina tonic** —
+  everything a player learns in act one — plus two salvage bottles and the top of the whole chain.
+  The eight imbuings the valley *did* want were all late-game. So the most natural first use of a
+  newly opened floor — *improve the thing I am already good at* — paid out in vendor trash every
+  time, and a player only found the verb worth using hours later.
+  Nine orders, buyer drawn from what the imbuing actually does rather than invented: splashed glow
+  lights the whole cut at once instead of eleven people passing a lamp; the echoed healing draught
+  arrives twice for patients who will not sit still; the delayed stamina tonic is drunk at the bottom
+  of the pass and works at the top; the beacon burst is not for walking by, it is for **being
+  found**; warded calmleaf holds a *shallow* sleep to morning rather than going deeper, which is
+  what Wren keeps saying she wants; the second-spring tonic feeds a bed again in the second week,
+  when a bed decides whether it took; three leakfire flares because the crews would rather have three
+  bad ones than one good one; two second readings because Ione will not accept a reading she cannot
+  check against itself; and the heldstar vigil burning dusk to dawn unattended on the hall steps the
+  nights the pass is shut.
+  Two of the nine route **salvage** bottles — a failed glow brew and the unnamed murky mixture — so
+  the failure tail now pays at the top of the tower, which is a nicer shape than pricing it up.
+  *Guard:* `every_imbuing_the_rune_floor_makes_is_wanted_by_something`, the rune analogue of the
+  morph one, verified by deleting the nine — it names all nine.
+  **29 → 20 sinkless potions; cycle 8,574 → 10,050; 191 tests.** What is left is one flat class,
+  16 plain recipe outputs plus 4 a recipe and a branch both make, with no shared cause — a tail
+  rather than a hole, and probably a *recipe* problem rather than a demand one.
+
 ## Deferred (needs a new system; not for this loop)
 
 - ~~Apply-potion-to-target flow (wilted plant, frightened creature, blocked path)~~ **Built
