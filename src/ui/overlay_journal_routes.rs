@@ -84,17 +84,39 @@ pub(crate) fn draw_journal_routes_tab_view(
     }
 }
 
+/// The herb detail's type sizes and steps. Exported because the guard that
+/// keeps the entry inside its box has to do this arithmetic too, and a test
+/// carrying its own copy of the numbers stops being a guard the first time one
+/// of them changes.
+pub(crate) const HERB_DETAIL_FONT: f32 = 16.0;
+pub(crate) const HERB_DETAIL_LINE_HEIGHT: f32 = 18.0;
+pub(crate) const HERB_DETAIL_BLOCK_GAP: f32 = 8.0;
+pub(crate) const HERB_ROW_STEP: f32 = 22.0;
+pub(crate) const HERB_DETAIL_TOP_GAP: f32 = 8.0;
+pub(crate) const HERB_LINE_STEP: f32 = 20.0;
+
 /// Draw a wrapped block and return the next y, advanced by the text's real
 /// wrapped height so a long line cannot overlap whatever comes beneath it.
 fn draw_wrapped_block(text: &str, x: f32, y: f32, text_width: f32) -> f32 {
-    const FONT: f32 = 16.0;
-    const LINE_HEIGHT: f32 = 18.0;
-    const BLOCK_GAP: f32 = 8.0;
-    draw_wrapped_text(text, x, y, text_width, FONT, LINE_HEIGHT, dark::TEXT_DIM);
-    let lines = super::text::wrapped_lines(text, text_width, FONT)
+    draw_wrapped_text(
+        text,
+        x,
+        y,
+        text_width,
+        HERB_DETAIL_FONT,
+        HERB_DETAIL_LINE_HEIGHT,
+        dark::TEXT_DIM,
+    );
+    y + block_height(text, text_width)
+}
+
+/// What a block will occupy, gap included — asked *before* drawing, because a
+/// bounds check on where a block starts says nothing about where it ends.
+fn block_height(text: &str, text_width: f32) -> f32 {
+    let lines = super::text::wrapped_lines(text, text_width, HERB_DETAIL_FONT)
         .len()
         .max(1) as f32;
-    y + lines * LINE_HEIGHT + BLOCK_GAP
+    lines * HERB_DETAIL_LINE_HEIGHT + HERB_DETAIL_BLOCK_GAP
 }
 
 fn draw_journal_herb_memories_view(
@@ -123,24 +145,32 @@ fn draw_journal_herb_memories_view(
         };
         draw_ui_text(&row.title, x, entry_y, 20.0, colour);
         draw_ui_text(&row.state_line, x + 210.0, entry_y, 16.0, dark::TEXT_DIM);
-        entry_y += 22.0;
+        entry_y += HERB_ROW_STEP;
     }
 
-    // Everything known about the selected herb, under the list and clipped to
-    // the column so a long note cannot run into the panel below.
+    // Everything known about the selected herb, under the list and bounded by
+    // the column so nothing runs into the panel below.
+    //
+    // The order is what the entry is *for*, most useful first: where and when
+    // to look, then what it brews into, then the numbers, and the flavour last.
+    // It used to lead with the description, which for two thirds of the shelf
+    // wrapped to three lines and pushed the gathering conditions through the
+    // Tower Access panel and the "brews into" line off the bottom entirely —
+    // the whole actionable half of the entry, lost to a paragraph the player
+    // has already read once.
     let Some(entry) = &view.detail else {
         return;
     };
-    entry_y += 8.0;
+    entry_y += HERB_DETAIL_TOP_GAP;
     draw_ui_text(&entry.route_line, x, entry_y, 18.0, dark::TEXT_DIM);
-    entry_y += 20.0;
-    for block in [Some(&entry.summary), Some(&entry.conditions)]
+    entry_y += HERB_LINE_STEP;
+    for block in [Some(&entry.conditions)]
         .into_iter()
         .flatten()
         .chain(entry.used_in_text.as_ref())
         .chain(entry.note_text.as_ref())
     {
-        if entry_y > bottom_limit {
+        if entry_y + block_height(block, text_width) > bottom_limit {
             return;
         }
         entry_y = draw_wrapped_block(block, x, entry_y, text_width);
@@ -152,10 +182,13 @@ fn draw_journal_herb_memories_view(
     .into_iter()
     .flatten()
     {
-        if entry_y > bottom_limit {
+        if entry_y + HERB_LINE_STEP > bottom_limit {
             return;
         }
         draw_ui_text(line, x, entry_y, 18.0, dark::TEXT_DIM);
-        entry_y += 20.0;
+        entry_y += HERB_LINE_STEP;
+    }
+    if entry_y + block_height(&entry.summary, text_width) <= bottom_limit {
+        draw_wrapped_block(&entry.summary, x, entry_y, text_width);
     }
 }

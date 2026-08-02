@@ -319,8 +319,15 @@ impl GameplayState {
             .flat_map(|area| area.gather_nodes.iter())
             .map(|node| (node.item_id.clone(), node.route_id.clone()))
             .collect::<std::collections::BTreeMap<_, _>>();
-        for (item_id, route_id) in gathered {
+        // A real shelf is half worked out and half hearsay, and the two states
+        // say different things — the learned entry gives exact conditions, the
+        // seen one gives what the valley says about the herb. Seeding
+        // everything as learned meant the second of those had never been
+        // photographed. The first entry is deliberately the unlearned one, so a
+        // capture opens on it.
+        for (index, (item_id, route_id)) in gathered.iter().enumerate() {
             let (item_id, route_id) = (item_id.as_str(), route_id.as_str());
+            let learned = index % 3 != 0;
             self.progression.herb_memories.insert(
                 item_id.to_owned(),
                 crate::data::HerbMemoryEntry {
@@ -328,17 +335,31 @@ impl GameplayState {
                     first_seen_day: 0,
                     first_seen_route_id: route_id.to_owned(),
                     seen: true,
-                    learned: true,
-                    learned_day: 1,
-                    learned_route_id: route_id.to_owned(),
+                    learned,
+                    learned_day: u32::from(learned),
+                    learned_route_id: if learned {
+                        route_id.to_owned()
+                    } else {
+                        String::new()
+                    },
                     note: String::new(),
-                    best_quality: 28,
+                    best_quality: if learned { 28 } else { 0 },
                     best_quality_band: "Serviceable".to_owned(),
                     variant_name: String::new(),
                 },
             );
         }
         self.ui.journal_tab = 0;
+        // The list sorts worked-out herbs first, so the hearsay entries are all
+        // at the far end and a capture opening on row one photographs the state
+        // that was already visible. Point at the first unlearned one.
+        if let Some(index) = self
+            .herb_memories(data)
+            .iter()
+            .position(|entry| !entry.learned)
+        {
+            self.ui.journal_index = index;
+        }
         self.set_overlay(super::gameplay_overlay_types::OverlayScreen::Journal);
     }
 

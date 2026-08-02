@@ -1437,6 +1437,34 @@ Stop the loop and report if:
   standing orders you have to have earned (25), the commissions you pay into (5). 876 → 240/616/144.
   **65 requests, 5 commissions, 43 of 101 potions sinkless; 162 tests.**
 
+- **2026-08-03 — sixty-one strings about where herbs grow, and a box already dropping the half of
+  the entry the player opens it for.** `source_conditions` is 61 authored lines — *"rain and mist,
+  when the floor takes up damp faster than the wards dry it"*, *"the shelf below the binding, never
+  the binding"* — with **no reader in the game**, and `room_bonus.description` is five more.
+  Both are hooked up rather than deleted. The herb journal shows the learned conditions when they
+  are known exactly and **the hearsay when they are not**, so a seen-but-unlearned entry stops
+  saying *"the memory is still only a glimpse"* and starts telling you when to go looking — the
+  authored prose is one step vaguer than the mechanical line, which is precisely what half-knowledge
+  should be. The room descriptions head the bench overlay in place of the same sentence shown at
+  every bench in the tower.
+  ***The hookup uncovered a live bug under it, which is the real find.*** The herb detail box holds
+  about four lines and **every entry led with the item description, which wraps to three for two
+  thirds of the shelf** — so the gathering conditions ran down through the Tower Access panel and
+  the "brews into" line fell off the bottom with nothing to say it had. The entry is ordered by what
+  it is consulted *for* now — conditions, uses, numbers, flavour last and cut to its opening
+  sentence — block **heights** are checked rather than only block starts (iteration 46's routes-pane
+  bug, still present here), and the shelf shows five rows instead of six.
+  ***Guard:*** `every_herb_entry_gets_its_conditions_and_its_uses` walks all forty herbs in both
+  states using the renderer's own layout constants, exported for the purpose so the test cannot
+  drift from the code. At six rows it names Lowstar Ash and Washvein Crystal exactly.
+  *The shared overlay subtitle grew too: a fixed 36px box is one line, and the first capture put the
+  archive's description half behind the Close button and half outside the box. It sizes to its text
+  and wraps short of the button now — the strip stays panel-width so the other four overlays look
+  unchanged.*
+  *Also: the journal capture scene seeded **every** herb as learned, so the unlearned state had
+  never been photographed at all. It now seeds a third of them as hearsay and opens on one.*
+  **61 + 5 authored strings live; 163 tests.**
+
 ## Deferred (needs a new system; not for this loop)
 
 - Apply-potion-to-target flow (wilted plant, frightened creature, blocked path) — `TODO.md` calls it

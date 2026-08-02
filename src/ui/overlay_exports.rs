@@ -26,6 +26,11 @@ pub(crate) use super::overlay_journal_greenhouse::draw_journal_greenhouse_tab_vi
 pub(crate) use super::overlay_journal_notes::draw_journal_notes_tab_view;
 pub(crate) use super::overlay_journal_rapport::draw_journal_rapport_tab_view;
 pub(crate) use super::overlay_journal_routes::draw_journal_routes_tab_view;
+#[cfg(test)]
+pub(crate) use super::overlay_journal_routes::{
+    HERB_DETAIL_BLOCK_GAP, HERB_DETAIL_LINE_HEIGHT, HERB_DETAIL_TOP_GAP, HERB_LINE_STEP,
+    HERB_ROW_STEP,
+};
 pub(crate) use super::overlay_pause::draw_pause_overlay;
 pub(crate) use super::overlay_quest_board::draw_quest_board_overlay_view;
 pub(crate) use super::overlay_rune::draw_rune_overlay_view;

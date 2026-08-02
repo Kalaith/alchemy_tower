@@ -10,7 +10,7 @@ use crate::ui::{
 impl GameplayState {
     pub(super) fn draw_alchemy_overlay(&self, data: &GameData, art: &ArtAssets) {
         draw_overlay_backdrop();
-        let chrome = self.alchemy_chrome_view();
+        let chrome = self.alchemy_chrome_view(data);
         let panel = alchemy_panel_rect();
         let x = panel.x;
         let y = panel.y;

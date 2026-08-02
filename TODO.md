@@ -243,15 +243,33 @@ content with no destination.
   `last_harvest_day` from the *stale* `placed_day` rather than today, so a
   re-stocked habitat would have carried the wrong harvest timer. Both now read
   the clock before taking the entry's borrow.
-- Still dead, and worth a decision rather than a reflex delete:
-  `ItemDefinition.source_conditions` (61 authored strings — "evening glades",
-  "clear nights", "gentle capture only") is real player-facing information now
-  that gathering under the right sky changes the brew, so the herb journal is a
-  hookup candidate rather than a delete. `RoomBonusDefinition.description` (19
-  authored, preview shows only Active/Inactive) is the same shape of question.
-  Item traits `spread`/`echo`/`delay` *are* on items in `materials.json`; what
-  they lack is any recipe asking for them, which is a content gap, not dead
-  data.
+- ~~`source_conditions` and `RoomBonusDefinition.description` are dead~~
+  **Hooked up 2026-08-03, both kept rather than deleted.** The 61
+  `source_conditions` strings are what a herb entry says *before* you have
+  worked it out: the journal now shows the learned conditions when they are
+  known exactly and this hearsay when they are not, so a seen-but-unlearned
+  entry stops reading "the memory is still only a glimpse" and starts telling
+  you when to go looking. The room-bonus descriptions (**5** authored, not 19 —
+  the old count was wrong) head the bench overlay in place of the same
+  "Select materials, set the process, then confirm." shown at every bench in
+  the tower, which is the one thing a bench subtitle should not be on a floor
+  whose whole point is that the room changes the brew.
+  ***The hookup found a live bug underneath it.*** The herb detail box holds
+  about four lines and every entry led with the item description, which wraps
+  to three for two thirds of the shelf — so the gathering conditions ran down
+  through the Tower Access panel and the "brews into" line fell off the bottom
+  with no mark to say so. The entry is ordered by what it is consulted for now
+  (conditions, uses, numbers, flavour last, and the flavour is cut to its
+  opening sentence), block heights are checked before drawing rather than only
+  block *starts*, and the shelf shows five rows instead of six.
+  `every_herb_entry_gets_its_conditions_and_its_uses` walks all forty herbs in
+  both states; at six rows it names Lowstar Ash and Washvein Crystal.
+  The shared overlay subtitle also grew: it was a fixed 36px box, which was one
+  line, and it now sizes to its text and wraps short of the close button.
+  `screenshots/hud/journal_hearsay.png`, `compound_bench.png`.
+- Still dead: item traits `spread`/`echo`/`delay` *are* on items in
+  `materials.json`; what they lack is any recipe asking for them, which is a
+  content gap, not dead data.
 - ~~~50 dead `ui_text.json` keys~~ **Fixed 2026-08-02.** 52 removed, and two
   tests keep the file honest: `every_line_of_copy_is_asked_for_by_something`
   scans the source for each key, and `composed_copy_keys_name_real_items` covers

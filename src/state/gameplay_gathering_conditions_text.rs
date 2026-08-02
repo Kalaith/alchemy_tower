@@ -40,6 +40,16 @@ pub(super) fn known_conditions(
     }
 }
 
+/// The authored source conditions, run together as one remark. They are
+/// written as separate clauses — sky, hour, place — and read as a sentence.
+pub(super) fn heard_conditions(source_conditions: &[String]) -> String {
+    let separator = ui_format("gather_heard_condition_separator", &[]);
+    ui_format(
+        "journal_memory_conditions_heard",
+        &[("notes", &source_conditions.join(&separator))],
+    )
+}
+
 fn join_gathering_options(values: BTreeSet<String>, separator: &str) -> String {
     values.into_iter().collect::<Vec<_>>().join(separator)
 }

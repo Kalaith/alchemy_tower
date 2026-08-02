@@ -11,6 +11,22 @@ impl GameplayState {
             .unwrap_or_else(|| data.item_name(item_id).to_owned())
     }
 
+    /// The herb entry's flavour line, cut to its first sentence.
+    ///
+    /// Two thirds of the descriptions wrap to three lines in the detail box,
+    /// which holds four — so carrying the whole paragraph here cost the
+    /// gathering conditions and the "brews into" line, the two things the entry
+    /// is actually consulted for. The opening sentence is the part that says
+    /// what the thing is; the rest is colour the player has already read once
+    /// on the pickup.
+    pub(super) fn journal_herb_lead(&self, data: &GameData, item_id: &str) -> String {
+        let summary = self.journal_herb_summary(data, item_id);
+        let Some(end) = summary.find(". ") else {
+            return summary;
+        };
+        summary[..=end].to_owned()
+    }
+
     pub(super) fn journal_potion_recap(&self, data: &GameData, item_id: &str) -> String {
         let key = format!("journal_potion_recap_{item_id}");
         ui_copy_optional(&key)

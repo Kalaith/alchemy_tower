@@ -46,17 +46,30 @@ pub(crate) fn draw_overlay_backdrop() {
 }
 
 pub(crate) fn draw_overlay_subtitle(x: f32, y: f32, text: &str) {
+    // Every overlay puts its close button in the top-right corner, inside the
+    // panel and level with this strip, so the text has to stop short of it.
+    const CLOSE_BUTTON_SPACE: f32 = 130.0;
+    const FONT: f32 = 20.0;
+    const LINE_HEIGHT: f32 = 20.0;
     let width = crate::ui_scale::ui_w() - x * 2.0 - 40.0;
+    let text_width = width - 24.0 - CLOSE_BUTTON_SPACE;
+    // The box used to be a fixed 36 tall, which was one line — fine while every
+    // subtitle was a short instruction, and wrong the moment a bench started
+    // introducing itself in its own words. Sized to what it holds.
+    let lines = super::text::wrapped_lines(text, text_width, FONT)
+        .len()
+        .max(1) as f32;
+    let height = (lines * LINE_HEIGHT + 16.0).max(36.0);
     let surface = macroquad_toolkit::ui::SurfaceStyle::new(Color::from_rgba(16, 18, 26, 176))
         .with_border(1.0, Color::from_rgba(160, 170, 190, 52));
-    macroquad_toolkit::ui::draw_surface(Rect::new(x + 16.0, y + 46.0, width, 36.0), &surface);
+    macroquad_toolkit::ui::draw_surface(Rect::new(x + 16.0, y + 46.0, width, height), &surface);
     draw_wrapped_text(
         text,
         x + 28.0,
         y + 59.0,
-        width - 24.0,
-        20.0,
-        20.0,
+        text_width,
+        FONT,
+        LINE_HEIGHT,
         dark::TEXT_DIM,
     );
 }

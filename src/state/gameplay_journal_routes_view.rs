@@ -14,7 +14,7 @@ const VISIBLE_ROUTE_ROWS: usize = 7;
 
 /// Herb rows are one line each and the block beneath belongs to the selected
 /// row. Drawn at full detail for every herb, the column had room for one.
-const VISIBLE_HERB_ROWS: usize = 6;
+const VISIBLE_HERB_ROWS: usize = 5;
 
 impl GameplayState {
     pub(super) fn journal_routes_tab_view(&self, data: &GameData) -> JournalRoutesTabView {
@@ -120,15 +120,17 @@ impl GameplayState {
                         &[("state", ui_copy(self.herb_memory_state_key(&entry.item_id)))],
                     ),
                     route_line: ui_format(route_copy_key, &[("route", route_label)]),
-                    summary: self.journal_herb_summary(data, &entry.item_id),
+                    summary: self.journal_herb_lead(data, &entry.item_id),
+                    // Learned means the conditions are known exactly. Short of
+                    // that the entry carries what the valley says about the
+                    // herb, which is enough to know when to go looking and not
+                    // enough to save the trip.
                     conditions: if entry.learned {
                         self.learned_gathering_conditions(data, &entry.item_id)
-                            .unwrap_or_else(|| {
-                                ui_copy("journal_memory_conditions_unknown").to_owned()
-                            })
                     } else {
-                        ui_copy("journal_memory_conditions_unknown").to_owned()
-                    },
+                        self.heard_gathering_conditions(data, &entry.item_id)
+                    }
+                    .unwrap_or_else(|| ui_copy("journal_memory_conditions_unknown").to_owned()),
                     used_in_text: self.herb_used_in_text(data, &entry.item_id),
                     best_specimen_text: (entry.best_quality > 0).then(|| {
                         ui_format(
@@ -337,6 +339,72 @@ mod window_tests {
         assert_ne!(
             last_row_seen, first_page_last,
             "walking to the end never moved past the first page"
+        );
+    }
+
+    /// Measured off `screenshots/hud/journal_hearsay.png`: the 600-wide herb
+    /// column wraps at about 88 characters per line at font 16. Deliberately
+    /// generous — a long word wraps early and costs a line, so a real entry
+    /// takes at least as many lines as this arithmetic says.
+    const CHARS_PER_LINE: usize = 88;
+    /// The shortest window the game is laid out for.
+    const REFERENCE_SCREEN_HEIGHT: f32 = 720.0;
+
+    /// The detail box has room for about four lines, and every entry was
+    /// leading with a description that wraps to three of them — so the
+    /// gathering conditions ran down through the Tower Access panel and the
+    /// "brews into" line fell off the bottom without a mark to say so. Those
+    /// two are the whole reason to open this tab.
+    ///
+    /// This checks the worst entry the content can produce still gets both,
+    /// using the same layout numbers the renderer uses.
+    #[test]
+    fn every_herb_entry_gets_its_conditions_and_its_uses() {
+        use crate::ui::{
+            HERB_DETAIL_BLOCK_GAP, HERB_DETAIL_LINE_HEIGHT, HERB_DETAIL_TOP_GAP, HERB_LINE_STEP,
+            HERB_ROW_STEP,
+        };
+
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let mut state = seeded_state(&data);
+        // The panel is `journal_panel_rect()` at the reference height, and the
+        // herb detail is bounded by `y + h - 170` with the rows above it.
+        let panel_y = 72.0;
+        let panel_h = REFERENCE_SCREEN_HEIGHT - 144.0;
+        let bottom_limit = panel_y + panel_h - 170.0;
+        let rows_end = panel_y + 136.0 + 32.0 + super::VISIBLE_HERB_ROWS as f32 * HERB_ROW_STEP;
+        let block_height = |text: &str| {
+            let lines = text.len().div_ceil(CHARS_PER_LINE).max(1) as f32;
+            lines * HERB_DETAIL_LINE_HEIGHT + HERB_DETAIL_BLOCK_GAP
+        };
+
+        let total = state.herb_memories(&data).len();
+        let mut clipped = Vec::new();
+        for index in 0..total {
+            state.ui.journal_index = index;
+            let view = state.journal_routes_tab_view(&data);
+            let Some(entry) = view.herb_memories.detail else {
+                continue;
+            };
+            let mut y = rows_end + HERB_DETAIL_TOP_GAP + HERB_LINE_STEP;
+            y += block_height(&entry.conditions);
+            if let Some(used_in) = &entry.used_in_text {
+                y += block_height(used_in);
+            }
+            if y > bottom_limit {
+                clipped.push(format!(
+                    "{}: needs {y:.0} against a {bottom_limit:.0} floor",
+                    entry.title
+                ));
+            }
+        }
+
+        clipped.sort();
+        clipped.dedup();
+        assert!(
+            clipped.is_empty(),
+            "herb entries whose conditions or uses fall out of the box:
+{clipped:#?}"
         );
     }
 
