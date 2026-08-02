@@ -388,5 +388,19 @@ content with no destination.
   suffix; `screenshots/hud/full.png` and `quiet.png` are the comparison, and it
   is stark — three townsfolk, a market stall and the whole top-left of the square
   are behind panels in one and visible in the other.
-- Replace the procedural one-shots (`tools/generate_audio.py`) with
-  hand-authored ambient audio and music.
+- Replace the procedural one-shots with hand-authored ambient audio and music.
+  **Silent moments fixed 2026-08-02.** Reading the code first turned up a
+  structural gap underneath the stated one: all five existing sounds are
+  *inputs* — footsteps, a pickup, a bench opening, a stir, a brew result — and
+  everything the player works *towards* was silent. A beat recorded, a request
+  delivered, a bank treated, a commission funded, a route opened, a day run out:
+  each already raised a toast, so the moment was identified and timed, and made
+  no noise. Four families added in the same procedural style: a small dry
+  journal tick (it fires for every recorded moment, so it has to survive being
+  heard hundreds of times), a warmer work-landed, a route-restored that rises
+  rather than resolves, and a collapse that falls away unresolved. They queue in
+  `runtime.pending_sounds` and the frame loop drains them, because the code that
+  knows a moment happened is several modules from the code that owns the
+  speakers — the visual feedbacks beside them already work this way.
+  Still open, and genuinely wanting a composer: there is no ambient bed and no
+  music at all. The one-shots are procedural and sound it.
