@@ -75,7 +75,15 @@ impl GameplayState {
             .map(|item| item.quality)
             .unwrap_or_default();
         if !is_potion(data, item_id) {
-            return base;
+            // A herb gathered under the right sky goes into the pot better than
+            // the data file's number, and the bench spends the best one held —
+            // so this is the figure that decides the brew, and it was the only
+            // one the player could not see.
+            return base
+                + self
+                    .best_held_variant(data, item_id)
+                    .map(|variant| variant.quality_bonus)
+                    .unwrap_or_default();
         }
         self.live_batches(item_id)
             .iter()

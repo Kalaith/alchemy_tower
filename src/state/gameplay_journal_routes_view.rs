@@ -141,12 +141,24 @@ impl GameplayState {
                             ],
                         )
                     }),
-                    variant_text: (!entry.variant_name.is_empty()).then(|| {
-                        ui_format(
-                            "journal_memory_variant",
-                            &[("variant", &entry.variant_name)],
-                        )
-                    }),
+                    // What was seen once, and — the part that decides whether to
+                    // walk back out — whether one is in the bag now.
+                    variant_text: self
+                        .held_variant_summary(data, &entry.item_id)
+                        .map(|(name, count)| {
+                            ui_format(
+                                "journal_memory_variant_held",
+                                &[("variant", &name), ("count", &count.to_string())],
+                            )
+                        })
+                        .or_else(|| {
+                            (!entry.variant_name.is_empty()).then(|| {
+                                ui_format(
+                                    "journal_memory_variant",
+                                    &[("variant", &entry.variant_name)],
+                                )
+                            })
+                        }),
                     note_text: (entry.learned && !entry.note.is_empty())
                         .then(|| entry.note.clone()),
                 }

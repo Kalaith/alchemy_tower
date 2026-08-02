@@ -129,9 +129,22 @@ content with no destination.
   exist — every dead field went live at once. `sequence_matches` now reads the
   ingredients rather than looking them up by id, so a variant's bonus trait can
   satisfy a reagent-order token. Brewing spends the unit; the preview reads the
-  same stock the bench will. Remaining gap: the *belt* still shows one stack per
-  id, so the player cannot see or choose which units are variant-grade — the
-  bench spends the best one automatically.
+  same stock the bench will.
+- ~~Nothing on screen says which stacks hold a variant~~ **Fixed 2026-08-03**,
+  six passes after the gap was written down. The bench spends the best unit
+  automatically and the belt shows one stack per id, so the player was making
+  the decision the whole system exists for — brew now or walk back out for a
+  better strain — with no information at all.
+  Two surfaces, because they answer different questions. The **materials list**
+  marks a stack holding one and reads the *variant-adjusted* quality, which is
+  the number the pot will actually get; that figure had been the plain data-file
+  value even after the bottle work taught the same row to read a poured grade.
+  The **journal** entry says what is in the bag rather than only what was once
+  seen: "Noted strain: Static Arcane Dust — 2 in the bag".
+  One guard covering both, verified by putting the plain title back.
+  `screenshots/hud/bench_variants.png`, `journal_hearsay.png`. Both capture
+  scenes now seed a held variant, because a bench with none in the bag proves
+  nothing about a marker that only appears when there is one.
 - ~~Quest quality gates check history, not the bottle~~ **Fixed 2026-08-02.**
   Bottles carry the quality and traits they were brewed at, in a persisted
   `bottle_stock` (item -> batches, worst first), and a request is now checked

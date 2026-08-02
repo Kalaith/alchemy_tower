@@ -49,6 +49,27 @@ impl GameplayState {
             .max_by_key(|variant| variant.quality_bonus)
     }
 
+    /// The best strain currently in the bag for this ingredient, and how many
+    /// of them there are. The journal has recorded the best strain ever *seen*
+    /// since variants were authored; what it could not say is whether the
+    /// player is carrying one right now, which is the half that decides whether
+    /// to walk back out or brew with what is in the bag.
+    pub(super) fn held_variant_summary(
+        &self,
+        data: &GameData,
+        item_id: &str,
+    ) -> Option<(String, u32)> {
+        let variant = self.best_held_variant(data, item_id)?;
+        let count = self
+            .progression
+            .variant_stock
+            .get(item_id)
+            .and_then(|held| held.get(&variant.id))
+            .copied()
+            .unwrap_or_default();
+        (count > 0).then(|| (variant.name.clone(), count))
+    }
+
     /// Spend one held unit of `variant_id`, dropping the entry when it runs out
     /// so `best_held_variant` stops offering something that is gone.
     pub(super) fn spend_variant_unit(&mut self, item_id: &str, variant_id: &str) {
@@ -212,6 +233,57 @@ mod tests {
             "the first slot should get the good one"
         );
         assert_eq!(both[1].quality, base, "the second slot should be plain");
+    }
+
+    /// The gap this system shipped with, named in the TODO for six passes: the
+    /// belt shows one stack per id, the bench quietly spends the best unit in
+    /// it, and *nothing on screen said which stacks held one*. The player was
+    /// making the one decision the system exists for — brew now or walk back
+    /// out for a better strain — with no information at all.
+    ///
+    /// Both surfaces are checked here because they answer different questions:
+    /// the bench says which stack is worth loading, the journal says what is in
+    /// the bag and how much of it.
+    #[test]
+    fn a_held_variant_is_visible_at_the_bench_and_in_the_journal() {
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let mut state = GameplayState::new(&data);
+        let (item_id, variant_id) = an_item_with_a_variant(&data);
+        state.inventory.insert(item_id.clone(), 3);
+
+        let plain_quality = state.reagent_quality(&data, &item_id);
+        let plain_title = state
+            .alchemy_materials_panel_view(&data)
+            .rows
+            .into_iter()
+            .find(|row| row.title.starts_with(data.item_name(&item_id)))
+            .map(|row| row.title)
+            .expect("the herb should be listed at the bench");
+
+        state.note_variant_gathered(&item_id, &variant_id);
+        state.note_variant_gathered(&item_id, &variant_id);
+
+        assert!(
+            state.reagent_quality(&data, &item_id) > plain_quality,
+            "the bench still reads the plain quality for a stack holding a variant"
+        );
+        let marked_title = state
+            .alchemy_materials_panel_view(&data)
+            .rows
+            .into_iter()
+            .find(|row| row.title.starts_with(data.item_name(&item_id)))
+            .map(|row| row.title)
+            .expect("the herb should still be listed");
+        assert_ne!(
+            marked_title, plain_title,
+            "the row reads the same whether or not the stack holds a variant"
+        );
+
+        let (name, count) = state
+            .held_variant_summary(&data, &item_id)
+            .expect("two gathered units should be held");
+        assert_eq!(count, 2, "the journal should count what is in the bag");
+        assert!(!name.is_empty(), "the strain should be named");
     }
 
     /// Brewing consumes the variant along with the herb. Without this the same

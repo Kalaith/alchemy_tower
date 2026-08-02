@@ -232,6 +232,17 @@ impl GameplayState {
         }
         self.inventory.insert("sunleaf".to_string(), 3);
         self.inventory.insert("whisper_moss".to_string(), 3);
+        // One stack holding a wild variant, because "which of these came up
+        // under the right sky" is the one thing the materials list could not
+        // say until now — and a capture of a bench with no variants in the bag
+        // proves nothing about it.
+        if let Some(variant) = data
+            .item("whisper_moss")
+            .and_then(|item| item.wild_variants.first())
+        {
+            let variant_id = variant.id.clone();
+            self.note_variant_gathered("whisper_moss", &variant_id);
+        }
         self.alchemy.slots[0] = Some("sunleaf".to_string());
         self.alchemy.slots[1] = Some("whisper_moss".to_string());
         self.alchemy.heat = 1;
@@ -363,6 +374,23 @@ impl GameplayState {
                     variant_name: String::new(),
                 },
             );
+        }
+        // Half the shelf is worth more than the data file says, and the entry
+        // could not tell the player whether any of it was in the bag.
+        for (index, item_id) in gathered.keys().enumerate() {
+            if index % 4 != 0 {
+                continue;
+            }
+            let Some(variant) = data
+                .item(item_id)
+                .and_then(|item| item.wild_variants.first())
+                .map(|variant| variant.id.clone())
+            else {
+                continue;
+            };
+            let item_id = item_id.clone();
+            self.note_variant_gathered(&item_id, &variant);
+            self.note_variant_gathered(&item_id, &variant);
         }
         self.ui.journal_tab = 0;
         // The list sorts worked-out herbs first, so the hearsay entries are all

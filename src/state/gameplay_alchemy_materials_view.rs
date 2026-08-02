@@ -27,7 +27,18 @@ impl GameplayState {
                         ],
                     );
                     AlchemyMaterialRowView {
-                        title: data.item_name(&card.item_id).to_owned(),
+                        // A held wild variant is worth more in the pot and the
+                        // bench spends it first, and the belt shows one stack
+                        // per id — so until now nothing on screen said which
+                        // stacks had one in them. The meta column is about a
+                        // dozen characters wide, so the mark is a mark.
+                        title: match self.best_held_variant(data, &card.item_id) {
+                            Some(_) => ui_format(
+                                "overlay_materials_variant_held",
+                                &[("name", data.item_name(&card.item_id))],
+                            ),
+                            None => data.item_name(&card.item_id).to_owned(),
+                        },
                         meta: self.item_card_meta_at_quality(
                             data,
                             &card.item_id,

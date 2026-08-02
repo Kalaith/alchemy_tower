@@ -1573,6 +1573,23 @@ Stop the loop and report if:
   this one took 3,000.
   **174 tests; `screenshots/hud/opening_hint.png` is the crow, finally saying it.**
 
+- **2026-08-03 — the decision the variant system exists for was being made blind.** The last open
+  line in the unconnected-systems audit, written down six passes ago and left: gathering under the
+  right sky changes the brew, the bench spends the best held unit automatically, and **the belt
+  shows one stack per id**, so nothing on screen ever said which stacks had a good unit in them.
+  Two surfaces, because they answer different questions. The **materials list** marks a stack that
+  holds one and reads the **variant-adjusted** quality — the number the pot will actually get, which
+  had stayed the plain data-file value even after the bottle work taught that same row to read a
+  poured grade. The **journal** says what is in the bag rather than only what was once seen:
+  *"Noted strain: Static Arcane Dust — 2 in the bag"*.
+  *The mark is a mark on purpose.* The meta column is capped at 34% of a 292px card — about twelve
+  characters at font 16 — so there is room for `q34` and an asterisk and nothing else. Measuring the
+  column before writing the copy is what stopped this being a sentence nobody would see.
+  *Guard covers both surfaces, verified by putting the plain title back.* Both capture scenes seed a
+  held variant now: **a bench with nothing good in the bag proves nothing about a marker that only
+  appears when there is.**
+  **175 tests; the audit's last remaining-gap line is closed.**
+
 ## Deferred (needs a new system; not for this loop)
 
 - Apply-potion-to-target flow (wilted plant, frightened creature, blocked path) — `TODO.md` calls it
