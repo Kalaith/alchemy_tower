@@ -32,6 +32,9 @@ pub(crate) enum HudPanel {
     PotionBelt,
     /// What just happened, and the only warning before a collapse.
     StatusStrip,
+    /// The banners that announce a beat, a delivery, a route reopening. They
+    /// are the payoff channel, not framing, so quiet keeps them.
+    EventToasts,
 }
 
 /// What each density draws. Quiet keeps the four things a player acts on and
@@ -49,12 +52,14 @@ pub(crate) fn visible_panels(density: HudDensity) -> &'static [HudPanel] {
             HudPanel::ControlTags,
             HudPanel::PotionBelt,
             HudPanel::StatusStrip,
+            HudPanel::EventToasts,
         ],
         HudDensity::Quiet => &[
             HudPanel::VitalityMedallion,
             HudPanel::TimePanel,
             HudPanel::PotionBelt,
             HudPanel::StatusStrip,
+            HudPanel::EventToasts,
         ],
     }
 }
@@ -107,6 +112,7 @@ mod tests {
             HudPanel::TimePanel,
             HudPanel::StatusStrip,
             HudPanel::PotionBelt,
+            HudPanel::EventToasts,
         ] {
             assert!(
                 quiet.contains(&required),

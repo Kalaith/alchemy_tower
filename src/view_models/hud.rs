@@ -25,6 +25,16 @@ pub(crate) struct HudFeedbackView {
     pub(crate) burst_scale: f32,
 }
 
+/// One event banner: what just happened, in the words the caller wrote.
+pub(crate) struct HudToastView {
+    pub(crate) text: String,
+    pub(crate) icon_key: String,
+    pub(crate) color: HudColor,
+    /// Fades out over the last of its life so a banner leaves rather than
+    /// vanishing mid-sentence.
+    pub(crate) alpha: f32,
+}
+
 pub(crate) struct HudControlTag {
     pub(crate) key_label: String,
     pub(crate) label: String,
@@ -56,4 +66,5 @@ pub(crate) struct HudView {
     pub(crate) inventory_count: u32,
     pub(crate) effect_count: usize,
     pub(crate) feedbacks: Vec<HudFeedbackView>,
+    pub(crate) toasts: Vec<HudToastView>,
 }

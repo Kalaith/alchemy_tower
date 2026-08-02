@@ -13,3 +13,8 @@ pub(crate) use self::draw_markers::{
     draw_gather_node_marker, draw_priority_marker, draw_station_marker,
 };
 pub(crate) use self::props::draw_blocker_prop;
+
+/// The toast icon shown when a caller names none, from `ui_art.json`.
+pub(crate) fn default_toast_icon() -> &'static str {
+    &self::ui_art_catalog::ui_art_catalog().default_toast_icon
+}

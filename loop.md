@@ -1499,6 +1499,32 @@ Stop the loop and report if:
   belongs there should trigger a split instead.
   **42 of 101 potions sinkless; 165 tests.**
 
+- **2026-08-03 — every toast the game has ever raised was thrown away on arrival.** I went looking
+  for a surface to hang "you brought me better than I asked" on, opened the feedback module, and
+  found `push_event_toast_with_icon(_text, _color, _icon_key)` pushing a struct whose only field is
+  a countdown. **The entire payoff channel was a timer.** A beat recorded, a request delivered, a
+  route reopened, a formula worked out, a commission funded, a mastery reached — thirteen call
+  sites — plus **the whole tutorial hint layer**, all formatted and dropped.
+  ***Three layers of it were dead at once.*** Six icons sit in `assets/generated/ui/toasts/`, and
+  the two `ui_art.json` keys naming them (`toast_icons`, `default_toast_icon`) had **no struct
+  field**, so serde discarded them without a word — the *third* instance of that exact failure after
+  the Southern Pass gate and the `alchemy.heat` bindings. `UiArtCatalog` now takes
+  `deny_unknown_fields`.
+  The toast carries text, colour and icon key; the icons are in the texture manifest; the HUD draws
+  the stack above the status strip, newest nearest the eye, capped at three, fading out. **Quiet
+  mode keeps them** — they are the payoff channel, not framing, so the density policy lists them
+  beside vitality and the clock.
+  *Method note worth keeping: this was found by **reading the module I was about to extend**, not by
+  a test or a capture. Nothing failed. The suite was green, the game shipped, and the whole
+  celebratory layer was missing.* Iteration 8's lesson generalises — when a pass is about to add
+  content to a channel, look at what the channel actually does with what it already has.
+  *Guards:* a toast carries the words it was raised with (fails outright against the old stub), the
+  newest is first and the stack is capped, and `default_toast_icon` has to name a real icon — a key
+  that has never once been checked against the list directly beneath it.
+  *Harness:* new `toasts` scene, because a banner lasts 2.2 seconds and there is no catching one by
+  hand; captured at 20 frames rather than the default 150, which would have caught the fade instead.
+  **168 tests; the payoff channel says what it has been trying to say all along.**
+
 ## Deferred (needs a new system; not for this loop)
 
 - Apply-potion-to-target flow (wilted plant, frightened creature, blocked path) — `TODO.md` calls it

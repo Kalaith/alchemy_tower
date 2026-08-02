@@ -5,6 +5,7 @@ pub(super) const ITEM_ICON_CATEGORY: &str = "item_icon";
 pub(super) const JOURNAL_TAB_CATEGORY: &str = "journal_tab";
 pub(super) const STATION_CATEGORY: &str = "station";
 pub(super) const TITLE_SCREEN_CATEGORY: &str = "title_screen";
+pub(super) const TOAST_ICON_CATEGORY: &str = "toast_icon";
 pub(super) const WORLD_NODE_CATEGORY: &str = "world_node";
 
 pub(super) const PLAYER_ID: &str = "player_tower_alchemist";

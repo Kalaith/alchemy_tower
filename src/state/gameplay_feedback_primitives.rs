@@ -1,4 +1,8 @@
 use super::gameplay_feedback_types::{GatherFeedback, GatherToast};
+
+/// How long a banner stays up. Long enough to read a sentence at a glance and
+/// short enough that three landing together do not queue up behind each other.
+pub(super) const TOAST_SECONDS: f32 = 2.2;
 use super::GameplayState;
 
 impl GameplayState {
@@ -8,14 +12,17 @@ impl GameplayState {
 
     pub(super) fn push_event_toast_with_icon(
         &mut self,
-        _text: impl Into<String>,
-        _color: [f32; 4],
-        _icon_key: &str,
+        text: impl Into<String>,
+        color: [f32; 4],
+        icon_key: &str,
     ) {
         self.runtime.gather_toasts.insert(
             0,
             GatherToast {
-                remaining_seconds: 2.2,
+                text: text.into(),
+                color,
+                icon_key: icon_key.to_owned(),
+                remaining_seconds: TOAST_SECONDS,
             },
         );
         self.runtime.gather_toasts.truncate(3);

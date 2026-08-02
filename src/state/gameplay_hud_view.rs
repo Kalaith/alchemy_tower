@@ -73,6 +73,7 @@ impl GameplayState {
             inventory_count: self.inventory.values().copied().sum(),
             effect_count: self.runtime.active_effects.len(),
             feedbacks: self.build_hud_feedbacks(area),
+            toasts: self.build_hud_toasts(),
         }
     }
 }

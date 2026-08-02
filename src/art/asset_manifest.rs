@@ -2,7 +2,8 @@ use std::collections::HashMap;
 
 use super::asset_keys::{
     asset_key, BACKGROUND_CATEGORY, CHARACTER_CATEGORY, EFFECT_CATEGORY, ITEM_ICON_CATEGORY,
-    JOURNAL_TAB_CATEGORY, PLAYER_ID, STATION_CATEGORY, TITLE_SCREEN_CATEGORY, WORLD_NODE_CATEGORY,
+    JOURNAL_TAB_CATEGORY, PLAYER_ID, STATION_CATEGORY, TITLE_SCREEN_CATEGORY, TOAST_ICON_CATEGORY,
+    WORLD_NODE_CATEGORY,
 };
 use super::ui_art_catalog::{ui_art_catalog, UiArtCatalog};
 use macroquad_toolkit::assets::{TextureConfig, TextureFilter};
@@ -27,6 +28,7 @@ pub(super) fn build_texture_manifest(data: &GameData) -> TextureManifest {
     add_journal_tabs(&mut texture_configs, &mut journal_tab_bindings, catalog);
     add_effects(&mut texture_configs, catalog);
     add_title_screens(&mut texture_configs, catalog);
+    add_toast_icons(&mut texture_configs, catalog);
 
     TextureManifest {
         texture_configs,
@@ -126,6 +128,12 @@ fn add_journal_tabs(
 fn add_effects(configs: &mut Vec<TextureConfig>, catalog: &UiArtCatalog) {
     for effect in &catalog.effects {
         push_texture_config(configs, EFFECT_CATEGORY, &effect.key, effect.path.clone());
+    }
+}
+
+fn add_toast_icons(configs: &mut Vec<TextureConfig>, catalog: &UiArtCatalog) {
+    for icon in &catalog.toast_icons {
+        push_texture_config(configs, TOAST_ICON_CATEGORY, &icon.key, icon.path.clone());
     }
 }
 

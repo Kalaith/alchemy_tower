@@ -140,6 +140,13 @@ impl Game {
                 gameplay.open_compound_brew_sample(&self.data);
                 GameState::from_gameplay(gameplay)
             }
+            // "toasts" raises the event banners so they can be looked at; they
+            // last a couple of seconds, so there is no catching one by hand.
+            "toasts" => {
+                let mut gameplay = GameplayState::new(&self.data);
+                gameplay.show_event_toasts_sample(&self.data);
+                GameState::from_gameplay(gameplay)
+            }
             // "rune" opens the rune workbench holding every reworkable potion.
             "rune" => {
                 let mut gameplay = GameplayState::new(&self.data);

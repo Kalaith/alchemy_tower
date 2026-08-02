@@ -64,6 +64,8 @@ mod hud_status_time;
 mod hud_status_vitals;
 #[path = "hud_text.rs"]
 mod hud_text;
+#[path = "hud_toasts.rs"]
+mod hud_toasts;
 
 use self::hud_belt::*;
 use self::hud_control_tags::*;
@@ -113,6 +115,7 @@ pub(crate) fn draw_hud_view(view: &HudView, art: &ArtAssets) {
             HudPanel::ControlTags => draw_control_tags(view),
             HudPanel::PotionBelt => draw_potion_belt(view, art),
             HudPanel::StatusStrip => draw_status_strip(view),
+            HudPanel::EventToasts => hud_toasts::draw_event_toasts(view, art),
         }
     }
     crate::ui_scale::end_ui_camera(scaled);

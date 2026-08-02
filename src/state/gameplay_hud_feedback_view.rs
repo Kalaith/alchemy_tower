@@ -1,9 +1,28 @@
+use super::gameplay_feedback_primitives::TOAST_SECONDS;
 use super::GameplayState;
 use crate::data::AreaDefinition;
-use crate::view_models::hud::HudFeedbackView;
+use crate::view_models::hud::{HudFeedbackView, HudToastView};
 use macroquad::prelude::{vec2, Vec2};
 
 impl GameplayState {
+    /// The event banners waiting to be read, newest first. Their text, colour
+    /// and icon were being collected and discarded before this existed.
+    pub(super) fn build_hud_toasts(&self) -> Vec<HudToastView> {
+        const FADE_SECONDS: f32 = 0.5;
+        self.runtime
+            .gather_toasts
+            .iter()
+            .map(|toast| HudToastView {
+                text: toast.text.clone(),
+                icon_key: toast.icon_key.clone(),
+                color: toast.color,
+                alpha: (toast.remaining_seconds / FADE_SECONDS)
+                    .min(toast.remaining_seconds.min(TOAST_SECONDS) / FADE_SECONDS)
+                    .clamp(0.0, 1.0),
+            })
+            .collect()
+    }
+
     pub(super) fn build_hud_feedbacks(&self, area: &AreaDefinition) -> Vec<HudFeedbackView> {
         let offset = self.camera_offset(area);
         self.runtime

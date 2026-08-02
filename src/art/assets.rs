@@ -8,7 +8,7 @@ use crate::data::GameData;
 use super::asset_keys::{
     asset_key, BACKGROUND_CATEGORY, CHARACTER_CATEGORY, EFFECT_CATEGORY, GENERATED_ASSET_PACK,
     ITEM_ICON_CATEGORY, JOURNAL_TAB_CATEGORY, PLAYER_ID, STATION_CATEGORY, TITLE_SCREEN_CATEGORY,
-    WORLD_NODE_CATEGORY,
+    TOAST_ICON_CATEGORY, WORLD_NODE_CATEGORY,
 };
 use super::asset_manifest::build_texture_manifest;
 
@@ -84,6 +84,13 @@ impl ArtAssets {
 
     pub(crate) fn title_screen(&self, id: &str) -> Option<&Texture2D> {
         self.texture(TITLE_SCREEN_CATEGORY, id)
+    }
+
+    /// The icon beside an event toast. Falls back to the catalogue's default
+    /// key, because a toast raised with no icon still wants a mark beside it.
+    pub(crate) fn toast_icon(&self, key: &str) -> Option<&Texture2D> {
+        self.texture(TOAST_ICON_CATEGORY, key)
+            .or_else(|| self.texture(TOAST_ICON_CATEGORY, super::default_toast_icon()))
     }
 
     fn texture(&self, category: &str, id: &str) -> Option<&Texture2D> {

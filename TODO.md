@@ -237,6 +237,29 @@ content with no destination.
   clamps rather than showing an empty panel. Against the old single-page view
   the reachability test names the nine that were invisible.
 
+### Dead code found 2026-08-03
+
+- ~~Every event toast in the game was invisible~~ **Fixed 2026-08-03.** This is
+  the `quick_potions` shape again, and bigger: `push_event_toast_with_icon` took
+  `_text`, `_color`, `_icon_key` and pushed a struct holding **nothing but a
+  countdown**, so the entire payoff channel — a beat recorded, a request
+  delivered, a route reopened, a formula worked out, a commission funded, a
+  mastery reached, plus the **whole tutorial hint layer** — was formatted and
+  dropped on arrival. Six icons were generated for it under
+  `assets/generated/ui/toasts/` and never loaded, because the two `ui_art.json`
+  keys naming them (`toast_icons`, `default_toast_icon`) had no struct field and
+  serde discarded them in silence: the third instance of that exact failure
+  after the Southern Pass gate and the input-binding labels.
+  The toast now carries its text, colour and icon key; the icons are in the
+  texture manifest; and the HUD draws the stack above the status strip, newest
+  nearest the eye, capped at three and fading out. Quiet mode keeps them —
+  they are the payoff channel, not framing. `UiArtCatalog` took
+  `deny_unknown_fields`, so the next dropped key fails to load rather than
+  looking configured.
+  Three tests and a `toasts` capture scene (`screenshots/hud/event_toasts.png`),
+  which exists because a banner lasts two seconds and there is no catching one
+  by hand.
+
 ### Dead data (low stakes, cheap deletes or one-line hookups)
 
 - ~~`HabitatStateEntry.placed_day` and `FieldJournalEntry`'s season/weather/time

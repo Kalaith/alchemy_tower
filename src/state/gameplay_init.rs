@@ -307,6 +307,19 @@ impl GameplayState {
         self.set_overlay(super::gameplay_overlay_types::OverlayScreen::Alchemy);
     }
 
+    /// Raise the three event banners the game can stack at once and stand in
+    /// the world to look at them. They fade after a couple of seconds, so a
+    /// capture has to be taken with them freshly raised — which is the whole
+    /// reason this scene exists rather than trying to catch one by hand.
+    pub(crate) fn show_event_toasts_sample(&mut self, data: &GameData) {
+        self.progression.total_brews = 12;
+        let here = [self.world.player.position.x, self.world.player.position.y];
+        self.trigger_route_restored_feedback("The switchback is walkable again.", here);
+        self.trigger_new_best_brew_feedback("Best yet: Healing Draught, Excellent (68).");
+        self.trigger_quest_complete_feedback("Delivered: Something For The Headaches.");
+        self.runtime.status_text = self.next_goal_summary(data);
+    }
+
     /// Seed a couple of learned herb memories and open the journal, so the
     /// capture harness can render the herb-memory tab (including the new
     /// "brews into" recipe usage line).

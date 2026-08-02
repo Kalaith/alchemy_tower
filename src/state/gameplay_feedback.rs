@@ -209,4 +209,51 @@ mod tests {
             "the queue kept a copy of what it handed over"
         );
     }
+
+    /// Every celebratory moment in the game raises a toast, and for the whole
+    /// life of the project the function that received them ignored its own
+    /// arguments: `_text`, `_color`, `_icon_key`, and a struct holding nothing
+    /// but a countdown. Thirteen authored strings, six generated icons and a
+    /// whole tutorial hint layer went into it and none of it could ever appear.
+    ///
+    /// This checks the words survive the trip from the trigger to the view the
+    /// HUD draws — the trip that was severed.
+    #[test]
+    fn a_toast_carries_the_words_it_was_raised_with() {
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let mut state = GameplayState::new(&data);
+
+        state.trigger_quest_complete_feedback("The winter stores are laid in.");
+        let toasts = state.build_hud_toasts();
+
+        assert_eq!(toasts.len(), 1, "the toast never reached the HUD view");
+        assert_eq!(toasts[0].text, "The winter stores are laid in.");
+        assert_eq!(
+            toasts[0].icon_key, "quest_complete",
+            "the icon the trigger asked for was dropped"
+        );
+        assert!(toasts[0].alpha > 0.0, "a fresh banner should be visible");
+        assert!(
+            toasts[0].color[..3] != [0.0, 0.0, 0.0],
+            "the event's colour was dropped"
+        );
+    }
+
+    /// Three landing at once is normal — a delivery can record a beat, open a
+    /// route and finish an arc in the same keypress. The newest has to be first
+    /// in the list, which is the one drawn nearest the status strip, and the
+    /// stack is capped so a busy moment cannot bury the world behind banners.
+    #[test]
+    fn the_newest_banner_is_first_and_the_stack_is_capped() {
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let mut state = GameplayState::new(&data);
+
+        for index in 0..5 {
+            state.trigger_quest_complete_feedback(format!("beat {index}"));
+        }
+
+        let toasts = state.build_hud_toasts();
+        assert_eq!(toasts.len(), 3, "the stack should be capped at three");
+        assert_eq!(toasts[0].text, "beat 4", "the newest should be first");
+    }
 }

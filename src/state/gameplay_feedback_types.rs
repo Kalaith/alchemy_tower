@@ -8,8 +8,15 @@ pub(super) struct ActiveEffect {
     pub(super) description: String,
 }
 
+/// An event banner: what just happened, in words, with the mark that goes with
+/// it. The text, colour and icon key were passed in by every caller and thrown
+/// away on arrival for the whole life of the project — thirteen authored
+/// strings and six generated icons that nothing could ever show.
 #[derive(Clone, Debug)]
 pub(super) struct GatherToast {
+    pub(super) text: String,
+    pub(super) color: [f32; 4],
+    pub(super) icon_key: String,
     pub(super) remaining_seconds: f32,
 }
 
