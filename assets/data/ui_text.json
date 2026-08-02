@@ -510,7 +510,7 @@
     "overlay_archive_logged_suffix": " [logged]",
     "overlay_archive_empty_disassembly": "Bring a brewed item from a logged recipe.",
     "overlay_archive_owned": "owned {count}",
-    "overlay_archive_disassembly_help": "{confirm} confirm will break one brewed item back into its authored recipe inputs.",
+    "overlay_archive_disassembly_help": "{confirm} confirm breaks one bottle back into its share of the pour. A recipe that brews a batch gives back a batch's share, rounded down.",
     "overlay_archive_empty_duplication": "Bring a potion, ingredient, or catalyst plus a starlight shard.",
     "overlay_archive_owned_cost": "owned {count}  cost {cost}c",
     "overlay_archive_duplication_catalyst": "Catalyst: {item}",

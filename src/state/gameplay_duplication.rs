@@ -74,6 +74,15 @@ impl GameplayState {
             duplication_text::duplicated(data, &item.name, cost, &catalyst_item_id);
     }
 
+    /// The starlight catalyst the console would spend.
+    ///
+    /// It used to take the *highest-quality* one held, and duplication reads
+    /// nothing from a catalyst's quality — it is spent, not measured. So the
+    /// console reached past a 24-coin shard you can buy at two counters for
+    /// Mira's `counterkept_shard`, which is a friendship gift, sold nowhere and
+    /// gathered nowhere, and burned it for exactly the same result. The
+    /// planter had the same shape of bug and the same answer: take the least
+    /// valuable thing that qualifies.
     pub(super) fn duplication_catalyst_item_id(&self, data: &GameData) -> Option<String> {
         self.inventory
             .iter()
@@ -83,9 +92,9 @@ impl GameplayState {
                 item.catalyst_tags
                     .iter()
                     .any(|tag| tag == "starlight")
-                    .then_some((item_id.clone(), item.quality))
+                    .then_some((item_id.clone(), item.base_value))
             })
-            .max_by(|left, right| left.1.cmp(&right.1).then(left.0.cmp(&right.0)))
+            .min_by(|left, right| left.1.cmp(&right.1).then(left.0.cmp(&right.0)))
             .map(|entry| entry.0)
     }
 }
@@ -134,5 +143,36 @@ mod tests {
             0
         );
         assert_eq!(state.coins, 63);
+    }
+
+    /// Duplication reads nothing from a catalyst's quality — the shard is spent,
+    /// not measured — and it used to take the *best* one held. Mira's
+    /// `counterkept_shard` is a friendship gift, sold nowhere and gathered
+    /// nowhere, and the console burned it in preference to a 24-coin shard two
+    /// counters sell, for exactly the same result.
+    #[test]
+    fn duplication_spends_the_shard_you_can_replace() {
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let mut state = GameplayState::new(&data);
+
+        let gift = data
+            .item("counterkept_shard")
+            .expect("Mira's gift catalyst should exist");
+        let stock = data
+            .item("starlight_shard")
+            .expect("the buyable starlight shard should exist");
+        assert!(
+            gift.quality > stock.quality && gift.base_value > stock.base_value,
+            "the gift has to be both better and dearer for this to mean anything"
+        );
+
+        state.inventory.insert(gift.id.clone(), 1);
+        state.inventory.insert(stock.id.clone(), 1);
+
+        assert_eq!(
+            state.duplication_catalyst_item_id(&data).as_deref(),
+            Some(stock.id.as_str()),
+            "the console reached past the replaceable shard for the gift"
+        );
     }
 }

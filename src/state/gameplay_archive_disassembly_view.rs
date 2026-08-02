@@ -50,15 +50,26 @@ impl GameplayState {
             })
             .collect();
 
-        let selected_inputs = recipes[selected_index]
+        // What comes back, not what the recipe was written with. A batch recipe
+        // returns one bottle's share, so listing the authored amounts here
+        // advertised more than the console hands over.
+        let selected = recipes[selected_index];
+        let selected_inputs = selected
             .ingredients
             .iter()
             .map(|ingredient| {
+                (
+                    ingredient,
+                    super::gameplay_disassembly::salvage_share(selected, ingredient.amount),
+                )
+            })
+            .filter(|(_, share)| *share > 0)
+            .map(|(ingredient, share)| {
                 ui_format(
                     "overlay_input_amount",
                     &[
                         ("item", data.item_name(&ingredient.item_id)),
-                        ("amount", &ingredient.amount.to_string()),
+                        ("amount", &share.to_string()),
                     ],
                 )
             })

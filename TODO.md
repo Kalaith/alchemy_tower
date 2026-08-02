@@ -220,6 +220,39 @@ content with no destination.
   alphabetical pick, and the pair it uses is *found* in the data rather than
   named, so a re-priced bottle cannot quietly turn it into a test of nothing.
 
+### The archive console, read 2026-08-03
+
+- ~~Disassembly was a reagent printer~~ **Fixed 2026-08-03.** Taking a bottle
+  apart returned **every ingredient at full amount**, and nine recipes brew more
+  than one bottle at a time: `coldiron_tincture` and `shiftlong_tonic` turn
+  **three reagents into three bottles**, each handing back all three. Six free
+  reagents a brew, no travel, no season to wait for, repeatable forever — in a
+  game whose entire outer loop is deciding where to walk and when.
+  A bottle gives back its **share of the pour** now — the ingredient amount over
+  the recipe's output count, rounded down — so a whole batch cannot yield more
+  than the batch cost. Six batch recipes divide away to nothing and are no
+  longer offered rather than eating a bottle for an empty hand; three return a
+  partial share; every one-bottle recipe is untouched.
+  ***The mastery bottle is deliberately not in the divisor, and the arithmetic
+  is why.*** A brew costs 5 vitality and a gather 1.5, so gathering yields ~3.3
+  units per 5 vitality. A mastered one-bottle recipe hands back two bottles'
+  worth for the same 5 vitality — 2 or 3 units — which is *worse* than walking
+  out and picking them. Counting mastery in the divisor rounds every ordinary
+  recipe's return to zero and kills the feature to close a hole that is not
+  open. (I tried it that way first; the existing test named the cost.)
+  The panel lied too: it listed the *authored* ingredients as "Recovered
+  Inputs". It shows the share now, and the help line says the rule.
+  Two guards — a full brew's bottles can never yield more than the brew cost,
+  and nothing is offered that gives nothing back. `screenshots/hud/
+  archive_disassembly.png`.
+- ~~Duplication burned the gift catalyst first~~ **Fixed 2026-08-03.**
+  `duplication_catalyst_item_id` took the **highest-quality** starlight catalyst
+  held, and duplication reads nothing from a catalyst's quality — it is spent,
+  not measured. So the console reached past a 24-coin shard sold at two counters
+  for Mira's `counterkept_shard`, a friendship gift sold and gathered nowhere,
+  and burned it for exactly the same result. It takes the least valuable thing
+  that qualifies now, which is the same answer the planter needed the same day.
+
 ### Authored content with no destination
 
 - **48 of 101 potions have no structural sink** — no quest, no board order, no

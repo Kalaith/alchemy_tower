@@ -1613,6 +1613,30 @@ Stop the loop and report if:
   *Verified against the old pick by putting `.next()` back.*
   **178 tests; the cheapest thing on the shelf is the thing the bed wants.**
 
+- **2026-08-03 — the archive console was printing reagents, and the question that found it was the
+  same one as yesterday.** Last pass's planter bug was *which item does the system take*. I asked it
+  of the two archive verbs and both answered wrong.
+  **Disassembly returned every ingredient at full amount for one bottle**, and nine recipes brew more
+  than one at a time — `coldiron_tincture` and `shiftlong_tonic` turn **three reagents into three
+  bottles**, each handing back three. Six free reagents a brew, no travel, no season, forever, in a
+  game whose whole outer loop is deciding where to walk. A bottle gives back its **share of the
+  pour** now, rounded down; six batch recipes divide away to nothing and are dropped from the list
+  rather than eating a bottle for an empty hand.
+  ***The mastery bottle is deliberately not in the divisor, and the arithmetic is the reason.*** A
+  brew costs 5 vitality and a gather 1.5 — gathering is ~3.3 units per 5 vitality, and a mastered
+  one-bottle recipe hands back 2–3 units for the same 5. **Worse than walking out and picking them,
+  so it is not a hole.** I built it the other way first and the existing test named the cost
+  immediately: the healing draught returned *nothing*. **Measure the exploit before pricing the
+  fix.**
+  *The panel was lying as well* — it listed the authored ingredients under "Recovered Inputs" while
+  the console handed over a share. It shows what comes back now.
+  **Duplication burned the gift catalyst first:** it took the *highest-quality* starlight catalyst
+  held, and duplication reads nothing from catalyst quality. It reached past a 24-coin shard two
+  counters sell for Mira's `counterkept_shard` — a friendship gift, sold and gathered nowhere — and
+  spent it for exactly the same result.
+  *Both guards verified against the old behaviour; the disassembly one names four recipes by ident.*
+  **181 tests; nothing comes out of that room that did not go into the pot.**
+
 ## Deferred (needs a new system; not for this loop)
 
 - Apply-potion-to-target flow (wilted plant, frightened creature, blocked path) — `TODO.md` calls it
