@@ -8,8 +8,12 @@ pub(crate) struct NpcDefinition {
     pub(crate) position: [f32; 2],
     pub(crate) interaction_radius: f32,
     pub(crate) color: [u8; 4],
-    pub(crate) dialogue_start: String,
-    pub(crate) dialogue_progress: String,
+    /// What this townsperson says once every request they had is finished —
+    /// their settled word on the whole arc. The `dialogue_start`/`_progress`
+    /// pair that used to sit beside it was an earlier, blunter draft of the
+    /// same beats the `phase1_dialogue` block now covers in more detail, and
+    /// nothing could ever reach it; the prose is in git history if it is wanted
+    /// back.
     pub(crate) dialogue_complete: String,
     #[serde(default)]
     pub(crate) quest_id: String,

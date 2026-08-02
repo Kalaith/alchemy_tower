@@ -61,8 +61,8 @@ impl GameplayState {
         npc: &'a NpcDefinition,
     ) -> NpcDialogueSelection<'a> {
         let mut selection = NpcDialogueSelection {
-            start: npc.dialogue_start.as_str(),
-            progress: npc.dialogue_progress.as_str(),
+            start: npc.dialogue_complete.as_str(),
+            progress: npc.dialogue_complete.as_str(),
             complete: npc.dialogue_complete.as_str(),
         };
 
@@ -100,47 +100,77 @@ impl GameplayState {
             .unwrap_or(false);
 
         // A line authored on the live step of an arc is the most specific thing
-        // this NPC has to say, so it wins over every broader phase line. Without
-        // this, later beats are drowned out by the town-recovery observation.
-        if let Some(quest) = quest.filter(|_| quest_started || quest_available) {
-            let beat = if quest_started {
-                quest.giver_active_line.as_str()
-            } else {
-                quest.giver_intro_line.as_str()
-            };
-            if !beat.is_empty() {
-                selection.start = beat;
-                selection.progress = beat;
-                return selection;
-            }
+        // this NPC has to say, so it takes the slot it belongs in — but it used
+        // to take both and return outright, which left the phase-1
+        // `active_request` reminder unreachable for seven of the eight, and
+        // Mira's `intro` unreachable altogether because her first errand is
+        // available from the opening minute.
+        //
+        // Accepted: the beat is the reminder, and `active_request` opens.
+        // Merely offered: the beat is the pitch, and the NPC's own voice opens
+        // — which is where the *reason* for the errand lives, rather than
+        // jumping straight to "make me X".
+        let beat = quest
+            .filter(|_| quest_started || quest_available)
+            .map(|quest| {
+                if quest_started {
+                    quest.giver_active_line.as_str()
+                } else {
+                    quest.giver_intro_line.as_str()
+                }
+            })
+            .filter(|beat| !beat.is_empty());
+
+        // What they say with nothing of yours pending, most specific first.
+        //
+        // The town-recovery observation used to be checked ahead of all of this
+        // and returned outright, so from the moment the greenhouse reopened —
+        // which is early — it was the only thing eight townsfolk could say.
+        // `post_help_relief` was reachable for three of them, and only because
+        // their arcs happened to finish first.
+        let arc_finished = quest.is_none();
+        if arc_finished && !npc.dialogue_complete.is_empty() {
+            // Everything they asked for is done. This is their settled word on
+            // it, and the only place the schema's own dialogue line is heard.
+            selection.complete = npc.dialogue_complete.as_str();
+        } else if quest_completed && !phase1.post_help_relief.is_empty() {
+            selection.complete = phase1.post_help_relief.as_str();
+        } else if self.phase1_town_recovery_reached()
+            && !phase1.town_recovery_observation.is_empty()
+        {
+            selection.complete = phase1.town_recovery_observation.as_str();
         }
 
-        if self.phase1_town_recovery_reached() && !phase1.town_recovery_observation.is_empty() {
-            selection.start = phase1.town_recovery_observation.as_str();
-            selection.progress = phase1.town_recovery_observation.as_str();
-            selection.complete = phase1.town_recovery_observation.as_str();
-            return selection;
-        }
-        if quest_completed && !phase1.post_help_relief.is_empty() {
-            selection.complete = phase1.post_help_relief.as_str();
-        }
-        if (quest_started || quest_available) && !phase1.active_request.is_empty() {
-            // Only collapse to the terse "active request" reminder once the
-            // player has actually accepted the quest. While it is merely
-            // available, the opener stays as the NPC's full pitch
-            // (`dialogue_start`), which is where the *reason* for the errand
-            // lives — otherwise the first conversation jumps straight to "make
-            // me X" with no motivation.
-            if quest_started {
-                selection.start = phase1.active_request.as_str();
-            }
-            selection.progress = phase1.active_request.as_str();
+        // How they open, most specific first.
+        let opener = if quest_started && !phase1.active_request.is_empty() {
+            // Working on it: the terse reminder of what was asked for.
+            Some(phase1.active_request.as_str())
+        } else if !quest_started
+            && !quest_available
+            && self.phase1_town_recovery_reached()
+            && !phase1.town_recovery_observation.is_empty()
+        {
+            // Nothing of yours pending and the town on its feet.
+            Some(phase1.town_recovery_observation.as_str())
         } else if self.phase1_first_brew_reached() && !phase1.pre_help_concern.is_empty() {
-            selection.start = phase1.pre_help_concern.as_str();
-            selection.progress = phase1.pre_help_concern.as_str();
+            Some(phase1.pre_help_concern.as_str())
         } else if !phase1.intro.is_empty() {
-            selection.start = phase1.intro.as_str();
-            selection.progress = phase1.intro.as_str();
+            Some(phase1.intro.as_str())
+        } else {
+            None
+        };
+        if let Some(opener) = opener {
+            selection.start = opener;
+            selection.progress = opener;
+        }
+
+        // The arc beat carries the conversation on from that opener rather than
+        // replacing it, so both the errand and the voice asking get heard.
+        if let Some(beat) = beat {
+            selection.progress = beat;
+            if opener.is_none() {
+                selection.start = beat;
+            }
         }
 
         selection
@@ -438,6 +468,80 @@ mod tests {
         assert!(
             seen_after,
             "the turned row should grow once the beat is done"
+        );
+    }
+
+    /// Every phrase authored on a townsperson should be something a player can
+    /// actually hear. The town-recovery observation used to be checked first and
+    /// returned outright, so from the moment the greenhouse reopened it was the
+    /// only thing eight of them could say — `post_help_relief` reached three,
+    /// and `dialogue_complete` nobody at all.
+    ///
+    /// Walks each townsperson through the states the game puts them in and
+    /// collects everything they say, then asks whether anything authored was
+    /// never heard.
+    #[test]
+    fn every_line_a_townsperson_has_is_reachable() {
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let mut silent = Vec::new();
+
+        for npc in &data.npcs {
+            if npc.id == "crow_guide" {
+                continue;
+            }
+            let chain = npc.quest_chain().to_vec();
+            let mut heard = std::collections::HashSet::new();
+
+            // Before anything; after a brew; then each arc beat accepted and
+            // finished in turn; with and without the town having recovered.
+            for recovered in [false, true] {
+                let mut state = GameplayState::new(&data);
+                if recovered {
+                    state.push_journal_milestone("greenhouse_repaired", "", "");
+                }
+                let collect =
+                    |state: &GameplayState, heard: &mut std::collections::HashSet<String>| {
+                        let selection = state.npc_dialogue_selection(&data, npc);
+                        heard.insert(selection.start.to_owned());
+                        heard.insert(selection.progress.to_owned());
+                        heard.insert(selection.complete.to_owned());
+                    };
+
+                collect(&state, &mut heard);
+                state.progression.total_brews = 1;
+                collect(&state, &mut heard);
+                for quest_id in &chain {
+                    state.progression.started_quests.insert(quest_id.clone());
+                    collect(&state, &mut heard);
+                    state.progression.started_quests.remove(quest_id);
+                    state.progression.completed_quests.insert(quest_id.clone());
+                    collect(&state, &mut heard);
+                }
+            }
+
+            let phase1 = &npc.phase1_dialogue;
+            for (label, line) in [
+                ("dialogue_complete", npc.dialogue_complete.as_str()),
+                ("intro", phase1.intro.as_str()),
+                ("pre_help_concern", phase1.pre_help_concern.as_str()),
+                ("active_request", phase1.active_request.as_str()),
+                ("post_help_relief", phase1.post_help_relief.as_str()),
+                (
+                    "town_recovery_observation",
+                    phase1.town_recovery_observation.as_str(),
+                ),
+            ] {
+                if !line.is_empty() && !heard.contains(line) {
+                    silent.push(format!("{}: {label}", npc.id));
+                }
+            }
+        }
+
+        silent.sort();
+        assert!(
+            silent.is_empty(),
+            "lines authored on a townsperson that nothing can ever say:
+{silent:#?}"
         );
     }
 }

@@ -94,15 +94,11 @@ mod tests {
 
         let mut longest_beat: HashMap<&str, usize> = HashMap::new();
         for npc in &data.npcs {
-            let own = [
-                npc.dialogue_start.as_str(),
-                npc.dialogue_progress.as_str(),
-                npc.dialogue_complete.as_str(),
-            ]
-            .iter()
-            .map(|line| line.chars().count())
-            .max()
-            .unwrap_or(0);
+            let own = [npc.dialogue_complete.as_str()]
+                .iter()
+                .map(|line| line.chars().count())
+                .max()
+                .unwrap_or(0);
             let entry = longest_beat.entry(npc.id.as_str()).or_default();
             *entry = (*entry).max(own);
         }

@@ -15,8 +15,6 @@
         98,
         255
       ],
-      "dialogue_start": "The tower still listens. That is more than I expected.",
-      "dialogue_progress": "Start with simple brews. The valley is already fraying at the edges.",
       "dialogue_complete": "The tower still listens. Start with simple brews, help the town breathe easier, and pay attention to what each room was meant to mend.",
       "quest_id": "",
       "role": "tower crow",
@@ -76,8 +74,6 @@
         150,
         255
       ],
-      "dialogue_start": "If you really mean to work that tower, help me first. Half the square comes to me tired, aching, and trying to pretend they are not worn thin. I need one proper Healing Draught I can trust.",
-      "dialogue_progress": "Have you brewed that Healing Draught yet? I need something steady enough for a real patient, not something that merely glows nicely in a bottle.",
       "dialogue_complete": "That draught settled a pounding head and let someone sleep for the first time in days. If the tower can still make medicine like this, people will start hoping again.",
       "quest_id": "healing_for_mira",
       "role": "shopkeeper",
@@ -151,8 +147,6 @@
         166,
         255
       ],
-      "dialogue_start": "The road home keeps getting darker before the lamps do. If you can brew a Glow Potion that holds steady, I could stop treating every dusk walk like a dare.",
-      "dialogue_progress": "I need a Glow Potion with a soft carry to it. Something you can trust in your hand, not a sputtering little panic-light.",
       "dialogue_complete": "That glow holds like a lantern wick in still air. Good. If the roads can feel safe again, maybe the rest of the valley can too.",
       "quest_id": "glow_for_rowan",
       "role": "herbalist rival",
@@ -226,8 +220,6 @@
         150,
         255
       ],
-      "dialogue_start": "What worries me is not one bad season. It is the pattern. The beds are thinner, the workers tire faster, and every fix now costs twice what it used to. If your tower can still make a disciplined Stamina Tonic, I want proof the old place can help the whole town, not just itself.",
-      "dialogue_progress": "A civic tonic must be reliable. We need steadier hands and longer mornings, not another dramatic tower mishap.",
       "dialogue_complete": "That is the kind of work a town can build around. If the tower can support people instead of frightening them, I can justify opening more roads and repair funds.",
       "quest_id": "stamina_for_elric",
       "role": "mayor",
@@ -301,8 +293,6 @@
         255,
         255
       ],
-      "dialogue_start": "The old notes suggest the tower served more than itself. If you can produce the starlit branch of the glow formula, I may finally have something solid to compare them against.",
-      "dialogue_progress": "I am still waiting on evidence. Hope is useful, but it does not sort an archive.",
       "dialogue_complete": "Yes... this is enough to work from. If the records are right, restoring the tower may restore more than its rooms.",
       "quest_id": "star_elixir_for_ione",
       "role": "archivist",
@@ -376,8 +366,6 @@
         120,
         255
       ],
-      "dialogue_start": "The town beds are failing from the roots up. Not dead, just tired. If the greenhouse opens again, we might have one place left that remembers how to grow properly.",
-      "dialogue_progress": "The old tower beds never liked haste. If we wake them, we do it gently and we do it for the whole valley, not for show.",
       "dialogue_complete": "You are starting to treat the tower like a living place again. If the greenhouse keeps answering, we may be able to feed more than a few stubborn planters.",
       "quest_id": "cultivation_for_brin",
       "role": "groundskeeper",
@@ -451,8 +439,6 @@
         255,
         255
       ],
-      "dialogue_start": "The small creatures are changing their habits. Fewer pollinators, stranger nesting, too much fear where there used to be routine. If we reopen the containment floor, we do it to shelter and steady them, not to trap them.",
-      "dialogue_progress": "A calm specimen is worth more than any carcass. If the valley is to heal, the creatures have to trust us enough to return to their place in it.",
       "dialogue_complete": "Good. The habitats are behaving like living rooms instead of traps now. That is the only kind of tower work I will stand beside.",
       "quest_id": "containment_for_lyra",
       "role": "creature keeper",
@@ -526,8 +512,6 @@
         122,
         255
       ],
-      "dialogue_start": "You are from down there. I have carried past this valley for eleven years and I have never once had a reason to walk down into it. That is not an insult. It is just what the road thought of you.",
-      "dialogue_progress": "The waystation is a wall and a roof and a dead lamp. It has been that since before I took the route.",
       "dialogue_complete": "Carters are stopping here again. Do you know what that does to a valley's name? More than any of you shouting up the road ever would.",
       "quest_ids": [
         "waystation_light_for_tarn",
@@ -600,8 +584,6 @@
         220,
         255
       ],
-      "dialogue_start": "You are the tower. Good. I have been ordering from you through a board for a year and I would rather order from a person. Understand first that I do not want your best work. I want your most repeatable work, and those are not the same request.",
-      "dialogue_progress": "Same again, and the same as the last one. I know how that sounds coming from somebody asking a craftsman for a favour. A shelf I can predict is worth more to the people on it than any single bottle you are proud of.",
       "dialogue_complete": "The shelf holds. I can tell somebody what will happen to them now instead of what I hope will. That is the whole job and I have not been able to do it in nine years.",
       "quest_id": "shelf_stock_for_wren",
       "role": "infirmary keeper",

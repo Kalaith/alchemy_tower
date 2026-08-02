@@ -159,11 +159,21 @@ content with no destination.
   of speaker + line, because seven reactions already share a speaker and order,
   and a narrative test keeps those hashes distinct. Against the old selector the
   new reachability test gives Ione 1 of her 25 lines.
-- **The NPC schema's `dialogue_start/progress/complete` and the phase-1
-  `active_request` strings are always overwritten** before display
-  (`gameplay_npc_dialogue.rs` — every branch that would show them is
-  preempted by quest lines or recovery observations), and `post_help_relief`
-  is reachable for only 3 of 8 townsfolk. Dead words from nine authored NPCs.
+- ~~The NPC schema's `dialogue_start/progress/complete` and the phase-1
+  `active_request` strings are always overwritten~~ **Fixed 2026-08-02.** Two
+  branches returned outright and swallowed everything below them. The
+  town-recovery observation now fills the `complete` slot only when nothing
+  warmer applies, and opens the conversation only when nothing is pending, so
+  `post_help_relief` reaches all eight. The arc beat line takes `progress` and
+  leaves the opener to the townsperson's own voice, which reaches
+  `active_request` (was dead for seven) and Mira's `intro` (dead because her
+  first errand is offered from the opening minute). `dialogue_complete` is now
+  their settled word once their whole arc is finished. `dialogue_start` and
+  `dialogue_progress` are deleted: an earlier, blunter draft of beats the
+  `phase1_dialogue` block covers better, and no honest slot was left for them —
+  the prose is in git history. A new `every_line_a_townsperson_has_is_reachable`
+  walks each of them through the states the game puts them in and fails on any
+  authored string nothing can say.
 - **The ending shows 3 of 12 epilogue beats, two of which are always the same
   two** — reaching the ending requires the milestones that earn beats 80 and
   100, so only one slot is ever contested and nine beats are invisible in a
