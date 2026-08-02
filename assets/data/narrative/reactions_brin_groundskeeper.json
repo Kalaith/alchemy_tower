@@ -178,6 +178,12 @@
       "after_milestone": "the_forge_took_a_finished_bottle",
       "order": 116,
       "line": "You put a finished bottle back in. I watched you do it and I still do not like it. Then I carried the result down to the lower cut and stood next to it for an hour in the wet and did not have to go back up for the brazier, and I have decided I do not have to like a thing to want four more of them by Thursday."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_milestone": "the_house_grows_its_own",
+      "order": 134,
+      "line": "Twenty years I have been up and down that walk with a barrow and never once looked to my left. It is a foot of ground between a bed and a wall. Nothing is supposed to be there. I have started leaving it alone deliberately now, which is different from not noticing it."
     }
   ]
 }

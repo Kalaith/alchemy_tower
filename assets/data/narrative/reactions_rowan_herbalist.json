@@ -129,6 +129,12 @@
       "after_milestone": "the_ground_answered",
       "order": 130,
       "line": "I walked that hedge every autumn of my working life and I never once heard it. I had decided it was a plant that did not rattle. That is the part I keep coming back to — not that it stopped, but that I had already finished being surprised about it."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_milestone": "the_house_grows_its_own",
+      "order": 134,
+      "line": "I can give a cutting away now and mean it. Do you know how many I have handed over knowing full well it would be dead by the second week? I stopped counting, and that is not the same as it not mattering."
     }
   ]
 }

@@ -392,6 +392,55 @@
         "restorative",
         "arcane"
       ]
+    },
+    {
+      "id": "takehold_solution_recipe",
+      "name": "Takehold Solution",
+      "station_id": "greenhouse_still",
+      "ingredients": [
+        {
+          "item_id": "barlight_fern",
+          "amount": 1
+        },
+        {
+          "item_id": "panewater_moss",
+          "amount": 2
+        }
+      ],
+      "output_item_id": "takehold_solution",
+      "output_amount": 2,
+      "description": "Fern out of the bar shade held in water the house breathed out and caught again, drawn off cool so nothing in it is ever hurried.",
+      "required_heat": 1,
+      "required_stirs": 3,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "Both halves grew in a room where nothing arrives and nothing leaves. Brin's view is that this is exactly what a cutting needs for the first four days and exactly what would kill it on the fifth.",
+      "minimum_quality": 46,
+      "preferred_traits": [
+        "pure",
+        "calm"
+      ],
+      "guaranteed_traits": [
+        "pure"
+      ],
+      "minimum_elements": {
+        "vita": 4,
+        "ember": 0,
+        "mist": 8,
+        "lux": 0
+      },
+      "required_timing": "early",
+      "morph_targets": [],
+      "required_sequence": [
+        "calm",
+        "pure"
+      ],
+      "discovery_milestones": [
+        {
+          "id": "the_house_grows_its_own",
+          "title": "The House Grows Its Own",
+          "text": "For two years the greenhouse has been a room with beds in it that you carry things up to. Nobody had walked the glass line, because there is no reason to walk between a bed and a wall unless you are looking for something, and nothing in the tower's books says anything grows there. Two things do, and neither of them has ever been outside. The house has been quietly running its own weather since before the sealing."
+        }
+      ]
     }
   ]
 }

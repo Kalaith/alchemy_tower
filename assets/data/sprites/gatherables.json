@@ -514,6 +514,32 @@
         64
       ],
       "prompt": "A blotting sheet with lifted blue-violet ink pooled at one corner, faint reversed letters showing through, readable from above."
+    },
+    {
+      "id": "barlight_fern",
+      "type": "icon_and_world_node",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A low fern frond in a hard stripe of shade on pale greenhouse gravel, cool grey-green, readable from above."
+    },
+    {
+      "id": "panewater_moss",
+      "type": "icon_and_world_node",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A film of wet green moss along the foot of a misted glass pane with a run of condensation over it, readable from above."
     }
   ]
 }

@@ -162,6 +162,95 @@
       ],
       "spawn_chance": 50,
       "note": "These gentle slugs gather where greenhouse glass sweats at dawn."
+    },
+    {
+      "id": "greenhouse_barlight_01",
+      "name": "Barlight Fern",
+      "item_id": "barlight_fern",
+      "color": [
+        128,
+        168,
+        132,
+        255
+      ],
+      "position": [
+        188.0,
+        392.0
+      ],
+      "radius": 16.0,
+      "route_id": "greenhouse_glass_line",
+      "seasons": [],
+      "weathers": [],
+      "time_windows": [
+        "morning",
+        "day"
+      ],
+      "spawn_chance": 80,
+      "note": "The bar shadow lands here from mid-morning and holds until the light goes round. Brin has never once weeded this strip and says so as though it were an argument.",
+      "render": {
+        "sprite_id": "barlight_fern"
+      }
+    },
+    {
+      "id": "greenhouse_barlight_02",
+      "name": "Barlight Fern",
+      "item_id": "barlight_fern",
+      "color": [
+        128,
+        168,
+        132,
+        255
+      ],
+      "position": [
+        790.0,
+        468.0
+      ],
+      "radius": 16.0,
+      "route_id": "greenhouse_glass_line",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "weathers": [],
+      "time_windows": [
+        "day"
+      ],
+      "spawn_chance": 66,
+      "note": "A second bar, and a thinner stripe under it. The fern is smaller here and gives up entirely once the year turns.",
+      "render": {
+        "sprite_id": "barlight_fern"
+      }
+    },
+    {
+      "id": "greenhouse_panewater_01",
+      "name": "Panewater Moss",
+      "item_id": "panewater_moss",
+      "color": [
+        150,
+        186,
+        176,
+        255
+      ],
+      "position": [
+        420.0,
+        624.0
+      ],
+      "radius": 16.0,
+      "route_id": "greenhouse_glass_line",
+      "seasons": [
+        "autumn",
+        "winter"
+      ],
+      "weathers": [],
+      "time_windows": [
+        "morning"
+      ],
+      "spawn_chance": 76,
+      "note": "Low on the north panes, where the run comes down and stands. In winter you can hear the house dripping to itself before you get up the stairs.",
+      "render": {
+        "sprite_id": "panewater_moss"
+      }
     }
   ],
   "apply_targets": [

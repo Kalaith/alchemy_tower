@@ -244,4 +244,63 @@ mod tests {
 {corridors:#?}"
         );
     }
+
+    /// The same rule for the building, which the biome guard skips by name.
+    ///
+    /// Counted per floor, every room the player can gather in sheds something
+    /// found nowhere else — containment three, the rune workshop three, the
+    /// archive five, the observatory four, the entry lab two — **except the
+    /// greenhouse**, which had three nodes on one route and not one plant of
+    /// its own. It is the first floor a player restores and the room whose
+    /// entire purpose is growing, and everything in it could be picked in the
+    /// plains.
+    ///
+    /// A floor with no nodes at all is not covered: not every room has to be
+    /// ground. The rule is that a floor which *does* grow things has to grow
+    /// something the valley does not.
+    #[test]
+    fn every_tower_floor_that_grows_anything_grows_something_of_its_own() {
+        let data = load_embedded().expect("embedded game data should load");
+        let mut where_found: std::collections::HashMap<&str, std::collections::BTreeSet<&str>> =
+            std::collections::HashMap::new();
+        for area in &data.areas {
+            for node in &area.gather_nodes {
+                where_found
+                    .entry(node.item_id.as_str())
+                    .or_default()
+                    .insert(area.id.as_str());
+            }
+        }
+
+        let mut borrowed = Vec::new();
+        let mut floors = 0usize;
+        for area in &data.areas {
+            let inside = area.id.contains("floor") || area.id == "tower_entry";
+            if !inside || area.gather_nodes.is_empty() {
+                continue;
+            }
+            floors += 1;
+            let exclusive = area
+                .gather_nodes
+                .iter()
+                .map(|node| node.item_id.as_str())
+                .filter(|item_id| {
+                    where_found
+                        .get(item_id)
+                        .is_some_and(|areas| areas.len() == 1)
+                })
+                .collect::<std::collections::BTreeSet<_>>();
+            if exclusive.is_empty() {
+                borrowed.push(format!("{}: everything in it grows elsewhere", area.id));
+            }
+        }
+
+        assert!(floors >= 5, "only {floors} floors were walked");
+        borrowed.sort();
+        assert!(
+            borrowed.is_empty(),
+            "rooms in the tower that grow nothing of their own:
+{borrowed:#?}"
+        );
+    }
 }

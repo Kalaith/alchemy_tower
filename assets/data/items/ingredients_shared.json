@@ -330,6 +330,113 @@
       ],
       "synthesis_weight": 1,
       "synthesis_value": 2
+    },
+    {
+      "id": "barlight_fern",
+      "name": "Barlight Fern",
+      "category": "ingredient",
+      "base_value": 22,
+      "color": [
+        128,
+        168,
+        132,
+        255
+      ],
+      "description": "It grows in the stripe of shade a glazing bar lays across the beds and nowhere else, which means it has never in its life been rained on. Brin points out that this is not a plant that likes shade — it is a plant that has found the one shade in the valley which does not move with the weather, and has decided that will do.",
+      "quality": 44,
+      "rarity": 3,
+      "elements": {
+        "vita": 3,
+        "ember": 0,
+        "mist": 2,
+        "lux": 1
+      },
+      "traits": [
+        "calm",
+        "pure"
+      ],
+      "source_conditions": [
+        "the shade line under a glazing bar, never the open bed",
+        "daylight only — after dark there is no bar to be under",
+        "any season and any weather, which is the point of a glasshouse"
+      ],
+      "wild_variants": [
+        {
+          "id": "barlight_fern_deepbar",
+          "name": "Deep-Bar Barlight Fern",
+          "required_conditions": [
+            "day"
+          ],
+          "bonus_traits": [
+            "restorative"
+          ],
+          "quality_bonus": 10,
+          "elements": {
+            "vita": 1,
+            "ember": 0,
+            "mist": 1,
+            "lux": 0
+          },
+          "synthesis_weight_bonus": 1,
+          "synthesis_value_bonus": 3
+        }
+      ],
+      "synthesis_weight": 2,
+      "synthesis_value": 4
+    },
+    {
+      "id": "panewater_moss",
+      "name": "Panewater Moss",
+      "category": "ingredient",
+      "base_value": 26,
+      "color": [
+        150,
+        186,
+        176,
+        255
+      ],
+      "description": "A green skin on the inside of the glass, living on the house's own breath running back down it. The water it drinks has been through a plant, up into the air, onto the pane and down again, and it has done that for twenty years without once leaving the room. Take it in the morning; by noon the panes are dry and it goes flat and sulks.",
+      "quality": 48,
+      "rarity": 3,
+      "elements": {
+        "vita": 2,
+        "ember": 0,
+        "mist": 5,
+        "lux": 0
+      },
+      "traits": [
+        "pure",
+        "cold"
+      ],
+      "source_conditions": [
+        "the inside of the glass, low down where the run collects",
+        "mornings, before the house dries",
+        "autumn and winter, when the panes carry anything at all"
+      ],
+      "wild_variants": [
+        {
+          "id": "panewater_moss_running",
+          "name": "Running Panewater Moss",
+          "required_conditions": [
+            "morning",
+            "winter"
+          ],
+          "bonus_traits": [
+            "restorative"
+          ],
+          "quality_bonus": 12,
+          "elements": {
+            "vita": 1,
+            "ember": 0,
+            "mist": 2,
+            "lux": 0
+          },
+          "synthesis_weight_bonus": 1,
+          "synthesis_value_bonus": 4
+        }
+      ],
+      "synthesis_weight": 2,
+      "synthesis_value": 5
     }
   ]
 }

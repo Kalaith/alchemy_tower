@@ -530,6 +530,27 @@
           "description": "A plain, well-made dose out of two things that were on their way to the bin."
         }
       ]
+    },
+    {
+      "id": "takehold_solution",
+      "name": "Takehold Solution",
+      "category": "potion",
+      "color": [
+        156,
+        190,
+        158,
+        255
+      ],
+      "base_value": 86,
+      "description": "Stand a cutting in this overnight and it roots. Not always, and not quickly, but it roots — which is the difference between a herbalist who can give a plant away and one who can only ever lend it. Made of two things that have spent their whole lives four flights up and indoors, neither of which has any idea what a season is.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 36.0,
+          "duration_seconds": 0.0,
+          "description": "A cool, green dose. It was not made for people and does not pretend to be."
+        }
+      ]
     }
   ]
 }

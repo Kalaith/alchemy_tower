@@ -2148,6 +2148,43 @@ Stop the loop and report if:
   other way. Worth asking of any list: not "does it page" but "is there anywhere else this can be
   read".
 
+- **2026-08-03 — the room whose entire purpose is growing grew nothing of its own.** Axis: world and
+  ingredients, back on content after a UI pass. Counted exclusive gatherables per area, which is the
+  measure the biome-signature passes used: containment 3, rune workshop 3, archive 5, observatory 4,
+  entry lab 2 — **every room in the tower sheds something found nowhere else except the
+  greenhouse**, which had three nodes on one route carrying sunleaf, whisper moss and a dew slug.
+  It is the *first floor a player restores*, it holds four of the game's six planters, and
+  everything in it could be picked in the plains.
+  **The Glass Line** — the walk between the beds and the outer glazing — and its signature is the one
+  thing a glasshouse actually is: **ground the weather does not reach**. *Barlight Fern* grows in the
+  stripe of shade a glazing bar lays across the beds and nowhere else, so it has never been rained
+  on: daylight only, because after dark there is no bar to be under, and otherwise free of season and
+  weather, which nothing else in the game is. *Panewater Moss* lives on the inside of the glass off
+  the house's own breath running back down it — mornings, autumn and winter, because by noon the
+  panes are dry.
+  ***The winter half is the strategic point.*** Winter is the leanest quarter by a wide margin — 55
+  available nodes against 77 in autumn — and the greenhouse is now the one place that gets *better*
+  when the valley goes quiet. Restoring the first floor buys a winter, which is a reason to restore
+  it beyond getting a second bench.
+  Both feed **Takehold Solution**: stand a cutting in it overnight and it roots, which is the
+  difference between a herbalist who can give a plant away and one who can only lend it. Rowan buys
+  it, and not for her own stock — so that a cutting handed to somebody who has never grown anything
+  is a gift rather than a test. Her friendship gift has been cuttings since it was written.
+  Beat `the_house_grows_its_own`; Brin and Rowan react. Brin's: thirty years up and down that walk
+  with a barrow and he never once looked to his left, because it is a foot of ground between a bed
+  and a wall and nothing is supposed to be there.
+  *Guard:* `every_tower_floor_that_grows_anything_grows_something_of_its_own`, the building's
+  counterpart to the wild-biome rule, which skips tower floors by name. A floor with no nodes is not
+  covered — not every room has to be ground, but a room that grows things has to grow something the
+  valley does not.
+  ***A verification mistake worth writing down.*** My first sabotage run "passed", and I nearly
+  recorded that as the guard being weak — the string replace had silently not matched after
+  `cargo fmt` reflowed the code. Applied with an assertion on the match count, it fails and names
+  the greenhouse. **A sabotage that passes is more likely to be a sabotage that did not land than a
+  guard that does not work; assert the edit applied.**
+  **27 → 28 routes, 93 → 96 nodes, 176 → 179 items, 64 → 65 recipes, 104 → 105 quests; 209 tests.**
+  `screenshots/hud/greenhouse_glass_line.png`.
+
 ## Deferred (needs a new system; not for this loop)
 
 - ~~Apply-potion-to-target flow (wilted plant, frightened creature, blocked path)~~ **Built

@@ -119,6 +119,26 @@
       "repeatable": true,
       "repeat_cooldown_days": 6,
       "rapport_npc_id": "lyra_keeper"
+    },
+    {
+      "id": "board_ground_cuttings_that_take",
+      "title": "Beds: Cuttings That Take",
+      "description": "Four takehold solutions for the bed rows, and Rowan is specific that this is not for her stock. It is so that she can hand a cutting to somebody who has never grown anything and have it be a gift rather than a test. She has given away a great many cuttings over the years and has watched most of them die on a windowsill.",
+      "required_item_id": "takehold_solution",
+      "required_amount": 4,
+      "reward_coins": 344,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Fine",
+      "required_trait": "pure",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [
+        "harvest_recovery_for_rowan"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 24,
+      "repeatable": true,
+      "repeat_cooldown_days": 7,
+      "rapport_npc_id": "rowan_herbalist"
     }
   ]
 }

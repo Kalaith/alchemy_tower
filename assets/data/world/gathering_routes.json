@@ -161,6 +161,12 @@
       "name": "The Copying Table",
       "area_id": "archive_floor",
       "description": "A table between the ranks with a lamp low over it and a year of work stacked both sides. One shelf is being copied onto another, and the wrong pages are kept rather than thrown, which is this floor's whole argument."
+    },
+    {
+      "id": "greenhouse_glass_line",
+      "name": "The Glass Line",
+      "area_id": "greenhouse_floor",
+      "description": "The narrow walk between the beds and the outer glazing, where the house meets its own wall. Nothing here has been outside. It is the only ground in the valley where the weather is a thing happening to somebody else."
     }
   ]
 }
