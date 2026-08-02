@@ -195,6 +195,31 @@ content with no destination.
   rather than only the board and one warp; a progression test keeps at least one
   arc beat asking for it.
 
+### The planter, read 2026-08-03
+
+- ~~A bed spent whichever bottle sorted first alphabetically~~ **Fixed
+  2026-08-03.** A mutation asks for an effect *kind* rather than a named brew —
+  the one place in the game that already worked that way — so any glow bottle in
+  the bag will do. `planter_mutation_candidate` walked `self.inventory`, which
+  is a `BTreeMap`, and took the first match: **planting a bed could spend a
+  284-coin Heldstar Vigil because `h` sorts before `k`**, with a 22-coin
+  Kindling Tonic sitting beside it. Every other spend in the game already knows
+  better — a delivery hands over the worst bottle that qualifies, a sale parts
+  with the worst held, the bench pours the best deliberately. It takes the
+  cheapest thing that fits now, which is also **what the sinkless tail is for**:
+  the four salvage bottles are the cheapest in the game, so a bed reaches for a
+  failed brew before a good one.
+  The banner names the bottle as well as the bed: a mutation costs a brew, and
+  while the toast channel was dead nobody could see anything had been spent.
+  *Content:* the **murky concoction** — two coins, the game's only `misfire`
+  brew, wanted by nothing — now has three formulas of its own. A bed prefers a
+  proper brew and takes the unlabelled one only when that is all there is, which
+  is what data order in `mutation_formulas_for_seed` means; the strain it throws
+  is faster to come up and no more of it. 25 → 28 formulas.
+  Four tests, including the cheapest-bottle rule verified against the old
+  alphabetical pick, and the pair it uses is *found* in the data rather than
+  named, so a re-priced bottle cannot quietly turn it into a test of nothing.
+
 ### Authored content with no destination
 
 - **48 of 101 potions have no structural sink** — no quest, no board order, no

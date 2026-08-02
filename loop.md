@@ -1590,6 +1590,29 @@ Stop the loop and report if:
   appears when there is.**
   **175 tests; the audit's last remaining-gap line is closed.**
 
+- **2026-08-03 — the bed was eating the most expensive bottle in the bag, alphabetically.** Went
+  looking at the sinkless tail (42 of 101, and **16 of them off the entry cauldron** — everything you
+  learn to make first) and found the planter instead. A mutation asks for an effect *kind* rather
+  than a named brew, which is the one place in the game that already worked the way an "open order"
+  would; `planter_mutation_candidate` then walked `self.inventory`, **a `BTreeMap`**, and took the
+  first match. Planting a bed could spend a **284-coin Heldstar Vigil because `h` sorts before `k`**,
+  with a 22-coin Kindling Tonic beside it.
+  Every other spend already knows better — delivery hands over the worst that qualifies, a sale
+  parts with the worst held, the bench pours the best on purpose. **Cheapest that fits** now, which
+  is also what the tail is *for*: the four salvage bottles are the cheapest in the game, so a bed
+  reaches for a failed brew before a good one. The banner names the bottle as well as the bed.
+  *Content:* the **murky concoction** — two coins, the game's only `misfire`, wanted by nothing —
+  gets three formulas. **The ordering is the design:** `mutation_formulas_for_seed` returns data
+  order and the picker takes the first formula with a candidate, so a bed prefers a proper brew and
+  takes the unlabelled one only when that is all there is. Its strain comes up faster and no more of
+  it, so it is a trade rather than an upgrade. 25 → 28.
+  ***A test I wrote wrong and the suite caught in one run.*** I named two bottles by hand for the
+  cheapest-first check and asserted the dear one sorted first — it did not (`duskbell` before
+  `heldstar`), so the test would have proved nothing. It now **finds** a qualifying pair in the data,
+  which also means a re-priced bottle cannot quietly turn it into a test of nothing.
+  *Verified against the old pick by putting `.next()` back.*
+  **178 tests; the cheapest thing on the shelf is the thing the bed wants.**
+
 ## Deferred (needs a new system; not for this loop)
 
 - Apply-potion-to-target flow (wilted plant, frightened creature, blocked path) — `TODO.md` calls it

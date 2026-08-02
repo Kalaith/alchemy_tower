@@ -1,10 +1,13 @@
 use crate::content::ui_format;
 use crate::data::GameData;
 
-pub(super) fn toast(data: &GameData, planted_item_id: &str) -> String {
+pub(super) fn toast(data: &GameData, planted_item_id: &str, catalyst_item_id: &str) -> String {
     ui_format(
         "progression_planter_mutation",
-        &[("item", data.item_name(planted_item_id))],
+        &[
+            ("item", data.item_name(planted_item_id)),
+            ("catalyst", data.item_name(catalyst_item_id)),
+        ],
     )
 }
 

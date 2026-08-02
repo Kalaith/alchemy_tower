@@ -213,7 +213,7 @@
     "progression_duplicate_need_catalyst": "A starlight catalyst is required for duplication.",
     "progression_duplicate_toast": "Duplicated {name}.",
     "progression_duplicate_status": "Duplicated {name} by spending {cost} coins and {catalyst}.",
-    "progression_planter_mutation": "Planter mutation: {item}.",
+    "progression_planter_mutation": "The bed takes the {catalyst}: {item} comes up changed.",
     "progression_planter_mutation_status": "{catalyst} infuses the bed and coaxes a {strain} strain.",
     "quests_accepted_toast": "Quest accepted: {title}.",
     "quests_accepted_status": "Accepted quest: {title}. {hint}",

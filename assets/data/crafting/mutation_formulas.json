@@ -199,6 +199,30 @@
       "yield_bonus": 1,
       "growth_bonus_days": 1,
       "mutation_note": "far-thrown"
+    },
+    {
+      "id": "moon_fern_misfire_mutation",
+      "seed_item_id": "moon_fern",
+      "required_effect_kind": "misfire",
+      "yield_bonus": 0,
+      "growth_bonus_days": 2,
+      "mutation_note": "half-lit"
+    },
+    {
+      "id": "whisper_moss_misfire_mutation",
+      "seed_item_id": "whisper_moss",
+      "required_effect_kind": "misfire",
+      "yield_bonus": 0,
+      "growth_bonus_days": 2,
+      "mutation_note": "off-book"
+    },
+    {
+      "id": "ember_root_misfire_mutation",
+      "seed_item_id": "ember_root",
+      "required_effect_kind": "misfire",
+      "yield_bonus": 0,
+      "growth_bonus_days": 2,
+      "mutation_note": "guesswork"
     }
   ]
 }
