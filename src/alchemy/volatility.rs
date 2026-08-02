@@ -29,7 +29,8 @@ const VOLATILE_INSTABILITY: u32 = 12;
 const STABILIZER_REDUCTION: u32 = 9;
 /// Instability removed when a matched catalyst steadies the reaction.
 const CATALYST_STABILIZE: u32 = 6;
-/// Instability removed per mastered brew (capped alongside the quality bonus).
+/// Instability removed per clean brew of the same formula, up to mastery
+/// (capped alongside the quality bonus).
 const MASTERY_STABILIZE: u32 = 3;
 
 /// At or above this score the brew destabilizes into its unstable output.
@@ -67,7 +68,8 @@ pub(super) fn brew_instability(
         instability = instability.saturating_sub(CATALYST_STABILIZE);
     }
 
-    instability.saturating_sub(mastery_brews.min(6) * MASTERY_STABILIZE)
+    instability
+        .saturating_sub(mastery_brews.min(super::quality::MASTERED_BREW_COUNT) * MASTERY_STABILIZE)
 }
 
 pub(super) fn is_destabilized(instability: u32) -> bool {

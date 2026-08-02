@@ -593,7 +593,7 @@
     {
       "id": "worst_case_shelf_for_wren",
       "title": "The Shelf She Stopped Keeping",
-      "description": "Deliver 1 Excellent Purified Draught with the pure trait — the last bottle Wren needs before she can clear out the shelf she has kept for twenty years of worst cases.",
+      "description": "Deliver 1 Excellent Purified Draught with the pure trait — the last bottle Wren needs before she can clear out the shelf she has kept for twenty years of worst cases. She will only take it from a hand that has mastered the formula.",
       "required_item_id": "purified_draught",
       "required_amount": 1,
       "reward_coins": 190,
@@ -606,15 +606,16 @@
       ],
       "required_unlocked_warp": "",
       "minimum_total_brews": 30,
-      "giver_intro_line": "There is a shelf at the back I have never explained to anybody. It is what I keep for the cases I cannot fix, so that I have something to do with my hands while somebody dies. One excellent purified draught and I can take it down, because I will not need to do that any more.",
-      "giver_active_line": "The back shelf. I have not touched it in four months, which is the longest since I started keeping it, and I would like to stop counting.",
+      "giver_intro_line": "There is a shelf at the back I have never explained to anybody. It is what I keep for the cases I cannot fix, so that I have something to do with my hands while somebody dies. One excellent purified draught and I can take it down. But I want it from someone who has made that formula so many times they could do it badly and would still not — a good bottle by luck is the thing I am trying to stop needing.",
+      "giver_active_line": "The back shelf. I have not touched it in four months, which is the longest since I started keeping it, and I would like to stop counting. Take your time and get the formula under your hands first; I have waited twenty years.",
       "completion_milestones": [
         {
           "id": "worst_case_shelf_cleared",
           "title": "The Shelf At The Back",
           "text": "Wren cleared the shelf she kept for the cases she could not fix. She did not make a speech about it. She moved the bottles, wiped the board, and wrote the day's stock on it instead, which is a different kind of record entirely."
         }
-      ]
+      ],
+      "required_mastered_recipe": "purified_draught_recipe"
     }
   ]
 }

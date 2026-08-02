@@ -145,8 +145,11 @@ pub(super) fn resolve_known_recipe_brew<'a>(
     }
 }
 
+/// The extra bottle a mastered formula yields. It used to arrive at six, one
+/// brew before mastery, which left the seventh with nothing to give. Mastery is
+/// where it belongs: the run's payoff should land on the step that names it.
 fn mastery_output_bonus(mastery_brews: u32) -> u32 {
-    if mastery_brews >= 6 {
+    if mastery_brews >= super::super::quality::MASTERED_BREW_COUNT {
         1
     } else {
         0

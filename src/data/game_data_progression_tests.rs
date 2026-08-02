@@ -513,6 +513,17 @@ reachable areas: {open_areas:?}"
         }
 
         assert!(gated > 0, "no request asks for a formula to be mastered");
+        // Mastery was reachable only through the board and one warp, so a story
+        // could be finished start to end without ever being asked to make one
+        // thing reliably. At least one arc beat should want it.
+        assert!(
+            data.quests.iter().any(|quest| {
+                !quest.required_mastered_recipe.is_empty()
+                    && quest.giver_npc_id != "quest_board"
+                    && !quest.repeatable
+            }),
+            "mastery is asked for only by the board; no townsperson's story wants it"
+        );
         assert!(
             wrong.is_empty(),
             "mastery requirements pointing at the wrong formula:\n{wrong:#?}"

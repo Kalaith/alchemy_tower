@@ -122,10 +122,18 @@ content with no destination.
   band has nothing to beat and still pays flat. Remaining: NPC reaction lines
   do not vary with delivered quality, and the band multipliers are Rust
   constants (see the tuning-into-data item below).
-- **The seventh brew — the one that flips "Mastered" — adds nothing.** The
-  quality bonus caps at `min(6)*3` and the output bonus lands at 6, so the
-  brew that opens the mastery gates is mechanically empty. No story-arc quest
-  uses `required_mastered_recipe`; only one warp and three board orders do.
+- ~~The seventh brew — the one that flips "Mastered" — adds nothing~~ **Fixed
+  2026-08-02.** All three ramps capped at six, one short of the step that names
+  them: the quality bonus and the instability reduction now run to
+  `MASTERED_BREW_COUNT`, and the extra bottle arrives at mastery rather than the
+  brew before it. Mastery also earns what the code always said it meant — being
+  able to make one thing the same way twice — as a floor: a mastered formula
+  never scores below its own `minimum_quality`, so it cannot fail on quality
+  however poor the reagents. Process and stability still apply.
+  `worst_case_shelf_for_wren` is now gated on mastering `purified_draught_recipe`
+  (its prose asked for exactly that reliability), so a story arc uses the gate
+  rather than only the board and one warp; a progression test keeps at least one
+  arc beat asking for it.
 
 ### Authored content with no destination
 
