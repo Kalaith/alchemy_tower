@@ -253,6 +253,30 @@ content with no destination.
   and burned it for exactly the same result. It takes the least valuable thing
   that qualifies now, which is the same answer the planter needed the same day.
 
+### The counters, read 2026-08-03
+
+- ~~Two ways to print coins, one cause~~ **Fixed 2026-08-03.** The apothecary
+  sold a starlight shard for **28** and bought it back for **33**: five coins a
+  click, unbounded, no travel and no cost but the keypress. And the archive
+  console would duplicate Tarn's `elevenyear_amber` for **360** and a counter
+  would pay **640** for the copy — 280 a click, on a gift item, forever.
+  `saltroad_amber` and `backshelf_pearl` were the same shape at smaller margins.
+  One cause: **the quality-band multipliers were being applied to raw materials
+  as well as to brews.** A bottle's grade is a fact about the work that went
+  into it, which is what the multipliers are for; a herb's or a catalyst's
+  `quality` is potency, authored once and identical for every unit, so running
+  it through a *craft* multiplier expressed nothing and inflated everything —
+  the amber is quality 82, which paid 200%. `quality_adjusted_value` scales
+  bottles only now. Brewing well is still worth more at a counter; picking up
+  the same shard twice is not.
+  The first fix was to reprice the shard, and it was wrong: it patched one line
+  and left the rule unguarded, so it was reverted once the cause was found and
+  the authored 28/34 stands.
+  Two guards, both verified against the old multiplier and each naming its own
+  cases: **no counter pays more for a thing than it charges** (all 20 stocked
+  lines) and **a copy never sells for more than it cost to make** (every
+  duplicable item).
+
 ### Authored content with no destination
 
 - **48 of 101 potions have no structural sink** — no quest, no board order, no

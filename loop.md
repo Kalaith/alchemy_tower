@@ -1637,6 +1637,29 @@ Stop the loop and report if:
   *Both guards verified against the old behaviour; the disassembly one names four recipes by ident.*
   **181 tests; nothing comes out of that room that did not go into the pot.**
 
+- **2026-08-03 — two money printers, one cause, found by pricing every line in the game.** The shop
+  was the last unread load-bearing system, and the question was the obvious one: **does any counter
+  pay more for a thing than it charges?** One did — the apothecary sold a starlight shard for 28 and
+  bought it back for **33**, five coins a keypress, unbounded. Then the same arithmetic against the
+  duplication verb: Tarn's `elevenyear_amber` copies for **360** and sells for **640**. Two more
+  catalysts at smaller margins.
+  ***One cause.*** The quality-band multipliers were being applied to **raw materials as well as
+  brews**. A bottle's grade is a fact about the work that went into it — that is what the multipliers
+  are for, and why brewing well is worth something at a counter. A herb's or a catalyst's `quality`
+  is *potency*, authored once, identical for every unit: running it through a **craft** multiplier
+  expressed nothing and inflated everything. The amber is quality 82, which paid 200%.
+  ***My first fix was wrong and I reverted it.*** I repriced the shard (28 → 38) — a patch on one
+  authored line that left the rule unguarded and would have said nothing about the amber. Once the
+  cause was found, the price went back to what the designer wrote. **Reprice the symptom, and the
+  next one ships.**
+  *Two guards, each verified against the old multiplier and each naming its own cases:* no counter
+  pays more than it charges (all 20 stocked lines), and a copy never sells for more than it cost
+  (every duplicable item, which names all three catalysts at once).
+  *Third pass running on the same question — "which item, and at what price, does this verb take?" —
+  and the third pass it has found something: the planter, then the archive console, now the
+  counters.*
+  **183 tests; the economy has no faucet in it.**
+
 ## Deferred (needs a new system; not for this loop)
 
 - Apply-potion-to-target flow (wilted plant, frightened creature, blocked path) — `TODO.md` calls it

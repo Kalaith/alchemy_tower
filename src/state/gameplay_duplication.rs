@@ -145,6 +145,42 @@ mod tests {
         assert_eq!(state.coins, 63);
     }
 
+    /// A copy must never be worth more than it cost to make.
+    ///
+    /// The band multipliers were being applied to raw materials as well as to
+    /// brews, and a catalyst's `quality` is potency rather than craft — so
+    /// Tarn's `elevenyear_amber` (quality 82, paying 200%) sold for 640 against
+    /// a 360 duplication cost. Two more catalysts were the same shape. The
+    /// console cannot be a mint: whatever the fix, this is the rule.
+    #[test]
+    fn a_copy_never_sells_for_more_than_it_cost_to_make() {
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let mut state = GameplayState::new(&data);
+        let mut mints = Vec::new();
+
+        for item in &data.items {
+            if !super::duplication_item_allowed(item) {
+                continue;
+            }
+            state.inventory.insert(item.id.clone(), 1);
+            let paid_back = state.sell_price(&data, &item.id);
+            state.take_from_inventory(&item.id, 1);
+            let cost = super::duplication_cost(item);
+            if paid_back >= cost {
+                mints.push(format!(
+                    "{}: copy costs {cost}, sells for {paid_back}",
+                    item.id
+                ));
+            }
+        }
+
+        assert!(
+            mints.is_empty(),
+            "things the console can mint coins from:
+{mints:#?}"
+        );
+    }
+
     /// Duplication reads nothing from a catalyst's quality — the shard is spent,
     /// not measured — and it used to take the *best* one held. Mira's
     /// `counterkept_shard` is a friendship gift, sold nowhere and gathered

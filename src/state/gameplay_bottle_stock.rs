@@ -252,7 +252,23 @@ impl GameplayState {
     }
 
     /// Scale a price by what the bottle being sold is actually worth.
+    ///
+    /// Bottles only. A brew's grade is a fact about the work that went into it,
+    /// and the multipliers exist so that brewing well is worth something at a
+    /// counter as well as at a quest giver. A herb's or a catalyst's `quality`
+    /// is potency, authored once and identical for every unit, so running it
+    /// through a *craft* multiplier expressed nothing and inflated everything:
+    /// `elevenyear_amber` is quality 82, which paid 200%, so Tarn's parting
+    /// gift sold for 640 against a 360 duplication cost — 280 coins a click,
+    /// unbounded, at exactly the moment the commissions gave coins somewhere to
+    /// go. Two more catalysts and one shop line had the same shape.
     pub(super) fn quality_adjusted_value(&self, data: &GameData, item_id: &str, base: u32) -> u32 {
+        let is_bottle = data
+            .item(item_id)
+            .is_some_and(|item| item.category == crate::data::ItemCategory::Potion);
+        if !is_bottle {
+            return base.max(1);
+        }
         // What a bottle of each grade is worth is tuning, and lives beside the
         // content it balances. Selling used to ignore quality entirely, which
         // made the brewing-well half of the game worth nothing to anybody but a
