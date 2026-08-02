@@ -509,6 +509,27 @@
           "description": "Holding rather than mending — nothing gets worse while it lasts."
         }
       ]
+    },
+    {
+      "id": "seconddraft_tonic",
+      "name": "Second-Draft Tonic",
+      "category": "potion",
+      "color": [
+        186,
+        172,
+        156,
+        255
+      ],
+      "base_value": 92,
+      "description": "Brewed out of two people's mistakes and nothing else: a mixture somebody abandoned half-reacted, and the ink off a page somebody wrote and then decided against. It restores about as well as an honest field draught. What it actually is, is proof that this tower now employs enough people for being wrong to be affordable.",
+      "effects": [
+        {
+          "kind": "restore",
+          "magnitude": 42.0,
+          "duration_seconds": 0.0,
+          "description": "A plain, well-made dose out of two things that were on their way to the bin."
+        }
+      ]
     }
   ]
 }

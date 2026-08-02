@@ -488,6 +488,32 @@
         64
       ],
       "prompt": "A small bell flower opening upward on the bed of clear shallow water, pale blue-green with a white throat, readable from above."
+    },
+    {
+      "id": "firsthand_dross",
+      "type": "icon_and_world_node",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A shallow bench tray holding a cooled brown-grey residue with a dried ring at its edge, dull and matte, readable from above."
+    },
+    {
+      "id": "margin_ink",
+      "type": "icon_and_world_node",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A blotting sheet with lifted blue-violet ink pooled at one corner, faint reversed letters showing through, readable from above."
     }
   ]
 }

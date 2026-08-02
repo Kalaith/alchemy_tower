@@ -2076,6 +2076,43 @@ Stop the loop and report if:
   *Lesson worth keeping: the hand-written file list was the same mistake one level up — a sweep*
   *scoped to where I remembered the bug being rather than to where the class lives.*
 
+- **2026-08-03 — the ending reached the whole valley except the building the game is about.** Axis:
+  world/place, back on content after a correctness pass. Two passes ago the ending was a wall; one
+  pass fixed it in **paperwork** and the next fixed it with **ground** — and both pieces of ground
+  were outdoors. Counted after: of the six tower rooms, one carried a single post-ending flourish
+  and **no room carried a post-ending node, station, apply target or warp.**
+  ***The design is the story bible's rather than mine.*** The ending's thesis is that a tower *used*
+  is a different thing from a tower *run*, and the last commission buys **a second alchemist** — a
+  stipend, a reference shelf, and a formula book allowed to be wrong in the margins. So what changes
+  in the tower is that somebody else works there, and both routes are that person's leavings.
+  **The Second Bench** (tower_entry): **Firsthand Dross**, what cools in the new hand's discard tray
+  overnight — half reacted, abandoned, and *not yours*, because you stopped making this particular
+  mistake a long time ago. **The Copying Table** (archive_floor): **Margin Ink**, lifted off a page
+  the copyist got wrong, under the same raking light Ione reads pressure by.
+  Both feed **Second-Draft Tonic** at the *entry cauldron* — the plainest bench in the building, and
+  the reason is in the recipe: dross is half a reaction that stopped, so it wants continuing rather
+  than starting. A restorative made **entirely of two people's mistakes**, which is the argument
+  itself: the tower now employs enough people for being wrong to be affordable. Ione buys it for the
+  shelf rather than the room.
+  Journal beat `a_second_hand_in_the_room`, deliberately the answer to `the_previous_hand` — the
+  previous hand took eleven months out of the record so nobody would find the working; the second
+  hand leaves theirs in a tray, dated, face up, and the first thing anybody did with it was make
+  something out of it. Ione and the Crow each have a line. The Crow's: *"They leave the pot cold and
+  the slate written up. You did neither for a year and a half. I am not making a point. I am simply
+  the only one here who watched both."*
+  *Guard:* `the_rooms_change_after_the_ending_and_not_only_the_valley`, deriving "a room the player
+  works in" from where the **stations** are — the same derivation the flourish guard uses, so the
+  valley's outdoor routes correctly do not count. Verified by ignoring the new nodes: it names one
+  room, `tower_entry`.
+  ***The placement lesson, for the third time in this loop.*** The first draft dropped a dross tray
+  50px from the Crow and an ink sheet 60px from Ione, so the NPC prompt won and neither node could
+  be gathered at all. Nothing in the data says a node and a person occupy the same square; only the
+  capture does. **Check new nodes against the NPC schedule for the hours they spawn.**
+  Two existing guards bit on the way: both route descriptions overran the journal pane by ~30
+  characters, and the art manifest caught three missing icons.
+  **25 → 27 routes, 89 → 93 nodes, 173 → 176 items, 63 → 64 recipes, 103 → 104 quests; 205 tests.**
+  `screenshots/hud/entry_second_bench.png`, `archive_copying_table.png`.
+
 ## Deferred (needs a new system; not for this loop)
 
 - ~~Apply-potion-to-target flow (wilted plant, frightened creature, blocked path)~~ **Built
@@ -2091,5 +2128,6 @@ Stop the loop and report if:
   the player can walk.
   **The walking half fixed 2026-08-03**: two routes, four nodes, two reagents, a recipe and a fifth
   standing order now wait on the ending — the seed year in the plains and the clear shelf on the
-  lake. Still open: the post-ending *tower*. No floor, station, bench or apply target waits on the
-  ending, so the building the game is about reopening is the one place the ending changes nothing.
+  lake. **And the tower half the same day**: the second bench and the copying table, so the building
+  the game is about reopening changes too. Still open: no post-ending *station* or *apply target*
+  exists, and the second bench the last commission pays for is drawn rather than usable.

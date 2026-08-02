@@ -413,6 +413,15 @@
         64
       ],
       "prompt": "A squat stoppered jar of pale green-grey solution with seed husks settled at the bottom, cold and still, readable at small size."
+    },
+    {
+      "id": "seconddraft_tonic",
+      "type": "inventory_icon",
+      "icon_size_px": [
+        64,
+        64
+      ],
+      "prompt": "A plain corked bottle of warm grey-fawn tonic with a paper label written over twice, readable at small size."
     }
   ]
 }

@@ -75,6 +75,25 @@
       "repeatable": true,
       "repeat_cooldown_days": 14,
       "rapport_npc_id": "rowan_herbalist"
+    },
+    {
+      "id": "board_after_the_kept_wrong_pages",
+      "title": "Archive: What Was Kept Instead Of Thrown",
+      "description": "Two second-draft tonics for the reading room, and Ione is placing the order for the shelf rather than for the room. She spent nine years on a record with eleven months cut out of it by somebody who did not want their working found. She would like a bottle on that shelf that could only exist because this tower now keeps the pages it got wrong.",
+      "required_item_id": "seconddraft_tonic",
+      "required_amount": 2,
+      "reward_coins": 232,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "restorative",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 0,
+      "required_journal_milestone": "commission_second_bench_staffed",
+      "repeatable": true,
+      "repeat_cooldown_days": 10,
+      "rapport_npc_id": "ione_archivist"
     }
   ]
 }

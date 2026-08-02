@@ -639,6 +639,63 @@
       "render": {
         "sprite_id": "whisper_moss"
       }
+    },
+    {
+      "id": "entry_dross_01",
+      "name": "Firsthand Dross",
+      "item_id": "firsthand_dross",
+      "color": [
+        176,
+        148,
+        118,
+        255
+      ],
+      "position": [
+        700.0,
+        392.0
+      ],
+      "radius": 16.0,
+      "route_id": "entry_second_bench",
+      "seasons": [],
+      "weathers": [],
+      "time_windows": [
+        "morning",
+        "day"
+      ],
+      "spawn_chance": 78,
+      "required_journal_milestone": "commission_second_bench_staffed",
+      "note": "Cleared out of the tray before the day starts. Whoever it is has been leaving the pot cold and the slate written up, which is more than you did for your first year.",
+      "render": {
+        "sprite_id": "firsthand_dross"
+      }
+    },
+    {
+      "id": "entry_dross_02",
+      "name": "Firsthand Dross",
+      "item_id": "firsthand_dross",
+      "color": [
+        176,
+        148,
+        118,
+        255
+      ],
+      "position": [
+        280.0,
+        420.0
+      ],
+      "radius": 16.0,
+      "route_id": "entry_second_bench",
+      "seasons": [],
+      "weathers": [],
+      "time_windows": [
+        "morning"
+      ],
+      "spawn_chance": 62,
+      "required_journal_milestone": "commission_second_bench_staffed",
+      "note": "A second tray, further along, from the nights they stayed late. There is a date pencilled on the rim of every one of them, which nobody taught them to do.",
+      "render": {
+        "sprite_id": "firsthand_dross"
+      }
     }
   ]
 }

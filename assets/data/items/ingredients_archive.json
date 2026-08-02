@@ -107,6 +107,59 @@
       ],
       "synthesis_weight": 1,
       "synthesis_value": 7
+    },
+    {
+      "id": "margin_ink",
+      "name": "Margin Ink",
+      "category": "ingredient",
+      "base_value": 30,
+      "color": [
+        126,
+        132,
+        168,
+        255
+      ],
+      "description": "Ink lifted off a page the copyist got wrong, scraped back under the same raking light Ione reads pressure by. Every gram of it is a line somebody wrote, looked at, and decided against. The reference shelf the stipend paid for is being made this way, one corrected page at a time, and the corrections are being kept.",
+      "quality": 50,
+      "rarity": 3,
+      "elements": {
+        "vita": 0,
+        "ember": 0,
+        "mist": 2,
+        "lux": 4
+      },
+      "traits": [
+        "arcane",
+        "pure"
+      ],
+      "source_conditions": [
+        "the copying table, on the blotting sheet rather than the page",
+        "evenings and nights, when the raking lamp is the only lamp",
+        "any season — the shelf is a year's work and does not care"
+      ],
+      "wild_variants": [
+        {
+          "id": "margin_ink_recovered",
+          "name": "Recovered Margin Ink",
+          "required_conditions": [
+            "night"
+          ],
+          "bonus_traits": [
+            "luminous"
+          ],
+          "quality_bonus": 10,
+          "elements": {
+            "vita": 0,
+            "ember": 0,
+            "mist": 0,
+            "lux": 2
+          },
+          "synthesis_weight_bonus": 1,
+          "synthesis_value_bonus": 3
+        }
+      ],
+      "synthesis_weight": 2,
+      "synthesis_value": 4
     }
   ]
 }

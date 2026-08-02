@@ -149,6 +149,18 @@
       "name": "The Clear Shelf",
       "area_id": "lake_shore",
       "description": "The shallow shelf off the reed bar, which used to be a grey plate you took on trust and is now a floor with things growing on it. Nobody dredged it. It settled, the way water does when whatever held it up stops."
+    },
+    {
+      "id": "entry_second_bench",
+      "name": "The Second Bench",
+      "area_id": "tower_entry",
+      "description": "The far end of the entry laboratory, which for years was where you put things down. There is a stool at it now, and a tray, and somebody else's handwriting on the slate. The room has not got bigger, only busier."
+    },
+    {
+      "id": "archive_copying_table",
+      "name": "The Copying Table",
+      "area_id": "archive_floor",
+      "description": "A table between the ranks with a lamp low over it and a year of work stacked both sides. One shelf is being copied onto another, and the wrong pages are kept rather than thrown, which is this floor's whole argument."
     }
   ]
 }

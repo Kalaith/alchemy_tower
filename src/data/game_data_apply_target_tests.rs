@@ -176,6 +176,72 @@ mod tests {
         }
     }
 
+    /// And the half *that* guard could not see either. The pass which opened
+    /// ground after the ending opened it in the plains and on the lake shore —
+    /// outdoors, both of them — so the **building the whole game is about
+    /// reopening** was still the one place the ending changed nothing. Measured
+    /// afterwards: of the six tower rooms, one carried a single post-ending
+    /// flourish and no room carried a post-ending node, station, apply target
+    /// or warp.
+    ///
+    /// "A room the player works in" is derived from where the stations are,
+    /// exactly as the flourish guard derives it, so a bench on a new floor is
+    /// covered the day it is placed and the valley's outdoor routes correctly
+    /// do not count towards this.
+    #[test]
+    fn the_rooms_change_after_the_ending_and_not_only_the_valley() {
+        let data = load_embedded().expect("embedded game data should load");
+        let ending = crate::content::narrative_text()
+            .milestones
+            .observatory_ending
+            .id
+            .clone();
+
+        // Everything the ending leads to: itself, plus whatever the requests
+        // that wait on it record when they are finished.
+        let mut after = std::collections::HashSet::from([ending.clone()]);
+        for quest in &data.quests {
+            if quest.required_journal_milestone == ending {
+                after.extend(
+                    quest
+                        .completion_milestones
+                        .iter()
+                        .map(|milestone| milestone.id.clone()),
+                );
+            }
+        }
+
+        let worked_in = data
+            .stations
+            .iter()
+            .map(|station| station.area_id.as_str())
+            .collect::<std::collections::HashSet<_>>();
+
+        let changed = data
+            .areas
+            .iter()
+            .filter(|area| worked_in.contains(area.id.as_str()))
+            .filter(|area| {
+                area.gather_nodes
+                    .iter()
+                    .any(|node| after.contains(&node.required_journal_milestone))
+                    || area.flourishes.iter().any(|flourish| {
+                        flourish
+                            .after_any_journal_milestone
+                            .iter()
+                            .any(|beat| after.contains(beat))
+                    })
+            })
+            .map(|area| area.id.as_str())
+            .collect::<std::collections::BTreeSet<_>>();
+
+        assert!(
+            changed.len() >= 2,
+            "only {} room(s) the player works in change after the ending: {changed:?}",
+            changed.len()
+        );
+    }
+
     /// A flourish waits on a quest or a beat, both of which are strings in an
     /// area file. One that names something that does not exist is a piece of
     /// the world that never appears, and nothing on screen would say why.

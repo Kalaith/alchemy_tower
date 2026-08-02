@@ -189,6 +189,63 @@
       "render": {
         "sprite_id": "shelf_silverfish"
       }
+    },
+    {
+      "id": "archive_margin_ink_01",
+      "name": "Margin Ink",
+      "item_id": "margin_ink",
+      "color": [
+        126,
+        132,
+        168,
+        255
+      ],
+      "position": [
+        560.0,
+        420.0
+      ],
+      "radius": 16.0,
+      "route_id": "archive_copying_table",
+      "seasons": [],
+      "weathers": [],
+      "time_windows": [
+        "evening",
+        "night"
+      ],
+      "spawn_chance": 70,
+      "required_journal_milestone": "commission_second_bench_staffed",
+      "note": "The blotting sheet under the copying hand, lifted while the raking lamp is still the only lamp on the floor.",
+      "render": {
+        "sprite_id": "margin_ink"
+      }
+    },
+    {
+      "id": "archive_margin_ink_02",
+      "name": "Margin Ink",
+      "item_id": "margin_ink",
+      "color": [
+        126,
+        132,
+        168,
+        255
+      ],
+      "position": [
+        772.0,
+        596.0
+      ],
+      "radius": 16.0,
+      "route_id": "archive_copying_table",
+      "seasons": [],
+      "weathers": [],
+      "time_windows": [
+        "night"
+      ],
+      "spawn_chance": 58,
+      "required_journal_milestone": "commission_second_bench_staffed",
+      "note": "The reject stack at the end of the table, face up. Ione turned them face up herself and will not discuss it.",
+      "render": {
+        "sprite_id": "margin_ink"
+      }
     }
   ],
   "flourishes": [

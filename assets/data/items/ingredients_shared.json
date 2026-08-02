@@ -277,6 +277,59 @@
       ],
       "synthesis_weight": 2,
       "synthesis_value": 3
+    },
+    {
+      "id": "firsthand_dross",
+      "name": "Firsthand Dross",
+      "category": "ingredient",
+      "base_value": 12,
+      "color": [
+        176,
+        148,
+        118,
+        255
+      ],
+      "description": "What cools in the second bench's discard tray overnight. It is a mixture that went nowhere, half reacted and then abandoned, and it is not yours — you stopped making this particular mistake a long time ago. Somebody is being paid to be allowed to make it, which is a sentence nobody in this valley could have said two years ago.",
+      "quality": 26,
+      "rarity": 2,
+      "elements": {
+        "vita": 1,
+        "ember": 3,
+        "mist": 1,
+        "lux": 0
+      },
+      "traits": [
+        "warm",
+        "volatile"
+      ],
+      "source_conditions": [
+        "the second bench's tray, cleared in the morning",
+        "any weather — nothing about it happens outdoors",
+        "after a night somebody worked, which since the stipend is most of them"
+      ],
+      "wild_variants": [
+        {
+          "id": "firsthand_dross_nearly",
+          "name": "Nearly-Right Dross",
+          "required_conditions": [
+            "morning"
+          ],
+          "bonus_traits": [
+            "vigor"
+          ],
+          "quality_bonus": 9,
+          "elements": {
+            "vita": 0,
+            "ember": 1,
+            "mist": 0,
+            "lux": 0
+          },
+          "synthesis_weight_bonus": 1,
+          "synthesis_value_bonus": 2
+        }
+      ],
+      "synthesis_weight": 1,
+      "synthesis_value": 2
     }
   ]
 }

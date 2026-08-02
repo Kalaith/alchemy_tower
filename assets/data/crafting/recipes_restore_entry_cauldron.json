@@ -478,6 +478,55 @@
         "healing"
       ],
       "morph_targets": []
+    },
+    {
+      "id": "seconddraft_tonic_recipe",
+      "name": "Second-Draft Tonic",
+      "station_id": "entry_cauldron",
+      "ingredients": [
+        {
+          "item_id": "firsthand_dross",
+          "amount": 2
+        },
+        {
+          "item_id": "margin_ink",
+          "amount": 1
+        }
+      ],
+      "output_item_id": "seconddraft_tonic",
+      "output_amount": 1,
+      "description": "Somebody else's abandoned pot, taken up again and finished, with the ink off their corrected page carrying it.",
+      "required_heat": 2,
+      "required_stirs": 3,
+      "unstable_output_item_id": "soothing_tonic",
+      "lore_note": "The dross is half a reaction that stopped. It does not need starting, only continuing, which is why this brews at the plainest bench in the building and would not brew anywhere else.",
+      "minimum_quality": 40,
+      "preferred_traits": [
+        "warm",
+        "arcane"
+      ],
+      "guaranteed_traits": [
+        "restorative"
+      ],
+      "minimum_elements": {
+        "vita": 1,
+        "ember": 4,
+        "mist": 2,
+        "lux": 3
+      },
+      "required_timing": "late",
+      "morph_targets": [],
+      "required_sequence": [
+        "volatile",
+        "pure"
+      ],
+      "discovery_milestones": [
+        {
+          "id": "a_second_hand_in_the_room",
+          "title": "A Second Hand In The Room",
+          "text": "The previous hand wrote eleven months of working and then took it out of the record, so that nobody would find the reasoning and be persuaded by it. The second hand leaves theirs in a tray and on a blotting sheet, dated, face up, where anybody can pick it up — and the first thing anyone did with it was make something out of it. That is the whole of the difference, and it cost five thousand two hundred coins."
+        }
+      ]
     }
   ]
 }

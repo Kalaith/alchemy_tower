@@ -212,6 +212,12 @@
       "after_milestone": "unsigned_order_after_the_end",
       "order": 134,
       "line": "Five now. The fifth came after the observatory, which means whoever writes them was waiting to see whether you would finish it. No question in this one. Just that they are glad it was done properly. I have copied all five into the record and written 'still open' underneath, because that is the honest entry and I am not going to pretend otherwise for the sake of a tidy shelf."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_milestone": "a_second_hand_in_the_room",
+      "order": 132,
+      "line": "Face up, and dated, and kept. I have written four separate notes to myself about why that matters and thrown all four away, which I am aware is funny. The short version is that I can finally check somebody's working against what they did next."
     }
   ]
 }

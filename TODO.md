@@ -657,6 +657,53 @@ content with no destination.
   (which is her whole arc), and Rowan on the first formula in the book the
   calendar can close.
 
+### The one place the ending changed nothing was the tower, 2026-08-03
+
+- ~~Post-ending ground is all outdoors~~ **Fixed 2026-08-03.** The pass that
+  answered "the ending is a wall" answered it in paperwork; the pass after that
+  answered it with ground — and both pieces of ground were **outdoors**, in the
+  plains and on the lake shore. Measured afterwards: of the six tower rooms, one
+  carried a single post-ending flourish and **no room carried a post-ending
+  node, station, apply target or warp**. The building the whole game is about
+  reopening was the last place in the valley the ending did not touch.
+  The answer is the story bible's, not mine. The ending's thesis is that a tower
+  *used* is a different thing from a tower *run*, and the last commission buys
+  **a second alchemist**: a stipend, a reference shelf, and a formula book that
+  is allowed to be wrong in the margins. So what changes in the tower after the
+  ending is that **somebody else works there**, and both new routes are that
+  person's leavings:
+  **The Second Bench** (tower_entry) — **Firsthand Dross**, what cools in the
+  new hand's discard tray overnight. A mixture that went nowhere, half reacted
+  and abandoned, and *not yours*: you stopped making this particular mistake a
+  long time ago. Somebody is being paid to be allowed to make it.
+  **The Copying Table** (archive_floor) — **Margin Ink**, lifted off a page the
+  copyist got wrong, scraped back under the same raking light Ione reads
+  pressure by. The reference shelf is being made one corrected page at a time,
+  and the corrections are being kept.
+  Both feed **Second-Draft Tonic** at the entry cauldron — the plainest bench in
+  the building, because dross is half a reaction that stopped and needs
+  continuing rather than starting. It is a brew made **entirely of two people's
+  mistakes**, which is the whole argument: the tower now employs enough people
+  for being wrong to be affordable. Ione's post-ending order is for the shelf
+  rather than the room — she spent nine years on a record with eleven months cut
+  out of it by somebody who did not want their working found.
+  Journal beat `a_second_hand_in_the_room`, deliberately answering
+  `the_previous_hand`: the previous hand took their working out of the record;
+  the second hand leaves theirs in a tray, dated, face up. Ione and the Crow
+  each have a word — the Crow's is "They leave the pot cold and the slate
+  written up. You did neither for a year and a half."
+  `the_rooms_change_after_the_ending_and_not_only_the_valley` is the guard, and
+  it derives "a room the player works in" from where the stations are, exactly
+  as the flourish guard does — so the valley's outdoor routes correctly do not
+  count and a bench on a new floor is covered the day it is placed. Verified by
+  ignoring the new nodes: it names 1 room.
+  ***Placement lesson, again.*** The first draft put a dross tray 50px from the
+  Crow and the ink sheet 60px from Ione, so the NPC prompt won and the node
+  could not be gathered at all. Nothing in the data says a node and a person
+  are in the same place; only the capture does.
+  **25 → 27 routes; 89 → 93 nodes; 173 → 176 items; 63 → 64 recipes.**
+  `screenshots/hud/entry_second_bench.png`, `archive_copying_table.png`.
+
 ### The rest of the sweep for this project's most repeated bug, 2026-08-03
 
 - ~~`deny_unknown_fields` had only ever been added to the one struct that had

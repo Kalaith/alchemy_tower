@@ -146,6 +146,12 @@
       "after_milestone": "commission_second_bench_staffed",
       "order": 136,
       "line": "Somebody else's hands on the same work. That is the whole of it. He was the only one who could do this and he liked being the only one, and the liking is what killed the valley for twenty years. You just bought the thing that makes you unnecessary. Well done. Go and be unnecessary somewhere for an afternoon."
+    },
+    {
+      "npc_id": "crow_guide",
+      "after_milestone": "a_second_hand_in_the_room",
+      "order": 132,
+      "line": "They leave the pot cold and the slate written up. You did neither for a year and a half. I am not making a point. I am simply the only one here who watched both."
     }
   ]
 }
