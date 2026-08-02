@@ -100,6 +100,8 @@ pub(crate) struct SaveData {
     pub(crate) variant_stock: Vec<VariantStockEntry>,
     #[serde(default)]
     pub(crate) bottle_stock: Vec<BottleBatchEntry>,
+    #[serde(default)]
+    pub(crate) spoken_reactions: Vec<String>,
 }
 
 /// How many of the player's units of `item_id` were gathered as a particular

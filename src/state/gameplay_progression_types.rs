@@ -35,6 +35,12 @@ pub(super) struct ProgressionState {
     /// records the best the player has *ever* brewed, so one masterwork
     /// satisfied every later gate forever. Bottles have their own quality now.
     pub(super) bottle_stock: BTreeMap<String, Vec<BottleBatchEntry>>,
+    /// Reaction lines a townsperson has already said, keyed `npc_id#order`.
+    /// Earning a reaction is monotonic and the selector took the highest-order
+    /// earned line, so any line that became earned alongside a later one was
+    /// shadowed forever. Remembering what has been said lets the earlier ones
+    /// have their turn first.
+    pub(super) spoken_reactions: HashSet<String>,
 }
 
 impl ProgressionState {
@@ -57,6 +63,7 @@ impl ProgressionState {
             potion_memories: BTreeMap::new(),
             variant_stock: BTreeMap::new(),
             bottle_stock: BTreeMap::new(),
+            spoken_reactions: HashSet::new(),
         }
     }
 }

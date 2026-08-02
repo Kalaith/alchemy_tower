@@ -149,13 +149,16 @@ content with no destination.
   used by no recipe or quest and are also plain shop stock — the friendship
   payoff item is something the player could already buy. The other ten gifts
   are real recipe inputs; these three should be too.
-- **36 of 160 NPC reaction lines can never be spoken.**
-  `npc_phase1_followup_line` takes `max_by_key(order)` over all *earned*
-  reactions, and earning is monotonic — so any line sharing a gate with (or
-  gated behind an ancestor of) a higher-order line is permanently shadowed.
-  Worst: Ione's `first_rune_imbuing` lines at orders 72/74/82 all lose to 86.
-  Either rotate through earned-but-unspoken lines or make the narrative tests
-  assert reachability, not just existence.
+- ~~36 of 160 NPC reaction lines can never be spoken~~ **Fixed 2026-08-02.**
+  The selector rotates through earned-but-unsaid lines, earliest first, so a run
+  of beats that came due together is worked through one conversation at a time;
+  once everything is said the latest line stands as their current word. It still
+  only moves forward — a line earned *after* later ones were already spoken is
+  skipped rather than dragging the townsperson back. Advancing a conversation is
+  what marks a line said (persisted `spoken_reactions`). Keyed on an FNV-1a hash
+  of speaker + line, because seven reactions already share a speaker and order,
+  and a narrative test keeps those hashes distinct. Against the old selector the
+  new reachability test gives Ione 1 of her 25 lines.
 - **The NPC schema's `dialogue_start/progress/complete` and the phase-1
   `active_request` strings are always overwritten** before display
   (`gameplay_npc_dialogue.rs` — every branch that would show them is

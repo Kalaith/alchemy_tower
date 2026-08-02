@@ -20,6 +20,11 @@ impl GameplayState {
             return;
         };
 
+        // Advancing is the player having read whatever this townsperson had to
+        // say, so their next unsaid line comes up next time rather than being
+        // shadowed by a later one forever.
+        self.mark_followup_spoken(&npc_id);
+
         // A townsperson who now counts you a friend hands over their one-time
         // gift before anything else, turning rapport into a felt payoff.
         if self.try_grant_friendship_gift(data, npc) {

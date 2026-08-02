@@ -111,6 +111,7 @@ pub(super) fn apply_save_snapshot(
     for batches in state.progression.bottle_stock.values_mut() {
         batches.sort_by_key(|batch| batch.quality_score);
     }
+    state.progression.spoken_reactions = save.spoken_reactions.into_iter().collect();
     state.world.available_nodes.clear();
     state.ui = OverlayState::new_gameplay();
     state.alchemy = AlchemySession::default();
@@ -172,6 +173,7 @@ mod tests {
                 count: 1,
             }],
         );
+        p.spoken_reactions.insert("deadbeefdeadbeef".to_owned());
         p.variant_stock.insert(
             "whisper_moss".to_owned(),
             [("whisper_moss_dew".to_owned(), 2u32)]
@@ -301,6 +303,9 @@ mod tests {
         // Which held units were gathered as variants lives only in the save;
         // losing it silently downgrades the player's stock back to plain.
         assert_eq!(a.variant_stock, b.variant_stock, "variant stock");
+        // Which lines a townsperson has already said lives only in the save;
+        // losing it makes the whole town repeat their opening remarks.
+        assert_eq!(a.spoken_reactions, b.spoken_reactions, "spoken reactions");
         // What each bottle is worth lives only in the save; losing it would put
         // the quality gates back to reading a best-ever record.
         assert_eq!(a.bottle_stock, b.bottle_stock, "bottle stock");

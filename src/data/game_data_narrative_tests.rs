@@ -219,4 +219,32 @@ pub(crate) mod tests {
             "narrative gated on beats that never happen:\n{unreachable:#?}"
         );
     }
+
+    /// Remembering which lines have been said keys on a hash of the speaker and
+    /// the words. Two reactions hashing alike would be one line as far as the
+    /// game is concerned — say either and both are marked said, and the other
+    /// goes back to being unreachable, which is the bug this replaced.
+    #[test]
+    fn every_reaction_line_is_distinguishable_from_every_other() {
+        use crate::content::narrative_text;
+
+        let mut seen = std::collections::HashSet::new();
+        let mut collisions = Vec::new();
+        for reaction in &narrative_text().reactions {
+            let mut hash: u64 = 0xcbf2_9ce4_8422_2325;
+            for byte in reaction.npc_id.bytes().chain(reaction.line.bytes()) {
+                hash ^= u64::from(byte);
+                hash = hash.wrapping_mul(0x1000_0000_01b3);
+            }
+            if !seen.insert(hash) {
+                collisions.push(format!("{} order {}", reaction.npc_id, reaction.order));
+            }
+        }
+        collisions.sort();
+        assert!(
+            collisions.is_empty(),
+            "reactions the game cannot tell apart:
+{collisions:#?}"
+        );
+    }
 }

@@ -107,5 +107,6 @@ pub(super) fn build_save_snapshot(state: &GameplayState, data: &GameData) -> Sav
             .values()
             .flat_map(|batches| batches.iter().cloned())
             .collect(),
+        spoken_reactions: state.progression.spoken_reactions.iter().cloned().collect(),
     }
 }

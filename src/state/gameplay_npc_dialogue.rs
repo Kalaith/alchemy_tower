@@ -146,14 +146,79 @@ impl GameplayState {
         selection
     }
 
+    /// Key for remembering that a line has been said.
+    ///
+    /// Reactions carry no id, and speaker-plus-order will not serve: seven of
+    /// them already share an order with a sibling, which would mark both said
+    /// the moment either was. Hashing the words themselves gives a short stable
+    /// key that survives reordering and re-authoring elsewhere in the file, and
+    /// two byte-identical lines from one speaker are interchangeable anyway.
+    fn reaction_key(reaction: &NarrativeReaction) -> String {
+        // FNV-1a. Small, dependency-free, and stable across builds — which a
+        // key written into save files has to be.
+        let mut hash: u64 = 0xcbf2_9ce4_8422_2325;
+        for byte in reaction.npc_id.bytes().chain(reaction.line.bytes()) {
+            hash ^= u64::from(byte);
+            hash = hash.wrapping_mul(0x1000_0000_01b3);
+        }
+        format!("{hash:016x}")
+    }
+
+    /// The reaction this townsperson would offer next.
+    ///
+    /// This used to be `max_by_key(order)` over everything earned, and earning
+    /// is monotonic — so a line that came due at the same moment as a later one,
+    /// or behind an ancestor of it, lost every time and could never be spoken.
+    /// Thirty-six of the hundred and sixty authored lines were unreachable that
+    /// way, including three of Ione's in a row.
+    ///
+    /// Earned-but-unsaid lines now go first, earliest first, so a run of beats
+    /// that came due together is worked through one conversation at a time. Once
+    /// everything is said the latest line stands as their current word, which is
+    /// what the old behaviour was reaching for.
+    ///
+    /// The conversation still only moves forward: a line that becomes earned
+    /// after later ones have already been spoken is skipped rather than dragging
+    /// the townsperson back to an older beat. Lines that come due *together* are
+    /// all above the last thing said, so they still get their turn.
+    fn npc_phase1_followup(&self, npc_id: &str) -> Option<&'static NarrativeReaction> {
+        let earned = || {
+            narrative_text()
+                .reactions
+                .iter()
+                .filter(move |reaction| reaction.npc_id == npc_id)
+                .filter(|reaction| self.reaction_is_earned(reaction))
+        };
+        let already_said = |reaction: &NarrativeReaction| {
+            self.progression
+                .spoken_reactions
+                .contains(&Self::reaction_key(reaction))
+        };
+        let furthest_said = earned()
+            .filter(|reaction| already_said(reaction))
+            .map(|reaction| reaction.order)
+            .max();
+
+        earned()
+            .filter(|reaction| !already_said(reaction))
+            .filter(|reaction| furthest_said.is_none_or(|said| reaction.order >= said))
+            .min_by_key(|reaction| reaction.order)
+            .or_else(|| earned().max_by_key(|reaction| reaction.order))
+    }
+
     pub(super) fn npc_phase1_followup_line(&self, npc_id: &str) -> Option<&'static str> {
-        narrative_text()
-            .reactions
-            .iter()
-            .filter(|reaction| reaction.npc_id == npc_id)
-            .filter(|reaction| self.reaction_is_earned(reaction))
-            .max_by_key(|reaction| reaction.order)
+        self.npc_phase1_followup(npc_id)
             .map(|reaction| reaction.line.as_str())
+    }
+
+    /// Note that the line currently on offer has now been said. Called when the
+    /// player advances the conversation — that is the moment they have read it —
+    /// so the next one is waiting the next time they come by.
+    pub(super) fn mark_followup_spoken(&mut self, npc_id: &str) {
+        let Some(key) = self.npc_phase1_followup(npc_id).map(Self::reaction_key) else {
+            return;
+        };
+        self.progression.spoken_reactions.insert(key);
     }
 
     fn reaction_is_earned(&self, reaction: &NarrativeReaction) -> bool {
@@ -218,9 +283,10 @@ mod tests {
         assert!(state.npc_has_been_helped(&rowan));
     }
 
-    /// The town should be talking about the most recent thing that happened,
-    /// not the first. Walk Elric forward through his reactions and check each
-    /// new beat displaces the last.
+    /// The town talks about what has happened, one thing per conversation, and
+    /// keeps moving forward. Walk Elric through his reactions: each new beat is
+    /// remarked on once it has been heard, and a beat that lands late does not
+    /// drag him back to an older subject.
     #[test]
     fn town_reactions_move_on_as_the_story_does() {
         let data = crate::data::load_embedded().expect("embedded game data should load");
@@ -237,12 +303,18 @@ mod tests {
             .npc_phase1_followup_line(npc_id)
             .expect("elric reacts to the first delivered draught");
 
+        // Until the player has actually heard it, that is still what he has to
+        // say — a new beat does not overwrite one that was never spoken.
         state.push_journal_milestone("greenhouse_repaired", "Greenhouse", "");
+        assert_eq!(state.npc_phase1_followup_line(npc_id), Some(after_healing));
+
+        state.mark_followup_spoken(npc_id);
         let after_greenhouse = state
             .npc_phase1_followup_line(npc_id)
             .expect("elric reacts to the greenhouse");
         assert_ne!(after_healing, after_greenhouse);
 
+        state.mark_followup_spoken(npc_id);
         state.push_journal_milestone("harvest_beds_turned", "Bed Rows", "");
         let after_harvest = state
             .npc_phase1_followup_line(npc_id)
@@ -250,11 +322,58 @@ mod tests {
         assert_ne!(after_greenhouse, after_harvest);
 
         // An earlier beat arriving late must not drag the conversation back.
+        state.mark_followup_spoken(npc_id);
         state
             .progression
             .completed_quests
             .insert("glow_for_rowan".to_owned());
         assert_eq!(state.npc_phase1_followup_line(npc_id), Some(after_harvest));
+    }
+
+    /// Thirty-six of the hundred and sixty authored reactions could never be
+    /// spoken: the selector took the highest-order earned line, and earning is
+    /// monotonic, so anything that came due alongside a later beat lost forever.
+    /// With every gate satisfied, a townsperson should work through all of their
+    /// lines rather than repeating their last one.
+    #[test]
+    fn every_reaction_a_townsperson_has_earned_eventually_gets_said() {
+        use crate::content::narrative_text;
+
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let mut state = GameplayState::new(&data);
+
+        // Satisfy everything: every quest done, every recordable beat recorded.
+        for quest in &data.quests {
+            state.progression.completed_quests.insert(quest.id.clone());
+        }
+        for reaction in &narrative_text().reactions {
+            if !reaction.after_milestone.is_empty() {
+                state.push_journal_milestone(&reaction.after_milestone, "", "");
+            }
+        }
+
+        let npc_id = "ione_archivist";
+        let authored = narrative_text()
+            .reactions
+            .iter()
+            .filter(|reaction| reaction.npc_id == npc_id)
+            .count();
+        assert!(authored >= 4, "ione should have several lines");
+
+        let mut heard = std::collections::HashSet::new();
+        for _ in 0..authored {
+            let line = state
+                .npc_phase1_followup_line(npc_id)
+                .expect("an earned line should be on offer");
+            heard.insert(line);
+            state.mark_followup_spoken(npc_id);
+        }
+
+        assert_eq!(
+            heard.len(),
+            authored,
+            "ione repeated herself instead of working through her {authored} lines"
+        );
     }
 
     /// `quest_ids` is the arc; `quest_id` is the older single-request field that
