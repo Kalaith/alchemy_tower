@@ -70,6 +70,7 @@ impl GameplayState {
                 self.push_journal_milestone(milestone_id, milestone_id, "");
             }
         }
+        self.ui.ending_page = 0;
         self.set_overlay(super::gameplay_overlay_types::OverlayScreen::Ending);
     }
 

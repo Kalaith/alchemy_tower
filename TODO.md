@@ -174,10 +174,15 @@ content with no destination.
   the prose is in git history. A new `every_line_a_townsperson_has_is_reachable`
   walks each of them through the states the game puts them in and fails on any
   authored string nothing can say.
-- **The ending shows 3 of 12 epilogue beats, two of which are always the same
-  two** — reaching the ending requires the milestones that earn beats 80 and
-  100, so only one slot is ever contested and nine beats are invisible in a
-  completionist run (`MAX_EPILOGUE_BEATS`, `gameplay_ending_overlay_view.rs`).
+- ~~The ending shows 3 of 12 epilogue beats~~ **Fixed 2026-08-02.** The panel is
+  a fixed box and cannot grow, so the epilogue is paged instead of truncated:
+  the opening page keeps the fixed paragraph plus three beats, later pages carry
+  four each (five overran by 134 characters — the existing char-budget test now
+  runs over every page, and said so). Confirm turns the page and closes on the
+  last; cancel still closes outright. Three tests: every page fits, a
+  completionist hears every beat they earned, and a page index past the end
+  clamps rather than showing an empty panel. Against the old single-page view
+  the reachability test names the nine that were invisible.
 
 ### Dead data (low stakes, cheap deletes or one-line hookups)
 

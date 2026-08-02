@@ -567,6 +567,7 @@
     "overlay_archive_footer_browse": "{switch} section  |  {select} browse  |  {close} close",
     "overlay_archive_footer_close": "{switch} section  |  {close} close",
     "overlay_ending_title": "Observatory",
+    "overlay_ending_more": "There is more. Press to read on.",
     "overlay_journal_title": "Field Journal",
     "overlay_close": "Close",
     "overlay_current_conditions": "Current Conditions: {season} / {weather}",

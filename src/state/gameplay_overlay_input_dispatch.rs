@@ -31,8 +31,15 @@ impl GameplayState {
             OverlayScreen::Rune => self.handle_rune_inputs(data),
             OverlayScreen::Archive => self.handle_archive_inputs(data),
             OverlayScreen::Ending => {
-                if cancel_pressed() || confirm_pressed() {
+                if cancel_pressed() {
                     self.clear_overlay();
+                } else if confirm_pressed() {
+                    // Read on through the epilogue, then close out.
+                    if self.ui.ending_page + 1 < self.epilogue_page_count() {
+                        self.ui.ending_page += 1;
+                    } else {
+                        self.clear_overlay();
+                    }
                 }
             }
             OverlayScreen::QuestBoard => self.handle_quest_board_inputs(data),

@@ -20,6 +20,10 @@ pub(super) struct OverlayState {
     pub(super) archive_experiment_filter: ArchiveExperimentFilter,
     pub(super) current: Option<OverlayScreen>,
     pub(super) inventory_sort_mode: InventorySortMode,
+    /// Which page of the epilogue the ending overlay is showing. The panel is a
+    /// fixed box, so the beats a player earned are read a few at a time rather
+    /// than the top three standing in for all twelve.
+    pub(super) ending_page: usize,
 }
 
 impl OverlayState {
