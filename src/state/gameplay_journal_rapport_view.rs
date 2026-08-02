@@ -29,7 +29,7 @@ impl GameplayState {
                                 ("name", &npc.name),
                                 ("role", role),
                                 ("value", &rapport.to_string()),
-                                ("standing", self.rapport_tier_label(&npc.id, rapport)),
+                                ("standing", self.rapport_tier_label(data, &npc.id, rapport)),
                             ],
                         ),
                         now_text: ui_format(

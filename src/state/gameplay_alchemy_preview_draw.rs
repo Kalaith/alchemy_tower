@@ -37,7 +37,7 @@ impl GameplayState {
             let known = preview
                 .recipe
                 .map(|recipe| self.recipe_is_known(&recipe.id))
-                .unwrap_or_else(|| self.salvage_is_discovered(station, &selected));
+                .unwrap_or_else(|| self.salvage_is_discovered(data, station, &selected));
             let preview_uncertain = known && self.preview_is_uncertain(&preview);
             let stable_preview = preview.is_stable();
             let quest_line = self.brew_quest_motivation(data, &preview.output_item_id);

@@ -304,7 +304,7 @@ mod tests {
             .expect("the confidant order should exist");
         assert_eq!(
             quest.required_rapport,
-            crate::state::gameplay::gameplay_rapport::CONFIDANT_RAPPORT
+            data.config.balance.rapport.confidant
         );
 
         // Everything but the standing.

@@ -17,10 +17,6 @@ use crate::alchemy::BrewResolution;
 use crate::content::ui_format;
 use crate::data::{GameData, StationDefinition};
 
-/// Attempts at one mixture before the player is credited with having found it.
-/// Two could be luck; three is a method.
-pub(super) const SALVAGE_DISCOVERY_ATTEMPTS: u32 = 3;
-
 impl GameplayState {
     /// What makes two off-book brews "the same thing": the bench and the
     /// reagents, regardless of the order they went in. Heat, stirs and timing
@@ -50,10 +46,12 @@ impl GameplayState {
     /// times for the tower to treat it as a formula rather than an accident.
     pub(super) fn salvage_is_discovered(
         &self,
+        data: &GameData,
         station: &StationDefinition,
         selected: &[String],
     ) -> bool {
-        self.salvage_familiarity(station, selected) >= SALVAGE_DISCOVERY_ATTEMPTS
+        self.salvage_familiarity(station, selected)
+            >= data.config.balance.salvage.discovery_attempts
     }
 
     /// Record one off-book brew and, on the attempt that earns it, journal the
@@ -79,7 +77,7 @@ impl GameplayState {
             .entry(signature.clone())
             .or_insert(0);
         *attempts += 1;
-        if *attempts != SALVAGE_DISCOVERY_ATTEMPTS {
+        if *attempts != data.config.balance.salvage.discovery_attempts {
             return false;
         }
 
@@ -107,7 +105,7 @@ impl GameplayState {
 
 #[cfg(test)]
 mod tests {
-    use super::{GameplayState, SALVAGE_DISCOVERY_ATTEMPTS};
+    use super::GameplayState;
     use crate::alchemy::resolve_brew;
     use crate::data::{GameData, StationDefinition};
 
@@ -165,13 +163,13 @@ mod tests {
         let mut state = GameplayState::new(&data);
         let (station, selected) = an_off_book_mixture(&data);
 
-        for attempt in 1..SALVAGE_DISCOVERY_ATTEMPTS {
+        for attempt in 1..data.config.balance.salvage.discovery_attempts {
             assert!(!brew(&mut state, &data), "attempt {attempt} is not a find");
-            assert!(!state.salvage_is_discovered(station, &selected));
+            assert!(!state.salvage_is_discovered(&data, station, &selected));
         }
 
         assert!(brew(&mut state, &data), "the third attempt should land");
-        assert!(state.salvage_is_discovered(station, &selected));
+        assert!(state.salvage_is_discovered(&data, station, &selected));
         let signature = GameplayState::salvage_signature(station, &selected);
         assert!(state.has_journal_milestone(&format!("found_formula_{signature}")));
 
@@ -221,7 +219,7 @@ mod tests {
             "steady",
             0,
         );
-        for _ in 0..SALVAGE_DISCOVERY_ATTEMPTS {
+        for _ in 0..data.config.balance.salvage.discovery_attempts {
             brew(&mut state, &data);
         }
         let practised = resolve_brew(
@@ -241,6 +239,58 @@ mod tests {
             "working a mixture out changed nothing: {} vs {}",
             practised.quality_score,
             blind.quality_score
+        );
+    }
+
+    /// Tuning that lives in a file but is not actually read is worse than a
+    /// constant, because the file says it is configurable and turning the knob
+    /// does nothing. Move the numbers and check the game moves with them.
+    #[test]
+    fn the_salvage_curve_is_read_from_the_data_rather_than_baked_in() {
+        let mut data = crate::data::load_embedded().expect("embedded game data should load");
+        let (station, selected) = an_off_book_mixture(&data);
+        let station = station.clone();
+        let mut state = GameplayState::new(&data);
+        let ingredients = state.brew_ingredients(&data, &selected);
+
+        let stock = resolve_brew(
+            &data,
+            &station,
+            &selected,
+            &ingredients,
+            None,
+            2,
+            2,
+            "steady",
+            99,
+        )
+        .quality_score;
+
+        // The per-attempt bonus rather than the cap: this mixture scores well
+        // under the cap, so raising the ceiling alone would prove nothing.
+        data.config.balance.salvage.bonus_per_attempt += 5;
+        let richer = resolve_brew(
+            &data,
+            &station,
+            &selected,
+            &ingredients,
+            None,
+            2,
+            2,
+            "steady",
+            99,
+        )
+        .quality_score;
+        assert!(
+            richer > stock,
+            "raising the practice bonus changed nothing: {richer} vs {stock}"
+        );
+
+        // And the discovery threshold, which is read on a different path.
+        data.config.balance.salvage.discovery_attempts = 1;
+        assert!(
+            brew(&mut state, &data),
+            "one attempt should be a find when the data says one attempt"
         );
     }
 }

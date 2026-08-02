@@ -5,20 +5,6 @@ use crate::data::{GameData, NpcDefinition};
 #[path = "gameplay_rapport_text.rs"]
 mod rapport_text;
 
-/// Rapport at which a townsperson counts you a friend and hands over their
-/// one-time thank-you gift. Reachable by seeing one of their errands through
-/// (+1 on accept, +2 on completion in `gameplay_dialogue`).
-pub(super) const FRIEND_RAPPORT: i32 = 3;
-/// Reliability, rather than story: reachable by running board orders somebody
-/// benefits from as well as by their own errands. A confidant asks for things
-/// they would not mention to a stranger — see `required_rapport_npc_id`.
-pub(super) const CONFIDANT_RAPPORT: i32 = 6;
-/// Accepting and finishing all three beats of an arc is worth exactly nine, so
-/// this tier means "you finished everything they asked" and nothing less. Board
-/// orders can carry the *number* there without the story being done, so the
-/// label checks the arc too rather than letting a supply run buy the top tier.
-const KIN_RAPPORT: i32 = 9;
-
 impl GameplayState {
     pub(super) fn rapport_value(&self, npc_id: &str) -> i32 {
         self.progression
@@ -28,15 +14,27 @@ impl GameplayState {
             .unwrap_or_default()
     }
 
-    /// Human-readable standing for the journal rapport tab. The top tier wants
-    /// the arc finished as well as the number, so that a player who supplied a
-    /// lot of board orders is a confidant rather than kin.
-    pub(super) fn rapport_tier_label(&self, npc_id: &str, rapport: i32) -> &'static str {
-        if rapport >= KIN_RAPPORT && self.has_reached_trust(npc_id) {
+    /// Human-readable standing for the journal rapport tab.
+    ///
+    /// The tiers themselves are tuning and live in `config.balance.rapport`.
+    /// FRIEND is reachable by seeing one errand through (+1 on accept, +2 on
+    /// completion); CONFIDANT is reliability rather than story, since board
+    /// orders pay rapport too; and accepting and finishing all three beats of an
+    /// arc is worth exactly KIN. The top tier wants the arc finished as well as
+    /// the number, so a player who supplied a lot of board orders is a confidant
+    /// rather than kin.
+    pub(super) fn rapport_tier_label(
+        &self,
+        data: &GameData,
+        npc_id: &str,
+        rapport: i32,
+    ) -> &'static str {
+        let tiers = &data.config.balance.rapport;
+        if rapport >= tiers.kin && self.has_reached_trust(npc_id) {
             ui_copy("rapport_tier_kin")
-        } else if rapport >= CONFIDANT_RAPPORT {
+        } else if rapport >= tiers.confidant {
             ui_copy("rapport_tier_confidant")
-        } else if rapport >= FRIEND_RAPPORT {
+        } else if rapport >= tiers.friend {
             ui_copy("rapport_tier_friend")
         } else if rapport >= 1 {
             ui_copy("rapport_tier_acquaintance")
@@ -108,7 +106,9 @@ impl GameplayState {
         if npc.id == "crow_guide" || npc.friendship_line.is_empty() {
             return false;
         }
-        if self.rapport_value(&npc.id) < FRIEND_RAPPORT || self.has_reached_friendship(&npc.id) {
+        if self.rapport_value(&npc.id) < data.config.balance.rapport.friend
+            || self.has_reached_friendship(&npc.id)
+        {
             return false;
         }
 
@@ -134,7 +134,7 @@ impl GameplayState {
 
 #[cfg(test)]
 mod tests {
-    use super::{GameplayState, FRIEND_RAPPORT};
+    use super::GameplayState;
 
     #[test]
     fn friendship_gift_granted_once_at_friend_tier() {
@@ -154,7 +154,7 @@ mod tests {
         state
             .progression
             .relationships
-            .insert(npc.id.clone(), FRIEND_RAPPORT);
+            .insert(npc.id.clone(), data.config.balance.rapport.friend);
         let coins_before = state.coins;
         assert!(state.try_grant_friendship_gift(&data, &npc));
         assert_eq!(state.coins, coins_before + npc.friendship_reward_coins);
@@ -177,10 +177,13 @@ mod tests {
         let data = crate::data::load_embedded().expect("embedded game data should load");
         let state = GameplayState::new(&data);
         let npc = "mira_apothecary";
-        assert_eq!(state.rapport_tier_label(npc, 0), "Stranger");
-        assert_eq!(state.rapport_tier_label(npc, 1), "Acquaintance");
-        assert_eq!(state.rapport_tier_label(npc, FRIEND_RAPPORT), "Friend");
-        assert_eq!(state.rapport_tier_label(npc, 6), "Confidant");
+        assert_eq!(state.rapport_tier_label(&data, npc, 0), "Stranger");
+        assert_eq!(state.rapport_tier_label(&data, npc, 1), "Acquaintance");
+        assert_eq!(
+            state.rapport_tier_label(&data, npc, data.config.balance.rapport.friend),
+            "Friend"
+        );
+        assert_eq!(state.rapport_tier_label(&data, npc, 6), "Confidant");
     }
 
     /// The friend tier arrives at rapport 3, which a three-beat arc passes
@@ -275,13 +278,13 @@ mod tests {
 
         // Accepting and completing three beats is +1 and +2 apiece.
         assert_eq!(
-            state.rapport_tier_label(&npc.id, super::KIN_RAPPORT - 1),
-            state.rapport_tier_label(&npc.id, super::CONFIDANT_RAPPORT)
+            state.rapport_tier_label(&data, &npc.id, data.config.balance.rapport.kin - 1),
+            state.rapport_tier_label(&data, &npc.id, data.config.balance.rapport.confidant)
         );
         // The number on its own does not buy the top tier.
         assert_eq!(
-            state.rapport_tier_label(&npc.id, super::KIN_RAPPORT),
-            state.rapport_tier_label(&npc.id, super::CONFIDANT_RAPPORT),
+            state.rapport_tier_label(&data, &npc.id, data.config.balance.rapport.kin),
+            state.rapport_tier_label(&data, &npc.id, data.config.balance.rapport.confidant),
             "supply runs alone should not make somebody kin"
         );
 
@@ -291,8 +294,8 @@ mod tests {
         }
         assert!(state.try_grant_trusted_gift(&data, &npc));
         assert_ne!(
-            state.rapport_tier_label(&npc.id, super::KIN_RAPPORT),
-            state.rapport_tier_label(&npc.id, super::CONFIDANT_RAPPORT)
+            state.rapport_tier_label(&data, &npc.id, data.config.balance.rapport.kin),
+            state.rapport_tier_label(&data, &npc.id, data.config.balance.rapport.confidant)
         );
     }
 }

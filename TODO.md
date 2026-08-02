@@ -251,9 +251,17 @@ content with no destination.
   including that a worked-out formula genuinely brews better than a blind
   attempt; the off-book pair is *found* rather than named, so a new recipe
   covering it cannot quietly turn these into tests of the written-recipe path.
-- Move the last tuning constants out of Rust into data: the rapport tiers
-  (`FRIEND`/`CONFIDANT`/`KIN` in `state/gameplay_rapport.rs`) and the salvage
-  quality curve in `alchemy/fallback.rs` are the remaining hardcoded balance.
+- ~~Move the last tuning constants out of Rust into data~~ **Done 2026-08-02.**
+  `config.balance` now holds the rapport tiers, the salvage curve (including the
+  discovery threshold), and the quality-band value multipliers the sell-price
+  work had left in Rust. Every block takes `deny_unknown_fields` and none takes
+  a serde default: a tuning value nobody reads is worse than a missing one,
+  because the file claims it is configured and the game ignores it. A test
+  turns two of the knobs and asserts the brewer moves with them — the first
+  version of it turned the salvage *cap* and proved nothing, because the mixture
+  it used scores well under the ceiling.
+  `MASTERED_BREW_COUNT` stays in Rust deliberately: `mastery_stage`'s match arms
+  encode the same threshold, so it is a shape rather than a number.
 
 ## Long tail content
 

@@ -19,6 +19,27 @@
       "rune_workshop_restored",
       "harvest_beds_turned",
       "pollinators_returned"
-    ]
+    ],
+    "balance": {
+      "rapport": {
+        "friend": 3,
+        "confidant": 6,
+        "kin": 9
+      },
+      "salvage": {
+        "blind_cap": 40,
+        "cap_per_attempt": 6,
+        "bonus_per_attempt": 3,
+        "practice_cap": 4,
+        "discovery_attempts": 3
+      },
+      "quality_value_percent": {
+        "crude": 55,
+        "serviceable": 80,
+        "fine": 100,
+        "excellent": 140,
+        "masterwork": 200
+      }
+    }
   }
 }

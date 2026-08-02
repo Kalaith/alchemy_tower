@@ -13,6 +13,74 @@ pub(crate) struct GameConfig {
     pub(crate) archive_required_completed_quests: Vec<String>,
     #[serde(default)]
     pub(crate) archive_required_journal_milestones: Vec<String>,
+    /// Tuning that used to live as `const` in the Rust that read it. Balance
+    /// belongs beside the content it balances — every other number the designer
+    /// turns is already in `assets/`, and these were the last that were not.
+    pub(crate) balance: BalanceDefinition,
+}
+
+/// `deny_unknown_fields` throughout: a tuning value nobody reads is worse than
+/// a missing one, because the file says it is configured and the game ignores
+/// it. Nothing here takes a serde default either — a balance block that half
+/// loads should fail loudly rather than silently fall back to numbers no
+/// designer can see.
+#[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
+pub(crate) struct BalanceDefinition {
+    pub(crate) rapport: RapportTuning,
+    pub(crate) salvage: SalvageTuning,
+    pub(crate) quality_value_percent: QualityValueTuning,
+}
+
+/// Standing thresholds. FRIEND is reachable by seeing one errand through;
+/// accepting and finishing a three-beat arc is worth exactly KIN.
+#[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
+pub(crate) struct RapportTuning {
+    pub(crate) friend: i32,
+    pub(crate) confidant: i32,
+    pub(crate) kin: i32,
+}
+
+/// The off-book brewing curve — see `state::gameplay_salvage_discovery`.
+#[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
+pub(crate) struct SalvageTuning {
+    /// What a first guess at a mixture can come to.
+    pub(crate) blind_cap: u32,
+    /// How far that cap lifts per attempt at the same mixture.
+    pub(crate) cap_per_attempt: u32,
+    /// Quality added per attempt, so practice shows below the cap too.
+    pub(crate) bonus_per_attempt: u32,
+    /// Where practice stops paying, so an off-book mixture never overtakes the
+    /// written recipes.
+    pub(crate) practice_cap: u32,
+    /// Attempts before the player is credited with having found the formula.
+    pub(crate) discovery_attempts: u32,
+}
+
+/// What a bottle of each grade is worth, as a percentage of base value.
+#[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
+pub(crate) struct QualityValueTuning {
+    pub(crate) crude: u32,
+    pub(crate) serviceable: u32,
+    pub(crate) fine: u32,
+    pub(crate) excellent: u32,
+    pub(crate) masterwork: u32,
+}
+
+impl QualityValueTuning {
+    /// By `quality_band_rank`, which scores Crude 0 through Masterwork 4.
+    pub(crate) fn for_rank(&self, rank: u8) -> u32 {
+        match rank {
+            0 => self.crude,
+            1 => self.serviceable,
+            2 => self.fine,
+            3 => self.excellent,
+            _ => self.masterwork,
+        }
+    }
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]

@@ -32,5 +32,6 @@ pub(crate) use schema::{
     GatherNodeDefinition, GatheringRouteDefinition, HabitatStateEntry, ItemCategory,
     ItemDefinition, JournalMilestoneEntry, MorphDefinition, MutationFormulaDefinition,
     NpcDefinition, PlanterStateEntry, QuestDefinition, RecipeDefinition, RectDefinition,
-    RuneRecipeDefinition, StationDefinition, StationKind, WarpDefinition, WildVariantDefinition,
+    RuneRecipeDefinition, SalvageTuning, StationDefinition, StationKind, WarpDefinition,
+    WildVariantDefinition,
 };

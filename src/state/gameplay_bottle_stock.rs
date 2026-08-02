@@ -234,22 +234,6 @@ impl GameplayState {
         }
     }
 
-    /// What a bottle of this grade is worth, as a percentage of the item's base
-    /// value. Selling used to ignore quality entirely, which made the whole
-    /// brewing-well half of the game worth nothing to anyone but a quest giver.
-    ///
-    /// Balance constants, and among the last left in Rust — see the TODO note
-    /// about moving tuning into data.
-    fn band_value_percent(rank: u8) -> u32 {
-        match rank {
-            0 => 55,  // Crude
-            1 => 80,  // Serviceable
-            2 => 100, // Fine
-            3 => 140, // Excellent
-            _ => 200, // Masterwork
-        }
-    }
-
     /// The grade of the bottle a sale would actually part with. Selling takes
     /// the worst one held, matching how `reconcile_bottle_stock` trims, so a
     /// player clearing shelf space never loses their best work by accident.
@@ -269,7 +253,15 @@ impl GameplayState {
 
     /// Scale a price by what the bottle being sold is actually worth.
     pub(super) fn quality_adjusted_value(&self, data: &GameData, item_id: &str, base: u32) -> u32 {
-        let percent = Self::band_value_percent(self.worst_held_band_rank(data, item_id));
+        // What a bottle of each grade is worth is tuning, and lives beside the
+        // content it balances. Selling used to ignore quality entirely, which
+        // made the brewing-well half of the game worth nothing to anybody but a
+        // quest giver.
+        let percent = data
+            .config
+            .balance
+            .quality_value_percent
+            .for_rank(self.worst_held_band_rank(data, item_id));
         (base.saturating_mul(percent) / 100).max(1)
     }
 
