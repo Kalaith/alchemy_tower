@@ -333,7 +333,103 @@
       "render": {
         "sprite_id": "dustwake_shrimp"
       }
+    },
+    {
+      "id": "quarry_gallery_pearl_01",
+      "name": "Stillwater Pearl",
+      "item_id": "stillwater_pearl",
+      "color": [
+        186,
+        214,
+        214,
+        255
+      ],
+      "position": [
+        150.0,
+        760.0
+      ],
+      "radius": 16.0,
+      "route_id": "quarry_sump",
+      "seasons": [],
+      "weathers": [
+        "clear",
+        "mist",
+        "rain"
+      ],
+      "time_windows": [
+        "morning",
+        "day",
+        "evening"
+      ],
+      "spawn_chance": 62,
+      "required_journal_milestone": "quarry_gallery_lit",
+      "note": "Pearls form where water has not moved in twenty years, which describes the gallery exactly.",
+      "render": {
+        "sprite_id": "stillwater_pearl_quarry"
+      }
+    },
+    {
+      "id": "quarry_gallery_washvein_01",
+      "name": "Washvein Crystal",
+      "item_id": "washvein_crystal",
+      "color": [
+        198,
+        206,
+        232,
+        255
+      ],
+      "position": [
+        250.0,
+        840.0
+      ],
+      "radius": 16.0,
+      "route_id": "quarry_sump",
+      "seasons": [],
+      "weathers": [
+        "clear",
+        "mist",
+        "rain"
+      ],
+      "time_windows": [
+        "morning",
+        "day",
+        "evening"
+      ],
+      "spawn_chance": 58,
+      "required_journal_milestone": "quarry_gallery_lit",
+      "note": "The seam the gallery was chasing is still down there, half a day's work from the light and no longer in the dark.",
+      "render": {
+        "sprite_id": "washvein_crystal_quarry"
+      }
     }
   ],
-  "footstep_sound_set": "gravel"
+  "footstep_sound_set": "gravel",
+  "apply_targets": [
+    {
+      "id": "quarry_drowned_gallery",
+      "name": "Drowned Gallery",
+      "position": [
+        170.0,
+        650.0
+      ],
+      "radius": 38.0,
+      "color": [
+        126,
+        168,
+        196,
+        255
+      ],
+      "required_effect_kind": "glow",
+      "minimum_quality_band": "Fine",
+      "untreated_note": "The lower gallery has been under water since the last crew walked out. You can hear it going back a long way and you cannot see a hand's width into it.",
+      "treated_note": "The light goes down through the water instead of stopping at it, and the gallery turns out to run forty feet under the sump — still, cold, and undisturbed since the cutting stopped.",
+      "completion_milestones": [
+        {
+          "id": "quarry_gallery_lit",
+          "title": "Forty Feet Under The Sump",
+          "text": "A lit brew poured into the sump showed the gallery running forty feet back under the workings, still water the whole way. Nobody flooded it deliberately. The sump simply stopped being pumped the year the tower did."
+        }
+      ]
+    }
+  ]
 }

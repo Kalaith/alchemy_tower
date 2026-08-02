@@ -117,6 +117,12 @@
       "after_milestone": "discovered_the_fortnight",
       "order": 105,
       "line": "A formula with a season on it. I have spent my working life being told when I can and cannot have a thing, and this is the first time the tower has had to listen to the same calendar I do. I find I do not mind it."
+    },
+    {
+      "npc_id": "rowan_herbalist",
+      "after_milestone": "greenhouse_bed_revived",
+      "order": 108,
+      "line": "That bed had been sitting there refusing to do anything for two years and I had written it off in the book. You poured something on it. I want to be clear that I am pleased and also that I have questions about the method, in that order, and only just."
     }
   ]
 }

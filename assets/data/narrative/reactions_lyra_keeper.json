@@ -124,6 +124,12 @@
       "after_milestone": "commission_survey_standing",
       "order": 115,
       "line": "Somebody will hold this ledger after me and they will not have to be watching closely to see it going wrong. That is the whole thing. I counted eleven where the book said ninety and I only found it because I happened to be the sort of person who sits in a field for four nights."
+    },
+    {
+      "npc_id": "lyra_keeper",
+      "after_milestone": "forest_roost_settled",
+      "order": 108,
+      "line": "They have stopped going up every time somebody walks under them. Do you know what a roost that is not panicking does? It feeds. It is the first thing I have been able to count twice and get the same number."
     }
   ]
 }

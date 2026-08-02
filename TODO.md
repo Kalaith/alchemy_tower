@@ -5,11 +5,12 @@
 **Long tail. A finished product is 20–25 hours of play.** Everything below is
 measured against that target; anything not listed here is considered done.
 
-Where the content currently stands (re-counted 2026-08-03; the old figures here
-were four passes stale): 14 areas and 77 gather nodes, 165 items of which 101
-are potions and 47 ingredients, 59 recipes across 5 benches plus 17 rune
-patterns and 25 mutations, 9 townsfolk with 171 reaction lines, 24 story-arc
-requests, 11 open board orders, 26 standing orders and 5 commissions, plus an
+Where the content currently stands (re-counted 2026-08-03, second count that
+day — a week of iterations moves these fast enough that stale figures mislead):
+14 areas, 85 gather nodes and 21 routes, 6 apply targets, 168 items of which 102
+are potions and 49 ingredients, 60 recipes across 5 benches plus 17 rune
+patterns and 28 mutations, 9 townsfolk with 177 reaction lines, 24 story-arc
+requests, 11 open board orders, 27 standing orders and 5 commissions, plus an
 epilogue. That is the mid-game and most of the way into the last third; the
 remaining work is what makes it a 20–25 hour game rather than a well-furnished
 8-hour one.
@@ -63,6 +64,39 @@ remaining work is what makes it a 20–25 hour game rather than a well-furnished
   All three targets now lead somewhere. `recordable_milestone_ids` knows targets
   are a fourth writer into the journal, and a new test asserts every target and
   every commission changes something beyond the journal.
+
+### Applied alchemy, widened 2026-08-03
+
+The verb shipped with exactly the three examples this file listed, and never
+grew past them: **2 `Restore`, 1 `Misfire`, across 14 areas**. Two of the four
+effect kinds had nothing anywhere in the world to pour them on, so a player who
+brewed for glow or speed had no target for it — the same shape as the four dead
+`EffectKind`s above, one layer out.
+
+Three more authored, both missing kinds now covered and the count doubled:
+
+- **The Drowned Gallery** (rock_fields, `Glow`, Fine or better) — a flooded
+  working the quarry crews abandoned; a lit bottle poured on the water shows the
+  seam. Opens **stillwater pearl** and **washvein crystal**.
+- **The Closed Hedgerow** (north_plains, `Speed`, any grade) — a season's growth
+  across the drovers' gap. Speed the hedge through to seed and it opens rather
+  than thickens. Opens **driftseed**.
+- **The Fogged Mirror** (observatory_floor, `Glow`, Excellent) — the endgame
+  area's own target, and the only one that asks for the top grade. Opens
+  **mirrorbead**.
+
+Every target opens ground, which is the rule the first three set. Six targets,
+six areas, all four effect kinds sinkable.
+
+**And the reaction guard had never walked them.** The apply-target class was the
+fourth journal writer, added on 2026-08-02, and
+`every_recorded_moment_gets_remarked_on_by_somebody` only knew the other three —
+so *no* target had ever been remarked on, including the original three, and
+nothing said so. Extended, it named six unremarked beats at once. Six reaction
+lines authored, one speaker each: Rowan on the bed, Lyra on the roost, Tarn on
+the root wall, Brin on the gallery, Elric on the hedgerow, Ione on the mirror.
+A second guard, `every_effect_a_bottle_can_carry_has_something_to_pour_it_on`,
+keeps the next `EffectKind` from shipping with nowhere to go.
 
 ## Unconnected systems — audit 2026-08-02
 

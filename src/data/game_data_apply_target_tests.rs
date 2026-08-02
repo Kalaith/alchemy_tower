@@ -359,4 +359,39 @@ mod tests {
 {shallow:#?}"
         );
     }
+
+    /// The apply-potion verb is the game's answer to "a brew is for pouring on
+    /// something, not only for drinking or handing over", and it shipped with
+    /// exactly the three examples the TODO listed — two restore, one misfire.
+    /// A whole effect kind with nothing to pour it on means a player who brews
+    /// lights has no reason to carry one anywhere but a dark node.
+    ///
+    /// Effect kinds come from the potions that exist, so this cannot go stale
+    /// against a fifth kind being authored.
+    #[test]
+    fn every_effect_a_bottle_can_carry_has_something_to_pour_it_on() {
+        use crate::data::ItemCategory;
+
+        let data = load_embedded().expect("embedded game data should load");
+        let poured = data
+            .areas
+            .iter()
+            .flat_map(|area| area.apply_targets.iter())
+            .map(|target| target.required_effect_kind.clone())
+            .collect::<std::collections::HashSet<_>>();
+
+        let unpourable = data
+            .items
+            .iter()
+            .filter(|item| item.category == ItemCategory::Potion)
+            .flat_map(|item| item.effects.iter())
+            .map(|effect| effect.kind.as_str())
+            .filter(|kind| !poured.contains(*kind))
+            .collect::<std::collections::BTreeSet<_>>();
+
+        assert!(
+            unpourable.is_empty(),
+            "effect kinds with nothing in the world to use them on: {unpourable:?}"
+        );
+    }
 }

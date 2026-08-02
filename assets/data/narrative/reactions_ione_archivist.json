@@ -192,6 +192,12 @@
       "after_milestone": "the_shelves_kept_their_own_record",
       "order": 112,
       "line": "Dust. Twenty years of it, and it has been keeping a list the entire time of which volumes came off the shelf and roughly when. He was careful with the record and could not be careful with the shelf. I know what he was reading in his last month here, and I did not have to find a single page of it to know."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_milestone": "observatory_mirror_cleared",
+      "order": 112,
+      "line": "The bloom came off in a sheet. Which means every reading taken from that ring in twenty years was taken through a haze, including the ones I have been treating as the reliable half of the record. I am going to have to go back through all of it, and I am glad."
     }
   ]
 }

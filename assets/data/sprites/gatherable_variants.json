@@ -413,6 +413,15 @@
         64
       ],
       "prompt": "A rainforest stranglerfig node: amber sap on a cut in an old trunk wrapped in fig roots, readable from above."
+    },
+    {
+      "id": "stillwater_pearl_quarry",
+      "type": "world_node_variant",
+      "world_sprite_px": [
+        64,
+        64
+      ],
+      "prompt": "A quarry stillwater pearl node: a pale pearl in undisturbed flooded gallery water, cut stone edges around it, readable from above."
     }
   ]
 }

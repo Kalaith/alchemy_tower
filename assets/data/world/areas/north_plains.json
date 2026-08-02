@@ -378,6 +378,71 @@
       "render": {
         "sprite_id": "lieflat_clover_plains"
       }
+    },
+    {
+      "id": "plains_hedgerow_driftseed_01",
+      "name": "Driftseed",
+      "item_id": "driftseed",
+      "color": [
+        214,
+        206,
+        150,
+        255
+      ],
+      "position": [
+        1160.0,
+        560.0
+      ],
+      "radius": 16.0,
+      "route_id": "hedgerow_line",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "weathers": [
+        "clear",
+        "mist"
+      ],
+      "time_windows": [
+        "morning",
+        "day",
+        "evening"
+      ],
+      "spawn_chance": 70,
+      "required_journal_milestone": "plains_hedgerow_closed",
+      "note": "The new whips catch what used to blow straight through, which is why there is suddenly seed on this side of the line.",
+      "render": {
+        "sprite_id": "driftseed_plains"
+      }
+    }
+  ],
+  "apply_targets": [
+    {
+      "id": "plains_hedgerow_gap",
+      "name": "Gap In The Hedgerow",
+      "position": [
+        1120.0,
+        470.0
+      ],
+      "radius": 38.0,
+      "color": [
+        150,
+        182,
+        120,
+        255
+      ],
+      "required_effect_kind": "speed",
+      "minimum_quality_band": "",
+      "untreated_note": "Forty feet of hedgerow went the same winter everything else did, and a hedge takes four years. Four years is three harvests of seed blowing straight through the gap.",
+      "treated_note": "The whips put on a year's growth in a fortnight and keep going. It is not a hedge yet. It is enough of one to catch what comes past it.",
+      "completion_milestones": [
+        {
+          "id": "plains_hedgerow_closed",
+          "title": "A Hedge In One Season",
+          "text": "The gap in the hedgerow was hurried rather than waited out: four years of growth argued into a fortnight. Brin has opinions about what that does to a plant's habit, and has still asked whether it can be done to the terrace rows."
+        }
+      ]
     }
   ]
 }

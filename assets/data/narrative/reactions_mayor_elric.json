@@ -145,6 +145,12 @@
       "after_milestone": "commission_road_service_running",
       "order": 118,
       "line": "There is a timetable on a board in my square. I want to be measured about this and I find that I cannot be. For nine years the answer to what happens next was whoever happens to be passing, and now it is Tuesday."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_milestone": "plains_hedgerow_closed",
+      "order": 110,
+      "line": "Forty feet of gap, three harvests of seed gone through it, and a hedge takes four years — I have that arithmetic in a ledger from before I was mayor. It took a fortnight. I am not going to pretend I know what to do with that."
     }
   ]
 }

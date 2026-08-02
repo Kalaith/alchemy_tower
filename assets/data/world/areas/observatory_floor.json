@@ -175,6 +175,65 @@
       "render": {
         "sprite_id": "lowstar_ash_observatory"
       }
+    },
+    {
+      "id": "observatory_clearsilver_bead_01",
+      "name": "Mirrorbead",
+      "item_id": "mirrorbead",
+      "color": [
+        222,
+        232,
+        242,
+        255
+      ],
+      "position": [
+        200.0,
+        300.0
+      ],
+      "radius": 16.0,
+      "route_id": "observatory_span",
+      "seasons": [],
+      "weathers": [
+        "mist",
+        "clear"
+      ],
+      "time_windows": [
+        "night"
+      ],
+      "spawn_chance": 66,
+      "required_journal_milestone": "observatory_mirror_cleared",
+      "note": "Beads form faster on clean silver, which nobody could have known while the silver was fogged.",
+      "render": {
+        "sprite_id": "mirrorbead_observatory"
+      }
+    }
+  ],
+  "apply_targets": [
+    {
+      "id": "observatory_fogged_mirror",
+      "name": "Fogged Outer Mirror",
+      "position": [
+        360.0,
+        300.0
+      ],
+      "radius": 38.0,
+      "color": [
+        206,
+        222,
+        236,
+        255
+      ],
+      "required_effect_kind": "glow",
+      "minimum_quality_band": "Excellent",
+      "untreated_note": "Twenty years of unattended weather has put a bloom on the outer silver. The lens still works. It works at about a third of what it was built for.",
+      "treated_note": "The bloom lifts off the silver in one sheet and the ring goes cold and bright. Whatever the mirror is for, it is doing it at full strength for the first time since the door was sealed.",
+      "completion_milestones": [
+        {
+          "id": "observatory_mirror_cleared",
+          "title": "The Silver Comes Back",
+          "text": "The outer mirror was fogged rather than damaged, and under a good enough light the bloom lifts away in a sheet. The ring works at what it was built for now — which means everything measured up here for twenty years was measured through a haze."
+        }
+      ]
     }
   ]
 }

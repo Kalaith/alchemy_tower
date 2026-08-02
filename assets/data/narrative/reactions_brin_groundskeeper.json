@@ -165,6 +165,12 @@
       "after_milestone": "commission_relief_post_stocked",
       "order": 116,
       "line": "Two of my crews work above that post in the cutting season and I have spent every one of those seasons doing arithmetic on the way down. Four hours to the infirmary, and the arithmetic never once came out. It still takes four hours. It is no longer four hours of nothing."
+    },
+    {
+      "npc_id": "brin_groundskeeper",
+      "after_milestone": "quarry_gallery_lit",
+      "order": 110,
+      "line": "Forty feet back under the sump, and I cut in that quarry for nine years without knowing it was there. Nobody flooded it. The pumps just stopped the year everything stopped, and the water has been sitting there ever since being none of our business."
     }
   ]
 }

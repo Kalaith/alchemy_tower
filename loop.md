@@ -1686,10 +1686,35 @@ Stop the loop and report if:
   fixture pushed twelve untitled beats — the fixture now titles them, which is what a beat is.
   **168 items, 185 tests; no biome is a corridor.**
 
+- **2026-08-03 — the verb `TODO.md` calls "the largest open gap" shipped with three examples and
+  never grew past them.** `apply_targets` went in on 2026-08-02 with exactly the three the TODO
+  itself listed — **2 `Restore`, 1 `Misfire`, over 14 areas** — so two of the four `EffectKind`s had
+  nothing anywhere in the world to pour them on. Brew for glow or speed and there was no target for
+  it; the same shape as the four dead effect kinds one layer out.
+  Three authored, doubling the count and covering both missing kinds, each one opening ground the
+  way the first three do: **The Drowned Gallery** (rock_fields, glow, Fine — a flooded working; light
+  on the water shows the seam) opens stillwater pearl and washvein crystal; **The Closed Hedgerow**
+  (north_plains, speed, any grade — speed the hedge through to seed and it opens rather than
+  thickens) opens driftseed; **The Fogged Mirror** (observatory_floor, glow, **Excellent**, the only
+  one asking the top grade) opens mirrorbead. 6 targets, 6 areas, 4/4 kinds sinkable.
+  ***And extending the reaction guard found that no target had ever been remarked on.***
+  `every_recorded_moment_gets_remarked_on_by_somebody` walked three of the journal's four writers;
+  apply targets were the fourth, added the day before, and the guard had never been taught about
+  them. Extended, it named **six** unremarked beats in one go — including the three from the pass
+  that built the verb. Six lines authored, one speaker each: Rowan on the bed, Lyra on the roost,
+  Tarn on the root wall, Brin on the gallery, Elric on the hedgerow, Ione on the mirror.
+  *Second guard:* `every_effect_a_bottle_can_carry_has_something_to_pour_it_on`, verified to bite —
+  it names `"speed"` when the two new targets are removed.
+  *The mistake worth keeping:* a guard that walks a class of thing has to be revisited when a new
+  writer joins that class, and nothing enforces that. The guard read as coverage while covering
+  three quarters of the ground.
+  **186 tests; all four effect kinds have somewhere to land.**
+
 ## Deferred (needs a new system; not for this loop)
 
-- Apply-potion-to-target flow (wilted plant, frightened creature, blocked path) — `TODO.md` calls it
-  out as the unexpressed premise, but it is a new verb, not content.
+- ~~Apply-potion-to-target flow (wilted plant, frightened creature, blocked path)~~ **Built
+  2026-08-02, widened 2026-08-03.** It was a new verb, so it sat here; once built it became content
+  like anything else — six targets across six areas now, all four effect kinds covered.
 - World/character art pass and hand-authored ambient audio.
 - Post-ending sandbox. **The scope question resolved (2026-08-02): long tail, 20-25 hours for a
   finished product — see `TODO.md`. So this is in scope as content, but it still needs somewhere for

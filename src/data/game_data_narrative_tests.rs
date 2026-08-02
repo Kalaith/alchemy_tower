@@ -176,6 +176,18 @@ pub(crate) mod tests {
                     .flat_map(|recipe| recipe.discovery_milestones.iter())
                     .map(|milestone| milestone.id.clone()),
             )
+            // And treated things, which are the *fourth* writer into the
+            // journal. `recordable_milestone_ids` has known that since the
+            // apply-potion verb shipped and this check never did — so the whole
+            // class went unremarked, and three new targets could be authored
+            // with the suite green and nobody in the valley saying a word.
+            .chain(
+                data.areas
+                    .iter()
+                    .flat_map(|area| area.apply_targets.iter())
+                    .flat_map(|target| target.completion_milestones.iter())
+                    .map(|milestone| milestone.id.clone()),
+            )
             .filter(|id| !RECORDED_AT_NEW_GAME.contains(&id.as_str()))
             .filter(|id| !spoken_for.contains(id))
             .collect::<std::collections::BTreeSet<_>>();
