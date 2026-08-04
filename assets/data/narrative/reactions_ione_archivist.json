@@ -218,6 +218,13 @@
       "after_milestone": "a_second_hand_in_the_room",
       "order": 132,
       "line": "Face up, and dated, and kept. I have written four separate notes to myself about why that matters and thrown all four away, which I am aware is funny. The short version is that I can finally check somebody's working against what they did next."
+    },
+    {
+      "npc_id": "ione_archivist",
+      "after_quest": "",
+      "after_milestone": "commission_teaching_place_endowed",
+      "order": 142,
+      "line": "The working book has a column for corrections and another for who made them. I added the second column. A method that cannot survive another name beside it is not a method, and the archive has had enough of those."
     }
   ]
 }

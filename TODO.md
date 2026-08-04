@@ -865,6 +865,30 @@ content with no destination.
   headroom, which is roughly one more pass of this size — and when it fails the
   answer is another commission, not smaller rewards. The demand is the content;
   the sink is the tuning.
+- ~~Ten plain recipe outputs were still wanted by nothing~~ **Fixed
+  2026-08-05.** Seven were at the entry cauldron, two at the containment cold
+  bench and one at the archive reading bench. Unlike the greenhouse six they
+  do not share a mechanical cause; they share the quieter fact that **their own
+  descriptions already name what they are for**. The moonmoth salve is easy on
+  frightened patients at night, the sluicewater tonic is asked for by road
+  crews by name, the cloudfloor lantern is the light Lyra proved her animals do
+  not look at, the openfield draught is the first right answer a new alchemist
+  can taste. Ten supply orders let those existing buyers actually buy them.
+  Filed in `quests_board_supply.json` because these are ordinary stock lines,
+  not emergencies or diagnoses: somebody has run out and puts in an order.
+  `every_plain_brew_has_somewhere_to_go` is the stronger guard the completed
+  sweep earns. It asks every normal recipe for an exact structural destination
+  — request, reagent slot, rune input or gate — while morph and rune outputs
+  keep their own verb-specific checks. **10 → 0 sinkless plain brews.**
+  The economy tripwire fired exactly as intended: the accumulated board cycle
+  had already moved from 13,086 to 13,662 and these ten raise it to **16,006**,
+  above the 15,300-coin commission sink. Rewards stayed intact. **The Teaching
+  Place** is a seventh, post-ending commission: eight Masterwork Second-Draft
+  Tonics and 6,800 coins turn the second bench's one-year stipend into a
+  standing teaching line. It follows the 5,200-coin bench, lands visibly as a
+  teaching table, and brings the full sink to **22,100**. The player is funding
+  succession rather than another emergency; the person at the bench may change
+  and the budget line does not.
 
 ### The schedule moved nine people around and their words stayed put, 2026-08-03
 

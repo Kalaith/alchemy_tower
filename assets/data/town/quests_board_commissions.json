@@ -169,6 +169,36 @@
           "text": "A second bench along the east wall of the entry laboratory, a stipend for a year, and six purified draughts on a shelf above it to measure against. The tower has been one person's for twenty years twice over, and both times that was the problem rather than the arrangement. It is not the arrangement now. Whoever stands at that bench will be wrong about things, in the margins, in ink, where somebody can read it."
         }
       ]
+    },
+    {
+      "id": "commission_teaching_place",
+      "title": "Commission: The Teaching Place",
+      "description": "Eight Masterwork second-draft tonics and 6,800 coins turn the second bench's one-year stipend into a standing teaching place: wages, lodging, paper, and a line in the town budget that comes back next year whoever happens to sit there. The bottles are the first reference shelf made entirely from somebody's corrected work.",
+      "required_item_id": "seconddraft_tonic",
+      "required_amount": 8,
+      "reward_coins": 0,
+      "coin_cost": 6800,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Masterwork",
+      "required_trait": "restorative",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [
+        "commission_second_bench"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 0,
+      "required_mastered_recipe": "seconddraft_tonic_recipe",
+      "required_journal_milestone": "a_second_hand_in_the_room",
+      "repeatable": false,
+      "repeat_cooldown_days": 0,
+      "rapport_npc_id": "mayor_elric",
+      "completion_milestones": [
+        {
+          "id": "commission_teaching_place_endowed",
+          "title": "The Line That Comes Back Next Year",
+          "text": "The second bench is funded again before its first year has run out. Wages, lodging and paper are a standing line now, not a rescue and not a favour. The name beside it can change. The line does not. A tower that can teach its work is no longer one person's tower."
+        }
+      ]
     }
   ]
 }

@@ -570,6 +570,103 @@
           "pulse": true
         }
       ]
+    },
+    {
+      "id": "entry_lab_teaching_table",
+      "after_any_journal_milestone": [
+        "commission_teaching_place_endowed"
+      ],
+      "shapes": [
+        {
+          "kind": "rect",
+          "x": 650,
+          "y": 354,
+          "w": 110,
+          "h": 36,
+          "color": [
+            124,
+            100,
+            74,
+            255
+          ]
+        },
+        {
+          "kind": "rect",
+          "x": 650,
+          "y": 346,
+          "w": 110,
+          "h": 10,
+          "color": [
+            158,
+            132,
+            100,
+            255
+          ]
+        },
+        {
+          "kind": "rect",
+          "x": 660,
+          "y": 334,
+          "w": 28,
+          "h": 18,
+          "color": [
+            232,
+            226,
+            206,
+            255
+          ]
+        },
+        {
+          "kind": "rect",
+          "x": 696,
+          "y": 332,
+          "w": 24,
+          "h": 20,
+          "color": [
+            220,
+            214,
+            194,
+            255
+          ]
+        },
+        {
+          "kind": "rect",
+          "x": 728,
+          "y": 335,
+          "w": 22,
+          "h": 17,
+          "color": [
+            236,
+            230,
+            212,
+            255
+          ]
+        },
+        {
+          "kind": "circle",
+          "x": 672,
+          "y": 414,
+          "radius": 14.0,
+          "color": [
+            112,
+            88,
+            68,
+            255
+          ]
+        },
+        {
+          "kind": "circle",
+          "x": 738,
+          "y": 414,
+          "radius": 14.0,
+          "color": [
+            112,
+            88,
+            68,
+            255
+          ]
+        }
+      ]
     }
   ],
   "gather_nodes": [

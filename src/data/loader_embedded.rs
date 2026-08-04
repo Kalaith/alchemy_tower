@@ -258,6 +258,15 @@ const QUEST_SOURCES: &[(&str, &str)] = &[
         "town/quests_board_ground",
         include_str!("../../assets/data/town/quests_board_ground.json"),
     ),
+    // The plain supply lines: bottles the valley simply uses, ordered because
+    // somebody has run out rather than because anything is wrong. Filed apart
+    // because that is what they have in common — these are the last ten potions
+    // in the game that nothing at all asked for, and the reason each is here is
+    // that its own description had already named a buyer.
+    (
+        "town/quests_board_supply",
+        include_str!("../../assets/data/town/quests_board_supply.json"),
+    ),
 ];
 
 #[derive(Debug, Deserialize)]

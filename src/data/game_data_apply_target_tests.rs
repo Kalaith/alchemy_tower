@@ -674,6 +674,59 @@ mod tests {
         );
     }
 
+    /// The per-bench floor exposed a final tail of ten ordinary recipes whose
+    /// output nothing in the game asked for: seven at the entry cauldron, two
+    /// at the cold bench and one at the reading bench. They had no shared
+    /// mechanical cause. What they did share was authored prose that already
+    /// named a buyer, so the missing half was demand rather than another recipe
+    /// layer.
+    ///
+    /// With that tail routed, the stronger invariant is honest: every ordinary
+    /// recipe ends in a request, a reagent slot, a rune pattern or a gate. The
+    /// morph and rune-output counterparts remain separate because they test the
+    /// rewards for different verbs.
+    #[test]
+    fn every_plain_brew_has_somewhere_to_go() {
+        let data = load_embedded().expect("embedded game data should load");
+
+        let mut wanted = std::collections::HashSet::new();
+        for quest in &data.quests {
+            wanted.insert(quest.required_item_id.clone());
+        }
+        for recipe in &data.recipes {
+            for ingredient in &recipe.ingredients {
+                wanted.insert(ingredient.item_id.clone());
+            }
+        }
+        for rune in &data.rune_recipes {
+            wanted.insert(rune.input_item_id.clone());
+        }
+        for area in &data.areas {
+            for warp in &area.warps {
+                wanted.insert(warp.required_item_id.clone());
+            }
+        }
+
+        let mut unwanted = data
+            .recipes
+            .iter()
+            .filter(|recipe| !wanted.contains(&recipe.output_item_id))
+            .map(|recipe| {
+                format!(
+                    "{} makes {}, which nothing asks for",
+                    recipe.id, recipe.output_item_id
+                )
+            })
+            .collect::<Vec<_>>();
+
+        unwanted.sort();
+        assert!(
+            unwanted.is_empty(),
+            "plain brews with nowhere to go:
+{unwanted:#?}"
+        );
+    }
+
     /// Second-order brewing existed at exactly one bench in a five-bench tower,
     /// which made it a feature of the archive rather than a tier. The measure
     /// that showed it: counting, per bench, how many of its outputs anything

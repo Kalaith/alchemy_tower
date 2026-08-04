@@ -2185,6 +2185,33 @@ Stop the loop and report if:
   **27 → 28 routes, 93 → 96 nodes, 176 → 179 items, 64 → 65 recipes, 104 → 105 quests; 209 tests.**
   `screenshots/hud/greenhouse_glass_line.png`.
 
+- **2026-08-05 — the last ten bottles finally reached the people their labels already named.**
+  Axis: board demand, finishing the sinkless-output sweep. The greenhouse pass left **ten** ordinary
+  recipe outputs wanted by nothing: seven at the entry cauldron, two at the cold bench and one at
+  the reading bench. They have no shared tier or mechanic. They do share authored descriptions that
+  already say who uses them — the road crews ask for Sluicewater Tonic by name, Wren wrote a margin
+  note about Downwash Draught, and Lyra spent a season proving creatures do not look up when a
+  Cloudfloor Lantern comes on. The missing content was not another recipe. It was letting those
+  buyers place the order.
+  Ten repeatable supply lines now do that, spread across seven townsfolk and gated where their use
+  requires it: the cold bench, the pass, the second bench, a buyer's own arc, or simply enough work
+  at the cauldron to make the request timely. They are filed together in `quests_board_supply.json`
+  because they are ordinary stock rather than crises — somebody has run out, so the board asks for
+  more. `every_plain_brew_has_somewhere_to_go` makes the result a rule: every normal recipe output
+  must be named by a request, a reagent slot, a rune input or a gate. The morph and rune-output
+  guards remain separate because those protect the rewards for different verbs.
+  ***The economy tripwire fired.*** The board cycle had crept from 13,086 to 13,662 after the last
+  two world passes; these ten orders take it to **16,006**, over the 15,300-coin endgame sink. The
+  guard's own instruction is the right one: keep the demand and author another commission. **The
+  Teaching Place** follows the second bench: eight Masterwork Second-Draft Tonics and **6,800 coins**
+  turn its one-year stipend into a standing teaching line — wages, lodging, paper and a budget entry
+  that comes back next year whoever sits there. It is the most expensive and deepest commission,
+  asks for a mastered post-ending formula, and lands as a second working table in the entry lab.
+  Elric writes the next year's line before this one is half spent; Ione adds a column for who made
+  each correction. A tower that can teach its work is no longer one person's tower.
+  **10 → 0 sinkless plain brews; 105 → 116 quests; board cycle 13,662 → 16,006; commission sink
+  15,300 → 22,100; 209 → 210 tests.**
+
 ## Deferred (needs a new system; not for this loop)
 
 - ~~Apply-potion-to-target flow (wilted plant, frightened creature, blocked path)~~ **Built

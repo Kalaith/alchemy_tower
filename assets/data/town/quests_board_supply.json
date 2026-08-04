@@ -1,0 +1,201 @@
+{
+  "quests": [
+    {
+      "id": "board_supply_settled_handling",
+      "title": "Pens: A Light They Do Not Look At",
+      "description": "Two cloudfloor lanterns for the handling nights. Lyra spent a season establishing that the creatures do not look up when this one comes on, and about four words asking for it, which she says is the correct ratio and that nobody ever believes her.",
+      "required_item_id": "cloudfloor_lantern",
+      "required_amount": 2,
+      "reward_coins": 208,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Fine",
+      "required_trait": "",
+      "required_effect_kind": "glow",
+      "prerequisite_quests": [
+        "containment_for_lyra"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 24,
+      "repeatable": true,
+      "repeat_cooldown_days": 7,
+      "rapport_npc_id": "lyra_keeper"
+    },
+    {
+      "id": "board_supply_duskshy",
+      "title": "Pens: For The Ones That Startle At Dusk",
+      "description": "Three duskbell tonics, and the note is careful to say these are for handling rather than for keeping. Something dim and calm at the hour the animals are least sure of anything. Lyra will not use a brighter one and has stopped explaining why to people who ask once.",
+      "required_item_id": "duskbell_tonic",
+      "required_amount": 3,
+      "reward_coins": 126,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Serviceable",
+      "required_trait": "",
+      "required_effect_kind": "glow",
+      "prerequisite_quests": [],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 12,
+      "repeatable": true,
+      "repeat_cooldown_days": 4,
+      "rapport_npc_id": "lyra_keeper"
+    },
+    {
+      "id": "board_supply_margin_note",
+      "title": "Infirmary: The One She Wrote A Note About",
+      "description": "Four downwash draughts. Wren has a shelf card for this with a line pencilled in the margin about where the bloom grows and why, and she has said out loud that she is not comfortable with how cheap it is for how well it works. She is ordering it anyway.",
+      "required_item_id": "downwash_draught",
+      "required_amount": 4,
+      "reward_coins": 232,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Fine",
+      "required_trait": "",
+      "required_effect_kind": "speed",
+      "prerequisite_quests": [
+        "wellside_relief_for_mira"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 26,
+      "repeatable": true,
+      "repeat_cooldown_days": 6,
+      "rapport_npc_id": "wren_physician"
+    },
+    {
+      "id": "board_supply_night_rounds",
+      "title": "Counter: Something For The Night Rounds",
+      "description": "Four moonmoth salves for the counter. Mira wants them for the patients who wake badly and cannot be given a lamp, which she notes is more people than anybody plans for and always at the hour when nobody is available to sit with them.",
+      "required_item_id": "moonmoth_salve",
+      "required_amount": 4,
+      "reward_coins": 144,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Serviceable",
+      "required_trait": "",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [
+        "healing_for_mira"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 8,
+      "repeatable": true,
+      "repeat_cooldown_days": 4,
+      "rapport_npc_id": "mira_apothecary"
+    },
+    {
+      "id": "board_supply_first_thing",
+      "title": "Reference Shelf: The First Thing That Works",
+      "description": "Six openfield draughts for the shelf beside the second bench, and Ione is explicit that this is not a medicine order. It is the plainest brew in the book and the first one a great many alchemists in this valley ever made that actually worked. Somebody learning at that bench should be able to take one down and taste what right is supposed to taste like.",
+      "required_item_id": "openfield_draught",
+      "required_amount": 6,
+      "reward_coins": 384,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 0,
+      "required_journal_milestone": "commission_second_bench_staffed",
+      "repeatable": true,
+      "repeat_cooldown_days": 12,
+      "rapport_npc_id": "ione_archivist"
+    },
+    {
+      "id": "board_supply_by_name",
+      "title": "Cut: The One They Ask For By Name",
+      "description": "Four sluicewater tonics for the road crews. Brin passes on, without endorsement, that the men say it tastes like the smell of a wet quarry, and that they mean this as a recommendation. He has given up arguing about it and simply orders more.",
+      "required_item_id": "sluicewater_tonic",
+      "required_amount": 4,
+      "reward_coins": 272,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Fine",
+      "required_trait": "",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [
+        "ruin_survey_for_brin"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 18,
+      "repeatable": true,
+      "repeat_cooldown_days": 5,
+      "rapport_npc_id": "brin_groundskeeper"
+    },
+    {
+      "id": "board_supply_exposed_road",
+      "title": "Waystation: For The Exposed Mile",
+      "description": "Three sunwarden tonics for the top of the switchback. Tarn's point is that the pass is not dangerous, it is exposed, and that those are different problems with different answers. Nobody has ever been hurt up there by the cold. They have been worn down by four hours of it.",
+      "required_item_id": "sunwarden_tonic",
+      "required_amount": 3,
+      "reward_coins": 138,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Serviceable",
+      "required_trait": "",
+      "required_effect_kind": "speed",
+      "prerequisite_quests": [
+        "waystation_light_for_tarn"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 30,
+      "repeatable": true,
+      "repeat_cooldown_days": 5,
+      "rapport_npc_id": "tarn_wayfarer"
+    },
+    {
+      "id": "board_supply_cloud_line",
+      "title": "Waystation: Above The Cloud Line",
+      "description": "Two rimeflower cordials, which Tarn is buying partly for the carters and partly because he wants one on the shelf at the station. It tastes the way the air does up there, and he has been trying to explain that air to people at the bottom of the pass for eleven years without once managing it.",
+      "required_item_id": "rimeflower_cordial",
+      "required_amount": 2,
+      "reward_coins": 268,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "",
+      "required_effect_kind": "restore",
+      "prerequisite_quests": [
+        "winter_crossing_for_tarn"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 42,
+      "repeatable": true,
+      "repeat_cooldown_days": 9,
+      "rapport_npc_id": "tarn_wayfarer"
+    },
+    {
+      "id": "board_supply_one_clear_beam",
+      "title": "Archive: One Beam, Not A Room Full",
+      "description": "Three stargrove elixirs. Ione has enough light in the reading room and none of it goes where she points it. What a page wants is one clear beam and the rest of the floor left dark, and she notes that this is the opposite of what every lamp she has ever been given was designed to do.",
+      "required_item_id": "stargrove_elixir",
+      "required_amount": 3,
+      "reward_coins": 216,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Fine",
+      "required_trait": "",
+      "required_effect_kind": "glow",
+      "prerequisite_quests": [
+        "star_elixir_for_ione"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 22,
+      "repeatable": true,
+      "repeat_cooldown_days": 6,
+      "rapport_npc_id": "ione_archivist"
+    },
+    {
+      "id": "board_supply_four_hours_back",
+      "title": "Town Hall: Four Hours, Given Back Slowly",
+      "description": "Two lowstar lanterns for the hall. Elric wants a light that outlasts a meeting rather than one that outlasts a walk, and he is aware that this is the least urgent order anybody has ever placed with the tower. He regards being able to place an unurgent order as the entire point.",
+      "required_item_id": "lowstar_lantern",
+      "required_amount": 2,
+      "reward_coins": 356,
+      "giver_npc_id": "quest_board",
+      "minimum_quality_band": "Excellent",
+      "required_trait": "",
+      "required_effect_kind": "glow",
+      "prerequisite_quests": [
+        "ledger_proof_for_elric"
+      ],
+      "required_unlocked_warp": "",
+      "minimum_total_brews": 38,
+      "repeatable": true,
+      "repeat_cooldown_days": 10,
+      "rapport_npc_id": "mayor_elric"
+    }
+  ]
+}

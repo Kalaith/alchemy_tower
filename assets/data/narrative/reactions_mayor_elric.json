@@ -158,6 +158,13 @@
       "after_milestone": "commission_second_bench_staffed",
       "order": 130,
       "line": "Two benches. I have been mayor for nine years and this is the first line in the budget I have written that is not about a thing going wrong. A stipend, a year, and a shelf to measure against. If the next one is any good we will not need to send anybody up that hill at all, and I would like to be the mayor who arranged that rather than the one who kept being rescued."
+    },
+    {
+      "npc_id": "mayor_elric",
+      "after_quest": "",
+      "after_milestone": "commission_teaching_place_endowed",
+      "order": 140,
+      "line": "I wrote the stipend into next year's budget before this year's was half spent. The council asked me for the name. I told them the name was not the part we were funding, and for once I had the figures ready before they found a second question."
     }
   ]
 }
