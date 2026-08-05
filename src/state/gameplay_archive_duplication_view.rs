@@ -1,4 +1,3 @@
-use super::gameplay_duplication::duplication_cost;
 use super::gameplay_overlay_window::{paged_window, ARCHIVE_PAGE_ROWS};
 use super::GameplayState;
 use crate::content::{input_bindings, ui_copy, ui_format};
@@ -35,7 +34,7 @@ impl GameplayState {
             .take(6)
             .enumerate()
             .filter_map(|(index, item_id)| {
-                let item = data.item(item_id)?;
+                data.item(item_id)?;
                 Some(ArchiveDuplicationItemEntry {
                     title: data.item_name(item_id).to_owned(),
                     detail: self.inventory_reference_summary(data, item_id),
@@ -51,7 +50,10 @@ impl GameplayState {
                                     .unwrap_or_default()
                                     .to_string(),
                             ),
-                            ("cost", &duplication_cost(item).to_string()),
+                            (
+                                "cost",
+                                &self.duplication_cost_for_item(data, item_id).to_string(),
+                            ),
                         ],
                     ),
                     enabled: self.can_duplicate_item(data, item_id),
@@ -67,7 +69,10 @@ impl GameplayState {
                 target_text: ui_format("overlay_target", &[("item", &item.name)]),
                 coin_text: ui_format(
                     "overlay_coins",
-                    &[("count", &duplication_cost(item).to_string())],
+                    &[(
+                        "count",
+                        &self.duplication_cost_for_item(data, &item.id).to_string(),
+                    )],
                 ),
                 catalyst_text: ui_format(
                     "overlay_archive_duplication_catalyst",

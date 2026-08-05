@@ -11,13 +11,13 @@ checks pass.
 
 ## 1. Restore the published WebGL runtime
 
-- [ ] Make the shared publisher deploy the JavaScript bundle belonging to the
+- [x] Make the shared publisher deploy the JavaScript bundle belonging to the
   resolved Macroquad version, including enabled Macroquad plugins such as audio,
   instead of deploying only Miniquad's `gl.js`.
-- [ ] Add a publisher regression check that rejects a runtime bundle missing an
+- [x] Add a publisher regression check that rejects a runtime bundle missing an
   import required by the built game, with `audio_source_is_loaded` covering the
   failure observed in this review.
-- [ ] Publish Alchemy Tower and verify in a browser that the game reaches its
+- [x] Publish Alchemy Tower and verify in a browser that the game reaches its
   menu without missing-import warnings.
 
 Ownership: `rust_management`, because every game uses the shared runtime under
@@ -25,13 +25,13 @@ Ownership: `rust_management`, because every game uses the shared runtime under
 
 ## 2. Preserve bottle grades through transformations
 
-- [ ] Rune imbuing must consume a definite source bottle and transfer its live
+- [x] Rune imbuing must consume a definite source bottle and transfer its live
   quality score, band, and inherited traits to the output bottle.
-- [ ] Potion duplication must copy a definite source bottle's live grade and
+- [x] Potion duplication must copy a definite source bottle's live grade and
   traits rather than creating an untracked Serviceable bottle.
-- [ ] Add regression tests using mixed-grade stacks and graded rune-only quest
+- [x] Add regression tests using mixed-grade stacks and graded rune-only quest
   outputs.
-- [ ] Prove that Mira's Fine Fieldwide Poultices and Elric's Excellent
+- [x] Prove that Mira's Fine Fieldwide Poultices and Elric's Excellent
   Nightwatch Lanterns can be produced and delivered, reopening the Southern
   Pass progression chain.
 

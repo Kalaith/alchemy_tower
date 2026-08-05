@@ -32,28 +32,100 @@ impl GameplayState {
     /// File the bottles a brew just produced, so what they are worth travels
     /// with them instead of being flattened into a best-ever record.
     pub(super) fn record_bottle_batch(&mut self, resolution: &BrewResolution<'_>) {
+        self.file_bottle_batch(BottleBatchEntry {
+            item_id: resolution.output_item_id.clone(),
+            quality_score: resolution.quality_score,
+            quality_band: resolution.quality_band.to_owned(),
+            traits: resolution.inherited_traits.clone(),
+            count: resolution.output_amount,
+        });
+    }
+
+    /// Put a known group of identical bottles on the shelf. Transformations use
+    /// this as well as brewing so a bottle never becomes plain inventory merely
+    /// because it passed through a rune or the archive console.
+    fn file_bottle_batch(&mut self, bottle: BottleBatchEntry) {
         let batches = self
             .progression
             .bottle_stock
-            .entry(resolution.output_item_id.clone())
+            .entry(bottle.item_id.clone())
             .or_default();
         // Identical bottles merge, so brewing the same thing forty times keeps
         // one row rather than forty.
         if let Some(existing) = batches.iter_mut().find(|batch| {
-            batch.quality_score == resolution.quality_score
-                && batch.traits == resolution.inherited_traits
+            batch.quality_score == bottle.quality_score && batch.traits == bottle.traits
         }) {
-            existing.count = existing.count.saturating_add(resolution.output_amount);
+            existing.count = existing.count.saturating_add(bottle.count);
         } else {
-            batches.push(BottleBatchEntry {
-                item_id: resolution.output_item_id.clone(),
-                quality_score: resolution.quality_score,
-                quality_band: resolution.quality_band.to_owned(),
-                traits: resolution.inherited_traits.clone(),
-                count: resolution.output_amount,
-            });
+            batches.push(bottle);
         }
         batches.sort_by_key(|batch| batch.quality_score);
+    }
+
+    /// The least exceptional bottle represented by an item row. Plain shop or
+    /// gift stock goes before brewed batches, matching sales and deliveries.
+    pub(super) fn worst_held_bottle(
+        &self,
+        data: &GameData,
+        item_id: &str,
+    ) -> Option<BottleBatchEntry> {
+        if self.inventory.get(item_id).copied().unwrap_or_default() == 0 {
+            return None;
+        }
+        if self.untracked_bottles(item_id) > 0 {
+            let item = data.item(item_id)?;
+            return Some(BottleBatchEntry {
+                item_id: item_id.to_owned(),
+                quality_score: item.quality,
+                quality_band: quality_band(item.quality).to_owned(),
+                traits: item.traits.clone(),
+                count: 1,
+            });
+        }
+        self.live_batches(item_id)
+            .into_iter()
+            .next()
+            .map(|mut batch| {
+                batch.count = 1;
+                batch
+            })
+    }
+
+    /// Consume one definite bottle and refile it under a transformed item id.
+    /// The new item's authored traits describe the rune/pattern it acquired;
+    /// the source batch retains everything the original brew inherited.
+    pub(super) fn transform_worst_held_bottle(
+        &mut self,
+        data: &GameData,
+        input_item_id: &str,
+        output_item_id: &str,
+    ) -> bool {
+        let Some(mut bottle) = self.worst_held_bottle(data, input_item_id) else {
+            return false;
+        };
+        let Some(output) = data.item(output_item_id) else {
+            return false;
+        };
+        for authored_trait in &output.traits {
+            if !bottle.traits.contains(authored_trait) {
+                bottle.traits.push(authored_trait.clone());
+            }
+        }
+        self.take_from_inventory(input_item_id, 1);
+        bottle.item_id = output_item_id.to_owned();
+        *self.inventory.entry(output_item_id.to_owned()).or_insert(0) += 1;
+        self.file_bottle_batch(bottle);
+        true
+    }
+
+    /// Add a copy of the definite bottle the console displays for this item.
+    pub(super) fn duplicate_worst_held_bottle(&mut self, data: &GameData, item_id: &str) -> bool {
+        let Some(bottle) = self.worst_held_bottle(data, item_id) else {
+            return false;
+        };
+        *self.inventory.entry(item_id.to_owned()).or_insert(0) += 1;
+        self.file_bottle_batch(bottle);
+        true
     }
 
     /// Take bottles off the shelf: the one way anything leaves the inventory.
