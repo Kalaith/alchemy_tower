@@ -23,6 +23,23 @@ impl GameplayState {
         self.world.day_clock_seconds = (minutes / (24.0 * 60.0)) * self.world.day_length_seconds;
     }
 
+    /// Move the live clock and refresh time-gated ground at the instant its
+    /// window changes. Area entry and midnight are not substitutes: a player
+    /// waiting beside a night flower should see it arrive without zoning out.
+    pub(super) fn advance_clock(&mut self, data: &GameData, seconds: f32) {
+        let previous_window = self.current_time_window();
+        let mut advanced_day = false;
+        self.world.day_clock_seconds += seconds;
+        while self.world.day_clock_seconds >= data.config.day_length_seconds {
+            self.world.day_clock_seconds -= data.config.day_length_seconds;
+            self.advance_to_next_day(data, true);
+            advanced_day = true;
+        }
+        if !advanced_day && self.current_time_window() != previous_window {
+            self.refresh_available_nodes(data);
+        }
+    }
+
     pub(super) fn advance_to_next_day(&mut self, data: &GameData, with_feedback: bool) {
         self.world.day_index += 1;
         self.world.gathered_nodes.clear();
@@ -41,6 +58,9 @@ impl GameplayState {
             self.advance_to_next_day(data, false);
         }
         self.set_clock_minutes(wake_minutes);
+        // Day rollover refreshed at the hour the player went to bed. The final
+        // wake hour is the condition the ground must actually answer to.
+        self.refresh_available_nodes(data);
         let tuning = &data.config.balance.vitality;
         let recovered = if forced_home {
             tuning.collapse_restores
@@ -74,5 +94,50 @@ impl GameplayState {
         if (60.0..120.0).contains(&minutes) || self.is_exhausted() {
             self.sleep_until(data, 10.0 * 60.0, true);
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::GameplayState;
+
+    #[test]
+    fn waiting_across_a_window_refreshes_the_ground_without_changing_area() {
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let mut state = GameplayState::new(&data);
+        let node_id = "archive_inkgall_01";
+        state.world.current_area_id = "archive_floor".to_owned();
+        state.set_clock_minutes(1261.0);
+
+        let day = (0..40)
+            .find(|day| {
+                state.world.day_index = *day;
+                state.refresh_available_nodes(&data);
+                state.world.available_nodes.contains(node_id)
+            })
+            .expect("the night ink should have a valid day in the campaign cycle");
+        state.world.day_index = day;
+        let two_minutes = state.world.day_length_seconds * 2.0 / (24.0 * 60.0);
+
+        state.set_clock_minutes(1259.0);
+        state.refresh_available_nodes(&data);
+        assert_eq!(state.current_time_window(), "evening");
+        assert!(!state.world.available_nodes.contains(node_id));
+        state.advance_clock(&data, two_minutes);
+        assert_eq!(state.current_time_window(), "night");
+        assert!(
+            state.world.available_nodes.contains(node_id),
+            "night ground did not arrive when night did"
+        );
+
+        state.set_clock_minutes(359.0);
+        state.refresh_available_nodes(&data);
+        assert!(state.world.available_nodes.contains(node_id));
+        state.advance_clock(&data, two_minutes);
+        assert_eq!(state.current_time_window(), "morning");
+        assert!(
+            !state.world.available_nodes.contains(node_id),
+            "night ground remained after morning arrived"
+        );
     }
 }

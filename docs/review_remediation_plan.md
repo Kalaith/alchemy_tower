@@ -37,11 +37,11 @@ Ownership: `rust_management`, because every game uses the shared runtime under
 
 ## 3. Refresh world availability when its conditions change
 
-- [ ] Refresh gather-node availability when the clock crosses a time-window
+- [x] Refresh gather-node availability when the clock crosses a time-window
   boundary, not only on area entry or day rollover.
-- [ ] Refresh the current area's nodes after a treatment or completed story beat
+- [x] Refresh the current area's nodes after a treatment or completed story beat
   changes their quest/milestone gates.
-- [ ] Add tests that wait across morning/day/evening/night boundaries without
+- [x] Add tests that wait across morning/day/evening/night boundaries without
   changing area, and tests that restore a same-area gated node.
 
 ## 4. Restore the intended reveal order

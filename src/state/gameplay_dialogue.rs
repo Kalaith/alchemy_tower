@@ -91,6 +91,7 @@ impl GameplayState {
                 }
             }
             self.push_quest_completion_milestones(quest);
+            self.refresh_available_nodes(data);
             self.trigger_quest_complete_feedback(dialogue_quest_text::complete_toast(&quest.title));
             self.runtime.status_text = dialogue_quest_text::delivered_status(data, quest);
         } else {

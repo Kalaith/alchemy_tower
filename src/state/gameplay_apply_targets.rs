@@ -76,6 +76,7 @@ impl GameplayState {
         for milestone in &target.completion_milestones {
             self.push_journal_milestone(&milestone.id, &milestone.title, &milestone.text);
         }
+        self.refresh_available_nodes(data);
         self.trigger_quest_complete_feedback(ui_format(
             "target_treated_toast",
             &[("name", &target.name)],
@@ -211,6 +212,62 @@ mod tests {
         assert!(
             state.bottle_for_target(&data, &target).is_none(),
             "a plain bottle should not satisfy a Masterwork demand"
+        );
+    }
+
+    #[test]
+    fn a_treatment_opens_its_same_area_ground_immediately() {
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let mut state = GameplayState::new(&data);
+        let area = data
+            .area("moonlit_forest")
+            .expect("the forest should exist");
+        let target = area
+            .apply_targets
+            .iter()
+            .find(|target| target.id == "forest_startled_roost")
+            .expect("the startled roost should exist")
+            .clone();
+        let milestone = "forest_roost_settled";
+        let node_id = "forest_settled_roost_01";
+        state.world.current_area_id = area.id.clone();
+        state.set_clock_minutes(1320.0);
+
+        // Find a day on which season, weather and daily roll all allow the node;
+        // then remove the temporary gate so the treatment is the only change.
+        state.push_journal_milestone(milestone, "", "");
+        let day = (0..40)
+            .find(|day| {
+                state.world.day_index = *day;
+                state.refresh_available_nodes(&data);
+                state.world.available_nodes.contains(node_id)
+            })
+            .expect("the settled roost should have a valid spawn day");
+        state
+            .progression
+            .journal_milestones
+            .retain(|entry| entry.id != milestone);
+        state.world.day_index = day;
+        state.refresh_available_nodes(&data);
+        assert!(!state.world.available_nodes.contains(node_id));
+
+        let bottle = data
+            .items
+            .iter()
+            .find(|item| {
+                item.category == crate::data::ItemCategory::Potion
+                    && item
+                        .effects
+                        .iter()
+                        .any(|effect| effect.kind.to_string() == target.required_effect_kind)
+            })
+            .expect("a misfire bottle should settle the roost");
+        state.inventory.insert(bottle.id.clone(), 1);
+
+        assert!(state.treat_target(&data, &target));
+        assert!(
+            state.world.available_nodes.contains(node_id),
+            "the player had to leave and re-enter before restored ground appeared"
         );
     }
 }

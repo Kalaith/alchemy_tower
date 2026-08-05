@@ -99,6 +99,7 @@ impl GameplayState {
                 .completed_quests
                 .insert(quest_id.to_owned());
         }
+        self.refresh_available_nodes(data);
         self.trigger_quest_complete_feedback(quest_board_text::delivered_toast(quest));
         self.runtime.status_text = quest_board_text::delivered_status(quest);
     }

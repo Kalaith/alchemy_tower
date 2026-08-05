@@ -25,11 +25,7 @@ impl GameplayState {
         }
 
         let frame_time = get_frame_time();
-        self.world.day_clock_seconds += frame_time;
-        while self.world.day_clock_seconds >= data.config.day_length_seconds {
-            self.world.day_clock_seconds -= data.config.day_length_seconds;
-            self.advance_to_next_day(data, true);
-        }
+        self.advance_clock(data, frame_time);
         self.handle_sleep_pressure(data);
         self.update_area_banner(data, frame_time);
         self.update_active_effects(frame_time);
