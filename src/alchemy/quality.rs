@@ -158,12 +158,12 @@ pub(super) fn room_bonus_applies(
 
 #[cfg(test)]
 mod tests {
-    use super::MASTERED_BREW_COUNT;
+    use super::{mastery_stage, MASTERED_BREW_COUNT};
     use crate::alchemy::resolve_brew;
     use crate::data::GameData;
 
     /// Everything a brew of one recipe's own reagents needs, run to spec.
-    fn brew_at_mastery(data: &GameData, mastery_brews: u32) -> (u32, u32) {
+    fn brew_at_mastery(data: &GameData, mastery_brews: u32) -> (u32, u32, String) {
         let recipe = data
             .recipes
             .iter()
@@ -195,7 +195,11 @@ mod tests {
             &recipe.required_timing,
             mastery_brews,
         );
-        (resolution.quality_score, resolution.output_amount)
+        (
+            resolution.quality_score,
+            resolution.output_amount,
+            resolution.mastery_stage.to_owned(),
+        )
     }
 
     /// The seventh clean brew is what flips a formula to "Mastered" and opens
@@ -205,8 +209,10 @@ mod tests {
     #[test]
     fn the_brew_that_earns_mastery_is_worth_making() {
         let data = crate::data::load_embedded().expect("embedded game data should load");
-        let (before_quality, before_output) = brew_at_mastery(&data, MASTERED_BREW_COUNT - 1);
-        let (mastered_quality, mastered_output) = brew_at_mastery(&data, MASTERED_BREW_COUNT);
+        let (before_quality, before_output, before_stage) =
+            brew_at_mastery(&data, MASTERED_BREW_COUNT - 2);
+        let (mastered_quality, mastered_output, mastered_stage) =
+            brew_at_mastery(&data, MASTERED_BREW_COUNT - 1);
 
         assert!(
             mastered_quality > before_quality,
@@ -216,6 +222,45 @@ mod tests {
             mastered_output > before_output,
             "mastery yielded no more bottles: {mastered_output} vs {before_output}"
         );
+        assert_ne!(before_stage, mastery_stage(MASTERED_BREW_COUNT));
+        assert_eq!(mastered_stage, mastery_stage(MASTERED_BREW_COUNT));
+
+        // A failed seventh attempt neither earns mastery nor receives its
+        // extra output. Only a successful brew advances the count.
+        let recipe = data
+            .recipes
+            .iter()
+            .find(|recipe| recipe.id == "healing_draught_recipe")
+            .expect("the healing draught recipe should exist");
+        let station = data
+            .stations
+            .iter()
+            .find(|station| station.id == recipe.station_id)
+            .expect("its bench should exist");
+        let selected = recipe
+            .ingredients
+            .iter()
+            .map(|ingredient| ingredient.item_id.clone())
+            .collect::<Vec<_>>();
+        let ingredients = selected
+            .iter()
+            .filter_map(|item_id| data.item(item_id))
+            .cloned()
+            .collect::<Vec<_>>();
+        let failed = resolve_brew(
+            &data,
+            station,
+            &selected,
+            &ingredients,
+            None,
+            recipe.required_heat - 1,
+            recipe.required_stirs,
+            &recipe.required_timing,
+            MASTERED_BREW_COUNT - 1,
+        );
+        assert!(!failed.is_stable());
+        assert_eq!(failed.output_amount, recipe.output_amount);
+        assert_ne!(failed.mastery_stage, mastery_stage(MASTERED_BREW_COUNT));
     }
 
     /// Mastery is defined in this crate as being able to make one particular

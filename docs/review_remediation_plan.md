@@ -58,7 +58,7 @@ Ownership: `rust_management`, because every game uses the shared runtime under
   mixed-grade stack, worst acceptable first.
 - [x] Quest requirement summaries must describe currently held qualifying
   bottles, not the historical best-ever crafted profile.
-- [ ] The seventh successful brew must receive the mastery output bonus on the
+- [x] The seventh successful brew must receive the mastery output bonus on the
   same brew that changes the formula's stage to Mastered.
 - [ ] Drinking a higher-quality potion must improve its authored effect in the
   ways promised by the alchemy design: restoration magnitude and timed-effect

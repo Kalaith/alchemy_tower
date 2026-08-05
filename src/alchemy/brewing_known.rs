@@ -120,7 +120,8 @@ pub(super) fn resolve_known_recipe_brew<'a>(
             recipe.unstable_output_item_id.clone()
         }
     });
-    let output_amount = recipe.output_amount + mastery_output_bonus(mastery_brews);
+    let mastery_brews_after = mastery_brews + u32::from(stable);
+    let output_amount = recipe.output_amount + mastery_output_bonus(mastery_brews_after);
 
     BrewResolution {
         recipe: Some(recipe),
@@ -130,7 +131,7 @@ pub(super) fn resolve_known_recipe_brew<'a>(
         quality_score,
         quality_band: quality_band(quality_score),
         inherited_traits,
-        mastery_stage: mastery_stage(mastery_brews + u32::from(stable)),
+        mastery_stage: mastery_stage(mastery_brews_after),
         morph_output_item_id,
         timing_match,
         sequence_match,
