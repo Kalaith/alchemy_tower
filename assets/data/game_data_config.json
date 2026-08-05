@@ -11,14 +11,18 @@
     "save_version": 5,
     "archive_required_completed_quests": [
       "star_elixir_for_ione",
-      "containment_for_lyra"
+      "containment_for_lyra",
+      "restored_record_for_ione"
     ],
     "archive_required_journal_milestones": [
       "greenhouse_repaired",
       "containment_repaired",
       "rune_workshop_restored",
       "harvest_beds_turned",
-      "pollinators_returned"
+      "pollinators_returned",
+      "record_reconciled",
+      "eleven_months_restored",
+      "the_previous_hand"
     ],
     "balance": {
       "rapport": {

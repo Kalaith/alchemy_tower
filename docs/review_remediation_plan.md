@@ -46,9 +46,9 @@ Ownership: `rust_management`, because every game uses the shared runtime under
 
 ## 4. Restore the intended reveal order
 
-- [ ] Require Ione's reconciled eleven-month record before archive
+- [x] Require Ione's reconciled eleven-month record before archive
   reconstruction can produce `archive_revelation`.
-- [ ] Add a progression test that proves the archive remains closed before
+- [x] Add a progression test that proves the archive remains closed before
   `record_reconciled`, `eleven_months_restored`, and `the_previous_hand`, then
   opens after the required evidence is present.
 
