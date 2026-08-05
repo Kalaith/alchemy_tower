@@ -44,6 +44,13 @@
         "excellent": 140,
         "masterwork": 200
       },
+      "quality_effect_percent": {
+        "crude": 75,
+        "serviceable": 100,
+        "fine": 110,
+        "excellent": 125,
+        "masterwork": 150
+      },
       "vitality": {
         "brew_cost": 5.0,
         "gather_cost": 1.5,

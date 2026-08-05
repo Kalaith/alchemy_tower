@@ -60,7 +60,7 @@ Ownership: `rust_management`, because every game uses the shared runtime under
   bottles, not the historical best-ever crafted profile.
 - [x] The seventh successful brew must receive the mastery output bonus on the
   same brew that changes the formula's stage to Mastered.
-- [ ] Drinking a higher-quality potion must improve its authored effect in the
+- [x] Drinking a higher-quality potion must improve its authored effect in the
   ways promised by the alchemy design: restoration magnitude and timed-effect
   duration, with data-driven balance values and tests.
 

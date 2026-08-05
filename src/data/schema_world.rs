@@ -30,7 +30,10 @@ pub(crate) struct GameConfig {
 pub(crate) struct BalanceDefinition {
     pub(crate) rapport: RapportTuning,
     pub(crate) salvage: SalvageTuning,
-    pub(crate) quality_value_percent: QualityValueTuning,
+    /// What a bottle of each grade is worth, as a percentage of base value.
+    pub(crate) quality_value_percent: QualityBandPercentTuning,
+    /// How much of an authored positive effect each grade provides.
+    pub(crate) quality_effect_percent: QualityBandPercentTuning,
     pub(crate) vitality: VitalityTuning,
     pub(crate) gathering: GatheringTuning,
 }
@@ -92,10 +95,10 @@ pub(crate) struct SalvageTuning {
     pub(crate) discovery_attempts: u32,
 }
 
-/// What a bottle of each grade is worth, as a percentage of base value.
+/// A percentage curve indexed by quality band.
 #[derive(Clone, Debug, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
-pub(crate) struct QualityValueTuning {
+pub(crate) struct QualityBandPercentTuning {
     pub(crate) crude: u32,
     pub(crate) serviceable: u32,
     pub(crate) fine: u32,
@@ -103,7 +106,7 @@ pub(crate) struct QualityValueTuning {
     pub(crate) masterwork: u32,
 }
 
-impl QualityValueTuning {
+impl QualityBandPercentTuning {
     /// By `quality_band_rank`, which scores Crude 0 through Masterwork 4.
     pub(crate) fn for_rank(&self, rank: u8) -> u32 {
         match rank {
