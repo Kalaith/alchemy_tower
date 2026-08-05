@@ -91,6 +91,89 @@ impl GameplayState {
             })
     }
 
+    /// The least exceptional held bottle that clears a quality bar. Unlike
+    /// `worst_held_bottle`, this may step past worse bottles in a mixed stack.
+    pub(super) fn worst_held_bottle_at_or_above(
+        &self,
+        data: &GameData,
+        item_id: &str,
+        minimum_quality_band: &str,
+    ) -> Option<BottleBatchEntry> {
+        let wanted_rank = quality_band_rank(minimum_quality_band);
+        let plain = (self.untracked_bottles(item_id) > 0)
+            .then(|| data.item(item_id))
+            .flatten()
+            .filter(|item| quality_band_rank(quality_band(item.quality)) >= wanted_rank)
+            .map(|item| BottleBatchEntry {
+                item_id: item_id.to_owned(),
+                quality_score: item.quality,
+                quality_band: quality_band(item.quality).to_owned(),
+                traits: item.traits.clone(),
+                count: 1,
+            });
+        let brewed = self
+            .live_batches(item_id)
+            .into_iter()
+            .find(|batch| quality_band_rank(&batch.quality_band) >= wanted_rank)
+            .map(|mut batch| {
+                batch.count = 1;
+                batch
+            });
+
+        match (plain, brewed) {
+            (Some(plain), Some(brewed)) => {
+                if plain.quality_score <= brewed.quality_score {
+                    Some(plain)
+                } else {
+                    Some(brewed)
+                }
+            }
+            (plain, brewed) => plain.or(brewed),
+        }
+    }
+
+    /// Spend the least exceptional held bottle that clears a quality bar.
+    /// Worse ineligible batches remain on the shelf instead of blocking or
+    /// being silently spent in place of the bottle that did the work.
+    pub(super) fn spend_bottle_at_or_above(
+        &mut self,
+        data: &GameData,
+        item_id: &str,
+        minimum_quality_band: &str,
+    ) -> bool {
+        self.reconcile_bottle_stock(item_id);
+        let Some(chosen) = self.worst_held_bottle_at_or_above(data, item_id, minimum_quality_band)
+        else {
+            return false;
+        };
+        let wanted_rank = quality_band_rank(minimum_quality_band);
+        let plain_is_chosen = self.untracked_bottles(item_id) > 0
+            && data.item(item_id).is_some_and(|item| {
+                quality_band_rank(quality_band(item.quality)) >= wanted_rank
+                    && item.quality <= chosen.quality_score
+            });
+
+        if !plain_is_chosen {
+            let Some(batches) = self.progression.bottle_stock.get_mut(item_id) else {
+                return false;
+            };
+            let Some(batch) = batches
+                .iter_mut()
+                .find(|batch| quality_band_rank(&batch.quality_band) >= wanted_rank)
+            else {
+                return false;
+            };
+            batch.count = batch.count.saturating_sub(1);
+            batches.retain(|batch| batch.count > 0);
+            if batches.is_empty() {
+                self.progression.bottle_stock.remove(item_id);
+            }
+        }
+
+        self.take_from_inventory(item_id, 1);
+        true
+    }
+
     /// Consume one definite bottle and refile it under a transformed item id.
     /// The new item's authored traits describe the rune/pattern it acquired;
     /// the source batch retains everything the original brew inherited.
@@ -236,6 +319,64 @@ impl GameplayState {
         } else {
             0
         };
+        from_batches.saturating_add(from_plain)
+    }
+
+    /// How much current stock clears a quest's quality bar, independently of
+    /// its trait requirements. Requirement text uses this to explain which
+    /// part of a combined specification is still missing.
+    pub(super) fn bottles_meeting_quality_count(
+        &self,
+        data: &GameData,
+        quest: &QuestDefinition,
+    ) -> u32 {
+        if quest.minimum_quality_band.is_empty() {
+            return self
+                .inventory
+                .get(&quest.required_item_id)
+                .copied()
+                .unwrap_or_default();
+        }
+        let wanted_rank = quality_band_rank(&quest.minimum_quality_band);
+        let from_batches = self
+            .live_batches(&quest.required_item_id)
+            .iter()
+            .filter(|batch| quality_band_rank(&batch.quality_band) >= wanted_rank)
+            .map(|batch| batch.count)
+            .sum::<u32>();
+        let from_plain = data
+            .item(&quest.required_item_id)
+            .filter(|item| quality_band_rank(quality_band(item.quality)) >= wanted_rank)
+            .map(|_| self.untracked_bottles(&quest.required_item_id))
+            .unwrap_or_default();
+        from_batches.saturating_add(from_plain)
+    }
+
+    /// How much current stock carries enough of a quest's required traits,
+    /// independently of quality.
+    pub(super) fn bottles_meeting_trait_count(
+        &self,
+        data: &GameData,
+        quest: &QuestDefinition,
+    ) -> u32 {
+        if trait_requirement_target(quest) == 0 {
+            return self
+                .inventory
+                .get(&quest.required_item_id)
+                .copied()
+                .unwrap_or_default();
+        }
+        let from_batches = self
+            .live_batches(&quest.required_item_id)
+            .iter()
+            .filter(|batch| trait_requirement_met(quest, &batch.traits))
+            .map(|batch| batch.count)
+            .sum::<u32>();
+        let from_plain = data
+            .item(&quest.required_item_id)
+            .filter(|item| trait_requirement_met(quest, &item.traits))
+            .map(|_| self.untracked_bottles(&quest.required_item_id))
+            .unwrap_or_default();
         from_batches.saturating_add(from_plain)
     }
 

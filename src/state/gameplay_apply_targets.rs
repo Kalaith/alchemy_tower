@@ -30,12 +30,6 @@ impl GameplayState {
         data: &GameData,
         target: &ApplyTargetDefinition,
     ) -> Option<String> {
-        let wanted_rank = if target.minimum_quality_band.is_empty() {
-            0
-        } else {
-            quality_band_rank(&target.minimum_quality_band)
-        };
-
         let mut best: Option<(u8, String)> = None;
         for (item_id, held) in &self.inventory {
             if *held == 0 {
@@ -54,10 +48,12 @@ impl GameplayState {
             {
                 continue;
             }
-            let rank = self.worst_held_band_rank(data, item_id);
-            if rank < wanted_rank {
+            let Some(bottle) =
+                self.worst_held_bottle_at_or_above(data, item_id, &target.minimum_quality_band)
+            else {
                 continue;
-            }
+            };
+            let rank = quality_band_rank(&bottle.quality_band);
             if best.as_ref().is_none_or(|(current, _)| rank < *current) {
                 best = Some((rank, item_id.clone()));
             }
@@ -71,7 +67,9 @@ impl GameplayState {
         let Some(item_id) = self.bottle_for_target(data, target) else {
             return false;
         };
-        self.take_from_inventory(&item_id, 1);
+        if !self.spend_bottle_at_or_above(data, &item_id, &target.minimum_quality_band) {
+            return false;
+        }
         self.progression.treated_targets.insert(target.id.clone());
         for milestone in &target.completion_milestones {
             self.push_journal_milestone(&milestone.id, &milestone.title, &milestone.text);
@@ -135,7 +133,7 @@ impl GameplayState {
 #[cfg(test)]
 mod tests {
     use super::GameplayState;
-    use crate::data::{ApplyTargetDefinition, GameData};
+    use crate::data::{ApplyTargetDefinition, BottleBatchEntry, GameData};
 
     fn a_target(data: &GameData) -> ApplyTargetDefinition {
         data.areas
@@ -213,6 +211,56 @@ mod tests {
             state.bottle_for_target(&data, &target).is_none(),
             "a plain bottle should not satisfy a Masterwork demand"
         );
+    }
+
+    #[test]
+    fn a_graded_target_spends_the_worst_bottle_that_actually_qualifies() {
+        let data = crate::data::load_embedded().expect("embedded game data should load");
+        let mut state = GameplayState::new(&data);
+        let mut target = a_target(&data);
+        target.minimum_quality_band = "Masterwork".to_owned();
+
+        let bottle = data
+            .items
+            .iter()
+            .find(|item| {
+                item.category == crate::data::ItemCategory::Potion
+                    && item
+                        .effects
+                        .iter()
+                        .any(|effect| effect.kind.to_string() == target.required_effect_kind)
+            })
+            .expect("some potion should do what the target asks");
+        state.inventory.insert(bottle.id.clone(), 2);
+        state.progression.bottle_stock.insert(
+            bottle.id.clone(),
+            vec![
+                BottleBatchEntry {
+                    item_id: bottle.id.clone(),
+                    quality_score: 10,
+                    quality_band: "Crude".to_owned(),
+                    traits: Vec::new(),
+                    count: 1,
+                },
+                BottleBatchEntry {
+                    item_id: bottle.id.clone(),
+                    quality_score: 95,
+                    quality_band: "Masterwork".to_owned(),
+                    traits: Vec::new(),
+                    count: 1,
+                },
+            ],
+        );
+
+        assert_eq!(
+            state.bottle_for_target(&data, &target),
+            Some(bottle.id.clone())
+        );
+        assert!(state.treat_target(&data, &target));
+        assert_eq!(state.inventory.get(&bottle.id), Some(&1));
+        let remaining = &state.progression.bottle_stock[&bottle.id];
+        assert_eq!(remaining.len(), 1);
+        assert_eq!(remaining[0].quality_band, "Crude");
     }
 
     #[test]

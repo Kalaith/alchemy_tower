@@ -54,9 +54,9 @@ Ownership: `rust_management`, because every game uses the shared runtime under
 
 ## 5. Make quality consistent at every player-facing boundary
 
-- [ ] World treatments must choose and spend a qualifying live bottle from a
+- [x] World treatments must choose and spend a qualifying live bottle from a
   mixed-grade stack, worst acceptable first.
-- [ ] Quest requirement summaries must describe currently held qualifying
+- [x] Quest requirement summaries must describe currently held qualifying
   bottles, not the historical best-ever crafted profile.
 - [ ] The seventh successful brew must receive the mastery output bonus on the
   same brew that changes the formula's stage to Mastered.
