@@ -66,11 +66,42 @@ Ownership: `rust_management`, because every game uses the shared runtime under
 
 ## 6. Final balance and release audit
 
-- [ ] Run formatting and focused tests after each phase.
-- [ ] Run `publish.ps1` with no parameters after the complete game-side change.
-- [ ] Repeat the deployed browser playcheck.
-- [ ] Recalculate one-off rewards, repeatable-order income and bottle demand,
+- [x] Run formatting and focused tests after each phase.
+- [x] Run `publish.ps1` with no parameters after the complete game-side change.
+- [x] Repeat the deployed browser playcheck.
+- [x] Recalculate one-off rewards, repeatable-order income and bottle demand,
   commission sinks, quality multipliers, and the reachable critical path after
   the progression fixes.
-- [ ] Confirm every item above with direct tests or runtime evidence; do not mark
+- [x] Confirm every item above with direct tests or runtime evidence; do not mark
   the plan complete from reference-integrity tests alone.
+
+## Completion evidence
+
+Completed 2026-08-05.
+
+- The final no-parameter publisher passed 220 tests, Windows and WebGL release
+  builds, both packages, and deployment to the local preview catalog.
+- The deployed WebGL build reached its title menu and a fresh playable Tower
+  Entry scene. Browser diagnostics reported no errors or missing imports; the
+  only warnings were Macroquad's existing legacy plugin-metadata notices.
+- Direct critical-path tests proved the ending remains reachable, graded rune
+  outputs reopen Mira and Elric's story routes, and the archive waits for all
+  three recovered-record milestones. The source-size gate also passed.
+- Current scope is 14 areas, 96 gather nodes, 28 routes, 6 world treatments,
+  23 flourishes, 179 items, 65 standard recipes, 17 rune recipes, 28 mutations,
+  9 NPCs, and 116 quests.
+- One-off quests pay 4,881 coins for 87 bottles. One complete repeatable cycle
+  pays 16,006 coins for 162 bottles (98.8 coins per bottle), while cooldown-
+  weighted availability is 2,809.3 coins for 35.3 bottles per day. The seven
+  commissions remove 22,100 coins, equal to 1.38 complete repeatable cycles
+  before counting one-off income.
+- Bottle sale value spans 55/80/100/140/200 percent from Crude through
+  Masterwork. Positive potion utility spans 75/100/110/125/150 percent, keeping
+  Serviceable as the authored baseline and making quality useful without
+  lengthening misfires. Sale/duplication and shop buyback regression tests rule
+  out the previously identified infinite-profit boundaries.
+
+Result: the feature graph is coherent and the static economy has meaningful
+work-to-sink pressure without a discovered hard lock or repeatable arbitrage.
+The remaining balance risk is experiential pacing over a full human playthrough,
+which code and content arithmetic cannot replace with telemetry.
